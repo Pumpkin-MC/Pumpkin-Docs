@@ -4,51 +4,64 @@ Representing `configuration.toml`
 
 ## Server Address
 
-The address to bind the server to
+The address to bind the server to.
 
-```toml
-server_address=0.0.0.0
+:::code-group
+```toml [configuration.toml] {2}
+server_address = "0.0.0.0:25565"
 ```
+:::
 
 ## Seed
 
-The seed for world generation
+The seed for world generation.
 
-```toml
-seed=
+:::code-group
+```toml [configuration.toml] {2}
+seed = ""
 ```
+:::
 
 ## Max players
 
-The maximum number of players allowed on the server
+The maximum number of players allowed on the server.
 
-```toml
-max_players=10000
+:::code-group
+```toml [configuration.toml] {2}
+max_players = 100000
 ```
+:::
 
 ## View distance
 
-The maximum view distance for players
+The maximum view distance for players.
 
-```toml
-view_distance=10
+:::code-group
+```toml [configuration.toml] {2}
+view_distance = 10
 ```
+:::
 
 ## Simulation distance
 
-The maximum simulation distance for players
+The maximum simulation distance for players.
 
-```toml
-simulation_distance=10
+:::code-group
+```toml [configuration.toml] {2}
+simulation_distance = 10
 ```
+:::
 
 ## Default difficulty
 
-The default game difficulty
+The default game difficulty.
 
-```toml
-default_difficulty=Normal
+:::code-group
+```toml [configuration.toml] {2}
+default_difficulty = "Normal"
 ```
+:::
+
 
 ```toml
 Peaceful
@@ -57,81 +70,88 @@ Normal
 Hard
 ```
 
+## Operation permission level
+
+The default permission level for all players.
+
+:::code-group
+```toml [configuration.toml] {2}
+op_permission_level = 4
+```
+:::
+
 ## Allow nether
 
-Whether the Nether dimension is enabled
+Whether the Nether dimension is enabled.
 
-```toml
-allow_nether=true
+:::code-group
+```toml [configuration.toml] {2}
+allow_nether = true
 ```
+:::
 
 ## Hardcore
 
 Whether the server is in hardcore mode.
 
-```toml
-hardcore=true
+:::code-group
+```toml [configuration.toml] {2}
+hardcore = false
 ```
+:::
 
 ## Online Mode
 
-Whether online mode is enabled. Requires valid Minecraft accounts
+Whether online mode is enabled. Requires valid Minecraft accounts.
 
-```toml
-online_mode=true
+:::code-group
+```toml [configuration.toml] {2}
+online_mode = true
 ```
+:::
 
 ## Encryption
 
-Whether packet encryption is enabled
+Whether packet encryption is enabled.
 
 > [!IMPORTANT]
-> Required when online mode is enabled
+> Required when online mode is enabled.
 
-```toml
-encryption=true
+:::code-group
+```toml [configuration.toml] {2}
+encryption = true
 ```
+:::
 
 ## Motd
 
 The server's description displayed on the status screen.
 
-```toml
-motd=true
+:::code-group
+```toml [configuration.toml] {2}
+motd = "A Blazing fast Pumpkin Server!"
 ```
+:::
 
 ## TPS
 
-The server's Tick rate.
+The target server's Tick rate.
 
-```toml
-tps=20.0
+:::code-group
+```toml [configuration.toml] {2}
+tps = 20.0
 ```
-
-
-## Use favicon
-
-Whether to use a server favicon or not
-
-```toml
-use_favicon=true
-```
-
-## Favicon path
-
-The path to the server's favicon
-
-```toml
-favicon_path=./icon.png
-```
+:::
 
 ## Default gamemode
 
-The default game mode for players
+The default game mode for players.
 
-```toml
-default_gamemode=Survival
+:::code-group
+```toml [configuration.toml] {2}
+default_gamemode = "Survival"
 ```
+:::
 
 ```toml
 Undefined
@@ -143,8 +163,30 @@ Spectator
 
 ## IP Scrubbing
 
-Whether to scrub player IPs from logs
+Whether to scrub player IPs from logs.
 
-```toml
-scrub_ips=true
+:::code-group
+```toml [configuration.toml] {2}
+scrub_ips = true
 ```
+:::
+
+## Use favicon
+
+Whether to use a server favicon or not.
+
+:::code-group
+```toml [configuration.toml] {2}
+use_favicon = true
+```
+:::
+
+## Favicon path
+
+The path to the server's favicon.
+
+:::code-group
+```toml [configuration.toml] {2}
+favicon_path = "icon.png"
+```
+:::
