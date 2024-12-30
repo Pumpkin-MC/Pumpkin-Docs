@@ -28,7 +28,7 @@ Packets in the Pumpkin protocol are organized by functionality and state.
 
 ### Minecraft Protocol
 
-You can find all Minecraft Java packets at https://wiki.vg/Protocol. There you also can see in which [State](#States) they are.
+You can find all Minecraft Java packets at https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol. There you also can see in which [State](#States) they are.
 You can also can see all the information the Packets have, which we can either Write or Read depending on whether they are Serverbound or Clientbound.
 
 ### Adding a Clientbound Packet
@@ -265,6 +265,6 @@ Minecraft Packets **can** use the ZLib compression for decoding/encoding. There 
 
 ### Porting
 
-To port to a new minecraft version, you can compare difference in Protocol on [wiki.vg](https://wiki.vg/index.php?title=Protocol&action=history)
+To port to a new minecraft version, you can compare difference in Protocol on the [wiki.vg merge on minecraft.wiki](https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol?action=history)
 
 Also change the `CURRENT_MC_PROTOCOL` in `src/lib.rs`
