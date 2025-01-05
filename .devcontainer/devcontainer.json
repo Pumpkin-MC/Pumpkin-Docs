@@ -1,5 +1,5 @@
 {
-	"name": "Pumpkin",
+	"name": "Pumpkin-Website",
 	"image": "mcr.microsoft.com/devcontainers/base:noble",
 	"features": {
 		"ghcr.io/devcontainers/features/node:1": {},
