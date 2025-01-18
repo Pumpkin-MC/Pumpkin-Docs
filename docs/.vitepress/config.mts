@@ -82,6 +82,10 @@ export default defineConfig({
                                 text: "Basic Logic",
                                 link: "/plugin-dev/example-plugin/basic-logic",
                             },
+                            {
+                                text: "Join Event",
+                                link: "/plugin-dev/example-plugin/join-event",
+                            },
                         ],
                     },
                 ],
