@@ -60,6 +60,33 @@ export default defineConfig({
                 ],
             },
             {
+                text: "Plugin Development",
+                items: [
+                    {
+                        text: "Introduction",
+                        link: "/plugin-dev/introduction",
+                    },
+                    {
+                        text: "Example Plugin",
+                        link: "/plugin-dev/example-plugin/introduction",
+                        items: [
+                            {
+                                text: "Environment Setup",
+                                link: "/plugin-dev/example-plugin/environment",
+                            },
+                            {
+                                text: "Creating Project",
+                                link: "/plugin-dev/example-plugin/creating-project",
+                            },
+                            {
+                                text: "Basic Logic",
+                                link: "/plugin-dev/example-plugin/basic-logic",
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
                 text: "Troubleshooting",
                 items: [
                     {
