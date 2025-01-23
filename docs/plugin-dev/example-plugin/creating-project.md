@@ -4,16 +4,11 @@ Pumpkin Plugins use the [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-car
 The complete code for this plugin can be found as a [template on GitHub](https://github.com/vyPal/Hello-Pumpkin).
 
 ## Initializing a new crate
-Before we can get started, we need to have a folder to house our plugin's source code. Either create one using the file explorer, or from the command line using:
+First we need to create a new project folder,you can do this by running this command in the folder you created:
 ```bash
-mkdir hello-pumpkin && cd hello-pumpkin
+cargo new <project-name> --lib
 ```
-
-Next we need to initialize our crate, do so by running this command in the folder you created:
-```bash
-cargo init --lib
-```
-This will create a couple files in our folder, which should now look like this:
+This will create a folder with a couple files in it. The folder structure should look like this:
 ```
 ├── Cargo.toml
 └── src
