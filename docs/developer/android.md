@@ -64,3 +64,6 @@ Type `hx --tutor` or go to offical website.
 2) Rust analyzer dont work on it, maybe emulator can hep with it, but its slow down code compilation.
 3) Vscode not good for android devices, because its higly desirable to have a mouse, while in helix you need only keyboard.
 4) Vscode laggy on some devices.
+
+## Why its so hard to type?
+Buy cheap bluetooth keyboard and see how it simple.
