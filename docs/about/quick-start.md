@@ -6,7 +6,7 @@ Pre-release: Currently under development and not yet ready for official release.
 
 To get Pumpkin running, you first have to clone it:
 ```shell
-git clone https://github.com/Snowiiii/Pumpkin.git
+git clone https://github.com/Pumpkin-MC/Pumpkin.git
 cd Pumpkin
 ```
 

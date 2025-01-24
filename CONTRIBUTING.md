@@ -25,9 +25,6 @@ There are several ways you can contribute to Pumpkin:
   Ensure your code adheres to our project structure and style guidelines.
   Write clear and concise commit messages that describe your changes.
 
-### Docs
-The Documentation of Pumpkin can be found at https://snowiiii.github.io/Pumpkin/
-
 ### Additional Information
 
 We encourage you to comment on existing issues and pull requests to share your thoughts and provide feedback.

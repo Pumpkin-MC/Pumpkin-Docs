@@ -7,7 +7,7 @@ and customizable experience. It prioritizes performance and player enjoyment whi
   <source srcset="/assets/introduction-preview-2560x1440.png" media="(min-width: 2560px)">
   <source srcset="/assets/introduction-preview-1280x720.png" media="(min-width: 1280px)">
   <source srcset="/assets/introduction-preview-640x360.png" media="(min-width: 640px)">
-  <img src="/assets/introduction-preview-1280x720.png" alt="Preview">
+  <img src="/assets/introduction-preview-1280x720.png" alt="introduction-preview">
 </picture>
 
 ## What Pumpkin wants to achieve

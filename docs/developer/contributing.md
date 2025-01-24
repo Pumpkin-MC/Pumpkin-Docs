@@ -23,15 +23,15 @@ There are several ways you can contribute to Pumpkin:
 #### Contributing Code
   To get started with contributing code to Pumpkin, fork the repository on github
 
-- First create a github account if you don't already have one
+1. First create a github account if you don't already have one
  
-- Go to Pumpkin's Official [Github Repository](https://github.com/Snowiiii/Pumpkin) and press fork
+2. Go to Pumpkin's Official [Github Organization](https://github.com/Pumpkin-MC) and press fork
 
 > Creating a fork means you now have your own copy of the Pumpkin source code, (this does not mean you own the copyright)
 
   Now that you have a copy that you can edit, you will need a few tools
 
-- Install [git](https://git-scm.com/downloads) for your operating system
+3. Install [git](https://git-scm.com/downloads) for your operating system
 
 - To get started with git, visit [Getting started with Git](https://docs.github.com/en/get-started/getting-started-with-git)
 
@@ -44,6 +44,16 @@ There are several ways you can contribute to Pumpkin:
 - If you are wanting to contribute code, install Rust at [rust-lang.org](https://www.rust-lang.org/).
 
 - If you are wanting to contribute to documentation, install [NodeJS](https://nodejs.org/en)
+
+### Getting the Minecraft source code
+When working at Pumpkin, we heavily rely on the official Minecraft client and utilize existing server logic. We often refer to the official Minecraft source code.
+The easiest way to get the Minecraft source code is using Fabric Yarn. Make sure you have Gradle installed before running the following commands:
+```
+git clone https://github.com/FabricMC/yarn.git
+cd yarn
+./gradlew decompileVineflower
+```
+After decompiling, you can find the source code located in `build/namedSrc`.
 
 ### Additional Information
 We encourage you to comment on existing issues and pull requests to share your thoughts and provide feedback.
