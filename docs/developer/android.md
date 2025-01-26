@@ -4,7 +4,7 @@ If you are android user and want edit source code - you can do this!
 (this page was written on android using helix)
 
 First of all we need terminal app.
-We recommend [termux](https://github.com/termux/termux-app/releases), because its stable and opensource.i
+We recommend [termux](https://github.com/termux/termux-app/releases), because its stable and opensource.
 Download needed apk file for your architecture of device and install termux.
 
 After this, you need run some commands. We use helix with it simplicity.
