@@ -57,7 +57,7 @@ export default defineConfig({
                         ]
                     },
                     { text: "World", link: "developer/world" },
-                    { text: "Mobile dev", link: "developer/android" },
+                    { text: "Mobile dev", link: "developer/mobile" },
                 ],
             },
             {
