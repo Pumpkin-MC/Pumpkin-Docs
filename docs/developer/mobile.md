@@ -1,6 +1,6 @@
-# Android pumpkin developing
+# Mobile pumpkin developing
 
-If you are android user and want edit source code - you can do this!
+If you are mobile user and want edit source code - you can do this!
 (this page was written on android using helix)
 
 First of all we need terminal app.
