@@ -1,11 +1,15 @@
 {
-  "scripts": {
-    "docs:dev": "vitepress dev docs --host",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
-  },
-  "devDependencies": {
-    "vitepress": "^1.6.3",
-    "vue": "^3.5.13"
-  }
+    "name": "pumpkin-website",
+    "scripts": {
+        "dev": "vitepress dev docs --host",
+        "build": "vitepress build docs",
+        "preview": "vitepress preview docs",
+        "lint": "biome lint --write ./docs",
+        "format": "biome format --write ./docs"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^1.9.4",
+        "vitepress": "^1.6.3",
+        "vue": "^3.5.13"
+    }
 }
