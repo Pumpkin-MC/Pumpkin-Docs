@@ -12,10 +12,10 @@ hero:
   actions:
     - theme: brand
       text: Quick Start
-      link: /about/quick-start
+      link: /guide/quick-start
     - theme: alt
       text: Configuration
-      link: /config/introduction
+      link: /guide/config/
     - theme: alt
       text: For developers
       link: /developer/introduction

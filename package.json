@@ -1,5 +1,6 @@
 {
     "name": "pumpkin-website",
+    "type": "module",
     "scripts": {
         "dev": "vitepress dev docs --host",
         "build": "vitepress build docs",

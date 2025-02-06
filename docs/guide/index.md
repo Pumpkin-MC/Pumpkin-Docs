@@ -1,3 +1,7 @@
+---
+title: Introduction
+---
+
 # Pumpkin
 
 Pumpkin is a Minecraft server built entirely in **Rust**, offering a fast, efficient,

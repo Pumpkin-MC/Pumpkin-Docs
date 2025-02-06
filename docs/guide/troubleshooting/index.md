@@ -1,3 +1,7 @@
+---
+title: Common Issues
+---
+
 ### Common Issues
 
 1.  ### Failed to verify username
