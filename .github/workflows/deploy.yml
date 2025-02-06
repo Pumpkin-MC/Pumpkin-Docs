@@ -3,6 +3,7 @@ name: Deploy VitePress site to GitHub Pages
 
 on:
   push:
+    branches: [master]
   pull_request:
   workflow_dispatch:
 
@@ -49,6 +50,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     name: Deploy
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

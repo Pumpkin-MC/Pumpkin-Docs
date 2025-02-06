@@ -57,12 +57,12 @@ Press `i` if you in normal mode.
 Press esc, when type `:q!`` if you dont want save edited data, or `:wq` if want.
 
 ## Where i can learn how use this editor?
-Type `hx --tutor` or go to offical website.
+Type `hx --tutor` or go to official website.
 
 ## Why not use vscode?
 1) Vscode is hard to setup, by the way its works only on web with limited functional.
 2) Rust analyzer dont work on it, maybe emulator can hep with it, but its slow down code compilation.
-3) Vscode not good for android devices, because its higly desirable to have a mouse, while in helix you need only keyboard.
+3) Vscode not good for android devices, because its highly desirable to have a mouse, while in helix you need only keyboard.
 4) Vscode laggy on some devices.
 
 ## Why its so hard to type?

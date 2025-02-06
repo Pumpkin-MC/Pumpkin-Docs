@@ -105,7 +105,7 @@ This method gets a mutable reference to itself (in this case the `MyPlugin` stru
 ```rs
 fn get_data_folder() -> String
 ```
-Returns the path to a folder dedicated to this plugin, which should be used for persistant data storage
+Returns the path to a folder dedicated to this plugin, which should be used for persistent data storage
 ```rs
 async fn get_player_by_name(player_name: String) -> Option<Arc<Player>>
 ```

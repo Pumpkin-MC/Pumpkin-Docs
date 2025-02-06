@@ -12,7 +12,7 @@ Cancellable can be also not Event, because its trait.
 Individual event handlers are just structs which implement the `EventHandler<T>` trait (where T is a specific event implementation).
 
 ### What are blocking events?
-The Pumpkin Plugin Event System differentiates between two types of evetns: blocking and non-blocking. Each have their benefits:
+The Pumpkin Plugin Event System differentiates between two types of events: blocking and non-blocking. Each have their benefits:
 #### Blocking events
 ```diff
 + Can modify the event (like editing the join message)
@@ -59,7 +59,7 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 
 **Explanation**:
 - `struct MyJoinHandler;`: The struct for our event handler
-- `#[with_runtime(global)]`: Pumpkin uses the tokio async runtime, which acts in wierd ways across the plugin boundary. Even though it is not necessary in this specific example, it is a good practise to wrap all async `impl`s that interact with async code with this macro.
+- `#[with_runtime(global)]`: Pumpkin uses the tokio async runtime, which acts in weird ways across the plugin boundary. Even though it is not necessary in this specific example, it is a good practice to wrap all async `impl`s that interact with async code with this macro.
 - `#[async_trait]`: Rust doesn't have native support for traits with async methods. So we use the `async_trait` crate to allow this.
 - `async fn handle_blocking()`: Since we chose for this event to be blocking, it is necessary to implement the `handle_blocking()` method instead of the `handle()` method.
 

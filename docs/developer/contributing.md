@@ -21,11 +21,11 @@ There are several ways you can contribute to Pumpkin:
   Describe the proposed feature in detail, including its benefits and potential implementation considerations.
 
 #### Contributing Code
-  To get started with contributing code to Pumpkin, fork the repository on github
+  To get started with contributing code to Pumpkin, fork the repository on GitHub
 
-1. First create a github account if you don't already have one
+1. First create a GitHub account if you don't already have one
  
-2. Go to Pumpkin's Official [Github Organization](https://github.com/Pumpkin-MC) and press fork
+2. Go to Pumpkin's Official [GitHub Organization](https://github.com/Pumpkin-MC) and press fork
 
 > Creating a fork means you now have your own copy of the Pumpkin source code, (this does not mean you own the copyright)
 
@@ -35,11 +35,11 @@ There are several ways you can contribute to Pumpkin:
 
 - To get started with git, visit [Getting started with Git](https://docs.github.com/en/get-started/getting-started-with-git)
 
-- Optional: If you want a graphical tool to interact with Github, install [Github-Desktop](https://desktop.github.com/download/)
+- Optional: If you want a graphical tool to interact with GitHub, install [GitHub-Desktop](https://desktop.github.com/download/)
 
-> Github Desktop may be easier if you are not used to the command line, but it is not for everyone
+> GitHub Desktop may be easier if you are not used to the command line, but it is not for everyone
 
-- To get started with Github Desktop, visit [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop)
+- To get started with GitHub Desktop, visit [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop)
 
 - If you are wanting to contribute code, install Rust at [rust-lang.org](https://www.rust-lang.org/).
 

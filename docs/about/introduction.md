@@ -21,10 +21,9 @@ and customizable experience. It prioritizes performance and player enjoyment whi
 ## What Pumpkin will not
 
 - Be compatible with plugins or mods for other servers
-- Function as a framework for building a server from scratch.
 
 > [!IMPORTANT]
-> Pumpkin is currently under heavy development. Check out our [Github Project](https://github.com/users/Snowiiii/projects/12/views/3) to see current progress
+> Pumpkin is currently under heavy development. Check out our [Github Project](https://github.com/orgs/Pumpkin-MC/projects/3) to see current progress
 
 ## Vanilla
 
