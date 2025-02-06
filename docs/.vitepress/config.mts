@@ -68,24 +68,24 @@ export default defineConfig({
                         link: "/plugin-dev/introduction",
                     },
                     {
-                        text: "Example Plugin",
-                        link: "/plugin-dev/example-plugin/introduction",
+                        text: "Plugin Template",
+                        link: "/plugin-dev/plugin-template/introduction",
                         items: [
                             {
                                 text: "Environment Setup",
-                                link: "/plugin-dev/example-plugin/environment",
+                                link: "/plugin-dev/plugin-template/environment",
                             },
                             {
                                 text: "Creating Project",
-                                link: "/plugin-dev/example-plugin/creating-project",
+                                link: "/plugin-dev/plugin-template/creating-project",
                             },
                             {
                                 text: "Basic Logic",
-                                link: "/plugin-dev/example-plugin/basic-logic",
+                                link: "/plugin-dev/plugin-template/basic-logic",
                             },
                             {
                                 text: "Join Event",
-                                link: "/plugin-dev/example-plugin/join-event",
+                                link: "/plugin-dev/plugin-template/join-event",
                             },
                         ],
                     },

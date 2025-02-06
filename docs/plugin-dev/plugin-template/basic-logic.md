@@ -115,20 +115,21 @@ async fn register_command(tree: CommandTree, permission: PermissionLvl)
 ```
 Registers a new command handler, with a minimum required permission level.
 ```rs
-async fn register_event(handler: H, priority: EventPriority, blocking: bool)
+async fn register_event(handler: Arc<H>, priority: EventPriority, blocking: bool)
 ```
 Registers a new event handler with a set priority and if it is blocking or not.
+By the way, handler is `Arc<T>`, what means you can implement a lot of events on one handler, and then register it.
 
 ## Basic on-load method
 For now we will only implement a very basic `on_load` method to be able to see that the plugin is running.
 
-Here we will setup the env_logger and setup a "Hello, Pumpkin!", so that we can see out plugin in action.
+Here we will setup the inner pumpkin logger and setup a "Hello, Pumpkin!", so that we can see out plugin in action.
 
 Add this to the `on_load` method:
 ```rs
 #[plugin_method]
 async fn on_load(&mut self, server: &Context) -> Result<(), String> {
-    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init(); // [!code ++:3]
+    pumpkin::init_logger!(); // [!code ++:3]
 
     log::info!("Hello, Pumpkin!");
 
@@ -136,7 +137,4 @@ async fn on_load(&mut self, server: &Context) -> Result<(), String> {
 }
 ```
 
-If we build the plugin again and start up the server, you should now see this somewhere in the log:
-```log
-[2025-01-18T09:36:16Z INFO  hello_pumpkin] Hello, Pumpkin!
-```
+If we build the plugin again and start up the server, you should now see this somewhere in the log Hello, Pumpkin!.

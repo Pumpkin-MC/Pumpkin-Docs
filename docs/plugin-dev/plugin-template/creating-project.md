@@ -44,11 +44,10 @@ pumpkin = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master"
 pumpkin-util = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-util" }
 pumpkin-api-macros = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-api-macros" }
 
-async-trait = "0.1.83"
+async-trait = "0.1"
 tokio = { version = "1.42", features = [ "full" ] }
 
-env_logger = "0.11.6"
-log = "0.4.22"
+log = "0.4"
 ```
 
 This adds three dependencies from Pumpkin:
@@ -60,4 +59,3 @@ as well as these other dependencies:
 - `async-trait` - A utility allowing plugins to work asynchronously
 - `tokio` - A rust asynchronous runtime
 - `log` - For logging
-- `env_logger` - Configure logger using environment variables
