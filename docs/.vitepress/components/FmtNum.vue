@@ -4,8 +4,8 @@ import { computed, getCurrentInstance } from 'vue';
 const props = defineProps({
     n: {
         type: Number,
-        required: true
-    }
+        required: true,
+    },
 });
 
 const formattedNumber = computed(() => {
