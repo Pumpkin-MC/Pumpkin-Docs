@@ -15,17 +15,21 @@ Individual event handlers are just structs which implement the `EventHandler<T>`
 The Pumpkin Plugin Event System differentiates between two types of events: blocking and non-blocking. Each have their benefits:
 #### Blocking events
 ```diff
+Pros:
 + Can modify the event (like editing the join message)
 + Can cancel the event
 + Have a priority system
+Cons:
 - Are executed in sequence
 - Can slow down the server if not implemented well
 ```
 #### Non-blocking events
 ```diff
+Pros:
 + Are executed in parallel
 + Are executed after all blocking events finish
 + Can still do some modifications (anything that is behin a Mutex or RwLock)
+Cons:
 - Can not cancel the event
 - No priority system
 - Allow for less control over the event
@@ -35,27 +39,26 @@ The Pumpkin Plugin Event System differentiates between two types of events: bloc
 Since our main aim here is to change the welcome message that the player sees when they join a server, we will be choosing the blocking event type with a low priority.
 
 Add this code above the `on_load` method:
-```rs
+:::code-group
+```rs [lib.rs]
 use async_trait::async_trait; // [!code ++:4]
-use pumpkin_api_macros::{plugin_impl, plugin_method, with_runtime};
+use pumpkin_api_macros::with_runtime;
 use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler};
 use pumpkin_util::text::{color::NamedColor, TextComponent};
-use pumpkin_api_macros::{plugin_impl, plugin_method}; // [!code --:2]
-use pumpkin::plugin::Context;
 
 struct MyJoinHandler; // [!code ++:12]
 
 #[with_runtime(global)]
 #[async_trait]
 impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
-    async fn handle_blocking(&self, event: &mut PlayerJoinEventImpl) {
-        event.set_join_message(
+    async fn handle_blocking(&self, event: &mut PlayerJoinEvent) {
+        event.join_message =
             TextComponent::text(format!("Welcome, {}!", event.player.gameprofile.name))
-                .color_named(NamedColor::Green),
-        );
+                .color_named(NamedColor::Green);
     }
 }
 ```
+:::
 
 **Explanation**:
 - `struct MyJoinHandler;`: The struct for our event handler
@@ -69,19 +72,21 @@ It is important that the `#[with_runtime(global)]` macro is **above** the **`#[a
 
 ### Registering the handler
 Now that we have written the event handler, we need to tell the plugin to use it. We can do that by adding a single line to the `on_load` method:
-```rs
+:::code-group
+```rs [lib.rs]
 use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler, EventPriority}; // [!code ++]
 use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler}; // [!code --]
 
 #[plugin_method]
 async fn on_load(&mut self, server: &Context) -> Result<(), String> {
-    pumpkin::init_logger!();
+    pumpkin::init_log!();
 
     log::info!("Hello, Pumpkin!");
 
-    server.register_event(MyJoinHandler, EventPriority::Lowest, true).await; // [!code ++]
+    server.register_event(Arc::new(MyJoinHandler), EventPriority::Lowest, true).await; // [!code ++]
 
     Ok(())
 }
 ```
+:::
 Now if we build the plugin and join the server, we should see a green "Welcome !" message with our username!

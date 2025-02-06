@@ -2,8 +2,8 @@
 ## Plugin base
 There is a lot going on under the hood of even a basic plugin, so to greatly simplify plugin development we will use the `pumpkin-api-macros` crate to create a basic empty plugin.
 
-Open the `src/lib.rs` file and replace its contents with this:
-```rs:line-numbers
+:::code-group
+```rs:line-numbers [lib.rs]
 use pumpkin_api_macros::plugin_impl;
 
 #[plugin_impl]
@@ -21,6 +21,8 @@ impl Default for MyPlugin {
     }
 }
 ```
+:::
+
 This will create a empty plugin and implement all the necessary methods for it to be loaded by pumpkin.
 
 We can now try to compile our plugin for the first time, to do so, run this command in your project folder:
@@ -68,8 +70,9 @@ The Pumpkin server currently uses two "methods" to tell the plugin about it's st
 
 These methods don't have to be implemented, but you will usually implement at least the `on_load` method. In this method you get access to a `Context` object which can give the plugin access to information about the server, but also allows the plugin to register command handlers or events.
 
-To make implementing these methods easier, there is another macro provided by the `pumpkin-api-macros` crate. Add these lines to your `src/lib.rs` file:
-```rs
+To make implementing these methods easier, there is another macro provided by the `pumpkin-api-macros` crate. 
+:::code-group
+```rs [lib.rs]
 use pumpkin_api_macros::{plugin_impl, plugin_method}; // [!code ++:2]
 use pumpkin::plugin::Context;
 use pumpkin_api_macros::plugin_impl; // [!code --]
@@ -94,6 +97,7 @@ impl Default for MyPlugin {
     }
 }
 ```
+:::
 
 ::: warning IMPORTANT
 It is important that you define any plugin methods before the `#[plugin_impl]` block
@@ -126,15 +130,17 @@ For now we will only implement a very basic `on_load` method to be able to see t
 Here we will setup the inner pumpkin logger and setup a "Hello, Pumpkin!", so that we can see out plugin in action.
 
 Add this to the `on_load` method:
-```rs
+:::code-group
+```rs [lib.rs]
 #[plugin_method]
 async fn on_load(&mut self, server: &Context) -> Result<(), String> {
-    pumpkin::init_logger!(); // [!code ++:3]
+    pumpkin::init_log!(); // [!code ++:3]
 
     log::info!("Hello, Pumpkin!");
 
     Ok(())
 }
 ```
+:::
 
 If we build the plugin again and start up the server, you should now see this somewhere in the log Hello, Pumpkin!.

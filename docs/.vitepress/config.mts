@@ -72,10 +72,6 @@ export default defineConfig({
                         link: "/plugin-dev/plugin-template/introduction",
                         items: [
                             {
-                                text: "Environment Setup",
-                                link: "/plugin-dev/plugin-template/environment",
-                            },
-                            {
                                 text: "Creating Project",
                                 link: "/plugin-dev/plugin-template/creating-project",
                             },
