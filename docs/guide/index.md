@@ -1,7 +1,3 @@
----
-title: Introduction
----
-
 # Pumpkin
 
 Pumpkin is a Minecraft server built entirely in **Rust**, offering a fast, efficient,
@@ -14,6 +10,9 @@ and customizable experience. It prioritizes performance and player enjoyment whi
   <img src="/assets/introduction-preview-1280x720.png" alt="introduction-preview">
 </picture>
 
+> [!IMPORTANT]
+> Pumpkin is currently under heavy development. Check out our [Github Project](https://github.com/orgs/Pumpkin-MC/projects/3) to see current progress
+
 ## What Pumpkin wants to achieve
 
 - **Performance**: Leveraging multi-threading for maximum speed and efficiency.
@@ -22,12 +21,8 @@ and customizable experience. It prioritizes performance and player enjoyment whi
 - **Flexibility**: Highly configurable, with the ability to disable unnecessary features.
 - **Extensibility**: Provides a foundation for plugin development.
 
-## What Pumpkin will not
-
-- Be compatible with plugins or mods for other servers
-
-> [!IMPORTANT]
-> Pumpkin is currently under heavy development. Check out our [Github Project](https://github.com/orgs/Pumpkin-MC/projects/3) to see current progress
+> [!NOTE]
+> Pumpkin won't be compatible with plugins or mods for other servers
 
 ## Vanilla
 

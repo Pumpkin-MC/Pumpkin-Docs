@@ -1,192 +1,174 @@
 # Basic Configuration
 
-Representing `configuration.toml`
-
 ## Server Address
 
-The address to bind the server to.
+The address to bind the server to
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 server_address = "0.0.0.0:25565"
 ```
 :::
 
 ## Seed
 
-The seed for world generation.
+The seed for world generation
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 seed = ""
 ```
 :::
 
 ## Max players
 
-The maximum number of players allowed on the server.
+The maximum number of players allowed on the server
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 max_players = 100000
 ```
 :::
 
 ## View distance
 
-The maximum view distance for players.
+The maximum view distance for players
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 view_distance = 10
 ```
 :::
 
 ## Simulation distance
 
-The maximum simulation distance for players.
+The maximum simulation distance for players
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 simulation_distance = 10
 ```
 :::
 
 ## Default difficulty
 
-The default game difficulty.
+The default game difficulty. Available types: `Peaceful`, `Easy`, `Normal`, `Hard`
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 default_difficulty = "Normal"
 ```
 :::
 
-
-```toml
-Peaceful
-Easy
-Normal
-Hard
-```
-
 ## Operation permission level
 
-The default permission level for all players.
+The default permission level for all players
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 op_permission_level = 4
 ```
 :::
 
 ## Allow nether
 
-Whether the Nether dimension is enabled.
+Whether the Nether dimension is enabled
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 allow_nether = true
 ```
 :::
 
 ## Hardcore
 
-Whether the server is in hardcore mode.
+Whether the server is in hardcore mode
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 hardcore = false
 ```
 :::
 
 ## Online Mode
 
-Whether online mode is enabled. Requires valid Minecraft accounts.
+Whether online mode is enabled. Requires valid Minecraft accounts
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 online_mode = true
 ```
 :::
 
 ## Encryption
 
-Whether packet encryption is enabled.
+Whether packet encryption is enabled
 
-> [!IMPORTANT]
-> Required when online mode is enabled.
+> [!CAUTION]
+> Required when online mode is enabled
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 encryption = true
 ```
 :::
 
-## Motd
+## MOTD
 
-The server's description displayed on the status screen.
+The server's description displayed on the multiplayer menu
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 motd = "A Blazing fast Pumpkin Server!"
 ```
 :::
 
 ## TPS
 
-The target server's Tick rate.
+The target server's tick rate
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 tps = 20.0
 ```
 :::
 
 ## Default gamemode
 
-The default game mode for players.
+The default game mode for players. Available types: `Undefined`, `Survival`, `Creative`, `Adventure`, `Spectator`
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 default_gamemode = "Survival"
 ```
 :::
 
-```toml
-Undefined
-Survival
-Creative
-Adventure
-Spectator
-```
-
 ## IP Scrubbing
 
-Whether to scrub player IPs from logs.
+Whether to scrub player IPs from logs
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 scrub_ips = true
 ```
 :::
 
 ## Use favicon
 
-Whether to use a server favicon or not.
+Whether to use a server favicon or not
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 use_favicon = true
 ```
 :::
 
 ## Favicon path
 
-The path to the server's favicon.
+The path to the server's favicon
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [configuration.toml]
 favicon_path = "icon.png"
 ```
 :::

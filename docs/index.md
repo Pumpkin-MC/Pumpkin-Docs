@@ -11,14 +11,14 @@ hero:
     alt: Pumpkin
   actions:
     - theme: brand
-      text: Quick Start
-      link: /guide/quick-start
+      text: Introduction
+      link: /guide/
     - theme: alt
       text: Configuration
       link: /guide/config/
     - theme: alt
-      text: For developers
-      link: /developer/introduction
+      text: Contributing
+      link: /development/contributing/
 
 features:
   # Need to add the svg here instead of using src because then it won't have the box around it

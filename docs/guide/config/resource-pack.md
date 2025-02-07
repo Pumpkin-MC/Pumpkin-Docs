@@ -44,10 +44,10 @@ The hash of the resource pack, using the SHA1 algorithm.
 ```powershell [Windows (PowerShell)]
 Get-FileHash [file] SHA1
 ```
-```shell [Mac OS]
+```sh [Mac OS]
 shasum -a 1 [file]
 ```
-```shell [Linux]
+```sh [Linux]
 sha1sum [file]
 ```
 :::

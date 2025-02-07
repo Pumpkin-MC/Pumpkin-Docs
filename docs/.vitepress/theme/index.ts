@@ -3,7 +3,6 @@ import { h } from 'vue';
 import type { Theme } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
 import './style.css';
-import FmtNum from '../components/FmtNum.vue';
 import FmtDateTime from '../components/FmtDateTime.vue';
 
 export default {
@@ -23,7 +22,6 @@ export default {
             minute: 'numeric',
             timeZoneName: 'short',
         });
-        app.component('FmtNum', FmtNum);
         app.component('FmtDateTime', FmtDateTime);
     },
 } satisfies Theme;
