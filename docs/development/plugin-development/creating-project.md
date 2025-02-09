@@ -5,7 +5,7 @@ The complete code for this plugin can be found as a [template on GitHub](https:/
 
 ## Initializing a new crate
 First we need to create a new project folder,you can do this by running this command in the folder you created:
-```bash
+```sh
 cargo new <project-name> --lib
 ```
 This will create a folder with a couple files in it. The folder structure should look like this:

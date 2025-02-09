@@ -26,7 +26,7 @@ impl Default for MyPlugin {
 This will create a empty plugin and implement all the necessary methods for it to be loaded by pumpkin.
 
 We can now try to compile our plugin for the first time, to do so, run this command in your project folder:
-```bash
+```sh
 cargo build --release
 ```
 ::: tip NOTICE
