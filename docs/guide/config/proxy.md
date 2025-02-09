@@ -7,34 +7,38 @@ Many servers use proxies to manage connections and distribute players across ser
 > [!TIP]
 > Velocity is recommended for most server networks. Velocity is modern and more performant compared to BungeeCord
 
-This configuration values can be edited in `features.toml`
-
 ## `enabled`
 
 Enables support for proxies.
 
-```toml
+:::code-group
+```toml [features.toml]
 [proxy]
 enabled = false # Boolean
 ```
+:::
 
 ## `velocity.enabled`
 
 Whether Velocity support is enabled or not.
 
-```toml
+:::code-group
+```toml [features.toml]
 [proxy.velocity]
 enabled = false # Boolean
 ```
+:::
 
 ## `velocity.secret`
 
 The secret as configured in Velocity.
 
-```toml
+:::code-group
+```toml [features.toml]
 [proxy.velocity]
 secret = "" # String
 ```
+:::
 
 ## `bungeecord.enabled`
 
@@ -43,7 +47,9 @@ Whether BungeeCord support is enabled or not
 > [!CAUTION]
 > Ensure that the server's firewall is correctly configured or you have BungeeGuard installed, as BungeeCord can't verify if player is coming from your proxy or directly trying accessing the server
 
-```toml
+:::code-group
+```toml [features.toml]
 [proxy.bungeecord]
 enabled = false # Boolean
 ```
+:::
