@@ -2,176 +2,125 @@
 
 Servers authenthicate with Mojang's session servers in order to ensure the client is playing on a legitimate, paid account. Pumpkin allows you to fully configure authentication.
 
-## Configuring Authentication
-
 > [!WARNING]
 > Most servers should not change the default authenthication configuration. Doing so may have unintended consequnces. **Only change these settings if you know what you are doing!**
 
-#### `enabled`: Boolean
+This configuration values can be edited in `features.toml`
+
+## `enabled`
 
 Whether authenthication is enabled or not.
 
-:::code-group
-```toml [features.toml] {2}
+```toml
 [authentication]
-enabled = false
+enabled = true # Boolean
 ```
-:::
 
-#### `prevent_proxy_connections`: Boolean
+## `prevent_proxy_connections`
 
 Whether to block proxy connections or not.
 
-:::code-group
-```toml [features.toml] {3}
+```toml
 [authentication]
-enabled = true
-prevent_proxy_connections = true
+prevent_proxy_connections = false # Boolean
 ```
-:::
 
-#### `auth_url`: String (optional)
-The URL to authenthicate with. Uses Mojang's session servers to authenthicate if not specified. 
+## `auth_url`
 
-##### Placeholders
-| Placeholder     | Description        |
-| --------------- | ------------------ |
-| `{username}`    | Player username    |
-| `{server_hash}` | Hash of the server |
+The URL to authenthicate with. Uses Mojang's session servers to authenthicate if not specified.
 
-:::code-group
-```toml [features.toml] {2}
+```toml
 [authentication]
-auth_url = "[custom auth server here]"
+auth_url = "" # String (optional)
 ```
-:::
 
-#### `prevent_proxy_connection_auth_url`: String (optional)
+### Placeholders
+- `{username}` - Player username
+- `{server_hash}` - Hash of the server
+
+## `prevent_proxy_connection_auth_url`
+
 The URL to authenthicate with if `prevent_proxy_connections` is enabled. Uses Mojang's session servers to authenthicate if not specified.
 
-##### Placeholders
-| Placeholder     | Description              |
-| --------------- | ------------------------ |
-| `{username}`    | Player username          |
-| `{server_hash}` | Hash of the server       |
-| `{ip}`          | IP Address of the player |
-
-:::code-group
-```toml [features.toml] {2}
+```toml
 [authentication]
-prevent_proxy_connection_auth_url = "[custom auth server here]"
+prevent_proxy_connection_auth_url = "" # String (optional)
 ```
-:::
 
-### Player Profile
+### Placeholders
+- `{username}` - Player username
+- `{server_hash}` - Hash of the server
+- `{ip}` - IP Address of the player
 
-#### `allow_banned_players`: Boolean
+## `player_profile.allow_banned_players`
+
 Allow players flagged by Mojang.
 
-:::code-group
-```toml [features.toml] {2}
+```toml
 [authentication.player_profile]
-allow_banned_players = true
+allow_banned_players = false # Boolean
 ```
-:::
 
-#### `allowed_actions`: String Array
+## `player_profile.allowed_actions`
+
 What actions are allowed if `allow_banned_players` is enabled.
 
-:::code-group
-```toml [features.toml] {3}
+```toml
 [authentication.player_profile]
-allow_banned_players = true
-allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
+allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"] # Array of enums (FORCED_NAME_CHANGE, USING_BANNED_SKIN)
 ```
-:::
 
-### Textures
+## `textures.enabled`
 
-#### `enabled`: Boolean
 Whether to filter/validate player textures (e.g. Skins/Capes).
 
-:::code-group
-```toml [features.toml] {2}
+```toml
 [authentication.textures]
-enabled = true
+enabled = true # Boolean
 ```
-:::
 
-#### `allowed_url_schemes`: String Array
+## `textures.allowed_url_schemes`
+
 Allowed URL Schemes for textures.
 
-:::code-group
-```toml [features.toml] {3}
+```toml
 [authentication.textures]
-enabled = true
-allowed_url_schemes = ["http", "https"]
+allowed_url_schemes = ["http", "https"] # Array of strings
 ```
-:::
 
-#### `allowed_url_domains`: String Array
+## `textures.allowed_url_domains`
 Allowed URL domains for textures.
 
-:::code-group
-```toml [features.toml] {3}
+```toml
 [authentication.textures]
-enabled = true
-allowed_url_domains = [".minecraft.net", ".mojang.com"]
+allowed_url_domains = [".minecraft.net", ".mojang.com"] # Array of strings
 ```
-:::
 
-### Texture Types
+---
 
-#### `skin`: Boolean
+## `textures.types.skin`
+
 Whether to use player skins or not.
 
-:::code-group
-```toml [features.toml] {3}
+```toml
 [authentication.textures.types]
-skin = true
+skin = true # Boolean
 ```
-:::
 
-#### `cape`: Boolean
+## `textures.types.cape`
+
 Whether to use player capes or not.
 
-:::code-group
-```toml [features.toml] {3}
+```toml
 [authentication.textures.types]
-cape = true
+cape = true # Boolean
 ```
-:::
 
-#### `elytra`: Boolean
+## `textures.types.elytra`
+
 Whether to use player elytras or not.
 
-:::code-group
-```toml [features.toml] {3}
+```toml
 [authentication.textures.types]
-elytra = true
+elytra = true # Boolean
 ```
-:::
-
-## Default Config
-By default, authentication is enabled and uses Mojang's servers. Here is the default config:
-:::code-group
-```toml [features.toml]
-[authentication]
-enabled = true
-prevent_proxy_connections = false
-
-[authentication.player_profile]
-allow_banned_players = false
-allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
-
-[authentication.textures]
-enabled = true
-allowed_url_schemes = ["http", "https"]
-allowed_url_domains = [".minecraft.net", ".mojang.com"]
-
-[authentication.textures.types]
-skin = true
-cape = true
-elytra = true
-```
-:::

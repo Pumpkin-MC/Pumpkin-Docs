@@ -1,174 +1,142 @@
 # Basic Configuration
 
-## Server Address
+This configuration values can be edited in `configuration.toml`
 
-The address to bind the server to
+## `server_address`
 
-:::code-group
-```toml [configuration.toml]
-server_address = "0.0.0.0:25565"
+The address to bind the server to.
+
+```toml
+server_address = "0.0.0.0:25565" # String (IP:Port)
 ```
-:::
 
-## Seed
+## `seed`
 
-The seed for world generation
+The seed for world generation.
 
-:::code-group
-```toml [configuration.toml]
-seed = ""
+```toml
+seed = "" # String
 ```
-:::
 
-## Max players
+## `max_players`
 
-The maximum number of players allowed on the server
+The maximum number of players allowed on the server.
 
-:::code-group
-```toml [configuration.toml]
-max_players = 100000
+```toml
+max_players = 100000 # Integer
 ```
-:::
 
-## View distance
+## `view_distance`
 
-The maximum view distance for players
+The maximum view distance for players.
 
-:::code-group
-```toml [configuration.toml]
-view_distance = 10
+```toml
+view_distance = 10 # Integer
 ```
-:::
 
-## Simulation distance
+## `simulation_distance`
 
-The maximum simulation distance for players
+The maximum simulation distance for players.
 
-:::code-group
-```toml [configuration.toml]
-simulation_distance = 10
+```toml
+simulation_distance = 10 # Integer
 ```
-:::
 
-## Default difficulty
+## `default_difficulty`
 
-The default game difficulty. Available types: `Peaceful`, `Easy`, `Normal`, `Hard`
+The default game difficulty.
 
-:::code-group
-```toml [configuration.toml]
-default_difficulty = "Normal"
+```toml
+default_difficulty = "Normal" # Enum (Peaceful, Easy, Normal, Hard)
 ```
-:::
 
-## Operation permission level
+## `op_permission_level`
 
-The default permission level for all players
+The default permission level for all players.
 
-:::code-group
-```toml [configuration.toml]
-op_permission_level = 4
+```toml
+op_permission_level = 4 # Enum (0, 1, 2, 3, 4)
 ```
-:::
 
-## Allow nether
+## `allow_nether`
 
-Whether the Nether dimension is enabled
+Whether the Nether dimension is enabled.
 
-:::code-group
-```toml [configuration.toml]
-allow_nether = true
+```toml
+allow_nether = true # Boolean
 ```
-:::
 
-## Hardcore
+## `hardcore`
 
-Whether the server is in hardcore mode
+Whether the server is in hardcore mode.
 
-:::code-group
-```toml [configuration.toml]
-hardcore = false
+```toml
+hardcore = false # Boolean
 ```
-:::
 
-## Online Mode
+## `online_mode`
 
-Whether online mode is enabled. Requires valid Minecraft accounts
+Whether online mode is enabled. Requires valid Minecraft accounts.
 
-:::code-group
-```toml [configuration.toml]
-online_mode = true
+```toml
+online_mode = true # Boolean
 ```
-:::
 
-## Encryption
+## `encryption`
 
-Whether packet encryption is enabled
+Whether packet encryption is enabled.
 
 > [!CAUTION]
 > Required when online mode is enabled
 
-:::code-group
-```toml [configuration.toml]
-encryption = true
+```toml
+encryption = true # Boolean
 ```
-:::
 
-## MOTD
+## `motd`
 
-The server's description displayed on the multiplayer menu
+The server's description displayed on the multiplayer menu.
 
-:::code-group
-```toml [configuration.toml]
-motd = "A Blazing fast Pumpkin Server!"
+```toml
+motd = "A Blazing fast Pumpkin Server!" # String
 ```
-:::
 
-## TPS
+## `tps`
 
-The target server's tick rate
+The target server's tick rate.
 
-:::code-group
-```toml [configuration.toml]
-tps = 20.0
+```toml
+tps = 20.0 # Float
 ```
-:::
 
-## Default gamemode
+## `default_gamemode`
 
-The default game mode for players. Available types: `Undefined`, `Survival`, `Creative`, `Adventure`, `Spectator`
+The default game mode for players.
 
-:::code-group
-```toml [configuration.toml]
-default_gamemode = "Survival"
+```toml
+default_gamemode = "Survival" # Enum (Survival, Creative, Adventure, Spectator)
 ```
-:::
 
-## IP Scrubbing
+## `scrub_ips`
 
-Whether to scrub player IPs from logs
+Whether to scrub player IPs from logs.
 
-:::code-group
-```toml [configuration.toml]
-scrub_ips = true
+```toml
+scrub_ips = true # Boolean
 ```
-:::
 
-## Use favicon
+## `use_favicon`
 
-Whether to use a server favicon or not
+Whether to use a server favicon or not.
 
-:::code-group
-```toml [configuration.toml]
-use_favicon = true
+```toml
+use_favicon = true # Boolean
 ```
-:::
 
-## Favicon path
+## `favicon_path`
 
-The path to the server's favicon
+The path to the server's favicon.
 
-:::code-group
-```toml [configuration.toml]
-favicon_path = "icon.png"
+```toml
+favicon_path = "icon.png" # String
 ```
-:::
