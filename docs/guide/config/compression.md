@@ -32,7 +32,7 @@ threshold = 256 # Integer (0-1024)
 
 ## `level`
 
-A value between 0 to 9: 0 to disable compression, 1 being the fastest compression (at the cost of size), and 9 being maximum compression (at the cost of speed).
+0 to disable compression, 1 being the fastest compression (at the cost of size), and 9 being maximum compression (at the cost of speed).
 
 :::code-group
 ```toml [features.toml]
