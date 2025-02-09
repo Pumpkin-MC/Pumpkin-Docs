@@ -73,7 +73,6 @@ export default defineConfig({
                             ],
                         },
                         { text: 'World', link: '/development/contributing/world' },
-                        { text: 'Mobile dev', link: '/development/contributing/mobile' },
                     ],
                 },
                 {
