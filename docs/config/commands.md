@@ -22,6 +22,17 @@ log_console = false
 ```
 :::
 
+## Operation permission level
+
+The default permission level for all players.
+
+:::code-group
+```toml [configuration.toml] {2}
+default_op_level = 0
+```
+:::
+
+
 ## Default Config
 By default, Pumpkin will allow commands from console and log all commands run by players.
 
@@ -30,5 +41,6 @@ By default, Pumpkin will allow commands from console and log all commands run by
 [commands]
 use_console = true
 log_console = true
+default_op_level = 0
 ```
 :::
