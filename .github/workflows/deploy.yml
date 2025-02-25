@@ -46,7 +46,7 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build with VitePress
-        run: bun run docs:build
+        run: bun run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
