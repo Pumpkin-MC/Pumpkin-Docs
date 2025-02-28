@@ -104,7 +104,7 @@ export const nl = defineConfig({
         logo: "/assets/favicon.ico",
         footer: {
             message: "Uitgebracht onder de MIT-licentie.",
-            copyright: "Copyright © 2024-present Aleksandr Medvedev",
+            copyright: `Copyright © 2024-${new Date().getFullYear()} Aleksandr Medvedev`,
         },
         editLink: {
             pattern:
