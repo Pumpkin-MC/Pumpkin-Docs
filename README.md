@@ -1,13 +1,8 @@
-
 ### Development
+1. Install [Bun](https://bun.sh)
+2. Download dependencies by running `bun install`
+3. Edit the documentation
+4. Build the documentation by running `bun run build`
+5. Preview the documentation by running `bun run preview`
 
-#### Install
-- **Node.js** >= 23
-
-1. Install dependencies using `npm ci`
-
-#### Run
-1. First build the static pages using VitePress by running `npm run docs:build`
-2. You can then can preview the site using `npm run docs:preview`
-
-**Note:** Changes to your documentation files will only be reflected after rebuilding the static pages
+If you wish to see website being changed in real-time, run `bun run dev`

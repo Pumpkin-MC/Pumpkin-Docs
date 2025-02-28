@@ -72,7 +72,7 @@ Hard
 
 ## Operation permission level
 
-The default permission level for all players.
+The op level assigned by the `/op` command.
 
 :::code-group
 ```toml [configuration.toml] {2}

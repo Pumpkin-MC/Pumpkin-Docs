@@ -1,6 +1,6 @@
 // https://vitepress.dev/guide/custom-theme
 import { h } from 'vue'
-import type { Theme } from 'vitepress'
+import { inBrowser, type Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import './style.css'
 import FmtNum from '../components/FmtNum.vue'
@@ -14,6 +14,8 @@ export default {
     })
   },
   enhanceApp({ app, router, siteData }) {
+    if (!inBrowser) return;
+
     app.config.globalProperties.$numberFormatter = new Intl.NumberFormat(navigator.languages);
     app.config.globalProperties.$dateTimeFormatter = new Intl.DateTimeFormat(navigator.languages, {
       year: "numeric",
