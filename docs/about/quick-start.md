@@ -1,9 +1,9 @@
 # Quick Start
 
 **Current Status:**
-
 Pre-release: Currently under development and not yet ready for official release.
 
+## First Steps
 To get Pumpkin running, you first have to clone it:
 ```shell
 git clone https://github.com/Pumpkin-MC/Pumpkin.git
@@ -31,14 +31,22 @@ cargo run --release
 ## Docker
 
 Experimental Docker support is available.
-The image is currently not published anywhere, but you can use the following command to build and deploy it:
+
+You may also have to [install docker](https://docs.docker.com/engine/install/)
+
+The image is currently not published anywhere, but you can use the following command from the cloned directory named `Pumpkin` where you ran the [clone](#first-steps) command from to build and deploy it:
 
 ```shell
-docker compose up --build
+docker build . -T pumkin && docker run pumpkin --rm -p <Exposed Port>:25565 -v <Server Data Location>:/pumkin -it 
 ```
-
-After running this command a `data/` folder should appear in which you'll be able to find all the server files.
-Within this `data/` folder you can put your `world/` folder (make sure you restart the server)
+- Replace `<Exposed Port>` with the port you want to connect with to Pumpkin, for example `25565`
+- Replace `<Server Data Location>` with the location where you want your server config to be stored, for example `./data`
+For example with the `<Server Data Location>` set to `./data`, and the `<Exposed Port>` set to `25565` the command is as follows:
+```shell
+docker build . -t pumkin && docker run pumpkin --rm -p 25565:25565 -v ./data:/pumkin -it 
+```
+After running this command a folder should appear in your chosen location which you'll be able to find all the server files.
+Within this folder you can put your `world/` folder (make sure you restart the server)
 
 
 ## Test Server
