@@ -1,10 +1,10 @@
 # LAN Broadcast
-Pumpkin can broadcast the server across the network in order to make it easier for local players to connect to the server easier.
+Pumpkin kan de server over het netwerk uitzenden om het voor lokale spelers gemakkelijker te maken om verbinding te maken met de server.
 
-## Configuring LAN Broadcast
+## LAN Broadcast configureren
 
 #### `enabled`: Boolean
-Whether LAN Broadcast is enabled or not.
+Of LAN Broadcast is ingeschakeld of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -13,25 +13,25 @@ enabled = true
 ```
 :::
 
-#### `motd`: String (optional)
-The MOTD to broadcast out to clients. Will use server's MOTD by default.
+#### `motd`: String (optioneel)
+De MOTD om uit te zenden naar clients. Zal standaard de MOTD van de server gebruiken.
 
 > [!CAUTION]
-> LAN broadcast MOTD does not support multiple lines, RGB colors, or gradients. Pumpkin does not verify the MOTD before broadcasted. If the server MOTD is using these components, consider defining this field so that clients see a proper MOTD.
+> LAN broadcast MOTD ondersteunt geen meerdere regels, RGB-kleuren of kleurverlopen. Pumpkin verifieert de MOTD niet voordat deze wordt uitgezonden. Als de server-MOTD deze componenten gebruikt, overweeg dan om dit veld in te vullen zodat clients een juiste MOTD zien.
 
 :::code-group
 ```toml [features.toml] {3}
 [lan_broadcast]
 enabled = true
-motd = "[your MOTD here]"
+motd = "[jouw MOTD hier]"
 ```
 :::
 
-#### `port`: Integer (0-65535) (optional)
-What port to bind to. If not specified, will bind to port 0 (any available port on the system).
+#### `port`: Integer (0-65535) (optioneel)
+Op welke poort moet worden gebonden. Als dit niet is opgegeven, wordt poort 0 (elke beschikbare poort op het systeem) gebruikt.
 
 > [!IMPORTANT]
-> The protocol defines what port to broadcast to. This option only exists to specify which port to bind to on the host. This option purely exists so that the port can be predictable.
+> Het protocol definieert naar welke poort moet worden uitgezonden. Deze optie bestaat alleen om op te geven op welke poort moet worden gebonden op de host. Deze optie bestaat puur zodat de poort voorspelbaar kan zijn.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -41,14 +41,14 @@ port = 46733
 ```
 :::
 
-## Default Config
-By default LAN broadcast is disabled.
+## Standaardconfiguratie
+Standaard is LAN broadcast uitgeschakeld.
 
 :::code-group
 ```toml [features.toml]
 [lan_broadcast]
 enabled = false
-motd = "[server MOTD here]"
+motd = "[server MOTD hier]"
 port = 0
 ```
 :::

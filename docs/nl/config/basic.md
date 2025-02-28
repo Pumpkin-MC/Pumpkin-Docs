@@ -1,10 +1,10 @@
-# Basic Configuration
+# Basisconfiguratie
 
-Representing `configuration.toml`
+Vertegenwoordigt `configuration.toml`
 
-## Server Address
+## Serveradres
 
-The address to bind the server to.
+Het adres om de server aan te binden.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -14,7 +14,7 @@ server_address = "0.0.0.0:25565"
 
 ## Seed
 
-The seed for world generation.
+De seed voor wereldgeneratie.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -22,9 +22,9 @@ seed = ""
 ```
 :::
 
-## Max players
+## Maximaal aantal spelers
 
-The maximum number of players allowed on the server.
+Het maximale aantal spelers dat op de server is toegestaan.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -32,9 +32,9 @@ max_players = 100000
 ```
 :::
 
-## View distance
+## Zichtafstand
 
-The maximum view distance for players.
+De maximale zichtafstand voor spelers.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -42,9 +42,9 @@ view_distance = 10
 ```
 :::
 
-## Simulation distance
+## Simulatieafstand
 
-The maximum simulation distance for players.
+De maximale simulatieafstand voor spelers.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -52,9 +52,9 @@ simulation_distance = 10
 ```
 :::
 
-## Default difficulty
+## Standaard moeilijkheidsgraad
 
-The default game difficulty.
+De standaard moeilijkheidsgraad van het spel.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -70,9 +70,9 @@ Normal
 Hard
 ```
 
-## Operation permission level
+## Operationeel permissieniveau
 
-The op level assigned by the `/op` command.
+Het op-niveau dat wordt toegewezen door het `/op`-commando.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -80,9 +80,9 @@ op_permission_level = 4
 ```
 :::
 
-## Allow nether
+## Nether toestaan
 
-Whether the Nether dimension is enabled.
+Of de Nether-dimensie is ingeschakeld.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -92,7 +92,7 @@ allow_nether = true
 
 ## Hardcore
 
-Whether the server is in hardcore mode.
+Of de server in hardcore modus is.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -100,9 +100,9 @@ hardcore = false
 ```
 :::
 
-## Online Mode
+## Online modus
 
-Whether online mode is enabled. Requires valid Minecraft accounts.
+Of de online modus is ingeschakeld. Vereist geldige Minecraft-accounts.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -110,12 +110,12 @@ online_mode = true
 ```
 :::
 
-## Encryption
+## Encryptie
 
-Whether packet encryption is enabled.
+Of pakketversleuteling is ingeschakeld.
 
 > [!IMPORTANT]
-> Required when online mode is enabled.
+> Vereist wanneer de online modus is ingeschakeld.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -125,7 +125,7 @@ encryption = true
 
 ## Motd
 
-The server's description displayed on the status screen.
+De beschrijving van de server die wordt weergegeven op het status scherm.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -135,7 +135,7 @@ motd = "A Blazing fast Pumpkin Server!"
 
 ## TPS
 
-The target server's Tick rate.
+De doel-tickrate van de server.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -143,9 +143,9 @@ tps = 20.0
 ```
 :::
 
-## Default gamemode
+## Standaard spelmodus
 
-The default game mode for players.
+De standaard spelmodus voor spelers.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -161,9 +161,9 @@ Adventure
 Spectator
 ```
 
-## IP Scrubbing
+## IP-scrubbing
 
-Whether to scrub player IPs from logs.
+Of spelers-IP's uit logs moeten worden verwijderd.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -171,9 +171,9 @@ scrub_ips = true
 ```
 :::
 
-## Use favicon
+## Favicon gebruiken
 
-Whether to use a server favicon or not.
+Of een server-favicon moet worden gebruikt of niet.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -181,9 +181,9 @@ use_favicon = true
 ```
 :::
 
-## Favicon path
+## Favicon-pad
 
-The path to the server's favicon.
+Het pad naar de favicon van de server.
 
 :::code-group
 ```toml [configuration.toml] {2}

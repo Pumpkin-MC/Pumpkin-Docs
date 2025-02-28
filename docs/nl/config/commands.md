@@ -1,9 +1,9 @@
-# Commands
-Pumpkin supports Vanilla commands and allows you to configure where they can be ran from. 
+# Commando's
+Pumpkin ondersteunt vanillecommando's en stelt je in staat om te configureren waar ze kunnen worden uitgevoerd.
 
-## Configuring Commands
+## Commando's configureren
 #### `use_console`: Boolean
-Whether commands from the console are accepted or not.
+Of commando's vanaf de console worden geaccepteerd of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -13,7 +13,7 @@ use_console = false
 :::
 
 #### `log_console`: Boolean
-Whether commands from players should be logged in the console or not.
+Of commando's van spelers in de console moeten worden gelogd of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -22,9 +22,9 @@ log_console = false
 ```
 :::
 
-## Operation permission level
+## Operationeel permissieniveau
 
-The default permission level for all players.
+Het standaard permissieniveau voor alle spelers.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -32,9 +32,8 @@ default_op_level = 0
 ```
 :::
 
-
-## Default Config
-By default, Pumpkin will allow commands from console and log all commands run by players.
+## Standaardconfiguratie
+Standaard staat Pumpkin commando's vanaf de console toe en logt alle commando's die door spelers worden uitgevoerd.
 
 :::code-group
 ```toml [features.toml]

@@ -1,10 +1,10 @@
 # PVP
-PVP is a core part of vanilla mechanics, with even the smallest change affecting gameplay. Pumpkin allows you to fully configure PVP.
+PVP is een kernonderdeel van de vanillemechanica, waarbij zelfs de kleinste verandering de gameplay beïnvloedt. Pumpkin stelt je in staat om PVP volledig te configureren.
 
-## Configuring PVP
+## PVP configureren
 
 #### `enabled`: Boolean
-Whether PVP is enabled or not.
+Of PVP is ingeschakeld of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -14,7 +14,7 @@ enabled = true
 :::
 
 #### `hurt_animation`: Boolean
-Whether to show red hurt animation and FOV bobbing or not.
+Of de rode pijnanimatie en FOV-bobbing moeten worden weergegeven of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -24,7 +24,7 @@ hurt_animation = true
 :::
 
 #### `protect_creative`: Boolean
-Whether to protect players in creative againest PVP or not.
+Of spelers in creatieve modus beschermd moeten worden tegen PVP of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -34,7 +34,7 @@ protect_creative = true
 :::
 
 #### `knockback`: Boolean
-Whether attacks should have knockback or not.
+Of aanvallen terugslag moeten hebben of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -44,7 +44,7 @@ knockback = true
 :::
 
 #### `swing`: Boolean
-Whether players should swing when attacking or not.
+Of spelers moeten zwaaien bij het aanvallen of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -53,8 +53,8 @@ swing = true
 ```
 :::
 
-## Default Config
-By default all PVP options are enabled to match vanilla behavior.
+## Standaardconfiguratie
+Standaard zijn alle PVP-opties ingeschakeld om het vanillegedrag te evenaren.
 
 :::code-group
 ```toml [features.toml]

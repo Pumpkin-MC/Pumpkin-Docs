@@ -1,13 +1,13 @@
-# Compression
-Compression is used to reduce the size of packets. This is beneficial to reduce bandwidth server side and also to help players on slower internet connections.
+# Compressie
+Compressie wordt gebruikt om de grootte van pakketten te verkleinen. Dit is gunstig om de bandbreedte aan de serverzijde te verminderen en ook om spelers met langzamere internetverbindingen te helpen.
 
-## Configuring Compression
+## Compressie configureren
 
 #### `enabled`: Boolean
-Whether packet compression is enabled or not.
+Of pakketcompressie is ingeschakeld of niet.
 
 > [!TIP]
-> It might be beneficial to disable compression if the server is behind a proxy.
+> Het kan voordelig zijn om compressie uit te schakelen als de server achter een proxy staat.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -18,10 +18,10 @@ enabled = true
 
 #### `threshold`: Integer (0-1024)
 
-The minimum packet size before the server attempts to compress the packet.
+De minimale pakketgrootte voordat de server probeert het pakket te comprimeren.
 
 > [!CAUTION]
-> Increasing this value can hurt players on slower connections.
+> Het verhogen van deze waarde kan spelers met langzamere verbindingen schaden.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -32,7 +32,7 @@ threshold = 256
 
 #### `level`: Integer (0-9)
 
-A value between 0 to 9: 0 to disable compression, 1 being the fastest compression (at the cost of size), and 9 being maximum compression (at the cost of speed).
+Een waarde tussen 0 en 9: 0 om compressie uit te schakelen, 1 is de snelste compressie (ten koste van de grootte), en 9 is maximale compressie (ten koste van de snelheid).
 
 :::code-group
 ```toml [features.toml] {2}
@@ -41,9 +41,9 @@ level = 4
 ```
 :::
 
-## Default Config
+## Standaardconfiguratie
 
-By default, compression is enabled.
+Standaard is compressie ingeschakeld.
 
 :::code-group
 ```toml [features.toml]

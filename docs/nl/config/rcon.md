@@ -1,7 +1,7 @@
 # RCON
-RCON is a protocol that allows you to remotely manage the server from a different device. Pumpkin has full support for RCON.
+RCON is een protocol waarmee je de server op afstand kunt beheren vanaf een ander apparaat. Pumpkin heeft volledige ondersteuning voor RCON.
 
-## Configuring RCON
+## Configureren van RCON
 
 #### `enabled`: Boolean
 
@@ -13,7 +13,7 @@ enabled = true
 :::
 
 #### `address`: String
-The address and port that RCON should listen to.
+Het adres en de poort waar RCON naar moet luisteren.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -24,18 +24,18 @@ address = "0.0.0.0:25575"
 :::
 
 #### `password`: String
-The password to use for RCON authentication.
+Het wachtwoord dat gebruikt moet worden voor RCON-authenticatie.
 
 :::code-group
 ```toml [features.toml] {3}
 [rcon]
 enabled = true
-password = "[your safe password here]"
+password = "[je veilig wachtwoord hier]"
 ```
 :::
 
 #### `max_connections`: Integer
-The max number of RCON connections allowed at a single time. Set to 0 to disable a limit.
+Het maximale aantal RCON-verbindingen dat tegelijkertijd is toegestaan. Stel in op 0 om een limiet uit te schakelen.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -47,7 +47,7 @@ max_connections = 5
 
 ### Logging
 #### `log_logged_successfully`: Boolean
-Whether successful logins should be logged to console or not.
+Of succesvolle logins naar de console moeten worden gelogd of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -57,7 +57,7 @@ log_logged_successfully = true
 :::
 
 #### `log_wrong_password`: Boolean
-Whether wrong password attempts should be logged to console or not.
+Of verkeerde wachtwoordpogingen naar de console moeten worden gelogd of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -67,7 +67,7 @@ log_logged_successfully = true
 :::
 
 #### `log_commands`: Boolean
-Whether to log commands ran from RCON to console or not.
+Of commando's uitgevoerd vanaf RCON naar de console moeten worden gelogd of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -77,7 +77,7 @@ log_commands = true
 :::
 
 #### `log_quit`: Boolean
-Whether RCON client quit should be logged or not.
+Of het afsluiten van de RCON-client moet worden gelogd of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -86,8 +86,8 @@ log_quit = true
 ```
 :::
 
-## Default Config
-By default RCON is disabled.
+## Standaard Configuratie
+Standaard is RCON uitgeschakeld.
 
 :::code-group
 ```toml [features.toml]

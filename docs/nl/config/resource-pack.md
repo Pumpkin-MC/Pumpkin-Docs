@@ -1,13 +1,13 @@
 # Resource Pack
-Servers can send resource packs to the client in order to change the appearance of the game on the client. Pumpkin allows you to fully configure the resource pack.
+Servers kunnen resource packs naar de client sturen om het uiterlijk van het spel op de client te veranderen. Pumpkin stelt je in staat om het resource pack volledig te configureren.
 
 > [!TIP]
-> Minify your resource pack using [PackSquash](https://packsquash.aylas.org/)! This can help clients download the resource pack faster.
+> Minimaliseer je resource pack met [PackSquash](https://packsquash.aylas.org/)! Dit kan helpen om de resource pack sneller te laten downloaden door clients.
 
-## Configuring Resource Pack
+## Configureren van Resource Pack
 
 #### `enabled`: Boolean
-Whether a resource pack is enabled or not.
+Of een resource pack is ingeschakeld of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -17,38 +17,38 @@ enabled = true
 :::
 
 #### `resource_pack_url`: String
-The direct download URL to the resource pack. 
+De directe download URL naar de resource pack.
 
 > [!TIP]
-> You can host the resource pack for free at [MCPacks](https://mc-packs.net/).
+> Je kunt de resource pack gratis hosten op [MCPacks](https://mc-packs.net/).
 
 :::code-group
 ```toml [features.toml] {3}
 [resource_pack]
 enabled = true
-resource_pack_url = "[your download URL here]"
+resource_pack_url = "[je download URL hier]"
 ```
 :::
 
 #### `resource_pack_sha1`: String
-The hash of the resource pack, using the SHA1 algorithm.
+De hash van de resource pack, met behulp van het SHA1-algoritme.
 
 > [!IMPORTANT]
-> Although not required to specify, you should specify this field because the client will otherwise redownload the resource pack every time they join the server, even if there are no changes to the resource pack.
+> Hoewel het niet verplicht is om dit veld op te geven, moet je dit veld specificeren omdat de client anders de resource pack elke keer opnieuw zal downloaden wanneer ze de server betreden, zelfs als er geen wijzigingen zijn in de resource pack.
 
 > [!WARNING]
-> Make sure to update this field if the resource pack is modified.
+> Zorg ervoor dat je dit veld bijwerkt als de resource pack is gewijzigd.
 
-::: details How do I get the SHA1 hash of my resource pack?
+::: details Hoe krijg ik de SHA1-hash van mijn resource pack?
 ::: code-group
 ```powershell [Windows (PowerShell)]
-Get-FileHash [file] SHA1
+Get-FileHash [bestand] SHA1
 ```
 ```shell [Mac OS]
-shasum -a 1 [file]
+shasum -a 1 [bestand]
 ```
 ```shell [Linux]
-sha1sum [file]
+sha1sum [bestand]
 ```
 :::
 
@@ -56,23 +56,23 @@ sha1sum [file]
 ```toml [features.toml] {3}
 [resource_pack]
 enabled = true
-resource_pack_sha1 = "[your hash here]"
+resource_pack_sha1 = "[je hash hier]"
 ```
 :::
 
 #### `prompt_message`: String
-The message to show to the user when prompted to download the resource pack.
+Het bericht dat aan de gebruiker wordt getoond wanneer gevraagd wordt om de resource pack te downloaden.
 
 :::code-group
 ```toml [features.toml] {3}
 [resource_pack]
 enabled = true
-prompt_message = "[your message here]"
+prompt_message = "[je bericht hier]"
 ```
 :::
 
 #### `force`: Boolean
-Whether to force the client to download the resource pack or not. If the client declines the download, they will be kicked from the server.
+Of de client gedwongen moet worden om de resource pack te downloaden of niet. Als de client de download weigert, worden ze van de server gekickt.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -82,8 +82,8 @@ force = false
 ```
 :::
 
-## Default Config
-By default, resource pack is disabled.
+## Standaard Configuratie
+Standaard is de resource pack uitgeschakeld.
 
 :::code-group
 ```toml [features.toml]

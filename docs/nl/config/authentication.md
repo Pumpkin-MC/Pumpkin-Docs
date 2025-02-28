@@ -1,15 +1,15 @@
-# Authentication
+# Authenticatie
 
-Servers authenthicate with Mojang's session servers in order to ensure the client is playing on a legitimate, paid account. Pumpkin allows you to fully configure authentication.
+Servers authentiseren met de sessieservers van Mojang om ervoor te zorgen dat de client op een legitiem, betaald account speelt. Pumpkin stelt je in staat om authenticatie volledig te configureren.
 
-## Configuring Authentication
+## Authenticatie configureren
 
 > [!WARNING]
-> Most servers should not change the default authenthication configuration. Doing so may have unintended consequnces. **Only change these settings if you know what you are doing!**
+> Meeste servers zouden de standaard authenticatieconfiguratie niet moeten wijzigen. Dit kan onbedoelde gevolgen hebben. **Wijzig deze instellingen alleen als je weet wat je doet!**
 
 #### `enabled`: Boolean
 
-Whether authenthication is enabled or not.
+Of authenticatie is ingeschakeld of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -20,7 +20,7 @@ enabled = false
 
 #### `prevent_proxy_connections`: Boolean
 
-Whether to block proxy connections or not.
+Of proxyverbindingen moeten worden geblokkeerd of niet.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -30,43 +30,43 @@ prevent_proxy_connections = true
 ```
 :::
 
-#### `auth_url`: String (optional)
-The URL to authenthicate with. Uses Mojang's session servers to authenthicate if not specified. 
+#### `auth_url`: String (optioneel)
+De URL om te authenticeren. Gebruikt de sessieservers van Mojang om te authenticeren als niet gespecificeerd.
 
-##### Placeholders
-| Placeholder     | Description        |
-| --------------- | ------------------ |
-| `{username}`    | Player username    |
-| `{server_hash}` | Hash of the server |
-
-:::code-group
-```toml [features.toml] {2}
-[authentication]
-auth_url = "[custom auth server here]"
-```
-:::
-
-#### `prevent_proxy_connection_auth_url`: String (optional)
-The URL to authenthicate with if `prevent_proxy_connections` is enabled. Uses Mojang's session servers to authenthicate if not specified.
-
-##### Placeholders
-| Placeholder     | Description              |
-| --------------- | ------------------------ |
-| `{username}`    | Player username          |
-| `{server_hash}` | Hash of the server       |
-| `{ip}`          | IP Address of the player |
+##### Plaatsvervangers
+| Plaatsvervanger | Beschrijving          |
+| --------------- | --------------------- |
+| `{username}`    | Speler gebruikersnaam |
+| `{server_hash}` | Hash van de server    |
 
 :::code-group
 ```toml [features.toml] {2}
 [authentication]
-prevent_proxy_connection_auth_url = "[custom auth server here]"
+auth_url = "[aangepaste auth server hier]"
 ```
 :::
 
-### Player Profile
+#### `prevent_proxy_connection_auth_url`: String (optioneel)
+De URL om te authenticeren als `prevent_proxy_connections` is ingeschakeld. Gebruikt de sessieservers van Mojang om te authenticeren als niet gespecificeerd.
+
+##### Plaatsvervangers
+| Plaatsvervanger | Beschrijving              |
+| --------------- | ------------------------- |
+| `{username}`    | Speler gebruikersnaam     |
+| `{server_hash}` | Hash van de server        |
+| `{ip}`          | IP-adres van de speler    |
+
+:::code-group
+```toml [features.toml] {2}
+[authentication]
+prevent_proxy_connection_auth_url = "[aangepaste auth server hier]"
+```
+:::
+
+### Spelerprofiel
 
 #### `allow_banned_players`: Boolean
-Allow players flagged by Mojang.
+Sta spelers toe die door Mojang zijn gemarkeerd.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -76,7 +76,7 @@ allow_banned_players = true
 :::
 
 #### `allowed_actions`: String Array
-What actions are allowed if `allow_banned_players` is enabled.
+Welke acties zijn toegestaan als `allow_banned_players` is ingeschakeld.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -86,10 +86,10 @@ allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
 ```
 :::
 
-### Textures
+### Texturen
 
 #### `enabled`: Boolean
-Whether to filter/validate player textures (e.g. Skins/Capes).
+Of spelertexturen (bijv. Skins/Capes) moeten worden gefilterd/gevalideerd.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -99,7 +99,7 @@ enabled = true
 :::
 
 #### `allowed_url_schemes`: String Array
-Allowed URL Schemes for textures.
+Toegestane URL-schema's voor texturen.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -110,7 +110,7 @@ allowed_url_schemes = ["http", "https"]
 :::
 
 #### `allowed_url_domains`: String Array
-Allowed URL domains for textures.
+Toegestane URL-domeinen voor texturen.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -120,10 +120,10 @@ allowed_url_domains = [".minecraft.net", ".mojang.com"]
 ```
 :::
 
-### Texture Types
+### Textuurtypen
 
 #### `skin`: Boolean
-Whether to use player skins or not.
+Of speler skins moeten worden gebruikt of niet.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -133,7 +133,7 @@ skin = true
 :::
 
 #### `cape`: Boolean
-Whether to use player capes or not.
+Of speler capes moeten worden gebruikt of niet.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -143,7 +143,7 @@ cape = true
 :::
 
 #### `elytra`: Boolean
-Whether to use player elytras or not.
+Of speler elytra's moeten worden gebruikt of niet.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -152,8 +152,8 @@ elytra = true
 ```
 :::
 
-## Default Config
-By default, authentication is enabled and uses Mojang's servers. Here is the default config:
+## Standaardconfiguratie
+Standaard is authenticatie ingeschakeld en worden de servers van Mojang gebruikt. Hier is de standaardconfiguratie:
 :::code-group
 ```toml [features.toml]
 [authentication]

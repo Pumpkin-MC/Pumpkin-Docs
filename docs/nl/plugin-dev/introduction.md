@@ -1,10 +1,10 @@
-# Pumpkin Plugin Development
+# Pumpkin Plugin Ontwikkeling
 ::: warning
-The Pumpkin Plugin API is still in a very early stage of development and may change at any time.
-If you run into any issues please reach out on [our discord](https://discord.gg/aaNuD6rFEe)
+De Pumpkin Plugin API bevindt zich nog in een zeer vroeg ontwikkelingsstadium en kan op elk moment veranderen.
+Als je problemen ondervindt, neem dan contact op via [onze discord](https://discord.gg/aaNuD6rFEe)
 :::
 
-Pumpkin Plugins integrate with the server software on a very deep level allowing for many things that would not be possible on other server software.
+Pumpkin Plugins integreren op een zeer diep niveau met de server software, waardoor veel dingen mogelijk zijn die op andere server software niet mogelijk zouden zijn.
 
-The Pumpkin Plugin API takes inspiration from the Spigot/Bukkit plugin API in many places, so if you have previous experience with these and have experience with rust development, you should have a pretty easy time writing plugins for Pumpkin :smile:
+De Pumpkin Plugin API haalt inspiratie uit de Spigot/Bukkit plugin API op veel plaatsen, dus als je eerdere ervaring hebt met deze en ervaring hebt met rust ontwikkeling, zou je vrij gemakkelijk plugins voor Pumpkin moeten kunnen schrijven :smile:
 

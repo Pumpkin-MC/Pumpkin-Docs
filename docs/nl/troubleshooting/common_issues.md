@@ -1,9 +1,9 @@
-### Common Issues
+### Veelvoorkomende Problemen
 
-1.  ### Failed to verify username
+1.  ### Gebruikersnaam verifiëren mislukt
 
-    **Issue:** Some players reported having issues logging into the Server, including a "Failed to verify username" error.
+    **Probleem:** Sommige spelers melden problemen bij het inloggen op de server, waaronder een foutmelding "Gebruikersnaam verifiëren mislukt".
 
-    **Cause:** This has to do with Authentication, Usually with the prevent proxy connections setting.
+    **Oorzaak:** Dit heeft te maken met authenticatie, meestal met de instelling om proxyverbindingen te voorkomen.
 
-    **Fix:** Disable `prevent_proxy_connections` in `features.toml`
+    **Oplossing:** Schakel `prevent_proxy_connections` uit in `features.toml`

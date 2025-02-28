@@ -1,23 +1,23 @@
-### Configuration
+### Configuratie
 
-Pumpkin offers a robust configuration system that allows users to customize various aspects of the server's behavior without relying on external plugins. This provides flexibility and control over the server's operation.
+Pumpkin biedt een robuust configuratiesysteem waarmee gebruikers verschillende aspecten van het gedrag van de server kunnen aanpassen zonder afhankelijk te zijn van externe plugins. Dit biedt flexibiliteit en controle over de werking van de server.
 
-### Basic / Advanced
+### Basis / Geavanceerd
 
-Pumpkin's Configuration is split into a basic Configuration made for quick changes and important changes and a more Advanced Configuration
+De configuratie van Pumpkin is opgesplitst in een basisconfiguratie voor snelle en belangrijke wijzigingen en een meer geavanceerde configuratie.
 
-- `configuration.toml`: simple and can be compared to the vanilla `server.properties`.
-- `features.toml`: designed to have all features of pumpkin at one place, making it a large configuration
+- `configuration.toml`: eenvoudig en kan worden vergeleken met de vanille `server.properties`.
+- `features.toml`: ontworpen om alle functies van Pumpkin op één plek te hebben, waardoor het een grote configuratie is.
 
-### Server Version
+### Serverversie
 
-Pumpkin aims to support the latest Minecraft Version. If you want to host a Pumpkin server in any other version, there is a project called [ViaProxy](https://github.com/ViaVersion/ViaProxy).
+Pumpkin streeft ernaar de nieuwste Minecraft-versie te ondersteunen. Als je een Pumpkin-server op een andere versie wilt hosten, is er een project genaamd [ViaProxy](https://github.com/ViaVersion/ViaProxy).
 
-- Make sure to allow Proxy connections.
-- Pumpkin and ViaProxy have no connection, don't submit issues regarding their code. Furthermore, this is a 3rd party proxy and Pumpkin does not take any responsibility for the good or the bad.
+- Zorg ervoor dat proxyverbindingen zijn toegestaan.
+- Pumpkin en ViaProxy hebben geen relatie, dien geen problemen in met betrekking tot hun code. Bovendien is dit een proxy van derden en Pumpkin neemt geen verantwoordelijkheid voor het goede of het slechte.
 
-#### Key Features:
+#### Belangrijkste kenmerken:
 
-- Extensive Customization: Configure server settings, player behavior, world generation, and more.
-- Performance Optimization: Optimize server performance through configuration tweaks.
-- Plugin-Free Customization: Achieve desired changes without the need for additional plugins.
+- Uitgebreide aanpassing: Configureer serverinstellingen, spelersgedrag, wereldgeneratie en meer.
+- Prestatieoptimalisatie: Optimaliseer de serverprestaties door configuratiewijzigingen.
+- Plugin-vrije aanpassing: Bereik gewenste wijzigingen zonder de noodzaak van extra plugins.

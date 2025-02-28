@@ -1,17 +1,17 @@
 # Proxy
-Many servers use proxies to manage connections and distribute players across servers. Pumpkin supports the following proxy protocols:
+Veel servers gebruiken proxies om verbindingen te beheren en spelers over servers te verdelen. Pumpkin ondersteunt de volgende proxy-protocollen:
 
 - [Velocity](https://papermc.io/software/velocity)
 - [BungeeCord](https://www.spigotmc.org/wiki/bungeecord-installation/)
 
 > [!TIP]
-> Velocity is recommended for most server networks. Velocity is modern and more performant compared to BungeeCord.
+> Velocity wordt aanbevolen voor de meeste servernetwerken. Velocity is moderner en presteert beter in vergelijking met BungeeCord.
 
-## Configuring Proxy
+## Proxy configureren
 
 #### `enabled`: Boolean
 
-Enables support for proxies.
+Schakelt ondersteuning voor proxies in.
 
 :::code-group
 ```toml [features.toml]{2}
@@ -24,7 +24,7 @@ enabled = true
 
 #### `enabled`: Boolean
 
-Whether Velocity support is enabled or not.
+Of Velocity-ondersteuning is ingeschakeld of niet.
 
 :::code-group
 ```toml [features.toml]{2}
@@ -35,20 +35,20 @@ enabled = true
 
 #### `secret`: String 
 
-The secret as configured in Velocity. 
+Het geheim zoals geconfigureerd in Velocity. 
 
 :::code-group
 ```toml [features.toml]{3}
 [proxy.velocity]
 enabled = true
-secret = "[proxy secret here]"
+secret = "[proxy secret hier]"
 ```
 :::
 
 ### BungeeCord
 
 #### `enabled`: Boolean
-Whether BungeeCord support is enabled or not.
+Of BungeeCord-ondersteuning is ingeschakeld of niet.
 
 :::code-group
 ```toml [features.toml]{2}
@@ -58,10 +58,10 @@ enabled = true
 :::
 
 > [!CAUTION]
-> Ensure that the server's firewall is correctly configured, as BungeeCord can't verify if player info is from your proxy or an imposter.
+> Zorg ervoor dat de firewall van de server correct is geconfigureerd, aangezien BungeeCord niet kan verifiëren of spelersinformatie van jouw proxy of een bedrieger komt.
 
-## Default Config
-By default, proxy support is disabled. Here is the default config:
+## Standaardconfiguratie
+Standaard is proxy-ondersteuning uitgeschakeld. Hier is de standaardconfiguratie:
 
 :::code-group
 ```toml [features.toml]

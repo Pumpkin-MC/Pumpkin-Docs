@@ -1,10 +1,10 @@
 # Logging
-Pumpkin allows you to customize what you want in your logs.
+Pumpkin stelt je in staat om aan te passen wat je in je logs wilt hebben.
 
-## Configuring Logging
+## Logging configureren
 
 #### `enabled`: Boolean
-Whether logging is enabled or not.
+Of logging is ingeschakeld of niet.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -14,7 +14,7 @@ enabled = true
 :::
 
 #### `level`: Enum
-What should be logged. Possible values are:
+Wat er moet worden gelogd. Mogelijke waarden zijn:
 - Off
 - Error
 - Warn
@@ -31,7 +31,7 @@ level = "Debug"
 :::
 
 #### `env`: Boolean
-Whether to allow choosing the log level by setting the `RUST_LOG` environment variable or not.
+Of het mogelijk is om het logniveau te kiezen door de `RUST_LOG`-omgevingsvariabele in te stellen of niet.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -42,7 +42,7 @@ env = true
 :::
 
 #### `threads`: Boolean
-Whether to print threads in the logging message or not.
+Of threads in het logbericht moeten worden weergegeven of niet.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -53,7 +53,7 @@ threads = false
 :::
 
 #### `color`: Boolean
-Whether to print with color to the console or not.
+Of er met kleur naar de console moet worden geprint of niet.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -64,7 +64,7 @@ color = false
 :::
 
 #### `timestamp`: Boolean
-Whether to print the timestamp in the meessage or not.
+Of de tijdstempel in het bericht moet worden weergegeven of niet.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -74,8 +74,8 @@ timestamp = false
 ```
 :::
 
-## Default Config
-By default, logging is enabled and will print with color, threads, and timestamp at the `Info` level. 
+## Standaardconfiguratie
+Standaard is logging ingeschakeld en wordt er met kleur, threads en tijdstempel op het `Info`-niveau geprint. 
 
 :::code-group
 ```toml [features.toml]
