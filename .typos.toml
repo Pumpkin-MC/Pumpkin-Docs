@@ -1,0 +1,5 @@
+[files]
+extend-exclude = [
+	"docs/nl/",
+    "docs/.vitepress/nl.ts"
+]

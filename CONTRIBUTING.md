@@ -34,6 +34,7 @@ Below are instructions for adding a new language translation for the documentati
 3. Register the new locale in `docs/.vitepress/config.ts`.
 4. Duplicate English documentation folder (`docs/en/`) and rename it to your language's ISO code. (e.g. `en`,`nl`)
 5. Translate all documentation files in the newly created folder.
+6. Configure the typo check to skip the translation files in `.typos.toml`.
 
 ### Additional Information
 
