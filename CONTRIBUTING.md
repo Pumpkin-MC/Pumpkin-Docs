@@ -25,6 +25,16 @@ There are several ways you can contribute to Pumpkin:
   Ensure your code adheres to our project structure and style guidelines.
   Write clear and concise commit messages that describe your changes.
 
+### Adding a Translation
+
+Below are instructions for adding a new language translation for the documentation.
+
+1. Create a new locale file in `docs/.vitepress/`. (e.g. `fr.ts` for a French translation)
+2. Translate the content and update all links with the appropriate language code (refer to the Dutch translation for an example).
+3. Register the new locale in `docs/.vitepress/config.ts`.
+4. Duplicate English documentation folder (`docs/en/`) and rename it to your language's ISO code. (e.g. `en`,`nl`)
+5. Translate all documentation files in the newly created folder.
+
 ### Additional Information
 
 We encourage you to comment on existing issues and pull requests to share your thoughts and provide feedback.
