@@ -9,6 +9,8 @@ To get Pumpkin running, you first have to clone it:
 git clone https://github.com/Pumpkin-MC/Pumpkin.git
 cd Pumpkin
 ```
+## Rust
+This is the intended way to install Pumpkin.
 
 You may also have to [install rust](https://www.rust-lang.org/tools/install) if you don't already have it.
 
@@ -26,6 +28,10 @@ Then run:
 
 ```shell
 cargo run --release
+```
+To set the rust flag to target-cpu=native use the following command to launch the server instead.
+```shell
+RUSTFLAGS='-C target-cpu=native' cargo run --release
 ```
 
 ## Docker
