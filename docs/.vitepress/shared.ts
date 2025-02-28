@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress';
 export const shared = defineConfig({
     title: "Pumpkin",
 
+    cleanUrls: true,
     rewrites: {
         'en/:rest*': ':rest*'
     },
