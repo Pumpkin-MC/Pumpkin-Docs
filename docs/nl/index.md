@@ -12,13 +12,13 @@ hero:
   actions:
     - theme: brand
       text: Snelle start
-      link: /about/quick-start
+      link: /nl/about/quick-start
     - theme: alt
       text: Configuratie
-      link: /config/introduction
+      link: /nl/config/introduction
     - theme: alt
       text: Voor ontwikkelaars
-      link: /developer/introduction
+      link: /nl/developer/introduction
 
 features:
   # Need to add the svg here instead of using src because then it won't have the box around it
