@@ -64,7 +64,7 @@ color = false
 :::
 
 #### `timestamp`: Boolean
-Whether to print the timestamp in the meessage or not.
+Whether to print the timestamp in the message or not.
 
 :::code-group
 ```toml [features.toml] {3}
