@@ -1,5 +1,5 @@
 [files]
 extend-exclude = [
-	"docs/nl/",
+    "docs/nl/",
     "docs/.vitepress/nl.ts"
 ]
