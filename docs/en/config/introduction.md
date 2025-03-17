@@ -4,17 +4,17 @@ Pumpkin offers a robust configuration system that allows users to customize vari
 
 ### Basic / Advanced
 
-Pumpkin's Configuration is split into a basic Configuration made for quick changes and important changes and a more Advanced Configuration
+Pumpkin's configuration is split into a "basic" configuration made for quick changes and important changes, and a more "advanced" configuration
 
 - `configuration.toml`: simple and can be compared to the vanilla `server.properties`.
 - `features.toml`: designed to have all features of pumpkin at one place, making it a large configuration
 
 ### Server Version
 
-Pumpkin aims to support the latest Minecraft Version. If you want to host a Pumpkin server in any other version, there is a project called [ViaProxy](https://github.com/ViaVersion/ViaProxy).
+Pumpkin aims to support the latest Minecraft Version. If you want to host a Pumpkin server for any other version, there is a project called [ViaProxy](https://github.com/ViaVersion/ViaProxy).
 
-- Make sure to allow Proxy connections.
-- Pumpkin and ViaProxy have no connection, don't submit issues regarding their code. Furthermore, this is a 3rd party proxy and Pumpkin does not take any responsibility for the good or the bad.
+- Make sure to allow proxy connections.
+- Pumpkin and ViaProxy have no connection; don't submit issues regarding their code. Furthermore, this is a 3rd party proxy and Pumpkin does not take any responsibility for the good or the bad.
 
 #### Key Features:
 

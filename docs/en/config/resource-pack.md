@@ -1,5 +1,5 @@
 # Resource Pack
-Servers can send resource packs to the client in order to change the appearance of the game on the client. Pumpkin allows you to fully configure the resource pack.
+Servers can send resource packs to clients in order to change the appearance of the game on the client. Pumpkin allows you to fully configure the resource pack.
 
 > [!TIP]
 > Minify your resource pack using [PackSquash](https://packsquash.aylas.org/)! This can help clients download the resource pack faster.
@@ -31,7 +31,7 @@ resource_pack_url = "[your download URL here]"
 :::
 
 #### `resource_pack_sha1`: String
-The hash of the resource pack, using the SHA1 algorithm.
+The SHA1 hash of the resource pack.
 
 > [!IMPORTANT]
 > Although not required to specify, you should specify this field because the client will otherwise redownload the resource pack every time they join the server, even if there are no changes to the resource pack.
@@ -83,7 +83,7 @@ force = false
 :::
 
 ## Default Config
-By default, resource pack is disabled.
+By default, no resource pack is sent to clients.
 
 :::code-group
 ```toml [features.toml]

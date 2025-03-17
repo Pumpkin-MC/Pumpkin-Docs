@@ -35,7 +35,7 @@ password = "[your safe password here]"
 :::
 
 #### `max_connections`: Integer
-The max number of RCON connections allowed at a single time. Set to 0 to disable a limit.
+The max number of RCON connections allowed at a single time. Set this to 0 to disable the limit.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -87,7 +87,7 @@ log_quit = true
 :::
 
 ## Default Config
-By default RCON is disabled.
+By default, RCON is disabled.
 
 :::code-group
 ```toml [features.toml]

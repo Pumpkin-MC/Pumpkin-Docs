@@ -58,7 +58,7 @@ enabled = true
 :::
 
 > [!CAUTION]
-> Ensure that the server's firewall is correctly configured, as BungeeCord can't verify if player info is from your proxy or an imposter.
+> BungeeCord can't verify if player info is from your proxy or an imposter. Ensure that the server's firewall is correctly configured.
 
 ## Default Config
 By default, proxy support is disabled. Here is the default config:

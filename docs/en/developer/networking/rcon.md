@@ -36,14 +36,14 @@ RCON is a very simple protocol with a few packets. Here's how an RCON packet loo
 | Type  | Identifies the packet type                      |
 | Body  | A message (String), e.g., a command or a password |
 
-#### Server Bound Packets <sub><sub>(Client→Server)</sub></sub>
+#### Serverbound Packets <sub><sub>(Client→Server)</sub></sub>
 
 | Type | Packet      |
 | ---- | ----------- |
 | 2    | Auth        |
 | 3    | ExecCommand |
 
-#### Client Bound Packets <sub><sub>(Server→Client)</sub></sub>
+#### Clientbound Packets <sub><sub>(Server→Client)</sub></sub>
 
 | Type | Packet       |
 | ---- | ------------ |

@@ -1,10 +1,10 @@
 # Creating a new project
-Pumpkin Plugins use the [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html) build system.
+Pumpkin plugins use the [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html) build system.
 
 The complete code for this plugin can be found as a [template on GitHub](https://github.com/vyPal/Hello-Pumpkin).
 
 ## Initializing a new crate
-First we need to create a new project folder,you can do this by running this command in the folder you created:
+First we need to create a new project folder. You can do this by running this command in the folder you created:
 ```bash
 cargo new <project-name> --lib
 ```
@@ -16,7 +16,7 @@ This will create a folder with a couple files in it. The folder structure should
 ```
 
 ## Configuring the crate
-Since Pumpkin Plugins are loaded at runtime as dynamic libraries, we need to tell Cargo to build this crate as one.
+Since Pumpkin plugins are loaded at runtime as dynamic libraries, we need to tell Cargo to build this crate as one.
 :::code-group
 ```toml [Cargo.toml] 
 [package]
@@ -68,4 +68,4 @@ Be aware that this will increase compilation time.
 lto = true
 ```
 :::
-<small>Only enables LTO for release builds</small>
+<small>Enables LTO only for release builds.</small>

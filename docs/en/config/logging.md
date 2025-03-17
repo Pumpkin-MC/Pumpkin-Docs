@@ -14,7 +14,7 @@ enabled = true
 :::
 
 #### `level`: Enum
-What should be logged. Possible values are:
+The log verbosity level. Possible values are:
 - Off
 - Error
 - Warn
@@ -53,7 +53,7 @@ threads = false
 :::
 
 #### `color`: Boolean
-Whether to print with color to the console or not.
+Whether to print to the console with color or not.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -75,7 +75,7 @@ timestamp = false
 :::
 
 ## Default Config
-By default, logging is enabled and will print with color, threads, and timestamp at the `Info` level. 
+By default, logging is enabled at the `Info` level and will print with color, threads, and timestamps. 
 
 :::code-group
 ```toml [features.toml]

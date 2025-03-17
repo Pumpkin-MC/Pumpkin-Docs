@@ -1,7 +1,7 @@
 # Compression
 Compression is used to reduce the size of packets. This is beneficial to reduce bandwidth server side and also to help players on slower internet connections.
 
-## Configuring Compression
+## Configuring compression
 
 #### `enabled`: Boolean
 Whether packet compression is enabled or not.
@@ -41,7 +41,7 @@ level = 4
 ```
 :::
 
-## Default Config
+## Default config
 
 By default, compression is enabled.
 

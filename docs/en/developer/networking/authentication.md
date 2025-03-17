@@ -3,18 +3,18 @@
 Offline accounts, that is, accounts generated from a player's username without contacting an authorization or authentication server, can have any nickname chosen. This, without additional plugins, means that players can impersonate other players, including those with operator permissions.
 
 ### Offline server
-By default, online_mode is enabled in the configuration. This enables authentication, disabling Offline Accounts. If you want to allow offline accounts, you can disable online_mode in the configuration.toml.
+By default, `online_mode` is enabled in the configuration. This enables authentication, disabling offline accounts. If you want to allow offline accounts, you can disable `online_mode` in `configuration.toml`.
 
 ### How Yggdrasil Auth works
-1. The client gets an authentication token and UUID from the launcher
+1. The client gets an authentication token and UUID from the launcher.
 2. The client, during loading, fetches data from the authorization/authentication server using the authentication token, such as various signing keys and the list of blocked servers.
 3. The client, when joining the server, sends a join request to the authorization/authentication servers. Mojang servers can deny this request if the account is banned.
-4. The client sends its identification in a packet to the server
-5. The server, based on this identification, sends a hasJoined request to the authorization/authentication servers. If it succeeds, it obtains the player information, such as the skin.
+4. The client sends its identification to the server in a packet.
+5. The server, based on this identification, sends a `hasJoined` request to the authorization/authentication servers. If it succeeds, it obtains the player information, such as the skin.
 
 ### Custom Authentication Server
 
-Pumpkin does support custom authentication servers. You can replace the authentication URL in `features.toml`.
+Pumpkin supports custom authentication servers. You can replace the authentication URL in `features.toml`.
 
 #### How Pumpkin Authentication Works
 

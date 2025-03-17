@@ -5,4 +5,4 @@
 4. Build the documentation by running `bun run build`
 5. Preview the documentation by running `bun run preview`
 
-If you wish to see website being changed in real-time, run `bun run dev`
+If you wish to see the website being changed in real-time, run `bun run dev`

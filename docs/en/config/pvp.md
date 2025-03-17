@@ -1,5 +1,5 @@
 # PVP
-PVP is a core part of vanilla mechanics, with even the smallest change affecting gameplay. Pumpkin allows you to fully configure PVP.
+PVP is a core part of the Vanilla mechanics, with even the smallest change affecting gameplay. Pumpkin allows you to fully configure PVP.
 
 ## Configuring PVP
 
@@ -24,7 +24,7 @@ hurt_animation = true
 :::
 
 #### `protect_creative`: Boolean
-Whether to protect players in creative againest PVP or not.
+Whether to protect players in creative against PVP or not.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -54,7 +54,7 @@ swing = true
 :::
 
 ## Default Config
-By default all PVP options are enabled to match vanilla behavior.
+By default, all PVP options are enabled in order to match vanilla behavior.
 
 :::code-group
 ```toml [features.toml]

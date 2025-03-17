@@ -1,11 +1,11 @@
 # Benchmarks
 
-Here, common Minecraft servers are compared against Pumpkin.
+Here, common Minecraft server software is compared against Pumpkin.
 
 > [!CAUTION]
 > **This comparison is unfair.** Pumpkin currently has far fewer features than other servers, which might suggest it uses fewer resources.
-> It's also important to consider that other servers have had years for optimization.
-> Vanilla forks, which don’t need to rewrite the entire vanilla logic, can focus exclusively on optimizations.
+> It's also important to consider that other servers have had years to optimize.
+> Vanilla forks, which don’t need to rewrite the entire Vanilla logic, can focus exclusively on optimizations.
 
 ![Screenshot From 2024-10-15 16-42-53](https://github.com/user-attachments/assets/e08fbb00-42fe-4479-a03b-11bb6886c91a)
 
@@ -46,15 +46,15 @@ Here, common Minecraft servers are compared against Pumpkin.
 - Online mode: false
 - Rcon: false
 
-<sub><sup>online mode was disabled for easier testing with non-premium accounts</sup></sub>
+<sub><sup>Online mode was disabled for easier testing with non-premium accounts.</sup></sub>
 
 > [!NOTE]
-> All tests have been ran multiple times to guarantee consistent results.
-> All players did not move when spawning, only the initial 8 chunks were loaded.
-> All servers used their own terrain generation, no world was pre-loaded.
+> All tests have been ran multiple times for more accurate results.
+> All players did not move when spawning. Only the initial 8 chunks were loaded.
+> All servers used their own terrain generation. No world was pre-loaded.
 
 > [!IMPORTANT]
-> `CPU Max` is usually higher with one player as the initial chunks are being loaded.
+> `CPU Max` is usually higher with one player because the initial chunks are being loaded.
 
 ## Pumpkin
 
@@ -81,7 +81,7 @@ Run args:
 <sub><sup>Pumpkin does cache already loaded chunks, resulting in no extra RAM usage besides player data and minimal CPU usage.</sup></sub>
 
 #### Compile time
-Compiling from Nothing:
+Compiling from nothing:
 
 **Debug:** <FmtNum :n=10.35 />sec
 **Release:** <FmtNum :n=38.40 />sec

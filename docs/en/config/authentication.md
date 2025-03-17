@@ -89,7 +89,7 @@ allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
 ### Textures
 
 #### `enabled`: Boolean
-Whether to filter/validate player textures (e.g. Skins/Capes).
+Whether to filter/validate player textures (e.g. skins/capes).
 
 :::code-group
 ```toml [features.toml] {2}
@@ -99,7 +99,7 @@ enabled = true
 :::
 
 #### `allowed_url_schemes`: String Array
-Allowed URL Schemes for textures.
+Allowed URL schemes for textures.
 
 :::code-group
 ```toml [features.toml] {3}

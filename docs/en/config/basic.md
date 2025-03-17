@@ -72,7 +72,7 @@ Hard
 
 ## Operation permission level
 
-The op level assigned by the `/op` command.
+The permission level assigned by the `/op` command.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -123,9 +123,9 @@ encryption = true
 ```
 :::
 
-## Motd
+## MOTD
 
-The server's description displayed on the status screen.
+Message of the Day; the server's description displayed on the status screen.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -135,7 +135,7 @@ motd = "A Blazing fast Pumpkin Server!"
 
 ## TPS
 
-The target server's Tick rate.
+The server's target tick rate.
 
 :::code-group
 ```toml [configuration.toml] {2}
@@ -163,7 +163,7 @@ Spectator
 
 ## IP Scrubbing
 
-Whether to scrub player IPs from logs.
+Whether to scrub players' IP addresses from logs.
 
 :::code-group
 ```toml [configuration.toml] {2}

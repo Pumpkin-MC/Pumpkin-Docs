@@ -1,10 +1,10 @@
 # LAN Broadcast
-Pumpkin can broadcast the server across the network in order to make it easier for local players to connect to the server easier.
+Pumpkin can advertise the server across the network in order to make it easier for local players to connect to the server easier.
 
 ## Configuring LAN Broadcast
 
 #### `enabled`: Boolean
-Whether LAN Broadcast is enabled or not.
+Whether LAN broadcast is enabled or not.
 
 :::code-group
 ```toml [features.toml] {2}
@@ -14,10 +14,10 @@ enabled = true
 :::
 
 #### `motd`: String (optional)
-The MOTD to broadcast out to clients. Will use server's MOTD by default.
+The MOTD to broadcast out to clients; uses the server's MOTD by default.
 
 > [!CAUTION]
-> LAN broadcast MOTD does not support multiple lines, RGB colors, or gradients. Pumpkin does not verify the MOTD before broadcasted. If the server MOTD is using these components, consider defining this field so that clients see a proper MOTD.
+> LAN broadcast MOTD does not support multiple lines, RGB colors, or gradients. Pumpkin does not verify the MOTD before broadcasting it. If the server MOTD is using these components, consider defining this field so that clients see a proper MOTD.
 
 :::code-group
 ```toml [features.toml] {3}
@@ -42,7 +42,7 @@ port = 46733
 :::
 
 ## Default Config
-By default LAN broadcast is disabled.
+By default, LAN broadcast is disabled.
 
 :::code-group
 ```toml [features.toml]

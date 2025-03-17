@@ -2,7 +2,7 @@
 We appreciate your interest in contributing to Pumpkin! This document outlines the guidelines for submitting bug reports, feature suggestions, and code changes.
 
 ### Getting Started
-The easiest way to get started is by asking for help in our [discord](https://discord.gg/wT8XjrjKkf).
+The easiest way to get started is by asking for help in [our Discord server](https://discord.gg/wT8XjrjKkf).
 
 ### How to Contribute
 There are several ways you can contribute to Pumpkin:
@@ -23,13 +23,13 @@ There are several ways you can contribute to Pumpkin:
 #### Contributing Code
   To get started with contributing code to Pumpkin, fork the repository on GitHub
 
-1. First create a GitHub account if you don't already have one
+1. First, create a GitHub account if you don't already have one
  
-2. Go to Pumpkin's Official [GitHub Organization](https://github.com/Pumpkin-MC) and press fork
+2. Go to Pumpkin's official [GitHub Organization](https://github.com/Pumpkin-MC) and press fork
 
-> Creating a fork means you now have your own copy of the Pumpkin source code, (this does not mean you own the copyright)
+> Creating a fork means you now have your own copy of the Pumpkin source code (this does not mean you own the copyright).
 
-  Now that you have a copy that you can edit, you will need a few tools
+  Now that you have a copy that you can edit, you will need a few tools.
 
 3. Install [git](https://git-scm.com/downloads) for your operating system
 
@@ -45,9 +45,9 @@ There are several ways you can contribute to Pumpkin:
 
 - If you are wanting to contribute to documentation, install [NodeJS](https://nodejs.org/en)
 
-### Getting the Minecraft source code
-When working at Pumpkin, we heavily rely on the official Minecraft client and utilize existing server logic. We often refer to the official Minecraft source code.
-The easiest way to get the Minecraft source code is using Fabric Yarn. Make sure you have Gradle installed before running the following commands:
+### Decompiling Minecraft's code
+When working at Pumpkin, we heavily rely on the official Minecraft client and utilize existing server logic. We often refer to Minecraft's official code.
+The easiest way to decompile Minecraft is by using Fabric Yarn. Make sure you have Gradle installed before running the following commands:
 ```
 git clone https://github.com/FabricMC/yarn.git
 cd yarn
@@ -60,4 +60,4 @@ We encourage you to comment on existing issues and pull requests to share your t
 
 Feel free to ask questions in the issue tracker or reach out to the project maintainers if you need assistance.
 
-Before submitting a large contribution, consider opening an issue, discussion or talk with us on our discord to discuss your approach.
+Before submitting a large contribution, consider opening an issue or discussion, or talk with us on our Discord to discuss your approach.

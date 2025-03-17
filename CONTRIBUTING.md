@@ -4,7 +4,7 @@ We appreciate your interest in contributing to Pumpkin! This document outlines t
 
 ## Getting Started
 
-The easiest way to get started is by asking for help in our [discord](https://discord.gg/wT8XjrjKkf).
+The easiest way to get started is by asking for help in [our Discord server](https://discord.gg/wT8XjrjKkf).
 
 ### How to Contribute
 
@@ -40,4 +40,4 @@ Below are instructions for adding a new language translation for the documentati
 
 We encourage you to comment on existing issues and pull requests to share your thoughts and provide feedback.
 Feel free to ask questions in the issue tracker or reach out to the project maintainers if you need assistance.
-Before submitting a large contribution, consider opening an issue, discussion or talk with us on our discord to discuss your approach.
+Before submitting a large contribution, consider opening an issue or discussion, or talk with us on our Discord to discuss your approach.

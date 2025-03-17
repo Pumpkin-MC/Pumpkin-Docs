@@ -1,69 +1,69 @@
-# Mobile pumpkin developing
+# Pumpking Development on Mobile
 
-If you are mobile user and want edit source code - you can do this!
-(this page was written on android using helix)
+If you are a mobile user and want to edit the source code, you can do this!
+(This page was written on Android using Helix.)
 
-First of all we need terminal app.
-We recommend [termux](https://github.com/termux/termux-app/releases), because its stable and opensource.
-Download needed apk file for your architecture of device and install termux.
+First of all, we need a terminal app.
+We recommend [Termux](https://github.com/termux/termux-app/releases) because it's stable and open source.
+Download the needed apk file for your device's architecture and install Termux.
 
-After this, you need run some commands. We use helix with it simplicity.
+After this, you need to run some commands. We use Helix for its simplicity.
 ```bash
   pkg update && pkg upgrade
   pkg install build-essential git rust rust-analyzer taplo helix helix-grammar nodejs
 ```
 
-If you want contribute, you need install github.
+If you want to contribute, you need to install the GitHub software.
 ```bash
   pkg install gh
 ```
 
-Also we recommend install fish shell, because its more friendly that bash.
+We also recommend installing the fish shell because it's more friendly than bash.
 ```bash
   pkg install fish
   chsh -s fish
 ```
 
-Now you installed basic tools, but we need some setup.
-If you want contribute you need login into github.
+Now that you've installed basic tools, we need to do some setup.
+If you want to contribute, you need log into GitHub.
 ```bash
   gh auth login
 ```
 
-Also setup git: change editor to vim, edit credentials and etc.
+Also setup git: change the editor to vim, edit your credentials, etc.
 
-After this, you need clone pumpkin repo. (before this you can create projects dir with `mkdir proj`, its useful)
+After this, you need to clone the Pumpkin repo. (Before this, you can create a project directory with `mkdir proj`; it's useful)
 ```bash
   git clone https://github.com/Pumpkin-MC/Pumpkin.git
 ```
 
-If you want contribute, you need fork our repo, and change `Pumpkin-MC` to your username on github.
+If you want to contribute, you need to fork our repo and change `Pumpkin-MC` to your username on GitHub.
 
-Now all setup done! Enjoy :)
+Setup's all done now! Enjoy :)
 
 # FAQ
 
-## How use editor?
+## How to use the text editor?
 Type `hx <path>`.
 
-## How navigate over project?
-You can use `ls`, `cd` and other programs.
-You can also use `hx <dir>` for locate over dir when start.
+## How to navigate through the project?
+You can use `ls`, `cd`, and other programs.
+You can also use `hx <dir>` to browse your directory on startup.
 
-## How i can type in editor?
-Press `i` if you in normal mode.
+## How can I type in the editor?
+Press `i` if you are in normal mode.
 
 ## HOW EXIT FROM EDITOR????
-Press esc, when type `:q!`` if you dont want save edited data, or `:wq` if want.
+Press esc, then type `:q!` if you don't want to save, or `:wq` if you do want to save.
 
-## Where i can learn how use this editor?
-Type `hx --tutor` or go to official website.
+## Where can I learn how to use this editor?
+Run `hx --tutor` or go their official website.
 
-## Why not use vscode?
-1) Vscode is hard to setup, by the way its works only on web with limited functional.
-2) Rust analyzer dont work on it, maybe emulator can hep with it, but its slow down code compilation.
-3) Vscode not good for android devices, because its highly desirable to have a mouse, while in helix you need only keyboard.
-4) Vscode laggy on some devices.
+## Why not use VS Code?
+1) VS Code is hard to set up, and it works with limited functionality on web.
+2) rust-analyzer doesn't work on it. Maybe an emulator can help with this, but that slows down code compilation.
+3) With VS Code, it's highly desirable to have a mouse, while in Helix you only need a keyboard.
+4) VS Code is laggy on some devices.
 
-## Why its so hard to type?
-Buy cheap bluetooth keyboard and see how it simple.
+## Why is it so hard to type?
+Buy a cheap bluetooth keyboard and see how much easier it becomes.
