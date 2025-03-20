@@ -43,13 +43,13 @@ You may also have to [install Docker](https://docs.docker.com/engine/install/).
 The Docker image is currently not published anywhere, but you can use the following command from the cloned directory named `Pumpkin` where you ran the [clone](#first-steps) command from to build and deploy it:
 
 ```shell
-docker build . -T pumpkin && docker run pumpkin --rm -p <Exposed Port>:25565 -v <Server Data Location>:/pumpkin -it 
+docker build . -T pumpkin && docker run --rm -p <Exposed Port>:25565 -v <Server Data Location>:/pumpkin -it pumpkin
 ```
 - Replace `<Exposed Port>` with the port you want to connect with to Pumpkin, for example `25565`
 - Replace `<Server Data Location>` with the location where you want your server config to be stored, for example `./data`
 For example, with the `<Server Data Location>` set to `./data` and the `<Exposed Port>` set to `25565`, the command is as follows:
 ```shell
-docker build . -t pumpkin && docker run pumpkin --rm -p 25565:25565 -v ./data:/pumpkin -it 
+docker build . -t pumpkin && docker run --rm -p 25565:25565 -v ./data:/pumpkin -it pumpkin
 ```
 After running this command a folder should appear in your chosen location in which you'll be able to find all the server files.
 Within this folder you can put your `world/` folder (make sure you restart the server).
