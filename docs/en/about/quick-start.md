@@ -5,7 +5,7 @@ Pre-release: Currently under development and not yet ready for official release.
 
 ## Rust
 
-To run Pumpkin with Rust, ensure you have [Rust]() installed.
+To run Pumpkin with Rust, ensure you have [Rust](https://www.rust-lang.org/tools/install) installed.
 
 1. Clone the repository:
 ```shell
