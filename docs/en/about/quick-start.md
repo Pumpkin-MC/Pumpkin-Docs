@@ -48,7 +48,7 @@ docker run --rm \
 
 ### Example 
 
-To run Pumkin on port `25565` and store data in a directory called `./data`, you would run the following command:
+To run Pumpkin on port `25565` and store data in a directory called `./data`, you would run the following command:
 ```shell
 docker run --rm \
     -p 25565:25565 \
