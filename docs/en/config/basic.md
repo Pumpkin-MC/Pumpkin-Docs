@@ -190,3 +190,13 @@ The path to the server's favicon.
 favicon_path = "icon.png"
 ```
 :::
+
+## Chat reporting
+
+Whether to allow players to report offensive chat messages to Mojang.
+
+:::code-group
+```toml [configuration.toml] {2}
+allow_chat_reports = false
+```
+:::

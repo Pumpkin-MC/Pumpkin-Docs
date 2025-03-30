@@ -34,6 +34,7 @@ export const en = defineConfig({
                     { text: "Compression", link: "/config/compression" },
                     { text: "Resource Pack", link: "/config/resource-pack" },
                     { text: "Commands", link: "/config/commands" },
+                    { text: "Chat", link: "/config/chat" },
                     { text: "RCON", link: "/config/rcon" },
                     { text: "PVP", link: "/config/pvp" },
                     { text: "Logging", link: "/config/logging" },
