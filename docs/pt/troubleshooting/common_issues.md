@@ -1,9 +1,9 @@
-### Common Issues
+### Problemas Comuns
 
-1.  ### Failed to verify username
+1.  ### Falha ao verificar nome de usuário
 
-    **Issue:** Some players reported having issues logging into the server, including encountering a "Failed to verify username" error.
+    **Problema:** Alguns jogadores relataram dificuldades ao logar no servidor, incluindo o erro "Falha ao verificar nome de usuário".
 
-    **Cause:** This has to do with authentication, and usually with the `prevent_proxy_connections` setting.
+    **Causa:** Isso está relacionado à autenticação, geralmente com a configuração `prevent_proxy_connections`.
 
-    **Fix:** Disable `prevent_proxy_connections` in `features.toml`
+    **Solução:** Desative a opção `prevent_proxy_connections` em `features.toml`.
