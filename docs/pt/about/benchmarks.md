@@ -1,188 +1,187 @@
 # Benchmarks
 
-Here, common Minecraft server software is compared against Pumpkin.
+Aqui, softwares de servidores Minecraft comuns são comparados com o Pumpkin.
 
-> [!CAUTION]
-> **This comparison is unfair.** Pumpkin currently has far fewer features than other servers, which might suggest it uses fewer resources.
-> It's also important to consider that other servers have had years to optimize.
-> Vanilla forks, which don’t need to rewrite the entire Vanilla logic, can focus exclusively on optimizations.
+> [!CAUTION] CUIDADO
+> **Esta comparação é injusta.** Pumpkin atualmente tem muito menos recursos que outros servidores, o que pode sugerir que ele usa menos recursos.
+> Também é importante considerar que outros servidores tiveram anos para otimizar.
+> Forks do Vanilla, que não precisam reescrever toda a lógica do Vanilla, podem se concentrar exclusivamente em otimizações.
 
 ![Screenshot From 2024-10-15 16-42-53](https://github.com/user-attachments/assets/e08fbb00-42fe-4479-a03b-11bb6886c91a)
 
-## Specifications
+## Especificações
 
-#### Technical
+#### Técnicas
 
 **Software**
 
-- Distribution: Manjaro Linux
-- Architecture: x86_64 (64-bit)
-- Kernel Version: 6.11.3-arch1-1
+-   Distribuição: Manjaro Linux
+-   Arquitetura: x86_64 (64-bit)
+-   Versão do Kernel: 6.11.3-arch1-1
 
 **Hardware**
 
-- Motherboard: MAG B650 TOMAHAWK WIFI
-- CPU: AMD Ryzen 7600X 6-Core
-- RAM: Corsair 2x16GB DDR5 6000Mhz
-- Storage: Samsung 990 PRO 1TB PCIe 4.0 M.2 SSD
-- Cooling: be quiet Dark Rock Elite
+-   Placa-mãe: MAG B650 TOMAHAWK WIFI
+-   CPU: AMD Ryzen 7600X 6-Core
+-   RAM: Corsair 2x16GB DDR5 6000Mhz
+-   Armazenamento: Samsung 990 PRO 1TB PCIe 4.0 M.2 SSD
+-   Refrigeração: be quiet Dark Rock Elite
 
 **Rust**
 
-- Toolchain: stable-x86_64-unknown-linux-gnu (1.81.0)
-- Rust Compiler: rustc 1.81.0 (eeb90cda1 2024-09-04)
+-   Toolchain: stable-x86_64-unknown-linux-gnu (1.81.0)
+-   Compilador Rust: rustc 1.81.0 (eeb90cda1 2024-09-04)
 
 **Java**
 
-- JDK Version: OpenJDK 23 64-Bit 2024-09-17
-- JRE Version: OpenJDK Runtime Environment (build 23+37)
-- Vendor: Oracle
+-   Versão do JDK: OpenJDK 23 64-Bit 2024-09-17
+-   Versão do JRE: OpenJDK Runtime Environment (build 23+37)
+-   Fornecedor: Oracle
 
-#### Game
+#### Jogo
 
-- Minecraft version: 1.21.1
-- View distance: 10
-- Simulated distance: 10
-- Online mode: false
-- Rcon: false
+-   Versão do Minecraft: 1.21.1
+-   Distância de visão: 10
+-   Distância simulada: 10
+-   Modo online: falso
+-   Rcon: falso
 
-<sub><sup>Online mode was disabled for easier testing with non-premium accounts.</sup></sub>
+<sub><sup>O modo online foi desativado para facilitar os testes com contas não premium.</sup></sub>
 
-> [!NOTE]
-> All tests have been ran multiple times for more accurate results.
-> All players did not move when spawning. Only the initial 8 chunks were loaded.
-> All servers used their own terrain generation. No world was pre-loaded.
+> [!NOTE] NOTA
+> Todos os testes foram realizados várias vezes para obter resultados mais precisos.
+> Todos os jogadores não se moveram ao nascer. Apenas os 8 primeiros chunks foram carregados.
+> Todos os servidores usaram sua própria geração de terreno. Nenhum mundo foi pré-carregado.
 
-> [!IMPORTANT]
-> `CPU Max` is usually higher with one player because the initial chunks are being loaded.
+> [!IMPORTANT] IMPORTANTE
+> `CPU Max` geralmente é maior com um jogador, pois os chunks iniciais estão sendo carregados.
 
 ## Pumpkin
 
 Build: [8febc50](https://github.com/Snowiiii/Pumpkin/commit/8febc5035d5611558c13505b7724e6ca284e0ada)
 
-Compile args: `--release`
+Argumentos de compilação: `--release`
 
-Run args:
+Argumentos de execução:
 
-**File Size:** <FmtNum :n=12.3 />MB
+**Tamanho do arquivo:** <FmtNum :n=12.3 />MB
 
-**Startup time:** <FmtNum :n=8 />ms
+**Tempo de inicialização:** <FmtNum :n=8 />ms
 
-**Shutdown time:** <FmtNum :n=0 />ms
+**Tempo de desligamento:** <FmtNum :n=0 />ms
 
-| Players | RAM                   | CPU Idle         | CPU Max            |
-| ------- | --------------------- | ---------------- | ------------------ |
-| 0       | <FmtNum :n=392.2 />KB | <FmtNum :n=0 />% | <FmtNum :n=0 />%   |
-| 1       | <FmtNum :n=24.9 />MB  | <FmtNum :n=0 />% | <FmtNum :n=4 />%   |
-| 2       | <FmtNum :n=25.1 />MB  | <FmtNum :n=0 />% | <FmtNum :n=0.6 />% |
-| 5       | <FmtNum :n=26 />MB    | <FmtNum :n=0 />% | <FmtNum :n=1 />%   |
-| 10      | <FmtNum :n=27.1 />MB  | <FmtNum :n=0 />% | <FmtNum :n=1.5 />% |
+| Jogadores | RAM                   | CPU Ocioso       | CPU Máx            |
+| --------- | --------------------- | ---------------- | ------------------ |
+| 0         | <FmtNum :n=392.2 />KB | <FmtNum :n=0 />% | <FmtNum :n=0 />%   |
+| 1         | <FmtNum :n=24.9 />MB  | <FmtNum :n=0 />% | <FmtNum :n=4 />%   |
+| 2         | <FmtNum :n=25.1 />MB  | <FmtNum :n=0 />% | <FmtNum :n=0.6 />% |
+| 5         | <FmtNum :n=26 />MB    | <FmtNum :n=0 />% | <FmtNum :n=1 />%   |
+| 10        | <FmtNum :n=27.1 />MB  | <FmtNum :n=0 />% | <FmtNum :n=1.5 />% |
 
-<sub><sup>Pumpkin does cache already loaded chunks, resulting in no extra RAM usage besides player data and minimal CPU usage.</sup></sub>
+<sub><sup>Pumpkin faz cache dos chunks já carregados, resultando em nenhum uso extra de RAM além dos dados do jogador e uso mínimo de CPU.</sup></sub>
 
-#### Compile time
-Compiling from nothing:
+#### Tempo de compilação
 
-**Debug:** <FmtNum :n=10.35 />sec
+Compilando do zero:
+
+**Debug:** <FmtNum :n=10.35 />sec  
 **Release:** <FmtNum :n=38.40 />sec
 
-Recompilation (pumpkin crate):
+Recompilação (pumpkin crate):
 
-**Debug:** <FmtNum :n=1.82 />sec
+**Debug:** <FmtNum :n=1.82 />sec  
 **Release:** <FmtNum :n=28.68 />sec
 
 ## Vanilla
 
 Release: [1.21.1](https://piston-data.mojang.com/v1/objects/59353fb40c36d304f2035d51e7d6e6baa98dc05c/server.jar)
 
-Compile args:
+Argumentos de compilação:
 
-Run args: `nogui`
+Argumentos de execução: `nogui`
 
-**File Size:** <FmtNum :n=51.6 />MB
+**Tamanho do arquivo:** <FmtNum :n=51.6 />MB
 
-**Startup time:** <FmtNum :n=7 />sec
+**Tempo de inicialização:** <FmtNum :n=7 />sec
 
-**Shutdown time:** <FmtNum :n=4 />sec
+**Tempo de desligamento:** <FmtNum :n=4 />sec
 
-| Players | RAM                   | CPU idle                                 | CPU Max            |
-| ------- | --------------------- | ---------------------------------------- | ------------------ |
-| 0       | <FmtNum n="860" />MB  | <FmtNum n="0.1" /> - <FmtNum n="0.3" />% | <FmtNum n="51" />% |
-| 1       | <FmtNum n="1.5" />GB  | <FmtNum n="0.9" /> - <FmtNum n="1" />%   | <FmtNum n="41" />% |
-| 2       | <FmtNum n="1.6" />GB  | <FmtNum n="1" /> - <FmtNum n="1.1" />%   | <FmtNum n="10" />% |
-| 5       | <FmtNum n="1.8" />GB  | <FmtNum n="2" />%                        | <FmtNum n="20" />% |
-| 10      | <FmtNum n="2.2" />GB  | <FmtNum n="4" />%                        | <FmtNum n="24" />% |
+| Jogadores | RAM                  | CPU ocioso                               | CPU Máx            |
+| --------- | -------------------- | ---------------------------------------- | ------------------ |
+| 0         | <FmtNum n="860" />MB | <FmtNum n="0.1" /> - <FmtNum n="0.3" />% | <FmtNum n="51" />% |
+| 1         | <FmtNum n="1.5" />GB | <FmtNum n="0.9" /> - <FmtNum n="1" />%   | <FmtNum n="41" />% |
+| 2         | <FmtNum n="1.6" />GB | <FmtNum n="1" /> - <FmtNum n="1.1" />%   | <FmtNum n="10" />% |
+| 5         | <FmtNum n="1.8" />GB | <FmtNum n="2" />%                        | <FmtNum n="20" />% |
+| 10        | <FmtNum n="2.2" />GB | <FmtNum n="4" />%                        | <FmtNum n="24" />% |
 
 ## Paper
 
 Build: [122](https://api.papermc.io/v2/projects/paper/versions/1.21.1/builds/122/downloads/paper-1.21.1-122.jar)
 
-Compile args:
+Argumentos de compilação:
 
-Run args: `nogui`
+Argumentos de execução: `nogui`
 
-**File Size:** <FmtNum :n=49.4 />MB
+**Tamanho do arquivo:** <FmtNum :n=49.4 />MB
 
-**Startup time:** <FmtNum :n=7 />sec
+**Tempo de inicialização:** <FmtNum :n=7 />sec
 
-**Shutdown time:** <FmtNum :n=3 />sec
+**Tempo de desligamento:** <FmtNum :n=3 />sec
 
-| Players | RAM                 | CPU idle                               | CPU Max           |
-| ------- | ------------------- | -------------------------------------- | ----------------- |
-| 0       | <FmtNum :n=1.1 />GB | <FmtNum :n=0.2 /> - <FmtNum :n=0.3 />% | <FmtNum :n=36 />% |
-| 1       | <FmtNum :n=1.7 />GB | <FmtNum :n=0.9 /> - <FmtNum :n=1.0 />% | <FmtNum :n=47 />% |
-| 2       | <FmtNum :n=1.8 />GB | <FmtNum :n=1 /> - <FmtNum :n=1.1 />%   | <FmtNum :n=10 />% |
-| 5       | <FmtNum :n=1.9 />GB | <FmtNum :n=1.5 />%                     | <FmtNum :n=15 />% |
-| 10      | <FmtNum :n=2 />GB   | <FmtNum :n=3 />%                       | <FmtNum :n=20 />% |
-
+| Jogadores | RAM                 | CPU ocioso                             | CPU Máx           |
+| --------- | ------------------- | -------------------------------------- | ----------------- |
+| 0         | <FmtNum :n=1.1 />GB | <FmtNum :n=0.2 /> - <FmtNum :n=0.3 />% | <FmtNum :n=36 />% |
+| 1         | <FmtNum :n=1.7 />GB | <FmtNum :n=0.9 /> - <FmtNum :n=1.0 />% | <FmtNum :n=47 />% |
+| 2         | <FmtNum :n=1.8 />GB | <FmtNum :n=1 /> - <FmtNum :n=1.1 />%   | <FmtNum :n=10 />% |
+| 5         | <FmtNum :n=1.9 />GB | <FmtNum :n=1.5 />%                     | <FmtNum :n=15 />% |
+| 10        | <FmtNum :n=2 />GB   | <FmtNum :n=3 />%                       | <FmtNum :n=20 />% |
 
 ## Purpur
 
 Build: [2324](https://api.purpurmc.org/v2/purpur/1.21.1/2324/download)
 
-Compile args:
+Argumentos de compilação:
 
-Run args: `nogui`
+Argumentos de execução: `nogui`
 
-**File Size:** <FmtNum :n=53.1 />MB
+**Tamanho do arquivo:** <FmtNum :n=53.1 />MB
 
-**Startup time:** <FmtNum :n=8 />sec
+**Tempo de inicialização:** <FmtNum :n=8 />sec
 
-**Shutdown time:** <FmtNum :n=4 />sec
+**Tempo de desligamento:** <FmtNum :n=4 />sec
 
-| Players | RAM                 | CPU idle                               | CPU Max           |
-| ------- | ------------------- | -------------------------------------- | ----------------- |
-| 0       | <FmtNum :n=1.4 />GB | <FmtNum :n=0.2 /> - <FmtNum :n=0.3 />% | <FmtNum :n=25 />% |
-| 1       | <FmtNum :n=1.6 />GB | <FmtNum :n=0.7 /> - <FmtNum :n=1.0 />% | <FmtNum :n=35 />% |
-| 2       | <FmtNum :n=1.7 />GB | <FmtNum :n=1.1 /> - <FmtNum :n=1.3 />% | <FmtNum :n=9 />%  |
-| 5       | <FmtNum :n=1.9 />GB | <FmtNum :n=1.6 />%                     | <FmtNum :n=20 />% |
-| 10      | <FmtNum :n=2.2 />GB | <FmtNum :n=2 /> - <FmtNum :n=2.5 />%   | <FmtNum :n=26 />% |
+| Jogadores | RAM                 | CPU ocioso                             | CPU Máx           |
+| --------- | ------------------- | -------------------------------------- | ----------------- |
+| 0         | <FmtNum :n=1.4 />GB | <FmtNum :n=0.2 /> - <FmtNum :n=0.3 />% | <FmtNum :n=25 />% |
+| 1         | <FmtNum :n=1.6 />GB | <FmtNum :n=0.7 /> - <FmtNum :n=1.0 />% | <FmtNum :n=35 />% |
+| 2         | <FmtNum :n=1.7 />GB | <FmtNum :n=1.1 /> - <FmtNum :n=1.3 />% | <FmtNum :n=9 />%  |
+| 5         | <FmtNum :n=1.9 />GB | <FmtNum :n=1.6 />%                     | <FmtNum :n=20 />% |
+| 10        | <FmtNum :n=2.2 />GB | <FmtNum :n=2 /> - <FmtNum :n=2.5 />%   | <FmtNum :n=26 />% |
 
 ## Minestom
 
 Commit: [0ca1dda2fe](https://github.com/Minestom/Minestom/commit/0ca1dda2fe11390a1b89a228bbe7bf78fefc73e1)
 
-Compile args:
+Argumentos de compilação:
 
-Run args:
+Argumentos de execução:
 
-**Language:** Benchmarks ran with Kotlin 2.0.0 (Minestom itself is made with Java)
+**Idioma:** Benchmarks executados com Kotlin 2.0.0 (Minestom é feito com Java)
 
-**File Size:** <FmtNum :n=2.8 />MB (Library)
+**Tamanho do arquivo:** <FmtNum :n=2.8 />MB (Biblioteca)
 
-**Startup time:** <FmtNum :n=310 />ms
+**Tempo de inicialização:** <FmtNum :n=310 />ms
 
-**Shutdown time:** <FmtNum :n=0 />ms
+**Tempo de desligamento:** <FmtNum :n=0 />ms
 
-<sub>[Used example code from](https://minestom.net/docs/setup/your-first-server)</sub>
+<sub>[Usado o código do exemplo de](https://minestom.net/docs/setup/your-first-server)</sub>
 
-| Players | RAM                 | CPU idle                               | CPU Max          |
-| ------- | ------------------- | -------------------------------------- | ---------------- |
-| 0       | <FmtNum :n=228 />MB | <FmtNum :n=0.1 /> - <FmtNum :n=0.3 />% | <FmtNum :n=1 />% |
-| 1       | <FmtNum :n=365 />MB | <FmtNum :n=0.9 /> - <FmtNum :n=1.0 />% | <FmtNum :n=5 />% |
-| 2       | <FmtNum :n=371 />MB | <FmtNum :n=1 /> - <FmtNum :n=1.1 />%   | <FmtNum :n=4 />% |
-| 5       | <FmtNum :n=390 />MB | <FmtNum :n=1.0 />%                     | <FmtNum :n=6 />% |
-| 10      | <FmtNum :n=421 />MB | <FmtNum :n=3 />%                       | <FmtNum :n=9 />% |
+| Jogadores | RAM                 | CPU ocioso                             | CPU Máx          |
+| --------- | ------------------- | -------------------------------------- | ---------------- |
+| 0         | <FmtNum :n=228 />MB | <FmtNum :n=0.1 /> - <FmtNum :n=0.3 />% | <FmtNum :n=1 />% |
+| 1         | <FmtNum :n=365 />MB | <FmtNum :n=0.9 /> - <FmtNum :n=1.0 />% | <FmtNum :n=5 />% |
+| 2         | <FmtNum :n=371 />MB | <FmtNum :n=1 /> - <FmtNum :n=1.1 />%   | <FmtNum :n=4 />% |
+| 5         | <FmtNum :n=390 />MB | <FmtNum :n=1.0 />%                     | <FmtNum :n=6 />% |
+| 10        | <FmtNum :n=421 />MB | <FmtNum :n=3 />%                       | <FmtNum :n=9 />% |
 
-
-Benchmarked at <FmtDateTime :d="new Date('2024-10-15T16:34Z')" />
+Benchmarks realizados em <FmtDateTime :d="new Date('2024-10-15T16:34Z')" />

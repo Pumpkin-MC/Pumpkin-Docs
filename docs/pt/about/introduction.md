@@ -1,7 +1,6 @@
 # Pumpkin
 
-Pumpkin is a Minecraft server built entirely in **Rust**, offering a fast, efficient,
-and customizable experience. It prioritizes performance and player enjoyment while adhering to the core mechanics of the game.
+Pumpkin é um servidor de Minecraft construído inteiramente em **Rust**, oferecendo uma experiência rápida, eficiente e personalizável. Ele prioriza o desempenho e experiência dos jogadores, enquanto adere às mecânicas fundamentais do jogo.
 
 <picture>
   <source srcset="/assets/introduction-preview-2560x1440.png" media="(min-width: 2560px)">
@@ -10,27 +9,25 @@ and customizable experience. It prioritizes performance and player enjoyment whi
   <img src="/assets/introduction-preview-1280x720.png" alt="introduction-preview">
 </picture>
 
-## What Pumpkin wants to achieve
+## O que o Pumpkin quer alcançar
 
-- **Performance**: Leveraging multi-threading for maximum speed and efficiency.
-- **Compatibility**: Supports the latest Minecraft server version and adheres to Vanilla game mechanics.
-- **Security**: Prioritizes security by preventing known security exploits.
-- **Flexibility**: Highly configurable, with the ability to disable unnecessary features.
-- **Extensibility**: Provides a foundation for plugin development.
+-   **Performance**: Aproveita o multi-threading para máxima velocidade e eficiência.
+-   **Compatibilidade**: Suporta a versão mais recente do servidor Minecraft e adere às mecânicas do jogo Vanilla.
+-   **Segurança**: Prioriza a segurança, prevenindo exploits de segurança conhecidos.
+-   **Flexibilidade**: Altamente configurável, com a capacidade de desativar funcionalidades desnecessárias.
+-   **Extensibilidade**: Oferece uma base para o desenvolvimento de plugins.
 
-## What Pumpkin will not
+## O que o Pumpkin não fará
 
-- Be compatible with plugins or mods for other servers
+-   Ser compatível com plugins ou mods de outros servidores.
 
-> [!IMPORTANT]
-> Pumpkin is currently under heavy development. Check out our [Github Project](https://github.com/orgs/Pumpkin-MC/projects/3) to see current progress.
+> [!IMPORTANT] IMPORTANTE
+> O Pumpkin está atualmente em desenvolvimento acelerado. Confira nosso [Projeto no Github](https://github.com/orgs/Pumpkin-MC/projects/3) para ver o progresso atual.
 
 ## Vanilla
 
-Pumpkin is designed to replicate Vanilla Minecraft logic as closely as possible,
-ensuring a familiar gameplay experience. However, we've also added new features to enhance gameplay.
+O Pumpkin foi projetado para replicar a lógica do Minecraft Vanilla o mais fielmente possível, garantindo uma experiência de jogo familiar. No entanto, também adicionamos novos recursos para aprimorar o gameplay.
 
 ### Redstone
 
-Unlike other forks that may compromise redstone mechanics, Pumpkin maintains the Vanilla redstone behavior.
-If you're looking to experiment with redstone modifications or seek performance optimizations, you have the flexibility to do so through our configurable settings.
+Ao contrário de outros forks que podem comprometer as mecânicas de redstone, o Pumpkin mantém o comportamento de redstone do Vanilla. Se você deseja experimentar modificações em redstone ou busca otimizações de desempenho, você tem flexibilidade para fazer isso por meio das nossas configurações ajustáveis.

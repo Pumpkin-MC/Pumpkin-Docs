@@ -1,40 +1,42 @@
-# Quick Start
+# Primeiros Passos
 
-**Current Status:**
-Pre-release: Currently under development and not yet ready for official release.
+**Status Atual:**
+Pré-lançamento: Atualmente em desenvolvimento e ainda não pronto para lançamento oficial.
 
 ## Rust
 
-To run Pumpkin with Rust, ensure you have [Rust](https://www.rust-lang.org/tools/install) installed.
+Para rodar o Pumpkin com Rust, certifique-se de ter o [Rust](https://www.rust-lang.org/tools/install) instalado.
 
-1. Clone the repository:
+1. Clone o repositório:
+
 ```shell
 git clone https://github.com/Pumpkin-MC/Pumpkin.git
 cd Pumpkin
 ```
 
-2. **Optional:** If you wish, you can place a Vanilla world into the `Pumpkin/` directory. Just name the world folder `world`.
+2. **Opcional:** Se desejar, você pode colocar um mundo Vanilla no diretório `Pumpkin/`. Apenas nomeie a pasta do mundo como `world`.
 
-3. Run:
+3. Execute:
 
-> [!NOTE]
-> The build process may take a while, due to heavy optimizations for release builds.
+> [!NOTE] NOTA
+> O processo de construção pode demorar um pouco, devido a otimizações pesadas para builds de lançamento.
 
 ```shell
 cargo run --release
 ```
 
-4. **Optional:** If you want to use your CPU features, you can set the `target-cpu=native` Rust compiler flag.
+4. **Opcional:** Se quiser usar os recursos do seu processador, você pode configurar a flag do compilador Rust `target-cpu=native`.
+
 ```shell
 RUSTFLAGS='-C target-cpu=native' cargo run --release
 ```
 
 ## Docker
 
-> [!IMPORTANT]
-> Docker support is currently experimental.
+> [!IMPORTANT] IMPORTANTE
+> O suporte ao Docker está atualmente em fase experimental.
 
-If you haven't already, you need to [install Docker](https://docs.docker.com/engine/install/). After installing Docker, you can run the following command to start the server:
+Se ainda não tiver, você precisa [instalar o Docker](https://docs.docker.com/engine/install/). Após instalar o Docker, você pode rodar o seguinte comando para iniciar o servidor:
 
 ```shell
 docker run --rm \
@@ -43,12 +45,13 @@ docker run --rm \
     -it ghcr.io/pumpkin-mc/pumpkin:master
 ```
 
-- `<exposed_port>`: The port you want to connect to Pumpkin with, for example `25565`.
-- `<server_data_location>`: The location where you want your server config and data to be stored, for example `./data`.
+-   `<exposed_port>`: A porta que você deseja usar para conectar ao Pumpkin, por exemplo `25565`.
+-   `<server_data_location>`: O local onde você deseja que as configurações e dados do servidor sejam armazenados, por exemplo `./data`.
 
-### Example 
+### Exemplo
 
-To run Pumpkin on port `25565` and store data in a directory called `./data`, you would run the following command:
+Para rodar o Pumpkin na porta `25565` e armazenar os dados em um diretório chamado `./data`, você executaria o seguinte comando:
+
 ```shell
 docker run --rm \
     -p 25565:25565 \
@@ -56,13 +59,15 @@ docker run --rm \
     -it ghcr.io/pumpkin-mc/pumpkin:master
 ```
 
-## Test Server
-Pumpkin has a test server maintained by @kralverde. Its runs on the latest commit of Pumpkin's master branch.
+## Servidor de Teste
 
-- **IP:** pumpkin.kralverde.dev
+Pumpkin tem um servidor de teste mantido por @kralverde. Ele roda no commit mais recente da branch master do Pumpkin.
 
-**Specs:**
-- OS: Debian GNU/Linux bookworm 12.7 x86_64
-- Kernel: Linux 6.1.0-21-cloud-amd64
-- CPU: Intel Core (Haswell, no TSX) (2) @ 2.40 GHz
-- RAM: 4GB DIMM
+-   **IP:** pumpkin.kralverde.dev
+
+**Especificações:**
+
+-   SO: Debian GNU/Linux bookworm 12.7 x86_64
+-   Kernel: Linux 6.1.0-21-cloud-amd64
+-   CPU: Intel Core (Haswell, sem TSX) (2) @ 2.40 GHz
+-   RAM: 4GB DIMM
