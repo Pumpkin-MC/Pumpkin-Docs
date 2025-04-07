@@ -2,6 +2,6 @@
 extend-exclude = [
     "docs/nl/",
     "docs/.vitepress/nl.ts",
-    "docs/pt/,
-    "docs/.vitepress/pt.ts
+    "docs/pt/",
+    "docs/.vitepress/pt.ts"
 ]
