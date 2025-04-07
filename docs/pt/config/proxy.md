@@ -1,69 +1,81 @@
 # Proxy
-Many servers use proxies to manage connections and distribute players across servers. Pumpkin supports the following proxy protocols:
 
-- [Velocity](https://papermc.io/software/velocity)
-- [BungeeCord](https://www.spigotmc.org/wiki/bungeecord-installation/)
+Muitos servidores utilizam proxies para gerenciar conexões e distribuir jogadores entre servidores. Pumpkin suporta os seguintes protocolos de proxy:
 
-> [!TIP]
-> Velocity is recommended for most server networks. Velocity is modern and more performant compared to BungeeCord.
+-   [Velocity](https://papermc.io/software/velocity)
+-   [BungeeCord](https://www.spigotmc.org/wiki/bungeecord-installation/)
 
-## Configuring Proxy
+> [!TIP] DICA
+> Velocity é recomendado para a maioria das redes de servidores. Velocity é moderno e mais eficiente em comparação ao BungeeCord.
 
-#### `enabled`: Boolean
+## Configurando Proxy
 
-Enables support for proxies.
+#### `enabled`: Booleano
+
+Habilita o suporte para proxies.
 
 :::code-group
+
 ```toml [features.toml]{2}
 [proxy]
 enabled = true
 ```
+
 :::
 
 ### Velocity
 
-#### `enabled`: Boolean
+#### `enabled`: Booleano
 
-Whether Velocity support is enabled or not.
+Se o suporte ao Velocity está habilitado ou não.
 
 :::code-group
+
 ```toml [features.toml]{2}
 [proxy.velocity]
 enabled = true
 ```
+
 :::
 
-#### `secret`: String 
+#### `secret`: String
 
-The secret as configured in Velocity. 
+O segredo configurado no Velocity.
 
 :::code-group
+
 ```toml [features.toml]{3}
 [proxy.velocity]
 enabled = true
-secret = "[proxy secret here]"
+secret = "[segredo do proxy aqui]"
 ```
+
 :::
 
 ### BungeeCord
 
-#### `enabled`: Boolean
-Whether BungeeCord support is enabled or not.
+#### `enabled`: Booleano
+
+Se o suporte ao BungeeCord está habilitado ou não.
 
 :::code-group
+
 ```toml [features.toml]{2}
 [proxy.bungeecord]
 enabled = true
 ```
+
 :::
 
-> [!CAUTION]
-> BungeeCord can't verify if player info is from your proxy or an imposter. Ensure that the server's firewall is correctly configured.
+> [!CAUTION] CUIDADO
+> BungeeCord não consegue verificar se as informações do jogador são provenientes do seu proxy ou de um impostor. Certifique-se de que o firewall do servidor esteja configurado corretamente.
 
-## Default Config
-By default, proxy support is disabled. Here is the default config:
+## Configuração Padrão
+
+Por padrão, o suporte a proxies está desativado. Aqui está a configuração padrão:
 
 :::code-group
+
 ```toml [features.toml]
 [proxy]
 enabled = false
@@ -75,4 +87,5 @@ secret = ""
 [proxy.bungeecord]
 enabled = false
 ```
+
 :::

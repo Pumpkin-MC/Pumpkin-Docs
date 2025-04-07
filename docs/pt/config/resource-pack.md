@@ -1,91 +1,113 @@
-# Resource Pack
-Servers can send resource packs to clients in order to change the appearance of the game on the client. Pumpkin allows you to fully configure the resource pack.
+# Pacote de Recursos
 
-> [!TIP]
-> Minify your resource pack using [PackSquash](https://packsquash.aylas.org/)! This can help clients download the resource pack faster.
+Servidores podem enviar pacotes de recursos para os clientes a fim de alterar a aparência do jogo no cliente. Pumpkin permite que você configure completamente o pacote de recursos.
 
-## Configuring Resource Pack
+> [!TIP] DICA
+> Minifique seu pacote de recursos usando o [PackSquash](https://packsquash.aylas.org/)! Isso pode ajudar os clientes a baixar o pacote de recursos mais rápido.
 
-#### `enabled`: Boolean
-Whether a resource pack is enabled or not.
+## Configurando o Pacote de Recursos
+
+#### `enabled`: Booleano
+
+Se o pacote de recursos está habilitado ou não.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [resource_pack]
 enabled = true
 ```
+
 :::
 
 #### `resource_pack_url`: String
-The direct download URL to the resource pack. 
 
-> [!TIP]
-> You can host the resource pack for free at [MCPacks](https://mc-packs.net/).
+A URL direta de download do pacote de recursos.
+
+> [!TIP] DICA
+> Você pode hospedar o pacote de recursos gratuitamente no [MCPacks](https://mc-packs.net/).
 
 :::code-group
+
 ```toml [features.toml] {3}
 [resource_pack]
 enabled = true
-resource_pack_url = "[your download URL here]"
+resource_pack_url = "[sua URL de download aqui]"
 ```
+
 :::
 
 #### `resource_pack_sha1`: String
-The SHA1 hash of the resource pack.
 
-> [!IMPORTANT]
-> Although not required to specify, you should specify this field because the client will otherwise redownload the resource pack every time they join the server, even if there are no changes to the resource pack.
+O hash SHA1 do pacote de recursos.
 
-> [!WARNING]
-> Make sure to update this field if the resource pack is modified.
+> [!IMPORTANT] IMPORTANTE
+> Embora não seja necessário especificar, você deve informar este campo porque, caso contrário, o cliente fará o download do pacote de recursos toda vez que entrar no servidor, mesmo que não haja alterações no pacote.
 
-::: details How do I get the SHA1 hash of my resource pack?
+> [!WARNING] AVISO
+> Certifique-se de atualizar este campo se o pacote de recursos for modificado.
+
+::: detalhes Como obter o hash SHA1 do meu pacote de recursos?
 ::: code-group
+
 ```powershell [Windows (PowerShell)]
-Get-FileHash [file] SHA1
+Get-FileHash [arquivo] SHA1
 ```
+
 ```shell [Mac OS]
-shasum -a 1 [file]
+shasum -a 1 [arquivo]
 ```
+
 ```shell [Linux]
-sha1sum [file]
+sha1sum [arquivo]
 ```
+
 :::
 
 :::code-group
+
 ```toml [features.toml] {3}
 [resource_pack]
 enabled = true
-resource_pack_sha1 = "[your hash here]"
+resource_pack_sha1 = "[seu hash aqui]"
 ```
+
 :::
 
 #### `prompt_message`: String
-The message to show to the user when prompted to download the resource pack.
+
+A mensagem a ser exibida para o usuário quando for solicitado o download do pacote de recursos.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [resource_pack]
 enabled = true
-prompt_message = "[your message here]"
+prompt_message = "[sua mensagem aqui]"
 ```
+
 :::
 
-#### `force`: Boolean
-Whether to force the client to download the resource pack or not. If the client declines the download, they will be kicked from the server.
+#### `force`: Booleano
+
+Se deve forçar o cliente a baixar o pacote de recursos ou não. Se o cliente recusar o download, ele será expulso do servidor.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [resource_pack]
 enabled = true
 force = false
 ```
+
 :::
 
-## Default Config
-By default, no resource pack is sent to clients.
+## Configuração Padrão
+
+Por padrão, nenhum pacote de recursos é enviado para os clientes.
 
 :::code-group
+
 ```toml [features.toml]
 [resource_pack]
 enabled = false
@@ -94,4 +116,5 @@ resource_pack_sha1 = ""
 prompt_message = ""
 force = false
 ```
+
 :::

@@ -1,83 +1,105 @@
-# Logging
-Pumpkin allows you to customize what you want in your logs.
+# Registro de Logs
 
-## Configuring Logging
+Pumpkin permite personalizar o que você deseja registrar em seus logs.
 
-#### `enabled`: Boolean
-Whether logging is enabled or not.
+## Configurando o Registro de Logs
+
+#### `enabled`: Booleano
+
+Se o registro de logs está habilitado ou não.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [logging]
 enabled = true
 ```
+
 :::
 
 #### `level`: Enum
-The log verbosity level. Possible values are:
-- Off
-- Error
-- Warn
-- Info
-- Debug
-- Trace
+
+O nível de verbosidade do log. Os valores possíveis são:
+
+-   Off (Desligado)
+-   Error (Erro)
+-   Warn (Aviso)
+-   Info (Informação)
+-   Debug (Depuração)
+-   Trace (Rastreamento)
 
 :::code-group
+
 ```toml [features.toml] {3}
 [logging]
 enabled = true
 level = "Debug"
 ```
+
 :::
 
-#### `env`: Boolean
-Whether to allow choosing the log level by setting the `RUST_LOG` environment variable or not.
+#### `env`: Booleano
+
+Se deve permitir escolher o nível de log configurando a variável de ambiente `RUST_LOG` ou não.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [logging]
 enabled = true
 env = true
 ```
+
 :::
 
-#### `threads`: Boolean
-Whether to print threads in the logging message or not.
+#### `threads`: Booleano
+
+Se deve exibir as threads nas mensagens de log ou não.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [logging]
 enabled = true
 threads = false
 ```
+
 :::
 
-#### `color`: Boolean
-Whether to print to the console with color or not.
+#### `color`: Booleano
+
+Se deve imprimir no console com cores ou não.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [logging]
 enabled = true
 color = false
 ```
+
 :::
 
-#### `timestamp`: Boolean
-Whether to print the timestamp in the message or not.
+#### `timestamp`: Booleano
+
+Se deve imprimir a data e hora na mensagem ou não.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [logging]
 enabled = true
 timestamp = false
 ```
+
 :::
 
-## Default Config
-By default, logging is enabled at the `Info` level and will print with color, threads, and timestamps. 
+## Configuração Padrão
+
+Por padrão, o registro de logs está habilitado no nível `Info` e imprimirá com cores, threads e data/hora.
 
 :::code-group
+
 ```toml [features.toml]
 [logging]
 enabled = true
@@ -87,4 +109,5 @@ threads = true
 color = true
 timestamp = true
 ```
+
 :::

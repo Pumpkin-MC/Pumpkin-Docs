@@ -1,67 +1,78 @@
-# Basic Configuration
+# Configuração Básica
 
-Representing `configuration.toml`
+Representando `configuration.toml`
 
-## Server Address
+## Endereço do Servidor
 
-The address to bind the server to.
+O endereço para vincular o servidor.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 server_address = "0.0.0.0:25565"
 ```
+
 :::
 
 ## Seed
 
-The seed for world generation.
+A seed para a geração do mundo.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 seed = ""
 ```
+
 :::
 
-## Max players
+## Limite de Jogadores
 
-The maximum number of players allowed on the server.
+O número máximo de jogadores permitidos no servidor.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 max_players = 100000
 ```
+
 :::
 
-## View distance
+## Distância de Visão
 
-The maximum view distance for players.
+A distância máxima de visão para os jogadores.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 view_distance = 10
 ```
+
 :::
 
-## Simulation distance
+## Distância de Simulação
 
-The maximum simulation distance for players.
+A distância máxima de simulação para os jogadores.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 simulation_distance = 10
 ```
+
 :::
 
-## Default difficulty
+## Dificuldade Padrão
 
-The default game difficulty.
+A dificuldade padrão do jogo.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 default_difficulty = "Normal"
 ```
-:::
 
+:::
 
 ```toml
 Peaceful
@@ -70,87 +81,103 @@ Normal
 Hard
 ```
 
-## Operation permission level
+## Nível de Permissão de Operação
 
-The permission level assigned by the `/op` command.
+O nível de permissão atribuído pelo comando `/op`.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 op_permission_level = 4
 ```
+
 :::
 
-## Allow nether
+## Permitir Nether
 
-Whether the Nether dimension is enabled.
+Se a dimensão Nether está habilitada.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 allow_nether = true
 ```
+
 :::
 
 ## Hardcore
 
-Whether the server is in hardcore mode.
+Se o servidor está no modo hardcore.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 hardcore = false
 ```
+
 :::
 
-## Online Mode
+## Modo Online
 
-Whether online mode is enabled. Requires valid Minecraft accounts.
+Se o modo online está habilitado. Requer contas válidas do Minecraft.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 online_mode = true
 ```
+
 :::
 
-## Encryption
+## Criptografia
 
-Whether packet encryption is enabled.
+Se a criptografia de pacotes está habilitada.
 
-> [!IMPORTANT]
-> Required when online mode is enabled.
+> [!IMPORTANTE]
+> Requerido quando o modo online está habilitado.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 encryption = true
 ```
+
 :::
 
 ## MOTD
 
-Message of the Day; the server's description displayed on the status screen.
+Mensagem do Dia; a descrição do servidor exibida na tela de status.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 motd = "A Blazing fast Pumpkin Server!"
 ```
+
 :::
 
 ## TPS
 
-The server's target tick rate.
+A taxa de tique (tick rate) alvo do servidor.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 tps = 20.0
 ```
+
 :::
 
-## Default gamemode
+## Modo de Jogo Padrão
 
-The default game mode for players.
+O modo de jogo padrão para os jogadores.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 default_gamemode = "Survival"
 ```
+
 :::
 
 ```toml
@@ -161,32 +188,38 @@ Adventure
 Spectator
 ```
 
-## IP Scrubbing
+## Limpeza de IPs
 
-Whether to scrub players' IP addresses from logs.
+Se os endereços IP dos jogadores devem ser removidos dos logs.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 scrub_ips = true
 ```
+
 :::
 
-## Use favicon
+## Usar Favicon
 
-Whether to use a server favicon or not.
+Se o servidor deve usar um favicon ou não.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 use_favicon = true
 ```
+
 :::
 
-## Favicon path
+## Caminho do Favicon
 
-The path to the server's favicon.
+O caminho para o favicon do servidor.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 favicon_path = "icon.png"
 ```
+
 :::

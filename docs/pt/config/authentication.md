@@ -1,160 +1,198 @@
-# Authentication
+# Autenticação
 
-Servers authenthicate with Mojang's session servers in order to ensure the client is playing on a legitimate, paid account. Pumpkin allows you to fully configure authentication.
+Servidores autenticam com os servidores de sessão da Mojang para garantir que o cliente esteja jogando em uma conta legítima e paga. O Pumpkin permite configurar a autenticação de forma completa.
 
-## Configuring Authentication
+## Configurando a Autenticação
 
-> [!WARNING]
-> Most servers should not change the default authenthication configuration. Doing so may have unintended consequnces. **Only change these settings if you know what you are doing!**
+> [!WARNING] AVISO
+> A maioria dos servidores não deve alterar a configuração padrão de autenticação. Fazer isso pode ter consequências indesejadas. **Altere essas configurações somente se souber o que está fazendo!**
 
-#### `enabled`: Boolean
+#### `enabled`: Booleano
 
-Whether authenthication is enabled or not.
+Define se a autenticação está habilitada ou não.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [authentication]
 enabled = false
 ```
+
 :::
 
-#### `prevent_proxy_connections`: Boolean
+#### `prevent_proxy_connections`: Booleano
 
-Whether to block proxy connections or not.
+Define se deve bloquear conexões de proxy ou não.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [authentication]
 enabled = true
 prevent_proxy_connections = true
 ```
+
 :::
 
-#### `auth_url`: String (optional)
-The URL to authenthicate with. Uses Mojang's session servers to authenthicate if not specified. 
+#### `auth_url`: String (opcional)
 
-##### Placeholders
-| Placeholder     | Description        |
-| --------------- | ------------------ |
-| `{username}`    | Player username    |
-| `{server_hash}` | Hash of the server |
+A URL para autenticar. Usa os servidores de sessão da Mojang para autenticação se não for especificada.
+
+##### Argumentos
+
+| Argumento       | Descrição                  |
+| --------------- | -------------------------- |
+| `{username}`    | Nome de usuário do jogador |
+| `{server_hash}` | Hash do servidor           |
 
 :::code-group
+
 ```toml [features.toml] {2}
 [authentication]
-auth_url = "[custom auth server here]"
+auth_url = "[servidor de autenticação personalizado aqui]"
 ```
+
 :::
 
-#### `prevent_proxy_connection_auth_url`: String (optional)
-The URL to authenthicate with if `prevent_proxy_connections` is enabled. Uses Mojang's session servers to authenthicate if not specified.
+#### `prevent_proxy_connection_auth_url`: String (opcional)
 
-##### Placeholders
-| Placeholder     | Description              |
-| --------------- | ------------------------ |
-| `{username}`    | Player username          |
-| `{server_hash}` | Hash of the server       |
-| `{ip}`          | IP Address of the player |
+A URL para autenticar quando `prevent_proxy_connections` está habilitado. Usa os servidores de sessão da Mojang para autenticação se não for especificada.
+
+##### Argumentos
+
+| Argumento       | Descrição                  |
+| --------------- | -------------------------- |
+| `{username}`    | Nome de usuário do jogador |
+| `{server_hash}` | Hash do servidor           |
+| `{ip}`          | Endereço IP do jogador     |
 
 :::code-group
+
 ```toml [features.toml] {2}
 [authentication]
-prevent_proxy_connection_auth_url = "[custom auth server here]"
+prevent_proxy_connection_auth_url = "[servidor de autenticação personalizado aqui]"
 ```
+
 :::
 
-### Player Profile
+### Perfil do Jogador
 
-#### `allow_banned_players`: Boolean
-Allow players flagged by Mojang.
+#### `allow_banned_players`: Booleano
+
+Permitir jogadores banidos pela Mojang.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [authentication.player_profile]
 allow_banned_players = true
 ```
+
 :::
 
-#### `allowed_actions`: String Array
-What actions are allowed if `allow_banned_players` is enabled.
+#### `allowed_actions`: Array de Strings
+
+Quais ações são permitidas se `allow_banned_players` estiver habilitado.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [authentication.player_profile]
 allow_banned_players = true
 allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
 ```
+
 :::
 
-### Textures
+### Texturas
 
-#### `enabled`: Boolean
-Whether to filter/validate player textures (e.g. skins/capes).
+#### `enabled`: Booleano
+
+Define se as texturas dos jogadores (por exemplo, skins/capas) devem ser filtradas/validadas.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [authentication.textures]
 enabled = true
 ```
+
 :::
 
-#### `allowed_url_schemes`: String Array
-Allowed URL schemes for textures.
+#### `allowed_url_schemes`: Array de Strings
+
+Esquemas URL permitidos para texturas.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [authentication.textures]
 enabled = true
 allowed_url_schemes = ["http", "https"]
 ```
+
 :::
 
-#### `allowed_url_domains`: String Array
-Allowed URL domains for textures.
+#### `allowed_url_domains`: Array de Strings
+
+Domínios URL permitidos para texturas.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [authentication.textures]
 enabled = true
 allowed_url_domains = [".minecraft.net", ".mojang.com"]
 ```
+
 :::
 
-### Texture Types
+### Tipos de Texturas
 
-#### `skin`: Boolean
-Whether to use player skins or not.
+#### `skin`: Booleano
+
+Define se deve usar skins dos jogadores ou não.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [authentication.textures.types]
 skin = true
 ```
+
 :::
 
-#### `cape`: Boolean
-Whether to use player capes or not.
+#### `cape`: Booleano
+
+Define se deve usar capas dos jogadores ou não.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [authentication.textures.types]
 cape = true
 ```
+
 :::
 
-#### `elytra`: Boolean
-Whether to use player elytras or not.
+#### `elytra`: Booleano
+
+Define se deve usar elytras dos jogadores ou não.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [authentication.textures.types]
 elytra = true
 ```
+
 :::
 
-## Default Config
-By default, authentication is enabled and uses Mojang's servers. Here is the default config:
+## Configuração Padrão
+
+Por padrão, a autenticação está habilitada e usa os servidores da Mojang. Aqui está a configuração padrão:
 :::code-group
+
 ```toml [features.toml]
 [authentication]
 enabled = true
@@ -174,4 +212,5 @@ skin = true
 cape = true
 elytra = true
 ```
+
 :::

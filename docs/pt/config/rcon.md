@@ -1,95 +1,122 @@
 # RCON
-RCON is a protocol that allows you to remotely manage the server from a different device. Pumpkin has full support for RCON.
 
-## Configuring RCON
+RCON é um protocolo que permite gerenciar o servidor remotamente a partir de outro dispositivo. Pumpkin oferece suporte completo para RCON.
 
-#### `enabled`: Boolean
+## Configurando o RCON
+
+#### `enabled`: Booleano
 
 :::code-group
+
 ```toml [features.toml] {2}
 [rcon]
 enabled = true
 ```
+
 :::
 
 #### `address`: String
-The address and port that RCON should listen to.
+
+O endereço e a porta que o RCON deve escutar.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [rcon]
 enabled = true
 address = "0.0.0.0:25575"
 ```
+
 :::
 
 #### `password`: String
-The password to use for RCON authentication.
+
+A senha a ser usada para autenticação RCON.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [rcon]
 enabled = true
-password = "[your safe password here]"
+password = "[sua senha segura aqui]"
 ```
+
 :::
 
-#### `max_connections`: Integer
-The max number of RCON connections allowed at a single time. Set this to 0 to disable the limit.
+#### `max_connections`: Inteiro
+
+O número máximo de conexões RCON permitidas ao mesmo tempo. Defina como 0 para desabilitar o limite.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [rcon]
 enabled = true
 max_connections = 5
 ```
+
 :::
 
-### Logging
-#### `log_logged_successfully`: Boolean
-Whether successful logins should be logged to console or not.
+### Registro de Logs
+
+#### `log_logged_successfully`: Booleano
+
+Se os logins bem-sucedidos devem ser registrados no console ou não.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [rcon.logging]
 log_logged_successfully = true
 ```
+
 :::
 
-#### `log_wrong_password`: Boolean
-Whether wrong password attempts should be logged to console or not.
+#### `log_wrong_password`: Booleano
+
+Se as tentativas de senha incorreta devem ser registradas no console ou não.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [rcon.logging]
-log_logged_successfully = true
+log_wrong_password = true
 ```
+
 :::
 
-#### `log_commands`: Boolean
-Whether to log commands ran from RCON to console or not.
+#### `log_commands`: Booleano
+
+Se os comandos executados via RCON devem ser registrados no console ou não.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [rcon.logging]
 log_commands = true
 ```
+
 :::
 
-#### `log_quit`: Boolean
-Whether RCON client quit should be logged or not.
+#### `log_quit`: Booleano
+
+Se a saída do cliente RCON deve ser registrada ou não.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [rcon.logging]
 log_quit = true
 ```
+
 :::
 
-## Default Config
-By default, RCON is disabled.
+## Configuração Padrão
+
+Por padrão, o RCON está desabilitado.
 
 :::code-group
+
 ```toml [features.toml]
 [rcon]
 enabled = false
@@ -103,4 +130,5 @@ log_wrong_password = true
 log_commands = true
 log_quit = true
 ```
+
 :::

@@ -1,23 +1,23 @@
-### Configuration
+### Configuração
 
-Pumpkin offers a robust configuration system that allows users to customize various aspects of the server's behavior without relying on external plugins. This provides flexibility and control over the server's operation.
+Pumpkin oferece um sistema de configuração robusto que permite aos usuários personalizar vários aspectos do comportamento do servidor sem depender de plugins externos. Isso proporciona flexibilidade e controle sobre o funcionamento do servidor.
 
-### Basic / Advanced
+### Básica / Avançada
 
-Pumpkin's configuration is split into a "basic" configuration made for quick changes and important changes, and a more "advanced" configuration
+A configuração do Pumpkin é dividida em uma configuração "básica", feita para mudanças rápidas e importantes, e uma configuração mais "avançada".
 
-- `configuration.toml`: simple and can be compared to the vanilla `server.properties`.
-- `features.toml`: designed to have all features of pumpkin at one place, making it a large configuration
+-   `configuration.toml`: simples e pode ser comparado ao `server.properties` do vanilla.
+-   `features.toml`: projetado para reunir todos os recursos do Pumpkin em um único lugar, tornando-se uma configuração mais abrangente.
 
-### Server Version
+### Versão do Servidor
 
-Pumpkin aims to support the latest Minecraft Version. If you want to host a Pumpkin server for any other version, there is a project called [ViaProxy](https://github.com/ViaVersion/ViaProxy).
+Pumpkin tem como objetivo oferecer suporte à versão mais recente do Minecraft. Se você deseja hospedar um servidor Pumpkin para qualquer outra versão, existe um projeto chamado [ViaProxy](https://github.com/ViaVersion/ViaProxy).
 
-- Make sure to allow proxy connections.
-- Pumpkin and ViaProxy have no connection; don't submit issues regarding their code. Furthermore, this is a 3rd party proxy and Pumpkin does not take any responsibility for the good or the bad.
+-   Certifique-se de permitir conexões de proxy.
+-   Pumpkin e o ViaProxy não possuem conexão; não nos envie problemas relacionados ao código deles. Além disso, este é um proxy de terceiros e o Pumpkin não se responsabiliza pelos resultados, bons ou ruins.
 
-#### Key Features:
+#### Principais Características:
 
-- Extensive Customization: Configure server settings, player behavior, world generation, and more.
-- Performance Optimization: Optimize server performance through configuration tweaks.
-- Plugin-Free Customization: Achieve desired changes without the need for additional plugins.
+-   **Personalização Extensa**: Configure configurações do servidor, comportamento dos jogadores, geração de mundos e muito mais.
+-   **Otimização de Desempenho**: Otimize o desempenho do servidor por meio de ajustes na configuração.
+-   **Personalização Sem Plugins**: Alcance as mudanças desejadas sem a necessidade de plugins adicionais.

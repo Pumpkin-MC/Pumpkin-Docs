@@ -1,36 +1,46 @@
 # Query
-The Query protocol is a simple way to query the server about its status. Pumpkin fully supports the Query protocol.
 
-## Configuring Query
+O protocolo Query é uma maneira simples de consultar o status do servidor. Pumpkin oferece suporte total para o protocolo Query.
 
-#### `enabled`: Boolean
-Whether to listen for Query protocol requests or not.
+## Configurando o Query
+
+#### `enabled`: Booleano
+
+Se deve ouvir ou não as requisições do protocolo Query.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [query]
 enabled = true
 ```
+
 :::
 
-#### `port`: Integer (0-65535) (optional)
-Which port to listen to Query protocol requests on. If not specified, it uses the same port as the server.
+#### `port`: Inteiro (0-65535) (opcional)
+
+A porta em que o servidor deve ouvir as requisições do protocolo Query. Se não especificado, será utilizada a mesma porta do servidor.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [query]
 enabled = true
 port = 12345
 ```
+
 :::
 
-## Default Config
-By default, Query is disabled. It will run on the server port if enabled unless specified explicitly.
+## Configuração Padrão
+
+Por padrão, o Query está desabilitado. Ele será executado na porta do servidor se habilitado, a menos que especificado explicitamente.
 
 :::code-group
+
 ```toml [features.toml]
 [query]
 enabled = true
 port = 25565
 ```
+
 :::

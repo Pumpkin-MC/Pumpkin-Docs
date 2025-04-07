@@ -1,46 +1,58 @@
-# Commands
-Pumpkin supports Vanilla commands and allows you to configure where they can be ran from. 
+# Comandos
 
-## Configuring Commands
-#### `use_console`: Boolean
-Whether commands from the console are accepted or not.
+Pumpkin suporta comandos Vanilla e permite configurar onde eles podem ser executados.
+
+## Configurando Comandos
+
+#### `use_console`: Booleano
+
+Se os comandos do console são aceitos ou não.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [commands]
 use_console = false
 ```
+
 :::
 
-#### `log_console`: Boolean
-Whether commands from players should be logged in the console or not.
+#### `log_console`: Booleano
+
+Se os comandos dos jogadores devem ser registrados no console ou não.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [commands]
 log_console = false
 ```
+
 :::
 
-## Operation permission level
+## Nível de permissão de operação
 
-The default permission level for all players.
+O nível de permissão padrão para todos os jogadores.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 default_op_level = 0
 ```
+
 :::
 
+## Configuração Padrão
 
-## Default Config
-By default, Pumpkin will allow commands from console and log all commands run by players.
+Por padrão, Pumpkin permitirá comandos da console e registrará todos os comandos executados pelos jogadores.
 
 :::code-group
+
 ```toml [features.toml]
 [commands]
 use_console = true
 log_console = true
 default_op_level = 0
 ```
+
 :::

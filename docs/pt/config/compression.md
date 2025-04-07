@@ -1,55 +1,65 @@
-# Compression
-Compression is used to reduce the size of packets. This is beneficial to reduce bandwidth server side and also to help players on slower internet connections.
+# Compressão
 
-## Configuring compression
+A compressão é utilizada para reduzir o tamanho dos pacotes. Isso é benéfico para reduzir a largura de banda do lado do servidor e também para ajudar jogadores com conexões de internet mais lentas.
 
-#### `enabled`: Boolean
-Whether packet compression is enabled or not.
+## Configurando a compressão
 
-> [!TIP]
-> It might be beneficial to disable compression if the server is behind a proxy.
+#### `enabled`: Booleano
+
+Se a compressão de pacotes está habilitada ou não.
+
+> [!TIP] DICA
+> Pode ser benéfico desabilitar a compressão se o servidor estiver atrás de um proxy.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [packet_compression]
 enabled = true
 ```
+
 :::
 
-#### `threshold`: Integer (0-1024)
+#### `threshold`: Inteiro (0-1024)
 
-The minimum packet size before the server attempts to compress the packet.
+O tamanho mínimo do pacote antes que o servidor tente comprimir o pacote.
 
-> [!CAUTION]
-> Increasing this value can hurt players on slower connections.
+> [!CAUTION] CUIDADO
+> Aumentar este valor pode prejudicar jogadores com conexões mais lentas.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [packet_compression]
 threshold = 256
 ```
+
 :::
 
-#### `level`: Integer (0-9)
+#### `level`: Inteiro (0-9)
 
-A value between 0 to 9: 0 to disable compression, 1 being the fastest compression (at the cost of size), and 9 being maximum compression (at the cost of speed).
+Um valor entre 0 e 9: 0 para desabilitar a compressão, 1 sendo a compressão mais rápida (à custa do tamanho), e 9 sendo a compressão máxima (à custa da velocidade).
 
 :::code-group
+
 ```toml [features.toml] {2}
 [packet_compression]
 level = 4
 ```
+
 :::
 
-## Default config
+## Configuração Padrão
 
-By default, compression is enabled.
+Por padrão, a compressão está habilitada.
 
 :::code-group
+
 ```toml [features.toml]
 [packet_compression]
 enabled = true
 threshold = 256
 level = 4
 ```
+
 :::

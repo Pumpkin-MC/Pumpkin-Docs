@@ -1,54 +1,67 @@
-# LAN Broadcast
-Pumpkin can advertise the server across the network in order to make it easier for local players to connect to the server easier.
+# Transmissão LAN
 
-## Configuring LAN Broadcast
+Pumpkin pode divulgar o servidor na rede para facilitar a conexão de jogadores locais ao servidor.
 
-#### `enabled`: Boolean
-Whether LAN broadcast is enabled or not.
+## Configurando a Transmissão LAN
+
+#### `enabled`: Booleano
+
+Se a transmissão LAN está habilitada ou não.
 
 :::code-group
+
 ```toml [features.toml] {2}
 [lan_broadcast]
 enabled = true
 ```
+
 :::
 
-#### `motd`: String (optional)
-The MOTD to broadcast out to clients; uses the server's MOTD by default.
+#### `motd`: String (opcional)
 
-> [!CAUTION]
-> LAN broadcast MOTD does not support multiple lines, RGB colors, or gradients. Pumpkin does not verify the MOTD before broadcasting it. If the server MOTD is using these components, consider defining this field so that clients see a proper MOTD.
+A mensagem de boas-vindas (MOTD) a ser transmitida para os clientes; usa a MOTD do servidor por padrão.
+
+> [!CAUTION] CUIDADO
+> A MOTD da transmissão LAN não suporta múltiplas linhas, cores RGB ou gradientes. O Pumpkin não verifica a MOTD antes de transmiti-la. Se a MOTD do servidor usar esses componentes, considere definir este campo para que os clientes vejam uma MOTD adequada.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [lan_broadcast]
 enabled = true
-motd = "[your MOTD here]"
+motd = "[sua MOTD aqui]"
 ```
+
 :::
 
-#### `port`: Integer (0-65535) (optional)
-What port to bind to. If not specified, will bind to port 0 (any available port on the system).
+#### `port`: Inteiro (0-65535) (opcional)
 
-> [!IMPORTANT]
-> The protocol defines what port to broadcast to. This option only exists to specify which port to bind to on the host. This option purely exists so that the port can be predictable.
+A porta para a qual o servidor será vinculado. Se não especificado, será vinculado à porta 0 (qualquer porta disponível no sistema).
+
+> [!IMPORTANT] IMPORTANTE
+> O protocolo define qual porta será usada para a transmissão. Esta opção existe apenas para especificar qual porta vincular no host. Ela existe exclusivamente para que a porta seja previsível.
 
 :::code-group
+
 ```toml [features.toml] {3}
 [lan_broadcast]
 enabled = true
 port = 46733
 ```
+
 :::
 
-## Default Config
-By default, LAN broadcast is disabled.
+## Configuração Padrão
+
+Por padrão, a transmissão LAN está desabilitada.
 
 :::code-group
+
 ```toml [features.toml]
 [lan_broadcast]
 enabled = false
-motd = "[server MOTD here]"
+motd = "[MOTD do servidor aqui]"
 port = 0
 ```
+
 :::
