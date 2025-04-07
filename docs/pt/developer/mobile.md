@@ -1,69 +1,81 @@
-# Pumpking Development on Mobile
+# Desenvolvimento do Pumpkin no Mobile
 
-If you are a mobile user and want to edit the source code, you can do this!
-(This page was written on Android using Helix.)
+Se você é um usuário móvel e deseja editar o código-fonte, você consegue fazer isso!  
+(Esta página foi escrita no Android usando o Helix.)
 
-First of all, we need a terminal app.
-We recommend [Termux](https://github.com/termux/termux-app/releases) because it's stable and open source.
-Download the needed apk file for your device's architecture and install Termux.
+Primeiro de tudo, precisamos de um aplicativo de terminal.  
+Recomendamos o [Termux](https://github.com/termux/termux-app/releases) porque é estável e open source.  
+Baixe o arquivo apk necessário para a arquitetura do seu dispositivo e instale o Termux.
 
-After this, you need to run some commands. We use Helix for its simplicity.
+Após isso, você precisará rodar alguns comandos. Usamos o Helix pela sua simplicidade.
+
 ```bash
   pkg update && pkg upgrade
   pkg install build-essential git rust rust-analyzer taplo helix helix-grammar nodejs
 ```
 
-If you want to contribute, you need to install the GitHub software.
+Se você quiser contribuir, precisará instalar o software do GitHub.
+
 ```bash
   pkg install gh
 ```
 
-We also recommend installing the fish shell because it's more friendly than bash.
+Também recomendamos instalar o fish shell porque ele é mais amigável do que o bash.
+
 ```bash
   pkg install fish
   chsh -s fish
 ```
 
-Now that you've installed basic tools, we need to do some setup.
-If you want to contribute, you need log into GitHub.
+Agora que você instalou as ferramentas básicas, precisamos fazer algumas configurações.  
+Se você quiser contribuir, precisará fazer login no GitHub.
+
 ```bash
   gh auth login
 ```
 
-Also setup git: change the editor to vim, edit your credentials, etc.
+Também configure o git: altere o editor para o vim, edite suas credenciais, etc.
 
-After this, you need to clone the Pumpkin repo. (Before this, you can create a project directory with `mkdir proj`; it's useful)
+Após isso, você precisa clonar o repositório do Pumpkin. (Antes disso, você pode criar um diretório de projeto com `mkdir proj`; é útil)
+
 ```bash
   git clone https://github.com/Pumpkin-MC/Pumpkin.git
 ```
 
-If you want to contribute, you need to fork our repo and change `Pumpkin-MC` to your username on GitHub.
+Se você quiser contribuir, precisa fazer um fork do nosso repositório e trocar `Pumpkin-MC` pelo seu nome de usuário no GitHub.
 
-Setup's all done now! Enjoy :)
+A configuração está toda feita agora! Aproveite :)
 
 # FAQ
 
-## How to use the text editor?
-Type `hx <path>`.
+## Como usar o editor de texto?
 
-## How to navigate through the project?
-You can use `ls`, `cd`, and other programs.
-You can also use `hx <dir>` to browse your directory on startup.
+Digite `hx <caminho>`.
 
-## How can I type in the editor?
-Press `i` if you are in normal mode.
+## Como navegar pelo projeto?
 
-## HOW EXIT FROM EDITOR????
-Press esc, then type `:q!` if you don't want to save, or `:wq` if you do want to save.
+Você pode usar `ls`, `cd` e outros programas.  
+Também pode usar `hx <diretório>` para navegar pelo seu diretório ao iniciar.
 
-## Where can I learn how to use this editor?
-Run `hx --tutor` or go their official website.
+## Como posso digitar no editor?
 
-## Why not use VS Code?
-1) VS Code is hard to set up, and it works with limited functionality on web.
-2) rust-analyzer doesn't work on it. Maybe an emulator can help with this, but that slows down code compilation.
-3) With VS Code, it's highly desirable to have a mouse, while in Helix you only need a keyboard.
-4) VS Code is laggy on some devices.
+Pressione `i` se você estiver no modo normal.
 
-## Why is it so hard to type?
-Buy a cheap bluetooth keyboard and see how much easier it becomes.
+## COMO SAIR DO EDITOR????
+
+Pressione `esc` e depois digite `:q!` se não quiser salvar, ou `:wq` se quiser salvar.
+
+## Onde posso aprender a usar esse editor?
+
+Execute `hx --tutor` ou acesse o site oficial deles.
+
+## Por que não usar o VS Code?
+
+1. O VS Code é difícil de configurar e funciona com funcionalidades limitadas na versão web.
+2. O rust-analyzer não funciona nele. Talvez um emulador ajude com isso, mas isso pode retardar a compilação do código.
+3. Com o VS Code, é altamente desejável ter um mouse, enquanto no Helix você só precisa de um teclado.
+4. O VS Code é lento em alguns dispositivos.
+
+## Por que é tão difícil digitar?
+
+Compre um teclado bluetooth barato e veja como fica mais fácil.

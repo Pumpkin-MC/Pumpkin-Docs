@@ -1,64 +1,64 @@
 ### RCON
 
-### What is RCON
+### O que é RCON
 
-RCON (Remote Console) is a protocol designed by Valve to allow administrators to control and manage game servers remotely. It provides a way to execute commands on a server from a different location, such as a phone or a separate computer.
+RCON (Console Remoto) é um protocolo criado pela Valve para permitir que administradores controlem e gerenciem servidores de jogos remotamente. Ele oferece uma maneira de executar comandos em um servidor de um local diferente, como um celular ou um computador separado.
 
-### Why RCON
+### Por que usar RCON
 
-- **Convenience:** Manage your server from anywhere with an internet connection.
-- **Flexibility:** Execute commands without needing to be physically present at the server's location.
-- **Efficiency:** Automate tasks and streamline server management.
+-   **Conveniência:** Gerencie seu servidor de qualquer lugar com uma conexão à internet.
+-   **Flexibilidade:** Execute comandos sem precisar estar fisicamente presente no local do servidor.
+-   **Eficiência:** Automatize tarefas e torne o gerenciamento do servidor mais ágil.
 
 ### SSH vs RCON
 
 **SSH**
 
-- Offers strong encryption to protect data transmitted between the client and server.
-- Primarily designed for secure remote login and execution of commands on a remote machine.
-- Commonly used for managing Linux/Unix systems, configuring networks, and running scripts.
-- Provides a shell-like environment, allowing you to execute various commands and interact with the remote system.
+-   Oferece forte criptografia para proteger os dados transmitidos entre o cliente e o servidor.
+-   Principalmente projetado para login remoto seguro e execução de comandos em uma máquina remota.
+-   Comumente usado para gerenciar sistemas Linux/Unix, configurar redes e executar scripts.
+-   Fornece um ambiente de shell, permitindo que você execute diversos comandos e interaja com o sistema remoto.
 
 **RCON**
 
-- Specifically designed for remote administration of game servers, allowing you to control and manage the server's settings and operations.
-- Typically less secure than SSH, as it often relies on plain text passwords.
-- Primarily used by game server administrators to manage game servers.
-- Has a limited set of game-specific commands.
+-   Especificamente projetado para administração remota de servidores de jogos, permitindo que você controle e gerencie as configurações e operações do servidor.
+-   Geralmente menos seguro que o SSH, pois muitas vezes depende de senhas em texto simples.
+-   Principalmente utilizado por administradores de servidores de jogos para gerenciar servidores de jogos.
+-   Tem um conjunto limitado de comandos, específicos do jogo.
 
-### Packets
+### Pacotes
 
-RCON is a very simple protocol with a few packets. Here's how an RCON packet looks:
+RCON é um protocolo muito simples com poucos pacotes. Veja como um pacote RCON se parece:
 
-| Field | Description                                     |
-| ----- | ----------------------------------------------- |
-| ID    | Used to indicate whether authentication failed or succeeded |
-| Type  | Identifies the packet type                      |
-| Body  | A message (String), e.g., a command or a password |
+| Campo | Descrição                                                   |
+| ----- | ----------------------------------------------------------- |
+| ID    | Usado para indicar se a autenticação falhou ou teve sucesso |
+| Tipo  | Identifica o tipo de pacote                                 |
+| Corpo | Uma mensagem (String), por exemplo, um comando ou uma senha |
 
-#### Serverbound Packets <sub><sub>(Client→Server)</sub></sub>
+#### Pacotes Serverbound <sub><sub>(Cliente→Servidor)</sub></sub>
 
-| Type | Packet      |
+| Tipo | Pacote      |
 | ---- | ----------- |
 | 2    | Auth        |
 | 3    | ExecCommand |
 
-#### Clientbound Packets <sub><sub>(Server→Client)</sub></sub>
+#### Pacotes Clientbound <sub><sub>(Servidor→Cliente)</sub></sub>
 
-| Type | Packet       |
+| Tipo | Pacote       |
 | ---- | ------------ |
 | 2    | AuthResponse |
 | 0    | Output       |
 
-### How RCON Works
+### Como o RCON Funciona
 
-1. **Authentication:**
+1. **Autenticação:**
 
-   - The RCON client sends an authentication packet with the desired password.
-   - The server verifies the password and responds with an authentication response packet.
-   - If successful, the response packet includes the same ID as the one sent by the client. If unsuccessful, the ID is -1.
+    - O cliente RCON envia um pacote de autenticação com a senha desejada.
+    - O servidor verifica a senha e responde com um pacote de resposta de autenticação.
+    - Se bem-sucedido, o pacote de resposta inclui o mesmo ID enviado pelo cliente. Se não for bem-sucedido, o ID é -1.
 
-2. **Command Execution:**
+2. **Execução de Comandos:**
 
-   - The authenticated client can now send command execution packets, with each packet containing the command to be executed.
-   - The server processes the command and sends back an output packet containing the result or any error messages.
+    - O cliente autenticado pode agora enviar pacotes de execução de comandos, com cada pacote contendo o comando a ser executado.
+    - O servidor processa o comando e envia de volta um pacote de saída contendo o resultado ou qualquer mensagem de erro.

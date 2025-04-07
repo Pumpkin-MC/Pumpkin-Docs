@@ -1,8 +1,9 @@
-### Introduction
+### Introdução
 
-Welcome to the Pumpkin Documentation!
+Bem-vindo à Documentação do Pumpkin!
 
-Whether you're an internal Pumpkin developer or working on a Pumpkin plugin, this documentation is your resource for everything Pumpkin.
+Seja você um desenvolvedor interno do Pumpkin ou esteja trabalhando em um plugin do Pumpkin, esta documentação é o seu recurso para tudo relacionado ao Pumpkin.
 
-#### Plugin Development
-For a better documentation structure, plugin development docs have been moved to a [separate category](/plugin-dev/introduction).
+#### Desenvolvimento de Plugins
+
+Para uma estrutura de documentação mais organizada, a documentação sobre desenvolvimento de plugins foi movida para uma [categoria separada](/plugin-dev/introduction).
