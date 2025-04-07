@@ -1,9 +1,11 @@
-# Writing an Example Plugin
-This tutorial will guide you through creating a new plugin.
+# Escrevendo um Plugin de Exemplo
 
-This tutorial expects that you have some experience with Rust and the command line.
+Este tutorial irá guiá-lo na criação de um novo plugin.
 
-Topics described in this tutorial:
-- Modifying the join message
-- Creating a rock-paper-scissors command (coming soon)
-- Saving plugin data in the plugin's directory (coming soon)
+Este tutorial assume que você tem alguma experiência com Rust e linha de comando.
+
+Tópicos descritos neste tutorial:
+
+-   Modificando a mensagem de entrada
+-   Criando um comando de pedra-papel-tesoura (em breve)
+-   Salvando dados do plugin em diretório (em breve)

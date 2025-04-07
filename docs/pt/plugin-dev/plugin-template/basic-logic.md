@@ -1,8 +1,11 @@
-# Writing the basic logic
-## Plugin base
-Even in a basic plugin, there is a lot going on under the hood, so to greatly simplify plugin development we will use the `pumpkin-api-macros` crate to create a basic empty plugin.
+# Escrevendo a Lógica Básica
+
+## Base do Plugin
+
+Mesmo em um plugin básico, há muita coisa acontecendo nos bastidores, então, para simplificar bastante o desenvolvimento de plugins, usaremos o crate `pumpkin-api-macros` para criar um plugin básico vazio.
 
 :::code-group
+
 ```rs:line-numbers [lib.rs]
 use pumpkin_api_macros::plugin_impl;
 
@@ -21,57 +24,66 @@ impl Default for MyPlugin {
     }
 }
 ```
+
 :::
 
-This will create an empty plugin and implement all the necessary methods for it to be loaded by Pumpkin.
+Isso criará um plugin vazio e implementará todos os métodos necessários para que ele seja carregado pelo Pumpkin.
 
-We can now try to compile our plugin for the first time. To do so, run this command in your project folder:
+Agora podemos tentar compilar nosso plugin pela primeira vez. Para isso, execute o seguinte comando na pasta do seu projeto:
+
 ```bash
 cargo build --release
 ```
-::: tip NOTICE
-If you are using Windows, you **must** use the `--release` flag, or you will run into issues. If you are on another platform, you don't have to use it if you want to save on compile time.
-:::
-The initial compilation will take a bit, but don't worry, later compilations will be faster.
 
-If all went well, you should be left with a message like this:
+::: tip AVISO
+Se você estiver usando o Windows, você **tem** que usar a flag `--release`, caso contrário, terá problemas. Se você estiver em outra plataforma, não precisa usá-la caso queira economizar tempo de compilação.
+:::
+A compilação inicial levará um pouco de tempo, mas não se preocupe, as compilações seguintes serão mais rápidas.
+
+Se tudo correr bem, você deverá ver uma mensagem como esta:
+
 ```log
 ╰─ cargo build --release
    Compiling hello-pumpkin v0.1.0 (/home/vypal/Dokumenty/GitHub/hello-pumpkin)
     Finished `release` profile [optimized] target(s) in 0.68s
 ```
 
-Now you can go to the `./target/release` folder (or `./target/debug` if you didn't use `--release`) and locate your plugin binary.
+Agora você pode ir para a pasta `./target/release` (ou `./target/debug` se não usou `--release`) e localizar o binário do seu plugin.
 
-Depending on your operating system, the file will have one of three possible names:
-- For Windows: `hello-pumpkin.dll`
-- For MacOS: `libhello-pumpkin.dylib`
-- For Linux: `libhello-pumpkin.so`
+Dependendo do seu sistema operacional, o arquivo terá um dos três nomes possíveis:
 
-::: info NOTE
-If you used a different project name in the `Cargo.toml` file, look for a file which contains your project name.
+-   Para Windows: `hello-pumpkin.dll`
+-   Para MacOS: `libhello-pumpkin.dylib`
+-   Para Linux: `libhello-pumpkin.so`
+
+::: info NOTA
+Se você usou um nome de projeto diferente no arquivo `Cargo.toml`, procure o arquivo que contenha o nome do seu projeto.
 :::
 
-You can rename this file to whatever you like, however you must keep the file extension (`.dll`, `.dylib`, or `.so`) the same.
+Você pode renomear este arquivo como quiser, mas deve manter a extensão do arquivo (`.dll`, `.dylib` ou `.so`) a mesma.
 
-## Testing the plugin
-Now that we have our plugin binary, we can go ahead and test it on the Pumpkin server. Installing a plugin is as simple as putting the plugin binary that we just built into the `plugins/` folder of your Pumpkin server!
+## Testando o Plugin
 
-Thanks to the `#[plugin_impl]` macro, the plugin will have its details (like the name, authors, version, and description) built into the binary so that the server can read them. 
+Agora que temos o binário do plugin, podemos testá-lo no servidor Pumpkin. Instalar um plugin é tão simples quanto colocar o binário do plugin que acabamos de construir na pasta `plugins/` do seu servidor Pumpkin!
 
-When you start up the server and run the `/plugins` command, you should see an output like this:
+Graças à macro `#[plugin_impl]`, o plugin terá seus detalhes (como nome, autores, versão e descrição) incorporados ao binário para que o servidor possa lê-los.
+
+Quando você iniciar o servidor e executar o comando `/plugins`, deverá ver uma resposta como esta:
+
 ```
-There is 1 plugin loaded:
+Há 1 plugin carregado:
 hello-pumpkin
 ```
 
-## Basic methods
-The Pumpkin server currently uses two "methods" to tell the plugin about its state. These methods are `on_load` and `on_unload`.
+## Métodos Básicos
 
-These methods don't have to be implemented, but you will usually implement at least the `on_load` method. In this method you get access to a `Context` object which can give the plugin access to information about the server, but also allows the plugin to register command handlers and events.
+O servidor Pumpkin atualmente usa dois "métodos" para informar ao plugin sobre seu estado. Esses métodos são `on_load` e `on_unload`.
 
-To make implementing these methods easier, there is another macro provided by the `pumpkin-api-macros` crate. 
+Esses métodos não precisam ser implementados, mas você normalmente implementará pelo menos o método `on_load`. Nesse método, você tem acesso a um objeto `Context`, que pode fornecer ao plugin acesso a informações sobre o servidor, além de permitir que o plugin registre gerenciadores de comandos e eventos.
+
+Para facilitar a implementação desses métodos, há outra macro fornecida pelo crate `pumpkin-api-macros`.
 :::code-group
+
 ```rs [lib.rs]
 use pumpkin_api_macros::{plugin_impl, plugin_method}; // [!code ++:2]
 use pumpkin::plugin::Context;
@@ -97,40 +109,51 @@ impl Default for MyPlugin {
     }
 }
 ```
+
 :::
 
-::: warning IMPORTANT
-It is important that you define any plugin methods before the `#[plugin_impl]` block.
+::: warning IMPORTANTE
+É importante que você defina qualquer método do plugin antes do bloco `#[plugin_impl]`.
 :::
 
-This method gets a mutable reference to its plugin object (in this case the `MyPlugin` struct) which it can use to initialize any data stored in the plugin's main struct, and a reference to a `Context` object. This object is specifically constructed for this plugin based on the plugin's metadata.
+Este método recebe uma referência mutável ao objeto do plugin (neste caso, a struct `MyPlugin`), que pode ser usada para inicializar quaisquer dados armazenados na struct principal do plugin, e uma referência ao objeto `Context`. Esse objeto é especificamente construído para este plugin com base nos metadados do plugin.
 
-### Methods implemented on the `Context` object:
+### Métodos implementados no objeto `Context`:
+
 ```rs
 fn get_data_folder() -> String
 ```
-Returns the path to the folder dedicated to this plugin, which should be used for persistent data storage
+
+Retorna o caminho para a pasta dedicada a este plugin, que deve ser usada para armazenamento de dados persistentes.
+
 ```rs
 async fn get_player_by_name(player_name: String) -> Option<Arc<Player>>
 ```
-If a player by the name `player_name` is found (has to be currently online), this function will return a reference to them.
+
+Se um jogador com o nome `player_name` for encontrado (ele precisa estar online no momento), esta função retornará uma referência a ele.
+
 ```rs
 async fn register_command(tree: CommandTree, permission: PermissionLvl)
 ```
-Registers a new command handler, with a minimum required permission level.
+
+Registra um novo gerenciador de comandos, com um nível mínimo de permissão exigido.
+
 ```rs
 async fn register_event(handler: Arc<H>, priority: EventPriority, blocking: bool)
 ```
-Registers a new event handler with a set priority and if it is blocking or not.
-By the way, `handler` is `Arc<T>`, which means you can implement a lot of events on one handler, and then register it.
 
-## Basic on-load method
-For now we will only implement a very basic `on_load` method to be able to see that the plugin is running.
+Registra um novo gerenciador de eventos com uma prioridade definida e se é bloqueante ou não.
+Aliás, `handler` é `Arc<T>`, o que significa que você pode implementar vários eventos em um único gerenciador e depois registrá-lo.
 
-Here we will set up the inner Pumpkin logger and set up a "Hello, Pumpkin!" so that we can see our plugin in action.
+## Método Básico `on_load`
 
-Add this to the `on_load` method:
+Por enquanto, vamos implementar apenas um método `on_load` bem básico para conseguirmos ver que o plugin está funcionando.
+
+Aqui vamos configurar o logger interno do Pumpkin e exibir "Hello, Pumpkin!" para que possamos ver nosso plugin em ação.
+
+Adicione isso ao método `on_load`:
 :::code-group
+
 ```rs [lib.rs]
 #[plugin_method]
 async fn on_load(&mut self, server: &Context) -> Result<(), String> {
@@ -141,6 +164,7 @@ async fn on_load(&mut self, server: &Context) -> Result<(), String> {
     Ok(())
 }
 ```
+
 :::
 
-If we build the plugin again and start up the server, you should now see "Hello, Pumpkin!" somewhere in the log.
+Se compilarmos o plugin novamente e iniciarmos o servidor, agora você deverá ver "Hello, Pumpkin!" em algum lugar no log.

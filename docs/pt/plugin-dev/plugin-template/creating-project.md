@@ -1,24 +1,31 @@
-# Creating a new project
-Pumpkin plugins use the [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html) build system.
+# Criando um Novo Projeto
 
-The complete code for this plugin can be found as a [template on GitHub](https://github.com/vyPal/Hello-Pumpkin).
+Plugins Pumpkin utilizam o sistema de build [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html).
 
-## Initializing a new crate
-First we need to create a new project folder. You can do this by running this command in the folder you created:
+O código completo para este plugin pode ser encontrado como um [modelo no GitHub](https://github.com/vyPal/Hello-Pumpkin).
+
+## Inicializando um novo crate
+
+Primeiro, precisamos criar uma nova pasta para o projeto. Você pode fazer isso executando o seguinte comando na pasta que você criou:
+
 ```bash
-cargo new <project-name> --lib
+cargo new <nome-do-projeto> --lib
 ```
-This will create a folder with a couple files in it. The folder structure should look like this:
+
+Isso criará uma pasta com alguns arquivos dentro. A estrutura da pasta deverá ser parecida com esta:
+
 ```
 ├── Cargo.toml
 └── src
     └── lib.rs
 ```
 
-## Configuring the crate
-Since Pumpkin plugins are loaded at runtime as dynamic libraries, we need to tell Cargo to build this crate as one.
+## Configurando o crate
+
+Como os plugins Pumpkin são carregados em tempo de execução como bibliotecas dinâmicas, precisamos dizer ao Cargo para construir esse crate dessa forma.
 :::code-group
-```toml [Cargo.toml] 
+
+```toml [Cargo.toml]
 [package]
 name = "hello-pumpkin"
 version = "0.1.0"
@@ -29,10 +36,12 @@ crate-type = ["cdylib"]
 
 [dependencies]
 ```
+
 :::
 
-Next we need to add some basic dependencies. Since Pumpkin is still in early development, the internal crates aren't published to crates.io, so we need to tell Cargo to download the dependencies directly from GitHub.
+Em seguida, precisamos adicionar algumas dependências básicas. Como o Pumpkin ainda está em desenvolvimento inicial, os crates internos não estão publicados no crates.io, então precisamos dizer ao Cargo para baixar as dependências diretamente do GitHub.
 :::code-group
+
 ```toml [Cargo.toml]
 [package]
 name = "hello-pumpkin"
@@ -44,28 +53,31 @@ crate-type = ["cdylib"]
 
 [dependencies]
 // [!code ++:13]
-# This is the base crate with most high-level type definitions
-pumpkin = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin" } 
-# Other utilities used by Pumpkin (e.g. TextComponent, Vectors...)
+# Este é um crate base com a maioria das definições de tipos de alto nível
+pumpkin = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin" }
+# Outras utilidades usadas pelo Pumpkin (por exemplo, TextComponent, Vectors...)
 pumpkin-util = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-util" }
-# Macros for easier plugin development
+# Macros para facilitar o desenvolvimento de plugins
 pumpkin-api-macros = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-api-macros" }
 
-# A utility allowing plugins to work asynchronously
+# Uma utilidade permitindo que plugins funcionem de maneira assíncrona
 async-trait = "0.1"
-# A rust asynchronous runtime
+# Um runtime assíncrono em Rust
 tokio = "1.42"
 # Logging
 log = "0.4"
 ```
+
 :::
 
-For improved performance and smaller file sizes, we recommend enabling Link-Time Optimization (LTO).  
-Be aware that this will increase compilation time.
+Para melhorar o desempenho e reduzir o tamanho dos arquivos, recomendamos habilitar a Otimização em Tempo de Link (LTO).  
+Esteja ciente de que isso aumentará o tempo de compilação.
 :::code-group
+
 ```toml [Cargo.toml]
 [profile.release] // [!code ++:2]
 lto = true
 ```
+
 :::
-<small>Enables LTO only for release builds.</small>
+<small>Habilita LTO apenas para builds release.</small>

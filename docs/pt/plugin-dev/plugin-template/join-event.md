@@ -1,92 +1,105 @@
-# Writing a Event Handler
-Event handlers are one of the main functions of plugins. They allow a plugin to tap into the internal workings of the server and alter its behavior to perform some other action. For a simple example, we will implement a handler for the `player_join` event. 
+# Escrevendo um Gerenciador de Evento
 
-The Pumpkin plugin event system tries to copy the Bukkit/Spigot Event system, so that developers coming from there will have a easier time learning Pumpkin.
-However, Rust has different conceptions and rules, so it's not all like in Bukkit/Spigot.
-Rust doesn't have inheritance; instead it only has composition.
+Gerenciadores de eventos são uma das funções principais dos plugins. Eles permitem que um plugin acesse o funcionamento interno do servidor e altere seu comportamento para realizar alguma outra ação. Como exemplo simples, vamos implementar um manipulador para o evento `player_join`.
 
-The event system uses traits to dynamically handle some events: `Event`, `Cancellable`, `PlayerEvent` and etc.
-Cancellable can also be an Event, because it's a trait. (TODO: verify this)
+O sistema de eventos do Pumpkin tenta imitar o sistema de eventos do Bukkit/Spigot, para que desenvolvedores que vêm de lá tenham uma experiência mais fácil ao aprender o Pumpkin. No entanto, Rust tem concepções e regras diferentes, por isso nem tudo é como no Bukkit/Spigot. Rust não tem herança; em vez disso, ele só tem composição.
 
-## Implementing the Join Event
-Individual event handlers are just structs which implement the `EventHandler<T>` trait (where `T` is a specific event implementation).
+O sistema de eventos usa traits para gerenciar dinamicamente alguns eventos: `Event`, `Cancellable`, `PlayerEvent` e etc. `Cancellable` também pode ser um evento, porque é uma trait. (TODO: verificar isso)
 
-### What are blocking events?
-The Pumpkin plugin event system differentiates between two types of events: blocking and non-blocking. Each have their benefits:
-#### Blocking events
+## Implementando o Evento de Entrada
+
+Gerenciadores de eventos individuais são apenas structs que implementam a trait `EventHandler<T>` (onde `T` é uma implementação específica de evento).
+
+### O que são eventos bloqueantes?
+
+O sistema de eventos do Pumpkin diferencia dois tipos de eventos: bloqueantes e não bloqueantes. Cada um tem seus benefícios:
+
+#### Eventos bloqueantes
+
 ```diff
-Pros:
-+ Can modify the event (like editing the join message)
-+ Can cancel the event
-+ Have a priority system
-Cons:
-- Are executed in sequence
-- Can slow down the server if not implemented well
-```
-#### Non-blocking events
-```diff
-Pros:
-+ Are executed concurrently
-+ Are executed after all blocking events finish
-+ Can still do some modifications (anything that is behind a Mutex or RwLock)
-Cons:
-- Cannot cancel the event
-- Have no priority system
-- Allow for less control over the event
+Prós:
++ Podem modificar o evento (como editar a mensagem de entrada)
++ Podem cancelar o evento
++ Têm um sistema de prioridade
+Contras:
+- São executados em sequência
+- Podem diminuir a performance do servidor se não forem bem implementados
 ```
 
-### Writing a handler
-Since our main aim here is to change the welcome message that the player sees when they join a server, we will be choosing the blocking event type with a low priority.
+#### Eventos não bloqueantes
 
-Add this code above the `on_load` method:
+```diff
+Prós:
++ São executados simultaneamente
++ São executados depois de todos os eventos bloqueantes terminarem
++ Ainda podem fazer algumas modificações (qualquer coisa que esteja atrás de um Mutex ou RwLock)
+Contras:
+- Não podem cancelar o evento
+- Não têm sistema de prioridade
+- Oferecem menos controle sobre o evento
+```
+
+### Escrevendo um gerenciador
+
+Como nosso objetivo principal aqui é mudar a mensagem de boas-vindas que o jogador vê quando entra no servidor, vamos escolher o tipo de evento bloqueante com uma prioridade baixa.
+
+Adicione este código acima do método `on_load`:
 :::code-group
+
 ```rs [lib.rs]
-use async_trait::async_trait; // [!code ++:4]
+use async_trait::async_trait; // [!código ++:4]
 use pumpkin_api_macros::with_runtime;
 use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler};
 use pumpkin_util::text::{color::NamedColor, TextComponent};
 
-struct MyJoinHandler; // [!code ++:12]
+struct MyJoinHandler; // [!código ++:12]
 
 #[with_runtime(global)]
 #[async_trait]
 impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
     async fn handle_blocking(&self, event: &mut PlayerJoinEvent) {
         event.join_message =
-            TextComponent::text(format!("Welcome, {}!", event.player.gameprofile.name))
+            TextComponent::text(format!("Bem-vindo, {}!", event.player.gameprofile.name))
                 .color_named(NamedColor::Green);
     }
 }
 ```
+
 :::
 
-**Explanation**:
-- `struct MyJoinHandler;`: The struct for our event handler
-- `#[with_runtime(global)]`: Pumpkin uses the tokio async runtime, which acts in weird ways across the plugin boundary. Even though it is not necessary in this specific example, it is a good practice to wrap all async `impl`s that interact with async code with this macro.
-- `#[async_trait]`: Rust doesn't have full support for traits with async methods. So, we use the `async_trait` crate to allow this.
-- `async fn handle_blocking()`: Since we chose for this event to be blocking, it is necessary to implement the `handle_blocking()` method instead of the `handle()` method.
+**Explicação**:
 
-::: warning IMPORTANT
-It is important that the `#[with_runtime(global)]` macro is **above** the **`#[async_trait]`** macro. If they are in the opposite order, the `#[with_runtime(global)]` macro might not work.
+-   `struct MyJoinHandler;`: A struct para nosso gerenciador de evento.
+-   `#[with_runtime(global)]`: Pumpkin usa o runtime assíncrono tokio, que age de maneira estranha além dos limites do plugin. Embora não seja necessário neste exemplo específico, é uma boa prática envolver todos os `impl`s assíncronos que interagem com código assíncrono com essa macro.
+-   `#[async_trait]`: Rust não tem suporte completo para traits com métodos assíncronos. Então, usamos o crate `async_trait` para permitir isso.
+-   `async fn handle_blocking()`: Como escolhemos que este evento será bloqueante, é necessário implementar o método `handle_blocking()` ao invés do método `handle()`.
+
+::: warning IMPORTANTE
+É importante que a macro `#[with_runtime(global)]` esteja **acima** da macro **`#[async_trait]`**. Se estiverem na ordem oposta, a macro `#[with_runtime(global)]` pode não funcionar.
 :::
 
-### Registering the handler
-Now that we have written the event handler, we need to tell the plugin to use it. We can do that by adding a single line into the `on_load` method:
+### Registrando o gerenciador
+
+Agora que escrevemos o gerenciador de evento, precisamos informar ao plugin para usá-lo. Podemos fazer isso adicionando uma única linha no método `on_load`:
+
 :::code-group
+
 ```rs [lib.rs]
-use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler, EventPriority}; // [!code ++]
-use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler}; // [!code --]
+use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler, EventPriority}; // [!código ++]
+use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler}; // [!código --]
 
 #[plugin_method]
 async fn on_load(&mut self, server: &Context) -> Result<(), String> {
     pumpkin::init_log!();
 
-    log::info!("Hello, Pumpkin!");
+    log::info!("Olá, Pumpkin!");
 
-    server.register_event(Arc::new(MyJoinHandler), EventPriority::Lowest, true).await; // [!code ++]
+    server.register_event(Arc::new(MyJoinHandler), EventPriority::Lowest, true).await; // [!código ++]
 
     Ok(())
 }
 ```
+
 :::
-Now if we build the plugin and join the server, we should see a green "Welcome" message with our username!
+
+Agora, se compilarmos o plugin e entrarmos no servidor, devemos ver uma mensagem de boas-vindas verde com o nosso nome de usuário!
