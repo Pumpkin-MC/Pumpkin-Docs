@@ -50,9 +50,15 @@ export const en = defineConfig({
                         text: "Networking",
                         link: "/developer/networking/networking",
                         items: [
-                            { text: "Authentication", link: "/developer/networking/authentication" },
-                            { text: "RCON", link: "/developer/networking/rcon" },
-                        ]
+                            {
+                                text: "Authentication",
+                                link: "/developer/networking/authentication",
+                            },
+                            {
+                                text: "RCON",
+                                link: "/developer/networking/rcon",
+                            },
+                        ],
                     },
                     { text: "World", link: "developer/world" },
                     { text: "Mobile dev", link: "developer/mobile" },
@@ -80,6 +86,10 @@ export const en = defineConfig({
                             {
                                 text: "Join Event",
                                 link: "/plugin-dev/plugin-template/join-event",
+                            },
+                            {
+                                text: "Rock-Paper-Scissors Command",
+                                link: "/plugin-dev/plugin-template/rock-paper-scissors",
                             },
                         ],
                     },
@@ -119,5 +129,5 @@ export const en = defineConfig({
             },
         },
         outline: "deep",
-    }
+    },
 });
