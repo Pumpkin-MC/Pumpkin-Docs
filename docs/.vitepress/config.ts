@@ -1,6 +1,7 @@
 import { defineConfig } from "vitepress";
 import { en } from "./en";
 import { nl } from "./nl";
+import { pt } from "./pt";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -17,6 +18,9 @@ export default defineConfig({
         },
         nl: {
             label: "Dutch", ...nl
+        },
+        pt: {
+            label: "Português", ...pt
         }
     },
 
