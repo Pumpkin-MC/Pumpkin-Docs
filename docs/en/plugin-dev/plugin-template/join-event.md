@@ -41,9 +41,12 @@ Since our main aim here is to change the welcome message that the player sees wh
 Add this code above the `on_load` method:
 :::code-group
 ```rs [lib.rs]
-use async_trait::async_trait; // [!code ++:4]
+use async_trait::async_trait; // [!code ++:7]
 use pumpkin_api_macros::with_runtime;
-use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler};
+use pumpkin::{
+    plugin::{player::player_join::PlayerJoinEvent, Context, EventHandler, EventPriority},
+    server::Server,
+};
 use pumpkin_util::text::{color::NamedColor, TextComponent};
 
 struct MyJoinHandler; // [!code ++:12]
@@ -51,7 +54,7 @@ struct MyJoinHandler; // [!code ++:12]
 #[with_runtime(global)]
 #[async_trait]
 impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
-    async fn handle_blocking(&self, event: &mut PlayerJoinEvent) {
+    async fn handle_blocking(&self, _server: &Arc<Server>, event: &mut PlayerJoinEvent) {
         event.join_message =
             TextComponent::text(format!("Welcome, {}!", event.player.gameprofile.name))
                 .color_named(NamedColor::Green);
@@ -74,8 +77,14 @@ It is important that the `#[with_runtime(global)]` macro is **above** the **`#[a
 Now that we have written the event handler, we need to tell the plugin to use it. We can do that by adding a single line into the `on_load` method:
 :::code-group
 ```rs [lib.rs]
-use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler, EventPriority}; // [!code ++]
-use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler}; // [!code --]
+use pumpkin::{
+    plugin::{player::player_join::PlayerJoinEvent, Context, EventHandler, EventPriority}, // [!code ++]
+    server::Server,
+};
+use pumpkin::{
+    plugin::{player::player_join::PlayerJoinEvent, Context, EventHandler}, // [!code --]
+    server::Server,
+};
 
 #[plugin_method]
 async fn on_load(&mut self, server: &Context) -> Result<(), String> {
