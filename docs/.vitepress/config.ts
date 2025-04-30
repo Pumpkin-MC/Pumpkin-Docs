@@ -2,6 +2,7 @@ import { defineConfig } from "vitepress";
 import { en } from "./en";
 import { nl } from "./nl";
 import { pt } from "./pt";
+import { zhCN } from "./zh_cn";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -21,7 +22,10 @@ export default defineConfig({
         },
         pt: {
             label: "Português", ...pt
-        }
+        },
+        zh_cn: {
+            label: "简体中文", ...zhCN
+        },
     },
 
     head: [
