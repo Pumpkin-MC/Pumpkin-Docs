@@ -167,7 +167,7 @@ player.open_handled_screen(MyScreenFactory, Some(inventory)).await;
 
 You can create custom screen handlers by implementing the `ScreenHandler` trait.
 
-Implementing a custom `ScreenHandler` gives you more flexability and gives you the ability to create screens for other purposes than just being a inventory. To do this you could make a new struct that implements the Slot trait, `NormalSlot` is a slot that comes with pumpkin that just acts as a index into a inventory and has no restrictions.
+Implementing a custom `ScreenHandler` gives you more flexibility and gives you the ability to create screens for other purposes than just being a inventory. To do this you could make a new struct that implements the Slot trait, `NormalSlot` is a slot that comes with pumpkin that just acts as a index into a inventory and has no restrictions.
 
 TODO: Custom slot example
 
