@@ -26,8 +26,8 @@ features:
     title: Written in Rust
     details: Pumpkin is written 100% in Rust, ensuring memory safety and unmatched performance.
   - icon: 📋
-    title: Feature complete
-    details: With all vanilla features supported, you will have no issues.
+    title: Vanilla features
+    details: Aiming to support all vanilla features, with active development ongoing.
   - icon: ⚙️
     title: Flexibility
     details: Highly configurable, with the ability to disable unnecessary features.
