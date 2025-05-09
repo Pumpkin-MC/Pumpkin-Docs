@@ -3,6 +3,23 @@
 ## Overview
 The inventory system in Pumpkin provides a flexible way to manage item storage and manipulation. This guide explains how to create and implement custom inventories.
 
+## Table of Contents
+- [Opening a custom inventory](#opening-a-custom-inventory)
+  - [Overview](#overview)
+  - [Table of Contents](#table-of-contents)
+  - [Basic Inventory Implementation](#basic-inventory-implementation)
+  - [Required Traits](#required-traits)
+    - [Inventory Trait](#inventory-trait)
+    - [Clearable Trait](#clearable-trait)
+  - [Screen Handlers](#screen-handlers)
+    - [Using Generic Screen Handlers](#using-generic-screen-handlers)
+    - [Creating Custom Screen Handlers](#creating-custom-screen-handlers)
+    - [Supported Window Types](#supported-window-types)
+  - [Best Practices](#best-practices)
+  - [Examples](#examples)
+    - [Basic Inventory Usage](#basic-inventory-usage)
+    - [Opening an Inventory Screen](#opening-an-inventory-screen)
+
 ## Basic Inventory Implementation
 
 The `BasicInventory` struct provides a standard implementation of an inventory with 27 slots. Here's how to implement your own inventory:
@@ -21,7 +38,7 @@ pub struct BasicInventory {
 }
 ```
 
-## Required Trait Implementations
+## Required Traits
 
 ### Inventory Trait
 
@@ -72,7 +89,7 @@ impl Inventory for BasicInventory {
 
 ### Clearable Trait
 
-The `Clearable` trait provides functionality to empty an inventory, this is required to be implemented for Inventory to be implemented:
+The `Clearable` trait provides functionality to empty an inventory. This is required to be implemented for the `Inventory` trait:
 
 ```rust
 #[async_trait]
@@ -83,38 +100,6 @@ impl Clearable for YourInventory {
         }
     }
 }
-```
-
-## Key Features
-
-1. **Thread Safety**: All inventory operations are thread-safe using `Arc<Mutex<>>` for item stacks.
-2. **Async Operations**: All inventory operations are asynchronous to prevent blocking.
-3. **Stack Management**: Built-in support for splitting and managing item stacks.
-4. **Empty State Handling**: Easy checking for empty inventories and slots.
-
-## Best Practices
-
-1. Always use the provided `split_stack` function for removing partial stacks to ensure proper item handling.
-2. Implement proper error handling for slot bounds checking in your inventory implementation.
-3. Always remember to drop a stack lock before using something like inventory.set_stack(), otherwise you will end up with a deadlock
-4. Use the `ItemStack::EMPTY` constant for clearing slots or initializing empty inventories.
-
-## Example Usage
-
-```rust
-// Create a new inventory
-let inventory = BasicInventory {
-    items: [(); 27].map(|_| Arc::new(Mutex::new(ItemStack::EMPTY))),
-};
-
-// Add items to a slot
-inventory.set_stack(0, ItemStack::new(1, &Items::OAK_LOG)).await;
-
-// Remove items from a slot
-let removed = inventory.remove_stack(0).await;
-
-// Check if inventory is empty
-let is_empty = inventory.is_empty().await;
 ```
 
 ## Screen Handlers
@@ -152,24 +137,17 @@ impl ScreenHandlerFactory for MyScreenFactory {
         TextComponent::text("container.barrel")
     }
 }
-
-To open the inventory screen for a player:
-
-```rust
-player.open_handled_screen(MyScreenFactory {
-    inventory: inventory.clone(),
-}).await;
 ```
 
 ### Creating Custom Screen Handlers
 
-You can create custom screen handlers by implementing the `ScreenHandler` trait.
+You can create custom screen handlers by implementing the `ScreenHandler` trait. This gives you more flexibility and allows you to create screens for purposes other than just being an inventory.
 
-Implementing a custom `ScreenHandler` gives you more flexibility and gives you the ability to create screens for other purposes than just being a inventory. To do this you could make a new struct that implements the Slot trait, `NormalSlot` is a slot that comes with pumpkin that just acts as a index into a inventory and has no restrictions.
+To create a custom screen handler, you can make a new struct that implements the `Slot` trait. `NormalSlot` is a slot that comes with Pumpkin that just acts as an index into an inventory and has no restrictions.
 
 TODO: Custom slot example
 
-Here's an example the source code of the generic screen handler.
+Here's an example of the source code for the generic screen handler:
 
 ```rust
 use std::{any::Any, sync::Arc};
@@ -218,7 +196,6 @@ impl GenericContainerScreenHandler {
             behaviour: ScreenHandlerBehaviour::new(sync_id, Some(screen_type)),
         };
 
-        //inventory.onOpen(player);
         handler.add_inventory_slots();
         let player_inventory: Arc<dyn Inventory> = player_inventory.clone();
         handler.add_player_slots(&player_inventory);
@@ -242,7 +219,6 @@ impl GenericContainerScreenHandler {
 impl ScreenHandler for GenericContainerScreenHandler {
     async fn on_closed(&mut self, player: &dyn InventoryPlayer) {
         self.default_on_closed(player).await;
-        //TODO: self.inventory.on_closed(player).await;
     }
 
     fn as_any(&self) -> &dyn Any {
@@ -301,14 +277,9 @@ impl ScreenHandler for GenericContainerScreenHandler {
 }
 ```
 
-### Key Components
+### Supported Window Types
 
-1. **ScreenHandlerFactory**: Defines how to create screen handlers for your inventory
-2. **ScreenHandler**: Implements the behavior of the inventory screen
-3. **ScreenHandlerBehaviour**: Manages the state and slots of the screen, this is used internally to implement more defaults for the ScreenHandler trait
-4. **WindowType**: Defines the type of window to display
-
-You can only open inventories that are supported by the client, currently these are
+You can only open inventories that are supported by the client. Currently, these are:
 
 ```rust
 pub enum WindowType {
@@ -340,15 +311,44 @@ pub enum WindowType {
 }
 ```
 
-### Best Practices
+## Best Practices
 
-1. Use the generic screen handlers when possible for standard inventory layouts
-2. Implement proper error handling for slot operations
-3. Consider the player's inventory when implementing quick move functionality
-4. Handle inventory closing properly to prevent item loss
-5. Use appropriate window types for different inventory sizes
+1. **Thread Safety**
+   - Always use the provided `split_stack` function for removing partial stacks
+   - Implement proper error handling for slot bounds checking
+   - Remember to drop stack locks before using `inventory.set_stack()` to prevent deadlocks
 
-### Example Usage
+2. **Inventory Management**
+   - Use `ItemStack::EMPTY` constant for clearing slots or initializing empty inventories
+   - Implement proper error handling for slot operations
+   - Consider the player's inventory when implementing quick move functionality
+
+3. **Screen Handler Implementation**
+   - Use generic screen handlers when possible for standard inventory layouts
+   - Handle inventory closing properly to prevent item loss
+   - Use appropriate window types for different inventory sizes
+
+## Examples
+
+### Basic Inventory Usage
+
+```rust
+// Create a new inventory
+let inventory = BasicInventory {
+    items: [(); 27].map(|_| Arc::new(Mutex::new(ItemStack::EMPTY))),
+};
+
+// Add items to a slot
+inventory.set_stack(0, ItemStack::new(1, &Items::OAK_LOG)).await;
+
+// Remove items from a slot
+let removed = inventory.remove_stack(0).await;
+
+// Check if inventory is empty
+let is_empty = inventory.is_empty().await;
+```
+
+### Opening an Inventory Screen
 
 ```rust
 // Create a screen factory
