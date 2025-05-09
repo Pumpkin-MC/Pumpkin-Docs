@@ -290,56 +290,18 @@ impl ScreenHandler for GenericContainerScreenHandler {
 }
 ```
 
-### Supported Window Types
-
-You can only open inventories that are supported by the client. Currently, these are:
-
-```rust
-pub enum WindowType {
-    Generic9x1,
-    Generic9x2,
-    Generic9x3,
-    Generic9x4,
-    Generic9x5,
-    Generic9x6,
-    Generic3x3,
-    Crafter3x3,
-    Anvil,
-    Beacon,
-    BlastFurnace,
-    BrewingStand,
-    Crafting,
-    Enchantment,
-    Furnace,
-    Grindstone,
-    Hopper,
-    Lectern,
-    Loom,
-    Merchant,
-    ShulkerBox,
-    Smithing,
-    Smoker,
-    CartographyTable,
-    Stonecutter,
-}
-```
-
 ## Best Practices
 
 1. **Thread Safety**
-   - Always use the provided `split_stack` function for removing partial stacks
    - Implement proper error handling for slot bounds checking
-   - Remember to drop stack locks before using `inventory.set_stack()` to prevent deadlocks
+   - Remember to drop stack locks before using `inventory.set_stack()` or `slot.get_cloned_stack()` to prevent deadlocks
 
 2. **Inventory Management**
    - Use `ItemStack::EMPTY` constant for clearing slots or initializing empty inventories
-   - Implement proper error handling for slot operations
-   - Consider the player's inventory when implementing quick move functionality
 
 3. **Screen Handler Implementation**
-   - Use generic screen handlers when possible for standard inventory layouts
    - Handle inventory closing properly to prevent item loss
-   - Use appropriate window types for different inventory sizes
+   - Make sure slots add up to the amount of slots in that window type
 
 ## Examples
 
