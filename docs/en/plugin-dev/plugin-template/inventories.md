@@ -130,7 +130,9 @@ use pumpkin_inventory::generic_container_screen_handler::create_generic_9x3;
 use pumpkin_inventory::player::player_inventory::PlayerInventory;
 use pumpkin_inventory::screen_handler::{InventoryPlayer, ScreenHandler, ScreenHandlerFactory};
 
-struct MyScreenFactory;
+struct MyScreenFactory {
+    inventory: Arc<dyn Inventory>,
+}
 
 impl ScreenHandlerFactory for MyScreenFactory {
     fn create_screen_handler(
@@ -138,29 +140,25 @@ impl ScreenHandlerFactory for MyScreenFactory {
         sync_id: u8,
         player_inventory: &Arc<PlayerInventory>,
         _player: &dyn InventoryPlayer,
-        inventory: Option<Arc<dyn Inventory>>,
     ) -> Option<Arc<Mutex<dyn ScreenHandler>>> {
-        if let Some(inventory) = inventory {
-            Some(Arc::new(Mutex::new(create_generic_9x3(
-                sync_id,
-                player_inventory,
-                inventory,
-            ))))
-        } else {
-            None
-        }
+        Some(Arc::new(Mutex::new(create_generic_9x3(
+            sync_id,
+            player_inventory,
+            self.inventory.clone(),
+        ))))
     }
 
     fn get_display_name(&self) -> TextComponent {
         TextComponent::text("container.barrel")
     }
 }
-```
 
 To open the inventory screen for a player:
 
 ```rust
-player.open_handled_screen(MyScreenFactory, Some(inventory)).await;
+player.open_handled_screen(MyScreenFactory {
+    inventory: inventory.clone(),
+}).await;
 ```
 
 ### Creating Custom Screen Handlers
@@ -354,10 +352,12 @@ pub enum WindowType {
 
 ```rust
 // Create a screen factory
-let factory = MyScreenFactory;
+let factory = MyScreenFactory {
+    inventory: inventory.clone(),
+};
 
 // Open the inventory for a player
-player.open_handled_screen(factory, Some(inventory)).await;
+player.open_handled_screen(factory).await;
 
 // The screen will automatically handle:
 // - Item movement between slots
