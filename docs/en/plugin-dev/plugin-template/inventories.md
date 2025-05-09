@@ -18,7 +18,6 @@ The inventory system in Pumpkin provides a flexible way to manage item storage a
   - [Best Practices](#best-practices)
   - [Examples](#examples)
     - [Basic Inventory Usage](#basic-inventory-usage)
-    - [Opening an Inventory Screen](#opening-an-inventory-screen)
 
 ## Basic Inventory Implementation
 
@@ -137,6 +136,20 @@ impl ScreenHandlerFactory for MyScreenFactory {
         TextComponent::translate("container.barrel", vec![])
     }
 }
+
+// Create a screen factory
+let factory = MyScreenFactory {
+    inventory: inventory.clone(),
+};
+
+// Open the inventory for a player
+player.open_handled_screen(factory).await;
+
+// The screen will automatically handle:
+// - Item movement between slots
+// - Quick move functionality
+// - Player inventory interaction
+// - Screen closing
 ```
 
 ### Creating Custom Screen Handlers
@@ -346,22 +359,4 @@ let removed = inventory.remove_stack(0).await;
 
 // Check if inventory is empty
 let is_empty = inventory.is_empty().await;
-```
-
-### Opening an Inventory Screen
-
-```rust
-// Create a screen factory
-let factory = MyScreenFactory {
-    inventory: inventory.clone(),
-};
-
-// Open the inventory for a player
-player.open_handled_screen(factory).await;
-
-// The screen will automatically handle:
-// - Item movement between slots
-// - Quick move functionality
-// - Player inventory interaction
-// - Screen closing
 ```
