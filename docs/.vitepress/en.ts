@@ -91,6 +91,10 @@ export const en = defineConfig({
                                 text: "Rock-Paper-Scissors Command",
                                 link: "/plugin-dev/plugin-template/rock-paper-scissors",
                             },
+                            {
+                                text: "Inventories",
+                                link: "/plugin-dev/plugin-template/inventories",
+                            },
                         ],
                     },
                 ],
