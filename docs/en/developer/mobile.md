@@ -1,4 +1,4 @@
-# Pumpking Development on Mobile
+# Pumpkin Development on Mobile
 
 If you are a mobile user and want to edit the source code, you can do this!
 (This page was written on Android using Helix.)
