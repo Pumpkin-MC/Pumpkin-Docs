@@ -62,7 +62,7 @@ Whether wrong password attempts should be logged to console or not.
 :::code-group
 ```toml [features.toml] {2}
 [rcon.logging]
-log_logged_successfully = true
+log_wrong_password = true
 ```
 :::
 
