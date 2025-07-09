@@ -19,8 +19,6 @@ export const zhCN = defineConfig({
             {
                 text: "关于",
                 items: [
-                    { text: "介绍", link: "/zh_cn/about/introduction" },
-                    { text: "快速开始", link: "/zh_cn/about/quick-start" },
                     { text: "性能基准", link: "/zh_cn/about/benchmarks" },
                 ],
             },

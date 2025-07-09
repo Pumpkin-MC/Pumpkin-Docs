@@ -19,8 +19,6 @@ export const nl = defineConfig({
             {
                 text: "Over",
                 items: [
-                    { text: "Introductie", link: "/nl/about/introduction" },
-                    { text: "Snelle start", link: "/nl/about/quick-start" },
                     { text: "Benchmarktests", link: "/nl/about/benchmarks" },
                 ],
             },

@@ -19,8 +19,6 @@ export const pt = defineConfig({
             {
                 text: "Sobre",
                 items: [
-                    { text: "Introdução", link: "/pt/about/introduction" },
-                    { text: "Primeiros Passos", link: "/pt/about/quick-start" },
                     { text: "Benchmark", link: "/pt/about/benchmarks" },
                 ],
             },

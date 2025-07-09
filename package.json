@@ -6,8 +6,8 @@
     "preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "@types/bun": "^1.2.2",
+    "@types/bun": "^1.2.18",
     "vitepress": "^1.6.3",
-    "vue": "^3.5.13"
+    "vue": "^3.5.17"
   }
 }
