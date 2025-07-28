@@ -11,8 +11,8 @@ export const en = defineConfig({
         },
         nav: [
             {
-                text: "Documentation",
-                link: "/about/introduction",
+                text: "Home",
+                link: "https://pumpkinmc.org/",
             },
         ],
         sidebar: [
