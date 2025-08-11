@@ -45,11 +45,9 @@ Você pode encontrar todos os pacotes do Minecraft Java em [Minecraft Wiki](http
 2. Em seguida, você deve deixar claro que sua struct representa um pacote. Isso automaticamente obterá o ID do pacote do arquivo JSON de pacotes.
 
 ```rust
-// Para pacotes clientbound:
-#[client_packet("play:disconnect")]
+use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
 
-// Para pacotes serverbound:
-#[server_packet("login:move_player_pos")]
+#[packet(PLAY_DISCONNECT)]
 ```
 
 3. Agora você pode criar a `struct`.
@@ -97,7 +95,7 @@ impl CPlayDisconnect {
 
 ```rust
 #[derive(Serialize)]
-#[client_packet("play:disconnect")]
+#[packet(PLAY_DISCONNECT)]
 pub struct CPlayDisconnect {
     reason: TextComponent,
 }
@@ -109,7 +107,7 @@ impl CPlayDisconnect {
 }
 
 #[derive(Deserialize)]
-#[server_packet("login:move_player_pos")]
+#[packet(PLAY_MOVE_PLAYER_POS)]
 pub struct SPlayerPosition {
     pub x: f64,
     pub feet_y: f64,

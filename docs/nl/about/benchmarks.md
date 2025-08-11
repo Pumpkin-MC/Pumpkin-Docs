@@ -7,7 +7,7 @@ Hier worden veelvoorkomende Minecraft-servers vergeleken met Pumpkin.
 > Het is ook belangrijk om te overwegen dat andere servers jaren hebben gehad voor optimalisatie.
 > Vanilla forks, die de volledige vanilla-logica niet hoeven te herschrijven, kunnen zich uitsluitend richten op optimalisaties.
 
-![Screenshot From 2024-10-15 16-42-53](https://github.com/user-attachments/assets/e08fbb00-42fe-4479-a03b-11bb6886c91a)
+![A screenshot showing 9 Minecraft game windows](https://github.com/user-attachments/assets/e08fbb00-42fe-4479-a03b-11bb6886c91a)
 
 ## Specificaties
 

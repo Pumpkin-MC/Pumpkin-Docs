@@ -1,6 +1,6 @@
-### Common Issues
+# Common Issues
 
-1.  ### Failed to verify username
+1. ## Failed to verify username
 
     **Issue:** Some players reported having issues logging into the server, including encountering a "Failed to verify username" error.
 

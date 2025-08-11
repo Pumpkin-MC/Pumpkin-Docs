@@ -28,7 +28,7 @@ Pumpkin 协议中的数据包按功能和状态组织。
 
 ### Minecraft 协议
 
-您可以在 https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol 找到所有 Minecraft Java 数据包。在那里，您还可以看到它们处于哪个[状态](#状态)。
+您可以在 <https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol> 找到所有 Minecraft Java 数据包。在那里，您还可以看到它们处于哪个[状态](#状态)。
 您还可以看到数据包的所有信息，根据它们是服务器绑定还是客户端绑定，我们可以读取或写入这些信息。
 
 ### 添加数据包
@@ -46,11 +46,9 @@ Pumpkin 协议中的数据包按功能和状态组织。
 2. 接下来，您必须让系统知道您的结构表示一个数据包。这会自动从 JSON 数据包文件中获取数据包 ID。
 
 ```rust
-// 对于客户端绑定数据包：
-#[client_packet("play:disconnect")]
+use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
 
-// 对于服务器绑定数据包：
-#[server_packet("login:move_player_pos")]
+#[packet(PLAY_DISCONNECT)]
 ```
 
 3. 现在您可以创建 `struct`。
@@ -59,9 +57,9 @@ Pumpkin 协议中的数据包按功能和状态组织。
 > 请以 "C" 或 "S" 开始数据包名称，分别代表"客户端绑定"或"服务器绑定"。
 > 此外，如果这是一个可以在多个[状态](#状态)下发送的数据包，请将状态添加到名称中。例如，有 3 个不同的断开连接数据包。
 >
-> -   `CLoginDisconnect`
-> -   `CConfigDisconnect`
-> -   `CPlayDisconnect`
+> - `CLoginDisconnect`
+> - `CConfigDisconnect`
+> - `CPlayDisconnect`
 
 在您的数据包结构中创建字段，以表示将要发送的数据。
 
@@ -98,7 +96,7 @@ impl CPlayDisconnect {
 
 ```rust
 #[derive(Serialize)]
-#[client_packet("play:disconnect")]
+#[packet(PLAY_DISCONNECT)]
 pub struct CPlayDisconnect {
     reason: TextComponent,
 }
@@ -110,7 +108,7 @@ impl CPlayDisconnect {
 }
 
 #[derive(Deserialize)]
-#[server_packet("login:move_player_pos")]
+#[packet(PLAY_MOVE_PLAYER_POS)]
 pub struct SPlayerPosition {
     pub x: f64,
     pub feet_y: f64,
@@ -150,15 +148,15 @@ Pumpkin 将 `Client`（客户端）和 `Player`（玩家）分开分类。不在
 
 **客户端**
 
--   只能处于状态：Status、Login、Transfer、Config
--   不是活动实体
--   资源消耗小
+- 只能处于状态：Status、Login、Transfer、Config
+- 不是活动实体
+- 资源消耗小
 
 **玩家**
 
--   只能处于 Play 状态
--   是世界中的一个活动实体
--   有更多数据并消耗更多资源
+- 只能处于 Play 状态
+- 是世界中的一个活动实体
+- 有更多数据并消耗更多资源
 
 #### 发送数据包
 
@@ -198,4 +196,4 @@ client.send_packet(&CStatusResponse::new("{ description: "A Description"}"));
             );
             }
     };
-``` 
+```

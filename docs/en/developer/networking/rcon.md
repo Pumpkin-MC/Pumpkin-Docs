@@ -1,25 +1,25 @@
-### RCON
+# RCON (Remote Console)
 
-### What is RCON
+## What is RCON
 
 RCON (Remote Console) is a protocol designed by Valve to allow administrators to control and manage game servers remotely. It provides a way to execute commands on a server from a different location, such as a phone or a separate computer.
 
-### Why RCON
+## Why RCON
 
 - **Convenience:** Manage your server from anywhere with an internet connection.
 - **Flexibility:** Execute commands without needing to be physically present at the server's location.
 - **Efficiency:** Automate tasks and streamline server management.
 
-### SSH vs RCON
+## SSH vs RCON
 
-**SSH**
+### SSH
 
 - Offers strong encryption to protect data transmitted between the client and server.
 - Primarily designed for secure remote login and execution of commands on a remote machine.
 - Commonly used for managing Linux/Unix systems, configuring networks, and running scripts.
 - Provides a shell-like environment, allowing you to execute various commands and interact with the remote system.
 
-**RCON**
+### RCON
 
 - Specifically designed for remote administration of game servers, allowing you to control and manage the server's settings and operations.
 - Typically less secure than SSH, as it often relies on plain text passwords.

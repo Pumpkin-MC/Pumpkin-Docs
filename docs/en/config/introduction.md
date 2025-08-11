@@ -16,7 +16,7 @@ Pumpkin aims to support the latest Minecraft Version. If you want to host a Pump
 - Make sure to allow proxy connections.
 - Pumpkin and ViaProxy have no connection; don't submit issues regarding their code. Furthermore, this is a 3rd party proxy and Pumpkin does not take any responsibility for the good or the bad.
 
-#### Key Features:
+#### Key Features
 
 - Extensive Customization: Configure server settings, player behavior, world generation, and more.
 - Performance Optimization: Optimize server performance through configuration tweaks.

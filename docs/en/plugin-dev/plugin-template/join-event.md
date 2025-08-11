@@ -1,5 +1,6 @@
 # Writing a Event Handler
-Event handlers are one of the main functions of plugins. They allow a plugin to tap into the internal workings of the server and alter its behavior to perform some other action. For a simple example, we will implement a handler for the `player_join` event. 
+
+Event handlers are one of the main functions of plugins. They allow a plugin to tap into the internal workings of the server and alter its behavior to perform some other action. For a simple example, we will implement a handler for the `player_join` event.
 
 The Pumpkin plugin event system tries to copy the Bukkit/Spigot Event system, so that developers coming from there will have a easier time learning Pumpkin.
 However, Rust has different conceptions and rules, so it's not all like in Bukkit/Spigot.
@@ -9,11 +10,15 @@ The event system uses traits to dynamically handle some events: `Event`, `Cancel
 Cancellable can also be an Event, because it's a trait. (TODO: verify this)
 
 ## Implementing the Join Event
+
 Individual event handlers are just structs which implement the `EventHandler<T>` trait (where `T` is a specific event implementation).
 
 ### What are blocking events?
+
 The Pumpkin plugin event system differentiates between two types of events: blocking and non-blocking. Each have their benefits:
+
 #### Blocking events
+
 ```diff
 Pros:
 + Can modify the event (like editing the join message)
@@ -23,7 +28,9 @@ Cons:
 - Are executed in sequence
 - Can slow down the server if not implemented well
 ```
+
 #### Non-blocking events
+
 ```diff
 Pros:
 + Are executed concurrently
@@ -36,10 +43,12 @@ Cons:
 ```
 
 ### Writing a handler
+
 Since our main aim here is to change the welcome message that the player sees when they join a server, we will be choosing the blocking event type with a low priority.
 
 Add this code above the `on_load` method:
 :::code-group
+
 ```rs [lib.rs]
 use async_trait::async_trait; // [!code ++:7]
 use pumpkin_api_macros::with_runtime;
@@ -61,9 +70,11 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
     }
 }
 ```
+
 :::
 
 **Explanation**:
+
 - `struct MyJoinHandler;`: The struct for our event handler
 - `#[with_runtime(global)]`: Pumpkin uses the tokio async runtime, which acts in weird ways across the plugin boundary. Even though it is not necessary in this specific example, it is a good practice to wrap all async `impl`s that interact with async code with this macro.
 - `#[async_trait]`: Rust doesn't have full support for traits with async methods. So, we use the `async_trait` crate to allow this.
@@ -74,8 +85,10 @@ It is important that the `#[with_runtime(global)]` macro is **above** the **`#[a
 :::
 
 ### Registering the handler
+
 Now that we have written the event handler, we need to tell the plugin to use it. We can do that by adding a single line into the `on_load` method:
 :::code-group
+
 ```rs [lib.rs]
 use pumpkin::{
     plugin::{player::player_join::PlayerJoinEvent, Context, EventHandler, EventPriority}, // [!code ++]
@@ -97,5 +110,6 @@ async fn on_load(&mut self, server: &Context) -> Result<(), String> {
     Ok(())
 }
 ```
+
 :::
 Now if we build the plugin and join the server, we should see a green "Welcome" message with our username!

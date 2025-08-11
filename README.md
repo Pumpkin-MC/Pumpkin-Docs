@@ -1,4 +1,5 @@
-### Development
+# Development
+
 1. Install [Bun](https://bun.sh)
 2. Download dependencies by running `bun install`
 3. Edit the documentation

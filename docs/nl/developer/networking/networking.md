@@ -39,10 +39,12 @@ You can also can see all the information the Packets have, which we can either W
 #[derive(Serialize)]
 ```
 
-2. Next, you have set the packet using the client_packet macro, This uses the Packet ID automatically sets the Packet ID from the JSON packets file
+2. Next, you have set the packet using the packet macro
 
 ```rust
-#[client_packet("play:disconnect")]
+use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
+
+#[packet(PLAY_DISCONNECT)]
 ```
 
 3. Now you can create the Struct.
@@ -85,7 +87,7 @@ impl CPlayDisconnect {
 
 ```rust
 #[derive(Serialize)]
-#[client_packet("play:disconnect")]
+#[packet(PLAY_DISCONNECT)]
 pub struct CPlayDisconnect {
     reason: TextComponent,
 }
@@ -112,11 +114,13 @@ impl CPlayDisconnect {
 
 ### Adding a Serverbound Packet
 
-1. Adding a Packet is easy. First, you have to derive serde Deserialize for packets. You should also use the `server_packet` macro to automatically parse the Packet ID
+1. Adding a Packet is easy. First, you have to derive serde Deserialize for packets. 
 
 ```rust
+use pumpkin_data::packet::serverbound::PLAY_MOVE_PLAYER_POS;
+
 #[derive(Deserialize)]
-#[server_packet("login:move_player_pos")]
+#[packet(PLAY_MOVE_PLAYER_POS)]
 ```
 
 2. Now you can create the Struct.
@@ -145,7 +149,7 @@ pub struct SPlayerPosition {
 
 ```rust
 #[derive(Deserialize)]
-#[server_packet("login:move_player_pos")]
+#[packet(PLAY_MOVE_PLAYER_POS)]
 pub struct SPlayerPosition {
     pub x: f64,
     pub feet_y: f64,

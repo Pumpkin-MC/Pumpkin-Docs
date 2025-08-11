@@ -7,19 +7,19 @@ Here, common Minecraft server software is compared against Pumpkin.
 > It's also important to consider that other servers have had years to optimize.
 > Vanilla forks, which don’t need to rewrite the entire Vanilla logic, can focus exclusively on optimizations.
 
-![Screenshot From 2024-10-15 16-42-53](https://github.com/user-attachments/assets/e08fbb00-42fe-4479-a03b-11bb6886c91a)
+![A screenshot showing 9 Minecraft game windows](https://github.com/user-attachments/assets/e08fbb00-42fe-4479-a03b-11bb6886c91a)
 
 ## Specifications
 
-#### Technical
+### Technical
 
-**Software**
+#### Software
 
 - Distribution: Manjaro Linux
 - Architecture: x86_64 (64-bit)
 - Kernel Version: 6.11.3-arch1-1
 
-**Hardware**
+#### Hardware
 
 - Motherboard: MAG B650 TOMAHAWK WIFI
 - CPU: AMD Ryzen 7600X 6-Core
@@ -27,12 +27,12 @@ Here, common Minecraft server software is compared against Pumpkin.
 - Storage: Samsung 990 PRO 1TB PCIe 4.0 M.2 SSD
 - Cooling: be quiet Dark Rock Elite
 
-**Rust**
+#### Rust
 
 - Toolchain: stable-x86_64-unknown-linux-gnu (1.81.0)
 - Rust Compiler: rustc 1.81.0 (eeb90cda1 2024-09-04)
 
-**Java**
+#### Java
 
 - JDK Version: OpenJDK 23 64-Bit 2024-09-17
 - JRE Version: OpenJDK Runtime Environment (build 23+37)
@@ -44,7 +44,7 @@ Here, common Minecraft server software is compared against Pumpkin.
 - View distance: 10
 - Simulated distance: 10
 - Online mode: false
-- Rcon: false
+- RCON: false
 
 <sub><sup>Online mode was disabled for easier testing with non-premium accounts.</sup></sub>
 
@@ -80,7 +80,8 @@ Run args:
 
 <sub><sup>Pumpkin does cache already loaded chunks, resulting in no extra RAM usage besides player data and minimal CPU usage.</sup></sub>
 
-#### Compile time
+### Compile time
+
 Compiling from nothing:
 
 **Debug:** <FmtNum :n=10.35 />sec
@@ -135,7 +136,6 @@ Run args: `nogui`
 | 5       | <FmtNum :n=1.9 />GB | <FmtNum :n=1.5 />%                     | <FmtNum :n=15 />% |
 | 10      | <FmtNum :n=2 />GB   | <FmtNum :n=3 />%                       | <FmtNum :n=20 />% |
 
-
 ## Purpur
 
 Build: [2324](https://api.purpurmc.org/v2/purpur/1.21.1/2324/download)
@@ -183,6 +183,5 @@ Run args:
 | 2       | <FmtNum :n=371 />MB | <FmtNum :n=1 /> - <FmtNum :n=1.1 />%   | <FmtNum :n=4 />% |
 | 5       | <FmtNum :n=390 />MB | <FmtNum :n=1.0 />%                     | <FmtNum :n=6 />% |
 | 10      | <FmtNum :n=421 />MB | <FmtNum :n=3 />%                       | <FmtNum :n=9 />% |
-
 
 Benchmarked at <FmtDateTime :d="new Date('2024-10-15T16:34Z')" />

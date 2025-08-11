@@ -7,9 +7,11 @@ Representing `configuration.toml`
 The address to bind the server to.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 server_address = "0.0.0.0:25565"
 ```
+
 :::
 
 ## Seed
@@ -17,9 +19,11 @@ server_address = "0.0.0.0:25565"
 The seed for world generation.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 seed = ""
 ```
+
 :::
 
 ## Max players
@@ -27,9 +31,11 @@ seed = ""
 The maximum number of players allowed on the server.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 max_players = 100000
 ```
+
 :::
 
 ## View distance
@@ -37,9 +43,11 @@ max_players = 100000
 The maximum view distance for players.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 view_distance = 10
 ```
+
 :::
 
 ## Simulation distance
@@ -47,9 +55,11 @@ view_distance = 10
 The maximum simulation distance for players.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 simulation_distance = 10
 ```
+
 :::
 
 ## Default difficulty
@@ -57,11 +67,12 @@ simulation_distance = 10
 The default game difficulty.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 default_difficulty = "Normal"
 ```
-:::
 
+:::
 
 ```toml
 Peaceful
@@ -75,9 +86,11 @@ Hard
 The permission level assigned by the `/op` command.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 op_permission_level = 4
 ```
+
 :::
 
 ## Allow nether
@@ -85,9 +98,11 @@ op_permission_level = 4
 Whether the Nether dimension is enabled.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 allow_nether = true
 ```
+
 :::
 
 ## Hardcore
@@ -95,9 +110,11 @@ allow_nether = true
 Whether the server is in hardcore mode.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 hardcore = false
 ```
+
 :::
 
 ## Online Mode
@@ -105,9 +122,11 @@ hardcore = false
 Whether online mode is enabled. Requires valid Minecraft accounts.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 online_mode = true
 ```
+
 :::
 
 ## Encryption
@@ -118,9 +137,11 @@ Whether packet encryption is enabled.
 > Required when online mode is enabled.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 encryption = true
 ```
+
 :::
 
 ## MOTD
@@ -128,9 +149,11 @@ encryption = true
 Message of the Day; the server's description displayed on the status screen.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 motd = "A Blazing fast Pumpkin Server!"
 ```
+
 :::
 
 ## TPS
@@ -138,9 +161,11 @@ motd = "A Blazing fast Pumpkin Server!"
 The server's target tick rate.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 tps = 20.0
 ```
+
 :::
 
 ## Default gamemode
@@ -148,9 +173,11 @@ tps = 20.0
 The default game mode for players.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 default_gamemode = "Survival"
 ```
+
 :::
 
 ```toml
@@ -166,9 +193,11 @@ Spectator
 Whether to scrub players' IP addresses from logs.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 scrub_ips = true
 ```
+
 :::
 
 ## Use favicon
@@ -176,9 +205,11 @@ scrub_ips = true
 Whether to use a server favicon or not.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 use_favicon = true
 ```
+
 :::
 
 ## Favicon path
@@ -186,7 +217,9 @@ use_favicon = true
 The path to the server's favicon.
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 favicon_path = "icon.png"
 ```
+
 :::

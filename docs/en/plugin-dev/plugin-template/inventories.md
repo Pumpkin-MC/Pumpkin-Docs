@@ -1,9 +1,11 @@
 # Opening a custom inventory
 
 ## Overview
+
 The inventory system in Pumpkin provides a flexible way to manage item storage and manipulation. This guide explains how to create and implement custom inventories.
 
 ## Table of Contents
+
 - [Opening a custom inventory](#opening-a-custom-inventory)
   - [Overview](#overview)
   - [Table of Contents](#table-of-contents)
@@ -14,7 +16,6 @@ The inventory system in Pumpkin provides a flexible way to manage item storage a
   - [Screen Handlers](#screen-handlers)
     - [Using Generic Screen Handlers](#using-generic-screen-handlers)
     - [Creating Custom Screen Handlers](#creating-custom-screen-handlers)
-    - [Supported Window Types](#supported-window-types)
   - [Best Practices](#best-practices)
   - [Examples](#examples)
     - [Basic Inventory Usage](#basic-inventory-usage)

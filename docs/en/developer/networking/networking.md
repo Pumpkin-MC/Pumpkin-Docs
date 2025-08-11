@@ -28,7 +28,7 @@ Packets in the Pumpkin protocol are organized by functionality and state.
 
 ### Minecraft Protocol
 
-You can find all Minecraft Java packets at https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol. There you also can see which [state](#States) they are in.
+You can find all Minecraft Java packets at <https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol>. There you also can see which [state](#states) they are in.
 You can also can see all the information the packets have, which we can either read or write depending on whether they are serverbound or clientbound.
 
 ### Adding a Packet
@@ -46,22 +46,20 @@ You can also can see all the information the packets have, which we can either r
 2. Next, you have to make it known that your struct represents a packet. This automatically gets the packet ID from the JSON packets file.
 
 ```rust
-// For clientbound packets:
-#[client_packet("play:disconnect")]
+use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
 
-// For serverbound packets:
-#[server_packet("login:move_player_pos")]
+#[packet(PLAY_DISCONNECT)]
 ```
 
 3. Now you can create the `struct`.
 
 > [!IMPORTANT]
 > Please start the packet name with "C" or "S" for "Clientbound" or "Serverbound".
-> Also, if it's a packet that can be sent in multiple [states](#States), please add the state to the name. For example, there are 3 different disconnect packets.
+> Also, if it's a packet that can be sent in multiple [states](#states), please add the state to the name. For example, there are 3 different disconnect packets.
 >
-> -   `CLoginDisconnect`
-> -   `CConfigDisconnect`
-> -   `CPlayDisconnect`
+> - `CLoginDisconnect`
+> - `CConfigDisconnect`
+> - `CPlayDisconnect`
 
 Create fields within your packet structure to represent the data that will be sent.
 
@@ -98,7 +96,7 @@ impl CPlayDisconnect {
 
 ```rust
 #[derive(Serialize)]
-#[client_packet("play:disconnect")]
+#[packet(PLAY_DISCONNECT)]
 pub struct CPlayDisconnect {
     reason: TextComponent,
 }
@@ -110,7 +108,7 @@ impl CPlayDisconnect {
 }
 
 #[derive(Deserialize)]
-#[server_packet("login:move_player_pos")]
+#[packet(PLAY_MOVE_PLAYER_POS)]
 pub struct SPlayerPosition {
     pub x: f64,
     pub feet_y: f64,
@@ -148,17 +146,17 @@ pub struct SPlayerPosition {
 
 Pumpkin categorizes `Client`s and `Player`s separately. Everything that is not in the play state is a simple `Client`. Here are the differences:
 
-**Client**
+#### Client
 
--   Can only be the states: Status, Login, Transfer, Config
--   Is not a living entity
--   Has small resource consumption
+- Can only be the states: Status, Login, Transfer, Config
+- Is not a living entity
+- Has small resource consumption
 
-**Player**
+#### Player
 
--   Can only be in the Play state
--   Is a living entity in a world
--   Has more data and consumes more resources
+- Can only be in the Play state
+- Is a living entity in a world
+- Has more data and consumes more resources
 
 #### Sending Packets
 

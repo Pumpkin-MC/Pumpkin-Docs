@@ -7,7 +7,7 @@ Aqui, softwares de servidores Minecraft comuns são comparados com o Pumpkin.
 > Também é importante considerar que outros servidores tiveram anos para otimizar.
 > Forks do Vanilla, que não precisam reescrever toda a lógica do Vanilla, podem se concentrar exclusivamente em otimizações.
 
-![Screenshot From 2024-10-15 16-42-53](https://github.com/user-attachments/assets/e08fbb00-42fe-4479-a03b-11bb6886c91a)
+![A screenshot showing 9 Minecraft game windows](https://github.com/user-attachments/assets/e08fbb00-42fe-4479-a03b-11bb6886c91a)
 
 ## Especificações
 
