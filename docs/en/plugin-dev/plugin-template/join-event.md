@@ -100,7 +100,7 @@ use pumpkin::{
 };
 
 #[plugin_method]
-async fn on_load(&mut self, server: &Context) -> Result<(), String> {
+async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
     pumpkin::init_log!();
 
     log::info!("Hello, Pumpkin!");
