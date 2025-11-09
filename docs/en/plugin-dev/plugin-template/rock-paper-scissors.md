@@ -201,7 +201,7 @@ const NAMES: [&str; 2] = ["rps", "rockpaperscissors"]; // [!code ++:2]
 const DESCRIPTION: &str = "Play Rock Paper Scissors with the server.";
 
 #[plugin_method]
-async fn on_load(&mut self, server: &Context) -> Result<(), String> {
+async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
     pumpkin::init_log!();
 
     log::info!("Hello, Pumpkin!");

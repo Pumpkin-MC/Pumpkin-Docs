@@ -85,12 +85,14 @@ To make implementing these methods easier, there is another macro provided by th
 :::code-group
 
 ```rs [lib.rs]
-use pumpkin_api_macros::{plugin_impl, plugin_method}; // [!code ++:2]
+use std::sync::Arc; // [!code ++:4]
+
+use pumpkin_api_macros::{plugin_impl, plugin_method};
 use pumpkin::plugin::Context;
 use pumpkin_api_macros::plugin_impl; // [!code --]
 
 #[plugin_method] // [!code ++:4]
-async fn on_load(&mut self, server: &Context) -> Result<(), String> {
+async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
     Ok(())
 }
 
@@ -156,7 +158,7 @@ Add this to the `on_load` method:
 
 ```rs [lib.rs]
 #[plugin_method]
-async fn on_load(&mut self, server: &Context) -> Result<(), String> {
+async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
     pumpkin::init_log!(); // [!code ++:3]
 
     log::info!("Hello, Pumpkin!");
