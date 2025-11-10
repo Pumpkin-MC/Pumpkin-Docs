@@ -6,4 +6,6 @@ extend-exclude = [
     "docs/.vitepress/pt.ts",
     "docs/zh_cn/",
     "docs/.vitepress/zh_cn.ts",
+    "docs/de/",
+    "docs/.vitepress/de.ts",
 ]
