@@ -29,18 +29,24 @@ Beschreibe die vorgeschlagene Funktion im Detail, inklusive Nutzen und mögliche
 Um Code beizutragen, forke das Repository auf GitHub.
 
 1. Erstelle zuerst einen GitHub‑Account, falls nicht vorhanden.
+
 2. Gehe zur offiziellen [GitHub‑Organisation von Pumpkin](https://github.com/Pumpkin-MC) und klicke auf Fork.
 
 > Ein Fork bedeutet, dass du nun eine eigene Kopie des Pumpkin‑Quellcodes hast (du erwirbst dadurch nicht das Urheberrecht).
 
 Nun brauchst du einige Tools:
 3. Installiere [git](https://git-scm.com/downloads) für dein Betriebssystem.
-   - Einstieg in Git: [Getting started with Git](https://docs.github.com/en/get-started/getting-started-with-git)
-   - Optional: Für eine grafische Oberfläche zu GitHub, installiere [GitHub Desktop](https://desktop.github.com/download/)
-     > GitHub Desktop kann für Einsteiger leichter sein, ist aber nicht für jeden geeignet.
-   - Einstieg in GitHub Desktop: [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop)
+  
+- Einstieg in Git: [Getting started with Git](https://docs.github.com/en/get-started/getting-started-with-git)
+
+- Optional: Für eine grafische Oberfläche zu GitHub, installiere [GitHub Desktop](https://desktop.github.com/download/)
+
+> GitHub Desktop kann für Einsteiger leichter sein, ist aber nicht für jeden geeignet.
+
+- Einstieg in GitHub Desktop: [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop)
 
 - Wenn du Code beitragen willst, installiere Rust: [rust-lang.org](https://www.rust-lang.org/)
+
 - Wenn du zur Doku beitragen willst, installiere [NodeJS](https://nodejs.org/en)
 
 ### Minecraft dekompilieren

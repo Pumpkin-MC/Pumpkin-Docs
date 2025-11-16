@@ -1,6 +1,6 @@
 ### Konfiguration
 
-Pumpkin bietet ein leistungsfähiges Konfigurationssystem, mit dem du verschiedenste Aspekte des Serververhaltens ohne externe Plugins anpassen kannst. Das ermöglicht viel Flexibilität und Kontrolle über den Betrieb des Servers.
+Pumpkin bietet ein robustes Konfigurationssystem, mit dem Nutzer verschiedenste Aspekte des Serververhaltens ohne externe Plugins anpassen kannst. Das ermöglicht viel Flexibilität und Kontrolle über den Betrieb des Servers.
 
 ### Basic / Advanced
 

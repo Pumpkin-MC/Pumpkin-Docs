@@ -54,16 +54,17 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-# High‑level Typen
+// [!code ++:13]
+# Dies ist die Basis-Crate mit den meisten High-Level-Typdefinitionen.
 pumpkin = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin" } 
-# Utilities (z. B. TextComponent, Vektoren …)
+# Weitere von Pumpkin verwendete Hilfsprogramme (z. B. TextComponent, Vektoren...)
 pumpkin-util = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-util" }
-# Makros für einfachere Plugin‑Entwicklung
+# Makros zur einfacheren Plugin-Entwicklung
 pumpkin-api-macros = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-api-macros" }
 
-# Async‑Hilfen
+# Ein Hilfsprogramm, das es Plugins ermöglicht, asynchron zu arbeiten
 async-trait = "0.1"
-# Async‑Runtime
+# A rust asynchronous runtime
 tokio = "1.42"
 # Logging
 log = "0.4"

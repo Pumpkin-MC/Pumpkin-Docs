@@ -47,7 +47,7 @@ Das in Velocity konfigurierte Geheimnis.
 ```toml [features.toml]{3}
 [proxy.velocity]
 enabled = true
-secret = "[proxy secret here]"
+secret = "[proxy secret hier]"
 ```
 
 :::

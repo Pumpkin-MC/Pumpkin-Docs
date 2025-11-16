@@ -39,7 +39,15 @@ cargo build --release
 Unter Windows **muss** das Flag `--release` verwendet werden, sonst können Probleme auftreten. Auf anderen Plattformen ist das Flag optional, reduziert aber in der Regel die Kompilierdauer bei späteren Builds.
 :::
 
-Nach erfolgreicher Kompilierung findest du das Plugin‑Binary im Ordner `./target/release` (oder `./target/debug` bei Debug‑Builds).
+Wenn alles gut gegangen ist, sollte eine Nachricht wie diese angezeigt werden:
+
+```log
+╰─ cargo build --release
+   Compiling hello-pumpkin v0.1.0 (/home/vypal/Dokumenty/GitHub/hello-pumpkin)
+    Finished `release` profile [optimized] target(s) in 0.68s
+```
+
+Nun kannst du in den Ordner `./target/release` (oder `./target/debug`, falls nicht `--release` verwendet wurde) wechseln und dort deine Plugin-Binärdatei finden.
 
 Je nach Betriebssystem trägt die Datei eine der folgenden Endungen:
 
@@ -75,12 +83,13 @@ Um diese Methoden zu vereinfachen, stellt `pumpkin-api-macros` ein weiteres Macr
 :::code-group
 
 ```rs [lib.rs]
-use std::sync::Arc;
+use std::sync::Arc; // [!code ++:4]
 
 use pumpkin_api_macros::{plugin_impl, plugin_method};
 use pumpkin::plugin::Context;
+use pumpkin_api_macros::plugin_impl; // [!code --]
 
-#[plugin_method]
+#[plugin_method] // [!code ++:4]
 async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
     Ok(())
 }
@@ -140,7 +149,7 @@ In `on_load` initialisieren wir das Pumpkin‑Logging und geben eine Info‑Nach
 ```rs [lib.rs]
 #[plugin_method]
 async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
-    pumpkin::init_log!();
+    pumpkin::init_log!(); // [!code ++:3]
 
     log::info!("Hello, Pumpkin!");
 

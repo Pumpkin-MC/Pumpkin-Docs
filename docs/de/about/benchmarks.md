@@ -82,7 +82,7 @@ Run‑Args:
 
 ### Compile‑Zeit
 
-Kompilieren from scratch:
+Kompilieren von Grund auf:
 
 **Debug:** <FmtNum :n=10.35 />s
 **Release:** <FmtNum :n=38.40 />s

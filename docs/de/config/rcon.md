@@ -38,7 +38,7 @@ Das Passwort für RCON‑Authentifizierung.
 ```toml [features.toml] {3}
 [rcon]
 enabled = true
-password = "[your safe password here]"
+password = "[dein sicheres passwort hier]"
 ```
 
 :::

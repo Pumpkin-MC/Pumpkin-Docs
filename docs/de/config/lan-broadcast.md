@@ -29,7 +29,7 @@ Die MOTD, die an Clients gesendet wird; standardmäßig die Server‑MOTD.
 ```toml [features.toml] {3}
 [lan_broadcast]
 enabled = true
-motd = "[your MOTD here]"
+motd = "[dein MOTD hier]"
 ```
 
 :::
@@ -60,7 +60,7 @@ Standardmäßig ist LAN Broadcast deaktiviert.
 ```toml [features.toml]
 [lan_broadcast]
 enabled = false
-motd = "[server MOTD here]"
+motd = "[server MOTD hier]"
 port = 0
 ```
 

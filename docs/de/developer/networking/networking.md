@@ -53,7 +53,7 @@ use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
 3. Nun die `struct` anlegen.
 
 > [!IMPORTANT]
-> Beginne den Namen mit „C“ oder „S“ für „Clientbound“ bzw. „Serverbound“. Falls das Paket in mehreren [Zuständen](#zustände) existiert, füge den Zustand an. Beispiel: drei verschiedene Disconnect‑Pakete.
+> Beginne den Namen mit „C“ oder „S“ für „Clientbound“ bzw. „Serverbound“. Falls das Paket in mehreren [Zuständen](#zustände) existiert, füge den Zustand an. Beispiel: 3 verschiedene Disconnect‑Pakete.
 >
 > - `CLoginDisconnect`
 > - `CConfigDisconnect`
@@ -80,7 +80,7 @@ pub struct SPlayerPosition {
 }
 ```
 
-4. (Nur clientbound) Implementiere eine `new`‑Funktion, um Werte zu übergeben.
+4. (Nur clientbound) `impl` eine `new`‑Funktion, um Werte zu übergeben.
 
 ```rust
 impl CPlayDisconnect {
@@ -138,7 +138,7 @@ pub struct SPlayerPosition {
 +    }
 ```
 
-7. Nun kannst du clientbound‑Pakete senden (siehe „Pakete senden“) oder serverbound‑Pakete empfangen (siehe „Pakete empfangen“).
+7. Nun kannst du clientbound‑Pakete senden (siehe [Pakete senden](#sending-packets)) oder serverbound‑Pakete empfangen (siehe [Pakete empfangen](#receiving-packets)).
 
 ### Client
 
@@ -162,7 +162,7 @@ Beispiel:
 
 ```rust
 // Funktioniert nur im Status‑Zustand
-client.send_packet(&CStatusResponse::new("{ description: "A Description"}"));
+client.send_packet(&CStatusResponse::new("{ description: "Eine Beschreibung"}"));
 ```
 
 #### Pakete empfangen
@@ -227,7 +227,7 @@ Für `Player`s: `src/entity/player.rs`
 
 ### Kompression
 
-Minecraft‑Pakete können ZLib‑Kompression verwenden. Meist gibt es einen Schwellwert, ab dem komprimiert wird (oft Chunk‑Pakete betroffen).
+Minecraft‑Pakete **können** ZLib‑Kompression verwenden. Meist gibt es einen Schwellwert, ab dem komprimiert wird (oft Chunk‑Pakete betroffen).
 
 ### Portierung
 

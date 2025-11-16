@@ -32,7 +32,7 @@ Direkte Download‑URL des Ressourcenpakets.
 ```toml [features.toml] {3}
 [resource_pack]
 enabled = true
-resource_pack_url = "[your download URL here]"
+resource_pack_url = "[dein download URL hier]"
 ```
 
 :::
@@ -69,7 +69,7 @@ sha1sum [file]
 ```toml [features.toml] {3}
 [resource_pack]
 enabled = true
-resource_pack_sha1 = "[your hash here]"
+resource_pack_sha1 = "[dein hash hier]"
 ```
 
 :::
@@ -83,7 +83,7 @@ Die Nachricht, die dem Spieler beim Herunterladen angezeigt wird.
 ```toml [features.toml] {3}
 [resource_pack]
 enabled = true
-prompt_message = "[your message here]"
+prompt_message = "[deine Nachricht hier]"
 ```
 
 :::
