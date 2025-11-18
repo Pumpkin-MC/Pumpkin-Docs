@@ -3,6 +3,8 @@ import { en } from "./en";
 import { nl } from "./nl";
 import { pt } from "./pt";
 import { zhCN } from "./zh_cn";
+import { de } from "./de";
+
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -25,6 +27,9 @@ export default defineConfig({
         },
         zh_cn: {
             label: "简体中文", ...zhCN
+        },
+        de: {
+            label: "Deutsch", ...de
         },
     },
 
