@@ -29,7 +29,7 @@ cargo new <项目名称> --lib
 [package]
 name = "hello-pumpkin"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [lib] // [!code ++:3]
 crate-type = ["cdylib"]
@@ -46,7 +46,7 @@ crate-type = ["cdylib"]
 [package]
 name = "hello-pumpkin"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [lib]
 crate-type = ["cdylib"]
@@ -60,10 +60,8 @@ pumpkin-util = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "ma
 # 简化插件开发的宏
 pumpkin-api-macros = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-api-macros" }
 
-# 允许插件异步工作的工具
-async-trait = "0.1"
 # Rust异步运行时
-tokio = "1.42"
+tokio = "1.48"
 # 日志记录
 log = "0.4"
 ```

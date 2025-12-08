@@ -30,7 +30,7 @@ Da Pumpkin‑Plugins zur Laufzeit als dynamische Bibliotheken geladen werden, mu
 [package]
 name = "hello-pumpkin"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [lib] // [!code ++:3]
 crate-type = ["cdylib"]
@@ -48,7 +48,7 @@ Als Nächstes fügen wir Basis‑Abhängigkeiten hinzu. Da Pumpkin noch früh in
 [package]
 name = "hello-pumpkin"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [lib]
 crate-type = ["cdylib"]
@@ -62,10 +62,8 @@ pumpkin-util = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "ma
 # Makros zur einfacheren Plugin-Entwicklung
 pumpkin-api-macros = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-api-macros" }
 
-# Ein Hilfsprogramm, das es Plugins ermöglicht, asynchron zu arbeiten
-async-trait = "0.1"
 # A rust asynchronous runtime
-tokio = "1.42"
+tokio = "1.48"
 # Logging
 log = "0.4"
 ```

@@ -29,7 +29,7 @@ Como os plugins Pumpkin são carregados em tempo de execução como bibliotecas 
 [package]
 name = "hello-pumpkin"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [lib] // [!code ++:3]
 crate-type = ["cdylib"]
@@ -46,7 +46,7 @@ Em seguida, precisamos adicionar algumas dependências básicas. Como o Pumpkin 
 [package]
 name = "hello-pumpkin"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [lib]
 crate-type = ["cdylib"]
@@ -60,10 +60,8 @@ pumpkin-util = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "ma
 # Macros para facilitar o desenvolvimento de plugins
 pumpkin-api-macros = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-api-macros" }
 
-# Uma utilidade permitindo que plugins funcionem de maneira assíncrona
-async-trait = "0.1"
 # Um runtime assíncrono em Rust
-tokio = "1.42"
+tokio = "1.48"
 # Logging
 log = "0.4"
 ```

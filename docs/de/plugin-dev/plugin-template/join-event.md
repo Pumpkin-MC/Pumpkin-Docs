@@ -14,7 +14,7 @@ Event‑Handler sind einfache Structs, die das Trait `EventHandler<T>` implement
 
 Das Ereignissystem des Pumpkin-Plugins unterscheidet zwischen zwei Ereignistypen: blockierenden und nicht-blockierenden Ereignissen. Jeder Typ hat seine Vorteile:
 
-### Blockierende Events:
+### Blockierende Events
 
 ```diff
 Vorteile:
@@ -47,7 +47,7 @@ Füge folgenden Code oberhalb von `on_load` ein:
 :::code-group
 
 ```rs [lib.rs]
-use async_trait::async_trait; // [!code ++:7]
+ // [!code ++:7]
 use pumpkin_api_macros::with_runtime;
 use pumpkin::{
     plugin::{player::player_join::PlayerJoinEvent, Context, EventHandler, EventPriority},
@@ -58,12 +58,13 @@ use pumpkin_util::text::{color::NamedColor, TextComponent};
 struct MyJoinHandler; // [!code ++:12]
 
 #[with_runtime(global)]
-#[async_trait]
 impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
-    async fn handle_blocking(&self, _server: &Arc<Server>, event: &mut PlayerJoinEvent) {
+    fn handle_blocking(&self, _server: &Arc<Server>, event: &mut PlayerJoinEvent) -> BoxFuture<'_, ()> {
+        Box::pin(async move {
         event.join_message =
             TextComponent::text(format!("Welcome, {}!", event.player.gameprofile.name))
                 .color_named(NamedColor::Green);
+        })
     }
 }
 ```
@@ -74,12 +75,7 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 
 - `struct MyJoinHandler;`: Die Struktur für unseren Ereignishandler.
 `#[with_runtime(global)]`: Pumpkin verwendet die Tokio-Async-Laufzeitumgebung, die sich an der Plugin-Grenze mitunter ungewöhnlich verhält. Obwohl es in diesem Beispiel nicht notwendig ist, empfiehlt es sich, alle asynchronen `impl`-Implementierungen, die mit asynchronem Code interagieren, mit diesem Makro zu umschließen.
-`#[async_trait]`: Rust unterstützt Traits mit asynchronen Methoden nicht vollständig. Daher verwenden wir die `async_trait`-Crate, um dies zu ermöglichen.
-`async fn handle_blocking()`: Da wir dieses Ereignis als blockierend definiert haben, muss die Methode `handle_blocking()` anstelle der Methode `handle()` implementiert werden.
-
-::: warning WICHTIG
-Es ist wichtig, dass das Makro `#[with_runtime(global)]` **über** dem Makro `#[async_trait]` steht. Befinden sie sich in umgekehrter Reihenfolge, funktioniert das Makro `#[with_runtime(global)]` möglicherweise nicht.
-:::
+`fn handle_blocking()`: Da wir dieses Ereignis als blockierend definiert haben, muss die Methode `handle_blocking()` anstelle der Methode `handle()` implementiert werden.
 
 ### Handler registrieren
 

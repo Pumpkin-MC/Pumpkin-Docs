@@ -50,7 +50,7 @@ Cancellable也可以是Event，因为它是一个特质。（待确认）
 :::code-group
 
 ```rs [lib.rs]
-use async_trait::async_trait; // [!code ++:4]
+// [!code ++:4]
 use pumpkin_api_macros::with_runtime;
 use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler};
 use pumpkin_util::text::{color::NamedColor, TextComponent};
@@ -58,12 +58,13 @@ use pumpkin_util::text::{color::NamedColor, TextComponent};
 struct MyJoinHandler; // [!code ++:12]
 
 #[with_runtime(global)]
-#[async_trait]
 impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
-    async fn handle_blocking(&self, event: &mut PlayerJoinEvent) {
+    fn handle_blocking(&self, _server: &Arc<Server>, event: &mut PlayerJoinEvent) -> BoxFuture<'_, ()> {
+        Box::pin(async move {
         event.join_message =
-            TextComponent::text(format!("欢迎，{}！", event.player.gameprofile.name))
+            TextComponent::text(format!("Welcome, {}!", event.player.gameprofile.name))
                 .color_named(NamedColor::Green);
+        })
     }
 }
 ```
@@ -74,12 +75,7 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 
 - `struct MyJoinHandler;`：我们事件处理器的结构体
 - `#[with_runtime(global)]`： Pumpkin 使用 tokio 异步运行时，它在插件边界上会有奇怪的行为。虽然在这个特定例子中不是必需的，但最好用这个宏包装所有与异步代码交互的异步`impl`。
-- `#[async_trait]`：Rust对具有异步方法的特质没有完全支持。因此，我们使用`async_trait`包来实现这一点。
-- `async fn handle_blocking()`：由于我们选择将此事件设为阻塞，需要实现`handle_blocking()`方法而不是`handle()`方法。
-
-::: warning 重要
-`#[with_runtime(global)]`宏必须位于`#[async_trait]`宏**上方**。如果它们顺序相反，`#[with_runtime(global)]`宏可能不起作用。
-:::
+- `fn handle_blocking()`：由于我们选择将此事件设为阻塞，需要实现`handle_blocking()`方法而不是`handle()`方法。
 
 ### 注册处理器
 

@@ -3,9 +3,13 @@
 **Current Status:**
 Pre-release: Currently under development and not yet ready for official release.
 
-## Rust
+## Download Pre-Release binaries
 
-To run Pumpkin with Rust, ensure you have [Rust](https://www.rust-lang.org/tools/install) installed.
+You can download pre-built binaries on the [Pre-release Download Page](https://pumpkinmc.org/download.html)
+
+## Build from Source (Rust)
+
+To compile Pumpkin, ensure you have [Rust](https://www.rust-lang.org/tools/install) installed.
 
 1. **Clone the repository** and navigate into the directory:
 
@@ -25,7 +29,7 @@ cd Pumpkin
 cargo run --release
 ```
 
-4. **Optional:** If you want to use your CPU features, you can set the `target-cpu=native` Rust compiler flag.
+4. **Optional:** To maximize performance by utilizing your CPU's specific features, you can set the `target-cpu=native` Rust compiler flag:.
 
 ```shell
 RUSTFLAGS='-C target-cpu=native' cargo run --release

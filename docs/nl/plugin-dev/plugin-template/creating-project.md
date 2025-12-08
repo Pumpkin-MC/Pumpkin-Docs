@@ -22,13 +22,14 @@ Since Pumpkin Plugins are loaded at runtime as dynamic libraries, we need to tel
 [package]
 name = "hello-pumpkin"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [lib] // [!code ++:3]
 crate-type = ["cdylib"]
 
 [dependencies]
 ```
+
 :::
 
 Next we need to add some basic dependencies. Since Pumpkin is still in early development, the internal crates aren't published to crates.io, so we need to tell Cargo to download the dependencies directly from GitHub.
@@ -37,7 +38,7 @@ Next we need to add some basic dependencies. Since Pumpkin is still in early dev
 [package]
 name = "hello-pumpkin"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [lib]
 crate-type = ["cdylib"]
@@ -51,13 +52,12 @@ pumpkin-util = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "ma
 # Macros for easier plugin development
 pumpkin-api-macros = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-api-macros" }
 
-# A utility allowing plugins to work asynchronously
-async-trait = "0.1"
 # A rust asynchronous runtime
-tokio = "1.42"
+tokio = "1.48"
 # Logging
 log = "0.4"
 ```
+
 :::
 
 For improved performance and smaller file sizes, we recommend enabling Link-Time Optimization (LTO).  

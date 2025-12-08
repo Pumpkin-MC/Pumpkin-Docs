@@ -44,7 +44,6 @@ pub struct BasicInventory {
 `Inventory`接口定义了所有背包界面必须实现的核心功能：
 
 ```rust
-#[async_trait]
 impl Inventory for BasicInventory {
     // 获取背包界面中的总槽位数
     fn size(&self) -> usize {
@@ -52,36 +51,43 @@ impl Inventory for BasicInventory {
     }
 
     // 检查背包界面是否完全为空
-    async fn is_empty(&self) -> bool {
-        for slot in self.items.iter() {
-            if !slot.lock().await.is_empty() {
-                return false;
+    fn is_empty(&self) -> InventoryFuture<'_, bool> {
+        Box::pin(async move {
+            for slot in self.items.iter() {
+                if !slot.lock().await.is_empty() {
+                    return false;
+                }
             }
-        }
-        true
+
+            true
+        })
     }
 
     // 获取特定槽位中物品堆栈的引用
-    async fn get_stack(&self, slot: usize) -> Arc<Mutex<ItemStack>> {
-        self.items[slot].clone()
+    fn get_stack(&self, slot: usize) -> InventoryFuture<'_, Arc<Mutex<ItemStack>>> {
+        Box::pin(async move { self.items[slot].clone() })
     }
 
     // 移除并返回槽位中的整个物品堆栈
-    async fn remove_stack(&self, slot: usize) -> ItemStack {
-        let mut removed = ItemStack::EMPTY;
-        let mut guard = self.items[slot].lock().await;
-        std::mem::swap(&mut removed, &mut *guard);
-        removed
+    fn remove_stack(&self, slot: usize) -> InventoryFuture<'_, ItemStack> {
+        Box::pin(async move {
+            let mut removed = ItemStack::EMPTY.clone();
+            let mut guard = self.items[slot].lock().await;
+            std::mem::swap(&mut removed, &mut *guard);
+            removed
+        })
     }
 
     // 从堆栈中移除特定数量的物品
-    async fn remove_stack_specific(&self, slot: usize, amount: u8) -> ItemStack {
-        split_stack(&self.items, slot, amount).await
+    fn remove_stack_specific(&self, slot: usize, amount: u8) -> InventoryFuture<'_, ItemStack> {
+        Box::pin(async move { split_stack(&self.items, slot, amount).await })
     }
 
     // 设置特定槽位的内容
-    async fn set_stack(&self, slot: usize, stack: ItemStack) {
-        *self.items[slot].lock().await = stack;
+    fn set_stack(&self, slot: usize, stack: ItemStack) -> InventoryFuture<'_, ()> {
+        Box::pin(async move {
+            *self.items[slot].lock().await = stack;
+        })
     }
 }
 ```
@@ -91,12 +97,13 @@ impl Inventory for BasicInventory {
 `Clearable`接口提供了清空背包界面的功能，这是实现`Inventory`接口所需要的：
 
 ```rust
-#[async_trait]
 impl Clearable for YourInventory {
-    async fn clear(&self) {
-        for slot in self.items.iter() {
-            *slot.lock().await = ItemStack::EMPTY;
-        }
+    fn clear(&self) -> Pin<Box<dyn Future<Output = ()> + Send + '_>> {
+        Box::pin(async move {
+            for item in self.items.iter() {
+                *item.lock().await = ItemStack::EMPTY.clone();
+            }
+        })
     }
 }
 ```
@@ -165,7 +172,7 @@ TODO: 自定义槽位示例
 ```rust
 use std::{any::Any, sync::Arc};
 
-use async_trait::async_trait;
+
 use pumpkin_data::screen::WindowType;
 use pumpkin_world::{inventory::Inventory, item::ItemStack};
 
@@ -228,11 +235,14 @@ impl GenericContainerScreenHandler {
     }
 }
 
-#[async_trait]
 impl ScreenHandler for GenericContainerScreenHandler {
-    async fn on_closed(&mut self, player: &dyn InventoryPlayer) {
-        self.default_on_closed(player).await;
+   fn on_closed<'a>(&'a mut self, player: &'a dyn InventoryPlayer) -> ScreenHandlerFuture<'a, ()> {
+        Box::pin(async move {
+            self.default_on_closed(player).await;
+            self.inventory.on_close().await;
+        })
     }
+
 
     fn as_any(&self) -> &dyn Any {
         self
@@ -246,46 +256,59 @@ impl ScreenHandler for GenericContainerScreenHandler {
         &mut self.behaviour
     }
 
-    async fn quick_move(&mut self, _player: &dyn InventoryPlayer, slot_index: i32) -> ItemStack {
-        let mut stack_left = ItemStack::EMPTY;
-        let slot = self.get_behaviour().slots[slot_index as usize].clone();
+    fn quick_move<'a>(
+        &'a mut self,
+        _player: &'a dyn InventoryPlayer,
+        slot_index: i32,
+    ) -> ItemStackFuture<'a> {
+        Box::pin(async move {
+            let mut stack_left = ItemStack::EMPTY.clone();
+            // Assuming bounds check passed for slot_index by caller or within quick_move spec
+            let slot = self.get_behaviour().slots[slot_index as usize].clone();
 
-        if slot.has_stack().await {
-            let slot_stack = slot.get_stack().await;
-            stack_left = *slot_stack.lock().await;
+            if slot.has_stack().await {
+                let slot_stack_lock = slot.get_stack().await;
+                let slot_stack_guard = slot_stack_lock.lock().await;
+                stack_left = slot_stack_guard.clone();
+                // Release the guard before calling insert_item which needs its own lock
+                drop(slot_stack_guard);
 
-            if slot_index < (self.rows * 9) as i32 {
-                if !self
-                    .insert_item(
-                        &mut *slot_stack.lock().await,
-                        (self.rows * 9).into(),
-                        self.get_behaviour().slots.len() as i32,
-                        true,
-                    )
+                // Re-acquire lock for insert_item (which expects &mut ItemStack)
+                let mut slot_stack_mut = slot_stack_lock.lock().await;
+
+                if slot_index < (self.rows * 9) as i32 {
+                    // Move from inventory to player area (end)
+                    if !self
+                        .insert_item(
+                            &mut slot_stack_mut,
+                            (self.rows * 9).into(),
+                            self.get_behaviour().slots.len() as i32,
+                            true,
+                        )
+                        .await
+                    {
+                        return ItemStack::EMPTY.clone();
+                    }
+                } else if !self
+                    .insert_item(&mut slot_stack_mut, 0, (self.rows * 9).into(), false)
                     .await
                 {
-                    return ItemStack::EMPTY;
+                    // Move from player area to inventory (start)
+                    return ItemStack::EMPTY.clone();
                 }
-            } else if !self
-                .insert_item(
-                    &mut *slot_stack.lock().await,
-                    0,
-                    (self.rows * 9).into(),
-                    false,
-                )
-                .await
-            {
-                return ItemStack::EMPTY;
+
+                // Check the resulting state of the slot stack after insert_item
+                if slot_stack_mut.is_empty() {
+                    drop(slot_stack_mut); // Release lock
+                    slot.set_stack(ItemStack::EMPTY.clone()).await;
+                } else {
+                    drop(slot_stack_mut); // Release lock
+                    slot.mark_dirty().await;
+                }
             }
 
-            if stack_left.is_empty() {
-                slot.set_stack(ItemStack::EMPTY).await;
-            } else {
-                slot.mark_dirty().await;
-            }
-        }
-
-        return stack_left;
+            stack_left
+        })
     }
 }
 ```

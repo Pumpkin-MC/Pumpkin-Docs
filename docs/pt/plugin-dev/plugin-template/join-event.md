@@ -47,7 +47,7 @@ Adicione este código acima do método `on_load`:
 :::code-group
 
 ```rs [lib.rs]
-use async_trait::async_trait; // [!código ++:4]
+ // [!código ++:4]
 use pumpkin_api_macros::with_runtime;
 use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler};
 use pumpkin_util::text::{color::NamedColor, TextComponent};
@@ -55,12 +55,13 @@ use pumpkin_util::text::{color::NamedColor, TextComponent};
 struct MyJoinHandler; // [!código ++:12]
 
 #[with_runtime(global)]
-#[async_trait]
 impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
-    async fn handle_blocking(&self, event: &mut PlayerJoinEvent) {
+    fn handle_blocking(&self, _server: &Arc<Server>, event: &mut PlayerJoinEvent) -> BoxFuture<'_, ()> {
+        Box::pin(async move {
         event.join_message =
-            TextComponent::text(format!("Bem-vindo, {}!", event.player.gameprofile.name))
+            TextComponent::text(format!("Welcome, {}!", event.player.gameprofile.name))
                 .color_named(NamedColor::Green);
+        })
     }
 }
 ```
@@ -71,12 +72,7 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 
 -   `struct MyJoinHandler;`: A struct para nosso gerenciador de evento.
 -   `#[with_runtime(global)]`: Pumpkin usa o runtime assíncrono tokio, que age de maneira estranha além dos limites do plugin. Embora não seja necessário neste exemplo específico, é uma boa prática envolver todos os `impl`s assíncronos que interagem com código assíncrono com essa macro.
--   `#[async_trait]`: Rust não tem suporte completo para traits com métodos assíncronos. Então, usamos o crate `async_trait` para permitir isso.
--   `async fn handle_blocking()`: Como escolhemos que este evento será bloqueante, é necessário implementar o método `handle_blocking()` ao invés do método `handle()`.
-
-::: warning IMPORTANTE
-É importante que a macro `#[with_runtime(global)]` esteja **acima** da macro **`#[async_trait]`**. Se estiverem na ordem oposta, a macro `#[with_runtime(global)]` pode não funcionar.
-:::
+-   `fn handle_blocking()`: Como escolhemos que este evento será bloqueante, é necessário implementar o método `handle_blocking()` ao invés do método `handle()`.
 
 ### Registrando o gerenciador
 

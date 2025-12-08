@@ -24,15 +24,16 @@ use pumpkin::{
 
 struct RockPaperScissorsExecutor; // [!code ++]
 
-#[async_trait] // [!code ++:11]
 impl CommandExecutor for RockPaperScissorsExecutor {
-    async fn execute<'a>(
+    fn execute<'a>(
         &self,
         sender: &mut CommandSender,
         _: &Server,
         _: &ConsumedArgs<'a>,
     ) -> Result<(), CommandError> {
-        Ok(())
+        Box::pin(async {
+            Ok(())
+        })
     }
 }
 ```
@@ -87,18 +88,18 @@ Nun müssen wir die Struktur `RockPaperScissorsExecutor` anpassen, damit sie ein
 struct RockPaperScissorsExecutor(Choice); // [!code ++]
 struct RockPaperScissorsExecutor; // [!code --]
 
-#[async_trait]
 impl CommandExecutor for RockPaperScissorsExecutor {
-    async fn execute<'a>(
+    fn execute<'a>(
         &self,
         sender: &mut CommandSender,
         _: &Server,
         _: &ConsumedArgs<'a>,
     ) -> Result<(), CommandError> {
-        let player_choice = self.0; // [!code ++:3]
-        let computer_choice = get_random_choice();
-        
-        Ok(())
+        Box::pin(async move { // [!code ++:3]
+            let player_choice = self.0; 
+            let computer_choice = get_random_choice();
+            Ok(())
+        })
     }
 }
 ```
@@ -112,34 +113,35 @@ Nun implementieren wir die eigentliche Spiel-Logik und zeigen das Ergebnis an de
 Zuerst zeigen wir dem Spieler seine Wahl sowie die Wahl des Servers. Füge diesen Code hinzu:
 
 ```rs
-#[async_trait]
 impl CommandExecutor for RockPaperScissorsExecutor {
-    async fn execute<'a>(
+    fn execute<'a>(
         &self,
         sender: &mut CommandSender,
         _: &Server,
         _: &ConsumedArgs<'a>,
     ) -> Result<(), CommandError> {
-        let player_choice = self.0;
-        let computer_choice = get_random_choice();
-        
-        sender // [!code ++:15]
-            .send_message(
-                TextComponent::text("Du wählst: ")
-                    .add_text(format!("{:?}", player_choice))
-                    .color_named(NamedColor::Aqua),
-            )
-            .await;
+        Box::pin(async move {
+            let player_choice = self.0;
+            let computer_choice = get_random_choice();
+            
+            sender // [!code ++:15]
+                .send_message(
+                    TextComponent::text("Du wählst: ")
+                        .add_text(format!("{:?}", player_choice))
+                        .color_named(NamedColor::Aqua),
+                )
+                .await;
 
-        sender
-            .send_message(
-                TextComponent::text("Ich wähle: ")
-                    .add_text(format!("{:?}", computer_choice))
-                    .color_named(NamedColor::Gold),
-            )
-            .await;
-        
-        Ok(())
+            sender
+                .send_message(
+                    TextComponent::text("Ich wähle: ")
+                        .add_text(format!("{:?}", computer_choice))
+                        .color_named(NamedColor::Gold),
+                )
+                .await;
+            
+            Ok(())
+        })
     }
 }
 ```
@@ -147,38 +149,39 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 Als Nächstes berechnen wir das Ergebnis und zeigen es dem Spieler:
 
 ```rs
-#[async_trait]
 impl CommandExecutor for RockPaperScissorsExecutor {
-    async fn execute<'a>(
+    fn execute<'a>(
         &self,
         sender: &mut CommandSender,
         _: &Server,
         _: &ConsumedArgs<'a>,
     ) -> Result<(), CommandError> {
-        // Existierender Code
-        
+        Box::pin(async move {
+            // Existierender Code
+            
 
-        match player_choice.beats(&computer_choice) { // [!code ++:19]
-            Outcome::Win => {
-                sender
-                    .send_message(TextComponent::text("Du gewinnst!").color_named(NamedColor::Green))
-                    .await;
+            match player_choice.beats(&computer_choice) { // [!code ++:19]
+                Outcome::Win => {
+                    sender
+                        .send_message(TextComponent::text("Du gewinnst!").color_named(NamedColor::Green))
+                        .await;
+                }
+                Outcome::Lose => {
+                    sender
+                        .send_message(TextComponent::text("Du verlierst!").color_named(NamedColor::Red))
+                        .await;
+                }
+                Outcome::Draw => {
+                    sender
+                        .send_message(
+                            TextComponent::text("Unentschieden!").color_named(NamedColor::Yellow),
+                        )
+                        .await;
+                }
             }
-            Outcome::Lose => {
-                sender
-                    .send_message(TextComponent::text("Du verlierst!").color_named(NamedColor::Red))
-                    .await;
-            }
-            Outcome::Draw => {
-                sender
-                    .send_message(
-                        TextComponent::text("Unentschieden!").color_named(NamedColor::Yellow),
-                    )
-                    .await;
-            }
-        }
-        
-        Ok(())
+            
+            Ok(())
+        })
     }
 }
 ```

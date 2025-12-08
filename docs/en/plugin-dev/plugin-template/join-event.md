@@ -50,7 +50,7 @@ Add this code above the `on_load` method:
 :::code-group
 
 ```rs [lib.rs]
-use async_trait::async_trait; // [!code ++:7]
+ // [!code ++:7]
 use pumpkin_api_macros::with_runtime;
 use pumpkin::{
     plugin::{player::player_join::PlayerJoinEvent, Context, EventHandler, EventPriority},
@@ -61,12 +61,13 @@ use pumpkin_util::text::{color::NamedColor, TextComponent};
 struct MyJoinHandler; // [!code ++:12]
 
 #[with_runtime(global)]
-#[async_trait]
 impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
-    async fn handle_blocking(&self, _server: &Arc<Server>, event: &mut PlayerJoinEvent) {
+    fn handle_blocking(&self, _server: &Arc<Server>, event: &mut PlayerJoinEvent) -> BoxFuture<'_, ()> {
+        Box::pin(async move {
         event.join_message =
             TextComponent::text(format!("Welcome, {}!", event.player.gameprofile.name))
                 .color_named(NamedColor::Green);
+        })
     }
 }
 ```
@@ -77,12 +78,7 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 
 - `struct MyJoinHandler;`: The struct for our event handler
 - `#[with_runtime(global)]`: Pumpkin uses the tokio async runtime, which acts in weird ways across the plugin boundary. Even though it is not necessary in this specific example, it is a good practice to wrap all async `impl`s that interact with async code with this macro.
-- `#[async_trait]`: Rust doesn't have full support for traits with async methods. So, we use the `async_trait` crate to allow this.
-- `async fn handle_blocking()`: Since we chose for this event to be blocking, it is necessary to implement the `handle_blocking()` method instead of the `handle()` method.
-
-::: warning IMPORTANT
-It is important that the `#[with_runtime(global)]` macro is **above** the **`#[async_trait]`** macro. If they are in the opposite order, the `#[with_runtime(global)]` macro might not work.
-:::
+- `fn handle_blocking()`: Since we chose for this event to be blocking, it is necessary to implement the `handle_blocking()` method instead of the `handle()` method.
 
 ### Registering the handler
 
