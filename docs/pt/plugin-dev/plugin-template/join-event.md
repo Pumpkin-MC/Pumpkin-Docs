@@ -86,7 +86,7 @@ use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler}; // [!cód
 
 #[plugin_method]
 async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
-    pumpkin::init_log!();
+    server.init_log();
 
     log::info!("Olá, Pumpkin!");
 
