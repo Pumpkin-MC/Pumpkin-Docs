@@ -159,7 +159,7 @@ Adicione isso ao método `on_load`:
 ```rs [lib.rs]
 #[plugin_method]
 async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
-    pumpkin::init_log!(); // [!code ++:3]
+    server.init_log(); // [!code ++:3]
 
     log::info!("Hello, Pumpkin!");
 

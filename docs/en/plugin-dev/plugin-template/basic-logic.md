@@ -123,6 +123,12 @@ This method gets a mutable reference to its plugin object (in this case the `MyP
 ### Methods implemented on the `Context` object
 
 ```rs
+fn init_log()
+```
+
+Enables logging via the `log` crate.
+
+```rs
 fn get_data_folder() -> String
 ```
 
@@ -159,7 +165,7 @@ Add this to the `on_load` method:
 ```rs [lib.rs]
 #[plugin_method]
 async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
-    pumpkin::init_log!(); // [!code ++:3]
+    server.init_log(); // [!code ++:3]
 
     log::info!("Hello, Pumpkin!");
 
