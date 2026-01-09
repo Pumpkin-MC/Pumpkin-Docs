@@ -35,6 +35,12 @@ cargo run --release
 RUSTFLAGS='-C target-cpu=native' cargo run --release
 ```
 
+> [!NOTE]
+> To use (to play on) a server that you are self-hosting on the same local system (e.g. using Prism launcher on Linux to login and run/play minecraft and using Pumpkin to host the server) you may need to use "localhost:25565" as the server address through the 'Multiplayer' -> 'Add Server' -> 'Server Address' pathway, though that address is not listed in the terminal's run-server output.
+```text
+localhost:25565
+```
+
 ## Docker
 
 > [!IMPORTANT]
