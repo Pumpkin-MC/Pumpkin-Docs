@@ -29,7 +29,7 @@ Packets in the Pumpkin protocol are organized by functionality and state.
 ### Minecraft Protocol
 
 You can find all Minecraft Java packets at <https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol>. There you also can see which [state](#states) they are in.
-You can also can see all the information the packets have, which we can either read or write depending on whether they are serverbound or clientbound.
+You can also see all the information the packets have, which we can either read or write depending on whether they are serverbound or clientbound.
 
 ### Adding a Packet
 
