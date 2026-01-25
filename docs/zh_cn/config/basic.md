@@ -90,6 +90,18 @@ allow_nether = true
 ```
 :::
 
+## 允许末地
+
+是否启用末地维度。
+
+:::code-group
+
+```toml [configuration.toml] {2}
+allow_end = true
+```
+
+:::
+
 ## 极限模式
 
 服务器是否处于极限模式。
