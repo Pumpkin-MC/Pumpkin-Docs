@@ -1,6 +1,6 @@
-### 世界格式
+# 世界格式
 
-#### 区域文件格式（Region File Format）
+## 区域文件格式
 
 Minecraft Beta 1.3 到 Release 1.2 使用一种被称为"区域文件格式"的 Minecraft 格式。
 
@@ -8,31 +8,34 @@ Minecraft Beta 1.3 到 Release 1.2 使用一种被称为"区域文件格式"的 
 
 更多详情可以在 [Minecraft Wiki](https://minecraft.wiki/w/Region_file_format) 上找到。
 
-#### Anvil 文件格式（Anvil File Format）
+## Anvil 文件格式（已实现）
 
 在 Minecraft Release 1.2 之后取代区域文件格式，这是用于存储现代原版 Minecraft：Java 版世界的文件格式。
 
-这种格式存储的文件是 `.mca` 文件。虽然使用相同的区域逻辑，但有一些变化。值得注意的变化包括将高度限制增加到 256，然后到 320，以及更多的方块 ID。
+这种格式存储的文件是 `.mca` 文件。虽然使用相同的区域逻辑，但有一些变化。
+值得注意的变化包括将高度限制增加到 256，然后到 320，以及更多的方块 ID。
 
 更多详情可以在 [Minecraft Wiki](https://minecraft.wiki/w/Anvil_file_format) 上找到。
 
-#### 线性文件格式（Linear File Format）
+## Linear 文件格式（已实现）
 
-有一种更现代的文件格式，称为线性区域文件格式。它节省磁盘空间，并使用 zstd 库而不是 zlib。这是有益的，因为 zlib 非常老旧和过时。
+有一种更现代的文件格式，称为线性区域文件格式。
+它节省磁盘空间，并使用 zstd 库而不是 zlib。这是有益的，因为 zlib 非常老旧和过时。
 
 这种格式存储的文件是 `.linear` 文件，在主世界和下界可以节省约 50% 的磁盘空间，在末地可以节省 95%。
 
 更多详情可以在 [LinearRegionFileFormatTools](https://github.com/xymb-endcrystalme/LinearRegionFileFormatTools) 的 GitHub 页面上找到。
 
-#### Slime 文件格式（Slime File Format）
+## Slime 文件格式（未实现）
 
-由 Hypixel 开发，用于修复 Anvil 文件格式文件格式的许多缺陷，Slime 也替换了 zlib 并与 Anvil 文件格式相比节省空间。它将整个世界保存在单个保存文件中，并允许该文件加载到多个实例中。
+由 Hypixel 开发，用于修复 Anvil 文件格式文件格式的许多缺陷，Slime 也替换了 zlib 并与 Anvil 文件格式相比节省空间。
+它将整个世界保存在单个保存文件中，并允许该文件加载到多个实例中。
 
 这种格式存储的文件是 `.slime` 文件。
 
 更多详情可以在 [Slime World Manager](https://github.com/cijaaimee/Slime-World-Manager#:~:text=Slime%20World%20Manager%20is%20a,worlds%20faster%20and%20save%20space.) 的 GitHub 页面上以及 Hypixel 的 [Dev Blog #5](https://hypixel.net/threads/dev-blog-5-storing-your-skyblock-island.2190753/) 上找到。
 
-#### 原理图文件格式（Schematic File Format）
+## Schematic 文件格式
 
 与列出的其他文件格式不同，原理图文件格式不用于存储 Minecraft 世界，而是用于第三方程序，如 MCEdit、WorldEdit 和 Schematica。
 
