@@ -151,7 +151,7 @@ encryption = true
 :::code-group
 
 ```toml [configuration.toml] {2}
-motd = "A Blazing fast Pumpkin Server!"
+motd = "一款极速的南瓜服务器！"
 ```
 
 :::

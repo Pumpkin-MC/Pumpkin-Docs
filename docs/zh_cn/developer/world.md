@@ -1,6 +1,6 @@
 # 世界格式
 
-## 区域文件格式
+## Region 文件格式（已过时）
 
 Minecraft Beta 1.3 到 Release 1.2 使用一种被称为"区域文件格式"的 Minecraft 格式。
 
@@ -35,7 +35,7 @@ Minecraft Beta 1.3 到 Release 1.2 使用一种被称为"区域文件格式"的 
 
 更多详情可以在 [Slime World Manager](https://github.com/cijaaimee/Slime-World-Manager#:~:text=Slime%20World%20Manager%20is%20a,worlds%20faster%20and%20save%20space.) 的 GitHub 页面上以及 Hypixel 的 [Dev Blog #5](https://hypixel.net/threads/dev-blog-5-storing-your-skyblock-island.2190753/) 上找到。
 
-## Schematic 文件格式
+## Schematic 文件格式（未实现）
 
 与列出的其他文件格式不同，原理图文件格式不用于存储 Minecraft 世界，而是用于第三方程序，如 MCEdit、WorldEdit 和 Schematica。
 

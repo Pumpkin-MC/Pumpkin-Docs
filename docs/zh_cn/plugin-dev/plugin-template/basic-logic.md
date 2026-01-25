@@ -35,7 +35,7 @@ impl Default for MyPlugin {
 cargo build --release
 ```
 
-::: tip[注意]
+::: tip 注意
 如果您使用的是 Windows，您**必须**使用`--release`标志，否则会遇到问题。如果您使用的是其他平台，为了节省编译时间，可以不使用该标志。
 :::
 初始编译会花费一些时间，但不用担心，后续编译会更快。
@@ -56,7 +56,7 @@ cargo build --release
 - MacOS：`libhello-pumpkin.dylib`
 - Linux：`libhello-pumpkin.so`
 
-::: info[说明]
+::: info 说明
 如果您在`Cargo.toml`文件中使用了不同的项目名称，请查找包含您项目名称的文件。
 :::
 

@@ -53,7 +53,7 @@ use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
 
 3. 现在您可以创建 `struct`。
 
-> [!IMPORTANT]
+> [!IMPORTANT]重要
 > 请以 "C" 或 "S" 开始数据包名称，分别代表"客户端绑定"或"服务器绑定"。
 > 此外，如果这是一个可以在多个[状态](#状态)下发送的数据包，请将状态添加到名称中。例如，有 3 个不同的断开连接数据包。
 >
@@ -63,7 +63,7 @@ use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
 
 在您的数据包结构中创建字段，以表示将要发送的数据。
 
-> [!IMPORTANT]
+> [!IMPORTANT]重要
 > 使用描述性字段名称和适当的数据类型。
 
 例子：
