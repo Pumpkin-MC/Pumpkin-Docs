@@ -105,6 +105,18 @@ allow_nether = true
 
 :::
 
+## Permitir End
+
+Se a dimensão End está habilitada.
+
+:::code-group
+
+```toml [configuration.toml] {2}
+allow_end = true
+```
+
+:::
+
 ## Hardcore
 
 Se o servidor está no modo hardcore.
