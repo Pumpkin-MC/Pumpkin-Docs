@@ -14,10 +14,10 @@ Pumpkin'in yapılandırması, hızlı ve önemli değişiklikler için tasarlanm
 Pumpkin, en güncel Minecraft sürümünü desteklemeyi amaçlar. Farklı bir sürüm için Pumpkin sunucusu barındırmak istiyorsanız [ViaProxy](https://github.com/ViaVersion/ViaProxy) adlı bir proje vardır.
 
 - Proxy bağlantılarına izin verdiğinizden emin olun.
-- Pumpkin ve ViaProxy'nin bir bağlantısı yoktur; onların kodlarıyla ilgili sorun bildirimleri yapmayın. Ayrıca bu üçüncü taraf bir proxydir ve Pumpkin iyi ya da kötü hiçbir sonuç için sorumluluk almaz.
+- Pumpkin ile ViaProxy arasında bir bağlantı yoktur; onların kodlarıyla ilgili sorun bildirimleri yapmayın. Ayrıca, bu üçüncü taraf bir proxydir ve Pumpkin iyi ya da kötü hiçbir sonuç için sorumluluk almaz.
 
 #### Öne Çıkan Özellikler
 
 - Kapsamlı Özelleştirme: Sunucu ayarlarını, oyuncu davranışını, dünya üretimini ve daha fazlasını yapılandırın.
-- Performans Optimizasyonu: Yapılandırma ayarlarıyla sunucu performansını optimize edin.
+- Performances Optimizasyonu: Yapılandırma ayarlarıyla sunucu performances'unu optimize edin.
 - Eklentisiz Özelleştirme: Ek eklentilere ihtiyaç duymadan istediğiniz değişiklikleri yapın.
