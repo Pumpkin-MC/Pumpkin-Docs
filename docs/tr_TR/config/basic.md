@@ -16,7 +16,7 @@ server_address = "0.0.0.0:25565"
 
 ## Tohum
 
-Dünya üretimi için tohum.
+Dünya üretimi için seed.
 
 :::code-group
 

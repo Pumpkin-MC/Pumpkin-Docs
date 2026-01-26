@@ -60,7 +60,7 @@ Ardından Pumpkin dünya üretimini başlatır:
 
 #### Kayıt Yok
 
-Dünya tohumu "0" olarak ayarlanır. Gelecekte "basic" yapılandırmasındaki değere ayarlanacaktır.
+Dünya seed "0" olarak ayarlanır. Gelecekte "basic" yapılandırmasındaki değere ayarlanacaktır.
 
 `PlainsGenerator` çağrılır; şu ana kadar yalnızca `Plains` biyomu uygulanmıştır.
 
