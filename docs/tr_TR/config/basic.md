@@ -4,7 +4,7 @@
 
 ## Sunucu Adresi
 
-Sunucunun bağlanacağı adres.
+Sunucunun bağlanacağı address.
 
 :::code-group
 

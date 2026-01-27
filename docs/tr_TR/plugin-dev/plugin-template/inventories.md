@@ -22,7 +22,7 @@ Pumpkin'deki envanter sistemi, öğe depolama ve yönetimi için esnek bir yol s
 
 ## Temel Envanter Uygulaması
 
-`BasicInventory` struct'ı, 27 slotlu standart bir envanter uygulaması sunar. İşte kendi envanterinizi nasıl uygulayacağınız:
+`BasicInventory` struct'ı, 27 slotlu standard bir envanter uygulaması sunar. İşte kendi envanterinizi nasıl uygulayacağınız:
 
 ```rust
 use pumpkin_world::{

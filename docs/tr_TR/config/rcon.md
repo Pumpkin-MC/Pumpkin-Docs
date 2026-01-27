@@ -17,7 +17,7 @@ enabled = true
 
 #### `address`: String
 
-RCON'un dinleyeceği adres ve port.
+RCON'un dinleyeceği address ve port.
 
 :::code-group
 

@@ -12,7 +12,7 @@ Daha fazla ayrıntı [Minecraft Wiki](https://minecraft.wiki/w/Region_file_forma
 
 Minecraft Release 1.2'den sonra Region Dosya Formatı'nın yerini alan bu format, modern Vanilla Minecraft: Java Edition dünyalarını depolamak için kullanılır.
 
-Bu formatta saklanan dosyalar `.mca` dosyalarıdır. Aynı region mantığını kullanmakla birlikte bir dizi değişiklik yapılmıştır. Önemli değişiklikler arasında yükseklik sınırının 256'ya, ardından 320'ye çıkarılması ve daha fazla blok ID'si sayılabilir.
+Bu formatta saklanan dosyalar `.mca` dosyalarıdır. Aynı region mantığını kullanmakla birlikte bir dizi değişiklik yapılmıştır. Önemli değişiklikler arasında yükseklik sınırının 256'ya, ardından 320'ye çıkarılması ve daha fazla block ID'si sayılabilir.
 
 Daha fazla ayrıntı [Minecraft Wiki](https://minecraft.wiki/w/Anvil_file_format) sayfasında bulunabilir.
 
@@ -67,14 +67,14 @@ Dünya seed "0" olarak ayarlanır. Gelecekte "basic" yapılandırmasındaki değ
 - `PerlinTerrainGenerator` chunk yüksekliğini ayarlamak için çağrılır
 - Taş yüksekliği chunk yüksekliğinin 5 altına ayarlanır
 - Toprak yüksekliği chunk yüksekliğinin 2 altına ayarlanır
-- Çimen blokları toprağın üstünde görünür
+- Çimen blockları toprağın üstünde görünür
 - Bedrock y = -64 seviyesine ayarlanır
 - Çiçekler ve kısa otlar rastgele dağıtılır
 
 `SuperflatGenerator` da mevcuttur, ancak şu anda çağrılamaz.
 
 - Bedrock y = -64 seviyesine ayarlanır
-- Toprak iki blok yukarıya ayarlanır
-- Çimen blokları bir blok daha yukarıya ayarlanır
+- Toprak iki block yukarıya ayarlanır
+- Çimen blockları bir block daha yukarıya ayarlanır
 
-Bloklar yerleştirilebilir ve kırılabilir, ancak değişiklikler herhangi bir dünya formatında kaydedilemez. Anvil dünyaları şu anda salt okunurdur.
+Blocklar yerleştirilebilir ve kırılabilir, ancak değişiklikler herhangi bir dünya formatında kaydedilemez. Anvil dünyaları şu anda salt okunurdur.

@@ -10,7 +10,7 @@ Bu eğitimin dayandığı orijinal [Taş-Kağıt-Makas eklentisini](https://gith
 
 ## Temelleri ekleme
 
-Pumpkin'deki her komut, `CommandExecutor` trait'ini uygulayan bir yapı olarak tanımlanır. Bu trait, gönderici, sunucu ve tüketilen argümanları parametre olarak alan ve `-> Result<(), CommandError>` döndüren bir `execute` metodunun uygulanmasını gerektirir. Şimdi bu yapıyı tanımlayalım:
+Pumpkin'deki her komut, `CommandExecutor` trait'ini uygulayan bir yapı olarak tanımlanır. Bu trait, gönderici, sunucu ve tüketilen argümanları parameter olarak alan ve `-> Result<(), CommandError>` döndüren bir `execute` metodunun uygulanmasını gerektirir. Şimdi bu yapıyı tanımlayalım:
 
 ```rs
 use pumpkin::{

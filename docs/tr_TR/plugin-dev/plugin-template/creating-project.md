@@ -68,7 +68,7 @@ log = "0.4"
 
 :::
 
-Daha iyi performans ve daha küçük dosya boyutları için Link-Time Optimization (LTO) etkinleştirmenizi öneririz.  
+Daha iyi performance ve daha küçük dosya boyutları için Link-Time Optimization (LTO) etkinleştirmenizi öneririz.  
 Bunun derleme süresini artıracağını unutmayın.
 :::code-group
 

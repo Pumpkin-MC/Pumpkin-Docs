@@ -77,7 +77,7 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 **Açıklama**:
 
 - `struct MyJoinHandler;`: Olay işleyicimiz için struct
-- `#[with_runtime(global)]`: Pumpkin tokio async runtime'ını kullanır ve bu, eklenti sınırı boyunca garip davranabilir. Bu örnekte zorunlu olmasa da, async kodla etkileşime giren tüm async `impl`'leri bu makro ile sarmak iyi bir pratiktir.
+- `#[with_runtime(global)]`: Pumpkin tokio async runtime'ını kullanır ve bu, eklenti sınırı boyunca garip davranabilir. Bu örnekte zorunlu olmasa da, async kodla etkileşime giren tüm async `impl`'leri bu macro ile sarmak iyi bir pratiktir.
 - `fn handle_blocking()`: Bu olayın bloklayıcı olmasını seçtiğimiz için `handle()` yerine `handle_blocking()` yöntemini uygulamak gerekir.
 
 ### İşleyiciyi kaydetme

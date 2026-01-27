@@ -70,7 +70,7 @@ Derleme argümanları: `--release`
 
 **Kapanma süresi:** <FmtNum :n=0 />ms
 
-| Oyuncular | RAM                   | CPU Boşta        | CPU Maks           |
+| Oyuncular | RAM                   | CPU Boşta        | CPU Maksimum           |
 | ------- | --------------------- | ---------------- | ------------------ |
 | 0       | <FmtNum :n=392.2 />KB | <FmtNum :n=0 />% | <FmtNum :n=0 />%   |
 | 1       | <FmtNum :n=24.9 />MB  | <FmtNum :n=0 />% | <FmtNum :n=4 />%   |
@@ -106,7 +106,7 @@ Derleme argümanları:
 
 **Kapanma süresi:** <FmtNum :n=4 />sec
 
-| Oyuncular | RAM                   | CPU Boşta                               | CPU Maks           |
+| Oyuncular | RAM                   | CPU Boşta                               | CPU Maksimum           |
 | ------- | --------------------- | ---------------------------------------- | ------------------ |
 | 0       | <FmtNum n="860" />MB  | <FmtNum n="0.1" /> - <FmtNum n="0.3" />% | <FmtNum n="51" />% |
 | 1       | <FmtNum n="1.5" />GB  | <FmtNum n="0.9" /> - <FmtNum n="1" />%   | <FmtNum n="41" />% |
@@ -128,7 +128,7 @@ Derleme argümanları:
 
 **Kapanma süresi:** <FmtNum :n=3 />sec
 
-| Oyuncular | RAM                 | CPU Boşta                               | CPU Maks           |
+| Oyuncular | RAM                 | CPU Boşta                               | CPU Maksimum           |
 | ------- | ------------------- | -------------------------------------- | ----------------- |
 | 0       | <FmtNum :n=1.1 />GB | <FmtNum :n=0.2 /> - <FmtNum :n=0.3 />% | <FmtNum :n=36 />% |
 | 1       | <FmtNum :n=1.7 />GB | <FmtNum :n=0.9 /> - <FmtNum :n=1.0 />% | <FmtNum :n=47 />% |
@@ -150,7 +150,7 @@ Derleme argümanları:
 
 **Kapanma süresi:** <FmtNum :n=4 />sec
 
-| Oyuncular | RAM                 | CPU Boşta                               | CPU Maks           |
+| Oyuncular | RAM                 | CPU Boşta                               | CPU Maksimum           |
 | ------- | ------------------- | -------------------------------------- | ----------------- |
 | 0       | <FmtNum :n=1.4 />GB | <FmtNum :n=0.2 /> - <FmtNum :n=0.3 />% | <FmtNum :n=25 />% |
 | 1       | <FmtNum :n=1.6 />GB | <FmtNum :n=0.7 /> - <FmtNum :n=1.0 />% | <FmtNum :n=35 />% |
@@ -176,7 +176,7 @@ Derleme argümanları:
 
 <sub>[Örnek kod şuradan kullanıldı](https://minestom.net/docs/setup/your-first-server)</sub>
 
-| Oyuncular | RAM                 | CPU Boşta                               | CPU Maks          |
+| Oyuncular | RAM                 | CPU Boşta                               | CPU Maksimum          |
 | ------- | ------------------- | -------------------------------------- | ---------------- |
 | 0       | <FmtNum :n=228 />MB | <FmtNum :n=0.1 /> - <FmtNum :n=0.3 />% | <FmtNum :n=1 />% |
 | 1       | <FmtNum :n=365 />MB | <FmtNum :n=0.9 /> - <FmtNum :n=1.0 />% | <FmtNum :n=5 />% |

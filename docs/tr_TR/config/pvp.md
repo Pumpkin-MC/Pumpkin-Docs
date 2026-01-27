@@ -6,7 +6,7 @@ PVP, Vanilla mekaniğinin temel bir parçasıdır; en küçük değişiklik bile
 
 #### `enabled`: Boolean
 
-PVP'nin etkin olup olmadığı.
+PVP özelliğini kontrol eder.
 
 :::code-group
 
