@@ -131,7 +131,7 @@ online_mode = true
 
 ## Şifreleme
 
-Paket şifrelemesinin etkin olup olmadığı.
+packet şifrelemesinin etkin olup olmadığı.
 
 > [!IMPORTANT]
 > Çevrimiçi mod etkinse zorunludur.
@@ -223,3 +223,4 @@ favicon_path = "icon.png"
 ```
 
 :::
+

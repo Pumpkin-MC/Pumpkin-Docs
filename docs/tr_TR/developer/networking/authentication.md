@@ -13,7 +13,7 @@ Varsayılan olarak yapılandırmada `online_mode` etkindir. Bu, kimlik doğrulam
 1. İstemci, başlatıcıdan bir kimlik doğrulama belirteci ve UUID alır.
 2. İstemci, yükleme sırasında kimlik doğrulama belirtecini kullanarak yetkilendirme/kimlik doğrulama sunucusundan çeşitli imzalama anahtarları ve engellenen sunucu listesini gibi verileri alır.
 3. İstemci sunucuya katılırken yetkilendirme/kimlik doğrulama sunucularına bir katılma isteği gönderir. Mojang sunucuları hesap yasaklıysa bu isteği reddedebilir.
-4. İstemci kimliğini bir paketle sunucuya gönderir.
+4. İstemci kimliğini bir packet sunucuya gönderir.
 5. Sunucu, bu kimliğe dayanarak yetkilendirme/kimlik doğrulama sunucularına bir `hasJoined` isteği gönderir. Başarılı olursa skin gibi oyuncu bilgilerini elde eder.
 
 ## Özel Kimlik Doğrulama Sunucusu
@@ -55,3 +55,4 @@ enum ProfileAction {
     USING_BANNED_SKIN,
 }
 ```
+

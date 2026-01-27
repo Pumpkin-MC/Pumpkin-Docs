@@ -1,15 +1,15 @@
-﻿# Kaynak Paketi
+﻿# Kaynak packet
 
-Sunucular, oyunun istemci tarafındaki görünümünü değiştirmek için istemcilere kaynak paketi gönderebilir. Pumpkin, kaynak paketini tamamen yapılandırmanıza olanak tanır.
+Sunucular, oyunun istemci tarafındaki görünümünü değiştirmek için istemcilere kaynak packet gönderebilir. Pumpkin, kaynak packet tamamen yapılandırmanıza olanak tanır.
 
 > [!TIP]
-> Kaynak paketinizi [PackSquash](https://packsquash.aylas.org/) kullanarak küçültün! Bu, istemcilerin kaynak paketini daha hızlı indirmesine yardımcı olabilir.
+> Kaynak packet [PackSquash](https://packsquash.aylas.org/) kullanarak küçültün! Bu, istemcilerin kaynak packet daha hızlı indirmesine yardımcı olabilir.
 
-## Kaynak Paketini Yapılandırma
+## Kaynak packet Yapılandırma
 
 #### `enabled`: Boolean
 
-Kaynak paketinin etkin olup olmadığı.
+Kaynak packet etkin olup olmadığı.
 
 :::code-group
 
@@ -22,10 +22,10 @@ enabled = true
 
 #### `resource_pack_url`: String
 
-Kaynak paketine doğrudan indirme URL'si.
+Kaynak packet doğrudan indirme URL'si.
 
 > [!TIP]
-> Kaynak paketini ücretsiz olarak [MCPacks](https://mc-packs.net/) üzerinde barındırabilirsiniz.
+> Kaynak packet ücretsiz olarak [MCPacks](https://mc-packs.net/) üzerinde barındırabilirsiniz.
 
 :::code-group
 
@@ -39,15 +39,15 @@ resource_pack_url = "[your download URL here]"
 
 #### `resource_pack_sha1`: String
 
-Kaynak paketinin SHA1 hash'i.
+Kaynak packet SHA1 hash'i.
 
 > [!IMPORTANT]
-> Zorunlu olmasa da bu alanı belirtmelisiniz; aksi halde istemci, kaynak pakette değişiklik olmasa bile sunucuya her katıldığında kaynak paketini yeniden indirir.
+> Zorunlu olmasa da bu alanı belirtmelisiniz; aksi halde istemci, kaynak packet değişiklik olmasa bile sunucuya her katıldığında kaynak packet yeniden indirir.
 
 > [!WARNING]
-> Kaynak paketini değiştirdiğinizde bu alanı güncellediğinizden emin olun.
+> Kaynak packet değiştirdiğinizde bu alanı güncellediğinizden emin olun.
 
-::: details Kaynak paketimin SHA1 hash'ini nasıl alırım?
+::: details Kaynak packet SHA1 hash'ini nasıl alırım?
 ::: code-group
 
 ```powershell [Windows (PowerShell)]
@@ -76,7 +76,7 @@ resource_pack_sha1 = "[your hash here]"
 
 #### `prompt_message`: String
 
-Kullanıcıya kaynak paketini indirmesi istendiğinde gösterilecek mesaj.
+Kullanıcıya kaynak packet indirmesi istendiğinde gösterilecek mesaj.
 
 :::code-group
 
@@ -90,7 +90,7 @@ prompt_message = "[your message here]"
 
 #### `force`: Boolean
 
-İstemciyi kaynak paketini indirmeye zorlayıp zorlamaması. İstemci indirmeyi reddederse sunucudan atılır.
+İstemciyi kaynak packet indirmeye zorlayıp zorlamaması. İstemci indirmeyi reddederse sunucudan atılır.
 
 :::code-group
 
@@ -104,7 +104,7 @@ force = false
 
 ## Varsayılan Yapılandırma
 
-Varsayılan olarak istemcilere kaynak paketi gönderilmez.
+Varsayılan olarak istemcilere kaynak packet gönderilmez.
 
 :::code-group
 
@@ -118,3 +118,4 @@ force = false
 ```
 
 :::
+

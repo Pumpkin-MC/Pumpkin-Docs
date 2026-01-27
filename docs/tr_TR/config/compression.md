@@ -1,12 +1,12 @@
 ﻿# Sıkıştırma
 
-Sıkıştırma, paketlerin boyutunu azaltmak için kullanılır. Bu, sunucu tarafında bant genişliğini azaltır ve daha yavaş internet bağlantısına sahip oyunculara yardımcı olur.
+Sıkıştırma, packets boyutunu azaltmak için kullanılır. Bu, sunucu tarafında bant genişliğini azaltır ve daha yavaş internet bağlantısına sahip oyunculara yardımcı olur.
 
 ## Sıkıştırmayı Yapılandırma
 
 #### `enabled`: Boolean
 
-Paket sıkıştırmasının etkin olup olmadığı.
+packet sıkıştırmasının etkin olup olmadığı.
 
 > [!TIP]
 > Sunucu bir proxy arkasındaysa sıkıştırmayı devre dışı bırakmak faydalı olabilir.
@@ -22,7 +22,7 @@ enabled = true
 
 #### `threshold`: Integer (0-1024)
 
-Sunucunun paketi sıkıştırmayı denemeden önceki minimum paket boyutu.
+Sunucunun packet sıkıştırmayı denemeden önceki minimum packet boyutu.
 
 > [!CAUTION]
 > Bu değeri artırmak daha yavaş bağlantıya sahip oyuncuları olumsuz etkileyebilir.
@@ -63,3 +63,4 @@ level = 4
 ```
 
 :::
+

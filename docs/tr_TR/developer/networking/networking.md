@@ -8,32 +8,32 @@ Sunucuya giden: İstemci→Sunucu
 
 ### Yapı
 
-Pumpkin protokolündeki paketler, işlev ve duruma göre düzenlenir.
+Pumpkin protokolündeki packets, işlev ve duruma göre düzenlenir.
 
-`server`: Sunucuya giden paket tanımlarını içerir.
+`server`: Sunucuya giden packet tanımlarını içerir.
 
-`client`: İstemciye giden paket tanımlarını içerir.
+`client`: İstemciye giden packet tanımlarını içerir.
 
 ### Durumlar
 
-**Handshake**: İstemciden gönderilen ilk pakettir. Bu aynı zamanda bir sonraki durumu belirler; genellikle oyuncunun durum isteği yapmak, sunucuya katılmak veya transfer olmak isteyip istemediğini belirtir.
+**Handshake**: İstemciden gönderilen ilk packet. Bu aynı zamanda bir sonraki durumu belirler; genellikle oyuncunun durum isteği yapmak, sunucuya katılmak veya transfer olmak isteyip istemediğini belirtir.
 
 **Status**: İstemcinin bir durum yanıtı (MOTD) görmek istediğini belirtir.
 
 **Login**: Oturum açma sırası. İstemcinin sunucuya katılmak istediğini belirtir.
 
-**Config**: Çoğunlukla sunucudan istemciye gönderilen bir yapılandırma paketleri dizisi (features, resource pack, server links vb.).
+**Config**: Çoğunlukla sunucudan istemciye gönderilen bir yapılandırma packets dizisi (features, resource pack, server links vb.).
 
-**Play**: Son durumdur; oyuncunun artık katılmaya hazır olduğunu belirtir ve diğer tüm oyun içi paketleri işlemek için kullanılır.
+**Play**: Son durumdur; oyuncunun artık katılmaya hazır olduğunu belirtir ve diğer tüm oyun içi packets işlemek için kullanılır.
 
 ### Minecraft Protokolü
 
-Tüm Minecraft Java paketlerini <https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol> adresinde bulabilirsiniz. Orada ayrıca hangi [durumda](#durumlar) olduklarını da görebilirsiniz.
-Ayrıca paketlerin sahip olduğu tüm bilgileri görebilirsiniz; bunları sunucuya giden ya da istemciye giden olmalarına bağlı olarak okuyabilir veya yazabiliriz.
+Tüm Minecraft Java packets <https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol> adresinde bulabilirsiniz. Orada ayrıca hangi [durumda](#durumlar) olduklarını da görebilirsiniz.
+Ayrıca packets sahip olduğu tüm bilgileri görebilirsiniz; bunları sunucuya giden ya da istemciye giden olmalarına bağlı olarak okuyabilir veya yazabiliriz.
 
-### Paket Ekleme
+### packet Ekleme
 
-1. Paket eklemek kolaydır. Önce, şunları türetin:
+1. packet eklemek kolaydır. Önce, şunları türetin:
 
 ```rust
 // For clientbound packets:
@@ -43,7 +43,7 @@ Ayrıca paketlerin sahip olduğu tüm bilgileri görebilirsiniz; bunları sunucu
 #[derive(Deserialize)]
 ```
 
-2. Ardından, yapınızın bir paketi temsil ettiğini belirtmelisiniz. Bu, paket kimliğini JSON paketler dosyasından otomatik olarak alır.
+2. Ardından, yapınızın bir packet temsil ettiğini belirtmelisiniz. Bu, packet kimliğini JSON packets dosyasından otomatik olarak alır.
 
 ```rust
 use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
@@ -54,14 +54,14 @@ use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
 3. Şimdi `struct` oluşturabilirsiniz.
 
 > [!IMPORTANT]
-> Lütfen paket adını "Clientbound" veya "Serverbound" için "C" ya da "S" ile başlatın.
-> Ayrıca, birden fazla [durumda](#durumlar) gönderilebilen bir paket ise, durumu ada ekleyin. Örneğin, 3 farklı disconnect paketi vardır.
+> Lütfen packet adını "Clientbound" veya "Serverbound" için "C" ya da "S" ile başlatın.
+> Ayrıca, birden fazla [durumda](#durumlar) gönderilebilen bir packet ise, durumu ada ekleyin. Örneğin, 3 farklı disconnect packet vardır.
 >
 > - `CLoginDisconnect`
 > - `CConfigDisconnect`
 > - `CPlayDisconnect`
 
-Paket yapınızın içine, gönderilecek verileri temsil eden alanlar ekleyin.
+packet yapınızın içine, gönderilecek verileri temsil eden alanlar ekleyin.
 
 > [!IMPORTANT]
 > Açıklayıcı alan adları ve uygun veri türleri kullanın.
@@ -82,7 +82,7 @@ pub struct SPlayerPosition {
 }
 ```
 
-4. (Sadece clientbound paketler) değerleri gerçekten koyup oluşturabilmek için bir `new` fonksiyonu `impl` edin.
+4. (Sadece clientbound packets) değerleri gerçekten koyup oluşturabilmek için bir `new` fonksiyonu `impl` edin.
 
 ```rust
 impl CPlayDisconnect {
@@ -117,7 +117,7 @@ pub struct SPlayerPosition {
 }
 ```
 
-6. Paketi elle serialize/deserialize edebilirsiniz; bu, paket daha karmaşıksa faydalı olabilir.
+6. packet elle serialize/deserialize edebilirsiniz; bu, packet daha karmaşıksa faydalı olabilir.
 
 ```diff
 -#[derive(Serialize)]
@@ -140,7 +140,7 @@ pub struct SPlayerPosition {
 +    }
 ```
 
-7. Artık clientbound paketi gönderebilir ([Paket Gönderme](#paket-gönderme) bölümüne bakın) veya serverbound paketi dinleyebilirsiniz ([Paket Alma](#paket-alma) bölümüne bakın).
+7. Artık clientbound packet gönderebilir ([packet Gönderme](#packet-gönderme) bölümüne bakın) veya serverbound packet dinleyebilirsiniz ([packet Alma](#packet-alma) bölümüne bakın).
 
 ### İstemci
 
@@ -158,7 +158,7 @@ Pumpkin, `Client` ve `Player`'ı ayrı kategorilere ayırır. Play durumunda olm
 - Bir dünyada yaşayan bir varlıktır
 - Daha fazla veriye sahiptir ve daha fazla kaynak tüketir
 
-#### Paket Gönderme
+#### packet Gönderme
 
 Örnek:
 
@@ -167,7 +167,7 @@ Pumpkin, `Client` ve `Player`'ı ayrı kategorilere ayırır. Play durumunda olm
 client.send_packet(&CStatusResponse::new("{ description: "A Description"}"));
 ```
 
-#### Paket Alma
+#### packet Alma
 
 `Client`'lar için:
 `src/client/mod.rs`
@@ -231,10 +231,11 @@ client.send_packet(&CStatusResponse::new("{ description: "A Description"}"));
 
 ### Sıkıştırma
 
-Minecraft paketleri çözme/kodlama için ZLib sıkıştırması kullanabilir. Genellikle sıkıştırma uygulandığında bir eşik belirlenir; bu çoğunlukla chunk paketlerini etkiler.
+Minecraft packets çözme/kodlama için ZLib sıkıştırması kullanabilir. Genellikle sıkıştırma uygulandığında bir eşik belirlenir; bu çoğunlukla chunk packets etkiler.
 
 ### Portlama
 
 Yeni bir Minecraft sürümüne portlamak için protokoldeki farkları [minecraft.wiki protokol referansı](https://minecraft.wiki/w/Java_Edition_protocol) üzerinden karşılaştırabilirsiniz.
 
 Ayrıca `src/lib.rs` içindeki `CURRENT_MC_PROTOCOL` değerini değiştirin.
+

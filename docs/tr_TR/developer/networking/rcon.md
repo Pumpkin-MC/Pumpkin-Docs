@@ -26,26 +26,26 @@ RCON (Remote Console), Valve tarafından yöneticilerin oyun sunucularını uzak
 - Esas olarak oyun sunucusu yöneticileri tarafından kullanılır.
 - Sınırlı sayıda oyuna özel komut sunar.
 
-### Paketler
+### packets
 
-RCON, birkaç paketten oluşan çok basit bir protokoldür. Bir RCON paketi şu şekildedir:
+RCON, birkaç packet oluşan çok basit bir protokoldür. Bir RCON packet şu şekildedir:
 
 | Alan | Açıklama                                                |
 | ---- | ------------------------------------------------------- |
 | ID   | Kimlik doğrulamanın başarısız veya başarılı olup olmadığını belirtmek için kullanılır |
-| Type | Paket türünü tanımlar                                   |
+| Type | packet türünü tanımlar                                   |
 | Body | Bir mesaj (String); örn. bir komut veya parola           |
 
-#### Sunucuya giden paketler <sub><sub>(İstemci→Sunucu)</sub></sub>
+#### Sunucuya giden packets <sub><sub>(İstemci→Sunucu)</sub></sub>
 
-| Type | Paket       |
+| Type | packet       |
 | ---- | ----------- |
 | 2    | Auth        |
 | 3    | ExecCommand |
 
-#### İstemciye giden paketler <sub><sub>(Sunucu→İstemci)</sub></sub>
+#### İstemciye giden packets <sub><sub>(Sunucu→İstemci)</sub></sub>
 
-| Type | Paket        |
+| Type | packet        |
 | ---- | ------------ |
 | 2    | AuthResponse |
 | 0    | Output       |
@@ -54,11 +54,12 @@ RCON, birkaç paketten oluşan çok basit bir protokoldür. Bir RCON paketi şu 
 
 1. **Kimlik Doğrulama:**
 
-   - RCON istemcisi istenen parola ile bir kimlik doğrulama paketi gönderir.
-   - Sunucu parolayı doğrular ve bir kimlik doğrulama yanıtı paketi gönderir.
-   - Başarılıysa, yanıt paketi istemcinin gönderdiğiyle aynı ID'yi içerir. Başarısızsa ID -1 olur.
+   - RCON istemcisi istenen parola ile bir kimlik doğrulama packet gönderir.
+   - Sunucu parolayı doğrular ve bir kimlik doğrulama yanıtı packet gönderir.
+   - Başarılıysa, yanıt packet istemcinin gönderdiğiyle aynı ID'yi içerir. Başarısızsa ID -1 olur.
 
 2. **Komut Çalıştırma:**
 
-   - Kimliği doğrulanan istemci artık komut çalıştırma paketleri gönderebilir; her paket çalıştırılacak komutu içerir.
-   - Sunucu komutu işler ve sonuç veya hata mesajlarını içeren bir çıktı paketi gönderir.
+   - Kimliği doğrulanan istemci artık komut çalıştırma packets gönderebilir; her packet çalıştırılacak komutu içerir.
+   - Sunucu komutu işler ve sonuç veya hata mesajlarını içeren bir çıktı packet gönderir.
+
