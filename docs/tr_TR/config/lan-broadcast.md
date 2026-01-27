@@ -6,7 +6,7 @@ Pumpkin, yerel oyuncuların sunucuya daha kolay bağlanabilmesi için sunucuyu a
 
 #### `enabled`: Boolean
 
-LAN yayınının etkin olup olmadığı.
+LAN yayınının etkin olup olmadığını düzenler.
 
 :::code-group
 

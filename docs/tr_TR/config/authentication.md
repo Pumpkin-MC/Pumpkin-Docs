@@ -92,7 +92,7 @@ allow_banned_players = true
 
 #### `allowed_actions`: String Array
 
-`allow_banned_players` etkinse hangi eylemlere izin verileceği.
+`allow_banned_players` etkinse hangi eylemlere izin verileceğini düzenler.
 
 :::code-group
 
@@ -108,7 +108,7 @@ allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
 
 #### `enabled`: Boolean
 
-Oyuncu dokularını (örn. skin/cape) filtrelemek/doğrulamak.
+Oyuncu dokularını (örn. skin/cape) filtrelemeyi/doğrulamayı sağlar.
 
 :::code-group
 
@@ -151,7 +151,7 @@ allowed_url_domains = [".minecraft.net", ".mojang.com"]
 
 #### `skin`: Boolean
 
-Oyuncu skinlerini kullanıp kullanmama.
+Oyuncu skinlerini kullanıp kullanmama davranışını düzenler.
 
 :::code-group
 
@@ -164,7 +164,7 @@ skin = true
 
 #### `cape`: Boolean
 
-Oyuncu capelerini kullanıp kullanmama.
+Oyuncu capelerini kullanıp kullanmama davranışını düzenler.
 
 :::code-group
 
@@ -177,7 +177,7 @@ cape = true
 
 #### `elytra`: Boolean
 
-Oyuncu elytralarını kullanıp kullanmama.
+Oyuncu elytralarını kullanıp kullanmama davranışını düzenler.
 
 :::code-group
 

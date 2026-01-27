@@ -61,7 +61,7 @@ max_connections = 5
 
 #### `log_logged_successfully`: Boolean
 
-Başarılı girişlerin konsola loglanıp loglanmaması.
+Başarılı girişlerin konsola loglanıp loglanmaması ayarını değiştirir.
 
 :::code-group
 
@@ -74,7 +74,7 @@ log_logged_successfully = true
 
 #### `log_wrong_password`: Boolean
 
-Yanlış parola denemelerinin konsola loglanıp loglanmaması.
+Yanlış parola denemelerinin konsola loglanıp loglanmaması ayarını değiştirir.
 
 :::code-group
 
@@ -87,7 +87,7 @@ log_logged_successfully = true
 
 #### `log_commands`: Boolean
 
-RCON üzerinden çalıştırılan komutların konsola loglanıp loglanmaması.
+RCON üzerinden çalıştırılan komutların konsola loglanıp loglanmaması ayarını değiştirir.
 
 :::code-group
 
@@ -100,7 +100,7 @@ log_commands = true
 
 #### `log_quit`: Boolean
 
-RCON istemcisinin çıkışının loglanıp loglanmaması.
+RCON istemcisinin çıkışının loglanıp loglanmaması ayarını değiştirir.
 
 :::code-group
 

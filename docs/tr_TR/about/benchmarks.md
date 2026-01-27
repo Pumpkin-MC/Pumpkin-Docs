@@ -166,7 +166,7 @@ Derleme argümanları:
 
 Çalıştırma argümanları:
 
-**Dil:** Kıyaslamalar Kotlin 2.0.0 ile çalıştırıldı (Minestom'un kendisi Java ile yazılmıştır)
+**Dil:** Kıyaslamalar Kotlin 2.0.0 ile çalıştırıldı. (Minestom'un kendisi Java ile yazılmıştır)
 
 **Dosya Boyutu:** <FmtNum :n=2.8 />MB (Kütüphane)
 

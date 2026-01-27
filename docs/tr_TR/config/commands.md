@@ -6,7 +6,7 @@ Pumpkin, Vanilla komutlarını destekler ve bunların nereden çalıştırılabi
 
 #### `use_console`: Boolean
 
-Konsoldan gelen komutların kabul edilip edilmemesi.
+Konsoldan gelen komutların kabul edilip edilmemesini düzenler.
 
 :::code-group
 
@@ -19,7 +19,7 @@ use_console = false
 
 #### `log_console`: Boolean
 
-Oyunculardan gelen komutların konsola loglanıp loglanmaması.
+Oyunculardan gelen komutların konsola loglanıp loglanmama davranışını değiştirir.
 
 :::code-group
 

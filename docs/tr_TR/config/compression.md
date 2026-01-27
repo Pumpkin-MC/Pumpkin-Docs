@@ -6,7 +6,7 @@ Sıkıştırma, packets boyutunu azaltmak için kullanılır. Bu, sunucu tarafı
 
 #### `enabled`: Boolean
 
-packet sıkıştırmasının etkin olup olmadığı.
+packet sıkıştırmasının etkin olup olmadığını belirler.
 
 > [!TIP]
 > Sunucu bir proxy arkasındaysa sıkıştırmayı devre dışı bırakmak faydalı olabilir.

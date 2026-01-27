@@ -14,9 +14,9 @@ server_address = "0.0.0.0:25565"
 
 :::
 
-## Tohum
+## Seed
 
-Dünya üretimi için seed.
+Dünya üretimi için gereklidir.
 
 :::code-group
 
@@ -28,7 +28,7 @@ seed = ""
 
 ## Maksimum oyuncu
 
-Sunucuda izin verilen maksimum oyuncu sayısı.
+Sunucuda izin verilen maksimum oyuncu sayısını değiştirir.
 
 :::code-group
 
@@ -40,7 +40,7 @@ max_players = 100000
 
 ## Görüş mesafesi
 
-Oyuncular için maksimum görüş mesafesi.
+Oyuncular için maksimum görüş mesafesini değiştirir.
 
 :::code-group
 
@@ -52,7 +52,7 @@ view_distance = 10
 
 ## Simülasyon mesafesi
 
-Oyuncular için maksimum simülasyon mesafesi.
+Oyuncular için maksimum simülasyon mesafesini değiştirir.
 
 :::code-group
 
@@ -64,7 +64,7 @@ simulation_distance = 10
 
 ## Varsayılan zorluk
 
-Varsayılan oyun zorluğu.
+Varsayılan oyun zorluğu değiştirir.
 
 :::code-group
 
@@ -83,7 +83,7 @@ Hard
 
 ## Operatör izin seviyesi
 
-`/op` komutu tarafından atanan izin seviyesi.
+`/op` komutu tarafından atanan izin seviyesini değiştirir.
 
 :::code-group
 
@@ -95,7 +95,7 @@ op_permission_level = 4
 
 ## Nether'e izin ver
 
-Nether boyutunun etkin olup olmadığı.
+Nether boyutunu aktif/deaktif etmek için kullanılır.
 
 :::code-group
 
@@ -107,7 +107,7 @@ allow_nether = true
 
 ## Hardcore
 
-Sunucunun hardcore modda olup olmadığı.
+Sunucunun hardcore modda olup olmadığını düzenler.
 
 :::code-group
 
@@ -119,7 +119,7 @@ hardcore = false
 
 ## Çevrimiçi Mod
 
-Çevrimiçi modun etkin olup olmadığı. Geçerli Minecraft hesapları gerektirir.
+Çevrimiçi modun etkin olup olmadığını belirler. Geçerli Minecraft hesapları gerektirir.
 
 :::code-group
 
@@ -131,7 +131,7 @@ online_mode = true
 
 ## Şifreleme
 
-packet şifrelemesinin etkin olup olmadığı.
+Packet şifrelemesinin etkin olup olmadığını düzenler.
 
 > [!IMPORTANT]
 > Çevrimiçi mod etkinse zorunludur.
@@ -146,7 +146,7 @@ encryption = true
 
 ## MOTD
 
-Günün Mesajı; durum ekranında gösterilen sunucu açıklaması.
+Günün Mesajı; durum ekranında gösterilen sunucu açıklamasını düzenler.
 
 :::code-group
 
@@ -158,7 +158,7 @@ motd = "A Blazing fast Pumpkin Server!"
 
 ## TPS
 
-Sunucunun hedef tick hızı.
+Sunucunun hedef tick hızını belirtir.
 
 :::code-group
 
@@ -170,7 +170,7 @@ tps = 20.0
 
 ## Varsayılan oyun modu
 
-Oyuncular için varsayılan oyun modu.
+Oyuncular için varsayılan oyun modunu değiştirir.
 
 :::code-group
 
@@ -190,7 +190,7 @@ Spectator
 
 ## IP Temizleme
 
-Oyuncuların IP adreslerini loglardan temizleyip temizlememek.
+Oyuncuların IP adreslerini loglardan temizleyip temizlememek için gerekli bir ayar.
 
 :::code-group
 
@@ -202,7 +202,7 @@ scrub_ips = true
 
 ## Favicon kullan
 
-Sunucu favicon'u kullanılsın mı.
+Sunucu favicon'unu aktifleştirmeye yarayan bir ayar.
 
 :::code-group
 
@@ -214,7 +214,7 @@ use_favicon = true
 
 ## Favicon yolu
 
-Sunucu favicon'unun yolu.
+Sunucu favicon'unun yolunu belirtir.
 
 :::code-group
 

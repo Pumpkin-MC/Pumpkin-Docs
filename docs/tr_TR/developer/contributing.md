@@ -6,7 +6,7 @@ Pumpkin'e katkıda bulunmak istemenizden memnuniyet duyuyoruz! Bu belge, hata ra
 
 Başlamak için en kolay yol [Discord sunucumuzda](https://discord.gg/wT8XjrjKkf) yardım istemektir.
 
-## Nasıl Katkıda Bulunulur
+## Nasıl Katkıda Bulunulur?
 
 Pumpkin'e katkıda bulunmanın birkaç yolu vardır:
 

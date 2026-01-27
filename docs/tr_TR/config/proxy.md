@@ -27,7 +27,7 @@ enabled = true
 
 #### `enabled`: Boolean
 
-Velocity desteğinin etkin olup olmadığı.
+Velocity desteğinin etkin olup olmadığı davranışını değiştirir.
 
 :::code-group
 
@@ -56,7 +56,7 @@ secret = "[proxy secret here]"
 
 #### `enabled`: Boolean
 
-BungeeCord desteğinin etkin olup olmadığı.
+BungeeCord desteğinin etkin olup olmadığı ayarını değiştirir.
 
 :::code-group
 

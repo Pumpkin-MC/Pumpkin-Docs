@@ -6,7 +6,7 @@ Pumpkin, loglarınızda ne görmek istediğinizi özelleştirmenize izin verir.
 
 #### `enabled`: Boolean
 
-Günlüklemenin etkin olup olmadığı.
+Günlüklemenin etkin olup olmadığını ayarlar.
 
 :::code-group
 
@@ -40,7 +40,7 @@ level = "Debug"
 
 #### `env`: Boolean
 
-`RUST_LOG` ortam değişkeniyle log seviyesini seçmeye izin verilip verilmemesi.
+`RUST_LOG` ortam değişkeniyle log seviyesini seçmeye izin verilip verilmeme davranışını değiştirir.
 
 :::code-group
 
@@ -54,7 +54,7 @@ env = true
 
 #### `threads`: Boolean
 
-Log mesajında iş parçacıklarının yazdırılıp yazdırılmaması.
+Log mesajında iş parçacıklarının yazdırılıp yazdırılmamasını düzenler.
 
 :::code-group
 
@@ -68,7 +68,7 @@ threads = false
 
 #### `color`: Boolean
 
-Konsola renkli yazdırılıp yazdırılmaması.
+Konsola renkli yazdırılıp yazdırılmamasını düzenler.
 
 :::code-group
 
@@ -82,7 +82,7 @@ color = false
 
 #### `timestamp`: Boolean
 
-Mesajda zaman damgasının yazdırılıp yazdırılmaması.
+Mesajda zaman damgasının yazdırılıp yazdırılmama davranışını değiştirir.
 
 :::code-group
 

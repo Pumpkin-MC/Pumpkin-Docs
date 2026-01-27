@@ -19,7 +19,7 @@ enabled = true
 
 #### `hurt_animation`: Boolean
 
-Kırmızı hasar animasyonu ve FOV sallanmasının gösterilip gösterilmemesi.
+Kırmızı hasar animasyonu ve FOV sallanmasının gösterilip gösterilmemesini değiştirir.
 
 :::code-group
 
@@ -32,7 +32,7 @@ hurt_animation = true
 
 #### `protect_creative`: Boolean
 
-Yaratıcı moddaki oyuncuların PVP'ye karşı korunup korunmaması.
+Yaratıcı moddaki oyuncuların PVP'ye karşı korunup korunmaması ayarını değiştirir.
 
 :::code-group
 
@@ -45,7 +45,7 @@ protect_creative = true
 
 #### `knockback`: Boolean
 
-Saldırıların geri tepme (knockback) uygulayıp uygulamaması.
+Saldırıların geri tepme (knockback) uygulayıp uygulamaması ayarını değiştirir.
 
 :::code-group
 
@@ -58,7 +58,7 @@ knockback = true
 
 #### `swing`: Boolean
 
-Saldırırken oyuncuların sallama animasyonu yapıp yapmaması.
+Saldırırken oyuncuların sallama animasyonu yapıp yapmaması ayarını değiştirir.
 
 :::code-group
 

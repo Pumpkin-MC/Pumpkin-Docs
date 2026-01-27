@@ -81,7 +81,7 @@ Pumpkin sunucusu, eklentiye durumunu bildirmek için şu anda iki "yöntem" kull
 
 Bu yöntemlerin uygulanması zorunlu değildir, ancak genellikle en az `on_load` yöntemini uygularsınız. Bu yöntemde, eklentiye sunucu hakkında bilgi sağlayabilen `Context` nesnesine erişirsiniz; ayrıca eklentinin komut işleyicileri ve olayları kaydetmesine olanak tanır.
 
-Bu yöntemleri uygulamayı kolaylaştırmak için `pumpkin-api-macros` crate'i tarafından sağlanan başka bir makro daha vardır.
+Bu yöntemleri uygulamayı kolaylaştırmak için `pumpkin-api-macros` crate'i tarafından sağlanan başka bir macro daha vardır.
 :::code-group
 
 ```rs [lib.rs]
