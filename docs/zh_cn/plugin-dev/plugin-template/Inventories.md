@@ -1,10 +1,12 @@
 # 自定义背包界面系统指南
 
 ## 概述
-Pumpkin中的背包界面系统提供了一种灵活的方式来管理物品存储和操作。本指南将解释如何创建和实现自定义背包界面。
+
+Pumpkin 中的背包界面系统提供了一种灵活的方式来管理物品存储和操作。本指南将解释如何创建和实现自定义背包界面。
 
 ## 目录
-- [打开自定义背包界面](#打开自定义背包界面)
+
+- [自定义背包界面系统指南](#自定义背包界面系统指南)
   - [概述](#概述)
   - [目录](#目录)
   - [基础背包界面实现](#基础背包界面实现)
@@ -14,14 +16,13 @@ Pumpkin中的背包界面系统提供了一种灵活的方式来管理物品存�
   - [玩家界面接口](#玩家界面接口)
     - [使用通用玩家界面接口](#使用通用玩家界面接口)
     - [创建自定义玩家界面接口](#创建自定义玩家界面接口)
-    - [支持的窗口类型](#支持的窗口类型)
   - [最佳实践](#最佳实践)
   - [示例](#示例)
     - [基础背包界面使用](#基础背包界面使用)
 
 ## 基础背包界面实现
 
-`BasicInventory`结构体提供了一个标准实现，包含27个物品槽位。以下是实现自定义背包界面的方法：
+`BasicInventory` 结构体提供了一个标准实现，包含 27 个物品槽位。以下是实现自定义背包界面的方法：
 
 ```rust
 use pumpkin_world::{
@@ -41,7 +42,7 @@ pub struct BasicInventory {
 
 ### 背包界面接口
 
-`Inventory`接口定义了所有背包界面必须实现的核心功能：
+`Inventory` 接口定义了所有背包界面必须实现的核心功能：
 
 ```rust
 impl Inventory for BasicInventory {
@@ -50,8 +51,8 @@ impl Inventory for BasicInventory {
         self.items.len()
     }
 
-    // 检查背包界面是否完全为空
-    fn is_empty(&self) -> InventoryFuture<'_, bool> {
+    // 检查物品栏是否完全为空。
+     fn is_empty(&self) -> InventoryFuture<'_, bool> {
         Box::pin(async move {
             for slot in self.items.iter() {
                 if !slot.lock().await.is_empty() {
@@ -68,8 +69,8 @@ impl Inventory for BasicInventory {
         Box::pin(async move { self.items[slot].clone() })
     }
 
-    // 移除并返回槽位中的整个物品堆栈
-    fn remove_stack(&self, slot: usize) -> InventoryFuture<'_, ItemStack> {
+    // 从槽位移除并返回整个物品堆叠。
+  fn remove_stack(&self, slot: usize) -> InventoryFuture<'_, ItemStack> {
         Box::pin(async move {
             let mut removed = ItemStack::EMPTY.clone();
             let mut guard = self.items[slot].lock().await;
@@ -78,8 +79,8 @@ impl Inventory for BasicInventory {
         })
     }
 
-    // 从堆栈中移除特定数量的物品
-    fn remove_stack_specific(&self, slot: usize, amount: u8) -> InventoryFuture<'_, ItemStack> {
+    // 从物品堆叠中移除指定数量的物品。
+   fn remove_stack_specific(&self, slot: usize, amount: u8) -> InventoryFuture<'_, ItemStack> {
         Box::pin(async move { split_stack(&self.items, slot, amount).await })
     }
 
@@ -236,13 +237,12 @@ impl GenericContainerScreenHandler {
 }
 
 impl ScreenHandler for GenericContainerScreenHandler {
-   fn on_closed<'a>(&'a mut self, player: &'a dyn InventoryPlayer) -> ScreenHandlerFuture<'a, ()> {
+    fn on_closed<'a>(&'a mut self, player: &'a dyn InventoryPlayer) -> ScreenHandlerFuture<'a, ()> {
         Box::pin(async move {
             self.default_on_closed(player).await;
             self.inventory.on_close().await;
         })
     }
-
 
     fn as_any(&self) -> &dyn Any {
         self
@@ -263,21 +263,21 @@ impl ScreenHandler for GenericContainerScreenHandler {
     ) -> ItemStackFuture<'a> {
         Box::pin(async move {
             let mut stack_left = ItemStack::EMPTY.clone();
-            // Assuming bounds check passed for slot_index by caller or within quick_move spec
+            // 假设调用者或 `quick_move` 规范内部已为 `slot_index` 通过边界检查
             let slot = self.get_behaviour().slots[slot_index as usize].clone();
 
             if slot.has_stack().await {
                 let slot_stack_lock = slot.get_stack().await;
                 let slot_stack_guard = slot_stack_lock.lock().await;
                 stack_left = slot_stack_guard.clone();
-                // Release the guard before calling insert_item which needs its own lock
+                // 在调用 `insert_item` 之前释放 guard，因为 `insert_item` 需要获取自己的锁
                 drop(slot_stack_guard);
 
-                // Re-acquire lock for insert_item (which expects &mut ItemStack)
+                // 为 `insert_item` 重新获取锁（该方法需要 `&mut ItemStack`）
                 let mut slot_stack_mut = slot_stack_lock.lock().await;
 
                 if slot_index < (self.rows * 9) as i32 {
-                    // Move from inventory to player area (end)
+                    // 从物品栏移动到玩家区域（末尾）
                     if !self
                         .insert_item(
                             &mut slot_stack_mut,
@@ -293,16 +293,16 @@ impl ScreenHandler for GenericContainerScreenHandler {
                     .insert_item(&mut slot_stack_mut, 0, (self.rows * 9).into(), false)
                     .await
                 {
-                    // Move from player area to inventory (start)
+                    // 从玩家区域移动到物品栏（起始位置）
                     return ItemStack::EMPTY.clone();
                 }
 
-                // Check the resulting state of the slot stack after insert_item
+                // 检查 `insert_item` 操作后槽位堆叠的最终状态
                 if slot_stack_mut.is_empty() {
-                    drop(slot_stack_mut); // Release lock
+                    drop(slot_stack_mut); // 释放锁
                     slot.set_stack(ItemStack::EMPTY.clone()).await;
                 } else {
-                    drop(slot_stack_mut); // Release lock
+                    drop(slot_stack_mut); // 释放锁
                     slot.mark_dirty().await;
                 }
             }

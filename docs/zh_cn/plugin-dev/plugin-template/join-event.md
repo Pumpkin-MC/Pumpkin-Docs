@@ -2,16 +2,16 @@
 
 事件处理器是插件的主要功能之一。它们允许插件接入服务器的内部工作并改变其行为，以执行其他操作。作为一个简单的例子，我们将实现一个`player_join`事件的处理器。
 
-Pumpkin 插件事件系统尝试复制Bukkit/Spigot事件系统，以便来自那里的开发者能更容易地学习 Pumpkin 。
-然而，Rust有不同的概念和规则，所以并非所有内容都像在Bukkit/Spigot中一样。
-Rust没有继承；它只有组合。
+Pumpkin 插件事件系统尝试复制 Bukkit/Spigot 事件系统，以便来自那里的开发者能更容易地学习 Pumpkin 。
+然而，Rust 有不同的概念和规则，所以并非所有内容都像在 Bukkit/Spigot 中一样。
+Rust 没有继承；它只有组合。
 
-事件系统使用特质（traits）来动态处理一些事件：`Event`、`Cancellable`、`PlayerEvent`等。
-Cancellable也可以是Event，因为它是一个特质。（待确认）
+事件系统使用特质（traits）来动态处理一些事件：`Event`、`Cancellable`、`PlayerEvent` 等。
+Cancellable 也可以是 Event，因为它是一个特质。（待确认）
 
 ## 实现加入事件
 
-单个事件处理器只是实现了`EventHandler<T>`特质的结构体（其中`T`是特定的事件实现）。
+单个事件处理器只是实现了 `EventHandler<T>` 特质的结构体（其中 `T` 是特定的事件实现）。
 
 ### 什么是阻塞事件？
 
@@ -35,7 +35,7 @@ Cancellable也可以是Event，因为它是一个特质。（待确认）
 优点：
 + 并发执行
 + 在所有阻塞事件完成后执行
-+ 仍然可以进行一些修改（任何在Mutex或RwLock后面的内容）
++ 仍然可以进行一些修改（任何在 Mutex 或 RwLock 后面的内容）
 缺点：
 - 无法取消事件
 - 没有优先级系统
@@ -46,13 +46,16 @@ Cancellable也可以是Event，因为它是一个特质。（待确认）
 
 由于我们的主要目标是更改玩家加入服务器时看到的欢迎消息，我们将选择具有低优先级的阻塞事件类型。
 
-在`on_load`方法上方添加以下代码：
+在 `on_load` 方法上方添加以下代码：
 :::code-group
 
 ```rs [lib.rs]
-// [!code ++:4]
+ // [!code ++:7]
 use pumpkin_api_macros::with_runtime;
-use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler};
+use pumpkin::{
+    plugin::{player::player_join::PlayerJoinEvent, Context, EventHandler, EventPriority},
+    server::Server,
+};
 use pumpkin_util::text::{color::NamedColor, TextComponent};
 
 struct MyJoinHandler; // [!code ++:12]
@@ -83,14 +86,20 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 :::code-group
 
 ```rs [lib.rs]
-use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler, EventPriority}; // [!code ++]
-use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler}; // [!code --]
+use pumpkin::{
+    plugin::{player::player_join::PlayerJoinEvent, Context, EventHandler, EventPriority}, // [!code ++]
+    server::Server,
+};
+use pumpkin::{
+    plugin::{player::player_join::PlayerJoinEvent, Context, EventHandler}, // [!code --]
+    server::Server,
+};
 
 #[plugin_method]
 async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
     server.init_log();
 
-    log::info!("你好， Pumpkin ！");
+    log::info!("你好, Pumpkin!");
 
     server.register_event(Arc::new(MyJoinHandler), EventPriority::Lowest, true).await; // [!code ++]
 

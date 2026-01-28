@@ -3,7 +3,11 @@
 **当前状态:**
 预发布：目前正在开发中，尚未准备好正式发布。
 
-## Rust
+## 下载预发布二进制文件
+
+您可以在[预发布下载页面](https://pumpkinmc.org/download.html)下载预构建的二进制文件
+
+## 从源码构建（Rust）
 
 要使用 Rust 运行 Pumpkin，请确保您已安装 [Rust](https://www.rust-lang.org/tools/install)。
 
@@ -18,7 +22,7 @@ cd Pumpkin
 
 3. 运行：
 
-> [!NOTE]
+> [!NOTE]注意
 > 由于发布版本的大量优化，构建过程可能需要一些时间。
 
 ```shell
@@ -31,9 +35,15 @@ cargo run --release
 RUSTFLAGS='-C target-cpu=native' cargo run --release
 ```
 
+> [!NOTE]注意
+> 要在本地系统上连接自托管的服务器（例如在 Linux 上使用 Prism 启动器登录并运行 Minecraft，同时用 Pumpkin 托管服务器），您可能需要在"多人游戏"→"添加服务器"→"服务器地址"中输入"localhost:25565"作为服务器地址，尽管该地址不会显示在终端的运行服务器输出中。
+```text
+localhost:25565
+```
+
 ## Docker
 
-> [!IMPORTANT]
+> [!IMPORTANT]重要
 > Docker 支持目前处于实验阶段。
 
 如果您尚未安装，需要先[安装 Docker](https://docs.docker.com/engine/install/)。安装 Docker 后，可以运行以下命令启动服务器：
@@ -67,7 +77,7 @@ Pumpkin 有一个由 @kralverde 维护的测试服务器。它运行在 Pumpkin 
 
 **配置:**
 
-- 操作系统: Debian GNU/Linux bookworm 12.7 x86_64
+- 系统: Debian GNU/Linux bookworm 12.7 x86_64
 - 内核: Linux 6.1.0-21-cloud-amd64
-- CPU: Intel Core (Haswell, no TSX) (2) @ 2.40 GHz
+- CPU: Intel Core (Haswell, 禁用 TSX) (2) @ 2.40 GHz
 - 内存: 4GB DIMM
