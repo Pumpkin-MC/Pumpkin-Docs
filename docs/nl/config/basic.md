@@ -90,6 +90,16 @@ allow_nether = true
 ```
 :::
 
+## End toestaan
+
+Of de End-dimensie is ingeschakeld.
+
+:::code-group
+```toml [configuration.toml] {2}
+allow_end = true
+```
+:::
+
 ## Hardcore
 
 Of de server in hardcore modus is.
