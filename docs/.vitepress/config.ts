@@ -4,6 +4,7 @@ import { nl } from "./nl";
 import { pt } from "./pt";
 import { zhCN } from "./zh_cn";
 import { de } from "./de";
+import { trTR } from "./tr_tr";
 
 
 // https://vitepress.dev/reference/site-config
@@ -30,6 +31,9 @@ export default defineConfig({
         },
         de: {
             label: "Deutsch", ...de
+        },
+        tr_TR: {
+            label: "Türkçe", ...trTR
         },
     },
 

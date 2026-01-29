@@ -105,6 +105,18 @@ allow_nether = true
 
 :::
 
+## Allow end
+
+Whether the End dimension is enabled.
+
+:::code-group
+
+```toml [configuration.toml] {2}
+allow_end = true
+```
+
+:::
+
 ## Hardcore
 
 Whether the server is in hardcore mode.

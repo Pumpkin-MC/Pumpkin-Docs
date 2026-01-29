@@ -1,10 +1,10 @@
-# Configuração Básica
+﻿# Temel Yapılandırma
 
-Representando `configuration.toml`
+`configuration.toml` dosyasını temsil eder
 
-## Endereço do Servidor
+## Sunucu Adresi
 
-O endereço para vincular o servidor.
+Sunucunun bağlanacağı address.
 
 :::code-group
 
@@ -16,7 +16,7 @@ server_address = "0.0.0.0:25565"
 
 ## Seed
 
-A seed para a geração do mundo.
+Dünya üretimi için gereklidir.
 
 :::code-group
 
@@ -26,9 +26,9 @@ seed = ""
 
 :::
 
-## Limite de Jogadores
+## Maksimum oyuncu
 
-O número máximo de jogadores permitidos no servidor.
+Sunucuda izin verilen maksimum oyuncu sayısını değiştirir.
 
 :::code-group
 
@@ -38,9 +38,9 @@ max_players = 100000
 
 :::
 
-## Distância de Visão
+## Görüş mesafesi
 
-A distância máxima de visão para os jogadores.
+Oyuncular için maksimum görüş mesafesini değiştirir.
 
 :::code-group
 
@@ -50,9 +50,9 @@ view_distance = 10
 
 :::
 
-## Distância de Simulação
+## Simülasyon mesafesi
 
-A distância máxima de simulação para os jogadores.
+Oyuncular için maksimum simülasyon mesafesini değiştirir.
 
 :::code-group
 
@@ -62,9 +62,9 @@ simulation_distance = 10
 
 :::
 
-## Dificuldade Padrão
+## Varsayılan zorluk
 
-A dificuldade padrão do jogo.
+Varsayılan oyun zorluğu değiştirir.
 
 :::code-group
 
@@ -81,9 +81,9 @@ Normal
 Hard
 ```
 
-## Nível de Permissão de Operação
+## Operatör izin seviyesi
 
-O nível de permissão atribuído pelo comando `/op`.
+`/op` komutu tarafından atanan izin seviyesini değiştirir.
 
 :::code-group
 
@@ -93,9 +93,9 @@ op_permission_level = 4
 
 :::
 
-## Permitir Nether
+## Nether'e izin ver
 
-Se a dimensão Nether está habilitada.
+Nether boyutunu aktif/deaktif etmek için kullanılır.
 
 :::code-group
 
@@ -105,21 +105,9 @@ allow_nether = true
 
 :::
 
-## Permitir End
-
-Se a dimensão End está habilitada.
-
-:::code-group
-
-```toml [configuration.toml] {2}
-allow_end = true
-```
-
-:::
-
 ## Hardcore
 
-Se o servidor está no modo hardcore.
+Sunucunun hardcore modda olup olmadığını düzenler.
 
 :::code-group
 
@@ -129,9 +117,9 @@ hardcore = false
 
 :::
 
-## Modo Online
+## Çevrimiçi Mod
 
-Se o modo online está habilitado. Requer contas válidas do Minecraft.
+Çevrimiçi modun etkin olup olmadığını belirler. Geçerli Minecraft hesapları gerektirir.
 
 :::code-group
 
@@ -141,12 +129,12 @@ online_mode = true
 
 :::
 
-## Criptografia
+## Şifreleme
 
-Se a criptografia de pacotes está habilitada.
+Packet şifrelemesinin etkin olup olmadığını düzenler.
 
-> [!IMPORTANTE]
-> Requerido quando o modo online está habilitado.
+> [!IMPORTANT]
+> Çevrimiçi mod etkinse zorunludur.
 
 :::code-group
 
@@ -158,7 +146,7 @@ encryption = true
 
 ## MOTD
 
-Mensagem do Dia; a descrição do servidor exibida na tela de status.
+Günün Mesajı; durum ekranında gösterilen sunucu açıklamasını düzenler.
 
 :::code-group
 
@@ -170,7 +158,7 @@ motd = "A Blazing fast Pumpkin Server!"
 
 ## TPS
 
-A taxa de tique (tick rate) alvo do servidor.
+Sunucunun hedef tick hızını belirtir.
 
 :::code-group
 
@@ -180,9 +168,9 @@ tps = 20.0
 
 :::
 
-## Modo de Jogo Padrão
+## Varsayılan oyun modu
 
-O modo de jogo padrão para os jogadores.
+Oyuncular için varsayılan oyun modunu değiştirir.
 
 :::code-group
 
@@ -200,9 +188,9 @@ Adventure
 Spectator
 ```
 
-## Limpeza de IPs
+## IP Temizleme
 
-Se os endereços IP dos jogadores devem ser removidos dos logs.
+Oyuncuların IP adreslerini loglardan temizleyip temizlememek için gerekli bir ayar.
 
 :::code-group
 
@@ -212,9 +200,9 @@ scrub_ips = true
 
 :::
 
-## Usar Favicon
+## Favicon kullan
 
-Se o servidor deve usar um favicon ou não.
+Sunucu favicon'unu aktifleştirmeye yarayan bir ayar.
 
 :::code-group
 
@@ -224,9 +212,9 @@ use_favicon = true
 
 :::
 
-## Caminho do Favicon
+## Favicon yolu
 
-O caminho para o favicon do servidor.
+Sunucu favicon'unun yolunu belirtir.
 
 :::code-group
 
@@ -235,3 +223,4 @@ favicon_path = "icon.png"
 ```
 
 :::
+
