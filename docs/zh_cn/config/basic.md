@@ -7,9 +7,11 @@
 服务器绑定的地址。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 server_address = "0.0.0.0:25565"
 ```
+
 :::
 
 ## 种子
@@ -17,9 +19,11 @@ server_address = "0.0.0.0:25565"
 世界生成的种子值。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 seed = ""
 ```
+
 :::
 
 ## 最大玩家数
@@ -27,9 +31,11 @@ seed = ""
 服务器允许的最大玩家数量。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 max_players = 100000
 ```
+
 :::
 
 ## 视距
@@ -37,9 +43,11 @@ max_players = 100000
 玩家的最大视距。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 view_distance = 10
 ```
+
 :::
 
 ## 模拟距离
@@ -47,9 +55,11 @@ view_distance = 10
 玩家的最大模拟距离。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 simulation_distance = 10
 ```
+
 :::
 
 ## 默认难度
@@ -57,11 +67,12 @@ simulation_distance = 10
 默认游戏难度。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 default_difficulty = "Normal"
 ```
-:::
 
+:::
 
 ```toml
 Peaceful # 和平
@@ -75,9 +86,11 @@ Hard # 困难
 `/op` 命令分配的权限等级。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 op_permission_level = 4
 ```
+
 :::
 
 ## 允许下界
@@ -85,9 +98,11 @@ op_permission_level = 4
 是否启用下界维度。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 allow_nether = true
 ```
+
 :::
 
 ## 允许末地
@@ -107,9 +122,11 @@ allow_end = true
 服务器是否处于极限模式。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 hardcore = false
 ```
+
 :::
 
 ## 在线模式
@@ -117,32 +134,38 @@ hardcore = false
 是否启用在线模式。需要有效的 Minecraft 账号。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 online_mode = true
 ```
+
 :::
 
 ## 加密
 
 是否启用数据包加密。
 
-> [!IMPORTANT]
+> [!IMPORTANT]重要
 > 启用在线模式时需要此选项。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 encryption = true
 ```
+
 :::
 
-## MOTD（Message of the Day）
+## MOTD
 
 每日信息；在状态屏幕上显示的服务器描述。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
-motd = "A Blazing fast Pumpkin Server!"
+motd = "一款极速的南瓜服务器！"
 ```
+
 :::
 
 ## TPS
@@ -150,9 +173,11 @@ motd = "A Blazing fast Pumpkin Server!"
 服务器的目标刻率。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 tps = 20.0
 ```
+
 :::
 
 ## 默认游戏模式
@@ -160,9 +185,11 @@ tps = 20.0
 玩家的默认游戏模式。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 default_gamemode = "Survival"
 ```
+
 :::
 
 ```toml
@@ -173,14 +200,16 @@ Adventure # 冒险模式
 Spectator # 观察者模式
 ```
 
-## IP 清洗
+## IP 记录
 
-是否从日志中清洗玩家的 IP 地址。
+是否从日志中移除玩家的 IP 地址。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 scrub_ips = true
 ```
+
 :::
 
 ## 使用图标
@@ -188,9 +217,11 @@ scrub_ips = true
 是否使用服务器图标。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 use_favicon = true
 ```
+
 :::
 
 ## 图标路径
@@ -198,7 +229,9 @@ use_favicon = true
 服务器图标的路径。
 
 :::code-group
+
 ```toml [configuration.toml] {2}
 favicon_path = "icon.png"
 ```
-::: 
+
+:::

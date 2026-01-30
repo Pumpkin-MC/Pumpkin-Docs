@@ -36,7 +36,7 @@ cargo build --release
 ```
 
 ::: tip 注意
-如果您使用的是Windows，您**必须**使用`--release`标志，否则会遇到问题。如果您使用的是其他平台，为了节省编译时间，可以不使用该标志。
+如果您使用的是 Windows，您**必须**使用`--release`标志，否则会遇到问题。如果您使用的是其他平台，为了节省编译时间，可以不使用该标志。
 :::
 初始编译会花费一些时间，但不用担心，后续编译会更快。
 
@@ -71,7 +71,7 @@ cargo build --release
 当您启动服务器并运行`/plugins`命令时，您应该会看到类似这样的输出：
 
 ```bash
-已加载1个插件：
+已加载 1 个插件：
 hello-pumpkin
 ```
 
@@ -120,7 +120,13 @@ impl Default for MyPlugin {
 
 此方法获取对其插件对象（在本例中为`MyPlugin`结构）的可变引用，可用于初始化存储在插件主结构中的任何数据，以及对`Context`对象的引用。该对象是根据插件的元数据专门为该插件构建的。
 
-### `Context`对象上实现的方法
+### 在 `Context` 对象上实现的方法
+
+```rs
+fn init_log()
+```
+
+通过 `log` crate 启用日志记录。
 
 ```rs
 fn get_data_folder() -> String
@@ -147,13 +153,13 @@ async fn register_event(handler: Arc<H>, priority: EventPriority, blocking: bool
 注册一个新的事件处理器，具有设定的优先级，并指定是否为阻塞。
 顺便说一下，`handler`是`Arc<T>`，这意味着您可以在一个处理器上实现多个事件，然后注册它。
 
-## 基本on-load方法
+## 基本 on-load 方法
 
-现在我们将只实现一个非常基本的`on_load`方法，以便能够看到我们的插件正在运行。
+现在我们将只实现一个非常基本的 `on_load` 方法，以便能够看到我们的插件正在运行。
 
-在这里，我们将设置内部 Pumpkin 日志记录器，并设置一个"Hello, Pumpkin !"消息，以便我们能够看到我们的插件正在运行。
+在这里，我们将设置内部 Pumpkin 日志记录器，并设置一个 "Hello, Pumpkin !"消息，以便我们能够看到我们的插件正在运行。
 
-在`on_load`方法中添加以下内容：
+在 `on_load` 方法中添加以下内容：
 :::code-group
 
 ```rs [lib.rs]
@@ -161,7 +167,7 @@ async fn register_event(handler: Arc<H>, priority: EventPriority, blocking: bool
 async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
     server.init_log(); // [!code ++:3]
 
-    log::info!("Hello, Pumpkin !");
+    log::info!("你好, Pumpkin!");
 
     Ok(())
 }
@@ -169,4 +175,4 @@ async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
 
 :::
 
-如果我们再次构建插件并启动服务器，您现在应该能在日志中看到"你好， Pumpkin ！"的消息。
+如果我们再次构建插件并启动服务器，您现在应该能在日志中看到"你好, Pumpkin!"的消息。

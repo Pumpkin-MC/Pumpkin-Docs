@@ -24,7 +24,7 @@ Pumpkin 协议中的数据包按功能和状态组织。
 
 **配置（Config）**：配置数据包序列主要从服务器发送到客户端（功能、资源包、服务器链接等）。
 
-**游戏（Play）**：最终状态，表示玩家现在准备好加入，也用于处理所有其他游戏玩法数据包。
+**游玩（Play）**：最终状态，表示玩家现在准备好加入，也用于处理所有其他游戏玩法数据包。
 
 ### Minecraft 协议
 
@@ -53,7 +53,7 @@ use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
 
 3. 现在您可以创建 `struct`。
 
-> [!IMPORTANT]
+> [!IMPORTANT]重要
 > 请以 "C" 或 "S" 开始数据包名称，分别代表"客户端绑定"或"服务器绑定"。
 > 此外，如果这是一个可以在多个[状态](#状态)下发送的数据包，请将状态添加到名称中。例如，有 3 个不同的断开连接数据包。
 >
@@ -63,7 +63,7 @@ use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
 
 在您的数据包结构中创建字段，以表示将要发送的数据。
 
-> [!IMPORTANT]
+> [!IMPORTANT]重要
 > 使用描述性字段名称和适当的数据类型。
 
 例子：
@@ -146,13 +146,13 @@ pub struct SPlayerPosition {
 
 Pumpkin 将 `Client`（客户端）和 `Player`（玩家）分开分类。不在游戏状态的所有内容都是简单的 `Client`。以下是它们的区别：
 
-**客户端**
+#### 客户端
 
 - 只能处于状态：Status、Login、Transfer、Config
 - 不是活动实体
 - 资源消耗小
 
-**玩家**
+#### 玩家
 
 - 只能处于 Play 状态
 - 是世界中的一个活动实体
@@ -169,7 +169,7 @@ client.send_packet(&CStatusResponse::new("{ description: "A Description"}"));
 
 #### 接收数据包
 
-对于 `Client`：
+关于 `Client` 的部分：
 `src/client/mod.rs`
 
 ```diff
@@ -196,4 +196,45 @@ client.send_packet(&CStatusResponse::new("{ description: "A Description"}"));
             );
             }
     };
+    Ok(())
+}
 ```
+
+关于 `Player` 的部分
+`src/entity/player.rs`
+
+```diff
+// 玩家只有“游玩”状态
+ fn handle_play_packet(
+  &self,
+    server: &Arc<Server>,
+    packet: &mut RawPacket,
+) -> Result<(), ReadingError> {
+    let bytebuf = &mut packet.bytebuf;
+    match packet.id.0 {
+        SChatMessage::PACKET_ID => {
+            self.handle_chat_message(SChatMessage::read(bytebuf)?).await;
+        }
+       MyPacket::PACKET_ID => {
++           self.handle_mypacket(server, MyPacket::read(bytebuf)?).await;
+        }
+        _ => {
+            log::error!(
+                "Failed to handle packet id {} while in ... state",
+                packet.id.0
+            );
+        }
+    };
+    Ok(())
+}
+```
+
+### 压缩
+
+Minecraft 数据包 **可以** 使用 ZLib 压缩进行解码/编码。通常会设置一个压缩阈值，当数据包超过该阈值时才会应用压缩；这影响最多的是区块数据包。
+
+### 移植
+
+要移植到新的 Minecraft 版本，可以在 [minecraft.wiki 协议参考页面](https://minecraft.wiki/w/Java_Edition_protocol) 上对比协议差异。
+
+同时还要修改 `src/lib.rs` 中的 `CURRENT_MC_PROTOCOL`。
