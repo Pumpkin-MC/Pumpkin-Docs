@@ -5,7 +5,7 @@
 
 ## 下载预发布二进制文件
 
-您可以在[预发布下载页面](https://pumpkinmc.org/download.html)下载预构建的二进制文件
+您可以在[预发布下载页面](https://pumpkinmc.org/download)下载预构建的二进制文件
 
 ## 从源码构建（Rust）
 

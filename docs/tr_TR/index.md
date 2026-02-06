@@ -5,7 +5,7 @@
 
 ## Ön Sürüm İkili Dosyalarını İndir
 
-Hazır derlenmiş ikili dosyaları [Ön Sürüm İndirme Sayfası](https://pumpkinmc.org/download.html) üzerinden indirebilirsiniz.
+Hazır derlenmiş ikili dosyaları [Ön Sürüm İndirme Sayfası](https://pumpkinmc.org/download) üzerinden indirebilirsiniz.
 
 ## Kaynaktan Derleme (Rust)
 
