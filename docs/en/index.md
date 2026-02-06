@@ -5,7 +5,7 @@ Pre-release: Currently under development and not yet ready for official release.
 
 ## Download Pre-Release binaries
 
-You can download pre-built binaries on the [Pre-release Download Page](https://pumpkinmc.org/download.html)
+You can download pre-built binaries on the [Pre-release Download Page](https://pumpkinmc.org/download)
 
 ## Build from Source (Rust)
 
