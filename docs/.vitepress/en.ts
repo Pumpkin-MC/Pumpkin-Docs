@@ -71,7 +71,7 @@ export const en = defineConfig({
                     },
                     {
                         text: "Plugin Template",
-                        link: "/plugin-dev/plugin-template/introduction",
+                        collapsed: false,
                         items: [
                             {
                                 text: "Creating Project",
@@ -82,12 +82,23 @@ export const en = defineConfig({
                                 link: "/plugin-dev/plugin-template/basic-logic",
                             },
                             {
-                                text: "Join Event",
-                                link: "/plugin-dev/plugin-template/join-event",
+                                text: "Events",
+                                items: [
+                                    { text: "Join Event", link: "/plugin-dev/plugin-template/join-event" },
+                                ]
                             },
                             {
-                                text: "Rock-Paper-Scissors Command",
-                                link: "/plugin-dev/plugin-template/rock-paper-scissors",
+                                text: "Commands",
+                                items: [
+                                    {
+                                        text: "First Command",
+                                        link: "/plugin-dev/plugin-template/command/first-command"
+                                    },
+                                    {
+                                        text: "Rock-Paper-Scissors",
+                                        link: "/plugin-dev/plugin-template/command/rock-paper-scissors"
+                                    },
+                                ]
                             },
                             {
                                 text: "Inventories",
