@@ -85,11 +85,11 @@ Rebuild your plugin, move the plugins file into the plugins folder, and restart 
 
 <img src="/assets/plugin-dev/first_command_preview.png" alt="drawing" width="1000"/>
 
-Executing the command right now likly trown an Syntax error since no Command Executor has been implemented and the Command just does nothing
+Executing the command right now likely thrown an Syntax error since no Command Executor has been implemented and the Command just does nothing
 
 ### Adding an Executor
 
-Lets create a super simple Command Executor without requring and arguments
+Lets create a super simple Command Executor without requiring and arguments
 
 ```rust
 struct MyCommandExecutor; 
