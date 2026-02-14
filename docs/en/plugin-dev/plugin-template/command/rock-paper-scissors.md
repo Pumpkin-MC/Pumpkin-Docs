@@ -126,7 +126,7 @@ impl CommandExecutor for RockPaperScissorsExecutor {
             
             sender // [!code ++:15]
                 .send_message(
-                    TextComponent::text("Du wählst: ")
+                    TextComponent::text("You chose: ")
                         .add_text(format!("{:?}", player_choice))
                         .color_named(NamedColor::Aqua),
                 )
@@ -134,7 +134,7 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 
             sender
                 .send_message(
-                    TextComponent::text("Ich wähle: ")
+                    TextComponent::text("I chose: ")
                         .add_text(format!("{:?}", computer_choice))
                         .color_named(NamedColor::Gold),
                 )
@@ -157,24 +157,24 @@ impl CommandExecutor for RockPaperScissorsExecutor {
         _: &ConsumedArgs<'a>,
     ) -> Result<(), CommandError> {
         Box::pin(async move {
-            // Existierender Code
+            // Existing code
             
 
             match player_choice.beats(&computer_choice) { // [!code ++:19]
                 Outcome::Win => {
                     sender
-                        .send_message(TextComponent::text("Du gewinnst!").color_named(NamedColor::Green))
+                        .send_message(TextComponent::text("You win!").color_named(NamedColor::Green))
                         .await;
                 }
                 Outcome::Lose => {
                     sender
-                        .send_message(TextComponent::text("Du verlierst!").color_named(NamedColor::Red))
+                        .send_message(TextComponent::text("You lose!").color_named(NamedColor::Red))
                         .await;
                 }
                 Outcome::Draw => {
                     sender
                         .send_message(
-                            TextComponent::text("Unentschieden!").color_named(NamedColor::Yellow),
+                            TextComponent::text("It's a tie!").color_named(NamedColor::Yellow),
                         )
                         .await;
                 }
