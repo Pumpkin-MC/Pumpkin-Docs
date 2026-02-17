@@ -58,8 +58,8 @@ export const en = defineConfig({
                             },
                         ],
                     },
-                    { text: "World", link: "developer/world" },
-                    { text: "Mobile dev", link: "developer/mobile" },
+                    { text: "World", link: "/developer/world" },
+                    { text: "Mobile dev", link: "/developer/mobile" },
                 ],
             },
             {
