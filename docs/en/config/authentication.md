@@ -5,7 +5,7 @@ Servers authenthicate with Mojang's session servers in order to ensure the clien
 ## Configuring Authentication
 
 > [!WARNING]
-> Most servers should not change the default authenthication configuration. Doing so may have unintended consequnces. **Only change these settings if you know what you are doing!**
+> Most servers should not change the default authenthication configuration. Doing so may have unintended consequences. **Only change these settings if you know what you are doing!**
 
 #### `enabled`: Boolean
 
