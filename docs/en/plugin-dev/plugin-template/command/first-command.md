@@ -32,21 +32,21 @@ To make the command usable, you must register both the Permission and the Comman
 
 First, register the Permission. In this example, we set `PermissionDefault::Allow` so that everyone can use the command by default
 
-```diff
+```rust
 #[plugin_method]
 async fn on_load(&mut self, context: Arc<Context>) -> Result<(), String> {
     context.init_log();
 
     log::info!("Hello, Pumpkin!");
 
-+    context
-+        .register_permission(Permission::new(
-+            "plugin_docs_plugin:test",
-+            "Important Test Permission",
-+            PermissionDefault::Allow,
-+        ))
-+        .await
-+        .unwrap();
+    context // [!code ++:8]
+        .register_permission(Permission::new(
+            "plugin_docs_plugin:test",
+            "Important Test Permission",
+            PermissionDefault::Allow,
+        ))
+        .await
+        .unwrap();
 
 
     Ok(())
@@ -55,7 +55,7 @@ async fn on_load(&mut self, context: Arc<Context>) -> Result<(), String> {
 
 Next, register the command using the permission string created above:
 
-```diff
+```rust
 #[plugin_method]
 async fn on_load(&mut self, context: Arc<Context>) -> Result<(), String> {
     context.init_log();
@@ -71,9 +71,9 @@ async fn on_load(&mut self, context: Arc<Context>) -> Result<(), String> {
         .await
         .unwrap();
 
-+    context
-+        .register_command(command::init_command_tree(), "plugin_docs_plugin:test")
-+        .await;
+    context // [!code ++:3]
+        .register_command(command::init_command_tree(), "plugin_docs_plugin:test")
+        .await;
 
     Ok(())
 }
