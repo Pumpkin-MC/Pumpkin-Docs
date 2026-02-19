@@ -5,12 +5,14 @@ import DefaultTheme from 'vitepress/theme'
 import './style.css'
 import FmtNum from '../components/FmtNum.vue'
 import FmtDateTime from '../components/FmtDateTime.vue'
+import TranslationBanner from '../components/TranslationBanner.vue'
 
 export default {
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
+      'doc-before': () => h(TranslationBanner)
     })
   },
   enhanceApp({ app, router, siteData }) {
