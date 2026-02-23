@@ -1,12 +1,12 @@
 # 编写命令处理器
 
-In Minecraft, commands are the primary way for both regular players and server operators to interact with the game on a lower level. They can be used to perform a wide range of tasks, from simple chat messages to complex server management commands. In this tutorial, we will create a basic Rock-Paper-Scissors command handler that allows players to play the game against the server.
+在 Minecraft 中，命令是普通玩家和服务器管理员与游戏进行底层交互的主要方式。它们可用于执行从简单的聊天消息到复杂的服务器管理等广泛任务。在本教程中，我们将创建一个基本的“石头剪刀布”命令处理器，让玩家可以与服务器进行游戏。
 
-Pumpkin has its own system for handling commands, which is based around each command having a 'tree', which defines the exact structure of the command and its arguments. Each node in the tree represents a command or argument, and the tree is traversed to determine the command to execute and its parameters.
+Pumpkin 拥有自己的命令处理系统，其核心在于每个命令都有一个“树形结构”，该结构定义了命令及其参数的精确语法。树中的每个节点代表一个命令或参数，系统通过遍历这棵树来确定要执行的命令及其参数。
 
-Commands in Pumpkin are asynchronous, meaning that they do not block the main thread while they are executing. This allows for more efficient use of resources and a smoother user experience.
+Pumpkin 中的命令是异步执行的，这意味着它们在执行时不会阻塞主线程。这有助于更高效地利用资源并提供更流畅的用户体验。
 
-We would also like to thank [ploxxxy](https://github.com/ploxxxy) for writing the original [Rock-Paper-Scissors plugin](https://github.com/ploxxxy/rock-paper-scissors-mc) from which this tutorial is based.
+我们还要感谢 [ploxxxy](https://github.com/ploxxxy) 编写了最初的 “[石头剪刀布](https://github.com/ploxxxy/rock-paper-scissors-mc) ”插件，本教程正是基于此插件而创作的。
 
 ## 添加基础功能
 
