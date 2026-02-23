@@ -1,4 +1,4 @@
-# Writing a Command Handler
+# 编写命令处理器
 
 In Minecraft, commands are the primary way for both regular players and server operators to interact with the game on a lower level. They can be used to perform a wide range of tasks, from simple chat messages to complex server management commands. In this tutorial, we will create a basic Rock-Paper-Scissors command handler that allows players to play the game against the server.
 
@@ -8,7 +8,7 @@ Commands in Pumpkin are asynchronous, meaning that they do not block the main th
 
 We would also like to thank [ploxxxy](https://github.com/ploxxxy) for writing the original [Rock-Paper-Scissors plugin](https://github.com/ploxxxy/rock-paper-scissors-mc) from which this tutorial is based.
 
-## Adding the basics
+## 添加基础功能
 
 Each command in Pumpkin is defined as a structure that implements the `CommandExecutor` trait. This trait requires the implementation of a `execute` method, which takes the sender, server, and consumed arguments as parameters, and returns a `-> Result<(), CommandError>`. Let's define this structure now:
 
@@ -40,7 +40,7 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 
 This code defines an empty structure `RockPaperScissorsExecutor` that implements the `CommandExecutor` trait. The `execute` method is defined to return `Ok(())` when called.
 
-## Adding helper enums
+## 添加辅助枚举
 
 To make our lives easier, we will also define a couple of enums to represent the possible choices and outcomes of the game, as well as well as a couple functions to generate random choices and check the outcome. Add these to your plugin's code.
 
@@ -106,7 +106,7 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 
 This code will allow us to later pass in the player's choice and use it in the game logic, as well as compare it with the computer's choice to determine the outcome of the game.
 
-## Implementing the Game Logic
+## 实现游戏逻辑
 
 Now we can move on to actually implementing the game logic, and showing the outcome to the players.
 
@@ -188,7 +188,7 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 
 And that's it! The core logic is done. Now we only have one last thing to do.
 
-## Building and registering a command tree
+## 构建与注册命令树
 
 As stated earlier, we need to build a command tree and register it with the server. This will allow players to execute our plugin's commands.
 
@@ -223,7 +223,7 @@ async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
 }
 ```
 
-And that's it! If you compile the plugin, you can test it by running the following command:
+就这样完成了！如果您已编译该插件，可以通过运行以下命令来测试它：
 
 ```bash
 /rps rock
