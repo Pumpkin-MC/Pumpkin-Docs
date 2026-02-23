@@ -214,9 +214,9 @@ async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
     server.register_event(Arc::new(MyJoinHandler), EventPriority::Lowest, true).await;
     
     let command = CommandTree::new(NAMES, DESCRIPTION) // [!code ++:6]
-        .then(literal("rock").execute(RockPaperScissorsExecutor(Choice::Rock)))
-        .then(literal("paper").execute(RockPaperScissorsExecutor(Choice::Paper)))
-        .then(literal("scissors").execute(RockPaperScissorsExecutor(Choice::Scissors)));
+        .then(literal("石头").execute(RockPaperScissorsExecutor(Choice::Rock)))
+        .then(literal("布").execute(RockPaperScissorsExecutor(Choice::Paper)))
+        .then(literal("剪刀").execute(RockPaperScissorsExecutor(Choice::Scissors)));
 
     server.register_command(command, PermissionLvl::Zero).await;
 
