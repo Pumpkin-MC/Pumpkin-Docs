@@ -67,7 +67,7 @@ export const zhCN = defineConfig({
                 items: [
                     {
                         text: "介绍",
-                        link: "/plugin-dev/introduction",
+                        link: "/zh_cn/plugin-dev/introduction",
                     },
                     {
                         text: "插件模板",
@@ -75,16 +75,16 @@ export const zhCN = defineConfig({
                         items: [
                             {
                                 text: "创建项目",
-                                link: "/plugin-dev/plugin-template/creating-project",
+                                link: "/zh_cn/plugin-dev/plugin-template/creating-project",
                             },
                             {
                                 text: "基本逻辑",
-                                link: "/plugin-dev/plugin-template/basic-logic",
+                                link: "/zh_cn/plugin-dev/plugin-template/basic-logic",
                             },
                             {
                                 text: "事件",
                                 items: [
-                                    { text: "加入事件", link: "/plugin-dev/plugin-template/join-event" },
+                                    { text: "加入事件", link: "/zh_cn/plugin-dev/plugin-template/join-event" },
                                 ]
                             },
                             {
@@ -92,17 +92,17 @@ export const zhCN = defineConfig({
                                 items: [
                                     {
                                         text: "第一个命令",
-                                        link: "/plugin-dev/plugin-template/command/first-command"
+                                        link: "/zh_cn/plugin-dev/plugin-template/command/first-command"
                                     },
                                     {
                                         text: "剪刀石头布",
-                                        link: "/plugin-dev/plugin-template/command/rock-paper-scissors"
+                                        link: "/zh_cn/plugin-dev/plugin-template/command/rock-paper-scissors"
                                     },
                                 ]
                             },
                             {
                                 text: "背包",
-                                link: "/plugin-dev/plugin-template/inventories",
+                                link: "/zh_cn/plugin-dev/plugin-template/inventories",
                             },
                         ],
                     },
