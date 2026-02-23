@@ -10,8 +10,7 @@ Pumpkin 中的命令是异步执行的，这意味着它们在执行时不会阻
 
 ## 添加基础功能
 
-Each command in Pumpkin is defined as a structure that implements the `CommandExecutor` trait. This trait requires the implementation of a `execute` method, which takes the sender, server, and consumed arguments as parameters, and returns a `-> Result<(), CommandError>`. Let's define this structure now:
-
+Pumpkin 中的每个命令都被定义为实现 `CommandExecutor` trait 的结构体。此 trait 要求实现一个 `execute` 方法，该方法以发送者、服务器和消耗的参数作为参数，并返回 R`-> Result<(), CommandError>`。现在我们来定义这个结构体。
 ```rs
 use pumpkin::{
     command::{ // [!code ++:4]
@@ -40,9 +39,11 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 
 This code defines an empty structure `RockPaperScissorsExecutor` that implements the `CommandExecutor` trait. The `execute` method is defined to return `Ok(())` when called.
 
+这段代码定义了一个空结构体 `RockPaperScissorsExecutor` ，它实现了 `CommandExecutor` trait。其 `execute` 方法被定义为在调用时返回 `Ok(())`。
+
 ## 添加辅助枚举
 
-To make our lives easier, we will also define a couple of enums to represent the possible choices and outcomes of the game, as well as well as a couple functions to generate random choices and check the outcome. Add these to your plugin's code.
+为了让我们的开发工作更轻松，我们将在插件代码中定义一些枚举来表示游戏中可能的选择和结果，同时添加几个函数来生成随机选择和检查游戏结果。将这些内容添加到您的插件代码中。
 
 ```rs
 use rand::{rng, Rng};
@@ -82,7 +83,7 @@ fn get_random_choice() -> Choice {
 }
 ```
 
-Now we need to modify the `RockPaperScissorsExecutor` struct to accept a `Choice` parameter and implement the game logic.
+好的，现在我们需要修改 `RockPaperScissorsExecutor` 结构体，使其能接受一个 `Choice` 参数并实现游戏逻辑。
 
 ```rs
 struct RockPaperScissorsExecutor(Choice); // [!code ++]
@@ -104,13 +105,13 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 }
 ```
 
-This code will allow us to later pass in the player's choice and use it in the game logic, as well as compare it with the computer's choice to determine the outcome of the game.
+此代码将允许我们稍后传入玩家的选择并将其用于游戏逻辑中，同时将其与计算机的选择进行比较以确定游戏结果。
 
 ## 实现游戏逻辑
 
-Now we can move on to actually implementing the game logic, and showing the outcome to the players.
+现在，我们可以继续前进，实际实现游戏逻辑，并向玩家展示游戏结果。
 
-First we will show the player their and the computer's choice. Add this code to your plugin:
+首先，我们将向玩家展示他们自己和计算机的选择。将此代码添加到您的插件中：
 
 ```rs
 impl CommandExecutor for RockPaperScissorsExecutor {
@@ -126,7 +127,7 @@ impl CommandExecutor for RockPaperScissorsExecutor {
             
             sender // [!code ++:15]
                 .send_message(
-                    TextComponent::text("You chose: ")
+                    TextComponent::text("你选择了： ")
                         .add_text(format!("{:?}", player_choice))
                         .color_named(NamedColor::Aqua),
                 )
@@ -134,7 +135,7 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 
             sender
                 .send_message(
-                    TextComponent::text("I chose: ")
+                    TextComponent::text("我选择了： ")
                         .add_text(format!("{:?}", computer_choice))
                         .color_named(NamedColor::Gold),
                 )
@@ -146,7 +147,7 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 }
 ```
 
-Next we can compute the game outcome and show it to the player. Add this code to your plugin:
+接下来，我们可以计算游戏结果并将其展示给玩家。将此代码添加到您的插件中：
 
 ```rs
 impl CommandExecutor for RockPaperScissorsExecutor {
@@ -163,18 +164,18 @@ impl CommandExecutor for RockPaperScissorsExecutor {
             match player_choice.beats(&computer_choice) { // [!code ++:19]
                 Outcome::Win => {
                     sender
-                        .send_message(TextComponent::text("You win!").color_named(NamedColor::Green))
+                        .send_message(TextComponent::text("你赢了！").color_named(NamedColor::Green))
                         .await;
                 }
                 Outcome::Lose => {
                     sender
-                        .send_message(TextComponent::text("You lose!").color_named(NamedColor::Red))
+                        .send_message(TextComponent::text("你输了！").color_named(NamedColor::Red))
                         .await;
                 }
                 Outcome::Draw => {
                     sender
                         .send_message(
-                            TextComponent::text("It's a tie!").color_named(NamedColor::Yellow),
+                            TextComponent::text("平局了！").color_named(NamedColor::Yellow),
                         )
                         .await;
                 }
@@ -186,29 +187,29 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 }
 ```
 
-And that's it! The core logic is done. Now we only have one last thing to do.
+就这样！核心逻辑已完成。现在我们只剩下最后一件事要做。
 
 ## 构建与注册命令树
 
-As stated earlier, we need to build a command tree and register it with the server. This will allow players to execute our plugin's commands.
+如前所述，我们需要构建一个命令树并将其注册到服务器。这将允许玩家执行我们插件的命令。
 
-Building a command tree isn't very hard, but you have to know the exact structure of the command and its arguments. In this case, we have a command named `rock-paper-scissors`, which will take one required argument (the player's choice).
+构建命令树并不难，但您必须知道命令及其参数的确切结构。在本例中，我们有一个名为 `rock-paper-scissors` 的命令，它将接受一个必需参数（玩家的选择）。
 
-The command tree is initialized using the `CommandTree::new()` function. This function takes two arguments: a list of names, where the first is the main command name, and the others are aliases for the command; and a command description which is used to describe the command in the help menu. We can then add 'branches' to the tree using the `.then()` method. This method accepts a 'leaf' which can be built with the `literal()`, `argument()`, or `require()` functions.
+命令树使用 `CommandTree::new()` 函数进行初始化。此函数接受两个参数：一个名称列表，其中第一个是主命令名称，其余的是该命令的别名；以及一个用于在帮助菜单中描述命令的命令描述。然后，我们可以使用 `.then()` 方法向树中添加“分支”。此方法接受一个“叶节点”，该节点可以使用 `literal()`, `argument()`, 或 `require()` 函数构建。
 
-For the rock-paper-scissors command, we'll create 3 separate branches, each with a `literal()` leaf node for the player's choice. We will also register the command tree with the server and with a `PermissionLvl` of `Zero` which will allow anyone to execute the command. Add the following code to your `on_load()` method:
+对于石头剪刀布命令，我们将创建 3 个独立的分支，每个分支都有一个代表玩家选择的 `literal()` 叶节点。我们还将以 `Zero` 的 `PermissionLvl` 向服务器注册该命令树，这将允许任何人执行该命令。请将以下代码添加到您的 `on_load()` 方法中。
 
 ```rs
 use pumpkin_util::PermissionLvl; // [!code ++]
 
 const NAMES: [&str; 2] = ["rps", "rockpaperscissors"]; // [!code ++:2]
-const DESCRIPTION: &str = "Play Rock Paper Scissors with the server.";
+const DESCRIPTION: &str = "与服务器玩石头剪刀布。";
 
 #[plugin_method]
 async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
     server.init_log();
 
-    log::info!("Hello, Pumpkin!");
+    log::info!("你好, Pumpkin!");
 
     server.register_event(Arc::new(MyJoinHandler), EventPriority::Lowest, true).await;
     
