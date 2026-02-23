@@ -11,7 +11,7 @@ const NAMES: [&str; 2] = ["test", "testcommand"];
 您还需要定义命令的描述，当玩家使用 /help 命令时，此描述将会显示出来
 
 ```rust
-const DESCRIPTION: &str = "My first Command!";
+const DESCRIPTION: &str = "我的第一个命令！";
 ```
 
 Pumpkin 的 Command API 很大程度上受到了 Mojang 的 [Brigadier](https://github.com/Mojang/brigadier) 的启发。这套系统能够让你轻松地管理命令语法，并为玩家提供自动的 Tab 补全功能。
