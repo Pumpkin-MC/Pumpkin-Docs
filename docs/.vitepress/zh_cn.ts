@@ -71,19 +71,38 @@ export const zhCN = defineConfig({
                     },
                     {
                         text: "插件模板",
-                        link: "/zh_cn/plugin-dev/plugin-template/introduction",
+                        collapsed: false,
                         items: [
                             {
                                 text: "创建项目",
                                 link: "/zh_cn/plugin-dev/plugin-template/creating-project",
                             },
                             {
-                                text: "基础逻辑",
+                                text: "基本逻辑",
                                 link: "/zh_cn/plugin-dev/plugin-template/basic-logic",
                             },
                             {
-                                text: "加入事件",
-                                link: "/zh_cn/plugin-dev/plugin-template/join-event",
+                                text: "事件",
+                                items: [
+                                    { text: "加入事件", link: "/zh_cn/plugin-dev/plugin-template/join-event" },
+                                ]
+                            },
+                            {
+                                text: "命令",
+                                items: [
+                                    {
+                                        text: "第一个命令",
+                                        link: "/zh_cn/plugin-dev/plugin-template/command/first-command"
+                                    },
+                                    {
+                                        text: "剪刀石头布",
+                                        link: "/zh_cn/plugin-dev/plugin-template/command/rock-paper-scissors"
+                                    },
+                                ]
+                            },
+                            {
+                                text: "背包",
+                                link: "/zh_cn/plugin-dev/plugin-template/inventories",
                             },
                         ],
                     },
@@ -123,5 +142,5 @@ export const zhCN = defineConfig({
             },
         },
         outline: "deep",
-    }
+    },
 });
