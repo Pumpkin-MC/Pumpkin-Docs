@@ -5,6 +5,7 @@ import { pt } from "./pt";
 import { zhCN } from "./zh_cn";
 import { de } from "./de";
 import { trTR } from "./tr_tr";
+import { vi } from "./vi";
 
 
 // https://vitepress.dev/reference/site-config
@@ -34,6 +35,9 @@ export default defineConfig({
         },
         tr_TR: {
             label: "Türkçe", ...trTR
+        },
+        vi: {
+            label: "Tiếng Việt", ...vi
         },
     },
 
