@@ -6,8 +6,10 @@ Pumpkin offers a robust configuration system that allows users to customize vari
 
 Pumpkin's configuration is split into a "basic" configuration made for quick changes and important changes, and a more "advanced" configuration
 
-- `configuration.toml`: simple and can be compared to the vanilla `server.properties`.
-- `features.toml`: designed to have all features of pumpkin at one place, making it a large configuration
+- `config/configuration.toml`: simple and can be compared to the vanilla `server.properties`.
+- `config/features.toml`: designed to have all features of pumpkin at one place, making it a large configuration
+
+You can create those two files under `config/` folder before running Pumpkin, or edit them after the initial run of Pumpkin.
 
 ### Server Version
 
