@@ -44,21 +44,25 @@ Since our main aim here is to change the welcome message that the player sees wh
 :::code-group
 
 ```rs [lib.rs]
- // [!code ++:20]
- use pumpkin_plugin_api::{
-     Context, Plugin, PluginMetadata, Server,
-     events::{EventHandler, EventPriority, PlayerJoinEventData},
-     text::TextComponent,
- };
- use tracing::*;
- 
- struct MyJoinHandler;
- impl EventHandler<PlayerJoinEventData> for MyJoinHandler {
-     fn handle<'a>(&'a self, server: Server, mut event: PlayerJoinEventData) -> PlayerJoinEventData { 
-         event.join_message = TextComponent::text("Hello, world!");
-         event
-     }
- }
+// [!code ++:20]
+use pumpkin_plugin_api::{
+    Context, Plugin, PluginMetadata, Server,
+    events::{EventData, EventHandler, EventPriority, PlayerJoinEvent},
+    text::TextComponent,
+};
+use tracing::*;
+
+struct MyJoinHandler;
+impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
+    fn handle<'a>(
+        &'a self,
+        server: Server,
+        mut event: EventData<PlayerJoinEvent>,
+    ) -> EventData<PlayerJoinEvent> { 
+        event.join_message = TextComponent::text("Hello, world!");
+        event
+    }
+}
 ```
 
 :::

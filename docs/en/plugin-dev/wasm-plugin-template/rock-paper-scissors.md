@@ -234,6 +234,14 @@ impl Plugin for HelloPlugin {
             CommandNode::literal("scissors").execute(RockPaperScissorsExecutor(Choice::Scissors)),
         );
 
+        let permission = Permission {
+            node: "hello-pumpkin:command.rockpaperscisors".to_string(),
+            description: "Allows the player to play rock paper scisors".to_string(),
+            default: PermissionDefault::Allow,
+            children: Vec::new(),
+        };
+        
+        context.register_permission(&permission)?;
         context.register_command(command, "hello-pumpkin:command.rockpaperscisors");
         Ok(())
     }
