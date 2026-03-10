@@ -1,12 +1,12 @@
 # PVP
 
-PVP is a core part of the Vanilla mechanics, with even the smallest change affecting gameplay. Pumpkin allows you to fully configure PVP.
+PVP là một phần quan trọng của Vanilla mechanics, với ngay cả những thay đổi nhỏ nhất cũng ảnh hưởng đến lối chơi. Pumpkin cho phép bạn tùy chỉnh hoàn toàn PVP.
 
-## Configuring PVP
+## Cấu hình PVP
 
 #### `enabled`: Boolean
 
-Whether PVP is enabled or not.
+Bật và tắt PVP.
 
 :::code-group
 
@@ -19,7 +19,7 @@ enabled = true
 
 #### `hurt_animation`: Boolean
 
-Whether to show red hurt animation and FOV bobbing or not.
+Bật và tắt hiệu ứng đỏ khi bị đánh và FOV bobbing.
 
 :::code-group
 
@@ -32,7 +32,7 @@ hurt_animation = true
 
 #### `protect_creative`: Boolean
 
-Whether to protect players in creative against PVP or not.
+Bật và tắt bảo vệ người chơi trong creative khỏi PVP.
 
 :::code-group
 
@@ -45,7 +45,7 @@ protect_creative = true
 
 #### `knockback`: Boolean
 
-Whether attacks should have knockback or not.
+Bật và tắt knockback khi đánh.
 
 :::code-group
 
@@ -58,7 +58,7 @@ knockback = true
 
 #### `swing`: Boolean
 
-Whether players should swing when attacking or not.
+Bật và tắt swing khi đánh.
 
 :::code-group
 
@@ -69,9 +69,9 @@ swing = true
 
 :::
 
-## Default Config
+## Cấu hình mặc định
 
-By default, all PVP options are enabled in order to match vanilla behavior.
+Theo mặc định, tất cả các tùy chọn PVP đều được bật để phù hợp với hành vi vanilla.
 
 :::code-group
 

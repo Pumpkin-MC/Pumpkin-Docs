@@ -1,8 +1,8 @@
 # RCON
 
-RCON is a protocol that allows you to remotely manage the server from a different device. Pumpkin has full support for RCON.
+RCON là một giao thức cho phép bạn quản lý server từ xa từ một thiết bị khác. Pumpkin hỗ trợ đầy đủ RCON.
 
-## Configuring RCON
+## Cấu hình RCON
 
 #### `enabled`: Boolean
 
@@ -17,7 +17,7 @@ enabled = true
 
 #### `address`: String
 
-The address and port that RCON should listen to.
+Địa chỉ và port mà RCON sẽ lắng nghe.
 
 :::code-group
 
@@ -31,21 +31,21 @@ address = "0.0.0.0:25575"
 
 #### `password`: String
 
-The password to use for RCON authentication.
+Mật khẩu để sử dụng cho xác thực RCON.
 
 :::code-group
 
 ```toml [features.toml] {3}
 [rcon]
 enabled = true
-password = "[your safe password here]"
+password = "[mật khẩu ở đây]"
 ```
 
 :::
 
 #### `max_connections`: Integer
 
-The max number of RCON connections allowed at a single time. Set this to 0 to disable the limit.
+Số kết nối RCON tối đa được phép tại một thời điểm. Đặt thành 0 để tắt giới hạn.
 
 :::code-group
 
@@ -61,7 +61,7 @@ max_connections = 5
 
 #### `log_logged_successfully`: Boolean
 
-Whether successful logins should be logged to console or not.
+Bật và tắt log khi đăng nhập thành công.
 
 :::code-group
 
@@ -74,7 +74,7 @@ log_logged_successfully = true
 
 #### `log_wrong_password`: Boolean
 
-Whether wrong password attempts should be logged to console or not.
+Bật và tắt log khi đăng nhập sai mật khẩu.
 
 :::code-group
 
@@ -87,7 +87,7 @@ log_logged_successfully = true
 
 #### `log_commands`: Boolean
 
-Whether to log commands ran from RCON to console or not.
+Bật và tắt log khi chạy lệnh từ RCON.
 
 :::code-group
 
@@ -100,7 +100,7 @@ log_commands = true
 
 #### `log_quit`: Boolean
 
-Whether RCON client quit should be logged or not.
+Bật và tắt log khi RCON client thoát.
 
 :::code-group
 
@@ -111,9 +111,9 @@ log_quit = true
 
 :::
 
-## Default Config
+## Cấu hình mặc định
 
-By default, RCON is disabled.
+Theo mặc định, RCON bị tắt.
 
 :::code-group
 

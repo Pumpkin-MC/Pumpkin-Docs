@@ -1,15 +1,15 @@
-# Resource Pack
+# Gói tài nguyên
 
-Servers can send resource packs to clients in order to change the appearance of the game on the client. Pumpkin allows you to fully configure the resource pack.
+Server có thể gửi gói tài nguyên cho client để thay đổi giao diện của game trên client. Pumpkin cho phép bạn tùy chỉnh gói tài nguyên.
 
 > [!TIP]
-> Minify your resource pack using [PackSquash](https://packsquash.aylas.org/)! This can help clients download the resource pack faster.
+> Nén gói tài nguyên của bạn bằng [PackSquash](https://packsquash.aylas.org/)! Điều này có thể giúp client tải gói tài nguyên nhanh hơn.
 
-## Configuring Resource Pack
+## Cấu hình gói tài nguyên
 
 #### `enabled`: Boolean
 
-Whether a resource pack is enabled or not.
+Bật và tắt gói tài nguyên.
 
 :::code-group
 
@@ -22,10 +22,10 @@ enabled = true
 
 #### `resource_pack_url`: String
 
-The direct download URL to the resource pack.
+URL tải trực tiếp gói tài nguyên.
 
 > [!TIP]
-> You can host the resource pack for free at [MCPacks](https://mc-packs.net/).
+> Bạn có thể host gói tài nguyên miễn phí tại [MCPacks](https://mc-packs.net/).
 
 :::code-group
 
@@ -39,15 +39,15 @@ resource_pack_url = "[your download URL here]"
 
 #### `resource_pack_sha1`: String
 
-The SHA1 hash of the resource pack.
+SHA1 hash của gói tài nguyên.
 
-> [!IMPORTANT]
-> Although not required to specify, you should specify this field because the client will otherwise redownload the resource pack every time they join the server, even if there are no changes to the resource pack.
+> [!IMPORTANT] QUAN TRỌNG
+> Mặc dù không bắt buộc phải chỉ định, bạn nên chỉ định trường này vì client sẽ tải lại gói tài nguyên mỗi khi tham gia server, ngay cả khi không có thay đổi nào đối với gói tài nguyên.
 
-> [!WARNING]
-> Make sure to update this field if the resource pack is modified.
+> [!WARNING] CẢNH BÁO
+> Hãy đảm bảo cập nhật trường này nếu gói tài nguyên được sửa đổi.
 
-::: details How do I get the SHA1 hash of my resource pack?
+::: details Làm thế nào để lấy SHA1 hash của gói tài nguyên?
 ::: code-group
 
 ```powershell [Windows (PowerShell)]
@@ -76,7 +76,7 @@ resource_pack_sha1 = "[your hash here]"
 
 #### `prompt_message`: String
 
-The message to show to the user when prompted to download the resource pack.
+Thông báo hiển thị cho người dùng khi được yêu cầu tải gói tài nguyên.
 
 :::code-group
 
@@ -90,7 +90,7 @@ prompt_message = "[your message here]"
 
 #### `force`: Boolean
 
-Whether to force the client to download the resource pack or not. If the client declines the download, they will be kicked from the server.
+Bắt buộc client tải gói tài nguyên. Nếu client từ chối tải, họ sẽ bị kick khỏi server.
 
 :::code-group
 
@@ -102,9 +102,9 @@ force = false
 
 :::
 
-## Default Config
+## Cấu hình mặc định
 
-By default, no resource pack is sent to clients.
+Theo mặc định, không có gói tài nguyên nào được gửi cho client.
 
 :::code-group
 

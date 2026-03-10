@@ -1,12 +1,12 @@
 # Query
 
-The Query protocol is a simple way to query the server about its status. Pumpkin fully supports the Query protocol.
+Giao thức Query là một cách đơn giản để truy vấn trạng thái của server. Pumpkin hỗ trợ đầy đủ giao thức Query.
 
-## Configuring Query
+## Cấu hình Query
 
 #### `enabled`: Boolean
 
-Whether to listen for Query protocol requests or not.
+Bật và tắt Query.
 
 :::code-group
 
@@ -19,7 +19,7 @@ enabled = true
 
 #### `port`: Integer (0-65535) (optional)
 
-Which port to listen to Query protocol requests on. If not specified, it uses the same port as the server.
+Port để lắng nghe các yêu cầu Query. Nếu không được chỉ định, nó sẽ sử dụng cùng port với server.
 
 :::code-group
 
@@ -31,9 +31,9 @@ port = 12345
 
 :::
 
-## Default Config
+## Cấu hình mặc định
 
-By default, Query is disabled. It will run on the server port if enabled unless specified explicitly.
+Theo mặc định, Query bị tắt. Nó sẽ chạy trên port của server nếu được bật trừ khi được chỉ định rõ ràng.
 
 :::code-group
 

@@ -1,12 +1,12 @@
-# Logging
+# Ghi log
 
-Pumpkin allows you to customize what you want in your logs.
+Pumpkin cho phép bạn tùy chỉnh những gì bạn muốn trong log.
 
-## Configuring Logging
+## Cấu hình ghi log
 
 #### `enabled`: Boolean
 
-Whether logging is enabled or not.
+Bật và tắt ghi log.
 
 :::code-group
 
@@ -19,7 +19,7 @@ enabled = true
 
 #### `level`: Enum
 
-The log verbosity level. Possible values are:
+Mức độ chi tiết của log. Các giá trị có thể là:
 
 - Off
 - Error
@@ -40,7 +40,7 @@ level = "Debug"
 
 #### `env`: Boolean
 
-Whether to allow choosing the log level by setting the `RUST_LOG` environment variable or not.
+Cho phép chọn mức độ chi tiết của log bằng cách đặt biến môi trường `RUST_LOG`.
 
 :::code-group
 
@@ -54,7 +54,7 @@ env = true
 
 #### `threads`: Boolean
 
-Whether to print threads in the logging message or not.
+Bật và tắt thread chi tiết trong log.
 
 :::code-group
 
@@ -68,7 +68,7 @@ threads = false
 
 #### `color`: Boolean
 
-Whether to print to the console with color or not.
+Bật và tắt màu trong log.
 
 :::code-group
 
@@ -82,7 +82,7 @@ color = false
 
 #### `timestamp`: Boolean
 
-Whether to print the timestamp in the message or not.
+Bật và tắt timestamp trong log.
 
 :::code-group
 
@@ -94,9 +94,9 @@ timestamp = false
 
 :::
 
-## Default Config
+## Cấu hình mặc định
 
-By default, logging is enabled at the `Info` level and will print with color, threads, and timestamps.
+Theo mặc định, ghi log được bật ở mức `Info` và sẽ in màu, thread và timestamp.
 
 :::code-group
 

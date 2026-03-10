@@ -1,18 +1,18 @@
 # Proxy
 
-Many servers use proxies to manage connections and distribute players across servers. Pumpkin supports the following proxy protocols:
+Nhiều server sử dụng proxy để quản lý kết nối và phân phối người chơi trên các server. Pumpkin hỗ trợ các giao thức proxy sau:
 
 - [Velocity](https://papermc.io/software/velocity)
 - [BungeeCord](https://www.spigotmc.org/wiki/bungeecord-installation/)
 
 > [!TIP]
-> Velocity is recommended for most server networks. Velocity is modern and more performant compared to BungeeCord.
+> Velocity được khuyến nghị cho hầu hết các mạng server. Velocity hiện đại và hiệu quả hơn so với BungeeCord.
 
-## Configuring Proxy
+## Cấu hình Proxy
 
 #### `enabled`: Boolean
 
-Enables support for proxies.
+Bật và tắt proxy.
 
 :::code-group
 
@@ -27,7 +27,7 @@ enabled = true
 
 #### `enabled`: Boolean
 
-Whether Velocity support is enabled or not.
+Bật và tắt Velocity.
 
 :::code-group
 
@@ -40,14 +40,14 @@ enabled = true
 
 #### `secret`: String
 
-The secret as configured in Velocity.
+Secret như đã cấu hình trong Velocity.
 
 :::code-group
 
 ```toml [features.toml]{3}
 [proxy.velocity]
 enabled = true
-secret = "[proxy secret here]"
+secret = "[proxy secret ở đây]"
 ```
 
 :::
@@ -56,7 +56,7 @@ secret = "[proxy secret here]"
 
 #### `enabled`: Boolean
 
-Whether BungeeCord support is enabled or not.
+Bật và tắt BungeeCord.
 
 :::code-group
 
@@ -67,12 +67,12 @@ enabled = true
 
 :::
 
-> [!CAUTION]
-> BungeeCord can't verify if player info is from your proxy or an imposter. Ensure that the server's firewall is correctly configured.
+> [!CAUTION] CHÚ Ý
+> BungeeCord không thể xác minh thông tin người chơi có từ proxy của bạn hay không. Đảm bảo tường lửa của server được cấu hình đúng.
 
-## Default Config
+## Cấu hình mặc định
 
-By default, proxy support is disabled. Here is the default config:
+Theo mặc định, proxy bị tắt. Đây là cấu hình mặc định:
 
 :::code-group
 
