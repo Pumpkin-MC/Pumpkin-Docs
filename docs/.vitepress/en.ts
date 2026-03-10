@@ -18,9 +18,7 @@ export const en = defineConfig({
         sidebar: [
             {
                 text: "About",
-                items: [
-                    { text: "Benchmarks", link: "/about/benchmarks" },
-                ],
+                items: [{ text: "Benchmarks", link: "/about/benchmarks" }],
             },
             {
                 text: "Configuration",
@@ -70,39 +68,69 @@ export const en = defineConfig({
                         link: "/plugin-dev/introduction",
                     },
                     {
-                        text: "Plugin Template",
+                        text: "Wasm Plugin Template",
                         collapsed: false,
                         items: [
                             {
                                 text: "Creating Project",
-                                link: "/plugin-dev/plugin-template/creating-project",
+                                link: "/plugin-dev/wasm-plugin-template/creating-project",
                             },
                             {
                                 text: "Basic Logic",
-                                link: "/plugin-dev/plugin-template/basic-logic",
+                                link: "/plugin-dev/wasm-plugin-template/basic-logic",
                             },
                             {
                                 text: "Events",
-                                items: [
-                                    { text: "Join Event", link: "/plugin-dev/plugin-template/join-event" },
-                                ]
+                                link: "/plugin-dev/wasm-plugin-template/events",
                             },
                             {
                                 text: "Commands",
                                 items: [
                                     {
                                         text: "First Command",
-                                        link: "/plugin-dev/plugin-template/command/first-command"
+                                        link: "/plugin-dev/wasm-plugin-template/command/first-command",
                                     },
                                     {
                                         text: "Rock-Paper-Scissors",
-                                        link: "/plugin-dev/plugin-template/command/rock-paper-scissors"
+                                        link: "/plugin-dev/wasm-plugin-template/rock-paper-scissors",
                                     },
-                                ]
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        text: "Native Plugin Template",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "Creating Project",
+                                link: "/plugin-dev/native-plugin-template/creating-project",
+                            },
+                            {
+                                text: "Basic Logic",
+                                link: "/plugin-dev/native-plugin-template/basic-logic",
+                            },
+                            {
+                                text: "Events",
+                                items: [
+                                    {
+                                        text: "Join Event",
+                                        link: "/plugin-dev/native-plugin-template/join-event",
+                                    },
+                                ],
+                            },
+                            {
+                                text: "Commands",
+                                items: [
+                                    {
+                                        text: "Rock-Paper-Scissors",
+                                        link: "/plugin-dev/native-plugin-template/command/rock-paper-scissors",
+                                    },
+                                ],
                             },
                             {
                                 text: "Inventories",
-                                link: "/plugin-dev/plugin-template/inventories",
+                                link: "/plugin-dev/native-plugin-template/inventories",
                             },
                         ],
                     },

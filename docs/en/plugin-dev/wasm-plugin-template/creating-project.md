@@ -1,0 +1,82 @@
+# Creating a new project
+
+Pumpkin plugins use the [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html) build system.
+
+The complete code for this plugin can be found as a [template on GitHub](https://github.com/BjornTheProgrammer/Hello-Pumpkin-Wasm).
+
+## Installing the toolchain
+
+Before we can compile a plugin, we have to have the `wasm32-wasip2` target installed. You can install the target
+by running:
+
+```bash
+rustup target add wasm32-wasip2
+```
+
+## Initializing a new crate
+
+First we need to create a new project folder. You can do this by running this command in the folder you created:
+
+```bash
+cargo new <project-name> --lib
+```
+
+This will create a folder with a couple files in it. The folder structure should look like this:
+
+```bash
+├── Cargo.toml
+└── src
+    └── lib.rs
+```
+
+## Configuring the crate
+
+Since Pumpkin plugins are loaded at runtime as dynamic libraries, we need to tell Cargo to build this crate as one.
+:::code-group
+
+```toml [Cargo.toml]
+[package]
+name = "hello-pumpkin-wasm"
+version = "0.1.0"
+edition = "2024"
+
+[lib] // [!code ++:2]
+crate-type = ["cdylib"]
+
+[dependencies]
+```
+
+:::
+
+Next we need to add some basic dependencies. Since Pumpkin is still in early development, the internal crates aren't published to crates.io, so we need to tell Cargo to download the dependencies directly from GitHub.
+:::code-group
+
+```toml [Cargo.toml]
+[package]
+name = "hello-pumpkin"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+// [!code ++:3]
+# This is the api crate that makes creating plugins easier, and has wit definitions
+pumpkin-plugin-api = { version = "0.1.0", git = "https://github.com/Pumpkin-MC/Pumpkin", package = "pumpkin-plugin-api" }
+tracing = "0.1"
+```
+
+:::
+
+For improved performance and smaller file sizes, we recommend enabling Link-Time Optimization (LTO).  
+Be aware that this will increase compilation time.
+:::code-group
+
+```toml [Cargo.toml]
+[profile.release] // [!code ++:2]
+lto = true
+```
+
+:::
+<small>Enables LTO only for release builds.</small>
