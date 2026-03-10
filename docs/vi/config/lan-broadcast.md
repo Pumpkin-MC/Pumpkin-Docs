@@ -1,12 +1,12 @@
-# LAN Broadcast
+# Mạng LAN
 
-Pumpkin can advertise the server across the network in order to make it easier for local players to connect to the server easier.
+Pumpkin có thể quảng bá máy chủ trên toàn mạng LAN để giúp những người chơi cục bộ kết nối với máy chủ dễ dàng hơn.
 
-## Configuring LAN Broadcast
+## Cấu hình mạng LAN
 
 #### `enabled`: Boolean
 
-Whether LAN broadcast is enabled or not.
+Bật và tắt mạng LAN.
 
 :::code-group
 
@@ -19,10 +19,10 @@ enabled = true
 
 #### `motd`: String (optional)
 
-The MOTD to broadcast out to clients; uses the server's MOTD by default.
+MOTD để quảng bá ra client; sử dụng MOTD của máy chủ theo mặc định.
 
-> [!CAUTION]
-> LAN broadcast MOTD does not support multiple lines, RGB colors, or gradients. Pumpkin does not verify the MOTD before broadcasting it. If the server MOTD is using these components, consider defining this field so that clients see a proper MOTD.
+> [!CAUTION] CHÚ Ý
+> MOTD mạng LAN không hỗ trợ nhiều dòng, màu RGB hoặc gradient. Pumpkin không xác minh MOTD trước khi quảng bá nó. Nếu MOTD của máy chủ đang sử dụng các thành phần này, hãy cân nhắc định nghĩa trường này để client thấy MOTD phù hợp.
 
 :::code-group
 
@@ -34,12 +34,12 @@ motd = "[your MOTD here]"
 
 :::
 
-#### `port`: Integer (0-65535) (optional)
+#### `port`: Integer (0-65535) (tùy chọn)
 
-What port to bind to. If not specified, will bind to port 0 (any available port on the system).
+Port để bind. Nếu không được chỉ định, sẽ bind đến port 0 (bất kỳ port nào có sẵn trên hệ thống).
 
-> [!IMPORTANT]
-> The protocol defines what port to broadcast to. This option only exists to specify which port to bind to on the host. This option purely exists so that the port can be predictable.
+> [!IMPORTANT] QUAN TRỌNG
+> Giao thức định nghĩa port để quảng bá. Tùy chọn này chỉ tồn tại để chỉ định port nào sẽ bind trên host. Tùy chọn này chỉ tồn tại để port có thể dự đoán được.
 
 :::code-group
 
@@ -51,9 +51,9 @@ port = 46733
 
 :::
 
-## Default Config
+## Cấu hình mặc định
 
-By default, LAN broadcast is disabled.
+Theo mặc định, mạng LAN bị tắt.
 
 :::code-group
 

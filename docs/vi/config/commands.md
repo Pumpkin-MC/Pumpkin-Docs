@@ -1,12 +1,12 @@
-# Commands
+# Lệnh
 
-Pumpkin supports Vanilla commands and allows you to configure where they can be ran from.
+Pumpkin hỗ trợ lệnh Vanilla và cho phép bạn cấu hình nơi chúng có thể được chạy từ đó.
 
-## Configuring Commands
+## Cấu hình lệnh
 
 #### `use_console`: Boolean
 
-Whether commands from the console are accepted or not.
+Cho phép lệnh từ console.
 
 :::code-group
 
@@ -19,7 +19,7 @@ use_console = false
 
 #### `log_console`: Boolean
 
-Whether commands from players should be logged in the console or not.
+Lệnh từ người chơi có được ghi vào console hay không.
 
 :::code-group
 
@@ -30,9 +30,9 @@ log_console = false
 
 :::
 
-## Operation permission level
+## Cấp độ quyền
 
-The default permission level for all players.
+Cấp độ quyền mặc định cho tất cả người chơi.
 
 :::code-group
 
@@ -42,9 +42,9 @@ default_op_level = 0
 
 :::
 
-## Default Config
+## Cấu hình mặc định
 
-By default, Pumpkin will allow commands from console and log all commands run by players.
+Theo mặc định, Pumpkin sẽ cho phép lệnh từ console và ghi lại tất cả các lệnh được chạy bởi người chơi.
 
 :::code-group
 

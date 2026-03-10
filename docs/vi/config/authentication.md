@@ -1,15 +1,15 @@
-# Authentication
+# Xác thực
 
-Servers authenthicate with Mojang's session servers in order to ensure the client is playing on a legitimate, paid account. Pumpkin allows you to fully configure authentication.
+Server xác thực với Mojang's session servers để đảm bảo client đang chơi trên tài khoản hợp lệ. Pumpkin cho phép bạn cấu hình xác thực.
 
-## Configuring Authentication
+## Cấu hình xác thực
 
-> [!WARNING]
-> Most servers should not change the default authenthication configuration. Doing so may have unintended consequences. **Only change these settings if you know what you are doing!**
+> [!WARNING] CẢNH BÁO
+> Hầu hết các server không nên thay đổi cấu hình xác thực mặc định. Làm như vậy có thể gây ra hậu quả không mong muốn. **Chỉ thay đổi các cài đặt này nếu bạn biết mình đang làm gì!**
 
 #### `enabled`: Boolean
 
-Whether authenthication is enabled or not.
+Bật và tắt xác thực.
 
 :::code-group
 
@@ -22,7 +22,7 @@ enabled = false
 
 #### `prevent_proxy_connections`: Boolean
 
-Whether to block proxy connections or not.
+Chặn kết nối proxy.
 
 :::code-group
 
@@ -34,52 +34,52 @@ prevent_proxy_connections = true
 
 :::
 
-#### `auth_url`: String (optional)
+#### `auth_url`: String (tùy chọn)
 
-The URL to authenthicate with. Uses Mojang's session servers to authenthicate if not specified.
+URL để xác thực. Sử dụng Mojang's session servers để xác thực nếu không được chỉ định.
 
 ##### Placeholders
 
 | Placeholder     | Description        |
 | --------------- | ------------------ |
-| `{username}`    | Player username    |
-| `{server_hash}` | Hash of the server |
+| `{username}`    | Tên người chơi    |
+| `{server_hash}` | Hash của server |
 
 :::code-group
 
 ```toml [features.toml] {2}
 [authentication]
-auth_url = "[custom auth server here]"
+auth_url = "[custom auth server ở đây]"
 ```
 
 :::
 
-#### `prevent_proxy_connection_auth_url`: String (optional)
+#### `prevent_proxy_connection_auth_url`: String (tùy chọn)
 
-The URL to authenthicate with if `prevent_proxy_connections` is enabled. Uses Mojang's session servers to authenthicate if not specified.
+URL để xác thực nếu `prevent_proxy_connections` được bật. Sử dụng Mojang's session servers để xác thực nếu không được chỉ định.
 
 ##### Placeholders
 
 | Placeholder     | Description              |
 | --------------- | ------------------------ |
-| `{username}`    | Player username          |
-| `{server_hash}` | Hash of the server       |
-| `{ip}`          | IP Address of the player |
+| `{username}`    | Tên người chơi          |
+| `{server_hash}` | Hash của server       |
+| `{ip}`          | IP của người chơi |
 
 :::code-group
 
 ```toml [features.toml] {2}
 [authentication]
-prevent_proxy_connection_auth_url = "[custom auth server here]"
+prevent_proxy_connection_auth_url = "[custom auth server ở đây]"
 ```
 
 :::
 
-### Player Profile
+### Hồ sơ người chơi
 
 #### `allow_banned_players`: Boolean
 
-Allow players flagged by Mojang.
+Cho phép người chơi đã bị ban bởi Mojang.
 
 :::code-group
 
@@ -92,7 +92,7 @@ allow_banned_players = true
 
 #### `allowed_actions`: String Array
 
-What actions are allowed if `allow_banned_players` is enabled.
+Các hành động được cho phép nếu `allow_banned_players` được bật.
 
 :::code-group
 
@@ -108,7 +108,7 @@ allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
 
 #### `enabled`: Boolean
 
-Whether to filter/validate player textures (e.g. skins/capes).
+Bật và tắt textures (vd: skins/capes). 
 
 :::code-group
 
@@ -121,7 +121,7 @@ enabled = true
 
 #### `allowed_url_schemes`: String Array
 
-Allowed URL schemes for textures.
+URL schemes được cho phép cho textures.
 
 :::code-group
 
@@ -135,7 +135,7 @@ allowed_url_schemes = ["http", "https"]
 
 #### `allowed_url_domains`: String Array
 
-Allowed URL domains for textures.
+URL domains được cho phép cho textures.
 
 :::code-group
 
@@ -151,7 +151,7 @@ allowed_url_domains = [".minecraft.net", ".mojang.com"]
 
 #### `skin`: Boolean
 
-Whether to use player skins or not.
+Bật và tắt skins.
 
 :::code-group
 
@@ -164,7 +164,7 @@ skin = true
 
 #### `cape`: Boolean
 
-Whether to use player capes or not.
+Bật và tắt capes.
 
 :::code-group
 
@@ -177,7 +177,7 @@ cape = true
 
 #### `elytra`: Boolean
 
-Whether to use player elytras or not.
+Bật và tắt elytras.
 
 :::code-group
 
@@ -188,9 +188,9 @@ elytra = true
 
 :::
 
-## Default Config
+## Cấu hình mặc định
 
-By default, authentication is enabled and uses Mojang's servers. Here is the default config:
+Theo mặc định, xác thực được bật và sử dụng Mojang's servers. Đây là cấu hình mặc định:
 :::code-group
 
 ```toml [features.toml]

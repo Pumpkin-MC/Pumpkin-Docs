@@ -2,7 +2,7 @@
 
 Giải thích `configuration.toml`
 
-## Địa chỉ máy chủ
+## Địa chỉ Server
 
 Địa chỉ để bind server.
 
@@ -16,7 +16,7 @@ server_address = "0.0.0.0:25565"
 
 ## Seed
 
-Seed cho world generation..
+Seed dành cho world generation.
 
 :::code-group
 

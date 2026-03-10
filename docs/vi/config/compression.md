@@ -1,15 +1,15 @@
-# Compression
+# Nén dữ liệu
 
-Compression is used to reduce the size of packets. This is beneficial to reduce bandwidth server side and also to help players on slower internet connections.
+Nén dữ liệu được sử dụng để giảm kích thước của các gói tin. Điều này có lợi để giảm băng thông phía máy chủ và cũng để giúp những người chơi có kết nối internet chậm hơn.
 
-## Configuring compression
+## Cấu hình nén dữ liệu
 
 #### `enabled`: Boolean
 
-Whether packet compression is enabled or not.
+Bật và tắt nén dữ liệu.
 
 > [!TIP]
-> It might be beneficial to disable compression if the server is behind a proxy.
+> Có thể có lợi khi tắt nén dữ liệu nếu máy chủ được đặt sau proxy.
 
 :::code-group
 
@@ -22,10 +22,10 @@ enabled = true
 
 #### `threshold`: Integer (0-1024)
 
-The minimum packet size before the server attempts to compress the packet.
+Kích thước gói tin tối thiểu trước khi máy chủ cố gắng nén gói tin.
 
-> [!CAUTION]
-> Increasing this value can hurt players on slower connections.
+> [!CAUTION] CHÚ Ý
+> Tăng giá trị này có thể gây hại cho người chơi có kết nối chậm.
 
 :::code-group
 
@@ -38,7 +38,7 @@ threshold = 256
 
 #### `level`: Integer (0-9)
 
-A value between 0 to 9: 0 to disable compression, 1 being the fastest compression (at the cost of size), and 9 being maximum compression (at the cost of speed).
+Giá trị từ 0 tới 9: 0 để tắt nén dữ liệu, 1 là nén nhanh nhất (tốn dung lượng), và 9 là nén tối đa (tốn thời gian).
 
 :::code-group
 
@@ -49,9 +49,9 @@ level = 4
 
 :::
 
-## Default config
+## Cấu hình mặc định
 
-By default, compression is enabled.
+Theo mặc định, nén dữ liệu được bật.
 
 :::code-group
 
