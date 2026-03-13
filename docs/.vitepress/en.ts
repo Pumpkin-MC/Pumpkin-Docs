@@ -92,7 +92,7 @@ export const en = defineConfig({
                                     },
                                     {
                                         text: "Rock-Paper-Scissors",
-                                        link: "/plugin-dev/plugin-template/rock-paper-scissors",
+                                        link: "/plugin-dev/plugin-template/command/rock-paper-scissors",
                                     },
                                 ],
                             },

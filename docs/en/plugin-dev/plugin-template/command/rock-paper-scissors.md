@@ -127,13 +127,13 @@ players.
 First we will show the player their and the computer's choice. Add this code to your plugin:
 
 ```rs
-impl CommandExecutor for RockPaperScissorsExecutor {
-    fn execute<'a>(
+impl CommandHandler for RockPaperScissorsExecutor {
+    fn handle(
         &self,
-        sender: &mut CommandSender,
-        _: &Server,
-        _: &ConsumedArgs<'a>,
-    ) -> Result<(), CommandError> {
+        sender: CommandSender,
+        _server: Server,
+        _args: ConsumedArgs,
+    ) -> Result<i32, CommandError> {
         let player_choice = self.0;
         let computer_choice = get_random_choice();
         
@@ -223,7 +223,7 @@ impl Plugin for HelloPlugin {
     fn on_load(&mut self, context: Context) -> pumpkin_plugin_api::Result<()> {
         // Existing Code
 
-        let command = Command::new( // [!code ++:12]
+        let command = Command::new( // [!code ++:20]
             &["rps".to_string(), "rockpaperscissors".to_string()],
             "Play Rock Paper Scissors with the server.",
         );
@@ -243,11 +243,6 @@ impl Plugin for HelloPlugin {
         
         context.register_permission(&permission)?;
         context.register_command(command, "hello-pumpkin:command.rockpaperscisors");
-        Ok(())
-    }
-
-    fn on_unload(&mut self, _context: Context) -> pumpkin_plugin_api::Result<()> {
-        info!("Example plugin unloaded. Goodbye!");
         Ok(())
     }
 }

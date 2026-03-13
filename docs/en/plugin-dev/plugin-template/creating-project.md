@@ -21,12 +21,23 @@ First we need to create a new project folder. You can do this by running this co
 cargo new <project-name> --lib
 ```
 
-This will create a folder with a couple files in it. The folder structure should look like this:
+After adding this, we want to create a new directory called `.cargo` and add in a `config.toml` file with the following
+contents
+
+```toml [config.toml]
+[build]
+target = "wasm32-wasip2"
+```
+
+Altogether your new folder structure should look like this:
 
 ```bash
+├── .cargo/
+│   └── config.toml
+├── src/
+│   └── lib.rs
 ├── Cargo.toml
-└── src
-    └── lib.rs
+└── Cargo.lock
 ```
 
 ## Configuring the crate
