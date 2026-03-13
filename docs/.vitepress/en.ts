@@ -18,9 +18,7 @@ export const en = defineConfig({
         sidebar: [
             {
                 text: "About",
-                items: [
-                    { text: "Benchmarks", link: "/about/benchmarks" },
-                ],
+                items: [{ text: "Benchmarks", link: "/about/benchmarks" }],
             },
             {
                 text: "Configuration",
@@ -70,7 +68,7 @@ export const en = defineConfig({
                         link: "/plugin-dev/introduction",
                     },
                     {
-                        text: "Plugin Template",
+                        text: "Wasm Plugin Template",
                         collapsed: false,
                         items: [
                             {
@@ -83,26 +81,20 @@ export const en = defineConfig({
                             },
                             {
                                 text: "Events",
-                                items: [
-                                    { text: "Join Event", link: "/plugin-dev/plugin-template/join-event" },
-                                ]
+                                link: "/plugin-dev/plugin-template/events",
                             },
                             {
                                 text: "Commands",
                                 items: [
                                     {
                                         text: "First Command",
-                                        link: "/plugin-dev/plugin-template/command/first-command"
+                                        link: "/plugin-dev/plugin-template/command/first-command",
                                     },
                                     {
                                         text: "Rock-Paper-Scissors",
-                                        link: "/plugin-dev/plugin-template/command/rock-paper-scissors"
+                                        link: "/plugin-dev/plugin-template/rock-paper-scissors",
                                     },
-                                ]
-                            },
-                            {
-                                text: "Inventories",
-                                link: "/plugin-dev/plugin-template/inventories",
+                                ],
                             },
                         ],
                     },

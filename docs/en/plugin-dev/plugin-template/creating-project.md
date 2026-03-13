@@ -2,7 +2,16 @@
 
 Pumpkin plugins use the [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html) build system.
 
-The complete code for this plugin can be found as a [template on GitHub](https://github.com/vyPal/Hello-Pumpkin).
+The complete code for this plugin can be found as a [template on GitHub](https://github.com/BjornTheProgrammer/Hello-Pumpkin-Wasm).
+
+## Installing the toolchain
+
+Before we can compile a plugin, we have to have the `wasm32-wasip2` target installed. You can install the target
+by running:
+
+```bash
+rustup target add wasm32-wasip2
+```
 
 ## Initializing a new crate
 
@@ -27,11 +36,11 @@ Since Pumpkin plugins are loaded at runtime as dynamic libraries, we need to tel
 
 ```toml [Cargo.toml]
 [package]
-name = "hello-pumpkin"
+name = "hello-pumpkin-wasm"
 version = "0.1.0"
 edition = "2024"
 
-[lib] // [!code ++:3]
+[lib] // [!code ++:2]
 crate-type = ["cdylib"]
 
 [dependencies]
@@ -52,18 +61,10 @@ edition = "2024"
 crate-type = ["cdylib"]
 
 [dependencies]
-// [!code ++:13]
-# This is the base crate with most high-level type definitions
-pumpkin = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin" } 
-# Other utilities used by Pumpkin (e.g. TextComponent, Vectors...)
-pumpkin-util = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-util" }
-# Macros for easier plugin development
-pumpkin-api-macros = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-api-macros" }
-
-# A rust asynchronous runtime
-tokio = "1.48"
-# Logging
-log = "0.4"
+// [!code ++:3]
+# This is the api crate that makes creating plugins easier, and has wit definitions
+pumpkin-plugin-api = { version = "0.1.0", git = "https://github.com/Pumpkin-MC/Pumpkin", package = "pumpkin-plugin-api" }
+tracing = "0.1"
 ```
 
 :::
