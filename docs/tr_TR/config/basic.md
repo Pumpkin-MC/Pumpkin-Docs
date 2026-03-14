@@ -151,7 +151,7 @@ Günün Mesajı; durum ekranında gösterilen sunucu açıklamasını düzenler.
 :::code-group
 
 ```toml [configuration.toml] {2}
-motd = "A Blazing fast Pumpkin Server!"
+motd = "A Blazingly fast Pumpkin Server!"
 ```
 
 :::
