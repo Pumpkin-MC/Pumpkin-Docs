@@ -139,7 +139,7 @@ De beschrijving van de server die wordt weergegeven op het status scherm.
 
 :::code-group
 ```toml [configuration.toml] {2}
-motd = "A Blazing fast Pumpkin Server!"
+motd = "A Blazingly fast Pumpkin Server!"
 ```
 :::
 
