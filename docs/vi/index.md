@@ -1,52 +1,52 @@
-# Quick Start
+# Bắt đầu nhanh
 
-**Current Status:**
-Pre-release: Currently under development and not yet ready for official release.
+**Trạng thái hiện tại:**
+Pre-release: Hiện đang trong quá trình phát triển và chưa sẵn sàng phát hành chính thức.
 
-## Download Pre-Release binaries
+## Tải xuống bản Pre-Release
 
-You can download pre-built binaries on the [Pre-release Download Page](https://pumpkinmc.org/download)
+Bạn có thể tải xuống các bản dựng sẵn tại [Trang tải xuống Pre-release](https://pumpkinmc.org/download)
 
-## Build from Source (Rust)
+## Dựng từ mã nguồn (Rust)
 
-To compile Pumpkin, ensure you have [Rust](https://www.rust-lang.org/tools/install) installed.
+Để biên dịch Pumpkin, hãy đảm bảo bạn đã cài đặt [Rust](https://www.rust-lang.org/tools/install).
 
-1. **Clone the repository** and navigate into the directory:
+1. **Sao chép kho lưu trữ** và điều hướng vào thư mục:
 
 ```shell
 git clone https://github.com/Pumpkin-MC/Pumpkin.git
 cd Pumpkin
 ```
 
-2. **Optional:** If you wish, you can place a Vanilla world into the `Pumpkin/` directory. Just name the world folder `world`.
+2. **Tùy chọn:** Nếu bạn muốn, bạn có thể đặt một thế giới Vanilla vào thư mục `Pumpkin/`. Chỉ cần đặt tên thư mục thế giới là `world`.
 
-3. Run:
+3. Chạy:
 
-> [!NOTE]
-> The build process may take a while, due to heavy optimizations for release builds.
+> [!NOTE] GHI CHÚ
+> Quá trình dựng có thể mất một lúc, do có nhiều tối ưu hóa cho các bản phát hành (release builds).
 
 ```shell
 cargo run --release
 ```
 
-4. **Optional:** To maximize performance by utilizing your CPU's specific features, you can set the `target-cpu=native` Rust compiler flag:.
+4. **Tùy chọn:** Để tối đa hóa hiệu suất bằng cách sử dụng các tính năng cụ thể trên CPU của bạn, bạn có thể thiết lập cờ biên dịch Rust `target-cpu=native`:.
 
 ```shell
 RUSTFLAGS='-C target-cpu=native' cargo run --release
 ```
 
-> [!NOTE]
-> To use (to play on) a server that you are self-hosting on the same local system (e.g. using Prism launcher on Linux to login and run/play minecraft and using Pumpkin to host the server) you may need to use "localhost:25565" as the server address through the 'Multiplayer' -> 'Add Server' -> 'Server Address' pathway, though that address is not listed in the terminal's run-server output.
+> [!NOTE] GHI CHÚ
+> Để sử dụng (chơi trên) một server mà bạn tự host trên cùng hệ thống cục bộ (ví dụ: sử dụng Prism launcher trên Linux để đăng nhập và chạy/chơi minecraft và sử dụng Pumpkin để host server), bạn có thể cần sử dụng "localhost:25565" làm địa chỉ server thông qua đường dẫn 'Multiplayer' -> 'Add Server' -> 'Server Address', mặc dù địa chỉ đó không được liệt kê trong output run-server của terminal.
 ```text
 localhost:25565
 ```
 
 ## Docker
 
-> [!IMPORTANT]
-> Docker support is currently experimental.
+> [!IMPORTANT] QUAN TRỌNG
+> Hỗ trợ Docker hiện đang được thử nghiệm.
 
-If you haven't already, you need to [install Docker](https://docs.docker.com/engine/install/). After installing Docker, you can run the following command to start the server:
+Nếu bạn chưa cài đặt, bạn cần [cài đặt Docker](https://docs.docker.com/engine/install/). Sau khi cài đặt Docker, bạn có thể chạy lệnh sau để khởi động server:
 
 ```shell
 docker run --rm \
@@ -55,12 +55,12 @@ docker run --rm \
     -it ghcr.io/pumpkin-mc/pumpkin:master
 ```
 
-- `<exposed_port>`: The port you want to connect to Pumpkin with, for example `25565`.
-- `<server_data_location>`: The location where you want your server config and data to be stored, for example `./data`.
+- `<exposed_port>`: Port mà bạn muốn dùng để kết nối với Pumpkin, ví dụ `25565`.
+- `<server_data_location>`: Vị trí nơi bạn muốn lưu trữ dữ liệu và cấu hình server của mình, ví dụ `./data`.
 
-### Example
+### Ví dụ
 
-To run Pumpkin on port `25565` and store data in a directory called `./data`, you would run the following command:
+Để chạy Pumpkin trên port `25565` và lưu trữ dữ liệu trong một thư mục có tên `./data`, bạn chạy lệnh sau:
 
 ```shell
 docker run --rm \
@@ -69,13 +69,13 @@ docker run --rm \
     -it ghcr.io/pumpkin-mc/pumpkin:master
 ```
 
-## Test Server
+## Server thử nghiệm (Test Server)
 
-Pumpkin has a test server maintained by @kralverde. Its runs on the latest commit of Pumpkin's master branch.
+Pumpkin có một server chạy thử nghiệm được quản lý bởi @kralverde. Nó chạy trên commit mới nhất của nhánh master của Pumpkin.
 
 - **IP:** pumpkin.kralverde.dev
 
-**Specs:**
+**Thông số:**
 
 - OS: Debian GNU/Linux bookworm 12.7 x86_64
 - Kernel: Linux 6.1.0-21-cloud-amd64

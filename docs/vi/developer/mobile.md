@@ -1,81 +1,81 @@
-# Pumpkin Development on Mobile
+# Phát triển Pumpkin trên điện thoại
 
-If you are a mobile user and want to edit the source code, you can do this!
-(This page was written on Android using Helix.)
+Nếu bạn là một người dùng sử dụng điện thoại di động và muốn chỉnh sửa mã nguồn, bạn có thể thực hiện được điều này!
+(Trang này được viết trên Android bằng trình soạn thảo Helix.)
 
-First of all, we need a terminal app.
-We recommend [Termux](https://github.com/termux/termux-app/releases) because it's stable and open source.
-Download the needed apk file for your device's architecture and install Termux.
+Đầu tiên, chúng ta cần một ứng dụng dòng lệnh (terminal).
+Chúng tôi xin đề xuất [Termux](https://github.com/termux/termux-app/releases) vì tính ổn định và là mã nguồn mở.
+Tải xuống tệp apk tương thích với kiến trúc vi xử lý của thiết bị và cài đặt Termux.
 
-After this, you need to run some commands. We use Helix for its simplicity.
+Sau đó, bạn cần chạy một vài lệnh. Chúng tôi sử dụng Helix vì tính đơn giản của nó.
 
 ```bash
   pkg update && pkg upgrade
   pkg install build-essential git rust rust-analyzer taplo helix helix-grammar nodejs
 ```
 
-If you want to contribute, you need to install the GitHub software.
+Nếu bạn muốn đóng góp, bạn cần cài đặt phần mềm GitHub.
 
 ```bash
   pkg install gh
 ```
 
-We also recommend installing the fish shell because it's more friendly than bash.
+Chúng tôi cũng khuyến khích cài đặt fish shell vì nó thân thiện hơn so với bash.
 
 ```bash
   pkg install fish
   chsh -s fish
 ```
 
-Now that you've installed basic tools, we need to do some setup.
-If you want to contribute, you need log into GitHub.
+Sau khi hoàn tất cài đặt các công cụ cơ bản, chúng ta cần thực hiện một số thiết lập.
+Nếu bạn muốn đóng góp, bạn cần phải đăng nhập tài khoản vào GitHub.
 
 ```bash
   gh auth login
 ```
 
-Also setup git: change the editor to vim, edit your credentials, etc.
+Cũng thiết lập cả git: thay đổi trình biên tập thành vim, chỉnh sửa thông tin đăng nhập của bạn, v.v.
 
-After this, you need to clone the Pumpkin repo. (Before this, you can create a project directory with `mkdir proj`; it's useful)
+Sau quá trình này, bạn cần clone repo của Pumpkin. (Trước đó, bạn có thể tạo một thư mục cho dự án bằng lệnh `mkdir proj`; nó khá hữu ích)
 
 ```bash
   git clone https://github.com/Pumpkin-MC/Pumpkin.git
 ```
 
-If you want to contribute, you need to fork our repo and change `Pumpkin-MC` to your username on GitHub.
+Nếu bạn muốn đóng góp, bạn cần phải fork repo của chúng tôi và thay đổi phần `Pumpkin-MC` sang tên đăng nhập của bạn trên GitHub.
 
-Setup's all done now! Enjoy :)
+Tất cả phần thiết lập đã xong! Chúc bạn vui vẻ :)
 
-## FAQ
+## Những câu hỏi thường gặp (FAQ)
 
-### How to use the text editor?
+### Sử dụng trình soạn thảo văn bản như thế nào?
 
-Type `hx <path>`.
+Gõ lệnh `hx <đường dẫn>`.
 
-### How to navigate through the project?
+### Làm sao để duyệt tệp tin qua dự án?
 
-You can use `ls`, `cd`, and other programs.
-You can also use `hx <dir>` to browse your directory on startup.
+Bạn có thể sử dụng các lệnh như `ls`, `cd`, và một số chương trình khác.
+Bạn cũng có thể dùng lệnh `hx <thư mục>` để xem các thư mục của mình lúc mới mở lên.
 
-### How can I type in the editor?
+### Làm thế nào để có thể gõ chữ trong trình soạn thảo?
 
-Press `i` if you are in normal mode.
+Nhấn phím `i` nếu bạn đang ở chế độ normal.
 
-### HOW EXIT FROM EDITOR????
+### LÀM SAO ĐỂ THOÁT KHỎI TRÌNH SOẠN THẢO????
 
-Press esc, then type `:q!` if you don't want to save, or `:wq` if you do want to save.
+Nhấn nút esc, sau đó gõ `:q!` nếu bạn không muốn lưu file, hoặc `:wq` nếu bạn muốn lưu.
 
-### Where can I learn how to use this editor?
+### Tôi có thể học cách dùng trình soạn thảo này ở đâu?
 
-Run `hx --tutor` or go their official website.
+Chạy lệnh `hx --tutor` hoặc mở trang chủ chính thức của họ.
 
-### Why not use VS Code?
+### Tại sao lại không dùng VS Code?
 
-1) VS Code is hard to set up, and it works with limited functionality on web.
-2) rust-analyzer doesn't work on it. Maybe an emulator can help with this, but that slows down code compilation.
-3) With VS Code, it's highly desirable to have a mouse, while in Helix you only need a keyboard.
-4) VS Code is laggy on some devices.
+1) VS Code rất khó để thiết lập, và nó chỉ hoạt động trên web với các tính năng bị giới hạn.
+2) Tính năng rust-analyzer không hoạt động trên nó. Có thể dùng trình giả lập sẽ có ích trong việc này, nhưng nó làm chậm quá trình compile code.
+3) Với VS Code, sử dụng con trỏ chuột đem lại lợi ích rất lớn, trong khi với Helix bạn chỉ cần có mỗi một bàn phím.
+4) VS Code khá là giật lag trên một số thiết bị.
 
-### Why is it so hard to type?
+### Tại sao việc gõ chữ lại khó khăn như thế?
 
-Buy a cheap bluetooth keyboard and see how much easier it becomes.
+Hãy mua một cái bàn phím bluetooth giá rẻ và bạn sẽ thấy mọi thứ trở nên dễ dàng hơn nhiều.

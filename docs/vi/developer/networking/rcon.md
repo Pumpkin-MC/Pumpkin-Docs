@@ -1,40 +1,40 @@
-# RCON (Remote Console)
+# RCON (Server điều khiển từ xa)
 
-## What is RCON
+## RCON là gì
 
-RCON (Remote Console) is a protocol designed by Valve to allow administrators to control and manage game servers remotely. It provides a way to execute commands on a server from a different location, such as a phone or a separate computer.
+RCON (Remote Console) là một giao thức được thiết kế bởi Valve để cho phép các quản trị viên điều khiển và quản lý server trò chơi từ xa. Nó cung cấp một cách để thực thi các lệnh trên server từ một vị trí khác, chẳng hạn như điện thoại hoặc máy tính riêng biệt.
 
-## Why RCON
+## Tại sao sử dụng RCON
 
-- **Convenience:** Manage your server from anywhere with an internet connection.
-- **Flexibility:** Execute commands without needing to be physically present at the server's location.
-- **Efficiency:** Automate tasks and streamline server management.
+- **Tiện lợi:** Quản lý server của bạn từ bất cứ vị trí địa lý nào có kết nối internet.
+- **Tính linh động:** Điều khiển server qua mọi kết nối bằng cách sử dụng tập lệnh từ xa mà không cần phải hiện diện hoặc tốn chi phí đi lại.
+- **Tính hiệu quả:** Tự động hóa các tác vụ và hợp lý hóa quản lý server.
 
-## SSH vs RCON
+## Điểm khác biệt giữa SSH và RCON
 
 ### SSH
 
-- Offers strong encryption to protect data transmitted between the client and server.
-- Primarily designed for secure remote login and execution of commands on a remote machine.
-- Commonly used for managing Linux/Unix systems, configuring networks, and running scripts.
-- Provides a shell-like environment, allowing you to execute various commands and interact with the remote system.
+- Cung cấp mã hóa mạnh mẽ để bảo vệ dữ liệu được truyền giữa  và server.
+- Được thiết kế chủ yếu để đăng nhập từ xa an toàn và thực thi lệnh trên cấu trúc máy từ xa.
+- Thường được sử dụng để quản lý các hệ thống dựa trên nền tảng của Linux/Unix, cấu hình mạng và chạy các tệp kịch bản hệ thống (scripts).
+- Cung cấp một môi trường tương tự như shell, cho phép bạn thực hiện nhiều lệnh khác nhau và tương tác thẳng với hệ thống từ xa.
 
 ### RCON
 
-- Specifically designed for remote administration of game servers, allowing you to control and manage the server's settings and operations.
-- Typically less secure than SSH, as it often relies on plain text passwords.
-- Primarily used by game server administrators to manage game servers.
-- Has a limited set of game-specific commands.
+- Mọi tuỳ chỉnh và thiết kế của nó đều là vì mục đích quản trị server chơi game từ xa, cho phép bạn kiểm soát cũng như quản lý các cài đặt và hoạt động của server đó.
+- Thông thường sẽ kém an toàn hơn SSH, vì nó thường dựa vào mật khẩu là kiểu văn bản thuần túy.
+- Chủ yếu được sử dụng bởi các admin trong các server riêng của từng loại game mà nó được tích hợp.
+- Có một bộ lệnh giới hạn dành riêng cho mỗi trò chơi.
 
 ### Packets
 
-RCON is a very simple protocol with a few packets. Here's how an RCON packet looks:
+RCON là một giao thức rất đơn giản với một vài packets. Dưới đây là diện mạo của một RCON packet:
 
-| Field | Description                                     |
+| Field | Mô tả                                     |
 | ----- | ----------------------------------------------- |
-| ID    | Used to indicate whether authentication failed or succeeded |
-| Type  | Identifies the packet type                      |
-| Body  | A message (String), e.g., a command or a password |
+| ID    | Được sử dụng để cho biết lỗi hoặc thành công trong quá trình xác thực |
+| Type  | Xác định loại packet                      |
+| Body  | Một tin nhắn (Dạng chữ - String), tức là lệnh (command) hoặc cái mật khẩu |
 
 #### Serverbound Packets <sub><sub>(Client→Server)</sub></sub>
 
@@ -50,15 +50,15 @@ RCON is a very simple protocol with a few packets. Here's how an RCON packet loo
 | 2    | AuthResponse |
 | 0    | Output       |
 
-### How RCON Works
+### Cách RCON hoạt động
 
-1. **Authentication:**
+1. **Xác thực:**
 
-   - The RCON client sends an authentication packet with the desired password.
-   - The server verifies the password and responds with an authentication response packet.
-   - If successful, the response packet includes the same ID as the one sent by the client. If unsuccessful, the ID is -1.
+   - Client RCON gửi một packet xác thực với mật khẩu mong muốn.
+   - Server xác minh mật khẩu và phản hồi bằng một packet phản hồi xác thực.
+   - Nếu thành công, packet phản hồi bao gồm cùng số ID với số ID mà client đã gửi lúc đầu. Nếu không thành công, mã ID trả về sẽ mang giá trị -1.
 
-2. **Command Execution:**
+2. **Thực thi lệnh:**
 
-   - The authenticated client can now send command execution packets, with each packet containing the command to be executed.
-   - The server processes the command and sends back an output packet containing the result or any error messages.
+   - Client đã xác thực giờ đây có thể gửi các command execution packets (packet khởi yêu cầu thực thi lệnh), mỗi gói chứa lệnh sẽ được thực thi.
+   - Server xử lý lệnh và gửi lại một output packet trong đó chứa kết quả hoặc bất kỳ thông báo lỗi sinh ra.

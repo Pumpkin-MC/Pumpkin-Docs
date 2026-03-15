@@ -1,9 +1,9 @@
-# Introduction
+# Lời giới thiệu
 
-Welcome to the Pumpkin Documentation!
+Chào mừng bạn đến với Tài liệu Pumpkin!
 
-Whether you're an internal Pumpkin developer or working on a Pumpkin plugin, this documentation is your resource for everything Pumpkin.
+Cho dù bạn là một nhà phát triển nội bộ của Pumpkin hay đang làm việc trên một plugin của Pumpkin, tài liệu này là tài nguyên dành cho bạn về mọi thứ liên quan đến Pumpkin.
 
-## Plugin Development
+## Phát triển Plugin
 
-For a better documentation structure, plugin development docs have been moved to a [separate category](/vi/plugin-dev/introduction).
+Để có một cấu trúc tài liệu tốt hơn, tài liệu phát triển plugin đã được chuyển sang một [chuyên mục riêng biệt](/vi/plugin-dev/introduction).

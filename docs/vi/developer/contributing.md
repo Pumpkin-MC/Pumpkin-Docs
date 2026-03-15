@@ -1,59 +1,59 @@
-# Contributing to Pumpkin
+# Đóng góp cho Pumpkin
 
-We appreciate your interest in contributing to Pumpkin! This document outlines the guidelines for submitting bug reports, feature suggestions, and code changes.
+Chúng tôi đánh giá cao sự quan tâm của bạn trong việc đóng góp cho Pumpkin! Tài liệu này trình bày các nguyên tắc để gửi báo cáo lỗi (bug), đề xuất tính năng và thay đổi mã (code).
 
-## Getting Started
+## Bắt đầu
 
-The easiest way to get started is by asking for help in [our Discord server](https://discord.gg/wT8XjrjKkf).
+Cách dễ nhất để bắt đầu là yêu cầu hỗ trợ trong [server Discord của chúng tôi](https://discord.gg/wT8XjrjKkf).
 
-## How to Contribute
+## Cách đóng góp
 
-There are several ways you can contribute to Pumpkin:
+Có một vài cách bạn có thể đóng góp cho Pumpkin:
 
-### Reporting Bugs
+### Báo cáo lỗi (Reporting Bugs)
 
-  If you encounter a bug, please search for existing issues on the issue tracker first.
+  Nếu bạn gặp lỗi, vui lòng tìm kiếm các vấn đề hiện có trên issue tracker trước tiên.
 
-  If you can't find a duplicate issue, open a new one.
+  Nếu bạn không thể tìm thấy vấn đề tương tự nào, hãy mở một vấn đề mới.
 
-  Follow the template and provide a clear description of the bug, including steps to reproduce it if possible.
-  Screenshots, logs, or code snippets can also be helpful.
+  Làm theo mẫu (template) và cung cấp mô tả chi tiết về lỗi, bao gồm các bước để tái tạo lại nếu có thể.
+  Ảnh chụp màn hình, lịch sử nhật ký (logs) hoặc các đoạn mã cũng có thể hữu ích.
 
-### Suggesting Features
+### Đề xuất tính năng (Suggesting Features)
 
-  Do you have an idea on how Pumpkin can be improved? Share your thoughts by opening an issue on the issue tracker.
+  Bạn có ý tưởng về cách cải thiện Pumpkin không? Hãy chia sẻ suy nghĩ của bạn bằng cách mở một vấn đề trên issue tracker.
 
-  Describe the proposed feature in detail, including its benefits and potential implementation considerations.
+  Mô tả chi tiết về tính năng được đề xuất, bao gồm những lợi ích và các cân nhắc khả thi về việc triển khai.
 
-### Contributing Code
+### Đóng góp mã (Contributing Code)
 
-  To get started with contributing code to Pumpkin, fork the repository on GitHub
+  Để bắt đầu với việc đóng góp mã cho Pumpkin, hãy fork kho lưu trữ trên GitHub
 
-1. First, create a GitHub account if you don't already have one
+1. Trước tiên, hãy tạo một tài khoản GitHub nếu bạn chưa có
 
-2. Go to Pumpkin's official [GitHub Organization](https://github.com/Pumpkin-MC) and press fork
+2. Đi tới [Tổ chức GitHub](https://github.com/Pumpkin-MC) chính thức của Pumpkin và nhấn fork
 
-> Creating a fork means you now have your own copy of the Pumpkin source code (this does not mean you own the copyright).
+> Tạo fork có nghĩa là bạn hiện có bộ mã nguồn Pumpkin của riêng mình (điều này không có nghĩa là bạn sở hữu bản quyền).
 
-  Now that you have a copy that you can edit, you will need a few tools.
-3. Install [git](https://git-scm.com/downloads) for your operating system
+  Bây giờ bạn đã có một bản sao có thể chỉnh sửa, bạn sẽ cần một vài công cụ.
+3. Cài đặt [git](https://git-scm.com/downloads) cho hệ điều hành của bạn
 
-- To get started with git, visit [Getting started with Git](https://docs.github.com/en/get-started/getting-started-with-git)
+- Để bắt đầu làm quen với git, hãy truy cập [Getting started with Git](https://docs.github.com/en/get-started/getting-started-with-git)
 
-- Optional: If you want a graphical tool to interact with GitHub, install [GitHub-Desktop](https://desktop.github.com/download/)
+- Tùy chọn: Nếu bạn cần một công cụ giao diện thiết kế để tương tác với GitHub, hãy cài đặt [GitHub-Desktop](https://desktop.github.com/download/)
 
-> GitHub Desktop may be easier if you are not used to the command line, but it is not for everyone
+> GitHub Desktop có thể dễ dùng hơn nếu bạn không thường sử dụng dòng lệnh, nhưng nó không dành cho tất cả mọi người
 
-- To get started with GitHub Desktop, visit [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop)
+- Để bắt đầu làm quen với GitHub Desktop, hãy truy cập [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop)
 
-- If you are wanting to contribute code, install Rust at [rust-lang.org](https://www.rust-lang.org/).
+- Nếu bạn muốn đóng góp mã, vui lòng cài đặt Rust tại [rust-lang.org](https://www.rust-lang.org/).
 
-- If you are wanting to contribute to documentation, install [NodeJS](https://nodejs.org/en)
+- Nếu bạn muốn đóng góp bản dịch tài liệu, vui lòng cài đặt [NodeJS](https://nodejs.org/en)
 
-### Decompiling Minecraft's code
+### Dịch ngược (Decompiling) mã Minecraft
 
-When working at Pumpkin, we heavily rely on the official Minecraft client and utilize existing server logic. We often refer to Minecraft's official code.
-The easiest way to decompile Minecraft is by using Fabric Yarn. Make sure you have Gradle installed before running the following commands:
+Khi làm việc tại Pumpkin, chúng tôi phụ thuộc phần lớn vào client Minecraft chính thức và sử dụng logic server hiện có. Chúng tôi thường đề cập tới mã nguồn Minecraft chính thức.
+Cách dễ nhất để decompile Minecraft là bằng cách sử dụng Fabric Yarn. Hãy đảm bảo bạn đã cài đặt Gradle trước khi chạy các lệnh sau:
 
 ```shell
 git clone https://github.com/FabricMC/yarn.git
@@ -61,12 +61,12 @@ cd yarn
 ./gradlew decompileVineflower
 ```
 
-After decompiling, you can find the source code located in `build/namedSrc`.
+Sau khi dịch ngược, bạn có thể tìm thấy mã nguồn nằm ở đường dẫn `build/namedSrc`.
 
-### Additional Information
+### Thông tin bổ sung
 
-We encourage you to comment on existing issues and pull requests to share your thoughts and provide feedback.
+Chúng tôi khuyến khích bạn bình luận (comment) trên các issues và pull requests hiện có để chia sẻ suy nghĩ và cung cấp phản hồi.
 
-Feel free to ask questions in the issue tracker or reach out to the project maintainers if you need assistance.
+Đừng ngần ngại hỏi các câu hỏi trong issue tracker hoặc liên hệ với các dự án maintainers nếu bạn cần hỗ trợ.
 
-Before submitting a large contribution, consider opening an issue or discussion, or talk with us on our Discord to discuss your approach.
+Trước khi gửi các đóng góp lớn, hãy cân nhắc tạo một issue hoặc discussion (thảo luận), hoặc trò chuyện với chúng tôi qua Discord để bàn thảo về giải pháp của bạn.

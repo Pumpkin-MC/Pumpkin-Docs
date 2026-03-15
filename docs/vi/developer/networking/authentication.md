@@ -1,53 +1,53 @@
-# Authentication
+# Xác thực (Authentication)
 
-## Why authentication
+## Tại sao cần xác thực
 
-Offline accounts, that is, accounts generated from a player's username without contacting an authorization or authentication server, can have any nickname chosen. This, without additional plugins, means that players can impersonate other players, including those with operator permissions.
+Các tài khoản ngoại tuyến (offline), tức là các tài khoản được tạo từ tên người dùng của người chơi mà không cần liên hệ với server cấp quyền hoặc xác thực, có thể chọn bất kỳ biệt danh nào. Điều này có nghĩa là, nếu không có các plugin bổ sung, người chơi có thể mạo danh những người chơi khác, bao gồm cả những người có quyền điều hành (operator).
 
-## Offline server
+## Server ngoại tuyến (Offline server)
 
-By default, `online_mode` is enabled in the configuration. This enables authentication, disabling offline accounts. If you want to allow offline accounts, you can disable `online_mode` in `configuration.toml`.
+Theo mặc định, `online_mode` được bật trong cấu hình. Điều này bật xác thực, vô hiệu hóa các tài khoản ngoại tuyến. Nếu bạn muốn cho phép tài khoản ngoại tuyến, bạn có thể tắt `online_mode` trong tệp `configuration.toml`.
 
-## How Yggdrasil Auth works
+## Cách thức hoạt động của Yggdrasil Auth
 
-1. The client gets an authentication token and UUID from the launcher.
-2. The client, during loading, fetches data from the authorization/authentication server using the authentication token, such as various signing keys and the list of blocked servers.
-3. The client, when joining the server, sends a join request to the authorization/authentication servers. Mojang servers can deny this request if the account is banned.
-4. The client sends its identification to the server in a packet.
-5. The server, based on this identification, sends a `hasJoined` request to the authorization/authentication servers. If it succeeds, it obtains the player information, such as the skin.
+1. Client nhận token xác thực và UUID từ launcher.
+2. Trong quá trình tải, client lấy dữ liệu từ server cấp quyền/xác thực bằng token xác thực, chẳng hạn như các khóa ký khác nhau và danh sách các server bị chặn.
+3. Khi tham gia server, client gửi yêu cầu tham gia đến các server cấp quyền/xác thực. Các server Mojang có thể từ chối yêu cầu này nếu tài khoản bị cấm (banned).
+4. Client gửi thông tin nhận dạng của nó đến server trong một packet.
+5. Server, dựa trên thông tin nhận dạng này, gửi yêu cầu `hasJoined` đến các server cấp quyền/xác thực. Nếu thành công, nó sẽ nhận được thông tin người chơi, chẳng hạn như skin.
 
-## Custom Authentication Server
+## Server xác thực tùy chỉnh
 
-Pumpkin supports custom authentication servers. You can replace the authentication URL in `features.toml`.
+Pumpkin hỗ trợ server xác thực tùy chỉnh. Bạn có thể thay thế URL xác thực trong `features.toml`.
 
-### How Pumpkin Authentication Works
+### Cách xác thực của Pumpkin hoạt động
 
-1. **GET Request:** Pumpkin sends a GET request to the specified authentication URL.
-2. **Status Code 200:** If the authentication is successful, the server responds with a status code of 200.
-3. **Parse JSON Game Profile:** Pumpkin parses the JSON game profile returned in the response.
+1. **Yêu cầu GET:** Pumpkin gửi một yêu cầu GET đến URL xác thực được chỉ định.
+2. **Mã trạng thái thứ 200:** Nếu xác thực thành công, server sẽ phản hồi bằng mã trạng thái 200.
+3. **Phân tích cú pháp Hồ sơ trò chơi bằng JSON:** Pumpkin phân tích cú pháp (parse) cấu hình game JSON được trả về trong phản hồi.
 
-### Game Profile
+### Hồ sơ trò chơi (Game Profile)
 
 ```rust
 struct GameProfile {
     id: UUID,
     name: String,
     properties: Vec<Property>,
-    profile_actions: Option<Vec<ProfileAction>>, // Optional, only present when actions are applied
+    profile_actions: Option<Vec<ProfileAction>>, // Tùy chọn, chỉ xuất hiện khi các actions được áp dụng
 }
 ```
 
-#### Property
+#### Thuộc tính (Property)
 
 ```rust
 struct Property {
     name: String,
-    value: String, // Base64 encoded
-    signature: Option<String>, // Optional, Base64 encoded
+    value: String, // Mã hóa Base64
+    signature: Option<String>, // Tùy chọn, Mã hóa Base64
 }
 ```
 
-#### Profile Action
+#### Hồ sơ Action (Profile Action)
 
 ```rust
 enum ProfileAction {

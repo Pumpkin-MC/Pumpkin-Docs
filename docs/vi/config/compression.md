@@ -1,6 +1,6 @@
 # Nén dữ liệu
 
-Nén dữ liệu được sử dụng để giảm kích thước của các gói tin. Điều này có lợi để giảm băng thông phía máy chủ và cũng để giúp những người chơi có kết nối internet chậm hơn.
+Nén dữ liệu được sử dụng để giảm kích thước của các packet. Điều này có lợi để giảm băng thông phía server và cũng để giúp những người chơi có kết nối internet chậm hơn.
 
 ## Cấu hình nén dữ liệu
 
@@ -9,7 +9,7 @@ Nén dữ liệu được sử dụng để giảm kích thước của các gó
 Bật và tắt nén dữ liệu.
 
 > [!TIP]
-> Có thể có lợi khi tắt nén dữ liệu nếu máy chủ được đặt sau proxy.
+> Có thể có lợi khi tắt nén dữ liệu nếu server được đặt sau proxy.
 
 :::code-group
 
@@ -22,7 +22,7 @@ enabled = true
 
 #### `threshold`: Integer (0-1024)
 
-Kích thước gói tin tối thiểu trước khi máy chủ cố gắng nén gói tin.
+Kích thước packet tối thiểu trước khi server cố gắng nén packet.
 
 > [!CAUTION] CHÚ Ý
 > Tăng giá trị này có thể gây hại cho người chơi có kết nối chậm.

@@ -1,52 +1,52 @@
-# Writing a Event Handler
+# Viết một trình xử lý sự kiện (Event Handler)
 
-Event handlers are one of the main functions of plugins. They allow a plugin to tap into the internal workings of the server and alter its behavior to perform some other action. For a simple example, we will implement a handler for the `player_join` event.
+Các trình xử lý sự kiện là một trong những chức năng chính của plugin. Chúng cho phép plugin có thể khai thác và can thiệp sâu vào các hoạt động nội bộ của server và thay đổi hành vi của nó để thực hiện một số hành động khác. Để cho có một ví dụ đơn giản nhất, chúng ta sẽ implement một handler dành cho sự kiện `player_join`.
 
-The Pumpkin plugin event system tries to copy the Bukkit/Spigot Event system, so that developers coming from there will have a easier time learning Pumpkin.
-However, Rust has different conceptions and rules, so it's not all like in Bukkit/Spigot.
-Rust doesn't have inheritance; instead it only has composition.
+Hệ thống plugin event của Pumpkin cố gắng bắt chước hệ thống Event của Bukkit/Spigot, để các developer xuất thân từ đó có thể dễ thở hơn trong việc làm quen với Pumpkin.
+Tuy nhiên, Rust lại có những khái niệm và quy luật khác nhau, vậy nên nó không hoàn toàn giống như trong Bukkit/Spigot.
+Rust không có khái niệm kế thừa (inheritance); thay vào đó nó chỉ có khái niệm cấu thành (composition).
 
-The event system uses traits to dynamically handle some events: `Event`, `Cancellable`, `PlayerEvent` and etc.
-Cancellable can also be an Event, because it's a trait. (TODO: verify this)
+Hệ thống sự kiện (event system) sử dụng các trait để xử lý động (dynamically) một vài event: `Event`, `Cancellable`, `PlayerEvent` và v.v...
+Cancellable cũng có thể là một Event, bởi vì nó là một trait. (TODO: xác minh điều này)
 
-## Implementing the Join Event
+## Implement sự kiện tham gia server (Join Event)
 
-Individual event handlers are just structs which implement the `EventHandler<T>` trait (where `T` is a specific event implementation).
+Các event handler cá nhân chỉ là các struct có implement trait `EventHandler<T>` (nơi `T` là một cấu trúc event nhất định).
 
-### What are blocking events?
+### Blocking events là gì?
 
-The Pumpkin plugin event system differentiates between two types of events: blocking and non-blocking. Each have their benefits:
+Hệ thống sự kiện plugin trong Pumpkin giúp phân biệt rạch ròi giữa hai loại sự kiện: blocking và non-blocking. Mỗi loại đều có những lợi ích riêng:
 
-#### Blocking events
-
-```diff
-Pros:
-+ Can modify the event (like editing the join message)
-+ Can cancel the event
-+ Have a priority system
-Cons:
-- Are executed in sequence
-- Can slow down the server if not implemented well
-```
-
-#### Non-blocking events
+#### Các blocking events
 
 ```diff
-Pros:
-+ Are executed concurrently
-+ Are executed after all blocking events finish
-+ Can still do some modifications (anything that is behind a Mutex or RwLock)
-Cons:
-- Cannot cancel the event
-- Have no priority system
-- Allow for less control over the event
+Ưu điểm:
++ Có thể chỉnh sửa bản thân event đó (như chỉnh sửa message khi người chơi vào server)
++ Có thể từ chối event (hủy bỏ hoàn toàn)
++ Phân loại hệ thống các quyền ưu tiên
+Nhược điểm:
+- Được thi hành theo trình tự
+- Có thể làm chậm server nếu không implement đúng cách
 ```
 
-### Writing a handler
+#### Các non-blocking events
 
-Since our main aim here is to change the welcome message that the player sees when they join a server, we will be choosing the blocking event type with a low priority.
+```diff
+Ưu điểm:
++ Có thể thi hành cùng một lúc
++ Được thi hành ngay sau khi toàn bộ blocking events kết thúc hoàn thành tác vụ
++ Vẫn có thể thực hiện một vài thay đổi nhỏ (bất cứ thứ gì nằm đằng sau Mutex hoặc RwLock)
+Nhược điểm:
+- Không thể hủy hoàn toàn event
+- Không có hệ thống phân quyền ưu tiên
+- Cấp ít quyền kiểm soát hơn tới sự kiện
+```
 
-Add this code above the `on_load` method:
+### Viết một trình xử lý (handler)
+
+Mục đích chính của chúng ta tại đây là điều chỉnh thông tin message chào mừng đập vào mắt người chơi lúc họ vừa join server, chúng ta sẽ chọn loại blocking event với quyền ưu tiên thấp.
+
+Hãy thêm dòng code này lên trên `on_load` method:
 :::code-group
 
 ```rs [lib.rs]
@@ -74,15 +74,15 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 
 :::
 
-**Explanation**:
+**Giải thích**:
 
-- `struct MyJoinHandler;`: The struct for our event handler
-- `#[with_runtime(global)]`: Pumpkin uses the tokio async runtime, which acts in weird ways across the plugin boundary. Even though it is not necessary in this specific example, it is a good practice to wrap all async `impl`s that interact with async code with this macro.
-- `fn handle_blocking()`: Since we chose for this event to be blocking, it is necessary to implement the `handle_blocking()` method instead of the `handle()` method.
+- `struct MyJoinHandler;`: Struct cho event handler của chúng ta
+- `#[with_runtime(global)]`: Pumpkin sử dụng hệ sinh thái tokio async runtime, thứ thỉnh thoảng sẽ hoạt động một cách kì quặc thông qua ranh giới của plugin. Dù trong ví dụ này nó không cần thiết, nhưng việc gói tất cả các async `impl` tương tác với async code bằng macro này là một phương pháp rất tốt.
+- `fn handle_blocking()`: Do chúng ta đã chọn để event này mang thuộc tính blocking, chúng ta bắt buộc phải implement phương thức `handle_blocking()` thay vì method `handle()`.
 
-### Registering the handler
+### Đăng ký (Registering) trình xử lý này
 
-Now that we have written the event handler, we need to tell the plugin to use it. We can do that by adding a single line into the `on_load` method:
+Giờ chúng ta đã viết xong một event handler, chúng ta cần phải bảo hệ thống plugin hãy sử dụng nó. Chúng ta có thể làm như vậy bằng việc dán đoạn dòng kẻ mã đơn giản vào method `on_load`:
 :::code-group
 
 ```rs [lib.rs]
@@ -108,4 +108,4 @@ async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
 ```
 
 :::
-Now if we build the plugin and join the server, we should see a green "Welcome" message with our username!
+Và giờ nếu chúng ta build lại cái plugin này và vào server để thử, chúng ta sẽ thấy một dòng "Welcome" màu xanh cùng với tên đăng nhập của chúng ta!

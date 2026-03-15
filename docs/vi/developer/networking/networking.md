@@ -1,49 +1,49 @@
 ### Networking
 
-Most of the networking code in Pumpkin can be found in the [pumpkin-protocol](https://github.com/Pumpkin-MC/Pumpkin/tree/master/pumpkin-protocol) crate.
+Hầu hết code network trong Pumpkin có thể được tìm thấy trong crate [pumpkin-protocol](https://github.com/Pumpkin-MC/Pumpkin/tree/master/pumpkin-protocol).
 
 Serverbound: Client→Server
 
 Clientbound: Server→Client
 
-### Structure
+### Cấu trúc (Structure)
 
-Packets in the Pumpkin protocol are organized by functionality and state.
+Các packet trong giao thức Pumpkin được tổ chức theo chức năng và trạng thái (state).
 
-`server`: Contains definitions for serverbound packets.
+`server`: Chứa các định nghĩa cho serverbound packet.
 
-`client`: Contains definitions for clientbound packets.
+`client`: Chứa các định nghĩa cho clientbound packet.
 
-### States
+### Trạng thái (States)
 
-**Handshake**: Always the first packet being sent from the client. This also determines the next state, usually to indicate if the player wants to perform a status request, join the server, or wants to be transferred.
+**Handshake**: Luôn là packet đầu tiên được gửi từ client. Điều này cũng xác định trạng thái tiếp theo, thường là để chỉ ra xem người chơi muốn thực hiện yêu cầu trạng thái, tham gia server hay muốn được chuyển hướng (transfer).
 
-**Status**: Indicates the client wants to see a status response (MOTD).
+**Status**: Chỉ ra rằng client muốn xem phản hồi trạng thái (MOTD).
 
-**Login**: The login sequence. Indicates the client wants to join the server.
+**Login**: Quá trình đăng nhập. Cho biết client muốn tham gia vào server.
 
-**Config**: A sequence of configuration packets is mostly sent from the server to the client (features, resource pack, server links, etc.).
+**Config**: Một chuỗi các packet cấu hình chủ yếu được gửi từ server đến client (tính năng, resource pack, server links, v.v.).
 
-**Play**: The final state, which indicates the player is now ready to join, is also used to handle all other gameplay packets.
+**Play**: Trạng thái cuối cùng, biểu thị quá trình chuẩn bị đã xong và người chơi đã sẵn sàng tham gia trò chơi, cũng được sử dụng để xử lý tất cả các packet lối chơi (gameplay) khác.
 
-### Minecraft Protocol
+### Giao thức Minecraft (Minecraft Protocol)
 
-You can find all Minecraft Java packets at <https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol>. There you also can see which [state](#states) they are in.
-You can also see all the information the packets have, which we can either read or write depending on whether they are serverbound or clientbound.
+Bạn có thể tìm thấy tất cả thư viện packet của Minecraft Java tại <https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol>. Ở đó bạn cũng có thể xem chúng đang ở [trạng thái](#trạng-thái-states) nào.
+Bạn cũng có thể xem mọi thông tin mà packet sở hữu, thứ mà chúng ta có thể đọc hoặc ghi đè tùy thuộc vào việc chúng là serverbound hay clientbound.
 
-### Adding a Packet
+### Thêm một Packet
 
-1. Adding a packet is easy. First, derive:
+1. Việc thêm một packet rất dễ dàng. Đầu tiên, hãy derive:
 
 ```rust
-// For clientbound packets:
+// Đối với clientbound packets:
 #[derive(Serialize)]
 
-// For serverbound packets:
+// Đối với serverbound packets:
 #[derive(Deserialize)]
 ```
 
-2. Next, you have to make it known that your struct represents a packet. This automatically gets the packet ID from the JSON packets file.
+2. Tiếp theo, bạn phải làm cho nó hiểu struct của bạn đại diện cho một packet. Điều này sẽ tự động lấy ID packet từ tệp packet JSON.
 
 ```rust
 use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
@@ -51,27 +51,27 @@ use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
 #[packet(PLAY_DISCONNECT)]
 ```
 
-3. Now you can create the `struct`.
+3. Giờ thì bạn có thể tạo `struct`.
 
-> [!IMPORTANT]
-> Please start the packet name with "C" or "S" for "Clientbound" or "Serverbound".
-> Also, if it's a packet that can be sent in multiple [states](#states), please add the state to the name. For example, there are 3 different disconnect packets.
+> [!IMPORTANT] QUAN TRỌNG
+> Vui lòng bắt đầu tên packet bằng "C" hoặc "S" cho "Clientbound" hoặc "Serverbound".
+> Ngoài ra, nếu đó là packet có thể được gửi ở nhiều [trạng thái (states)](#trạng-thái-states), vui lòng thêm tên trạng thái vào tên. Ví dụ, có 3 packet disconnect khác nhau.
 >
 > - `CLoginDisconnect`
 > - `CConfigDisconnect`
 > - `CPlayDisconnect`
 
-Create fields within your packet structure to represent the data that will be sent.
+Tạo các trường trong cấu trúc packet của bạn để đại diện cho dữ liệu sẽ được gửi.
 
-> [!IMPORTANT]
-> Use descriptive field names and appropriate data types.
+> [!IMPORTANT] QUAN TRỌNG
+> Hãy sử dụng các tên trường mô tả mang tính ngắn gọn dễ hiểu và các kiểu dữ liệu phù hợp.
 
-Examples:
+Ví dụ:
 
 ```rust
 pub struct CPlayDisconnect {
     reason: TextComponent,
-    // more fields...
+    // các field khác...
 }
 
 pub struct SPlayerPosition {
@@ -82,7 +82,7 @@ pub struct SPlayerPosition {
 }
 ```
 
-4. (Clientbound packets only) `impl` a `new` function so we can actually create them by putting in the values.
+4. (Chỉ định clientbound packets) dùng `impl` trong `new` function để chúng ta có thể thực sự tạo nó bằng cách đặt các giá trị bên trong.
 
 ```rust
 impl CPlayDisconnect {
@@ -92,7 +92,7 @@ impl CPlayDisconnect {
 }
 ```
 
-5. In the end, everything should come together.
+5. Cuối cùng, mọi thứ sẽ kết hợp lại với nhau.
 
 ```rust
 #[derive(Serialize)]
@@ -117,7 +117,7 @@ pub struct SPlayerPosition {
 }
 ```
 
-6. You can also serialize/deserialize the packet manually, which can be useful if the packet is more complex.
+6. Bạn cũng có thể Serialize/Deserialize tự động bằng phương pháp thủ công, điều này có thể hữu ích cho các packet phức tạp hơn.
 
 ```diff
 -#[derive(Serialize)]
@@ -140,40 +140,40 @@ pub struct SPlayerPosition {
 +    }
 ```
 
-7. You can now send the clientbound packet (see [Sending Packets](#sending-packets)) or listen for the serverbound packet (see [Receiving Packets](#receiving-packets)).
+7. Lúc này thì bạn đã có thể gửi clientbound packet (xem [Sending Packets](#nhận-gửi-sending-packets)) hoặc lắng nghe lệnh serverbound packet từ client (xem [Receiving Packets](#tiếp-nhận-receiving-packets)).
 
 ### Client
 
-Pumpkin categorizes `Client`s and `Player`s separately. Everything that is not in the play state is a simple `Client`. Here are the differences:
+Pumpkin phân loại cả `Client` và `Player` tách biệt. Mọi thứ không nằm trong trạng thái play là các `Client` đơn giản. Dưới đây là sự khác biệt:
 
 #### Client
 
-- Can only be the states: Status, Login, Transfer, Config
-- Is not a living entity
-- Has small resource consumption
+- Chỉ có thể nằm ở các trạng thái: Status, Login, Transfer, Config
+- Không phải thực thể sống
+- Tiêu tốn ít tài nguyên
 
-#### Player
+#### Người chơi (Player)
 
-- Can only be in the Play state
-- Is a living entity in a world
-- Has more data and consumes more resources
+- Chỉ có thể nằm trong trạng thái Play
+- Là thực thể sống trong thế giới
+- Cấu thành nhiều dữ liệu hơn và làm tiêu tốn nhiều tài nguyên hơn
 
-#### Sending Packets
+#### Nhận gửi (Sending) Packets
 
-Example:
+Ví dụ:
 
 ```rust
-// Works only in the Status state
+// Chỉ hoạt động ở trạng thái Status
 client.send_packet(&CStatusResponse::new("{ description: "A Description"}"));
 ```
 
-#### Receiving Packets
+#### Tiếp nhận (Receiving) Packets
 
-For `Client`s:
+Với `Client`:
 `src/client/mod.rs`
 
 ```diff
-// Put the packet into the right state
+// Đưa packet vào đúng trạng thái (state)
  fn handle_mystate_packet(
   &self,
     server: &Arc<Server>,
@@ -200,11 +200,11 @@ For `Client`s:
 }
 ```
 
-For `Player`s:
+Với người chơi (`Player`):
 `src/entity/player.rs`
 
 ```diff
-// Players only have the Play state
+// Người chơi chỉ có duy nhất Play state
  fn handle_play_packet(
   &self,
     server: &Arc<Server>,
@@ -231,10 +231,10 @@ For `Player`s:
 
 ### Compression
 
-Minecraft packets **can** use ZLib compression for decoding/encoding. There is usually a threshold set when compression is applied; this most often affects chunk packets.
+Các Minecraft packet **có thể** sử dụng nén (compression) ZLib cho mục đích decoding/encoding. Thường có một bộ lọc ngữ cảnh khi nén được áp dụng; bộ lọc này thường xuyên ảnh hưởng tới chunk packets nhất.
 
 ### Porting
 
-To port to a new minecraft version, you can compare differences in the protocol on the [minecraft.wiki Protocol reference](https://minecraft.wiki/w/Java_Edition_protocol).
+Để chuyển đổi sang phiên bản Minecraft (port) mới, bạn có sự cho phép để so sánh các điểm khác biệt với giao thức cũ, chi tiết xem tại [minecraft.wiki Protocol reference](https://minecraft.wiki/w/Java_Edition_protocol).
 
-Also, change the `CURRENT_MC_PROTOCOL` in `src/lib.rs`.
+Và hãy thay đổi `CURRENT_MC_PROTOCOL` ở mục `src/lib.rs`.

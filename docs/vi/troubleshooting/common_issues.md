@@ -2,7 +2,7 @@
 
 1. ## Failed to verify username
 
-    **Vấn đề:** Một số người chơi báo cáo gặp sự cố khi đăng nhập vào máy chủ, bao gồm cả việc gặp lỗi "Failed to verify username".
+    **Vấn đề:** Một số người chơi báo cáo gặp sự cố khi đăng nhập vào server, bao gồm cả việc gặp lỗi "Failed to verify username".
 
     **Nguyên nhân:** Vấn đề này liên quan đến xác thực, và thường liên quan đến cài đặt `prevent_proxy_connections`.
 

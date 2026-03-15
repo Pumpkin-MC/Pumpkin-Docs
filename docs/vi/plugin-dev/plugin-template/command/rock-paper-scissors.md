@@ -1,16 +1,16 @@
-# Writing a Command Handler
+# Viết một Trình xử lý Lệnh (Command Handler)
 
-In Minecraft, commands are the primary way for both regular players and server operators to interact with the game on a lower level. They can be used to perform a wide range of tasks, from simple chat messages to complex server management commands. In this tutorial, we will create a basic Rock-Paper-Scissors command handler that allows players to play the game against the server.
+Trong Minecraft, các câu lệnh (commands) là phương thức chính để cả những người chơi thông thường và những quản trị viên (server operators) có thể tương tác với trò chơi ở một cấp độ thấp hơn. Chúng có thể được sử dụng để thực thi một loạt các tác vụ khác nhau, từ các câu lệnh gửi tin nhắn chat đơn giản cho đến các lệnh quản lý server phức tạp. Trong bài hướng dẫn này, chúng ta sẽ tạo một trình xử lý lệnh oẳn tù tì (Rock-Paper-Scissors) cơ bản cho phép người chơi tham gia trò chơi này với server.
 
-Pumpkin has its own system for handling commands, which is based around each command having a 'tree', which defines the exact structure of the command and its arguments. Each node in the tree represents a command or argument, and the tree is traversed to determine the command to execute and its parameters.
+Pumpkin có một hệ thống thao tác các lệnh (handling commands) riêng biệt, được xây dựng xoay quanh việc mỗi command sở hữu một 'cây lệnh' (tree), thứ giúp định nghĩa vị trí cấu trúc chính xác của lệnh và các đối số (arguments) của nó. Mỗi một nhánh phụ bên trong cây đại diện cho một command hoặc một argument, và cây được duyệt qua để thu thập kết quả và quyết định command nào sẽ được đưa vào thực thi cùng các tham số (parameters) của nó.
 
-Commands in Pumpkin are asynchronous, meaning that they do not block the main thread while they are executing. This allows for more efficient use of resources and a smoother user experience.
+Các commands trong Pumpkin được xử lý bất đồng bộ (asynchronous), có nghĩa là chúng không bao giờ gây chặn (block) thread chính giữa lúc chúng đang được thực thi. Điều này giúp tối ưu hóa hiệu quả khi sử dụng tài nguyên hệ thống và đem lại một trải nghiệm sử dụng mượt mà hơn.
 
-We would also like to thank [ploxxxy](https://github.com/ploxxxy) for writing the original [Rock-Paper-Scissors plugin](https://github.com/ploxxxy/rock-paper-scissors-mc) from which this tutorial is based.
+Chúng tôi cũng muốn gửi lời cảm ơn tới [ploxxxy](https://github.com/ploxxxy) vì đã viết [plugin Rock-Paper-Scissors](https://github.com/ploxxxy/rock-paper-scissors-mc) gốc mà bài hướng dẫn này được dựa trên.
 
-## Adding the basics
+## Thêm những thứ cơ bản
 
-Each command in Pumpkin is defined as a structure that implements the `CommandExecutor` trait. This trait requires the implementation of a `execute` method, which takes the sender, server, and consumed arguments as parameters, and returns a `-> Result<(), CommandError>`. Let's define this structure now:
+Mỗi lệnh trong Pumpkin được định nghĩa là một cấu trúc (structure) dùng để implement cho trait `CommandExecutor`. Trait này bắt buộc phải implement method tên `execute`, thứ sẽ đón nhận các parameters bao gồm sender, server và consumed arguments đi theo, và sau đó trả về một `-> Result<(), CommandError>`. Bây giờ chúng ta hãy cùng xác định structure này:
 
 ```rs
 use pumpkin::{
@@ -38,11 +38,11 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 }
 ```
 
-This code defines an empty structure `RockPaperScissorsExecutor` that implements the `CommandExecutor` trait. The `execute` method is defined to return `Ok(())` when called.
+Mã trên chỉ định ra một phần cấu trúc trống `RockPaperScissorsExecutor` chịu trách nhiệm implement trait `CommandExecutor`. Method `execute` được định nghĩa sẵn để trả về giá trị `Ok(())` mỗi khi được gọi tới.
 
-## Adding helper enums
+## Bổ sung các enums trợ giúp (helper enums)
 
-To make our lives easier, we will also define a couple of enums to represent the possible choices and outcomes of the game, as well as well as a couple functions to generate random choices and check the outcome. Add these to your plugin's code.
+Nhằm làm cho thao tác phần này dễ thở hơn chút, chúng ta cũng sẽ tiến hành định nghĩa một vài enum đại diện cho các lựa chọn và kết quả của trò chơi, cũng như thiết lập một vài hàm (functions) tiện ích có công dụng trích suất các lựa chọn ngẫu nhiên và theo dõi kết quả. Trực tiếp thêm những đoạn mã này vào trong code plugin của bạn.
 
 ```rs
 use rand::{rng, Rng};
@@ -82,7 +82,7 @@ fn get_random_choice() -> Choice {
 }
 ```
 
-Now we need to modify the `RockPaperScissorsExecutor` struct to accept a `Choice` parameter and implement the game logic.
+Và tiếp theo chúng ta cần sửa đổi lại cho struct `RockPaperScissorsExecutor` để có thể nhận thêm parameter `Choice` và thực thi lôgic (logic) của trò chơi.
 
 ```rs
 struct RockPaperScissorsExecutor(Choice); // [!code ++]
@@ -104,13 +104,13 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 }
 ```
 
-This code will allow us to later pass in the player's choice and use it in the game logic, as well as compare it with the computer's choice to determine the outcome of the game.
+Đoạn mã này sẽ trao cho chúng ta được quyền chèn lựa chọn của người chơi vào và tái sử dụng nó bên trong game logic, cũng như việc tính toán so sánh nó với lựa chọn của máy tính xem để đoạt được kết quả của trò chơi ra làm sao.
 
-## Implementing the Game Logic
+## Triển khai quy luật (Game Logic) của trò chơi
 
-Now we can move on to actually implementing the game logic, and showing the outcome to the players.
+Bây giờ chúng ta sẽ đi vào phần quan trọng nhất - Triển khai game logic của trò chơi, ngoài ra cũng trình chiếu kết xuất của trận đấu đó để cho người chơi có thể xem.
 
-First we will show the player their and the computer's choice. Add this code to your plugin:
+Đầu tiên chúng ta sẽ show phía người chơi chi tiết những thứ mà họ và máy tính đang thao tác chọn. Hãy dán mã code này vào plugin của bạn:
 
 ```rs
 impl CommandExecutor for RockPaperScissorsExecutor {
@@ -146,7 +146,7 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 }
 ```
 
-Next we can compute the game outcome and show it to the player. Add this code to your plugin:
+Phần kế tiếp là tính toán kết quả cuối cùng để hiển thị cho người chơi thông qua chat. Tiếp tục thêm đoạn này vào plugin:
 
 ```rs
 impl CommandExecutor for RockPaperScissorsExecutor {
@@ -157,7 +157,7 @@ impl CommandExecutor for RockPaperScissorsExecutor {
         _: &ConsumedArgs<'a>,
     ) -> Result<(), CommandError> {
         Box::pin(async move {
-            // Existing code
+            // Bao gồm những code đã nạp tại đây
             
 
             match player_choice.beats(&computer_choice) { // [!code ++:19]
@@ -186,17 +186,17 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 }
 ```
 
-And that's it! The core logic is done. Now we only have one last thing to do.
+Đó là tất cả! Các logic lõi (core logic) chính coi như đã làm xong. Hiện tại chúng ta mới chỉ còn lại duy nhất một thứ cần phải làm trước khi dứt.
 
-## Building and registering a command tree
+## Đóng gói Build và đăng ký (register) cơ sở command tree
 
-As stated earlier, we need to build a command tree and register it with the server. This will allow players to execute our plugin's commands.
+Giống như đã nói trước lúc nãy, chúng ta đòi hỏi phải xây dựng một cây mệnh lệnh (command tree) và chốt đăng ký nó với phía server. Điều đó sẽ cấp phép cho lượng người chơi khả năng thi hành câu lệnh do plugin thao túng.
 
-Building a command tree isn't very hard, but you have to know the exact structure of the command and its arguments. In this case, we have a command named `rock-paper-scissors`, which will take one required argument (the player's choice).
+Việc thiết đặt cho command tree không khó cho lắm, tuy vậy đòi hỏi rằng ít nhất phải am hiểu chắc cấu trúc của bản thân lệnh là cái gì cùng với danh sách arguments đầu vào của nó. Nằm trong số lần ví dụ này, chúng ta hiện tại có sẵn lệnh mang danh là `rock-paper-scissors` rồi, cái lệnh đó sẽ cần sử dụng tới duy nhất một argument yêu cầu (lựa chọn của người chơi).
 
-The command tree is initialized using the `CommandTree::new()` function. This function takes two arguments: a list of names, where the first is the main command name, and the others are aliases for the command; and a command description which is used to describe the command in the help menu. We can then add 'branches' to the tree using the `.then()` method. This method accepts a 'leaf' which can be built with the `literal()`, `argument()`, or `require()` functions.
+Nhánh phả hệ mang định dạng command tree được khai tạo bằng việc sử dụng function `CommandTree::new()`. Function này sẽ đòi hỏi 2 argument: mảng danh sách tên, với phần tử đầu tiên chính là tên gọi gốc (main command name), cùng một vài bí danh (alias) cho cái lệnh đó nữa; một nhóm nói thêm là phần command description là nơi dùng để gắn chuỗi dữ liệu miêu tả tính năng trong bảng help menu. Chúng ta có thể bổ sung các phụ tùng nhánh (branches) cho cây này bằng cách sử dụng lệnh `.then()`. Method này đồng thời chấp nhận các cấu trúc mang chức năng 'lá' (leaf) cấu thành và sinh trưởng thông qua các hàm built với `literal()`, `argument()`, hay `require()`.
 
-For the rock-paper-scissors command, we'll create 3 separate branches, each with a `literal()` leaf node for the player's choice. We will also register the command tree with the server and with a `PermissionLvl` of `Zero` which will allow anyone to execute the command. Add the following code to your `on_load()` method:
+Đến với mệnh lệnh rock-paper-scissors, chúng ta tiến hành chia 3 nhánh rời rạc rải rác, và dĩ nhiên mỗi nhánh mang theo lá mộc được thêu dệt theo định chuẩn mang nốt tên là `literal()` dành cho mỗi lựa chọn của người tham chơi. Ta đăng ký command tree trên server với `PermissionLvl` được quy thành `Zero` để mấu chốt là bất kỳ đối tượng nào cũng có thể gọi command được. Hãy dán đoạn code đó vào lòng `on_load()` method:
 
 ```rs
 use pumpkin_util::PermissionLvl; // [!code ++]
@@ -223,7 +223,7 @@ async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
 }
 ```
 
-And that's it! If you compile the plugin, you can test it by running the following command:
+Vậy đó! Tất cả thế là xong rồi. Nếu bạn tiến hành compile cái phần plugin, thì hãy vào dùng để mở cơ trải nghiệm chạy thử bằng việc gọi dòng lệnh này xem:
 
 ```bash
 /rps rock

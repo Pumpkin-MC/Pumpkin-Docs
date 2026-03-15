@@ -1,6 +1,6 @@
 # Mạng LAN
 
-Pumpkin có thể quảng bá máy chủ trên toàn mạng LAN để giúp những người chơi cục bộ kết nối với máy chủ dễ dàng hơn.
+Pumpkin có thể quảng bá server trên toàn mạng LAN để giúp những người chơi cục bộ kết nối với server dễ dàng hơn.
 
 ## Cấu hình mạng LAN
 
@@ -19,10 +19,10 @@ enabled = true
 
 #### `motd`: String (optional)
 
-MOTD để quảng bá ra client; sử dụng MOTD của máy chủ theo mặc định.
+MOTD để quảng bá ra client; sử dụng MOTD của server theo mặc định.
 
 > [!CAUTION] CHÚ Ý
-> MOTD mạng LAN không hỗ trợ nhiều dòng, màu RGB hoặc gradient. Pumpkin không xác minh MOTD trước khi quảng bá nó. Nếu MOTD của máy chủ đang sử dụng các thành phần này, hãy cân nhắc định nghĩa trường này để client thấy MOTD phù hợp.
+> MOTD mạng LAN không hỗ trợ nhiều dòng, màu RGB hoặc gradient. Pumpkin không xác minh MOTD trước khi quảng bá nó. Nếu MOTD của server đang sử dụng các thành phần này, hãy cân nhắc định nghĩa trường này để client thấy MOTD phù hợp.
 
 :::code-group
 

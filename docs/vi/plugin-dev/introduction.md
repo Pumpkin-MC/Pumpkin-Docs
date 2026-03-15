@@ -1,10 +1,10 @@
-# Pumpkin Plugin Development
+# Phát triển Plugin Pumpkin
 
 ::: warning
-The Pumpkin Plugin API is still in a very early stage of development and may change at any time.
-If you run into any issues please reach out on [our Discord server](https://discord.gg/aaNuD6rFEe).
+API Plugin của Pumpkin vẫn đang ở giai đoạn phát triển rất sớm và có thể thay đổi bất kỳ lúc nào.
+Nếu bạn gặp bất kỳ vấn đề nào, vui lòng liên hệ trên [server Discord của chúng tôi](https://discord.gg/aaNuD6rFEe).
 :::
 
-Pumpkin Plugins integrate with the server software on a very deep level allowing for many things that would not be possible on other server software.
+Các Plugin Pumpkin tương tác với phần mềm server ở mức độ rất sâu, cho phép thực hiện nhiều điều mà các phần mềm server khác không thể làm được.
 
-The Pumpkin Plugin API takes inspiration from the Spigot/Bukkit plugin API in many places, so if you have previous experience with these and have experience with Rust development, you should have a pretty easy time writing plugins for Pumpkin. :smile:
+API Plugin Pumpkin lấy cảm hứng từ API plugin Spigot/Bukkit ở nhiều điểm, vì vậy nếu bạn đã có kinh nghiệm trước đó với chúng và có kinh nghiệm phát triển Rust, bạn sẽ thấy khá dễ dàng khi viết các plugin cho Pumpkin. :smile:

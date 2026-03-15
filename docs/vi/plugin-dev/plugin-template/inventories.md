@@ -1,28 +1,28 @@
-# Opening a custom inventory
+# Mở một túi đồ (inventory) tùy chỉnh
 
-## Overview
+## Tổng quan (Overview)
 
-The inventory system in Pumpkin provides a flexible way to manage item storage and manipulation. This guide explains how to create and implement custom inventories.
+Hệ thống túi đồ (inventory) trong Pumpkin cung cấp một phương pháp linh hoạt để quản lý và thao tác sự vận chuyển các vật phẩm chứa trong nó. Hướng dẫn này giải thích cách để tạo và triển khai các túi đồ tùy chỉnh.
 
-## Table of Contents
+## Mục lục (Table of Contents)
 
-- [Opening a custom inventory](#opening-a-custom-inventory)
-  - [Overview](#overview)
-  - [Table of Contents](#table-of-contents)
-  - [Basic Inventory Implementation](#basic-inventory-implementation)
-  - [Required Traits](#required-traits)
+- [Mở một túi đồ (inventory) tùy chỉnh](#mở-một-túi-đồ-inventory-tùy-chỉnh)
+  - [Tổng quan (Overview)](#tổng-quan-overview)
+  - [Mục lục (Table of Contents)](#mục-lục-table-of-contents)
+  - [Khởi tạo (Implement) túi đồ cơ bản](#implement-túi-đồ-inventory-cơ-bản)
+  - [Các Trait yêu cầu phải có](#các-trait-yêu-cầu-phải-có)
     - [Inventory Trait](#inventory-trait)
     - [Clearable Trait](#clearable-trait)
-  - [Screen Handlers](#screen-handlers)
-    - [Using Generic Screen Handlers](#using-generic-screen-handlers)
-    - [Creating Custom Screen Handlers](#creating-custom-screen-handlers)
-  - [Best Practices](#best-practices)
-  - [Examples](#examples)
-    - [Basic Inventory Usage](#basic-inventory-usage)
+  - [Các Screen Handlers](#các-screen-handlers)
+    - [Sử dụng Generic Screen Handlers](#sử-dụng-generic-screen-handlers)
+    - [Tạo Screen Handlers tùy chỉnh riêng](#tạo-screen-handlers-tùy-chỉnh-riêng)
+  - [Phương pháp hiệu quả (Best Practices)](#phương-pháp-hiệu-quả-best-practices)
+  - [Ví dụ (Examples)](#ví-dụ-examples)
+    - [Cách dùng inventory cơ bản](#cách-dùng-inventory-cơ-bản)
 
-## Basic Inventory Implementation
+## Implement túi đồ (inventory) cơ bản
 
-The `BasicInventory` struct provides a standard implementation of an inventory with 27 slots. Here's how to implement your own inventory:
+Struct `BasicInventory` cung cấp một phương pháp implement tiêu chuẩn cho một túi đồ gồm 27 slot. Dưới đây là cách implement túi đồ của riêng bạn:
 
 ```rust
 use pumpkin_world::{
@@ -38,20 +38,20 @@ pub struct BasicInventory {
 }
 ```
 
-## Required Traits
+## Các Trait yêu cầu phải có
 
 ### Inventory Trait
 
-The `Inventory` trait defines the core functionality that all inventories must implement:
+Trait tên là `Inventory` định nghĩa một số hàm (functionality) cốt lõi mà tất cả mọi inventory bắt buộc phải implement:
 
 ```rust
 impl Inventory for BasicInventory {
-    // Get the total number of slots in the inventory
+    // Lấy tổng số lượng các slot của một inventory
     fn size(&self) -> usize {
         self.items.len()
     }
 
-    // Check if the inventory is completely empty
+    // Kiểm tra liệu một inventory có trống rỗng hoàn toàn hay không
      fn is_empty(&self) -> InventoryFuture<'_, bool> {
         Box::pin(async move {
             for slot in self.items.iter() {
@@ -64,12 +64,12 @@ impl Inventory for BasicInventory {
         })
     }
 
-    // Get a reference to an item stack in a specific slot
+    // Lấy object tham chiếu cho một danh mục vật phẩm (item stack) ở tại một slot cụ thể
     fn get_stack(&self, slot: usize) -> InventoryFuture<'_, Arc<Mutex<ItemStack>>> {
         Box::pin(async move { self.items[slot].clone() })
     }
 
-    // Remove and return the entire stack from a slot
+    // Xóa và trả lại toàn bộ item stack ra khỏi một slot
   fn remove_stack(&self, slot: usize) -> InventoryFuture<'_, ItemStack> {
         Box::pin(async move {
             let mut removed = ItemStack::EMPTY.clone();
@@ -79,12 +79,12 @@ impl Inventory for BasicInventory {
         })
     }
 
-    // Remove a specific amount of items from a stack
+    // Lấy một lượng vật phẩm nhất định ra khỏi một stack
    fn remove_stack_specific(&self, slot: usize, amount: u8) -> InventoryFuture<'_, ItemStack> {
         Box::pin(async move { split_stack(&self.items, slot, amount).await })
     }
 
-    // Set the contents of a specific slot
+    // Cài đặt đồ đạc (contents) cho một slot cụ thể
     fn set_stack(&self, slot: usize, stack: ItemStack) -> InventoryFuture<'_, ()> {
         Box::pin(async move {
             *self.items[slot].lock().await = stack;
@@ -95,7 +95,7 @@ impl Inventory for BasicInventory {
 
 ### Clearable Trait
 
-The `Clearable` trait provides functionality to empty an inventory. This is required to be implemented for the `Inventory` trait:
+Trait `Clearable` cung cấp tính năng dọn sạch đồ của inventory. Điều này là bắt buộc phải được implement cho trait `Inventory`:
 
 ```rust
 impl Clearable for YourInventory {
@@ -109,13 +109,13 @@ impl Clearable for YourInventory {
 }
 ```
 
-## Screen Handlers
+## Các Screen Handlers
 
-Screen handlers are used to create and manage the user interface for inventories. They define how items can be moved between slots and how the inventory interacts with the player's inventory.
+Screen handlers (trình xử lý màn hình) được sử dụng để tạo và quản lý giao diện đồ họa người dùng của kho đồ (inventories). Chúng chịu trách nhiệm cho các công việc có thể kể tới như cho phép vật phẩm di chuyển giữa các ô slot ngàm lưới và quy định cách thức inventory tương tác với chính inventory gốc của người chơi.
 
-### Using Generic Screen Handlers
+### Sử dụng Generic Screen Handlers
 
-Pumpkin provides a generic screen handler for common inventory layouts. Here's how to use it:
+Pumpkin cung cấp giao diện screen handler mang tính generic (tổng quát) dành cho đa số kiểu layout sắp xếp của kho túi đồ phổ thông. Đây là cách để sử dụng chúng:
 
 ```rust
 use pumpkin_inventory::generic_container_screen_handler::create_generic_9x3;
@@ -145,30 +145,30 @@ impl ScreenHandlerFactory for MyScreenFactory {
     }
 }
 
-// Create a screen factory
+// Tạo một screen factory (hệ quy chuẩn)
 let factory = MyScreenFactory {
     inventory: inventory.clone(),
 };
 
-// Open the inventory for a player
+// Mở kho túi đồ này cho một người chơi bất kỳ
 player.open_handled_screen(factory).await;
 
-// The screen will automatically handle:
-// - Item movement between slots
-// - Quick move functionality
-// - Player inventory interaction
-// - Screen closing
+// Screen này sẽ tự động handle các thao tác:
+// - Vận chuyển vật dụng đi qua lại các ô ngàm slots
+// - Cung cấp khả năng vận chuyển nhanh (quick move logic)
+// - Cùng khả năng làm việc với kho đồ của chính người chơi sở hữu
+// - Và cũng như việc ngắt hoạt động (tiến trình đóng) screen (giao diện)
 ```
 
-### Creating Custom Screen Handlers
+### Tạo Screen Handlers tùy chỉnh riêng
 
-You can create custom screen handlers by implementing the `ScreenHandler` trait. This gives you more flexibility and allows you to create screens for purposes other than just being an inventory.
+Bạn có thể tự tạo cho mình các hạng mục screen handler tùy chỉnh (custom) bằng cách implement trait tên `ScreenHandler`. Nó mang lại cho bạn sự tự do linh hoạt hơn và mở đường giúp bạn code màn hình dùng cho các tiện ích bổ ích thay vì cứ gò bó chúng với vai trò là một túi chứa hàng Inventory cục mịch.
 
-To create a custom screen handler, you can make a new struct that implements the `Slot` trait. `NormalSlot` is a slot that comes with Pumpkin that just acts as an index into an inventory and has no restrictions.
+Để mà tạo ra được cho mình một custom screen handler, bạn có thể triển khai một struct mới và gán ghép với trait `Slot`. Ở đây có một ví dụ cấu trúc tên `NormalSlot`, đó là một trait mặc định sẵn được giao nhượng bởi Pumpkin. Mục tiêu là để đóng vai trò index chiếu vào inventory và không có bất kỳ rào cản hạn chế ngăn nào được cắm vào nó.
 
-TODO: Custom slot example
+TODO: Cung cấp ví dụ về Custom slot (slot tùy chỉnh)
 
-Here's an example of the source code for the generic screen handler:
+Dưới đây là ví dụ về source code (mã nguồn tham khảo nguyên bản) cho generic screen handler:
 
 ```rust
 use std::{any::Any, sync::Arc};
@@ -263,21 +263,21 @@ impl ScreenHandler for GenericContainerScreenHandler {
     ) -> ItemStackFuture<'a> {
         Box::pin(async move {
             let mut stack_left = ItemStack::EMPTY.clone();
-            // Assuming bounds check passed for slot_index by caller or within quick_move spec
+            // Lấy giả định vòng kiểm tra bounds check dành cho slot_index (index ô túi đồ) truyền bởi caller hoặc nằm trong đặc điểm quick_move được thông qua
             let slot = self.get_behaviour().slots[slot_index as usize].clone();
 
             if slot.has_stack().await {
                 let slot_stack_lock = slot.get_stack().await;
                 let slot_stack_guard = slot_stack_lock.lock().await;
                 stack_left = slot_stack_guard.clone();
-                // Release the guard before calling insert_item which needs its own lock
+                // Phóng thích guard bảo hộ trước khi kích hoạt insert_item, thứ mà cần khóa cấu hình nội hàm (lock) của riêng nó
                 drop(slot_stack_guard);
 
-                // Re-acquire lock for insert_item (which expects &mut ItemStack)
+                // Yêu cầu (Request) cấp lại khóa bảo hộ nhằm gọi hàm insert_item (vốn chờ cấu trúc dạng &mut ItemStack)
                 let mut slot_stack_mut = slot_stack_lock.lock().await;
 
                 if slot_index < (self.rows * 9) as i32 {
-                    // Move from inventory to player area (end)
+                    // Mệnh lệnh di chuyển vật liệu từ trong inventory đến khu vực đồ người chơi (điểm đến)
                     if !self
                         .insert_item(
                             &mut slot_stack_mut,
@@ -293,16 +293,16 @@ impl ScreenHandler for GenericContainerScreenHandler {
                     .insert_item(&mut slot_stack_mut, 0, (self.rows * 9).into(), false)
                     .await
                 {
-                    // Move from player area to inventory (start)
+                    // Di chuyển vật thể từ khu trải đồ của người chơi lên kho diện inventory (vị trí đầu của màn di dời)
                     return ItemStack::EMPTY.clone();
                 }
 
-                // Check the resulting state of the slot stack after insert_item
+                // Chấm kiểm tra lại các cấu trúc trạng thái kết quả của một vật phẩm ở ô slot ngay sau khoảng thời gian kết thúc khởi động lệnh gọi lệnh insert_item
                 if slot_stack_mut.is_empty() {
-                    drop(slot_stack_mut); // Release lock
+                    drop(slot_stack_mut); // Release lại khóa (lock) cho vật phẩm này
                     slot.set_stack(ItemStack::EMPTY.clone()).await;
                 } else {
-                    drop(slot_stack_mut); // Release lock
+                    drop(slot_stack_mut); // Release lại khóa (lock)
                     slot.mark_dirty().await;
                 }
             }
@@ -313,35 +313,35 @@ impl ScreenHandler for GenericContainerScreenHandler {
 }
 ```
 
-## Best Practices
+## Phương pháp hiệu quả (Best Practices)
 
-1. **Thread Safety**
-   - Implement proper error handling for slot bounds checking
-   - Remember to drop stack locks before using `inventory.set_stack()` or `slot.get_cloned_stack()` to prevent deadlocks
+1. **Bảo toàn luồng xử lý (Thread Safety)**
+   - Hãy triển khai bắt xử lý lỗi (error handling) cẩn thận khi đối mặt với hàm check giới hạn slot index để tránh sai sót.
+   - Luôn nhớ lệnh thả (drop) stack locks trước khi dở trò dùng tham lệnh như kiểu `inventory.set_stack()` hay với kiểu gọi `slot.get_cloned_stack()` với mục tiêu ngăn phần mềm bị dính trạng thái đơ chặn (deadlocks).
 
-2. **Inventory Management**
-   - Use `ItemStack::EMPTY` constant for clearing slots or initializing empty inventories
+2. **Quản lý Inventory (Inventory Management)**
+   - Hãy dùng hệ đồ họa hằng số của `ItemStack::EMPTY` nếu có bất kỳ dự định thao tác như là tống khứ hay làm sạch loạt slot (clearing) hoặc khởi định làm sạch tạo nên túi (initialize) dành riêng cho các túi đồ trống rỗng khác.
 
-3. **Screen Handler Implementation**
-   - Handle inventory closing properly to prevent item loss
-   - Make sure slots add up to the amount of slots in that window type
+3. **Gắn nối tính năng Screen Handler (Screen Handler Implementation)**
+   - Setup kịch bản đóng thoát Inventory một cách tinh anh thận trọng vì mục tiêu tránh các trường hợp sự cố bay đồ trớ trêu.
+   - Nhớ đảm bảo là hãy check lại tổng số lượng slot này cộng chéo lên sẽ vừa đúng bằng tổng số slot cho sẵn tương đương trên kiểu Window type màn chiếu đã chọn.
 
-## Examples
+## Ví dụ (Examples)
 
-### Basic Inventory Usage
+### Cách dùng inventory cơ bản
 
 ```rust
-// Create a new inventory
+// Khởi tạo một inventory mới
 let inventory = BasicInventory {
     items: [(); 27].map(|_| Arc::new(Mutex::new(ItemStack::EMPTY))),
 };
 
-// Add items to a slot
+// Đặt item mới cho một vị trí slot đang nhắm tới
 inventory.set_stack(0, ItemStack::new(1, &Items::OAK_LOG)).await;
 
-// Remove items from a slot
+// Xóa vật phẩm vừa rồi ra khỏi slot đó
 let removed = inventory.remove_stack(0).await;
 
-// Check if inventory is empty
+// Check xem kho đồ đã không còn vật phẩm gì đúng ko
 let is_empty = inventory.is_empty().await;
 ```

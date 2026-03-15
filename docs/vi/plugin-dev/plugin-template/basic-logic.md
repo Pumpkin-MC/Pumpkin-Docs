@@ -1,8 +1,8 @@
-# Writing the basic logic
+# Viết các lôgic (logic) cơ bản
 
 ## Plugin base
 
-Even in a basic plugin, there is a lot going on under the hood, so to greatly simplify plugin development we will use the `pumpkin-api-macros` crate to create a basic empty plugin.
+Ngay cả trong một plugin cơ bản, có rất nhiều thứ diễn ra dưới mui xe, vì vậy để đơn giản hóa quá trình phát triển plugin, chúng ta sẽ sử dụng crate `pumpkin-api-macros` để tạo một plugin trống.
 
 :::code-group
 
@@ -27,20 +27,20 @@ impl Default for MyPlugin {
 
 :::
 
-This will create an empty plugin and implement all the necessary methods for it to be loaded by Pumpkin.
+Điều này sẽ tạo ra một plugin trống và triển khai tất cả các phương thức cần thiết để Pumpkin có thể tải nó.
 
-We can now try to compile our plugin for the first time. To do so, run this command in your project folder:
+Bây giờ chúng ta có thể thử biên dịch plugin của mình lần đầu tiên. Để làm như vậy, hãy chạy lệnh này trong thư mục dự án của bạn:
 
 ```bash
 cargo build --release
 ```
 
-::: tip NOTICE
-If you are using Windows, you **must** use the `--release` flag, or you will run into issues. If you are on another platform, you don't have to use it if you want to save on compile time.
+::: tip LƯU Ý
+Nếu bạn đang sử dụng Windows, bạn **bắt buộc** phải sử dụng cờ `--release`, nếu không bạn sẽ gặp sự cố thất bại. Nếu bạn dùng nền tảng khác, bạn không cần phải sử dụng nó nếu bạn muốn tiết kiệm thời gian biên soạn mã (compile time).
 :::
-The initial compilation will take a bit, but don't worry, later compilations will be faster.
+Lần biên dịch đầu tiên sẽ mất một chút thời gian, nhưng đừng lo lắng, các lần biên dịch sau sẽ nhanh hơn.
 
-If all went well, you should be left with a message like this:
+Nếu mọi việc suôn sẻ, bạn sẽ nhận được một thông báo như thế này:
 
 ```log
 ╰─ cargo build --release
@@ -48,40 +48,40 @@ If all went well, you should be left with a message like this:
     Finished `release` profile [optimized] target(s) in 0.68s
 ```
 
-Now you can go to the `./target/release` folder (or `./target/debug` if you didn't use `--release`) and locate your plugin binary.
+Giờ bạn có thể điều hướng tới thư mục `./target/release` (hoặc `./target/debug` nếu bạn không dùng cờ `--release`) và định vị tệp nhị phân plugin.
 
-Depending on your operating system, the file will have one of three possible names:
+Tùy vào hệ điều hành của bạn, file nhị phân sẽ có một trong ba cái tên sau:
 
-- For Windows: `hello-pumpkin.dll`
-- For MacOS: `libhello-pumpkin.dylib`
-- For Linux: `libhello-pumpkin.so`
+- Đối với Windows: `hello-pumpkin.dll`
+- Đối với MacOS: `libhello-pumpkin.dylib`
+- Đối với Linux: `libhello-pumpkin.so`
 
-::: info NOTE
-If you used a different project name in the `Cargo.toml` file, look for a file which contains your project name.
+::: info CHÚ Ý
+Nếu bạn đã dùng tên project khác bên trong file `Cargo.toml`, hãy tìm file có chứa tên project tương ứng của bạn.
 :::
 
-You can rename this file to whatever you like, however you must keep the file extension (`.dll`, `.dylib`, or `.so`) the same.
+Bạn có quyền tùy chỉnh đổi tên tệp này thành bất kỳ tên nào bạn muốn, tuy nhiên bạn bắt buộc phải giữ nguyên phần mở rộng của tệp (`.dll`, `.dylib`, hoặc `.so`).
 
-## Testing the plugin
+## Thử nghiệm plugin
 
-Now that we have our plugin binary, we can go ahead and test it on the Pumpkin server. Installing a plugin is as simple as putting the plugin binary that we just built into the `plugins/` folder of your Pumpkin server!
+Bây giờ chúng ta đã có tệp nhị phân plugin có thể sử dụng được, chúng ta có thể tiến hành và kiểm tra nó trên server Pumpkin. Việc cài đặt hoàn toàn đơn giản chỉ dưới hình thức đặt tệp nhị phân plugin mà chúng ta vừa tạo vào thư mục `plugins/` của server Pumpkin của bạn!
 
-Thanks to the `#[plugin_impl]` macro, the plugin will have its details (like the name, authors, version, and description) built into the binary so that the server can read them.
+Nhờ có macro `#[plugin_impl]`, plugin sẽ đính sẵn các thông tin chi tiết (như tên, tác giả, phiên bản và mô tả) được tích hợp trong tệp nhị phân để server có thể đọc được.
 
-When you start up the server and run the `/plugins` command, you should see an output like this:
+Khi bạn khởi động server và chạy lệnh `/plugins`, bạn sẽ thấy output như thế này:
 
 ```text
 There is 1 plugin loaded:
 hello-pumpkin
 ```
 
-## Basic methods
+## Các phương thức (Methods) cơ bản
 
-The Pumpkin server currently uses two "methods" to tell the plugin about its state. These methods are `on_load` and `on_unload`.
+Server Pumpkin hiện được triển khai thông qua hai "phương thức" (methods) để cho plugin biết về trạng thái thiết đặt của nó. Các phương thức này là `on_load` và `on_unload`.
 
-These methods don't have to be implemented, but you will usually implement at least the `on_load` method. In this method you get access to a `Context` object which can give the plugin access to information about the server, but also allows the plugin to register command handlers and events.
+Các methods này không bắt buộc phải được triển khai (implement), nhưng bạn thường sẽ implement ít nhất là phương thức `on_load`. Trong phương thức này, bạn có quyền truy cập vào một object tên là `Context`, object này có thể cung cấp cho plugin quyền truy cập vào thông tin chi tiết về server, nhưng cũng cho phép plugin đăng ký (register) các command handlers và events.
 
-To make implementing these methods easier, there is another macro provided by the `pumpkin-api-macros` crate.
+Để làm cho việc triển khai các method này dễ dàng hơn một cách đáng kể, có một macro khác được cung cấp bởi crate tên là `pumpkin-api-macros`.
 :::code-group
 
 ```rs [lib.rs]
@@ -114,52 +114,52 @@ impl Default for MyPlugin {
 
 :::
 
-::: warning IMPORTANT
-It is important that you define any plugin methods before the `#[plugin_impl]` block.
+::: warning QUAN TRỌNG
+Điều quan trọng là bạn phải định nghĩa trước bất kỳ lệnh plugin method nào trước khối `#[plugin_impl]`.
 :::
 
-This method gets a mutable reference to its plugin object (in this case the `MyPlugin` struct) which it can use to initialize any data stored in the plugin's main struct, and a reference to a `Context` object. This object is specifically constructed for this plugin based on the plugin's metadata.
+Method này nhận được một mutable reference trỏ đến object chứa liên kết (trong trường hợp này là struct `MyPlugin`), struct mà nó có thể sử dụng tiếp để khởi tạo bất kỳ dữ liệu nào được đặt cùng trong struct chính của plugin và một tham chiếu bổ sung đến object thuộc tính hệ thống `Context`. Object này được xây dựng dành riêng cho plugin này dựa trên metadata của chính plugin đó.
 
-### Methods implemented on the `Context` object
+### Những phương thức (Methods) được implement trên the `Context` object
 
 ```rs
 fn init_log()
 ```
 
-Enables logging via the `log` crate.
+Kích hoạt logging thông qua `log` crate.
 
 ```rs
 fn get_data_folder() -> String
 ```
 
-Returns the path to the folder dedicated to this plugin, which should be used for persistent data storage
+Hồi đáp (Returns) vị trí đường dẫn thư mục chuyên dụng cho plugin này, thứ mà sau này nên được tận dụng cho persistent data storage
 
 ```rs
 async fn get_player_by_name(player_name: String) -> Option<Arc<Player>>
 ```
 
-If a player by the name `player_name` is found (has to be currently online), this function will return a reference to them.
+Nếu một người chơi có tên `player_name` đã được tìm thấy (yêu cầu người chơi đó cần phải tham gia server vào lúc đấy), hàm này sẽ trả về reference của họ.
 
 ```rs
 async fn register_command(tree: CommandTree, permission: PermissionLvl)
 ```
 
-Registers a new command handler, with a minimum required permission level.
+Đăng ký (Registers) command handler cho lệnh mới sinh, đi đôi với cấp độ quyền (permission level) tối thiểu được yêu cầu.
 
 ```rs
 async fn register_event(handler: Arc<H>, priority: EventPriority, blocking: bool)
 ```
 
-Registers a new event handler with a set priority and if it is blocking or not.
-By the way, `handler` is `Arc<T>`, which means you can implement a lot of events on one handler, and then register it.
+Registers một cấu trúc sự kiện (event handler) mới với mức độ ưu tiên xác định đi sau đó là việc liệu nó có ngăn chặn gì không (blocking) hay không.
+Bên cạnh đó, `handler` thực chất là `Arc<T>`, điều này có nghĩa là bạn hoàn toàn có thể implement rất nhiều sự kiện trên cùng một handler, và đăng ký (register) nó chỉ tại đó.
 
-## Basic on-load method
+## Lệnh on-load method cơ bản
 
-For now we will only implement a very basic `on_load` method to be able to see that the plugin is running.
+Vì để kiểm chứng là plugin có đang hoạt động, giờ chúng ta sẽ chỉ implement một hàm method `on_load` cực kỳ cơ bản.
 
-Here we will set up the inner Pumpkin logger and set up a "Hello, Pumpkin!" so that we can see our plugin in action.
+Nằm tại đây, chúng ta sẽ thiết lập công cụ logger nội bộ của Pumpkin và thiết lập thông báo text "Hello, Pumpkin!" để chúng ta có thể kiểm duyệt plugin của mình có đang hoạt động hay không.
 
-Add this to the `on_load` method:
+Hãy thêm cái này vào `on_load` method:
 :::code-group
 
 ```rs [lib.rs]
@@ -175,4 +175,4 @@ async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
 
 :::
 
-If we build the plugin again and start up the server, you should now see "Hello, Pumpkin!" somewhere in the log.
+Nếu chúng ta build lại plugin một lần nữa và khởi động server, giờ đây bạn sẽ thấy dòng chữ text "Hello, Pumpkin!" hiển thị ở một nơi nào đó dọc trong thanh cuộn log.

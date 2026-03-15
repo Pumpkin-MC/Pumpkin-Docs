@@ -1,18 +1,18 @@
-# Creating a new project
+# Khởi tạo một dự án mới
 
-Pumpkin plugins use the [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html) build system.
+Các plugin Pumpkin sử dụng hệ thống build [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html).
 
-The complete code for this plugin can be found as a [template on GitHub](https://github.com/vyPal/Hello-Pumpkin).
+Toàn bộ code cho plugin này có thể được tìm thấy tại [template trên GitHub](https://github.com/vyPal/Hello-Pumpkin).
 
-## Initializing a new crate
+## Khởi tạo một crate mới
 
-First we need to create a new project folder. You can do this by running this command in the folder you created:
+Đầu tiên chúng ta cần tạo một thư mục cho dự án (project folder) mới. Bạn có thể làm điều đó bằng cách chạy lệnh này trong thư mục bạn vừa tạo:
 
 ```bash
 cargo new <project-name> --lib
 ```
 
-This will create a folder with a couple files in it. The folder structure should look like this:
+Điều này sẽ tạo ra một thư mục với một vài tệp tin bên trong nó. Cấu trúc thư mục của bạn nên trông giống như thế này:
 
 ```bash
 ├── Cargo.toml
@@ -20,9 +20,9 @@ This will create a folder with a couple files in it. The folder structure should
     └── lib.rs
 ```
 
-## Configuring the crate
+## Cấu hình crate
 
-Since Pumpkin plugins are loaded at runtime as dynamic libraries, we need to tell Cargo to build this crate as one.
+Bởi vì các plugin Pumpkin được load ở thời gian chạy (runtime) như một thư viện động (dynamic libraries), chúng ta cần điều hướng cho Cargo build crate này như thế.
 :::code-group
 
 ```toml [Cargo.toml]
@@ -39,7 +39,7 @@ crate-type = ["cdylib"]
 
 :::
 
-Next we need to add some basic dependencies. Since Pumpkin is still in early development, the internal crates aren't published to crates.io, so we need to tell Cargo to download the dependencies directly from GitHub.
+Tiếp theo chúng ta cần thêm một vài library (dependencies) cơ bản. Vì Pumpkin hiện vẫn đang trong giai đoạn đầu việc của phát triển, các crate nội bộ sẽ chưa được xuất bản lên crates.io, do đó chúng ta cần điều hướng Cargo tải phần dependencies đó trực tiếp từ GitHub.
 :::code-group
 
 ```toml [Cargo.toml]
@@ -53,23 +53,23 @@ crate-type = ["cdylib"]
 
 [dependencies]
 // [!code ++:13]
-# This is the base crate with most high-level type definitions
+# Đây là crate cơ sở (base crate) với hầu hết các định nghĩa thuộc phân loại bậc cao (high-level type definitions)
 pumpkin = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin" } 
-# Other utilities used by Pumpkin (e.g. TextComponent, Vectors...)
+# Các tiện ích khác được Pumpkin sử dụng (e.g. TextComponent, Vectors...)
 pumpkin-util = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-util" }
-# Macros for easier plugin development
+# Các Macros giúp phát triển plugin một cách dễ dàng hơn
 pumpkin-api-macros = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-api-macros" }
 
-# A rust asynchronous runtime
+# Một rust asynchronous runtime
 tokio = "1.48"
-# Logging
+# Các file log
 log = "0.4"
 ```
 
 :::
 
-For improved performance and smaller file sizes, we recommend enabling Link-Time Optimization (LTO).  
-Be aware that this will increase compilation time.
+Để tăng cường hiệu suất và đưa kích thước file nhỏ gọn hơn, chúng tôi đề xuất bật Link-Time Optimization (LTO).  
+Xin hãy lưu ý là điều này sẽ làm thời gian compile tốn lâu hơn.
 :::code-group
 
 ```toml [Cargo.toml]
@@ -78,4 +78,4 @@ lto = true
 ```
 
 :::
-<small>Enables LTO only for release builds.</small>
+<small>Chỉ bật LTO cho các bản release builds.</small>
