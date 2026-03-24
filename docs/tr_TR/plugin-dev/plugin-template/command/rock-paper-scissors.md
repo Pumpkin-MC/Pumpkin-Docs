@@ -1,4 +1,4 @@
-﻿# Komut İşleyicisi Yazma
+# Komut İşleyicisi Yazma
 
 Minecraft'ta komutlar, hem normal oyuncuların hem de sunucu operatörlerinin oyunun daha düşük seviyeli yönleriyle etkileşim kurmasının birincil yoludur. Basit sohbet mesajlarından karmaşık sunucu yönetim komutlarına kadar geniş bir görev yelpazesinde kullanılabilirler. Bu eğitimde, oyuncuların sunucuya karşı oynayabileceği temel bir Taş-Kağıt-Makas komut işleyicisi oluşturacağız.
 

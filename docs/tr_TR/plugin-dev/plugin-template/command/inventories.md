@@ -1,4 +1,4 @@
-﻿# Özel bir envanteri açma
+# Özel bir envanteri açma
 
 ## Genel Bakış
 

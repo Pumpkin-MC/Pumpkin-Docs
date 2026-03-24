@@ -1,4 +1,4 @@
-﻿import { defineConfig } from "vitepress";
+import { defineConfig } from "vitepress";
 
 export const trTR = defineConfig({
     lang: "tr-TR",
@@ -86,12 +86,17 @@ export const trTR = defineConfig({
                                 link: "/tr_TR/plugin-dev/plugin-template/join-event",
                             },
                             {
-                                text: "Taş-Kağıt-Makas Komutu",
-                                link: "/tr_TR/plugin-dev/plugin-template/rock-paper-scissors",
-                            },
-                            {
-                                text: "Envanterler",
-                                link: "/tr_TR/plugin-dev/plugin-template/inventories",
+                                text: "Komutlar",
+                                items: [
+                                    {
+                                        text: "Taş-Kağıt-Makas",
+                                        link: "/tr_TR/plugin-dev/plugin-template/command/rock-paper-scissors",
+                                    },
+                                    {
+                                        text: "Envanterler",
+                                        link: "/tr_TR/plugin-dev/plugin-template/command/inventories",
+                                    },
+                                ],
                             },
                         ],
                     },

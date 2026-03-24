@@ -86,12 +86,17 @@ export const de = defineConfig({
                                 link: "/de/plugin-dev/plugin-template/join-event",
                             },
                             {
-                                text: "Schere-Stein-Papier Befehl",
-                                link: "/de/plugin-dev/plugin-template/rock-paper-scissors",
-                            },
-                            {
-                                text: "Inventare",
-                                link: "/de/plugin-dev/plugin-template/inventories",
+                                text: "Befehle",
+                                items: [
+                                    {
+                                        text: "Schere-Stein-Papier",
+                                        link: "/de/plugin-dev/plugin-template/command/rock-paper-scissors",
+                                    },
+                                    {
+                                        text: "Inventare",
+                                        link: "/de/plugin-dev/plugin-template/command/inventories",
+                                    },
+                                ],
                             },
                         ],
                     },
