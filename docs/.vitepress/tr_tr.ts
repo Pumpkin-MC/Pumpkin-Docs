@@ -125,7 +125,7 @@ export const trTR = defineConfig({
         },
         editLink: {
             pattern:
-                "https://github.com/Pumpkin-MC/Pumpkin-Website/blob/master/docs/:path",
+                "https://github.com/Pumpkin-MC/Pumpkin-Docs/blob/master/docs/:path",
             text: "Bu sayfayı GitHub'da düzenle",
         },
         lastUpdated: {

@@ -106,7 +106,7 @@ export const nl = defineConfig({
         },
         editLink: {
             pattern:
-                "https://github.com/Pumpkin-MC/Pumpkin-Website/blob/master/docs/:path",
+                "https://github.com/Pumpkin-MC/Pumpkin-Docs/blob/master/docs/:path",
             text: "Bewerk deze pagina op GitHub",
         },
         lastUpdated: {

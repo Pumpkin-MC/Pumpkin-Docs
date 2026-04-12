@@ -131,7 +131,7 @@ export const zhCN = defineConfig({
         },
         editLink: {
             pattern:
-                "https://github.com/Pumpkin-MC/Pumpkin-Website/blob/master/docs/:path",
+                "https://github.com/Pumpkin-MC/Pumpkin-Docs/blob/master/docs/:path",
             text: "在 GitHub 上编辑此页面",
         },
         lastUpdated: {
