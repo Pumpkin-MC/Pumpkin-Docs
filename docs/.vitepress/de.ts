@@ -70,7 +70,7 @@ export const de = defineConfig({
                         link: "/de/plugin-dev/introduction",
                     },
                     {
-                        text: "Plugin-Vorlage",
+                        text: "Rust",
                         link: "/de/plugin-dev/plugin-template/introduction",
                         items: [
                             {
@@ -99,6 +99,10 @@ export const de = defineConfig({
                                 ],
                             },
                         ],
+                    },
+                    {
+                        text: "Python",
+                        link: "/de/plugin-dev/python",
                     },
                 ],
             },

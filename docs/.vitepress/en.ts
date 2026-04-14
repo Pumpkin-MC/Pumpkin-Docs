@@ -68,7 +68,7 @@ export const en = defineConfig({
                         link: "/plugin-dev/introduction",
                     },
                     {
-                        text: "Wasm Plugin Template",
+                        text: "Rust",
                         collapsed: false,
                         items: [
                             {
@@ -97,6 +97,10 @@ export const en = defineConfig({
                                 ],
                             },
                         ],
+                    },
+                    {
+                        text: "Python",
+                        link: "/plugin-dev/python",
                     },
                 ],
             },

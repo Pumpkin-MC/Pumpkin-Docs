@@ -70,7 +70,7 @@ export const zhCN = defineConfig({
                         link: "/zh_cn/plugin-dev/introduction",
                     },
                     {
-                        text: "插件模板",
+                        text: "Rust",
                         collapsed: false,
                         items: [
                             {
@@ -105,6 +105,10 @@ export const zhCN = defineConfig({
                                 link: "/zh_cn/plugin-dev/plugin-template/inventories",
                             },
                         ],
+                    },
+                    {
+                        text: "Python",
+                        link: "/zh_cn/plugin-dev/python",
                     },
                 ],
             },

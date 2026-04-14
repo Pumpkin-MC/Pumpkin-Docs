@@ -70,7 +70,7 @@ export const trTR = defineConfig({
                         link: "/tr_TR/plugin-dev/introduction",
                     },
                     {
-                        text: "Eklenti Şablonu",
+                        text: "Rust",
                         link: "/tr_TR/plugin-dev/plugin-template/introduction",
                         items: [
                             {
@@ -99,6 +99,10 @@ export const trTR = defineConfig({
                                 ],
                             },
                         ],
+                    },
+                    {
+                        text: "Python",
+                        link: "/tr_TR/plugin-dev/python",
                     },
                 ],
             },

@@ -64,7 +64,7 @@ export const pt = defineConfig({
                         link: "/pt/plugin-dev/introduction",
                     },
                     {
-                        text: "Exemplos de Plugin",
+                        text: "Rust",
                         link: "/pt/plugin-dev/plugin-template/introduction",
                         items: [
                             {
@@ -80,6 +80,10 @@ export const pt = defineConfig({
                                 link: "/pt/plugin-dev/plugin-template/join-event",
                             },
                         ],
+                    },
+                    {
+                        text: "Python",
+                        link: "/pt/plugin-dev/python",
                     },
                 ],
             },
