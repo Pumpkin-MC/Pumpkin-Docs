@@ -73,26 +73,26 @@ export const en = defineConfig({
                         items: [
                             {
                                 text: "Creating Project",
-                                link: "/plugin-dev/plugin-template/creating-project",
+                                link: "/plugin-dev/rust/creating-project",
                             },
                             {
                                 text: "Basic Logic",
-                                link: "/plugin-dev/plugin-template/basic-logic",
+                                link: "/plugin-dev/rust/basic-logic",
                             },
                             {
                                 text: "Events",
-                                link: "/plugin-dev/plugin-template/events",
+                                link: "/plugin-dev/rust/events",
                             },
                             {
                                 text: "Commands",
                                 items: [
                                     {
                                         text: "First Command",
-                                        link: "/plugin-dev/plugin-template/command/first-command",
+                                        link: "/plugin-dev/rust/command/first-command",
                                     },
                                     {
                                         text: "Rock-Paper-Scissors",
-                                        link: "/plugin-dev/plugin-template/command/rock-paper-scissors",
+                                        link: "/plugin-dev/rust/command/rock-paper-scissors",
                                     },
                                 ],
                             },

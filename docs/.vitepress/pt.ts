@@ -65,19 +65,19 @@ export const pt = defineConfig({
                     },
                     {
                         text: "Rust",
-                        link: "/pt/plugin-dev/plugin-template/introduction",
+                        link: "/pt/plugin-dev/rust/introduction",
                         items: [
                             {
                                 text: "Criando um projeto",
-                                link: "/pt/plugin-dev/plugin-template/creating-project",
+                                link: "/pt/plugin-dev/rust/creating-project",
                             },
                             {
                                 text: "Lógica básica",
-                                link: "/pt/plugin-dev/plugin-template/basic-logic",
+                                link: "/pt/plugin-dev/rust/basic-logic",
                             },
                             {
                                 text: "Gerenciador de eventos",
-                                link: "/pt/plugin-dev/plugin-template/join-event",
+                                link: "/pt/plugin-dev/rust/join-event",
                             },
                         ],
                     },

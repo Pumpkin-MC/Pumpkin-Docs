@@ -71,30 +71,30 @@ export const de = defineConfig({
                     },
                     {
                         text: "Rust",
-                        link: "/de/plugin-dev/plugin-template/introduction",
+                        link: "/de/plugin-dev/rust/introduction",
                         items: [
                             {
                                 text: "Projekt erstellen",
-                                link: "/de/plugin-dev/plugin-template/creating-project",
+                                link: "/de/plugin-dev/rust/creating-project",
                             },
                             {
                                 text: "Grundlogik",
-                                link: "/de/plugin-dev/plugin-template/basic-logic",
+                                link: "/de/plugin-dev/rust/basic-logic",
                             },
                             {
                                 text: "Join-Event",
-                                link: "/de/plugin-dev/plugin-template/join-event",
+                                link: "/de/plugin-dev/rust/join-event",
                             },
                             {
                                 text: "Befehle",
                                 items: [
                                     {
                                         text: "Schere-Stein-Papier",
-                                        link: "/de/plugin-dev/plugin-template/command/rock-paper-scissors",
+                                        link: "/de/plugin-dev/rust/command/rock-paper-scissors",
                                     },
                                     {
                                         text: "Inventare",
-                                        link: "/de/plugin-dev/plugin-template/command/inventories",
+                                        link: "/de/plugin-dev/rust/command/inventories",
                                     },
                                 ],
                             },

@@ -65,19 +65,19 @@ export const nl = defineConfig({
                     },
                     {
                         text: "Rust",
-                        link: "/nl/plugin-dev/plugin-template/introduction",
+                        link: "/nl/plugin-dev/rust/introduction",
                         items: [
                             {
                                 text: "Project aanmaken",
-                                link: "/nl/plugin-dev/plugin-template/creating-project",
+                                link: "/nl/plugin-dev/rust/creating-project",
                             },
                             {
                                 text: "Basislogica",
-                                link: "/nl/plugin-dev/plugin-template/basic-logic",
+                                link: "/nl/plugin-dev/rust/basic-logic",
                             },
                             {
                                 text: "Join Event",
-                                link: "/nl/plugin-dev/plugin-template/join-event",
+                                link: "/nl/plugin-dev/rust/join-event",
                             },
                         ],
                     },

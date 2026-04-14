@@ -71,30 +71,30 @@ export const trTR = defineConfig({
                     },
                     {
                         text: "Rust",
-                        link: "/tr_TR/plugin-dev/plugin-template/introduction",
+                        link: "/tr_TR/plugin-dev/rust/introduction",
                         items: [
                             {
                                 text: "Proje Oluşturma",
-                                link: "/tr_TR/plugin-dev/plugin-template/creating-project",
+                                link: "/tr_TR/plugin-dev/rust/creating-project",
                             },
                             {
                                 text: "Temel Mantık",
-                                link: "/tr_TR/plugin-dev/plugin-template/basic-logic",
+                                link: "/tr_TR/plugin-dev/rust/basic-logic",
                             },
                             {
                                 text: "Katılma Olayı",
-                                link: "/tr_TR/plugin-dev/plugin-template/join-event",
+                                link: "/tr_TR/plugin-dev/rust/join-event",
                             },
                             {
                                 text: "Komutlar",
                                 items: [
                                     {
                                         text: "Taş-Kağıt-Makas",
-                                        link: "/tr_TR/plugin-dev/plugin-template/command/rock-paper-scissors",
+                                        link: "/tr_TR/plugin-dev/rust/command/rock-paper-scissors",
                                     },
                                     {
                                         text: "Envanterler",
-                                        link: "/tr_TR/plugin-dev/plugin-template/command/inventories",
+                                        link: "/tr_TR/plugin-dev/rust/command/inventories",
                                     },
                                 ],
                             },
