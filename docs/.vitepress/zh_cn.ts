@@ -108,7 +108,21 @@ export const zhCN = defineConfig({
                     },
                     {
                         text: "Python",
-                        link: "/zh_cn/plugin-dev/python",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "Quick Start",
+                                link: "/zh_cn/plugin-dev/python/quick-start",
+                            },
+                            {
+                                text: "Basic Logic",
+                                link: "/zh_cn/plugin-dev/python/basic-logic",
+                            },
+                            {
+                                text: "Events",
+                                link: "/zh_cn/plugin-dev/python/events",
+                            },
+                        ],
                     },
                 ],
             },

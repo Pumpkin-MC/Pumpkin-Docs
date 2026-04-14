@@ -1,6 +1,18 @@
-# Python Plugin Development
+# Quick Start
 
-Pumpkin supports writing plugins in Python. Below is a basic example of a Python plugin.
+This guide will help you get started with writing Pumpkin server plugins using Python.
+
+## Installation
+
+First, you need to install the `pumpkin-api-py` library:
+
+```bash
+pip install pumpkin-api-py
+```
+
+## Creating your first plugin
+
+Create a file named `main.py` and add the following content:
 
 ```python
 from pumpkin_api import (
@@ -29,3 +41,13 @@ class MyPlugin(Plugin):
 
 register_plugin(MyPlugin)
 ```
+
+## Building the plugin
+
+Build your plugin into a WebAssembly component using the provided build tool:
+
+```bash
+pumpkin-api-build main -o my_plugin.wasm
+```
+
+This will generate a `my_plugin.wasm` file that you can place in the `plugins` folder of your Pumpkin server.

@@ -102,7 +102,21 @@ export const trTR = defineConfig({
                     },
                     {
                         text: "Python",
-                        link: "/tr_TR/plugin-dev/python",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "Quick Start",
+                                link: "/tr_TR/plugin-dev/python/quick-start",
+                            },
+                            {
+                                text: "Basic Logic",
+                                link: "/tr_TR/plugin-dev/python/basic-logic",
+                            },
+                            {
+                                text: "Events",
+                                link: "/tr_TR/plugin-dev/python/events",
+                            },
+                        ],
                     },
                 ],
             },

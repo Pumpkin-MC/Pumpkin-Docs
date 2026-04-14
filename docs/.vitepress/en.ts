@@ -100,7 +100,21 @@ export const en = defineConfig({
                     },
                     {
                         text: "Python",
-                        link: "/plugin-dev/python",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "Quick Start",
+                                link: "/plugin-dev/python/quick-start",
+                            },
+                            {
+                                text: "Basic Logic",
+                                link: "/plugin-dev/python/basic-logic",
+                            },
+                            {
+                                text: "Events",
+                                link: "/plugin-dev/python/events",
+                            },
+                        ],
                     },
                 ],
             },
