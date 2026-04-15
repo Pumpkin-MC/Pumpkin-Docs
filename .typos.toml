@@ -8,4 +8,9 @@ extend-exclude = [
     "docs/.vitepress/zh_cn.ts",
     "docs/de/",
     "docs/.vitepress/de.ts",
+    "docs/tr_TR/",
+    "docs/.vitepress/tr_tr.ts",
 ]
+
+[default.extend-words]
+Iinclude = "Iinclude"
