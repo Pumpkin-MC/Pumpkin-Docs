@@ -99,6 +99,16 @@ export const pt = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "C",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "Início Rápido",
+                                link: "/pt/plugin-dev/c/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {

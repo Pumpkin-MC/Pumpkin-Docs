@@ -124,6 +124,16 @@ export const zhCN = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "C",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "快速入门",
+                                link: "/zh_cn/plugin-dev/c/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {

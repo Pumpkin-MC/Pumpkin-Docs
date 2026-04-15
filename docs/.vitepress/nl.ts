@@ -99,6 +99,16 @@ export const nl = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "C",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "Snelstart",
+                                link: "/nl/plugin-dev/c/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {

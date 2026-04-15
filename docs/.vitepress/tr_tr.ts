@@ -118,6 +118,16 @@ export const trTR = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "C",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "Hızlı Başlangıç",
+                                link: "/tr_TR/plugin-dev/c/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {
