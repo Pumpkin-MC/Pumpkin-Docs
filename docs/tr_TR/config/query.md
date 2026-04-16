@@ -1,7 +1,6 @@
 ﻿# Query
 
-Query protokolü, sunucunun durumu hakkında sorgu yapmak için basit bir yöntemdir. Pumpkin Query protokolünü tamamen
-destekler.
+Query protokolü, sunucunun durumu hakkında sorgu yapmak için basit bir yöntemdir. Pumpkin Query protokolünü tamamen destekler.
 
 ## Query'yi Yapılandırma
 
@@ -27,7 +26,7 @@ Query protokolü isteklerinin dinleneceği port. Belirtilmezse sunucu portuyla a
 ```toml [features.toml] {3}
 [query]
 enabled = true
-port = "12345"
+port = 12345
 ```
 
 :::
@@ -41,7 +40,7 @@ Varsayılan olarak Query devre dışıdır. Etkinleştirilirse, açıkça belirt
 ```toml [features.toml]
 [query]
 enabled = true
-port = "25565"
+port = 25565
 ```
 
 :::

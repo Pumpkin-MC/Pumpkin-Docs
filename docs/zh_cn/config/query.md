@@ -26,7 +26,7 @@ enabled = true
 ```toml [features.toml] {3}
 [query]
 enabled = true
-port = "12345"
+port = 12345
 ```
 
 :::
@@ -40,7 +40,7 @@ port = "12345"
 ```toml [features.toml]
 [query]
 enabled = true
-port = "25565"
+port = 25565
 ```
 
 :::
