@@ -46,7 +46,7 @@ Como nosso objetivo principal aqui é mudar a mensagem de boas-vindas que o joga
 Adicione este código acima do método `on_load`:
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
  // [!código ++:4]
 use pumpkin_api_macros::with_runtime;
 use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler};
@@ -80,7 +80,7 @@ Agora que escrevemos o gerenciador de evento, precisamos informar ao plugin para
 
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler, EventPriority}; // [!código ++]
 use pumpkin::plugin::{player::PlayerJoinEvent, Context, EventHandler}; // [!código --]
 

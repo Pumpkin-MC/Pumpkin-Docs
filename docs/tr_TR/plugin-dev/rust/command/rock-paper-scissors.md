@@ -12,7 +12,7 @@ Bu eğitimin dayandığı orijinal [Taş-Kağıt-Makas eklentisini](https://gith
 
 Pumpkin'deki her komut, `CommandExecutor` trait'ini uygulayan bir yapı olarak tanımlanır. Bu trait, gönderici, sunucu ve tüketilen argümanları parameter olarak alan ve `-> Result<(), CommandError>` döndüren bir `execute` metodunun uygulanmasını gerektirir. Şimdi bu yapıyı tanımlayalım:
 
-```rs
+```rust
 use pumpkin::{
     command::{ // [!code ++:4]
         args::ConsumedArgs, dispatcher::CommandError, tree::builder::literal, tree::CommandTree,
@@ -44,7 +44,7 @@ Bu kod, `CommandExecutor` trait'ini uygulayan boş bir `RockPaperScissorsExecuto
 
 İşimizi kolaylaştırmak için, oyunun olası seçimlerini ve sonuçlarını temsil eden birkaç enum ve rastgele seçim üretip sonucu kontrol eden birkaç fonksiyon tanımlayacağız. Bunları eklenti kodunuza ekleyin.
 
-```rs
+```rust
 use rand::{rng, Rng};
 
 #[derive(PartialEq, Debug, Clone, Copy)]
@@ -84,7 +84,7 @@ fn get_random_choice() -> Choice {
 
 Şimdi `RockPaperScissorsExecutor` yapısını bir `Choice` parametresi kabul edecek şekilde değiştirmeli ve oyun mantığını uygulamalıyız.
 
-```rs
+```rust
 struct RockPaperScissorsExecutor(Choice); // [!code ++]
 struct RockPaperScissorsExecutor; // [!code --]
 
@@ -112,7 +112,7 @@ Artık oyun mantığını uygulamaya ve sonucu oyunculara göstermeye geçebilir
 
 Önce oyuncuya kendi seçimini ve bilgisayarın seçimini göstereceğiz. Bu kodu eklentinize ekleyin:
 
-```rs
+```rust
 impl CommandExecutor for RockPaperScissorsExecutor {
     fn execute<'a>(
         &self,
@@ -148,7 +148,7 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 
 Ardından oyun sonucunu hesaplayıp oyuncuya gösterebiliriz. Bu kodu eklentinize ekleyin:
 
-```rs
+```rust
 impl CommandExecutor for RockPaperScissorsExecutor {
     fn execute<'a>(
         &self,
@@ -198,7 +198,7 @@ Komut ağacı `CommandTree::new()` fonksiyonu ile başlatılır. Bu fonksiyon ik
 
 Taş-kağıt-makas komutu için, oyuncunun seçimi için her biri bir `literal()` yaprak düğümü olan 3 ayrı dal oluşturacağız. Komut ağacını sunucuya kaydedeceğiz ve `PermissionLvl` değerini `Zero` olarak ayarlayacağız; bu, herkesin komutu çalıştırmasına izin verir. Aşağıdaki kodu `on_load()` yöntemine ekleyin:
 
-```rs
+```rust
 use pumpkin_util::PermissionLvl; // [!code ++]
 
 const NAMES: [&str; 2] = ["rps", "rockpaperscissors"]; // [!code ++:2]

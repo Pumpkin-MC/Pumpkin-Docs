@@ -6,7 +6,7 @@
 
 :::code-group
 
-```rs:line-numbers [lib.rs]
+```rust:line-numbers [lib.rs]
 use pumpkin_api_macros::plugin_impl;
 
 #[plugin_impl]
@@ -84,7 +84,7 @@ hello-pumpkin
 为了使实现这些方法更容易，`pumpkin-api-macros` crate提供了另一个宏。
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 use std::sync::Arc; // [!code ++:4]
 
 use pumpkin_api_macros::{plugin_impl, plugin_method};
@@ -122,31 +122,31 @@ impl Default for MyPlugin {
 
 ### 在 `Context` 对象上实现的方法
 
-```rs
+```rust
 fn init_log()
 ```
 
 通过 `log` crate 启用日志记录。
 
-```rs
+```rust
 fn get_data_folder() -> String
 ```
 
 返回专用于此插件的文件夹路径，应用于持久数据存储
 
-```rs
+```rust
 async fn get_player_by_name(player_name: String) -> Option<Arc<Player>>
 ```
 
 如果找到名为`player_name`的玩家（必须当前在线），此函数将返回对该玩家的引用。
 
-```rs
+```rust
 async fn register_command(tree: CommandTree, permission: PermissionLvl)
 ```
 
 注册一个新的命令处理器，具有最低所需权限级别。
 
-```rs
+```rust
 async fn register_event(handler: Arc<H>, priority: EventPriority, blocking: bool)
 ```
 
@@ -162,7 +162,7 @@ async fn register_event(handler: Arc<H>, priority: EventPriority, blocking: bool
 在 `on_load` 方法中添加以下内容：
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 #[plugin_method]
 async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
     server.init_log(); // [!code ++:3]

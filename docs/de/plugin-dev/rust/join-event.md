@@ -46,7 +46,7 @@ Um die Willkommensnachricht beim Join zu ändern, wählen wir ein blockierendes 
 Füge folgenden Code oberhalb von `on_load` ein:
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
  // [!code ++:7]
 use pumpkin_api_macros::with_runtime;
 use pumpkin::{
@@ -82,7 +82,7 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 Nachdem wir den Ereignishandler geschrieben haben, müssen wir dem Plugin mitteilen, dass es ihn verwenden soll. Dies erreichen wir durch Hinzufügen einer einzigen Zeile zur `on_load`-Methode:
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 use pumpkin::{
     plugin::{player::player_join::PlayerJoinEvent, Context, EventHandler, EventPriority}, // [!code ++]
     server::Server,

@@ -49,7 +49,7 @@ Cancellable 也可以是 Event，因为它是一个特质。（待确认）
 在 `on_load` 方法上方添加以下代码：
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
  // [!code ++:7]
 use pumpkin_api_macros::with_runtime;
 use pumpkin::{
@@ -85,7 +85,7 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 现在我们已经编写了事件处理器，我们需要告诉插件使用它。我们可以通过在`on_load`方法中添加一行代码来实现：
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 use pumpkin::{
     plugin::{player::player_join::PlayerJoinEvent, Context, EventHandler, EventPriority}, // [!code ++]
     server::Server,
