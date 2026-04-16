@@ -6,7 +6,7 @@ Mesmo em um plugin básico, há muita coisa acontecendo nos bastidores, então, 
 
 :::code-group
 
-```rs:line-numbers [lib.rs]
+```rust:line-numbers [lib.rs]
 use pumpkin_api_macros::plugin_impl;
 
 #[plugin_impl]
@@ -84,7 +84,7 @@ Esses métodos não precisam ser implementados, mas você normalmente implementa
 Para facilitar a implementação desses métodos, há outra macro fornecida pelo crate `pumpkin-api-macros`.
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 use std::sync::Arc; // [!code ++:4]
 
 use pumpkin_api_macros::{plugin_impl, plugin_method};
@@ -122,25 +122,25 @@ Este método recebe uma referência mutável ao objeto do plugin (neste caso, a 
 
 ### Métodos implementados no objeto `Context`:
 
-```rs
+```rust
 fn get_data_folder() -> String
 ```
 
 Retorna o caminho para a pasta dedicada a este plugin, que deve ser usada para armazenamento de dados persistentes.
 
-```rs
+```rust
 async fn get_player_by_name(player_name: String) -> Option<Arc<Player>>
 ```
 
 Se um jogador com o nome `player_name` for encontrado (ele precisa estar online no momento), esta função retornará uma referência a ele.
 
-```rs
+```rust
 async fn register_command(tree: CommandTree, permission: PermissionLvl)
 ```
 
 Registra um novo gerenciador de comandos, com um nível mínimo de permissão exigido.
 
-```rs
+```rust
 async fn register_event(handler: Arc<H>, priority: EventPriority, blocking: bool)
 ```
 
@@ -156,7 +156,7 @@ Aqui vamos configurar o logger interno do Pumpkin e exibir "Hello, Pumpkin!" par
 Adicione isso ao método `on_load`:
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 #[plugin_method]
 async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
     server.init_log(); // [!code ++:3]
