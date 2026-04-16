@@ -26,7 +26,7 @@ Which port to listen to Query protocol requests on. If not specified, it uses th
 ```toml [features.toml] {3}
 [query]
 enabled = true
-port = 12345
+port = "12345"
 ```
 
 :::
@@ -40,7 +40,7 @@ By default, Query is disabled. It will run on the server port if enabled unless 
 ```toml [features.toml]
 [query]
 enabled = true
-port = 25565
+port = "25565"
 ```
 
 :::
