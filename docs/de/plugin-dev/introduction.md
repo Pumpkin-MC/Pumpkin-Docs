@@ -5,11 +5,14 @@ Die Pumpkin Plugin API befindet sich noch in einem sehr frühen Entwicklungsstad
 Wenn du auf Probleme stößt, melde dich bitte auf unserem [Discord‑Server](https://discord.gg/aaNuD6rFEe).
 :::
 
-Pumpkin‑Plugins integrieren sich sehr tief in die Server‑Software und ermöglichen dadurch viele Dinge, die auf anderer Serversoftware nicht möglich wären.
+Pumpkin‑Plugins integrieren sich sehr tief in die Server‑Software und ermöglichen dadurch viele Dinge, die auf anderer
+Serversoftware nicht möglich wären.
 
-Die Pumpkin Plugin API orientiert sich in vielen Bereichen an der Spigot/Bukkit Plugin API. Wenn du damit bereits Erfahrung hast und Rust, Python oder C beherrscht, solltest du relativ einfach Plugins für Pumpkin schreiben können. :smile:
+Die Pumpkin Plugin API orientiert sich in vielen Bereichen an der Spigot/Bukkit Plugin API. Wenn du damit bereits
+Erfahrung hast und Rust, Python oder C beherrscht, solltest du relativ einfach Plugins für Pumpkin schreiben können. :
+smile:
 
 * [Rust API](https://github.com/Pumpkin-MC/Pumpkin)
-* [Python API](https://github.com/Pumpkin-MC/pumpkin-python)
+* [Python API](https://github.com/Pumpkin-MC/pumpkin-api-py)
 * [C API](https://github.com/Pumpkin-MC/pumpkin-api-c)
 

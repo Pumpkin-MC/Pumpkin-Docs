@@ -10,5 +10,5 @@ so if you have previous experience with these and have experience with Rust, Pyt
 you should have a pretty easy time writing plugins for Pumpkin. :smile:
 
 * [Rust API](https://github.com/Pumpkin-MC/Pumpkin)
-* [Python API](https://github.com/Pumpkin-MC/pumpkin-python)
+* [Python API](https://github.com/Pumpkin-MC/pumpkin-api-py)
 * [C API](https://github.com/Pumpkin-MC/pumpkin-api-c)
