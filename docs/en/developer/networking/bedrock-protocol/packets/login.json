@@ -1,0 +1,27 @@
+{
+    "id": 1,
+    "name": "Login",
+    "details": {
+        "short_description": "Placeholder short description....",
+        "long_description": "Nice, long, multi-paragraph description.\n\nWell, not really.",
+        "direction": "server-bound",
+        "fields": [
+            {
+                "name": "network_version",
+                "type": {
+                    "kind": "primitive",
+                    "name": "s32"
+                },
+                "description": "a field"
+            },
+            {
+                "name": "connection_request",
+                "type": {
+                    "kind": "primitive",
+                    "name": "string"
+                },
+                "description": "another field"
+            }
+        ]
+    }
+}

@@ -54,6 +54,16 @@ export const en = defineConfig({
                                 text: "RCON",
                                 link: "/developer/networking/rcon",
                             },
+                            {
+                                text: "Bedrock Protocol",
+                                link: "/developer/networking/bedrock-protocol/introduction",
+                                items: [
+                                    {
+                                        text: "Packets",
+                                        link: "/developer/networking/bedrock-protocol/packets/all",
+                                    },
+                                ],
+                            },
                         ],
                     },
                     { text: "World", link: "/developer/world" },
