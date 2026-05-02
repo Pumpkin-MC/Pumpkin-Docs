@@ -59,7 +59,7 @@ ${packet.details.long_description}
 `;
 
         for (let field of packet.details.fields) {
-            result += `|\`${field.name}\`|[\`${field.type.name}\`]()|${field.description}|\n`;
+            result += `|[](){#field-${field.name.replaceAll("_", "-")}}\`${field.name}\`|[\`${field.type.name}\`]()|${field.description}|\n`;
         }
     }
 

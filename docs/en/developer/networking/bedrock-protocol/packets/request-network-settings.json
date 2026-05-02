@@ -1,4 +1,19 @@
 {
     "id": 193,
-    "name": "RequestNetworkSettings"
+    "name": "RequestNetworkSettings",
+    "details": {
+        "short_description": "Provides the client's protocol version, and requests [`NetworkSettings`](network-settings) for the connection.",
+        "long_description": "This is the first packet sent by the client to initiate the [client login process](). If the [`protocol_version`](#field-protocol-version) is not supported by the server, it should send an appropriate [`PlayStatus`](play-status) packet to indicate this to the client. If the version checks out, a [`NetworkSettings`](network-settings) packet should be sent to the client in reply.",
+        "direction": "server-bound",
+        "fields": [
+            {
+                "name": "protocol_version",
+                "type": {
+                    "kind": "primitive",
+                    "name": "i32"
+                },
+                "description": "The version of the Minecraft Bedrock Protocol used by the client."
+            }
+        ]
+    }
 }
