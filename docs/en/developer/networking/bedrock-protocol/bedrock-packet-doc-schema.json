@@ -1,0 +1,167 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "id": {
+            "type": "integer"
+        },
+        "name": {
+            "type": "string"
+        },
+        "details": {
+            "type": "object",
+            "properties": {
+                "short_description": {
+                    "type": "string"
+                },
+                "long_description": {
+                    "type": "string"
+                },
+                "direction": {
+                    "type": "string",
+                    "enum": ["server-bound", "client-bound"]
+                },
+                "fields": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/field"
+                    }
+                },
+                "types": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/local-type"
+                    }
+                }
+            },
+            "required": [
+                "short_description",
+                "long_description",
+                "direction",
+                "fields"
+            ],
+            "additionalProperties": false
+        }
+    },
+    "required": ["name", "id"],
+    "additionalProperties": false,
+    "$defs": {
+        "field-type": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "enum": ["primitive", "local", "global"]
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": ["kind", "name"],
+            "additionalProperties": false
+        },
+        "field": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/$defs/field-type"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": ["name", "type", "description"],
+            "additionalProperties": false
+        },
+
+        "local-type-enum": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "kind": {
+                    "type": "string",
+                    "const": "enum"
+                },
+                "repr": {
+                    "type": "string",
+                    "enum": ["u8", "u16", "u32", "u64"]
+                },
+                "members": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "integer"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "required": ["name", "value", "description"],
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "required": ["name", "kind", "description", "repr"],
+            "additionalProperties": false
+        },
+
+        "local-type-record": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "kind": {
+                    "type": "string",
+                    "const": "enum"
+                },
+                "fields": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/field"
+                    }
+                }
+            },
+            "required": ["name", "kind", "description", "fields"],
+            "additionalProperties": false
+        },
+        "local-type": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "kind": {
+                    "type": "string",
+                    "enum": ["enum", "record"]
+                }
+            },
+            "oneOf": [
+                { "$ref": "#/$defs/local-type-enum" },
+                { "$ref": "#/$defs/local-type-record" }
+            ]
+        }
+    }
+}

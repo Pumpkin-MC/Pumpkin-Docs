@@ -1,4 +1,5 @@
 {
+    "$schema": "../bedrock-packet-doc-schema.json",
     "id": 193,
     "name": "RequestNetworkSettings",
     "details": {

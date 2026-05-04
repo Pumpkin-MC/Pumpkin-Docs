@@ -1,4 +1,5 @@
 {
+    "$schema": "../bedrock-packet-doc-schema.json",
     "id": 322,
     "name": "ClientMovementPredictionSync"
 }

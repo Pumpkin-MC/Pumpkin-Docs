@@ -1,4 +1,5 @@
 {
+    "$schema": "../bedrock-packet-doc-schema.json",
     "id": 173,
     "name": "PhotoInfoRequest"
 }

@@ -1,4 +1,53 @@
 {
+    "$schema": "../bedrock-packet-doc-schema.json",
     "id": 143,
-    "name": "NetworkSettings"
+    "name": "NetworkSettings",
+    "details": {
+        "short_description": "",
+        "long_description": "",
+        "direction": "client-bound",
+        "fields": [
+            {
+                "name": "compression_threshold",
+                "type": {
+                    "kind": "primitive",
+                    "name": "u16"
+                },
+                "description": "Packets with size >= this threshold will be compressed according to [`compression_algorithm`](#field-compression-algorithm). Setting this to `0` disables compression."
+            },
+            {
+                "name": "compression_algorithm",
+                "type": {
+                    "kind": "local",
+                    "name": "CompressionAlgorithm"
+                },
+                "description": "Algorithm used to compress applicable packets."
+            }
+        ],
+        "types": [
+            {
+                "name": "CompressionAlgorithm",
+                "description": "A compression algorithm to apply to network packets.",
+                "kind": "enum",
+                "repr": "u16",
+                "members": [
+                    {
+                        "name": "Zlib",
+                        "value": 0,
+                        "description": "Use [ZLib](https://en.wikipedia.org/wiki/Zlib) compression"
+                    },
+                    {
+                        "name": "Snappy",
+                        "value": 1,
+                        "description": "Use [Snappy](https://en.wikipedia.org/wiki/Snappy_(compression)) compression"
+                    },
+                    {
+                        "name": "None",
+                        "value": 2,
+                        "description": "Do not compress packets. This can also be achieved by setting [`compression_threshold`](#field-compression-threshold) to `0`."
+                    }
+                ]
+            }
+        ]
+    }
 }

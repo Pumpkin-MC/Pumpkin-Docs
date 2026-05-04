@@ -3,7 +3,7 @@ import { glob, readFile } from "node:fs/promises";
 import path from "node:path";
 
 interface TypeDescriptor {
-    kind: "primitive";
+    kind: "primitive" | "local" | "global";
     name: string;
 }
 
@@ -13,17 +13,41 @@ interface PacketField {
     description: string;
 }
 
-interface PacketDetails {
-    short_description: string;
-    long_description: string;
-    direction: "server-bound" | "client-bound";
+interface PacketLocalTypeEnum {
+    name: string;
+    description: string;
+    kind: "enum";
+    repr: "u8" | "u16" | "u32" | "u64";
+    members: {
+        name: string;
+        value: number;
+        description: string;
+    }[];
+}
+
+interface PacketLocalTypeRecord {
+    name: string;
+    description: string;
+    kind: "record";
     fields: PacketField[];
+}
+
+interface PacketLocalType {
+    name: string;
+    description: string;
+    kind: "enum" | "record";
 }
 
 interface Packet {
     id: number;
     name: string;
-    details?: PacketDetails;
+    details?: {
+        short_description: string;
+        long_description: string;
+        direction: "server-bound" | "client-bound";
+        fields: PacketField[];
+        types?: PacketLocalType[];
+    };
 }
 
 interface PacketSummary {
@@ -43,8 +67,11 @@ function generateDetailPage(packet: Packet): string {
         result += `
 ::: warning\nThis packet is currently not documented. Please consult other sources.\n:::
         `;
-    } else {
-        result += `
+
+        return result;
+    }
+
+    result += `
 ${packet.details.short_description}
 
 ## Details
@@ -58,8 +85,55 @@ ${packet.details.long_description}
 |----|----|-----------|
 `;
 
-        for (let field of packet.details.fields) {
-            result += `|[](){#field-${field.name.replaceAll("_", "-")}}\`${field.name}\`|[\`${field.type.name}\`]()|${field.description}|\n`;
+    for (let field of packet.details.fields) {
+        let typeLink = "";
+        switch (field.type.kind) {
+            case "primitive":
+                break;
+            case "local":
+                typeLink =
+                    "#type-" +
+                    field.type.name
+                        .replace(/([a-z])([A-Z])/g, "$1-$2")
+                        .toLowerCase();
+            case "global":
+                break;
+            default:
+                break;
+        }
+
+        result += `|[](){#field-${field.name.replaceAll("_", "-")}}\`${field.name}\`|[\`${field.type.name}\`](${typeLink})|${field.description}|\n`;
+    }
+
+    if (packet.details.types === undefined) return result;
+
+    result += `## Supporting Types\n`;
+    for (let type of packet.details.types) {
+        let anchorId = type.name
+            .replace(/([a-z])([A-Z])/g, "$1-$2")
+            .toLowerCase();
+
+        result += `### \`${type.name}\` {#type-${anchorId}}\n`;
+
+        switch (type.kind) {
+            case "enum":
+                let type_enum = type as PacketLocalTypeEnum;
+                result += `
+- **Kind**: Enum
+- **Representation**: [\`${type_enum.repr}\`]()
+
+#### Members
+|Name|Value|Description|
+|----|-----|-----------|
+`;
+                for (let member of type_enum.members) {
+                    result += `|\`${member.name}\`|\`${member.value}\`|${member.description}|\n`;
+                }
+                break;
+            case "record":
+                break;
+            default:
+                result += `- Kind: *[[unknown kind - ${type.kind}]]*`;
         }
     }
 

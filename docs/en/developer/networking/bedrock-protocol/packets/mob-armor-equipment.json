@@ -1,4 +1,5 @@
 {
+    "$schema": "../bedrock-packet-doc-schema.json",
     "id": 32,
     "name": "MobArmorEquipment"
 }

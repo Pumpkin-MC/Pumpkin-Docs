@@ -1,4 +1,5 @@
 {
+    "$schema": "../bedrock-packet-doc-schema.json",
     "id": 340,
     "name": "ResourcePacksReadyForValidation"
 }
