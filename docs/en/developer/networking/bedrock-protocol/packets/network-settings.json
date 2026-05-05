@@ -3,8 +3,8 @@
     "id": 143,
     "name": "NetworkSettings",
     "details": {
-        "short_description": "",
-        "long_description": "",
+        "short_description": "Network packet compression and throttling configuration. Response to [`RequestNetworkSettings`](request-network-settings).",
+        "long_description": "After receiving [`RequestNetworkSettings`](request-network-settings) from the client, the server should send this packet in response, and start following the declared settings (e.g. start compressing packets).",
         "direction": "client-bound",
         "fields": [
             {
@@ -22,6 +22,30 @@
                     "name": "CompressionAlgorithm"
                 },
                 "description": "Algorithm used to compress applicable packets."
+            },
+            {
+                "name": "client_throttle_enabled",
+                "type": {
+                    "kind": "primitive",
+                    "name": "bool"
+                },
+                "description": "*(currently undocumented)*"
+            },
+            {
+                "name": "client_throttle_threshold",
+                "type": {
+                    "kind": "primitive",
+                    "name": "u8"
+                },
+                "description": "*(currently undocumented)*"
+            },
+            {
+                "name": "client_throttle_scalar",
+                "type": {
+                    "kind": "primitive",
+                    "name": "f32"
+                },
+                "description": "*(currently undocumented)*"
             }
         ],
         "types": [
