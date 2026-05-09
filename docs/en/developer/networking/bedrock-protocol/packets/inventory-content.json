@@ -1,5 +1,550 @@
 {
     "$schema": "../bedrock-packet-doc-schema.json",
     "id": 49,
-    "name": "InventoryContent"
+    "name": "InventoryContent",
+    "details": {
+        "short_description": "Provides the complete contents of a particular open inventory window to the client.",
+        "long_description": "See [Inventory](../inventory) for an explanation of how the Bedrock inventory management works.",
+        "direction": "client-bound",
+        "fields": [
+            {
+                "name": "window_id",
+                "description": "The inventory window to set the contents of.",
+                "type": {
+                    "kind": "primitive",
+                    "name": "vu32"
+                }
+            },
+            {
+                "name": "items",
+                "description": "The contents of the whole inventory. All slots must be accounted for (empty slots should be padded with an empty stack; i.e. 0 blocks of Air).\n\n::: info TODO\nVerify that that is indeed a requirement; maybe empty ends can be omitted\n:::",
+                "type": {
+                    "kind": "array",
+                    "item": {
+                        "kind": "local",
+                        "name": "ItemStackInstance"
+                    },
+                    "length": "vu32"
+                }
+            },
+            {
+                "name": "full_container_name",
+                "description": "::: info TODO\nFigure out exactly what this does. Most server impls I saw just send a dummy `0` (`ContainerType::AnvilInput`) with no dynamic ID. Maybe for server-auth inventory?\n:::",
+                "type": {
+                    "kind": "local",
+                    "name": "FullContainerName"
+                }
+            },
+            {
+                "name": "storage_item",
+                "description": "::: info TODO\nFigure out exactly what this does.\n:::",
+                "type": {
+                    "kind": "optional",
+                    "payload": {
+                        "kind": "local",
+                        "name": "ItemStackInstance"
+                    }
+                }
+            }
+        ],
+        "types": [
+            {
+                "name": "ItemStackInstance",
+                "description": "A uniquely identified item stack. On top of all the same data a normal (interchangable) [`ItemStack`]() has, it also has an ID to help differentiate a particular instance/stack for server-authoritative inventory.",
+                "kind": "record",
+                "fields": [
+                    {
+                        "name": "item_id",
+                        "description": "The numerical network ID/type of the item in the stack.\n\nIf `item_id == 0`, then the rest of the fields of stack are omitted.",
+                        "type": {
+                            "kind": "primitive",
+                            "name": "vi32"
+                        }
+                    },
+                    {
+                        "name": "count",
+                        "description": "The amount of the item in the stack. Must be <= than the max stack size for the item.",
+                        "type": {
+                            "kind": "primitive",
+                            "name": "u16"
+                        },
+                        "optional": true
+                    },
+                    {
+                        "name": "metadata",
+                        "description": "An extra piece of data, interpreted in an item-specific ways (some use it as damage value, others a variant identifier, etc.).",
+                        "type": {
+                            "kind": "primitive",
+                            "name": "vu32"
+                        },
+                        "optional": true
+                    },
+                    {
+                        "name": "stack_id",
+                        "description": "A unique identifier for this stack, for use in server-authoritive networking.\n\nWhen using client-authoritative inventory, this field should always be set to `1`. If using server-auth, it should be set to a unique non-zero value.\n\nIf the value would be zero, the value should instead be sent as empty/none. However the only time it should be zero is if the stack is empty, and this field is never encoded if the stack is empty, so in practice, it's always encoded as present and non-zero.",
+                        "type": {
+                            "kind": "optional",
+                            "payload": {
+                                "kind": "primitive",
+                                "name": "vi32"
+                            }
+                        },
+                        "optional": true
+                    },
+                    {
+                        "name": "block_runtime_id",
+                        "description": "When the item in question is actually a block, this should contain complete final block state of the block represented; i.e. the actual ID of the block, rather than the itemized form, including all state e.g. color of wool, damage/crack level of anvil, etc.",
+                        "type": {
+                            "kind": "primitive",
+                            "name": "vi32"
+                        },
+                        "optional": true
+                    },
+                    {
+                        "name": "extra_data",
+                        "description": "Really should have the contained fields inlined but a quirk of the encoding requires that the length be encoded as well...",
+                        "type": {
+                            "kind": "blob",
+                            "schema": {
+                                "kind": "local",
+                                "name": "ItemStackInstanceExtraData"
+                            }
+                        },
+                        "optional": true
+                    }
+                ]
+            },
+            {
+                "name": "ItemStackInstanceExtraData",
+                "description": "",
+                "kind": "record",
+                "fields": [
+                    {
+                        "name": "nbt_data_length",
+                        "description": "When there is `nbt_data` to be sent, this should be set to `-1` (`0xFFFF`). Otherwise, `0`, if `nbt_data` is absent.",
+                        "type": {
+                            "kind": "primitive",
+                            "name": "i16"
+                        }
+                    },
+                    {
+                        "name": "nbt_data_version",
+                        "description": "This should be included whenever `nbt_data_length` is `-1` (when `nbt_data` is to be sent as well). The value should always be `1`",
+                        "type": {
+                            "kind": "primitive",
+                            "name": "u8"
+                        },
+                        "optional": true
+                    },
+                    {
+                        "name": "nbt_data",
+                        "description": "Additional NBT data for the item stack. Whenever there is NBT data to send, set `nbt_data_length` to `-1`. Otherwise, set `nbt_data_length` to `0` and omit this field (and the `nbt_data_version`)",
+                        "type": {
+                            "kind": "nbt"
+                        },
+                        "optional": true
+                    },
+                    {
+                        "name": "can_be_placed_on",
+                        "description": "List of blocks (e.g. `\"minecraft:dirt\"`) that this block may be placed on. Ignored outside of Adventure Mode. Empty means all blocks are valid.",
+                        "type": {
+                            "kind": "array",
+                            "item": {
+                                "kind": "primitive",
+                                "name": "string"
+                            },
+                            "length": "u32"
+                        }
+                    },
+                    {
+                        "name": "can_break",
+                        "description": "List of blocks (e.g. `\"minecraft:dirt\"`) that this item may break/mine. Ignored outside of Adventure Mode. Empty means all blocks are valid.",
+                        "type": {
+                            "kind": "array",
+                            "item": {
+                                "kind": "primitive",
+                                "name": "string"
+                            },
+                            "length": "u32"
+                        }
+                    },
+                    {
+                        "name": "shield_blocking_tick",
+                        "description": "This should be sent if and only if the item in question is a `minecraft:shield`.\n\n::: info TODO\nFigure out exactly what this does.\n:::",
+                        "type": {
+                            "kind": "primitive",
+                            "name": "i64"
+                        },
+                        "optional": true
+                    }
+                ]
+            },
+            {
+                "name": "FullContainerName",
+                "description": "",
+                "kind": "record",
+                "fields": [
+                    {
+                        "name": "container_id",
+                        "description": "",
+                        "type": {
+                            "kind": "local",
+                            "name": "ContainerType"
+                        }
+                    },
+                    {
+                        "name": "dynamic_id",
+                        "description": "",
+                        "type": {
+                            "kind": "primitive",
+                            "name": "u32"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "ContainerType",
+                "description": "",
+                "kind": "enum",
+                "repr": "u8",
+                "members": [
+                    {
+                        "name": "AnvilInput",
+                        "description": "",
+                        "value": 0
+                    },
+                    {
+                        "name": "AnvilMaterial",
+                        "description": "",
+                        "value": 1
+                    },
+                    {
+                        "name": "AnvilResultPreview",
+                        "description": "",
+                        "value": 2
+                    },
+                    {
+                        "name": "SmithingTableInput",
+                        "description": "",
+                        "value": 3
+                    },
+                    {
+                        "name": "SmithingTableMaterial",
+                        "description": "",
+                        "value": 4
+                    },
+                    {
+                        "name": "SmithingTableResultPreview",
+                        "description": "",
+                        "value": 5
+                    },
+                    {
+                        "name": "Armor",
+                        "description": "",
+                        "value": 6
+                    },
+                    {
+                        "name": "LevelEntity",
+                        "description": "",
+                        "value": 7
+                    },
+                    {
+                        "name": "BeaconPayment",
+                        "description": "",
+                        "value": 8
+                    },
+                    {
+                        "name": "BrewingStandInput",
+                        "description": "",
+                        "value": 9
+                    },
+                    {
+                        "name": "BrewingStandResult",
+                        "description": "",
+                        "value": 10
+                    },
+                    {
+                        "name": "BrewingStandFuel",
+                        "description": "",
+                        "value": 11
+                    },
+                    {
+                        "name": "CombinedHotBarAndInventory",
+                        "description": "",
+                        "value": 12
+                    },
+                    {
+                        "name": "CraftingInput",
+                        "description": "",
+                        "value": 13
+                    },
+                    {
+                        "name": "CraftingOutputPreview",
+                        "description": "",
+                        "value": 14
+                    },
+                    {
+                        "name": "RecipeConstruction",
+                        "description": "",
+                        "value": 15
+                    },
+                    {
+                        "name": "RecipeNature",
+                        "description": "",
+                        "value": 16
+                    },
+                    {
+                        "name": "RecipeItems",
+                        "description": "",
+                        "value": 17
+                    },
+                    {
+                        "name": "RecipeSearch",
+                        "description": "",
+                        "value": 18
+                    },
+                    {
+                        "name": "RecipeSearchBar",
+                        "description": "",
+                        "value": 19
+                    },
+                    {
+                        "name": "RecipeEquipment",
+                        "description": "",
+                        "value": 20
+                    },
+                    {
+                        "name": "RecipeBook",
+                        "description": "",
+                        "value": 21
+                    },
+                    {
+                        "name": "EnchantingInput",
+                        "description": "",
+                        "value": 22
+                    },
+                    {
+                        "name": "EnchantingMaterial",
+                        "description": "",
+                        "value": 23
+                    },
+                    {
+                        "name": "FurnaceFuel",
+                        "description": "",
+                        "value": 24
+                    },
+                    {
+                        "name": "FurnaceIngredient",
+                        "description": "",
+                        "value": 25
+                    },
+                    {
+                        "name": "FurnaceResult",
+                        "description": "",
+                        "value": 26
+                    },
+                    {
+                        "name": "HorseEquip",
+                        "description": "",
+                        "value": 27
+                    },
+                    {
+                        "name": "HotBar",
+                        "description": "",
+                        "value": 28
+                    },
+                    {
+                        "name": "Inventory",
+                        "description": "",
+                        "value": 29
+                    },
+                    {
+                        "name": "ShulkerBox",
+                        "description": "",
+                        "value": 30
+                    },
+                    {
+                        "name": "TradeIngredient1",
+                        "description": "",
+                        "value": 31
+                    },
+                    {
+                        "name": "TradeIngredient2",
+                        "description": "",
+                        "value": 32
+                    },
+                    {
+                        "name": "TradeResultPreview",
+                        "description": "",
+                        "value": 33
+                    },
+                    {
+                        "name": "Offhand",
+                        "description": "",
+                        "value": 34
+                    },
+                    {
+                        "name": "CompoundCreatorInput",
+                        "description": "",
+                        "value": 35
+                    },
+                    {
+                        "name": "CompoundCreatorOutputPreview",
+                        "description": "",
+                        "value": 36
+                    },
+                    {
+                        "name": "ElementConstructorOutputPreview",
+                        "description": "",
+                        "value": 37
+                    },
+                    {
+                        "name": "MaterialReducerInput",
+                        "description": "",
+                        "value": 38
+                    },
+                    {
+                        "name": "MaterialReducerOutput",
+                        "description": "",
+                        "value": 39
+                    },
+                    {
+                        "name": "LabTableInput",
+                        "description": "",
+                        "value": 40
+                    },
+                    {
+                        "name": "LoomInput",
+                        "description": "",
+                        "value": 41
+                    },
+                    {
+                        "name": "LoomDye",
+                        "description": "",
+                        "value": 42
+                    },
+                    {
+                        "name": "LoomMaterial",
+                        "description": "",
+                        "value": 43
+                    },
+                    {
+                        "name": "LoomResultPreview",
+                        "description": "",
+                        "value": 44
+                    },
+                    {
+                        "name": "BlastFurnaceIngredient",
+                        "description": "",
+                        "value": 45
+                    },
+                    {
+                        "name": "SmokerIngredient",
+                        "description": "",
+                        "value": 46
+                    },
+                    {
+                        "name": "Trade2Ingredient1",
+                        "description": "",
+                        "value": 47
+                    },
+                    {
+                        "name": "Trade2Ingredient2",
+                        "description": "",
+                        "value": 48
+                    },
+                    {
+                        "name": "Trade2ResultPreview",
+                        "description": "",
+                        "value": 49
+                    },
+                    {
+                        "name": "GrindstoneInput",
+                        "description": "",
+                        "value": 50
+                    },
+                    {
+                        "name": "GrindstoneAdditional",
+                        "description": "",
+                        "value": 51
+                    },
+                    {
+                        "name": "GrindstoneResultPreview",
+                        "description": "",
+                        "value": 52
+                    },
+                    {
+                        "name": "StonecutterInput",
+                        "description": "",
+                        "value": 53
+                    },
+                    {
+                        "name": "StonecutterResultPreview",
+                        "description": "",
+                        "value": 54
+                    },
+                    {
+                        "name": "CartographyInput",
+                        "description": "",
+                        "value": 55
+                    },
+                    {
+                        "name": "CartographyAdditional",
+                        "description": "",
+                        "value": 56
+                    },
+                    {
+                        "name": "CartographyResultPreview",
+                        "description": "",
+                        "value": 57
+                    },
+                    {
+                        "name": "Barrel",
+                        "description": "",
+                        "value": 58
+                    },
+                    {
+                        "name": "Cursor",
+                        "description": "",
+                        "value": 59
+                    },
+                    {
+                        "name": "CreatedOutput",
+                        "description": "",
+                        "value": 60
+                    },
+                    {
+                        "name": "SmithingTableTemplate",
+                        "description": "",
+                        "value": 61
+                    },
+                    {
+                        "name": "CrafterLevelEntity",
+                        "description": "",
+                        "value": 62
+                    },
+                    {
+                        "name": "Dynamic",
+                        "description": "",
+                        "value": 63
+                    },
+                    {
+                        "name": "RecipeFood",
+                        "description": "",
+                        "value": 64
+                    },
+                    {
+                        "name": "RecipeBlocks",
+                        "description": "",
+                        "value": 65
+                    },
+                    {
+                        "name": "RecipeFurnaceItems",
+                        "description": "",
+                        "value": 66
+                    }
+                ]
+            }
+        ]
+    }
 }

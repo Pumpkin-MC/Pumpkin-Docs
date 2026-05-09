@@ -11,7 +11,7 @@
                 "name": "network_version",
                 "type": {
                     "kind": "primitive",
-                    "name": "s32"
+                    "name": "i32"
                 },
                 "description": "a field"
             },

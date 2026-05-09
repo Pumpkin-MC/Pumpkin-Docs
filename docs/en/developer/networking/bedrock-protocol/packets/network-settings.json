@@ -13,7 +13,7 @@
                     "kind": "primitive",
                     "name": "u16"
                 },
-                "description": "Packets with size >= this threshold will be compressed according to [`compression_algorithm`](#field-compression-algorithm). Setting this to `0` disables compression."
+                "description": "Packets with size >= this threshold will be compressed according to [`compression_algorithm`](#$type-$root-$field-compression-algorithm). Setting this to `0` disables compression."
             },
             {
                 "name": "compression_algorithm",
@@ -68,7 +68,7 @@
                     {
                         "name": "None",
                         "value": 2,
-                        "description": "Do not compress packets. This can also be achieved by setting [`compression_threshold`](#field-compression-threshold) to `0`."
+                        "description": "Do not compress packets. This can also be achieved by setting [`compression_threshold`](#$type-$root-$field-compression-threshold) to `0`."
                     }
                 ]
             }

@@ -2,15 +2,64 @@ import { defineRoutes } from "vitepress";
 import { glob, readFile } from "node:fs/promises";
 import path from "node:path";
 
-interface TypeDescriptor {
-    kind: "primitive" | "local" | "global";
+interface TypeDescriptorPrimitive {
+    kind: "primitive";
+    name:
+        | "i8"
+        | "i16"
+        | "i32"
+        | "i64"
+        | "u8"
+        | "u16"
+        | "u32"
+        | "u64"
+        | "vi32"
+        | "vi64"
+        | "vu32"
+        | "vu64"
+        | "f32"
+        | "f64"
+        | "bool"
+        | "string";
+}
+
+interface TypeDescriptorReference {
+    kind: "local" | "global";
     name: string;
+}
+
+interface TypeDescriptorArray {
+    kind: "array";
+    item: TypeDescriptor;
+    length: "u8" | "u16" | "u32" | "u64" | "vu32" | "vu64";
+}
+
+interface TypeDescriptorOptional {
+    kind: "optional";
+    payload: TypeDescriptor;
+}
+
+interface TypeDescriptorBlob {
+    kind: "blob";
+    schema?: TypeDescriptor;
+}
+
+interface TypeDescriptor {
+    kind:
+        | "primitive"
+        | "local"
+        | "global"
+        | "array"
+        | "optional"
+        | "nbt"
+        | "blob";
 }
 
 interface PacketField {
     name: string;
     type: TypeDescriptor;
     description: string;
+    optional?: boolean;
 }
 
 interface PacketLocalTypeEnum {
@@ -52,10 +101,94 @@ interface Packet {
 
 interface PacketSummary {
     id: number;
-    url_name: string;
+    urlName: string;
     name: string;
     description: string;
     documented: boolean;
+}
+
+function typeToMarkdown(type: TypeDescriptor): string {
+    switch (type.kind) {
+        case "primitive": {
+            let typePrimitive = type as TypeDescriptorPrimitive;
+            return `[${typePrimitive.name}]()`;
+        }
+        case "array": {
+            let typeArray = type as TypeDescriptorArray;
+            let itemMD = typeToMarkdown(typeArray.item);
+
+            if (typeArray.length == "vu32") {
+                return `[array]()&lt;${itemMD}&gt;`;
+            } else {
+                const lengthType: TypeDescriptorPrimitive = {
+                    kind: "primitive",
+                    name: typeArray.length,
+                };
+                let lengthMD = typeToMarkdown(lengthType);
+                return `[array]()&lt;${itemMD}, ${lengthMD}&gt;`;
+            }
+        }
+        case "optional": {
+            let typeOptional = type as TypeDescriptorOptional;
+            let payloadMD = typeToMarkdown(typeOptional.payload);
+            return `[optional]()&lt;${payloadMD}&gt;`;
+        }
+        case "blob": {
+            let typeBlob = type as TypeDescriptorBlob;
+            if (typeBlob.schema !== undefined) {
+                let payloadMD = typeToMarkdown(typeBlob.schema);
+                return `[blob]()&lt;${payloadMD}&gt;`;
+            } else {
+                return `[blob]()`;
+            }
+        }
+        case "nbt": {
+            return "[nbt]()";
+        }
+        case "local":
+        case "global": {
+            let typeRef = type as TypeDescriptorReference;
+            let link =
+                "#$type-" +
+                typeRef.name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+            return `[${typeRef.name}](${link})`;
+        }
+        default:
+            return "[[error]]";
+    }
+}
+
+function generateFieldList(
+    fields: PacketField[],
+    typeID: string,
+    headerDepth: string,
+) {
+    let table = `
+|Name|Type|
+|----|----|
+`;
+    let body = "---\n";
+
+    for (let field of fields) {
+        let nameSuffix = "";
+
+        if (field.optional === true) {
+            nameSuffix = "?";
+        }
+
+        let kebabCaseFieldName = field.name.replaceAll("_", "-");
+
+        let typeMD = typeToMarkdown(field.type);
+        table += `|[\`${field.name}${nameSuffix}\`](#$type-${typeID}-$field-${kebabCaseFieldName})|<code>${typeMD}</code>|\n`;
+        body += `
+${headerDepth} <code>${field.name}${nameSuffix}: ${typeMD}</code> {#$type-${typeID}-$field-${kebabCaseFieldName}}
+${field.description}
+
+---
+`;
+    }
+
+    return table + body;
 }
 
 function generateDetailPage(packet: Packet): string {
@@ -80,30 +213,9 @@ ${packet.details.short_description}
 
 ${packet.details.long_description}
 
-## Fields
-|Name|Type|Description|
-|----|----|-----------|
+## Fields {#$type-$root-$fields}
 `;
-
-    for (let field of packet.details.fields) {
-        let typeLink = "";
-        switch (field.type.kind) {
-            case "primitive":
-                break;
-            case "local":
-                typeLink =
-                    "#type-" +
-                    field.type.name
-                        .replace(/([a-z])([A-Z])/g, "$1-$2")
-                        .toLowerCase();
-            case "global":
-                break;
-            default:
-                break;
-        }
-
-        result += `|[](){#field-${field.name.replaceAll("_", "-")}}\`${field.name}\`|[\`${field.type.name}\`](${typeLink})|${field.description}|\n`;
-    }
+    result += generateFieldList(packet.details.fields, "$root", "###");
 
     if (packet.details.types === undefined) return result;
 
@@ -113,27 +225,44 @@ ${packet.details.long_description}
             .replace(/([a-z])([A-Z])/g, "$1-$2")
             .toLowerCase();
 
-        result += `### \`${type.name}\` {#type-${anchorId}}\n`;
+        result += `### ${type.name} {#$type-${anchorId}}\n`;
 
         switch (type.kind) {
             case "enum":
-                let type_enum = type as PacketLocalTypeEnum;
+                let typeEnum = type as PacketLocalTypeEnum;
                 result += `
 - **Kind**: Enum
-- **Representation**: [\`${type_enum.repr}\`]()
+- **Representation**: [\`${typeEnum.repr}\`]()
 
-#### Members
+${type.description}
+
+#### Members {#$type-${anchorId}-$members}
 |Name|Value|Description|
 |----|-----|-----------|
 `;
-                for (let member of type_enum.members) {
+                for (let member of typeEnum.members) {
                     result += `|\`${member.name}\`|\`${member.value}\`|${member.description}|\n`;
                 }
                 break;
             case "record":
+                let typeRecord = type as PacketLocalTypeRecord;
+                result += `
+- **Kind**: Record
+
+${type.description}
+
+#### Fields {#$type-${anchorId}-$fields}
+
+`;
+
+                result += generateFieldList(
+                    typeRecord.fields,
+                    anchorId,
+                    "#####",
+                );
                 break;
             default:
-                result += `- Kind: *[[unknown kind - ${type.kind}]]*`;
+                result += `- Kind: *[[unknown kind - ${type.kind}]]*\n`;
         }
     }
 
@@ -149,7 +278,7 @@ function generateIndex(entries: PacketSummary[]): string {
 
     for (let packet of entries) {
         if (packet.documented) {
-            result += `|${packet.id} (0x${packet.id.toString(16)})|[${packet.name}](${packet.url_name})|${packet.description}|\n`;
+            result += `|${packet.id} (0x${packet.id.toString(16)})|[${packet.name}](${packet.urlName})|${packet.description}|\n`;
         } else {
             result += `|${packet.id} (0x${packet.id.toString(16)})|${packet.name}|_(currently undocumented)_|\n`;
         }
@@ -164,7 +293,7 @@ export default defineRoutes({
         let pageTasks = watchedFiles
             .filter((f) => path.extname(f) == ".json")
             .map(async (filePath) => {
-                const url_name = path.basename(filePath, ".json");
+                const urlName = path.basename(filePath, ".json");
                 const raw = await readFile(filePath, "utf-8");
                 const json = JSON.parse(raw);
 
@@ -173,13 +302,13 @@ export default defineRoutes({
                 return {
                     page: {
                         params: {
-                            packet: url_name,
+                            packet: urlName,
                         },
                         content: generateDetailPage(packetInfo),
                     },
                     summary: {
                         id: packetInfo.id,
-                        url_name,
+                        urlName,
                         name: packetInfo.name,
                         documented: packetInfo.details !== undefined,
                         description:

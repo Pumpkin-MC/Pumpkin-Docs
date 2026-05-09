@@ -62,6 +62,10 @@ export const en = defineConfig({
                                         text: "Packets",
                                         link: "/developer/networking/bedrock-protocol/packets/all",
                                     },
+                                    {
+                                        text: "Inventory",
+                                        link: "/developer/networking/bedrock-protocol/inventory",
+                                    },
                                 ],
                             },
                         ],

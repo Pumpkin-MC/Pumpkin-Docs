@@ -56,4 +56,30 @@ export default defineConfig({
           gtag('config', 'G-QK7NXQQ2ZP');`]
 
     ],
+
+    markdown: {
+        anchor: {
+            slugify: (fragment) => {
+                // This is nearly identical to default slugify, but allows $ passthrough
+
+                const rControl = /[\u0000-\u001f]/g;
+                const rSpecialWithoutDollar =
+                    /[\s~`!@#%^&*()\-_+=[\]{}|\\;:"'“”‘’<>,.?/]+/g;
+                const rCombining = /[\u0300-\u036F]/g;
+                /**
+                 * Default slugification function
+                 */
+
+                return fragment
+                    .normalize("NFKD")
+                    .replace(rCombining, "")
+                    .replace(rControl, "")
+                    .replace(rSpecialWithoutDollar, "-")
+                    .replace(/-{2,}/g, "-")
+                    .replace(/^-+|-+$/g, "")
+                    .replace(/^(\d)/, "_$1")
+                    .toLowerCase();
+            },
+        },
+    },
 });

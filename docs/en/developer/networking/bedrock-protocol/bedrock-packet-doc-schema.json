@@ -49,12 +49,44 @@
     "required": ["name", "id"],
     "additionalProperties": false,
     "$defs": {
-        "field-type": {
+        "field-type-primitive": {
             "type": "object",
             "properties": {
                 "kind": {
                     "type": "string",
-                    "enum": ["primitive", "local", "global"]
+                    "const": "primitive"
+                },
+                "name": {
+                    "type": "string",
+                    "enum": [
+                        "i8",
+                        "i16",
+                        "i32",
+                        "i64",
+                        "u8",
+                        "u16",
+                        "u32",
+                        "u64",
+                        "vi32",
+                        "vi64",
+                        "vu32",
+                        "vu64",
+                        "f32",
+                        "f64",
+                        "bool",
+                        "string"
+                    ]
+                }
+            },
+            "required": ["kind", "name"],
+            "additionalProperties": false
+        },
+        "field-type-reference": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "enum": ["local", "global"]
                 },
                 "name": {
                     "type": "string"
@@ -62,6 +94,88 @@
             },
             "required": ["kind", "name"],
             "additionalProperties": false
+        },
+        "field-type-array": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "array"
+                },
+                "item": {
+                    "$ref": "#/$defs/field-type"
+                },
+                "length": {
+                    "type": "string",
+                    "enum": ["u8", "u16", "u32", "u64", "vu32", "vu64"]
+                }
+            },
+            "required": ["kind", "item", "length"],
+            "additionalProperties": false
+        },
+        "field-type-optional": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "optional"
+                },
+                "payload": {
+                    "$ref": "#/$defs/field-type"
+                }
+            },
+            "required": ["kind", "payload"],
+            "additionalProperties": false
+        },
+        "field-type-nbt": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "nbt"
+                }
+            },
+            "required": ["kind"],
+            "additionalProperties": false
+        },
+        "field-type-blob": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "blob"
+                },
+                "schema": {
+                    "$ref": "#/$defs/field-type"
+                }
+            },
+            "required": ["kind"],
+            "additionalProperties": false
+        },
+        "field-type": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "enum": [
+                        "primitive",
+                        "local",
+                        "global",
+                        "array",
+                        "optional",
+                        "nbt",
+                        "blob"
+                    ]
+                }
+            },
+            "oneOf": [
+                { "$ref": "#/$defs/field-type-primitive" },
+                { "$ref": "#/$defs/field-type-reference" },
+                { "$ref": "#/$defs/field-type-array" },
+                { "$ref": "#/$defs/field-type-optional" },
+                { "$ref": "#/$defs/field-type-nbt" },
+                { "$ref": "#/$defs/field-type-blob" }
+            ]
         },
         "field": {
             "type": "object",
@@ -74,6 +188,9 @@
                 },
                 "description": {
                     "type": "string"
+                },
+                "optional": {
+                    "type": "boolean"
                 }
             },
             "required": ["name", "type", "description"],
@@ -120,7 +237,6 @@
             "required": ["name", "kind", "description", "repr"],
             "additionalProperties": false
         },
-
         "local-type-record": {
             "type": "object",
             "properties": {
@@ -132,7 +248,7 @@
                 },
                 "kind": {
                     "type": "string",
-                    "const": "enum"
+                    "const": "record"
                 },
                 "fields": {
                     "type": "array",
