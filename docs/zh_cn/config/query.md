@@ -11,22 +11,21 @@
 :::code-group
 
 ```toml [features.toml] {2}
-[query]
+[networking.query]
 enabled = true
 ```
 
 :::
 
-#### `port`: 整数 (0-65535) (可选)
+#### `poaddressrt`: 整数 (0-65535) (可选)
 
 监听查询协议请求的端口。如果未指定，将使用与服务器相同的端口。
 
 :::code-group
 
 ```toml [features.toml] {3}
-[query]
-enabled = true
-port = 12345
+[networking.query]
+address = "0.0.0.0:25565"
 ```
 
 :::
@@ -38,9 +37,9 @@ port = 12345
 :::code-group
 
 ```toml [features.toml]
-[query]
+[networking.query]
 enabled = true
-port = 25565
+address = "0.0.0.0:25565"
 ```
 
 :::

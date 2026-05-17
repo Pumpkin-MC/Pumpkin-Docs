@@ -13,9 +13,35 @@ Whether authenthication is enabled or not.
 
 :::code-group
 
-```toml [features.toml] {2}
-[authentication]
+```toml [pumpkin.toml] {2}
+[networking.authentication]
 enabled = false
+```
+
+:::
+
+#### `connect_timeout`: integer
+
+Set player connection server timeout
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+[networking.authentication]
+connect_timeout = 5000
+```
+
+:::
+
+#### `read_timeout`: integer
+
+Set up player connection to server read
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+[networking.authentication]
+read_timeout = 5000
 ```
 
 :::
@@ -26,8 +52,8 @@ Whether to block proxy connections or not.
 
 :::code-group
 
-```toml [features.toml] {3}
-[authentication]
+```toml [pumpkin.toml] {3}
+[networking.authentication]
 enabled = true
 prevent_proxy_connections = true
 ```
@@ -47,8 +73,8 @@ The URL to authenthicate with. Uses Mojang's session servers to authenthicate if
 
 :::code-group
 
-```toml [features.toml] {2}
-[authentication]
+```toml [pumpkin.toml] {2}
+[networking.authentication]
 auth_url = "[custom auth server here]"
 ```
 
@@ -68,7 +94,7 @@ The URL to authenthicate with if `prevent_proxy_connections` is enabled. Uses Mo
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [authentication]
 prevent_proxy_connection_auth_url = "[custom auth server here]"
 ```
@@ -83,7 +109,7 @@ Allow players flagged by Mojang.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [authentication.player_profile]
 allow_banned_players = true
 ```
@@ -96,7 +122,7 @@ What actions are allowed if `allow_banned_players` is enabled.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.player_profile]
 allow_banned_players = true
 allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
@@ -112,7 +138,7 @@ Whether to filter/validate player textures (e.g. skins/capes).
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [authentication.textures]
 enabled = true
 ```
@@ -125,7 +151,7 @@ Allowed URL schemes for textures.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures]
 enabled = true
 allowed_url_schemes = ["http", "https"]
@@ -139,7 +165,7 @@ Allowed URL domains for textures.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures]
 enabled = true
 allowed_url_domains = [".minecraft.net", ".mojang.com"]
@@ -155,7 +181,7 @@ Whether to use player skins or not.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 skin = true
 ```
@@ -168,7 +194,7 @@ Whether to use player capes or not.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 cape = true
 ```
@@ -181,7 +207,7 @@ Whether to use player elytras or not.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 elytra = true
 ```
@@ -193,21 +219,23 @@ elytra = true
 By default, authentication is enabled and uses Mojang's servers. Here is the default config:
 :::code-group
 
-```toml [features.toml]
-[authentication]
+```toml [pumpkin.toml]
+[networking.authentication]
 enabled = true
+connect_timeout = 5000
+read_timeout = 5000
 prevent_proxy_connections = false
 
-[authentication.player_profile]
+[networking.authentication.player_profile]
 allow_banned_players = false
 allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
 
-[authentication.textures]
+[networking.authentication.textures]
 enabled = true
 allowed_url_schemes = ["http", "https"]
 allowed_url_domains = [".minecraft.net", ".mojang.com"]
 
-[authentication.textures.types]
+[networking.authentication.textures.types]
 skin = true
 cape = true
 elytra = true

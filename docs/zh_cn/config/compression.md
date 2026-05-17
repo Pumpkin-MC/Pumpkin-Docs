@@ -9,15 +9,18 @@
 是否启用数据包压缩。
 
 > [!TIP]提示
-> 如果服务器位于代理后面，禁用压缩可能会更有利。
+> 如果服务端位于代理端后端，禁用压缩可能会更有利。
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml 对于 Java Edition] {2}
+[networking.java_compression]
 enabled = true
 ```
-
+```toml [pumpkin.toml 对于 Bedrock Edition] {2}
+[networking.bedrock_compression]
+enabled = true
+```
 :::
 
 #### `threshold`: 整数 (0-1024)
@@ -29,8 +32,13 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml 对于 Java Edition] {2}
+[networking.java_compression]
+threshold = 256
+```
+
+```toml [pumpkin.toml 对于 Bedrock Edition] {2}
+[networking.bedrock_compression]
 threshold = 256
 ```
 
@@ -42,8 +50,14 @@ threshold = 256
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml 对于 Java Edition] {2}
+[networking.java_compression]
+level = 4
+```
+
+
+```toml [pumpkin.toml 对于 Bedrock Edition] {2}
+[networking.bedrock_compression]
 level = 4
 ```
 
@@ -55,8 +69,13 @@ level = 4
 
 :::code-group
 
-```toml [features.toml]
-[packet_compression]
+```toml [pumpkin.toml]
+[networking.java_compression]
+enabled = true
+threshold = 256
+level = 4
+
+[networking.bedrock_compression]
 enabled = true
 threshold = 256
 level = 4

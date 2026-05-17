@@ -18,9 +18,7 @@ export const zhCN = defineConfig({
         sidebar: [
             {
                 text: "关于",
-                items: [
-                    { text: "性能基准", link: "/zh_cn/about/benchmarks" },
-                ],
+                items: [{ text: "性能基准", link: "/zh_cn/about/benchmarks" }],
             },
             {
                 text: "配置",
@@ -83,9 +81,7 @@ export const zhCN = defineConfig({
                             },
                             {
                                 text: "事件",
-                                items: [
-                                    { text: "加入事件", link: "/zh_cn/plugin-dev/rust/join-event" },
-                                ]
+                                link: "/zh_cn/plugin-dev/rust/events",
                             },
                             {
                                 text: "命令",
@@ -100,10 +96,6 @@ export const zhCN = defineConfig({
                                     },
                                 ]
                             },
-                            {
-                                text: "背包",
-                                link: "/zh_cn/plugin-dev/rust/inventories",
-                            },
                         ],
                     },
                     {
@@ -111,15 +103,15 @@ export const zhCN = defineConfig({
                         collapsed: false,
                         items: [
                             {
-                                text: "Quick Start",
+                                text: "快速入门",
                                 link: "/zh_cn/plugin-dev/python/quick-start",
                             },
                             {
-                                text: "Basic Logic",
+                                text: "基础逻辑",
                                 link: "/zh_cn/plugin-dev/python/basic-logic",
                             },
                             {
-                                text: "Events",
+                                text: "事件",
                                 link: "/zh_cn/plugin-dev/python/events",
                             },
                         ],
@@ -141,6 +133,20 @@ export const zhCN = defineConfig({
                             {
                                 text: "快速入门",
                                 link: "/zh_cn/plugin-dev/c/quick-start",
+                            },
+                        ],
+                    },
+                    {
+                        text: "Go",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "快速入门",
+                                link: "/zh_cn/plugin-dev/go/quick-start",
+                            },
+                            {
+                                text: "基础逻辑",
+                                link: "/zh_cn/plugin-dev/go/basic-logic",
                             },
                         ],
                     },

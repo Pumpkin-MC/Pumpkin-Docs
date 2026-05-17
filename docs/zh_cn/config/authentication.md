@@ -1,11 +1,11 @@
 # 身份验证
 
-服务器使用 Mojang 的会话服务器进行身份验证，以确保客户端正在使用合法的付费账号。Pumpkin 允许你自定义配置身份验证系统。
+服务端使用 Mojang 的会话服务器进行身份验证，以确保客户端正在使用合法的付费账号。Pumpkin 允许你自定义配置身份验证系统。
 
 ## 配置身份验证
 
 > [!WARNING]警告
-> 大多数服务器不应更改默认的身份验证配置。这样做可能会带来意想不到的后果。**仅在你知道自己在做什么的情况下才可以更改这些设置！**
+> 大多数服务端不应更改默认的身份验证配置。这样做可能会带来意想不到的后果。**仅在你知道自己在做什么的情况下才可以更改这些设置！**
 
 #### `enabled`: 布尔值
 
@@ -13,9 +13,35 @@
 
 :::code-group
 
-```toml [features.toml] {2}
-[authentication]
+```toml [pumpkin.toml] {2}
+[networking.authentication]
 enabled = false
+```
+
+:::
+
+#### `connect_timeout`: 整数
+
+设置玩家连接服务器超时
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+[networking.authentication]
+connect_timeout = 5000
+```
+
+:::
+
+#### `read_timeout`: 整数
+
+设置玩家连接到服务器读取时间
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+[networking.authentication]
+read_timeout = 5000
 ```
 
 :::
@@ -26,8 +52,8 @@ enabled = false
 
 :::code-group
 
-```toml [features.toml] {3}
-[authentication]
+```toml [pumpkin.toml] {3}
+[networking.authentication]
 enabled = true
 prevent_proxy_connections = true
 ```
@@ -47,9 +73,9 @@ prevent_proxy_connections = true
 
 :::code-group
 
-```toml [features.toml] {2}
-[authentication]
-auth_url = "[这里填写自定义身份验证服务器]"
+```toml [pumpkin.toml] {2}
+[networking.authentication]
+auth_url = "[custom auth server here]"
 ```
 
 :::
@@ -68,7 +94,7 @@ auth_url = "[这里填写自定义身份验证服务器]"
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [authentication]
 prevent_proxy_connection_auth_url = "[这里填写自定义身份验证服务器]"
 ```
@@ -83,7 +109,7 @@ prevent_proxy_connection_auth_url = "[这里填写自定义身份验证服务器
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [authentication.player_profile]
 allow_banned_players = true
 ```
@@ -96,7 +122,7 @@ allow_banned_players = true
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.player_profile]
 allow_banned_players = true
 allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
@@ -112,7 +138,7 @@ allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [authentication.textures]
 enabled = true
 ```
@@ -125,7 +151,7 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures]
 enabled = true
 allowed_url_schemes = ["http", "https"]
@@ -139,7 +165,7 @@ allowed_url_schemes = ["http", "https"]
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures]
 enabled = true
 allowed_url_domains = [".minecraft.net", ".mojang.com"]
@@ -155,7 +181,7 @@ allowed_url_domains = [".minecraft.net", ".mojang.com"]
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 skin = true
 ```
@@ -168,7 +194,7 @@ skin = true
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 cape = true
 ```
@@ -181,7 +207,7 @@ cape = true
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 elytra = true
 ```
@@ -193,21 +219,23 @@ elytra = true
 默认情况下，身份验证已启用并使用 Mojang 的服务器。以下是默认配置：
 :::code-group
 
-```toml [features.toml]
-[authentication]
+```toml [pumpkin.toml]
+[networking.authentication]
 enabled = true
+connect_timeout = 5000
+read_timeout = 5000
 prevent_proxy_connections = false
 
-[authentication.player_profile]
+[networking.authentication.player_profile]
 allow_banned_players = false
 allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
 
-[authentication.textures]
+[networking.authentication.textures]
 enabled = true
 allowed_url_schemes = ["http", "https"]
 allowed_url_domains = [".minecraft.net", ".mojang.com"]
 
-[authentication.textures.types]
+[networking.authentication.textures.types]
 skin = true
 cape = true
 elytra = true

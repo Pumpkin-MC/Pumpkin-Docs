@@ -6,4 +6,4 @@
 
     **原因:** 这与身份验证有关，通常与 `prevent_proxy_connections` 设置有关。
 
-    **解决方法:** 在 `features.toml` 中禁用 `prevent_proxy_connections`
+    **解决方法:** 在 `pumpkin.toml` 中禁用 `prevent_proxy_connections`

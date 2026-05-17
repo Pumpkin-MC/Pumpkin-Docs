@@ -13,11 +13,14 @@ Whether packet compression is enabled or not.
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml For Java Edition] {2}
+[networking.java_compression]
 enabled = true
 ```
-
+```toml [pumpkin.toml For Bedrock Edition] {2}
+[networking.bedrock_compression]
+enabled = true
+```
 :::
 
 #### `threshold`: Integer (0-1024)
@@ -29,8 +32,13 @@ The minimum packet size before the server attempts to compress the packet.
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml For Java Edition] {2}
+[networking.java_compression]
+threshold = 256
+```
+
+```toml [pumpkin.toml For Bedrock Edition] {2}
+[networking.bedrock_compression]
 threshold = 256
 ```
 
@@ -42,8 +50,14 @@ A value between 0 to 9: 0 to disable compression, 1 being the fastest compressio
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml For Java Edition] {2}
+[networking.java_compression]
+level = 4
+```
+
+
+```toml [pumpkin.toml For Bedrock Edition] {2}
+[networking.bedrock_compression]
 level = 4
 ```
 
@@ -55,8 +69,13 @@ By default, compression is enabled.
 
 :::code-group
 
-```toml [features.toml]
-[packet_compression]
+```toml [pumpkin.toml]
+[networking.java_compression]
+enabled = true
+threshold = 256
+level = 4
+
+[networking.bedrock_compression]
 enabled = true
 threshold = 256
 level = 4
