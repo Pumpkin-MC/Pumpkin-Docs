@@ -10,7 +10,7 @@ Whether to listen for Query protocol requests or not.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [networking.query]
 enabled = true
 ```
@@ -23,7 +23,7 @@ Which port to listen to Query protocol requests on. If not specified, it uses th
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [networking.query]
 address = "0.0.0.0:25565"
 ```
@@ -36,7 +36,7 @@ By default, Query is disabled. It will run on the server port if enabled unless 
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [networking.query]
 enabled = true
 address = "0.0.0.0:25565"

@@ -53,7 +53,7 @@ There are several ways you can contribute to Pumpkin:
 ### Decompiling Minecraft's code
 
 When working at Pumpkin, we heavily rely on the official Minecraft client and utilize existing server logic. We often refer to Minecraft's official code.
-The easiest way to decompile Minecraft is by using Fabric Yarn:
+You can use [mcsrc](https://mcsrc.dev/) to decompile Minecraft's code online, or use Fabric Yarn.:
 
 ```shell
 git clone https://github.com/FabricMC/yarn.git

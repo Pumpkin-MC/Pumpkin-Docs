@@ -8,9 +8,11 @@ The address to bind the server to.
 
 :::code-group
 
-```toml [pumpkin.toml] {2}
+```toml [pumpkin.toml For Java Edition] {2}
 java_edition = true
 java_edition_address = "0.0.0.0:25565"
+```
+```toml [pumpkin.toml For Bedrock Edition] {2}
 bedrock_edition = true
 bedrock_edition_address = "0.0.0.0:19132"
 ```

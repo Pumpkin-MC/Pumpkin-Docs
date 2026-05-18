@@ -36,7 +36,7 @@ address = "0.0.0.0:25575"
 
 ```toml [pumpkin.toml] {3}
 [networking.rcon]
-password = "[your safe password here]"
+password = "[您在此处的安全密码]"
 ```
 
 :::

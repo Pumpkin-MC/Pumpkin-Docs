@@ -10,7 +10,7 @@
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [networking.query]
 enabled = true
 ```
@@ -23,7 +23,7 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [networking.query]
 address = "0.0.0.0:25565"
 ```
@@ -36,7 +36,7 @@ address = "0.0.0.0:25565"
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [networking.query]
 enabled = true
 address = "0.0.0.0:25565"

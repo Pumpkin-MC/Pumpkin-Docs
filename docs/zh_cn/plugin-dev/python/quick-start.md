@@ -1,18 +1,18 @@
-# Quick Start
+# 快速入门
 
-This guide will help you get started with writing Pumpkin server plugins using Python.
+本指南将帮助您开始使用 Python 编写 Pumpkin 服务器插件。
 
-## Installation
+## 安装
 
-First, you need to install the `pumpkin-api-py` library:
+首先，您需要安装 `pumpkin-api-py` 库：
 
 ```bash
 pip install pumpkin-api-py
 ```
 
-## Creating your first plugin
+## 创建您的第一个插件
 
-Create a file named `main.py` and add the following content:
+创建一个名为 `main.py` 的文件，并添加以下内容：
 
 ```python
 from pumpkin_api import (
@@ -23,31 +23,31 @@ from pumpkin_api import (
 class MyPlugin(Plugin):
     def metadata(self) -> PluginMetadata:
         return PluginMetadata(
-            name="my-plugin",
+            name="我的插件",
             version="0.1.0",
             authors=["you"],
-            description="An example plugin."
+            description="一个示例插件。"
         )
 
     def on_load(self, ctx: context.Context) -> None:
-        print("Python plugin loaded!")
+        print("Python 插件已加载！")
         
-        # Register an event handler
+        # 注册一个事件处理器
         self.register_event(ctx, event.EventType.PLAYER_JOIN_EVENT, self.on_player_join)
 
     def on_player_join(self, srv: server.Server, evt: event.PlayerJoinEventData) -> event.PlayerJoinEventData:
-        print(f"Player {evt.player.get_name()} joined!")
+        print(f"玩家 {evt.player.get_name()} 加入了游戏！")
         return evt
 
 register_plugin(MyPlugin)
 ```
 
-## Building the plugin
+## 构建插件
 
-Build your plugin into a WebAssembly component using the provided build tool:
+使用提供的构建工具将您的插件构建成一个 WebAssembly 组件：
 
 ```bash
 pumpkin-api-build main -o my_plugin.wasm
 ```
 
-This will generate a `my_plugin.wasm` file that you can place in the `plugins` folder of your Pumpkin server.
+这将生成一个 `my_plugin.wasm` 文件，您可以将其放置在 Pumpkin 服务器的 `plugins` 文件夹中。

@@ -1,37 +1,57 @@
-# 创建新项目
+# 创建一个新项目
 
 Pumpkin 插件使用 [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html) 构建系统。
 
-此插件的完整代码可以在 [GitHub 上的模板](https://github.com/vyPal/Hello-Pumpkin)中找到。
+此插件的完整代码可作为模板在 [GitHub](https://github.com/BjornTheProgrammer/Hello-Pumpkin-Wasm) 上找到。
 
-## 初始化新的 crate
+## 安装工具链
 
-首先我们需要创建一个新的项目文件夹。您可以通过在您创建的文件夹中运行以下命令来完成：
+在编译插件之前，我们必须安装 `wasm32-wasip2` 目标。
+您可以通过运行以下命令来安装该目标：
 
 ```bash
-cargo new <项目名称> --lib
+rustup target add wasm32-wasip2
 ```
 
-这将创建一个包含几个文件的文件夹。文件夹结构应该如下所示：
+## 初始化一个新的 crate
+
+首先，我们需要创建一个新的项目文件夹。您可以在您创建的文件夹中运行以下命令来完成此操作：
 
 ```bash
+cargo new <project-name> --lib
+```
+
+在此之后，我们想要创建一个名为 `.cargo` 的新目录，
+并添加一个包含以下内容的 `config.toml` 文件
+
+```toml [config.toml]
+[build]
+target = "wasm32-wasip2"
+```
+
+总的来说，您的新文件夹结构应如下所示：
+
+```bash
+├── .cargo/
+│   └── config.toml
+├── src/
+│   └── lib.rs
 ├── Cargo.toml
-└── src
-    └── lib.rs
+└── Cargo.lock
 ```
 
 ## 配置 crate
 
-由于 Pumpkin 插件在运行时作为动态库加载，我们需要告诉 Cargo 将此 crate 构建为动态库。
+由于 Pumpkin 插件在运行时作为动态库加载，我们需要告知 Cargo 将该 crate 构建为动态库。
 :::code-group
 
 ```toml [Cargo.toml]
 [package]
-name = "hello-pumpkin"
+name = "hello-pumpkin-wasm"
 version = "0.1.0"
 edition = "2024"
 
-[lib] // [!code ++:3]
+[lib] // [!code ++:2]
 crate-type = ["cdylib"]
 
 [dependencies]
@@ -39,7 +59,7 @@ crate-type = ["cdylib"]
 
 :::
 
-接下来我们需要添加一些基本依赖项。由于 Pumpkin 仍处于早期开发阶段，内部crate尚未发布到 crates.io，所以我们需要告诉 Cargo 直接从 GitHub 下载依赖项。
+接下来，我们需要添加一些基础的依赖项。由于 Pumpkin 仍处于早期开发阶段，其内部 crate 尚未发布到 crates.io，因此我们需要告知 Cargo 直接从 GitHub 下载这些依赖项。
 :::code-group
 
 ```toml [Cargo.toml]
@@ -52,24 +72,16 @@ edition = "2024"
 crate-type = ["cdylib"]
 
 [dependencies]
-// [!code ++:13]
-# 这是包含大多数高级类型定义的基本 crate
-pumpkin = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin" } 
-# Pumpkin 使用的其他工具（如 TextComponent、Vectors 等）
-pumpkin-util = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-util" }
-# 简化插件开发的宏
-pumpkin-api-macros = { git = "https://github.com/Pumpkin-MC/Pumpkin.git", branch = "master", package = "pumpkin-api-macros" }
-
-# Rust 异步运行时
-tokio = "1.48"
-# 日志记录
-log = "0.4"
+// [!code ++:3]
+# 这是一个 API crate，它能够简化插件的创建过程，并包含 WIT 定义。
+pumpkin-plugin-api = { version = "0.1.0", git = "https://github.com/Pumpkin-MC/Pumpkin", package = "pumpkin-plugin-api" }
+tracing = "0.1"
 ```
 
 :::
 
-为了提高性能和减小文件大小，我们建议启用链接时优化（Link-Time Optimization，LTO）。  
-请注意，这将增加编译时间。
+为了提升性能并减小文件体积，我们建议启用链接时优化（LTO）。
+请注意，这将会增加编译时间。
 :::code-group
 
 ```toml [Cargo.toml]
@@ -78,4 +90,4 @@ lto = true
 ```
 
 :::
-<small>建议仅对发布版本启用 LTO。</small>
+<small>仅为发布构建启用 LTO。</small>
