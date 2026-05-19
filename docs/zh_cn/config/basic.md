@@ -1,6 +1,6 @@
 # 基础配置
 
-对应 `configuration.toml` 文件
+对应 `pumpkin.toml` 文件
 
 ## 服务器地址
 
@@ -8,8 +8,13 @@
 
 :::code-group
 
-```toml [configuration.toml] {2}
-server_address = "0.0.0.0:25565"
+```toml [pumpkin.toml 对于 Java Edition] {2}
+java_edition = true
+java_edition_address = "0.0.0.0:25565"
+```
+```toml [pumpkin.toml 对于 Bedrock Edition] {2}
+bedrock_edition = true
+bedrock_edition_address = "0.0.0.0:19132"
 ```
 
 :::
@@ -20,7 +25,7 @@ server_address = "0.0.0.0:25565"
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 seed = ""
 ```
 
@@ -32,8 +37,8 @@ seed = ""
 
 :::code-group
 
-```toml [configuration.toml] {2}
-max_players = 100000
+```toml [pumpkin.toml] {2}
+max_players = 1000
 ```
 
 :::
@@ -44,8 +49,8 @@ max_players = 100000
 
 :::code-group
 
-```toml [configuration.toml] {2}
-view_distance = 10
+```toml [pumpkin.toml] {2}
+view_distance = 16
 ```
 
 :::
@@ -56,7 +61,7 @@ view_distance = 10
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 simulation_distance = 10
 ```
 
@@ -68,7 +73,7 @@ simulation_distance = 10
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 default_difficulty = "Normal"
 ```
 
@@ -87,7 +92,7 @@ Hard # 困难
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 op_permission_level = 4
 ```
 
@@ -99,7 +104,7 @@ op_permission_level = 4
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 allow_nether = true
 ```
 
@@ -111,7 +116,7 @@ allow_nether = true
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 allow_end = true
 ```
 
@@ -123,7 +128,7 @@ allow_end = true
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 hardcore = false
 ```
 
@@ -135,7 +140,7 @@ hardcore = false
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 online_mode = true
 ```
 
@@ -150,7 +155,7 @@ online_mode = true
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 encryption = true
 ```
 
@@ -162,7 +167,7 @@ encryption = true
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 motd = "一款极速的南瓜服务器！"
 ```
 
@@ -174,7 +179,7 @@ motd = "一款极速的南瓜服务器！"
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 tps = 20.0
 ```
 
@@ -186,7 +191,7 @@ tps = 20.0
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 default_gamemode = "Survival"
 ```
 
@@ -199,14 +204,25 @@ Creative # 创造模式
 Adventure # 冒险模式
 Spectator # 观察者模式
 ```
+## 固定游戏模式
 
-## IP 记录
-
-是否从日志中移除玩家的 IP 地址。
+是否强制玩家以固定游戏模式加入服务器
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
+force_gamemode = false
+```
+
+:::
+
+## IP 记录
+
+是否从日志中隐藏玩家的 IP 地址。
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
 scrub_ips = true
 ```
 
@@ -218,7 +234,7 @@ scrub_ips = true
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 use_favicon = true
 ```
 
@@ -230,7 +246,7 @@ use_favicon = true
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 favicon_path = "icon.png"
 ```
 

@@ -10,9 +10,22 @@ Whether commands from the console are accepted or not.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [commands]
 use_console = false
+```
+
+:::
+
+#### `use_tty`: Boolean
+
+Should the tty console be used under Linux
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+[commands]
+use_tty = true
 ```
 
 :::
@@ -23,7 +36,7 @@ Whether commands from players should be logged in the console or not.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [commands]
 log_console = false
 ```
@@ -36,7 +49,8 @@ The default permission level for all players.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
+[commands]
 default_op_level = 0
 ```
 
@@ -48,9 +62,10 @@ By default, Pumpkin will allow commands from console and log all commands run by
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [commands]
 use_console = true
+use_tty = true
 log_console = true
 default_op_level = 0
 ```

@@ -13,14 +13,18 @@
 
 :::code-group
 
-```toml [features.toml] {2}
-[resource_pack]
-enabled = true
+```toml [pumpkin.toml 对于 Java Edition] {2}
+[resource_pack.java]
+enabled = false
+```
+```toml [pumpkin.toml 对于 Bedrock Edition] {2}
+[resource_pack.bedrock]
+enabled = false
 ```
 
 :::
 
-#### `resource_pack_url`: 字符串
+#### `url`: 字符串
 
 资源包的直接下载 URL。
 
@@ -29,15 +33,18 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
-enabled = true
-resource_pack_url = "[你的下载 URL 在这里]"
+```toml [pumpkin.toml 对于 Java Edition] {3}
+[resource_pack.java]
+url = "[你的下载 URL 在这里]"
+```
+```toml [pumpkin.toml 对于 Bedrock Edition] {3}
+[resource_pack.bedrock]
+packs = [在这里设置你的资源包]
 ```
 
 :::
 
-#### `resource_pack_sha1`: 字符串
+#### `sha1`: 字符串
 
 资源包的 SHA1 哈希值。
 
@@ -66,10 +73,9 @@ sha1sum [文件]
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
-enabled = true
-resource_pack_sha1 = "[你的哈希值在这里]"
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
+sha1 = "[你的哈希值在这里]"
 ```
 
 :::
@@ -80,9 +86,8 @@ resource_pack_sha1 = "[你的哈希值在这里]"
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
-enabled = true
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 prompt_message = "[你的消息在这里]"
 ```
 
@@ -94,9 +99,12 @@ prompt_message = "[你的消息在这里]"
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
-enabled = true
+```toml [pumpkin.toml 对于 Java Edition] {3}
+[resource_pack.java]
+force = false
+```
+```toml [pumpkin.toml 对于 Bedrock Edition] {3}
+[resource_pack.bedrock]
 force = false
 ```
 
@@ -108,13 +116,18 @@ force = false
 
 :::code-group
 
-```toml [features.toml]
-[resource_pack]
+```toml [pumpkin.toml]
+[resource_pack.java]
 enabled = false
-resource_pack_url = ""
-resource_pack_sha1 = ""
+url = ""
+sha1 = ""
 prompt_message = ""
 force = false
+
+[resource_pack.bedrock]
+enabled = false
+force = false
+packs = []
 ```
 
 :::

@@ -17,7 +17,11 @@ to a 256 height limit, then to 320, as well as a higher number of block IDs.
 
 More details can be found on the [Minecraft Wiki](https://minecraft.wiki/w/Anvil_file_format).
 
-## Linear File Format
+## Pumpkin File Format
+
+No detailed information available at the moment.
+
+## LinearV2 File Format
 
 There is a more modern file format known as the Linear region file format. It saves on disk space and uses the zstd library instead of zlib. This is beneficial as zlib is extremely old and
 outdated.
@@ -61,11 +65,11 @@ Pumpkin then calls for world generation:
 - The location table is read from the save file, representing the chunk coordinates
 - The timestamp table is read from the save file, representing the last time the chunk was modified
 
-#### No Save Present
+#### Implemented save file saving
 
 The world seed is set to "0". In the future it will be set to the value in the "basic" configuration.
 
-`PlainsGenerator` is called, as so far `Plains` is the only biome that has been implemented.
+Calling the  `PlainsGenerator`
 
 - `PerlinTerrainGenerator` is called to set chunk height
 - Stone height is set 5 below chunk height

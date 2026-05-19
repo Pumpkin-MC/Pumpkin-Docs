@@ -10,9 +10,22 @@ Pumpkin 支持原版命令，并允许你配置命令可以从哪里运行。
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [commands]
 use_console = false
+```
+
+:::
+
+#### `use_tty`: 布尔值
+
+是否应在 Linux 下使用 TTY TTY 控制台终端
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+[commands]
+use_tty = true
 ```
 
 :::
@@ -23,7 +36,7 @@ use_console = false
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [commands]
 log_console = false
 ```
@@ -36,7 +49,8 @@ log_console = false
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
+[commands]
 default_op_level = 0
 ```
 
@@ -48,9 +62,10 @@ default_op_level = 0
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [commands]
 use_console = true
+use_tty = true
 log_console = true
 default_op_level = 0
 ```

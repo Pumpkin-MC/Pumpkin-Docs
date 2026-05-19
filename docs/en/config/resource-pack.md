@@ -13,14 +13,18 @@ Whether a resource pack is enabled or not.
 
 :::code-group
 
-```toml [features.toml] {2}
-[resource_pack]
-enabled = true
+```toml [pumpkin.toml For Java Edition] {2}
+[resource_pack.java]
+enabled = false
+```
+```toml [pumpkin.toml For Bedrock Edition] {2}
+[resource_pack.bedrock]
+enabled = false
 ```
 
 :::
 
-#### `resource_pack_url`: String
+#### `url`: String
 
 The direct download URL to the resource pack.
 
@@ -29,15 +33,18 @@ The direct download URL to the resource pack.
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
-enabled = true
-resource_pack_url = "[your download URL here]"
+```toml [pumpkin.toml For Java Edition] {3}
+[resource_pack.java]
+url = "[your download URL here]"
+```
+```toml [pumpkin.toml For Bedrock Edition] {3}
+[resource_pack.bedrock]
+packs = [Set up your resource package here]
 ```
 
 :::
 
-#### `resource_pack_sha1`: String
+#### `sha1`: String
 
 The SHA1 hash of the resource pack.
 
@@ -66,10 +73,9 @@ sha1sum [file]
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
-enabled = true
-resource_pack_sha1 = "[your hash here]"
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
+sha1 = "[your hash here]"
 ```
 
 :::
@@ -80,9 +86,8 @@ The message to show to the user when prompted to download the resource pack.
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
-enabled = true
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 prompt_message = "[your message here]"
 ```
 
@@ -94,9 +99,12 @@ Whether to force the client to download the resource pack or not. If the client 
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
-enabled = true
+```toml [pumpkin.toml For Java Edition] {3}
+[resource_pack.java]
+force = false
+```
+```toml [pumpkin.toml For Bedrock Edition] {3}
+[resource_pack.bedrock]
 force = false
 ```
 
@@ -108,13 +116,18 @@ By default, no resource pack is sent to clients.
 
 :::code-group
 
-```toml [features.toml]
-[resource_pack]
+```toml [pumpkin.toml]
+[resource_pack.java]
 enabled = false
-resource_pack_url = ""
-resource_pack_sha1 = ""
+url = ""
+sha1 = ""
 prompt_message = ""
 force = false
+
+[resource_pack.bedrock]
+enabled = false
+force = false
+packs = []
 ```
 
 :::

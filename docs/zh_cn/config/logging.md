@@ -10,47 +10,13 @@ Pumpkin 允许你自定义日志中想要的内容。
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [logging]
 enabled = true
 ```
 
 :::
 
-#### `level`: 枚举
-
-日志详细程度级别。可能的值有：
-
-- Off
-- Error
-- Warn
-- Info
-- Debug
-- Trace
-
-:::code-group
-
-```toml [features.toml] {3}
-[logging]
-enabled = true
-level = "Debug"
-```
-
-:::
-
-#### `env`: 布尔值
-
-是否允许通过设置 `RUST_LOG` 环境变量来选择日志级别。
-
-:::code-group
-
-```toml [features.toml] {3}
-[logging]
-enabled = true
-env = true
-```
-
-:::
 
 #### `threads`: 布尔值
 
@@ -58,10 +24,9 @@ env = true
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
-enabled = true
-threads = false
+threads = true
 ```
 
 :::
@@ -72,10 +37,9 @@ threads = false
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
-enabled = true
-color = false
+color = true
 ```
 
 :::
@@ -86,10 +50,22 @@ color = false
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
-enabled = true
-timestamp = false
+timestamp = true
+```
+
+:::
+
+#### `file`: Boolean
+
+设置默认的日志文件
+
+:::code-group
+
+```toml [pumpkin.toml] {3}
+[logging]
+file = "latest.log"
 ```
 
 :::
@@ -100,14 +76,13 @@ timestamp = false
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [logging]
 enabled = true
-level = "Info"
-env = false
 threads = true
 color = true
 timestamp = true
+file = "latest.log"
 ```
 
 :::

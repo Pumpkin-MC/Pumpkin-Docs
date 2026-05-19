@@ -16,9 +16,9 @@
 
 :::code-group
 
-```toml [features.toml]{2}
-[proxy]
-enabled = true
+```toml [pumpkin.toml]{2}
+[networking.proxy]
+enabled = false
 ```
 
 :::
@@ -31,9 +31,9 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml]{2}
-[proxy.velocity]
-enabled = true
+```toml [pumpkin.toml]{2}
+[networking.proxy.velocity]
+enabled = false
 ```
 
 :::
@@ -44,9 +44,8 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml]{3}
-[proxy.velocity]
-enabled = true
+```toml [pumpkin.toml]{3}
+[networking.proxy.velocity]
 secret = "[代理密钥]"
 ```
 
@@ -60,15 +59,15 @@ secret = "[代理密钥]"
 
 :::code-group
 
-```toml [features.toml]{2}
-[proxy.bungeecord]
-enabled = true
+```toml [pumpkin.toml]{2}
+[networking.proxy.bungeecord]
+enabled = false
 ```
 
 :::
 
 > [!CAUTION]警告
-> BungeeCord 无法验证玩家信息是来自你的代理还是冒充者。确保服务器的防火墙配置正确。
+> BungeeCord 无法验证玩家信息是来自你的代理还是冒充者。请确保服务器的防火墙配置正确。
 
 ## 默认配置
 
@@ -76,15 +75,15 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml]
-[proxy]
+```toml [pumpkin.toml]
+[networking.proxy]
 enabled = false
 
-[proxy.velocity]
+[networking.proxy.velocity]
 enabled = false
 secret = ""
 
-[proxy.bungeecord]
+[networking.proxy.bungeecord]
 enabled = false
 ```
 

@@ -191,7 +191,7 @@ client.send_packet(&CStatusResponse::new("{ description: "A Description"}"));
             }
             _ => {
             log::error!(
-                "Failed to handle packet id {} while in ... state",
+                "在 ... 状态下，处理数据包（packet）ID {} 时发生失败。",
                 packet.id.0
             );
             }
@@ -220,7 +220,7 @@ client.send_packet(&CStatusResponse::new("{ description: "A Description"}"));
         }
         _ => {
             log::error!(
-                "Failed to handle packet id {} while in ... state",
+                "在 ... 状态下，处理数据包（packet）ID {} 时发生失败。",
                 packet.id.0
             );
         }

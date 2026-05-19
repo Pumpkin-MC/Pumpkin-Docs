@@ -44,18 +44,18 @@ localhost:25565
 ## Docker
 
 > [!IMPORTANT]重要
-> Docker 支持目前处于实验阶段。
+> Docker 的支持目前处于实验性阶段。
 
-如果您尚未安装，需要先[安装 Docker](https://docs.docker.com/engine/install/)。安装 Docker 后，可以运行以下命令启动服务器：
+如果您尚未安装，需要先[安装 Docker](https://docker.github.net.cn/engine/install/)。安装 Docker 后，可以运行以下命令启动服务器：
 
 ```shell
 docker run --rm \
-    -p <暴露端口>:25565  \
+    -p <向外部暴露端口>:25565  \
     -v <服务器数据位置>:/pumpkin \
     -it ghcr.io/pumpkin-mc/pumpkin:master
 ```
 
-- `<暴露端口>`：您想要连接 Pumpkin 的端口，例如 `25565`。
+- `<向外部暴露端口>`：您想要连接 Pumpkin 的端口，例如 `25565`。
 - `<服务器数据位置>`：您希望存储服务器配置和数据的位置，例如 `./data`。
 
 ### 示例
