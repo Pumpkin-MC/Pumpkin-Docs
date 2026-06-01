@@ -51,7 +51,7 @@ cargo build --release
 ```
 
 You do not need to build in release mode, but it greatly reduces the size of the wasm plugin and
-increases startup times.
+reduces startup times.
 
 If all went well, you should be left with a message like this:
 
