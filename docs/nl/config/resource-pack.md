@@ -10,7 +10,7 @@ Servers kunnen resource packs naar de client sturen om het uiterlijk van het spe
 Of een resource pack is ingeschakeld of niet.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [resource_pack]
 enabled = true
 ```
@@ -23,7 +23,7 @@ De directe download URL naar de resource pack.
 > Je kunt de resource pack gratis hosten op [MCPacks](https://mc-packs.net/).
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [resource_pack]
 enabled = true
 resource_pack_url = "[je download URL hier]"
@@ -53,7 +53,7 @@ sha1sum [bestand]
 :::
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [resource_pack]
 enabled = true
 resource_pack_sha1 = "[je hash hier]"
@@ -64,7 +64,7 @@ resource_pack_sha1 = "[je hash hier]"
 Het bericht dat aan de gebruiker wordt getoond wanneer gevraagd wordt om de resource pack te downloaden.
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [resource_pack]
 enabled = true
 prompt_message = "[je bericht hier]"
@@ -75,7 +75,7 @@ prompt_message = "[je bericht hier]"
 Of de client gedwongen moet worden om de resource pack te downloaden of niet. Als de client de download weigert, worden ze van de server gekickt.
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [resource_pack]
 enabled = true
 force = false
@@ -86,7 +86,7 @@ force = false
 Standaard is de resource pack uitgeschakeld.
 
 :::code-group
-```toml [features.toml]
+```toml [pumpkin.toml]
 [resource_pack]
 enabled = false
 resource_pack_url = ""

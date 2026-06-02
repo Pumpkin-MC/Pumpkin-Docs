@@ -6,4 +6,4 @@
 
     **Oorzaak:** Dit heeft te maken met authenticatie, meestal met de instelling om proxyverbindingen te voorkomen.
 
-    **Oplossing:** Schakel `prevent_proxy_connections` uit in `features.toml`
+    **Oplossing:** Schakel `prevent_proxy_connections` uit in `pumpkin.toml`

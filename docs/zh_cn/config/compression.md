@@ -13,8 +13,8 @@
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 enabled = true
 ```
 
@@ -29,8 +29,8 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 threshold = 256
 ```
 
@@ -42,8 +42,8 @@ threshold = 256
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 level = 4
 ```
 
@@ -55,8 +55,8 @@ level = 4
 
 :::code-group
 
-```toml [features.toml]
-[packet_compression]
+```toml [pumpkin.toml]
+[networking.java_compression]
 enabled = true
 threshold = 256
 level = 4

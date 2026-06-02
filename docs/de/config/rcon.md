@@ -8,8 +8,8 @@ RCON ist ein Protokoll, mit dem du den Server remote von einem anderen Gerät ve
 
 :::code-group
 
-```toml [features.toml] {2}
-[rcon]
+```toml [pumpkin.toml] {2}
+[networking.rcon]
 enabled = true
 ```
 
@@ -21,8 +21,8 @@ Adresse und Port, auf denen RCON lauschen soll.
 
 :::code-group
 
-```toml [features.toml] {3}
-[rcon]
+```toml [pumpkin.toml] {3}
+[networking.rcon]
 enabled = true
 address = "0.0.0.0:25575"
 ```
@@ -35,8 +35,8 @@ Das Passwort für RCON‑Authentifizierung.
 
 :::code-group
 
-```toml [features.toml] {3}
-[rcon]
+```toml [pumpkin.toml] {3}
+[networking.rcon]
 enabled = true
 password = "[dein sicheres passwort hier]"
 ```
@@ -49,8 +49,8 @@ Maximale Anzahl gleichzeitiger RCON‑Verbindungen. `0` deaktiviert das Limit.
 
 :::code-group
 
-```toml [features.toml] {3}
-[rcon]
+```toml [pumpkin.toml] {3}
+[networking.rcon]
 enabled = true
 max_connections = 5
 ```
@@ -59,54 +59,54 @@ max_connections = 5
 
 ### Logging
 
-#### `log_logged_successfully`: Boolean
+#### `logged_successfully`: Boolean
 
 Ob erfolgreiche Logins protokolliert werden.
 
 :::code-group
 
-```toml [features.toml] {2}
-[rcon.logging]
-log_logged_successfully = true
+```toml [pumpkin.toml] {2}
+[networking.rcon.logging]
+logged_successfully = true
 ```
 
 :::
 
-#### `log_wrong_password`: Boolean
+#### `wrong_password`: Boolean
 
 Ob falsche Passwortversuche protokolliert werden.
 
 :::code-group
 
-```toml [features.toml] {2}
-[rcon.logging]
-log_logged_successfully = true
+```toml [pumpkin.toml] {2}
+[networking.rcon.logging]
+logged_successfully = true
 ```
 
 :::
 
-#### `log_commands`: Boolean
+#### `commands`: Boolean
 
 Ob von RCON ausgeführte Befehle protokolliert werden.
 
 :::code-group
 
-```toml [features.toml] {2}
-[rcon.logging]
-log_commands = true
+```toml [pumpkin.toml] {2}
+[networking.rcon.logging]
+commands = true
 ```
 
 :::
 
-#### `log_quit`: Boolean
+#### `quit`: Boolean
 
 Ob das Beenden eines RCON‑Clients protokolliert wird.
 
 :::code-group
 
-```toml [features.toml] {2}
-[rcon.logging]
-log_quit = true
+```toml [pumpkin.toml] {2}
+[networking.rcon.logging]
+quit = true
 ```
 
 :::
@@ -117,18 +117,18 @@ Standardmäßig ist RCON deaktiviert.
 
 :::code-group
 
-```toml [features.toml]
-[rcon]
+```toml [pumpkin.toml]
+[networking.rcon]
 enabled = false
 address = "0.0.0.0:25575"
 password = ""
 max_connections = 0
 
-[rcon.logging]
-log_logged_successfully = true
-log_wrong_password = true
-log_commands = true
-log_quit = true
+[networking.rcon.logging]
+logged_successfully = true
+wrong_password = true
+commands = true
+quit = true
 ```
 
 :::

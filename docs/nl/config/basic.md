@@ -1,45 +1,89 @@
 # Basisconfiguratie
 
-Vertegenwoordigt `configuration.toml`
+Vertegenwoordigt de top-level velden in `pumpkin.toml`. Dit zijn de kerninstellingen van de server.
 
-## Serveradres
+## Java Edition
 
-Het adres om de server aan te binden.
+Of Java Edition-clients worden geaccepteerd.
 
 :::code-group
-```toml [configuration.toml] {2}
-server_address = "0.0.0.0:25565"
+
+```toml [pumpkin.toml] {2}
+java_edition = true
 ```
+
+:::
+
+## Java Edition-adres
+
+Het adres en de poort waaraan de Java Edition-server wordt gebonden.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+java_edition_address = "0.0.0.0:25565"
+```
+
+:::
+
+## Bedrock Edition
+
+Of Bedrock Edition-clients worden geaccepteerd.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+bedrock_edition = true
+```
+
+:::
+
+## Bedrock Edition-adres
+
+Het adres en de poort waaraan de Bedrock Edition-server wordt gebonden.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+bedrock_edition_address = "0.0.0.0:19132"
+```
+
 :::
 
 ## Seed
 
-De seed voor wereldgeneratie.
+De seed voor de wereldgeneratie.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
 seed = ""
 ```
+
 :::
 
-## Maximaal aantal spelers
+## Maximale spelers
 
-Het maximale aantal spelers dat op de server is toegestaan.
+Het maximum aantal spelers dat tegelijkertijd op de server is toegestaan. `0` schakelt de limiet uit.
 
 :::code-group
-```toml [configuration.toml] {2}
-max_players = 100000
+
+```toml [pumpkin.toml] {2}
+max_players = 1000
 ```
+
 :::
 
-## Zichtafstand
+## Weergaveafstand
 
-De maximale zichtafstand voor spelers.
+De maximale weergaveafstand voor spelers.
 
 :::code-group
-```toml [configuration.toml] {2}
-view_distance = 10
+
+```toml [pumpkin.toml] {2}
+view_distance = 16
 ```
+
 :::
 
 ## Simulatieafstand
@@ -47,21 +91,24 @@ view_distance = 10
 De maximale simulatieafstand voor spelers.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
 simulation_distance = 10
 ```
+
 :::
 
-## Standaard moeilijkheidsgraad
+## Standaardmoeilijkheidsgraad
 
-De standaard moeilijkheidsgraad van het spel.
+De standaard moeilijkheidsgraad.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
 default_difficulty = "Normal"
 ```
-:::
 
+:::
 
 ```toml
 Peaceful
@@ -70,14 +117,16 @@ Normal
 Hard
 ```
 
-## Operationeel permissieniveau
+## Operator-rechtniveau
 
-Het op-niveau dat wordt toegewezen door het `/op`-commando.
+Het rechtenniveau dat wordt toegekend door het `/op`-commando.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
 op_permission_level = 4
 ```
+
 :::
 
 ## Nether toestaan
@@ -85,9 +134,11 @@ op_permission_level = 4
 Of de Nether-dimensie is ingeschakeld.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
 allow_nether = true
 ```
+
 :::
 
 ## End toestaan
@@ -95,52 +146,62 @@ allow_nether = true
 Of de End-dimensie is ingeschakeld.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
 allow_end = true
 ```
+
 :::
 
 ## Hardcore
 
-Of de server in hardcore modus is.
+Of de server in hardcore-modus draait.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
 hardcore = false
 ```
+
 :::
 
-## Online modus
+## Online-modus
 
-Of de online modus is ingeschakeld. Vereist geldige Minecraft-accounts.
+Of de online-modus is ingeschakeld. Vereist geldige Minecraft-accounts.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
 online_mode = true
 ```
+
 :::
 
-## Encryptie
+## Versleuteling
 
-Of pakketversleuteling is ingeschakeld.
+Of packetversleuteling is ingeschakeld.
 
 > [!IMPORTANT]
-> Vereist wanneer de online modus is ingeschakeld.
+> Vereist wanneer de online-modus is ingeschakeld.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
 encryption = true
 ```
+
 :::
 
-## Motd
+## MOTD
 
-De beschrijving van de server die wordt weergegeven op het status scherm.
+Message of the Day; de serverbeschrijving op het statusscherm.
 
 :::code-group
-```toml [configuration.toml] {2}
-motd = "A Blazingly fast Pumpkin Server!"
+
+```toml [pumpkin.toml] {2}
+motd = "A blazingly fast Pumpkin server!"
 ```
+
 :::
 
 ## TPS
@@ -148,55 +209,124 @@ motd = "A Blazingly fast Pumpkin Server!"
 De doel-tickrate van de server.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
 tps = 20.0
 ```
+
 :::
 
-## Standaard spelmodus
+## Standaard-spelmodus
 
 De standaard spelmodus voor spelers.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
 default_gamemode = "Survival"
 ```
+
 :::
 
 ```toml
-Undefined
 Survival
 Creative
 Adventure
 Spectator
 ```
 
-## IP-scrubbing
+## Spelmodus afdwingen
 
-Of spelers-IP's uit logs moeten worden verwijderd.
+Of de server de spelmodus afdwingt bij het joinen.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
+force_gamemode = false
+```
+
+:::
+
+## IP-opschonening
+
+Of speler-IP-adressen uit logs worden verwijderd.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
 scrub_ips = true
 ```
+
 :::
 
 ## Favicon gebruiken
 
-Of een server-favicon moet worden gebruikt of niet.
+Of een server-favicon wordt gebruikt.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
 use_favicon = true
 ```
+
 :::
 
 ## Favicon-pad
 
-Het pad naar de favicon van de server.
+Het pad naar het server-favicon.
 
 :::code-group
-```toml [configuration.toml] {2}
+
+```toml [pumpkin.toml] {2}
 favicon_path = "icon.png"
 ```
+
+:::
+
+## Standaard-wereldnaam
+
+De standaard naam voor de wereld.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+default_level_name = "world"
+```
+
+:::
+
+## Chat-rapportages toestaan
+
+Of chatberichten ondertekend en rapporteerbaar moeten zijn.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+allow_chat_reports = false
+```
+
+:::
+
+## Whitelist
+
+Of de whitelist is ingeschakeld.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+white_list = false
+```
+
+:::
+
+## Whitelist afdwingen
+
+Of spelers die niet op de whitelist staan worden gekickt.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+enforce_whitelist = false
+```
+
 :::

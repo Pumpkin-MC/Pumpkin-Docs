@@ -1,23 +1,42 @@
-### Configuração
+# Configuração
 
-Pumpkin oferece um sistema de configuração robusto que permite aos usuários personalizar vários aspectos do comportamento do servidor sem depender de plugins externos. Isso proporciona flexibilidade e controle sobre o funcionamento do servidor.
+O Pumpkin oferece um sistema de configuração robusto que permite personalizar diversos aspectos do comportamento do servidor sem depender de plugins externos. Isso proporciona flexibilidade e controle sobre a operação do servidor.
 
-### Básica / Avançada
+## Arquivo de Configuração
 
-A configuração do Pumpkin é dividida em uma configuração "básica", feita para mudanças rápidas e importantes, e uma configuração mais "avançada".
+O Pumpkin utiliza um único arquivo de configuração:
 
--   `configuration.toml`: simples e pode ser comparado ao `server.properties` do vanilla.
--   `features.toml`: projetado para reunir todos os recursos do Pumpkin em um único lugar, tornando-se uma configuração mais abrangente.
+- `pumpkin.toml`: o arquivo de configuração principal contendo todas as definições do servidor, desde configurações básicas de rede até recursos avançados
 
-### Versão do Servidor
+Quando o Pumpkin é iniciado pela primeira vez, ele gera o arquivo `pumpkin.toml` com valores padrão no diretório de trabalho. Você pode editá-lo antes ou depois da primeira execução. Campos ausentes são preenchidos automaticamente com valores padrão na inicialização.
 
-Pumpkin tem como objetivo oferecer suporte à versão mais recente do Minecraft. Se você deseja hospedar um servidor Pumpkin para qualquer outra versão, existe um projeto chamado [ViaProxy](https://github.com/ViaVersion/ViaProxy).
+## Estrutura
 
--   Certifique-se de permitir conexões de proxy.
--   Pumpkin e o ViaProxy não possuem conexão; não nos envie problemas relacionados ao código deles. Além disso, este é um proxy de terceiros e o Pumpkin não se responsabiliza pelos resultados, bons ou ruins.
+A configuração é organizada em seções:
 
-#### Principais Características:
+- **Campos de nível superior**: configurações principais como suporte a edições, endereços, seed, limites de jogadores, dificuldade e regras de jogo
+- **`[logging]`**: saída e formatação de logs
+- **`[resource_pack]`**: pacotes de recursos para Java e Bedrock
+- **`[world]`**: geração de mundo, armazenamento de chunks, iluminação e salvamento automático
+- **`[networking]`**: autenticação, compressão, proxy, query, RCON e broadcast LAN
+- **`[commands]`**: sistema de comandos
+- **`[chat]`**: formatação de mensagens do chat
+- **`[pvp]`**: regras e mecânicas de PVP
+- **`[server_links]`**: links exibidos aos clientes
+- **`[player_data]`**: persistência de dados do jogador
+- **`[fun]`**: recursos experimentais
+- **`[recipe]`**: configuração do livro de receitas
+- **`[plugins]`**: configurações de permissão de plugins
 
--   **Personalização Extensa**: Configure configurações do servidor, comportamento dos jogadores, geração de mundos e muito mais.
--   **Otimização de Desempenho**: Otimize o desempenho do servidor por meio de ajustes na configuração.
--   **Personalização Sem Plugins**: Alcance as mudanças desejadas sem a necessidade de plugins adicionais.
+## Versão do Servidor
+
+O Pumpkin tem como objetivo suportar a versão mais recente do Minecraft. Se você deseja hospedar um servidor Pumpkin para qualquer outra versão, existe um projeto chamado [ViaProxy](https://github.com/ViaVersion/ViaProxy).
+
+- Certifique-se de permitir conexões proxy.
+- O Pumpkin e o ViaProxy não têm nenhuma conexão; não envie issues relacionadas ao código deles. Além disso, este é um proxy de terceiros e o Pumpkin não se responsabiliza por seus aspectos positivos ou negativos.
+
+### Principais Recursos
+
+- Personalização Extensiva: Configure definições do servidor, comportamento do jogador, geração de mundo e mais.
+- Otimização de Desempenho: Otimize o desempenho do servidor por meio de ajustes de configuração.
+- Personalização sem Plugins: Alcance as alterações desejadas sem a necessidade de plugins adicionais.

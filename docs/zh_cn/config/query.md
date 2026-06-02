@@ -10,8 +10,8 @@
 
 :::code-group
 
-```toml [features.toml] {2}
-[query]
+```toml [pumpkin.toml] {2}
+[networking.query]
 enabled = true
 ```
 
@@ -23,8 +23,8 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml] {3}
-[query]
+```toml [pumpkin.toml] {3}
+[networking.query]
 enabled = true
 port = 12345
 ```
@@ -37,8 +37,8 @@ port = 12345
 
 :::code-group
 
-```toml [features.toml]
-[query]
+```toml [pumpkin.toml]
+[networking.query]
 enabled = true
 port = 25565
 ```

@@ -16,9 +16,9 @@ Enables support for proxies.
 
 :::code-group
 
-```toml [features.toml]{2}
-[proxy]
-enabled = true
+```toml [pumpkin.toml] {2}
+[networking.proxy]
+enabled = false
 ```
 
 :::
@@ -31,8 +31,8 @@ Whether Velocity support is enabled or not.
 
 :::code-group
 
-```toml [features.toml]{2}
-[proxy.velocity]
+```toml [pumpkin.toml] {2}
+[networking.proxy.velocity]
 enabled = true
 ```
 
@@ -44,8 +44,8 @@ The secret as configured in Velocity.
 
 :::code-group
 
-```toml [features.toml]{3}
-[proxy.velocity]
+```toml [pumpkin.toml] {3}
+[networking.proxy.velocity]
 enabled = true
 secret = "[proxy secret here]"
 ```
@@ -60,15 +60,15 @@ Whether BungeeCord support is enabled or not.
 
 :::code-group
 
-```toml [features.toml]{2}
-[proxy.bungeecord]
-enabled = true
+```toml [pumpkin.toml] {2}
+[networking.proxy.bungeecord]
+enabled = false
 ```
 
 :::
 
 > [!CAUTION]
-> BungeeCord can't verify if player info is from your proxy or an imposter. Ensure that the server's firewall is correctly configured.
+> BungeeCord can't verify if player info is from your proxy or an impostor. Ensure that the server's firewall is correctly configured.
 
 ## Default Config
 
@@ -76,15 +76,15 @@ By default, proxy support is disabled. Here is the default config:
 
 :::code-group
 
-```toml [features.toml]
-[proxy]
+```toml [pumpkin.toml]
+[networking.proxy]
 enabled = false
 
-[proxy.velocity]
+[networking.proxy.velocity]
 enabled = false
 secret = ""
 
-[proxy.bungeecord]
+[networking.proxy.bungeecord]
 enabled = false
 ```
 

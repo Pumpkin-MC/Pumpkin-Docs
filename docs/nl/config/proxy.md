@@ -14,8 +14,8 @@ Veel servers gebruiken proxies om verbindingen te beheren en spelers over server
 Schakelt ondersteuning voor proxies in.
 
 :::code-group
-```toml [features.toml]{2}
-[proxy]
+```toml [pumpkin.toml]{2}
+[networking.proxy]
 enabled = true
 ```
 :::
@@ -27,8 +27,8 @@ enabled = true
 Of Velocity-ondersteuning is ingeschakeld of niet.
 
 :::code-group
-```toml [features.toml]{2}
-[proxy.velocity]
+```toml [pumpkin.toml]{2}
+[networking.proxy.velocity]
 enabled = true
 ```
 :::
@@ -38,8 +38,8 @@ enabled = true
 Het geheim zoals geconfigureerd in Velocity. 
 
 :::code-group
-```toml [features.toml]{3}
-[proxy.velocity]
+```toml [pumpkin.toml]{3}
+[networking.proxy.velocity]
 enabled = true
 secret = "[proxy secret hier]"
 ```
@@ -51,8 +51,8 @@ secret = "[proxy secret hier]"
 Of BungeeCord-ondersteuning is ingeschakeld of niet.
 
 :::code-group
-```toml [features.toml]{2}
-[proxy.bungeecord]
+```toml [pumpkin.toml]{2}
+[networking.proxy.bungeecord]
 enabled = true
 ```
 :::
@@ -64,15 +64,15 @@ enabled = true
 Standaard is proxy-ondersteuning uitgeschakeld. Hier is de standaardconfiguratie:
 
 :::code-group
-```toml [features.toml]
-[proxy]
+```toml [pumpkin.toml]
+[networking.proxy]
 enabled = false
 
-[proxy.velocity]
+[networking.proxy.velocity]
 enabled = false
 secret = ""
 
-[proxy.bungeecord]
+[networking.proxy.bungeecord]
 enabled = false
 ```
 :::

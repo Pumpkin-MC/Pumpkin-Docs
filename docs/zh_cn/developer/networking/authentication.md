@@ -6,7 +6,7 @@
 
 ## 离线服务器
 
-默认情况下，配置中启用了 `online_mode`。这启用了身份验证，禁用离线账户。如果您想允许离线账户，可以在 `configuration.toml` 中禁用 `online_mode`。
+默认情况下，配置中启用了 `online_mode`。这启用了身份验证，禁用离线账户。如果您想允许离线账户，可以在 `pumpkin.toml` 中禁用 `online_mode`。
 
 ## Yggdrasil 身份验证的工作原理
 
@@ -18,7 +18,7 @@
 
 ## 自定义身份验证服务器
 
-Pumpkin 支持自定义身份验证服务器。您可以在 `features.toml` 中替换身份验证 URL。
+Pumpkin 支持自定义身份验证服务器。您可以在 `pumpkin.toml` 中替换身份验证 URL。
 
 ### Pumpkin 身份验证的工作原理
 

@@ -10,7 +10,7 @@ Günlüklemenin etkin olup olmadığını ayarlar.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [logging]
 enabled = true
 ```
@@ -30,7 +30,7 @@ Günlük ayrıntı seviyesi. Olası değerler:
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 level = "Debug"
@@ -44,7 +44,7 @@ level = "Debug"
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 env = true
@@ -58,7 +58,7 @@ Log mesajında iş parçacıklarının yazdırılıp yazdırılmamasını düzen
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 threads = false
@@ -72,7 +72,7 @@ Konsola renkli yazdırılıp yazdırılmamasını düzenler.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 color = false
@@ -86,7 +86,7 @@ Mesajda zaman damgasının yazdırılıp yazdırılmama davranışını değişt
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 timestamp = false
@@ -100,7 +100,7 @@ Varsayılan olarak günlükleme `Info` seviyesinde etkindir ve renk, iş parçac
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [logging]
 enabled = true
 level = "Info"

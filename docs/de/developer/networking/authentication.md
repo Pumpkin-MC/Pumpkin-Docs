@@ -6,7 +6,7 @@ Offline‑Accounts (Accounts, die nur aus dem Spielernamen generiert werden, ohn
 
 ## Offline‑Server
 
-Standardmäßig ist `online_mode` in der Konfiguration aktiviert. Das schaltet Authentifizierung ein und verhindert Offline‑Accounts. Um Offline‑Accounts zu erlauben, setze `online_mode` in `configuration.toml` auf `false`.
+Standardmäßig ist `online_mode` in der Konfiguration aktiviert. Das schaltet Authentifizierung ein und verhindert Offline‑Accounts. Um Offline‑Accounts zu erlauben, setze `online_mode` in `pumpkin.toml` auf `false`.
 
 ## Wie Yggdrasil Auth funktioniert
 
@@ -18,7 +18,7 @@ Standardmäßig ist `online_mode` in der Konfiguration aktiviert. Das schaltet A
 
 ## Eigener Authentifizierungsserver
 
-Pumpkin unterstützt eigene Auth‑Server. Die Auth‑URL kann in `features.toml` ersetzt werden.
+Pumpkin unterstützt eigene Auth‑Server. Die Auth‑URL kann in `pumpkin.toml` ersetzt werden.
 
 ### Pumpkin Auth Ablauf
 

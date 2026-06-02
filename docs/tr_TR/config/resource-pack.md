@@ -13,7 +13,7 @@ Kaynak packet etkin olup olmadığı.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [resource_pack]
 enabled = true
 ```
@@ -29,7 +29,7 @@ Kaynak packet doğrudan indirme URL'si.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [resource_pack]
 enabled = true
 resource_pack_url = "[your download URL here]"
@@ -66,7 +66,7 @@ sha1sum [file]
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [resource_pack]
 enabled = true
 resource_pack_sha1 = "[your hash here]"
@@ -80,7 +80,7 @@ Kullanıcıya kaynak packet indirmesi istendiğinde gösterilecek mesaj.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [resource_pack]
 enabled = true
 prompt_message = "[your message here]"
@@ -94,7 +94,7 @@ prompt_message = "[your message here]"
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [resource_pack]
 enabled = true
 force = false
@@ -108,7 +108,7 @@ Varsayılan olarak istemcilere kaynak packet gönderilmez.
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [resource_pack]
 enabled = false
 resource_pack_url = ""

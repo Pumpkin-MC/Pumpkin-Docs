@@ -10,8 +10,8 @@ Se a transmissão LAN está habilitada ou não.
 
 :::code-group
 
-```toml [features.toml] {2}
-[lan_broadcast]
+```toml [pumpkin.toml] {2}
+[networking.lan_broadcast]
 enabled = true
 ```
 
@@ -26,8 +26,8 @@ A mensagem de boas-vindas (MOTD) a ser transmitida para os clientes; usa a MOTD 
 
 :::code-group
 
-```toml [features.toml] {3}
-[lan_broadcast]
+```toml [pumpkin.toml] {3}
+[networking.lan_broadcast]
 enabled = true
 motd = "[sua MOTD aqui]"
 ```
@@ -43,8 +43,8 @@ A porta para a qual o servidor será vinculado. Se não especificado, será vinc
 
 :::code-group
 
-```toml [features.toml] {3}
-[lan_broadcast]
+```toml [pumpkin.toml] {3}
+[networking.lan_broadcast]
 enabled = true
 port = 46733
 ```
@@ -57,8 +57,8 @@ Por padrão, a transmissão LAN está desabilitada.
 
 :::code-group
 
-```toml [features.toml]
-[lan_broadcast]
+```toml [pumpkin.toml]
+[networking.lan_broadcast]
 enabled = false
 motd = "[MOTD do servidor aqui]"
 port = 0

@@ -1,26 +1,26 @@
 # Resource Pack
 
-Servers can send resource packs to clients in order to change the appearance of the game on the client. Pumpkin allows you to fully configure the resource pack.
+Servers can send resource packs to clients in order to change the appearance of the game on the client. Pumpkin allows you to fully configure resource packs for both Java and Bedrock editions.
 
 > [!TIP]
 > Minify your resource pack using [PackSquash](https://packsquash.aylas.org/)! This can help clients download the resource pack faster.
 
-## Configuring Resource Pack
+## Java Edition Resource Pack
 
 #### `enabled`: Boolean
 
-Whether a resource pack is enabled or not.
+Whether a resource pack is enabled for Java clients or not.
 
 :::code-group
 
-```toml [features.toml] {2}
-[resource_pack]
-enabled = true
+```toml [pumpkin.toml] {2}
+[resource_pack.java]
+enabled = false
 ```
 
 :::
 
-#### `resource_pack_url`: String
+#### `url`: String
 
 The direct download URL to the resource pack.
 
@@ -29,20 +29,20 @@ The direct download URL to the resource pack.
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
-resource_pack_url = "[your download URL here]"
+url = "[your download URL here]"
 ```
 
 :::
 
-#### `resource_pack_sha1`: String
+#### `sha1`: String
 
-The SHA1 hash of the resource pack.
+The SHA1 hash (40 characters) of the resource pack.
 
 > [!IMPORTANT]
-> Although not required to specify, you should specify this field because the client will otherwise redownload the resource pack every time they join the server, even if there are no changes to the resource pack.
+> Although not required to specify, you should specify this field because the client will otherwise redownload the resource pack every time they join the server, even if there are no changes.
 
 > [!WARNING]
 > Make sure to update this field if the resource pack is modified.
@@ -51,7 +51,7 @@ The SHA1 hash of the resource pack.
 ::: code-group
 
 ```powershell [Windows (PowerShell)]
-Get-FileHash [file] SHA1
+Get-FileHash [file] -Algorithm SHA1
 ```
 
 ```shell [Mac OS]
@@ -66,10 +66,10 @@ sha1sum [file]
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
-resource_pack_sha1 = "[your hash here]"
+sha1 = "[your hash here]"
 ```
 
 :::
@@ -80,8 +80,8 @@ The message to show to the user when prompted to download the resource pack.
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
 prompt_message = "[your message here]"
 ```
@@ -94,10 +94,66 @@ Whether to force the client to download the resource pack or not. If the client 
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
 force = false
+```
+
+:::
+
+## Bedrock Edition Resource Pack
+
+Bedrock Edition supports multiple resource packs.
+
+#### `enabled`: Boolean
+
+Whether resource packs are enabled for Bedrock clients.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+[resource_pack.bedrock]
+enabled = false
+```
+
+:::
+
+#### `force`: Boolean
+
+If true, Bedrock players cannot join without accepting the packs.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+[resource_pack.bedrock]
+force = false
+```
+
+:::
+
+#### `packs`: Array
+
+List of packs to be sent to the client. Each pack requires:
+
+- `uuid`: The pack UUID
+- `version`: The pack version string
+- `size`: The pack size in bytes
+- `download_url`: The download URL
+- `content_key` (optional): Content key for encryption
+- `sub_pack_name` (optional): Sub-pack name
+- `content_id` (optional): Content identifier
+- `has_scripts` (optional): Whether the pack has scripts
+- `addon_pack` (optional): Whether it's an addon pack
+- `rtx_enabled` (optional): Whether RTX is enabled
+
+:::code-group
+
+```toml [pumpkin.toml]
+[resource_pack.bedrock]
+enabled = true
+force = false
+packs = []
 ```
 
 :::
@@ -108,13 +164,18 @@ By default, no resource pack is sent to clients.
 
 :::code-group
 
-```toml [features.toml]
-[resource_pack]
+```toml [pumpkin.toml]
+[resource_pack.java]
 enabled = false
-resource_pack_url = ""
-resource_pack_sha1 = ""
+url = ""
+sha1 = ""
 prompt_message = ""
 force = false
+
+[resource_pack.bedrock]
+enabled = false
+force = false
+packs = []
 ```
 
 :::

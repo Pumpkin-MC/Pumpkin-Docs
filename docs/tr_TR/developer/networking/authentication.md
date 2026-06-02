@@ -6,7 +6,7 @@
 
 ## Çevrimdışı sunucu
 
-Varsayılan olarak yapılandırmada `online_mode` etkindir. Bu, kimlik doğrulamayı etkinleştirir ve çevrimdışı hesapları devre dışı bırakır. Çevrimdışı hesaplara izin vermek istiyorsanız `configuration.toml` dosyasında `online_mode` değerini devre dışı bırakabilirsiniz.
+Varsayılan olarak yapılandırmada `online_mode` etkindir. Bu, kimlik doğrulamayı etkinleştirir ve çevrimdışı hesapları devre dışı bırakır. Çevrimdışı hesaplara izin vermek istiyorsanız `pumpkin.toml` dosyasında `online_mode` değerini devre dışı bırakabilirsiniz.
 
 ## Yggdrasil Kimlik Doğrulama nasıl çalışır
 
@@ -18,7 +18,7 @@ Varsayılan olarak yapılandırmada `online_mode` etkindir. Bu, kimlik doğrulam
 
 ## Özel Kimlik Doğrulama Sunucusu
 
-Pumpkin özel kimlik doğrulama sunucularını destekler. `features.toml` dosyasındaki kimlik doğrulama URL'sini değiştirebilirsiniz.
+Pumpkin özel kimlik doğrulama sunucularını destekler. `pumpkin.toml` dosyasındaki kimlik doğrulama URL'sini değiştirebilirsiniz.
 
 ### Pumpkin Kimlik Doğrulaması Nasıl Çalışır
 

@@ -10,7 +10,7 @@ Se os comandos do console são aceitos ou não.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [commands]
 use_console = false
 ```
@@ -23,7 +23,7 @@ Se os comandos dos jogadores devem ser registrados no console ou não.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [commands]
 log_console = false
 ```
@@ -36,7 +36,7 @@ O nível de permissão padrão para todos os jogadores.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 default_op_level = 0
 ```
 
@@ -48,7 +48,7 @@ Por padrão, Pumpkin permitirá comandos da console e registrará todos os coman
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [commands]
 use_console = true
 log_console = true

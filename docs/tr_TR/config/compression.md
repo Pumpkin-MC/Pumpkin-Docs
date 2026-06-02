@@ -13,8 +13,8 @@ packet sıkıştırmasının etkin olup olmadığını belirler.
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 enabled = true
 ```
 
@@ -29,8 +29,8 @@ Sunucunun packet sıkıştırmayı denemeden önceki minimum packet boyutu.
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 threshold = 256
 ```
 
@@ -42,8 +42,8 @@ threshold = 256
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 level = 4
 ```
 
@@ -55,8 +55,8 @@ Varsayılan olarak sıkıştırma etkindir.
 
 :::code-group
 
-```toml [features.toml]
-[packet_compression]
+```toml [pumpkin.toml]
+[networking.java_compression]
 enabled = true
 threshold = 256
 level = 4

@@ -10,8 +10,8 @@ Of pakketcompressie is ingeschakeld of niet.
 > Het kan voordelig zijn om compressie uit te schakelen als de server achter een proxy staat.
 
 :::code-group
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 enabled = true
 ```
 :::
@@ -24,8 +24,8 @@ De minimale pakketgrootte voordat de server probeert het pakket te comprimeren.
 > Het verhogen van deze waarde kan spelers met langzamere verbindingen schaden.
 
 :::code-group
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 threshold = 256
 ```
 :::
@@ -35,8 +35,8 @@ threshold = 256
 Een waarde tussen 0 en 9: 0 om compressie uit te schakelen, 1 is de snelste compressie (ten koste van de grootte), en 9 is maximale compressie (ten koste van de snelheid).
 
 :::code-group
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 level = 4
 ```
 :::
@@ -46,8 +46,8 @@ level = 4
 Standaard is compressie ingeschakeld.
 
 :::code-group
-```toml [features.toml]
-[packet_compression]
+```toml [pumpkin.toml]
+[networking.java_compression]
 enabled = true
 threshold = 256
 level = 4

@@ -7,8 +7,8 @@ Pumpkin kan de server over het netwerk uitzenden om het voor lokale spelers gema
 Of LAN Broadcast is ingeschakeld of niet.
 
 :::code-group
-```toml [features.toml] {2}
-[lan_broadcast]
+```toml [pumpkin.toml] {2}
+[networking.lan_broadcast]
 enabled = true
 ```
 :::
@@ -20,8 +20,8 @@ De MOTD om uit te zenden naar clients. Zal standaard de MOTD van de server gebru
 > LAN broadcast MOTD ondersteunt geen meerdere regels, RGB-kleuren of kleurverlopen. Pumpkin verifieert de MOTD niet voordat deze wordt uitgezonden. Als de server-MOTD deze componenten gebruikt, overweeg dan om dit veld in te vullen zodat clients een juiste MOTD zien.
 
 :::code-group
-```toml [features.toml] {3}
-[lan_broadcast]
+```toml [pumpkin.toml] {3}
+[networking.lan_broadcast]
 enabled = true
 motd = "[jouw MOTD hier]"
 ```
@@ -34,8 +34,8 @@ Op welke poort moet worden gebonden. Als dit niet is opgegeven, wordt poort 0 (e
 > Het protocol definieert naar welke poort moet worden uitgezonden. Deze optie bestaat alleen om op te geven op welke poort moet worden gebonden op de host. Deze optie bestaat puur zodat de poort voorspelbaar kan zijn.
 
 :::code-group
-```toml [features.toml] {3}
-[lan_broadcast]
+```toml [pumpkin.toml] {3}
+[networking.lan_broadcast]
 enabled = true
 port = 46733
 ```
@@ -45,8 +45,8 @@ port = 46733
 Standaard is LAN broadcast uitgeschakeld.
 
 :::code-group
-```toml [features.toml]
-[lan_broadcast]
+```toml [pumpkin.toml]
+[networking.lan_broadcast]
 enabled = false
 motd = "[server MOTD hier]"
 port = 0

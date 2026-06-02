@@ -2,19 +2,21 @@
 
 Compression is used to reduce the size of packets. This is beneficial to reduce bandwidth server side and also to help players on slower internet connections.
 
-## Configuring compression
+Pumpkin supports separate compression settings for Java and Bedrock editions.
+
+## Java Edition Compression
 
 #### `enabled`: Boolean
 
-Whether packet compression is enabled or not.
+Whether Java packet compression is enabled or not.
 
 > [!TIP]
 > It might be beneficial to disable compression if the server is behind a proxy.
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 enabled = true
 ```
 
@@ -29,8 +31,8 @@ The minimum packet size before the server attempts to compress the packet.
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 threshold = 256
 ```
 
@@ -42,21 +44,41 @@ A value between 0 to 9: 0 to disable compression, 1 being the fastest compressio
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 level = 4
 ```
 
 :::
 
-## Default config
+## Bedrock Edition Compression
 
-By default, compression is enabled.
+The same fields are available for Bedrock Edition under `[networking.bedrock_compression]`:
 
 :::code-group
 
-```toml [features.toml]
-[packet_compression]
+```toml [pumpkin.toml]
+[networking.bedrock_compression]
+enabled = true
+threshold = 256
+level = 4
+```
+
+:::
+
+## Default Config
+
+By default, compression is enabled for both editions.
+
+:::code-group
+
+```toml [pumpkin.toml]
+[networking.java_compression]
+enabled = true
+threshold = 256
+level = 4
+
+[networking.bedrock_compression]
 enabled = true
 threshold = 256
 level = 4

@@ -10,8 +10,8 @@ LAN yayınının etkin olup olmadığını düzenler.
 
 :::code-group
 
-```toml [features.toml] {2}
-[lan_broadcast]
+```toml [pumpkin.toml] {2}
+[networking.lan_broadcast]
 enabled = true
 ```
 
@@ -26,8 +26,8 @@ Yayınlanacak MOTD; varsayılan olarak sunucunun MOTD'si kullanılır.
 
 :::code-group
 
-```toml [features.toml] {3}
-[lan_broadcast]
+```toml [pumpkin.toml] {3}
+[networking.lan_broadcast]
 enabled = true
 motd = "[your MOTD here]"
 ```
@@ -43,8 +43,8 @@ Bağlanılacak port. Belirtilmezse port 0'a (sistemdeki herhangi bir kullanılab
 
 :::code-group
 
-```toml [features.toml] {3}
-[lan_broadcast]
+```toml [pumpkin.toml] {3}
+[networking.lan_broadcast]
 enabled = true
 port = 46733
 ```
@@ -57,8 +57,8 @@ Varsayılan olarak LAN yayını devre dışıdır.
 
 :::code-group
 
-```toml [features.toml]
-[lan_broadcast]
+```toml [pumpkin.toml]
+[networking.lan_broadcast]
 enabled = false
 motd = "[server MOTD here]"
 port = 0

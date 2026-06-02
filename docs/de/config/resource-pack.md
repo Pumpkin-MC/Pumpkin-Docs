@@ -13,7 +13,7 @@ Ob ein Ressourcenpaket aktiviert ist.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [resource_pack]
 enabled = true
 ```
@@ -29,7 +29,7 @@ Direkte Download‑URL des Ressourcenpakets.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [resource_pack]
 enabled = true
 resource_pack_url = "[dein download URL hier]"
@@ -66,7 +66,7 @@ sha1sum [file]
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [resource_pack]
 enabled = true
 resource_pack_sha1 = "[dein hash hier]"
@@ -80,7 +80,7 @@ Die Nachricht, die dem Spieler beim Herunterladen angezeigt wird.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [resource_pack]
 enabled = true
 prompt_message = "[deine Nachricht hier]"
@@ -94,7 +94,7 @@ Ob der Client gezwungen wird, das Ressourcenpaket zu laden. Lehnt der Client ab,
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [resource_pack]
 enabled = true
 force = false
@@ -108,7 +108,7 @@ Standardmäßig wird kein Ressourcenpaket an Clients gesendet.
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [resource_pack]
 enabled = false
 resource_pack_url = ""

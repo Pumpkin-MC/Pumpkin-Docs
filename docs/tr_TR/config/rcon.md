@@ -8,8 +8,8 @@ RCON, sunucuyu farklı bir cihazdan uzaktan yönetmenizi sağlayan bir protokold
 
 :::code-group
 
-```toml [features.toml] {2}
-[rcon]
+```toml [pumpkin.toml] {2}
+[networking.rcon]
 enabled = true
 ```
 
@@ -21,8 +21,8 @@ RCON'un dinleyeceği address ve port.
 
 :::code-group
 
-```toml [features.toml] {3}
-[rcon]
+```toml [pumpkin.toml] {3}
+[networking.rcon]
 enabled = true
 address = "0.0.0.0:25575"
 ```
@@ -35,8 +35,8 @@ RCON kimlik doğrulaması için kullanılacak parola.
 
 :::code-group
 
-```toml [features.toml] {3}
-[rcon]
+```toml [pumpkin.toml] {3}
+[networking.rcon]
 enabled = true
 password = "[your safe password here]"
 ```
@@ -49,8 +49,8 @@ Aynı anda izin verilen RCON bağlantı sayısı. Sınırı kaldırmak için bun
 
 :::code-group
 
-```toml [features.toml] {3}
-[rcon]
+```toml [pumpkin.toml] {3}
+[networking.rcon]
 enabled = true
 max_connections = 5
 ```
@@ -59,54 +59,54 @@ max_connections = 5
 
 ### Günlükleme
 
-#### `log_logged_successfully`: Boolean
+#### `logged_successfully`: Boolean
 
 Başarılı girişlerin konsola loglanıp loglanmaması ayarını değiştirir.
 
 :::code-group
 
-```toml [features.toml] {2}
-[rcon.logging]
-log_logged_successfully = true
+```toml [pumpkin.toml] {2}
+[networking.rcon.logging]
+logged_successfully = true
 ```
 
 :::
 
-#### `log_wrong_password`: Boolean
+#### `wrong_password`: Boolean
 
 Yanlış parola denemelerinin konsola loglanıp loglanmaması ayarını değiştirir.
 
 :::code-group
 
-```toml [features.toml] {2}
-[rcon.logging]
-log_logged_successfully = true
+```toml [pumpkin.toml] {2}
+[networking.rcon.logging]
+logged_successfully = true
 ```
 
 :::
 
-#### `log_commands`: Boolean
+#### `commands`: Boolean
 
 RCON üzerinden çalıştırılan komutların konsola loglanıp loglanmaması ayarını değiştirir.
 
 :::code-group
 
-```toml [features.toml] {2}
-[rcon.logging]
-log_commands = true
+```toml [pumpkin.toml] {2}
+[networking.rcon.logging]
+commands = true
 ```
 
 :::
 
-#### `log_quit`: Boolean
+#### `quit`: Boolean
 
 RCON istemcisinin çıkışının loglanıp loglanmaması ayarını değiştirir.
 
 :::code-group
 
-```toml [features.toml] {2}
-[rcon.logging]
-log_quit = true
+```toml [pumpkin.toml] {2}
+[networking.rcon.logging]
+quit = true
 ```
 
 :::
@@ -117,18 +117,18 @@ Varsayılan olarak RCON devre dışıdır.
 
 :::code-group
 
-```toml [features.toml]
-[rcon]
+```toml [pumpkin.toml]
+[networking.rcon]
 enabled = false
 address = "0.0.0.0:25575"
 password = ""
 max_connections = 0
 
-[rcon.logging]
-log_logged_successfully = true
-log_wrong_password = true
-log_commands = true
-log_quit = true
+[networking.rcon.logging]
+logged_successfully = true
+wrong_password = true
+commands = true
+quit = true
 ```
 
 :::

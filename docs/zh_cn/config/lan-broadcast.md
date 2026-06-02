@@ -10,8 +10,8 @@ Pumpkin 可以在网络中广播服务器，使本地玩家更容易连接到服
 
 :::code-group
 
-```toml [features.toml] {2}
-[lan_broadcast]
+```toml [pumpkin.toml] {2}
+[networking.lan_broadcast]
 enabled = true
 ```
 
@@ -26,8 +26,8 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml] {3}
-[lan_broadcast]
+```toml [pumpkin.toml] {3}
+[networking.lan_broadcast]
 enabled = true
 motd = "[你的 MOTD 在这里]"
 ```
@@ -43,8 +43,8 @@ motd = "[你的 MOTD 在这里]"
 
 :::code-group
 
-```toml [features.toml] {3}
-[lan_broadcast]
+```toml [pumpkin.toml] {3}
+[networking.lan_broadcast]
 enabled = true
 port = 46733
 ```
@@ -57,8 +57,8 @@ port = 46733
 
 :::code-group
 
-```toml [features.toml]
-[lan_broadcast]
+```toml [pumpkin.toml]
+[networking.lan_broadcast]
 enabled = false
 motd = "[服务器 MOTD 在这里]"
 port = 0

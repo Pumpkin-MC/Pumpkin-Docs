@@ -6,7 +6,7 @@ Offline accounts, that is, accounts generated from a player's username without c
 
 ## Offline server
 
-By default, `online_mode` is enabled in the configuration. This enables authentication, disabling offline accounts. If you want to allow offline accounts, you can disable `online_mode` in `configuration.toml`.
+By default, `online_mode` is enabled in the configuration. This enables authentication, disabling offline accounts. If you want to allow offline accounts, you can disable `online_mode` in `pumpkin.toml`.
 
 ## How Yggdrasil Auth works
 
@@ -18,7 +18,7 @@ By default, `online_mode` is enabled in the configuration. This enables authenti
 
 ## Custom Authentication Server
 
-Pumpkin supports custom authentication servers. You can replace the authentication URL in `features.toml`.
+Pumpkin supports custom authentication servers. You can replace the authentication URL in `pumpkin.toml`.
 
 ### How Pumpkin Authentication Works
 

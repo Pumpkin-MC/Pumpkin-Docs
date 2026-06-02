@@ -1,23 +1,42 @@
-### Configuratie
+# Configuratie
 
-Pumpkin biedt een robuust configuratiesysteem waarmee gebruikers verschillende aspecten van het gedrag van de server kunnen aanpassen zonder afhankelijk te zijn van externe plugins. Dit biedt flexibiliteit en controle over de werking van de server.
+Pumpkin biedt een robuust configuratiesysteem waarmee je verschillende aspecten van het servergedrag kunt aanpassen zonder externe plugins. Dit biedt flexibiliteit en controle over de werking van de server.
 
-### Basis / Geavanceerd
+## Configuratiebestand
 
-De configuratie van Pumpkin is opgesplitst in een basisconfiguratie voor snelle en belangrijke wijzigingen en een meer geavanceerde configuratie.
+Pumpkin gebruikt één enkel configuratiebestand:
 
-- `configuration.toml`: eenvoudig en kan worden vergeleken met de vanille `server.properties`.
-- `features.toml`: ontworpen om alle functies van Pumpkin op één plek te hebben, waardoor het een grote configuratie is.
+- `pumpkin.toml`: het hoofdconfiguratiebestand met alle serverinstellingen, van basisnetwerkconfiguratie tot geavanceerde functies
 
-### Serverversie
+Wanneer Pumpkin voor het eerst start, wordt `pumpkin.toml` gegenereerd met standaardwaarden in de werkmap. Je kunt het bestand voor of na de eerste start bewerken. Ontbrekende velden worden automatisch aangevuld met standaardwaarden bij het opstarten.
 
-Pumpkin streeft ernaar de nieuwste Minecraft-versie te ondersteunen. Als je een Pumpkin-server op een andere versie wilt hosten, is er een project genaamd [ViaProxy](https://github.com/ViaVersion/ViaProxy).
+## Structuur
+
+De configuratie is georganiseerd in secties:
+
+- **Top-level velden**: kerninstellingen zoals editie-ondersteuning, adressen, seed, spelerlimieten, moeilijkheidsgraad en spelregels
+- **`[logging]`**: log-uitvoer en opmaak
+- **`[resource_pack]`**: resourcepacks voor Java en Bedrock
+- **`[world]`**: wereldgeneratie, chunk-opslag, verlichting en automatisch opslaan
+- **`[networking]`**: authenticatie, compressie, proxy, query, RCON en LAN-broadcast
+- **`[commands]`**: opdrachtsysteem
+- **`[chat]`**: chatberichtopmaak
+- **`[pvp]`**: PvP-regels en -mechanica
+- **`[server_links]`**: links die aan clients worden getoond
+- **`[player_data]`**: opslag van spelersgegevens
+- **`[fun]`**: experimentele functies
+- **`[recipe]`**: receptenboek-configuratie
+- **`[plugins]`**: plugin-rechtigheidsinstellingen
+
+## Serverversie
+
+Pumpkin richt zich op ondersteuning voor de nieuwste Minecraft-versie. Als je een Pumpkin-server voor een andere versie wilt hosten, kun je [ViaProxy](https://github.com/ViaVersion/ViaProxy) gebruiken.
 
 - Zorg ervoor dat proxyverbindingen zijn toegestaan.
-- Pumpkin en ViaProxy hebben geen relatie, dien geen problemen in met betrekking tot hun code. Bovendien is dit een proxy van derden en Pumpkin neemt geen verantwoordelijkheid voor het goede of het slechte.
+- Pumpkin en ViaProxy hebben geen onderlinge verbinding; dien geen issues in met betrekking tot hun code. Dit is een proxy van een derde partij en Pumpkin neemt geen verantwoordelijkheid voor de voor- of nadelen ervan.
 
-#### Belangrijkste kenmerken:
+### Belangrijkste functies
 
-- Uitgebreide aanpassing: Configureer serverinstellingen, spelersgedrag, wereldgeneratie en meer.
-- Prestatieoptimalisatie: Optimaliseer de serverprestaties door configuratiewijzigingen.
-- Plugin-vrije aanpassing: Bereik gewenste wijzigingen zonder de noodzaak van extra plugins.
+- Uitgebreide aanpassing: Serverinstellingen, spelersgedrag, wereldgeneratie en meer configureren.
+- Prestatie-optimalisatie: Serverprestaties optimaliseren via configuratie-aanpassingen.
+- Plugin-vrije aanpassing: Gewenste wijzigingen bereiken zonder extra plugins.

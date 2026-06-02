@@ -13,8 +13,8 @@ Ob Paketkompression aktiviert ist oder nicht.
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 enabled = true
 ```
 
@@ -29,8 +29,8 @@ Minimale Paketgröße, bei der der Server versucht, das Paket zu komprimieren.
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 threshold = 256
 ```
 
@@ -42,8 +42,8 @@ Wert zwischen 0 und 9: 0 deaktiviert die Kompression, 1 ist die schnellste (weni
 
 :::code-group
 
-```toml [features.toml] {2}
-[packet_compression]
+```toml [pumpkin.toml] {2}
+[networking.java_compression]
 level = 4
 ```
 
@@ -55,8 +55,8 @@ Standardmäßig ist Kompression aktiviert.
 
 :::code-group
 
-```toml [features.toml]
-[packet_compression]
+```toml [pumpkin.toml]
+[networking.java_compression]
 enabled = true
 threshold = 256
 level = 4

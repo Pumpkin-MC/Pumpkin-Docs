@@ -1,26 +1,62 @@
-﻿# Temel Yapılandırma
+# Temel Yapılandırma
 
-`configuration.toml` dosyasını temsil eder
+`pumpkin.toml` içindeki üst düzey alanları temsil eder. Bunlar sunucunun temel ayarlarıdır.
 
-## Sunucu Adresi
+## Java Edition
 
-Sunucunun bağlanacağı address.
+Java Edition istemcilerinin kabul edilip edilmeyeceği.
 
 :::code-group
 
-```toml [configuration.toml] {2}
-server_address = "0.0.0.0:25565"
+```toml [pumpkin.toml] {2}
+java_edition = true
+```
+
+:::
+
+## Java Edition Adresi
+
+Java Edition sunucusunun bağlanacağı adres ve port.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+java_edition_address = "0.0.0.0:25565"
+```
+
+:::
+
+## Bedrock Edition
+
+Bedrock Edition istemcilerinin kabul edilip edilmeyeceği.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+bedrock_edition = true
+```
+
+:::
+
+## Bedrock Edition Adresi
+
+Bedrock Edition sunucusunun bağlanacağı adres ve port.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+bedrock_edition_address = "0.0.0.0:19132"
 ```
 
 :::
 
 ## Seed
 
-Dünya üretimi için gereklidir.
+Dünya üretimi için kullanılan seed.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 seed = ""
 ```
 
@@ -28,35 +64,35 @@ seed = ""
 
 ## Maksimum oyuncu
 
-Sunucuda izin verilen maksimum oyuncu sayısını değiştirir.
+Sunucuda aynı anda bulunabilecek maksimum oyuncu sayısı. `0` limiti devre dışı bırakır.
 
 :::code-group
 
-```toml [configuration.toml] {2}
-max_players = 100000
+```toml [pumpkin.toml] {2}
+max_players = 1000
 ```
 
 :::
 
 ## Görüş mesafesi
 
-Oyuncular için maksimum görüş mesafesini değiştirir.
+Oyuncular için maksimum görüş mesafesi.
 
 :::code-group
 
-```toml [configuration.toml] {2}
-view_distance = 10
+```toml [pumpkin.toml] {2}
+view_distance = 16
 ```
 
 :::
 
 ## Simülasyon mesafesi
 
-Oyuncular için maksimum simülasyon mesafesini değiştirir.
+Oyuncular için maksimum simülasyon mesafesi.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 simulation_distance = 10
 ```
 
@@ -64,11 +100,11 @@ simulation_distance = 10
 
 ## Varsayılan zorluk
 
-Varsayılan oyun zorluğu değiştirir.
+Varsayılan oyun zorluğu.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 default_difficulty = "Normal"
 ```
 
@@ -81,13 +117,13 @@ Normal
 Hard
 ```
 
-## Operatör izin seviyesi
+## Operatör yetki seviyesi
 
-`/op` komutu tarafından atanan izin seviyesini değiştirir.
+`/op` komutu tarafından atanan yetki seviyesi.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 op_permission_level = 4
 ```
 
@@ -95,23 +131,35 @@ op_permission_level = 4
 
 ## Nether'e izin ver
 
-Nether boyutunu aktif/deaktif etmek için kullanılır.
+Nether boyutunun etkin olup olmadığı.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 allow_nether = true
+```
+
+:::
+
+## End'e izin ver
+
+End boyutunun etkin olup olmadığı.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+allow_end = true
 ```
 
 :::
 
 ## Hardcore
 
-Sunucunun hardcore modda olup olmadığını düzenler.
+Sunucunun hardcore modunda çalışıp çalışmadığı.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 hardcore = false
 ```
 
@@ -119,11 +167,11 @@ hardcore = false
 
 ## Çevrimiçi Mod
 
-Çevrimiçi modun etkin olup olmadığını belirler. Geçerli Minecraft hesapları gerektirir.
+Çevrimiçi modun etkin olup olmadığı. Geçerli Minecraft hesapları gerektirir.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 online_mode = true
 ```
 
@@ -131,14 +179,14 @@ online_mode = true
 
 ## Şifreleme
 
-Packet şifrelemesinin etkin olup olmadığını düzenler.
+Paket şifrelemenin etkin olup olmadığı.
 
 > [!IMPORTANT]
-> Çevrimiçi mod etkinse zorunludur.
+> Çevrimiçi mod etkin olduğunda gereklidir.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 encryption = true
 ```
 
@@ -146,23 +194,23 @@ encryption = true
 
 ## MOTD
 
-Günün Mesajı; durum ekranında gösterilen sunucu açıklamasını düzenler.
+Günün Mesajı; durum ekranında görüntülenen sunucu açıklaması.
 
 :::code-group
 
-```toml [configuration.toml] {2}
-motd = "A Blazingly fast Pumpkin Server!"
+```toml [pumpkin.toml] {2}
+motd = "A blazingly fast Pumpkin server!"
 ```
 
 :::
 
 ## TPS
 
-Sunucunun hedef tick hızını belirtir.
+Sunucunun hedef tick oranı.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 tps = 20.0
 ```
 
@@ -170,31 +218,42 @@ tps = 20.0
 
 ## Varsayılan oyun modu
 
-Oyuncular için varsayılan oyun modunu değiştirir.
+Oyuncular için varsayılan oyun modu.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 default_gamemode = "Survival"
 ```
 
 :::
 
 ```toml
-Undefined
 Survival
 Creative
 Adventure
 Spectator
 ```
 
-## IP Temizleme
+## Oyun modunu zorla
 
-Oyuncuların IP adreslerini loglardan temizleyip temizlememek için gerekli bir ayar.
+Sunucunun girişte oyun modunu zorlayıp zorlamadığı.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
+force_gamemode = false
+```
+
+:::
+
+## IP Temizleme
+
+Oyuncu IP adreslerinin loglardan silinip silinmeyeceği.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
 scrub_ips = true
 ```
 
@@ -202,11 +261,11 @@ scrub_ips = true
 
 ## Favicon kullan
 
-Sunucu favicon'unu aktifleştirmeye yarayan bir ayar.
+Sunucu faviconunun kullanılıp kullanılmayacağı.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 use_favicon = true
 ```
 
@@ -214,13 +273,60 @@ use_favicon = true
 
 ## Favicon yolu
 
-Sunucu favicon'unun yolunu belirtir.
+Sunucu faviconunun dosya yolu.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 favicon_path = "icon.png"
 ```
 
 :::
 
+## Varsayılan dünya adı
+
+Dünya için varsayılan ad.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+default_level_name = "world"
+```
+
+:::
+
+## Sohbet raporlarına izin ver
+
+Sohbet mesajlarının imzalanıp raporlanabilir olup olmayacağı.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+allow_chat_reports = false
+```
+
+:::
+
+## Whitelist
+
+Whitelist'in etkin olup olmadığı.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+white_list = false
+```
+
+:::
+
+## Whitelist'i uygula
+
+Whitelist'te olmayan oyuncuların atılıp atılmayacağı.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+enforce_whitelist = false
+```
+
+:::

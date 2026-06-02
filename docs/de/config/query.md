@@ -10,8 +10,8 @@ Ob auf Query‑Anfragen gehört werden soll oder nicht.
 
 :::code-group
 
-```toml [features.toml] {2}
-[query]
+```toml [pumpkin.toml] {2}
+[networking.query]
 enabled = true
 ```
 
@@ -23,8 +23,8 @@ Auf welchem Port Query‑Anfragen entgegengenommen werden sollen. Wenn nicht ang
 
 :::code-group
 
-```toml [features.toml] {3}
-[query]
+```toml [pumpkin.toml] {3}
+[networking.query]
 enabled = true
 port = 12345
 ```
@@ -37,8 +37,8 @@ Standardmäßig ist Query deaktiviert. Wenn es aktiviert ist und kein Port angeg
 
 :::code-group
 
-```toml [features.toml]
-[query]
+```toml [pumpkin.toml]
+[networking.query]
 enabled = true
 port = 25565
 ```

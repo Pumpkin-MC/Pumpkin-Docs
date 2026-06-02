@@ -10,7 +10,7 @@ PVP özelliğini kontrol eder.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 enabled = true
 ```
@@ -23,7 +23,7 @@ Kırmızı hasar animasyonu ve FOV sallanmasının gösterilip gösterilmemesini
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 hurt_animation = true
 ```
@@ -36,7 +36,7 @@ Yaratıcı moddaki oyuncuların PVP'ye karşı korunup korunmaması ayarını de
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 protect_creative = true
 ```
@@ -49,7 +49,7 @@ Saldırıların geri tepme (knockback) uygulayıp uygulamaması ayarını deği�
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 knockback = true
 ```
@@ -62,7 +62,7 @@ Saldırırken oyuncuların sallama animasyonu yapıp yapmaması ayarını deği�
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 swing = true
 ```
@@ -75,7 +75,7 @@ Varsayılan olarak Vanilla davranışına uyması için tüm PVP seçenekleri et
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [pvp]
 enabled = true
 hurt_animation = true

@@ -10,8 +10,8 @@ Ob LAN Broadcast aktiviert ist.
 
 :::code-group
 
-```toml [features.toml] {2}
-[lan_broadcast]
+```toml [pumpkin.toml] {2}
+[networking.lan_broadcast]
 enabled = true
 ```
 
@@ -26,8 +26,8 @@ Die MOTD, die an Clients gesendet wird; standardmäßig die Server‑MOTD.
 
 :::code-group
 
-```toml [features.toml] {3}
-[lan_broadcast]
+```toml [pumpkin.toml] {3}
+[networking.lan_broadcast]
 enabled = true
 motd = "[dein MOTD hier]"
 ```
@@ -43,8 +43,8 @@ Port, an den gebunden wird. Wenn nicht angegeben, Port 0 (beliebiger freier Port
 
 :::code-group
 
-```toml [features.toml] {3}
-[lan_broadcast]
+```toml [pumpkin.toml] {3}
+[networking.lan_broadcast]
 enabled = true
 port = 46733
 ```
@@ -57,8 +57,8 @@ Standardmäßig ist LAN Broadcast deaktiviert.
 
 :::code-group
 
-```toml [features.toml]
-[lan_broadcast]
+```toml [pumpkin.toml]
+[networking.lan_broadcast]
 enabled = false
 motd = "[server MOTD hier]"
 port = 0

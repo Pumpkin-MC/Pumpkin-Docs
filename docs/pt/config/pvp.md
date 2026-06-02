@@ -10,7 +10,7 @@ Se o PVP está habilitado ou não.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 enabled = true
 ```
@@ -23,7 +23,7 @@ Se deve exibir a animação de dano vermelho e o movimento de câmera (FOV) ou n
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 hurt_animation = true
 ```
@@ -36,7 +36,7 @@ Se deve proteger jogadores no modo criativo contra o PVP ou não.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 protect_creative = true
 ```
@@ -49,7 +49,7 @@ Se os ataques devem ter repulsão (knockback) ou não.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 knockback = true
 ```
@@ -62,7 +62,7 @@ Se os jogadores devem balançar a arma ao atacar ou não.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 swing = true
 ```
@@ -75,7 +75,7 @@ Por padrão, todas as opções de PVP estão habilitadas para coincidir com o co
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [pvp]
 enabled = true
 hurt_animation = true

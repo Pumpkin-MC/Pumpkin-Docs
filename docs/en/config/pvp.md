@@ -10,7 +10,7 @@ Whether PVP is enabled or not.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 enabled = true
 ```
@@ -23,7 +23,7 @@ Whether to show red hurt animation and FOV bobbing or not.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 hurt_animation = true
 ```
@@ -36,7 +36,7 @@ Whether to protect players in creative against PVP or not.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 protect_creative = true
 ```
@@ -49,7 +49,7 @@ Whether attacks should have knockback or not.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 knockback = true
 ```
@@ -62,7 +62,7 @@ Whether players should swing when attacking or not.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 swing = true
 ```
@@ -75,7 +75,7 @@ By default, all PVP options are enabled in order to match vanilla behavior.
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [pvp]
 enabled = true
 hurt_animation = true

@@ -7,7 +7,7 @@ PVP is een kernonderdeel van de vanillemechanica, waarbij zelfs de kleinste vera
 Of PVP is ingeschakeld of niet.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 enabled = true
 ```
@@ -17,7 +17,7 @@ enabled = true
 Of de rode pijnanimatie en FOV-bobbing moeten worden weergegeven of niet.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 hurt_animation = true
 ```
@@ -27,7 +27,7 @@ hurt_animation = true
 Of spelers in creatieve modus beschermd moeten worden tegen PVP of niet.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 protect_creative = true
 ```
@@ -37,7 +37,7 @@ protect_creative = true
 Of aanvallen terugslag moeten hebben of niet.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 knockback = true
 ```
@@ -47,7 +47,7 @@ knockback = true
 Of spelers moeten zwaaien bij het aanvallen of niet.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 swing = true
 ```
@@ -57,7 +57,7 @@ swing = true
 Standaard zijn alle PVP-opties ingeschakeld om het vanillegedrag te evenaren.
 
 :::code-group
-```toml [features.toml]
+```toml [pumpkin.toml]
 [pvp]
 enabled = true
 hurt_animation = true
