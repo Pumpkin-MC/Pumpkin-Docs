@@ -6,7 +6,7 @@ Basit bir eklentide bile perde arkasında çok şey olur, bu yüzden eklenti gel
 
 :::code-group
 
-```rs:line-numbers [lib.rs]
+```rust:line-numbers [lib.rs]
 use pumpkin_api_macros::plugin_impl;
 
 #[plugin_impl]
@@ -84,7 +84,7 @@ Bu yöntemlerin uygulanması zorunlu değildir, ancak genellikle en az `on_load`
 Bu yöntemleri uygulamayı kolaylaştırmak için `pumpkin-api-macros` crate'i tarafından sağlanan başka bir macro daha vardır.
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 use std::sync::Arc; // [!code ++:4]
 
 use pumpkin_api_macros::{plugin_impl, plugin_method};
@@ -122,31 +122,31 @@ Bu yöntem, eklenti nesnesine (bu örnekte `MyPlugin` struct'ı) değiştirilebi
 
 ### `Context` nesnesinde uygulanan yöntemler
 
-```rs
+```rust
 fn init_log()
 ```
 
 `log` crate'i üzerinden günlüklemeyi etkinleştirir.
 
-```rs
+```rust
 fn get_data_folder() -> String
 ```
 
 Bu eklentiye özel klasörün yolunu döndürür; kalıcı veri depolama için kullanılmalıdır
 
-```rs
+```rust
 async fn get_player_by_name(player_name: String) -> Option<Arc<Player>>
 ```
 
 `player_name` adlı bir oyuncu bulunursa (o anda çevrimiçi olmalıdır), bu fonksiyon ona bir referans döndürür.
 
-```rs
+```rust
 async fn register_command(tree: CommandTree, permission: PermissionLvl)
 ```
 
 Asgari gereken yetki seviyesiyle yeni bir komut işleyicisi kaydeder.
 
-```rs
+```rust
 async fn register_event(handler: Arc<H>, priority: EventPriority, blocking: bool)
 ```
 
@@ -162,7 +162,7 @@ Burada iç Pumpkin günlükleyicisini ayarlayıp "Hello, Pumpkin!" mesajını g�
 Bunu `on_load` yöntemine ekleyin:
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 #[plugin_method]
 async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
     server.init_log(); // [!code ++:3]

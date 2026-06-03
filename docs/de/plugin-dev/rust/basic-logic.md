@@ -6,7 +6,7 @@ Auch ein einfaches Plugin hat unter der Haube einiges an Komplexität. Um die Pl
 
 :::code-group
 
-```rs:line-numbers [lib.rs]
+```rust:line-numbers [lib.rs]
 use pumpkin_api_macros::plugin_impl;
 
 #[plugin_impl]
@@ -82,7 +82,7 @@ Um diese Methoden zu vereinfachen, stellt `pumpkin-api-macros` ein weiteres Macr
 
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 use std::sync::Arc; // [!code ++:4]
 
 use pumpkin_api_macros::{plugin_impl, plugin_method};
@@ -120,22 +120,22 @@ Die Methode erhält eine veränderbare Referenz auf das Plugin‑Objekt (hier `M
 
 ### Methoden im `Context`‑Objekt (Auszug)
 
-```rs
+```rust
 fn get_data_folder() -> String
 ```
 Gibt den Pfad zum plugin‑spezifischen Datenordner zurück.
 
-```rs
+```rust
 async fn get_player_by_name(player_name: String) -> Option<Arc<Player>>
 ```
 Gibt, falls ein Spieler online ist, eine Referenz auf diesen zurück.
 
-```rs
+```rust
 async fn register_command(tree: CommandTree, permission: PermissionLvl)
 ```
 Registriert einen neuen Befehls‑Handler mit minimal erforderlichem Berechtigungslevel.
 
-```rs
+```rust
 async fn register_event(handler: Arc<H>, priority: EventPriority, blocking: bool)
 ```
 Registriert einen Event‑Handler mit Priorität und Angabe, ob er blockierend ist.
@@ -146,7 +146,7 @@ In `on_load` initialisieren wir das Pumpkin‑Logging und geben eine Info‑Nach
 
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 #[plugin_method]
 async fn on_load(&mut self, server: Arc<Context>) -> Result<(), String> {
     server.init_log(); // [!code ++:3]

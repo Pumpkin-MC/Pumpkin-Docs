@@ -22,7 +22,7 @@ This trait requires the implementation of a `handle` method, which takes the sen
 and consumed arguments as parameters, and returns a `-> Result<(), CommandError>`. Let's
 define this structure now:
 
-```rs
+```rust
 use pumpkin_plugin_api::{
     Server,
     command::{CommandError, CommandSender, ConsumedArgs},
@@ -57,7 +57,7 @@ To make our lives easier, we will also define a couple of enums to represent the
 choices and outcomes of the game, as well as well as a couple functions to generate random
 choices and check the outcome. Add these to your plugin's code.
 
-```rs
+```rust
 use rand::{rng, Rng};
 
 #[derive(PartialEq, Debug, Clone, Copy)]
@@ -98,7 +98,7 @@ fn get_random_choice() -> Choice {
 Now we need to modify the `RockPaperScissorsExecutor` struct to accept a `Choice` parameter
 and implement the game logic.
 
-```rs
+```rust
 struct RockPaperScissorsExecutor(Choice); // [!code ++]
 struct RockPaperScissorsExecutor; // [!code --]
 
@@ -126,7 +126,7 @@ players.
 
 First we will show the player their and the computer's choice. Add this code to your plugin:
 
-```rs
+```rust
 impl CommandHandler for RockPaperScissorsExecutor {
     fn handle(
         &self,
@@ -153,7 +153,7 @@ impl CommandHandler for RockPaperScissorsExecutor {
 
 Next we can compute the game outcome and show it to the player. Add this code to your plugin:
 
-```rs
+```rust
 impl CommandHandler for RockPaperScissorsExecutor {
     fn handle(
         &self,
@@ -209,7 +209,7 @@ leaf node for the player's choice. We will also register the command tree with t
 with a `permission` of `hello-pumpkin:command.rockpaperscisors` which will allow anyone with that
 permission to execute the command. Add the following code to your `on_load()` method:
 
-```rs
+```rust
 struct HelloPlugin;
 impl Plugin for HelloPlugin {
     fn new() -> Self {

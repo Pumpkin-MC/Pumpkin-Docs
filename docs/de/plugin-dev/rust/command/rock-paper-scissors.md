@@ -12,7 +12,7 @@ Wir möchten außerdem [ploxxxy](https://github.com/ploxxxy) für das ursprüngl
 
 Jeder Befehl in Pumpkin wird als Struktur definiert, die das Trait `CommandExecutor` implementiert. Dieses Trait verlangt die Implementierung einer Methode `execute`, welche den Sender, den Server und die konsumierten Argumente entgegennimmt und `Result<(), CommandError>` zurückgibt. Definieren wir diese Struktur jetzt:
 
-```rs
+```rust
 use pumpkin::{
     command::{ // [!code ++:4]
         args::ConsumedArgs, dispatcher::CommandError, tree::builder::literal, tree::CommandTree,
@@ -44,7 +44,7 @@ Dieser Code definiert eine leere Struktur `RockPaperScissorsExecutor`, die das T
 
 Um uns die Logik zu vereinfachen, definieren wir zwei Enums für mögliche Spielzüge und Spielausgänge sowie Hilfsfunktionen zur Zufallsauswahl und zur Auswertung des Ergebnisses. Füge diese deinem Plugin hinzu:
 
-```rs
+```rust
 use rand::{rng, Rng};
 
 #[derive(PartialEq, Debug, Clone, Copy)]
@@ -84,7 +84,7 @@ fn get_random_choice() -> Choice {
 
 Nun müssen wir die Struktur `RockPaperScissorsExecutor` anpassen, damit sie eine `Choice` annimmt, und die Spiellogik vorbereiten:
 
-```rs
+```rust
 struct RockPaperScissorsExecutor(Choice); // [!code ++]
 struct RockPaperScissorsExecutor; // [!code --]
 
@@ -112,7 +112,7 @@ Nun implementieren wir die eigentliche Spiel-Logik und zeigen das Ergebnis an de
 
 Zuerst zeigen wir dem Spieler seine Wahl sowie die Wahl des Servers. Füge diesen Code hinzu:
 
-```rs
+```rust
 impl CommandExecutor for RockPaperScissorsExecutor {
     fn execute<'a>(
         &self,
@@ -148,7 +148,7 @@ impl CommandExecutor for RockPaperScissorsExecutor {
 
 Als Nächstes berechnen wir das Ergebnis und zeigen es dem Spieler:
 
-```rs
+```rust
 impl CommandExecutor for RockPaperScissorsExecutor {
     fn execute<'a>(
         &self,
@@ -196,7 +196,7 @@ Der Baum wird über `CommandTree::new()` initialisiert. Diese Funktion nimmt zwe
 
 Für Schere‑Stein‑Papier erstellen wir drei getrennte Äste – jeweils ein `literal()` für die Spielerwahl. Danach registrieren wir den Baum mit einer `PermissionLvl` von `Zero`, sodass jeder den Befehl ausführen kann. Ergänze folgenden Code in deiner `on_load()` Methode:
 
-```rs
+```rust
 use pumpkin_util::PermissionLvl; // [!code ++]
 
 const NAMES: [&str; 2] = ["rps", "rockpaperscissors"]; // [!code ++:2]

@@ -100,6 +100,16 @@ export const pt = defineConfig({
                         ],
                     },
                     {
+                        text: "C#",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "Quick Start",
+                                link: "/pt/plugin-dev/csharp/quick-start",
+                            },
+                        ],
+                    },
+                    {
                         text: "C",
                         collapsed: false,
                         items: [

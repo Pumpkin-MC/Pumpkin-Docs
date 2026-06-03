@@ -100,6 +100,16 @@ export const nl = defineConfig({
                         ],
                     },
                     {
+                        text: "C#",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "Quick Start",
+                                link: "/nl/plugin-dev/csharp/quick-start",
+                            },
+                        ],
+                    },
+                    {
                         text: "C",
                         collapsed: false,
                         items: [

@@ -49,7 +49,7 @@ Buradaki temel amacımız oyuncunun sunucuya katıldığında gördüğü hoş g
 Bu kodu `on_load` yönteminin üstüne ekleyin:
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
  // [!code ++:7]
 use pumpkin_api_macros::with_runtime;
 use pumpkin::{
@@ -85,7 +85,7 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 Artık olay işleyicisini yazdığımıza göre, eklentiye bunu kullanmasını söylememiz gerekiyor. Bunu `on_load` yöntemine tek bir satır ekleyerek yapabiliriz:
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 use pumpkin::{
     plugin::{player::player_join::PlayerJoinEvent, Context, EventHandler, EventPriority}, // [!code ++]
     server::Server,

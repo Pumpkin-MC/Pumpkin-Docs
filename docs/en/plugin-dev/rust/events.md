@@ -43,7 +43,7 @@ Since our main aim here is to change the welcome message that the player sees wh
 
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 // [!code ++:20]
 use pumpkin_plugin_api::{
     Context, Plugin, PluginMetadata, Server,
@@ -77,7 +77,7 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 Now that we have written the event handler, we need to tell the plugin to use it. We can do that by adding a single line into the `on_load` method:
 :::code-group
 
-```rs [lib.rs]
+```rust [lib.rs]
 struct HelloPlugin;
 impl Plugin for HelloPlugin {
     fn new() -> Self {

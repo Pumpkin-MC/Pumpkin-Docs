@@ -7,7 +7,7 @@ we will use the `pumpkin-plugin-api` crate to create a basic empty plugin.
 
 :::code-group
 
-```rs:line-numbers [lib.rs]
+```rust:line-numbers [lib.rs]
 use pumpkin_plugin_api::{Context, Plugin, PluginMetadata};
 use tracing::*;
 
@@ -51,7 +51,7 @@ cargo build --release
 ```
 
 You do not need to build in release mode, but it greatly reduces the size of the wasm plugin and
-increases startup times.
+reduces startup times.
 
 If all went well, you should be left with a message like this:
 
@@ -88,19 +88,19 @@ hello-pumpkin-wasm
 
 ## Methods implemented on the `Context` object
 
-```rs
+```rust
 fn get_server(&self) -> Server
 ```
 
 Returns an instance of the server.
 
-```rs
+```rust
 fn register_command(&self, command: Command, permission: &str)
 ```
 
 Registers a new command handler, with the permission that is for the command.
 
-```rs
+```rust
 fn register_event_handler<E, H>(&self, handler: H, event_priority: EventPriority, blocking: bool) -> Result<u32>
 ```
 

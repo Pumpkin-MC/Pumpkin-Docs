@@ -125,6 +125,16 @@ export const zhCN = defineConfig({
                         ],
                     },
                     {
+                        text: "C#",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "快速入门",
+                                link: "/zh_cn/plugin-dev/csharp/quick-start",
+                            },
+                        ],
+                    },
+                    {
                         text: "C",
                         collapsed: false,
                         items: [

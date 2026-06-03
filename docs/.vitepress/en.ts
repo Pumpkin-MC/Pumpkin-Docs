@@ -117,12 +117,36 @@ export const en = defineConfig({
                         ],
                     },
                     {
+                        text: "C#",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "Quick Start",
+                                link: "/plugin-dev/csharp/quick-start",
+                            },
+                        ],
+                    },
+                    {
                         text: "C",
                         collapsed: false,
                         items: [
                             {
                                 text: "Quick Start",
                                 link: "/plugin-dev/c/quick-start",
+                            },
+                        ],
+                    },
+                    {
+                        text: "Go",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "Quick Start",
+                                link: "/plugin-dev/go/quick-start",
+                            },
+                            {
+                                text: "Basic Logic",
+                                link: "/plugin-dev/go/basic-logic",
                             },
                         ],
                     },
