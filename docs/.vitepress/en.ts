@@ -150,6 +150,16 @@ export const en = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "Kotlin",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "Quick Start",
+                                link: "/plugin-dev/kotlin/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {
