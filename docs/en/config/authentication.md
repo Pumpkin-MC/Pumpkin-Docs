@@ -34,7 +34,7 @@ prevent_proxy_connections = true
 
 :::
 
-#### `auth_url`: String (optional)
+#### `url`: String (optional)
 
 The URL to authenthicate with. Uses Mojang's session servers to authenthicate if not specified.
 
@@ -49,7 +49,7 @@ The URL to authenthicate with. Uses Mojang's session servers to authenthicate if
 
 ```toml [features.toml] {2}
 [authentication]
-auth_url = "[custom auth server here]"
+url = "[custom auth server here]"
 ```
 
 :::
