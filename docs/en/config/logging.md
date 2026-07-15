@@ -10,7 +10,7 @@ Whether logging is enabled or not.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [logging]
 enabled = true
 ```
@@ -30,7 +30,7 @@ The log verbosity level. Possible values are:
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 level = "Debug"
@@ -44,7 +44,7 @@ Whether to allow choosing the log level by setting the `RUST_LOG` environment va
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 env = true
@@ -58,7 +58,7 @@ Whether to print threads in the logging message or not.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 threads = false
@@ -72,7 +72,7 @@ Whether to print to the console with color or not.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 color = false
@@ -86,10 +86,24 @@ Whether to print the timestamp in the message or not.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 timestamp = false
+```
+
+:::
+
+#### `file`: String
+
+The log file name.
+
+:::code-group
+
+```toml [pumpkin.toml] {3}
+[logging]
+enabled = true
+file = "latest.log"
 ```
 
 :::
@@ -100,14 +114,13 @@ By default, logging is enabled at the `Info` level and will print with color, th
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [logging]
 enabled = true
-level = "Info"
-env = false
 threads = true
 color = true
 timestamp = true
+file = "latest.log"
 ```
 
 :::

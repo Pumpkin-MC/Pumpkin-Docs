@@ -1,18 +1,6 @@
 # Basic Configuration
 
-Representing `configuration.toml`
-
-## Server Address
-
-The address to bind the server to.
-
-:::code-group
-
-```toml [configuration.toml] {2}
-server_address = "0.0.0.0:25565"
-```
-
-:::
+These are the root-level options in `pumpkin.toml` for quick and important changes.
 
 ## Seed
 
@@ -20,44 +8,8 @@ The seed for world generation.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {1}
 seed = ""
-```
-
-:::
-
-## Max players
-
-The maximum number of players allowed on the server.
-
-:::code-group
-
-```toml [configuration.toml] {2}
-max_players = 100000
-```
-
-:::
-
-## View distance
-
-The maximum view distance for players.
-
-:::code-group
-
-```toml [configuration.toml] {2}
-view_distance = 10
-```
-
-:::
-
-## Simulation distance
-
-The maximum simulation distance for players.
-
-:::code-group
-
-```toml [configuration.toml] {2}
-simulation_distance = 10
 ```
 
 :::
@@ -68,7 +20,7 @@ The default game difficulty.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {1}
 default_difficulty = "Normal"
 ```
 
@@ -87,7 +39,7 @@ The permission level assigned by the `/op` command.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {1}
 op_permission_level = 4
 ```
 
@@ -99,7 +51,7 @@ Whether the Nether dimension is enabled.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {1}
 allow_nether = true
 ```
 
@@ -111,7 +63,7 @@ Whether the End dimension is enabled.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {1}
 allow_end = true
 ```
 
@@ -123,47 +75,8 @@ Whether the server is in hardcore mode.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {1}
 hardcore = false
-```
-
-:::
-
-## Online Mode
-
-Whether online mode is enabled. Requires valid Minecraft accounts.
-
-:::code-group
-
-```toml [configuration.toml] {2}
-online_mode = true
-```
-
-:::
-
-## Encryption
-
-Whether packet encryption is enabled.
-
-> [!IMPORTANT]
-> Required when online mode is enabled.
-
-:::code-group
-
-```toml [configuration.toml] {2}
-encryption = true
-```
-
-:::
-
-## MOTD
-
-Message of the Day; the server's description displayed on the status screen.
-
-:::code-group
-
-```toml [configuration.toml] {2}
-motd = "A Blazingly fast Pumpkin Server!"
 ```
 
 :::
@@ -174,7 +87,7 @@ The server's target tick rate.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {1}
 tps = 20.0
 ```
 
@@ -186,7 +99,7 @@ The default game mode for players.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {1}
 default_gamemode = "Survival"
 ```
 
@@ -200,13 +113,25 @@ Adventure
 Spectator
 ```
 
+## Force gamemode
+
+Whether to force the default gamemode on players when they join.
+
+:::code-group
+
+```toml [pumpkin.toml] {1}
+force_gamemode = false
+```
+
+:::
+
 ## IP Scrubbing
 
 Whether to scrub players' IP addresses from logs.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {1}
 scrub_ips = true
 ```
 
@@ -218,20 +143,56 @@ Whether to use a server favicon or not.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {1}
 use_favicon = true
 ```
 
 :::
 
-## Favicon path
+## Default level name
 
-The path to the server's favicon.
+The name of the default world folder.
 
 :::code-group
 
-```toml [configuration.toml] {2}
-favicon_path = "icon.png"
+```toml [pumpkin.toml] {1}
+default_level_name = "world"
+```
+
+:::
+
+## Allow chat reports
+
+Whether to allow chat reports from players.
+
+:::code-group
+
+```toml [pumpkin.toml] {1}
+allow_chat_reports = false
+```
+
+:::
+
+## White list
+
+Whether the white list is enabled.
+
+:::code-group
+
+```toml [pumpkin.toml] {1}
+white_list = false
+```
+
+:::
+
+## Enforce whitelist
+
+Whether to enforce the white list by kicking players not on it.
+
+:::code-group
+
+```toml [pumpkin.toml] {1}
+enforce_whitelist = false
 ```
 
 :::

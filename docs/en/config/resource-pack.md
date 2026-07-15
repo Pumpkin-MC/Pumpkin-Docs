@@ -7,20 +7,25 @@ Servers can send resource packs to clients in order to change the appearance of 
 
 ## Configuring Resource Pack
 
+> [!NOTE]
+> Resource pack settings are now per-protocol. Java and Bedrock have separate resource pack configurations.
+
+### Java
+
 #### `enabled`: Boolean
 
 Whether a resource pack is enabled or not.
 
 :::code-group
 
-```toml [features.toml] {2}
-[resource_pack]
+```toml [pumpkin.toml] {2}
+[resource_pack.java]
 enabled = true
 ```
 
 :::
 
-#### `resource_pack_url`: String
+#### `url`: String
 
 The direct download URL to the resource pack.
 
@@ -29,15 +34,15 @@ The direct download URL to the resource pack.
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
-resource_pack_url = "[your download URL here]"
+url = "[your download URL here]"
 ```
 
 :::
 
-#### `resource_pack_sha1`: String
+#### `sha1`: String
 
 The SHA1 hash of the resource pack.
 
@@ -66,10 +71,10 @@ sha1sum [file]
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
-resource_pack_sha1 = "[your hash here]"
+sha1 = "[your hash here]"
 ```
 
 :::
@@ -80,8 +85,8 @@ The message to show to the user when prompted to download the resource pack.
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
 prompt_message = "[your message here]"
 ```
@@ -94,10 +99,53 @@ Whether to force the client to download the resource pack or not. If the client 
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
 force = false
+```
+
+:::
+
+### Bedrock
+
+#### `enabled`: Boolean
+
+Whether a resource pack is enabled for Bedrock clients or not.
+
+:::code-group
+
+```toml [pumpkin.toml] {2}
+[resource_pack.bedrock]
+enabled = false
+```
+
+:::
+
+#### `force`: Boolean
+
+Whether to force the client to download the resource pack or not.
+
+:::code-group
+
+```toml [pumpkin.toml] {3}
+[resource_pack.bedrock]
+enabled = false
+force = false
+```
+
+:::
+
+#### `packs`: String Array
+
+A list of resource pack URLs for Bedrock clients.
+
+:::code-group
+
+```toml [pumpkin.toml] {3}
+[resource_pack.bedrock]
+enabled = false
+packs = []
 ```
 
 :::
@@ -108,13 +156,18 @@ By default, no resource pack is sent to clients.
 
 :::code-group
 
-```toml [features.toml]
-[resource_pack]
+```toml [pumpkin.toml]
+[resource_pack.java]
 enabled = false
-resource_pack_url = ""
-resource_pack_sha1 = ""
+url = ""
+sha1 = ""
 prompt_message = ""
 force = false
+
+[resource_pack.bedrock]
+enabled = false
+force = false
+packs = []
 ```
 
 :::
