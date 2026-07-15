@@ -2,14 +2,14 @@
 
 Pumpkin offers a robust configuration system that allows users to customize various aspects of the server's behavior without relying on external plugins. This provides flexibility and control over the server's operation.
 
-### Basic / Advanced
+### Configuration File
 
-Pumpkin's configuration is split into a "basic" configuration made for quick changes and important changes, and a more "advanced" configuration
+Pumpkin uses a single `pumpkin.toml` file located in the server's root directory.
 
-- `config/configuration.toml`: simple and can be compared to the vanilla `server.properties`.
-- `config/features.toml`: designed to have all features of pumpkin at one place, making it a large configuration
+> [!NOTE]
+> Since [this commit](https://github.com/Pumpkin-MC/Pumpkin/commit/c8633b78d76b464323269ca04bd3b79dfc08cf13), the old separate `configuration.toml` and `features.toml` files have been merged into a single `pumpkin.toml`.
 
-You can create those two files under `config/` folder before running Pumpkin, or edit them after the initial run of Pumpkin.
+You can create this file before running Pumpkin, or edit it after the initial run.
 
 ### Server Version
 
