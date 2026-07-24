@@ -10,7 +10,7 @@ Ob PVP aktiviert ist.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 enabled = true
 ```
@@ -23,7 +23,7 @@ Ob die rote Treffer‑Animation und FOV‑Bobbing angezeigt werden.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 hurt_animation = true
 ```
@@ -36,7 +36,7 @@ Ob Spieler im Kreativmodus vor PVP geschützt werden.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 protect_creative = true
 ```
@@ -49,7 +49,7 @@ Ob Angriffe Rückstoß haben.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 knockback = true
 ```
@@ -62,7 +62,7 @@ Ob Spieler beim Angriff die Arm‑Schwung‑Animation ausführen.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 swing = true
 ```
@@ -75,7 +75,7 @@ Standardmäßig sind alle PVP‑Optionen aktiviert, um das Vanilla‑Verhalten a
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [pvp]
 enabled = true
 hurt_animation = true

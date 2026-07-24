@@ -13,8 +13,8 @@
 
 :::code-group
 
-```toml [features.toml] {2}
-[resource_pack]
+```toml [pumpkin.toml] {2}
+[resource_pack.java]
 enabled = true
 ```
 
@@ -29,8 +29,8 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
 resource_pack_url = "[你的下载 URL 在这里]"
 ```
@@ -66,8 +66,8 @@ sha1sum [文件]
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
 resource_pack_sha1 = "[你的哈希值在这里]"
 ```
@@ -80,8 +80,8 @@ resource_pack_sha1 = "[你的哈希值在这里]"
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
 prompt_message = "[你的消息在这里]"
 ```
@@ -94,8 +94,8 @@ prompt_message = "[你的消息在这里]"
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
 force = false
 ```
@@ -108,8 +108,8 @@ force = false
 
 :::code-group
 
-```toml [features.toml]
-[resource_pack]
+```toml [pumpkin.toml]
+[resource_pack.java]
 enabled = false
 resource_pack_url = ""
 resource_pack_sha1 = ""

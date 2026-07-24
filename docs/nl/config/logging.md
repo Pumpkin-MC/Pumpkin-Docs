@@ -7,7 +7,7 @@ Pumpkin stelt je in staat om aan te passen wat je in je logs wilt hebben.
 Of logging is ingeschakeld of niet.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [logging]
 enabled = true
 ```
@@ -23,7 +23,7 @@ Wat er moet worden gelogd. Mogelijke waarden zijn:
 - Trace
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 level = "Debug"
@@ -34,7 +34,7 @@ level = "Debug"
 Of het mogelijk is om het logniveau te kiezen door de `RUST_LOG`-omgevingsvariabele in te stellen of niet.
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 env = true
@@ -45,7 +45,7 @@ env = true
 Of threads in het logbericht moeten worden weergegeven of niet.
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 threads = false
@@ -56,7 +56,7 @@ threads = false
 Of er met kleur naar de console moet worden geprint of niet.
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 color = false
@@ -67,7 +67,7 @@ color = false
 Of de tijdstempel in het bericht moet worden weergegeven of niet.
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 timestamp = false
@@ -78,7 +78,7 @@ timestamp = false
 Standaard is logging ingeschakeld en wordt er met kleur, threads en tijdstempel op het `Info`-niveau geprint. 
 
 :::code-group
-```toml [features.toml]
+```toml [pumpkin.toml]
 [logging]
 enabled = true
 level = "Info"

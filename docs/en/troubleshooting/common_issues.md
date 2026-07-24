@@ -6,4 +6,4 @@
 
     **Cause:** This has to do with authentication, and usually with the `prevent_proxy_connections` setting.
 
-    **Fix:** Disable `prevent_proxy_connections` in `features.toml`
+    **Fix:** Disable `prevent_proxy_connections` under `[networking.java.authentication]` in `pumpkin.toml`

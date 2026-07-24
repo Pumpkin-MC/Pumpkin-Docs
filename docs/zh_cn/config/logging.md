@@ -10,7 +10,7 @@ Pumpkin 允许你自定义日志中想要的内容。
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [logging]
 enabled = true
 ```
@@ -30,7 +30,7 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 level = "Debug"
@@ -44,7 +44,7 @@ level = "Debug"
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 env = true
@@ -58,7 +58,7 @@ env = true
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 threads = false
@@ -72,7 +72,7 @@ threads = false
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 color = false
@@ -86,7 +86,7 @@ color = false
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 timestamp = false
@@ -100,7 +100,7 @@ timestamp = false
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [logging]
 enabled = true
 level = "Info"

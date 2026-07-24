@@ -16,8 +16,8 @@ Habilita o suporte para proxies.
 
 :::code-group
 
-```toml [features.toml]{2}
-[proxy]
+```toml [pumpkin.toml]{2}
+[networking.proxy]
 enabled = true
 ```
 
@@ -31,7 +31,7 @@ Se o suporte ao Velocity está habilitado ou não.
 
 :::code-group
 
-```toml [features.toml]{2}
+```toml [pumpkin.toml]{2}
 [proxy.velocity]
 enabled = true
 ```
@@ -44,7 +44,7 @@ O segredo configurado no Velocity.
 
 :::code-group
 
-```toml [features.toml]{3}
+```toml [pumpkin.toml]{3}
 [proxy.velocity]
 enabled = true
 secret = "[segredo do proxy aqui]"
@@ -60,7 +60,7 @@ Se o suporte ao BungeeCord está habilitado ou não.
 
 :::code-group
 
-```toml [features.toml]{2}
+```toml [pumpkin.toml]{2}
 [proxy.bungeecord]
 enabled = true
 ```
@@ -76,8 +76,8 @@ Por padrão, o suporte a proxies está desativado. Aqui está a configuração p
 
 :::code-group
 
-```toml [features.toml]
-[proxy]
+```toml [pumpkin.toml]
+[networking.proxy]
 enabled = false
 
 [proxy.velocity]

@@ -6,8 +6,8 @@ Pumpkin, harici eklentilere ihtiyaç duymadan sunucu davranışının çeşitli 
 
 Pumpkin'in yapılandırması, hızlı ve önemli değişiklikler için tasarlanmış bir "temel" yapılandırma ve daha "gelişmiş" bir yapılandırma olarak ikiye ayrılır.
 
-- `configuration.toml`: basittir ve vanilla `server.properties` ile kıyaslanabilir.
-- `features.toml`: Pumpkin'in tüm özelliklerini tek yerde toplamak üzere tasarlanmıştır; bu da onu büyük bir yapılandırma dosyası yapar.
+- `pumpkin.toml`: basittir ve vanilla `server.properties` ile kıyaslanabilir.
+- `pumpkin.toml`: Pumpkin'in tüm özelliklerini tek yerde toplamak üzere tasarlanmıştır; bu da onu büyük bir yapılandırma dosyası yapar.
 
 ### Sunucu Sürümü
 

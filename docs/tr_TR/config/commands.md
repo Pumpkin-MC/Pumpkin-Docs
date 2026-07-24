@@ -10,7 +10,7 @@ Konsoldan gelen komutların kabul edilip edilmemesini düzenler.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [commands]
 use_console = false
 ```
@@ -23,7 +23,7 @@ Oyunculardan gelen komutların konsola loglanıp loglanmama davranışını değ
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [commands]
 log_console = false
 ```
@@ -36,7 +36,7 @@ Tüm oyuncular için varsayılan izin seviyesi.
 
 :::code-group
 
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 default_op_level = 0
 ```
 
@@ -48,7 +48,7 @@ Varsayılan olarak Pumpkin konsoldan komutlara izin verir ve oyuncuların çalı
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [commands]
 use_console = true
 log_console = true

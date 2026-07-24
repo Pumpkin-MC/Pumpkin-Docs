@@ -11,8 +11,8 @@ Of er geluisterd moet worden naar query-protocolverzoeken of niet.
 
 :::code-group
 
-```toml [features.toml] {2}
-[query]
+```toml [pumpkin.toml] {2}
+[networking.query]
 enabled = true
 ```
 
@@ -25,8 +25,8 @@ als de server gebruikt.
 
 :::code-group
 
-```toml [features.toml] {3}
-[query]
+```toml [pumpkin.toml] {3}
+[networking.query]
 enabled = true
 address = "0.0.0.0:12345"
 ```
@@ -39,8 +39,8 @@ Standaard is query uitgeschakeld. Het zal op de serverpoort draaien als het is i
 
 :::code-group
 
-```toml [features.toml]
-[query]
+```toml [pumpkin.toml]
+[networking.query]
 enabled = true
 address = "0.0.0.0:25565"
 ```

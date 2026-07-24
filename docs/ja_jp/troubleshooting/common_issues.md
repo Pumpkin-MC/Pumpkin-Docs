@@ -6,4 +6,4 @@
 
     **原因:** これは認証に関連しており、通常は `prevent_proxy_connections` 設定に関係しています。
 
-    **修正:** `features.toml` で `prevent_proxy_connections` を無効にしてください。
+    **修正:** `pumpkin.toml` で `prevent_proxy_connections` を無効にしてください。

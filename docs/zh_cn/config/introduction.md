@@ -6,8 +6,8 @@ Pumpkin 提供了强大的配置系统，允许用户无需依赖外部插件即
 
 Pumpkin 的配置分为"基础"配置（用于快速更改和重要设置）和更加"高级"的配置：
 
-- `configuration.toml`：简单配置，可以与原版 Minecraft 的 `server.properties` 相比较。
-- `features.toml`：设计为在一个地方包含 Pumpkin 的所有功能，是一个更全面的配置文件。
+- `pumpkin.toml`：简单配置，可以与原版 Minecraft 的 `server.properties` 相比较。
+- `pumpkin.toml`：设计为在一个地方包含 Pumpkin 的所有功能，是一个更全面的配置文件。
 
 ### 服务器版本
 

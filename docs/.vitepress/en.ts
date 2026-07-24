@@ -18,7 +18,10 @@ export const en = defineConfig({
         sidebar: [
             {
                 text: "About",
-                items: [{ text: "Benchmarks", link: "/about/benchmarks" }],
+                items: [
+                    { text: "Benchmarks", link: "/about/benchmarks" },
+                    { text: "Helping & Donating", link: "/about/helping" },
+                ],
             },
             {
                 text: "Configuration",

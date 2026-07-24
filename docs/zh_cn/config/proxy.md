@@ -16,8 +16,8 @@
 
 :::code-group
 
-```toml [features.toml]{2}
-[proxy]
+```toml [pumpkin.toml]{2}
+[networking.proxy]
 enabled = true
 ```
 
@@ -31,7 +31,7 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml]{2}
+```toml [pumpkin.toml]{2}
 [proxy.velocity]
 enabled = true
 ```
@@ -44,7 +44,7 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml]{3}
+```toml [pumpkin.toml]{3}
 [proxy.velocity]
 enabled = true
 secret = "[代理密钥]"
@@ -60,7 +60,7 @@ secret = "[代理密钥]"
 
 :::code-group
 
-```toml [features.toml]{2}
+```toml [pumpkin.toml]{2}
 [proxy.bungeecord]
 enabled = true
 ```
@@ -76,8 +76,8 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml]
-[proxy]
+```toml [pumpkin.toml]
+[networking.proxy]
 enabled = false
 
 [proxy.velocity]

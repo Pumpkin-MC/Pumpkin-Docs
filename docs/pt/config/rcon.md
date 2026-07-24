@@ -8,8 +8,8 @@ RCON é um protocolo que permite gerenciar o servidor remotamente a partir de ou
 
 :::code-group
 
-```toml [features.toml] {2}
-[rcon]
+```toml [pumpkin.toml] {2}
+[networking.rcon]
 enabled = true
 ```
 
@@ -21,8 +21,8 @@ O endereço e a porta que o RCON deve escutar.
 
 :::code-group
 
-```toml [features.toml] {3}
-[rcon]
+```toml [pumpkin.toml] {3}
+[networking.rcon]
 enabled = true
 address = "0.0.0.0:25575"
 ```
@@ -35,8 +35,8 @@ A senha a ser usada para autenticação RCON.
 
 :::code-group
 
-```toml [features.toml] {3}
-[rcon]
+```toml [pumpkin.toml] {3}
+[networking.rcon]
 enabled = true
 password = "[sua senha segura aqui]"
 ```
@@ -49,8 +49,8 @@ O número máximo de conexões RCON permitidas ao mesmo tempo. Defina como 0 par
 
 :::code-group
 
-```toml [features.toml] {3}
-[rcon]
+```toml [pumpkin.toml] {3}
+[networking.rcon]
 enabled = true
 max_connections = 5
 ```
@@ -65,7 +65,7 @@ Se os logins bem-sucedidos devem ser registrados no console ou não.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [rcon.logging]
 log_logged_successfully = true
 ```
@@ -78,7 +78,7 @@ Se as tentativas de senha incorreta devem ser registradas no console ou não.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [rcon.logging]
 log_wrong_password = true
 ```
@@ -91,7 +91,7 @@ Se os comandos executados via RCON devem ser registrados no console ou não.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [rcon.logging]
 log_commands = true
 ```
@@ -104,7 +104,7 @@ Se a saída do cliente RCON deve ser registrada ou não.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [rcon.logging]
 log_quit = true
 ```
@@ -117,8 +117,8 @@ Por padrão, o RCON está desabilitado.
 
 :::code-group
 
-```toml [features.toml]
-[rcon]
+```toml [pumpkin.toml]
+[networking.rcon]
 enabled = false
 address = "0.0.0.0:25575"
 password = ""

@@ -6,7 +6,7 @@ Pumpkin ondersteunt vanillecommando's en stelt je in staat om te configureren wa
 Of commando's vanaf de console worden geaccepteerd of niet.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [commands]
 use_console = false
 ```
@@ -16,7 +16,7 @@ use_console = false
 Of commando's van spelers in de console moeten worden gelogd of niet.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [commands]
 log_console = false
 ```
@@ -27,7 +27,7 @@ log_console = false
 Het standaard permissieniveau voor alle spelers.
 
 :::code-group
-```toml [configuration.toml] {2}
+```toml [pumpkin.toml] {2}
 default_op_level = 0
 ```
 :::
@@ -36,7 +36,7 @@ default_op_level = 0
 Standaard staat Pumpkin commando's vanaf de console toe en logt alle commando's die door spelers worden uitgevoerd.
 
 :::code-group
-```toml [features.toml]
+```toml [pumpkin.toml]
 [commands]
 use_console = true
 log_console = true

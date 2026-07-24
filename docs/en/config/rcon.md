@@ -1,134 +1,37 @@
 # RCON
 
-RCON is a protocol that allows you to remotely manage the server from a different device. Pumpkin has full support for RCON.
+RCON allows remote administration of your Pumpkin server over a network connection. In `pumpkin.toml`, settings are placed under `[networking.rcon]`.
 
-## Configuring RCON
-
-#### `enabled`: Boolean
+## Configuration
 
 :::code-group
 
-```toml [features.toml] {2}
-[rcon]
-enabled = true
-```
-
-:::
-
-#### `address`: String
-
-The address and port that RCON should listen to.
-
-:::code-group
-
-```toml [features.toml] {3}
-[rcon]
-enabled = true
-address = "0.0.0.0:25575"
-```
-
-:::
-
-#### `password`: String
-
-The password to use for RCON authentication.
-
-:::code-group
-
-```toml [features.toml] {3}
-[rcon]
-enabled = true
-password = "[your safe password here]"
-```
-
-:::
-
-#### `max_connections`: Integer
-
-The max number of RCON connections allowed at a single time. Set this to 0 to disable the limit.
-
-:::code-group
-
-```toml [features.toml] {3}
-[rcon]
-enabled = true
-max_connections = 5
-```
-
-:::
-
-### Logging
-
-#### `log_logged_successfully`: Boolean
-
-Whether successful logins should be logged to console or not.
-
-:::code-group
-
-```toml [features.toml] {2}
-[rcon.logging]
-log_logged_successfully = true
-```
-
-:::
-
-#### `log_wrong_password`: Boolean
-
-Whether wrong password attempts should be logged to console or not.
-
-:::code-group
-
-```toml [features.toml] {2}
-[rcon.logging]
-log_logged_successfully = true
-```
-
-:::
-
-#### `log_commands`: Boolean
-
-Whether to log commands ran from RCON to console or not.
-
-:::code-group
-
-```toml [features.toml] {2}
-[rcon.logging]
-log_commands = true
-```
-
-:::
-
-#### `log_quit`: Boolean
-
-Whether RCON client quit should be logged or not.
-
-:::code-group
-
-```toml [features.toml] {2}
-[rcon.logging]
-log_quit = true
-```
-
-:::
-
-## Default Config
-
-By default, RCON is disabled.
-
-:::code-group
-
-```toml [features.toml]
-[rcon]
+```toml [pumpkin.toml]
+[networking.rcon]
 enabled = false
 address = "0.0.0.0:25575"
 password = ""
-max_connections = 0
+max_connections = 10
 
-[rcon.logging]
-log_logged_successfully = true
-log_wrong_password = true
-log_commands = true
-log_quit = true
+[networking.rcon.logging]
+logged_successfully = true
+wrong_password = true
+commands = true
+quit = true
 ```
 
 :::
+
+### RCON Settings
+
+- **`enabled`**: Master switch to enable RCON service.
+- **`address`**: IP address and port to bind RCON server to.
+- **`password`**: Password required for authenticating RCON clients.
+- **`max_connections`**: Maximum concurrent RCON client connections allowed.
+
+### RCON Logging Settings
+
+- **`logged_successfully`**: Log successful client authentication events.
+- **`wrong_password`**: Log failed authentication attempts (wrong password).
+- **`commands`**: Log commands executed through RCON.
+- **`quit`**: Log client disconnection events.

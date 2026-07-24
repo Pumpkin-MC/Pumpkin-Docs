@@ -10,7 +10,7 @@ PVP 是原版机制的核心部分，即使是最小的变化也会影响游戏�
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 enabled = true
 ```
@@ -23,7 +23,7 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 hurt_animation = true
 ```
@@ -36,7 +36,7 @@ hurt_animation = true
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 protect_creative = true
 ```
@@ -49,7 +49,7 @@ protect_creative = true
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 knockback = true
 ```
@@ -62,7 +62,7 @@ knockback = true
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [pvp]
 swing = true
 ```
@@ -75,7 +75,7 @@ swing = true
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [pvp]
 enabled = true
 hurt_animation = true

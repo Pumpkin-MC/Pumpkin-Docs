@@ -20,6 +20,8 @@ export const de = defineConfig({
                 text: "Über",
                 items: [
                     { text: "Benchmarks", link: "/de/about/benchmarks" },
+                    { text: "Helfen & Spenden", link: "/de/about/helping" },
+                    
                 ],
             },
             {

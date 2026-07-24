@@ -6,8 +6,8 @@ RCON is een protocol waarmee je de server op afstand kunt beheren vanaf een ande
 #### `enabled`: Boolean
 
 :::code-group
-```toml [features.toml] {2}
-[rcon]
+```toml [pumpkin.toml] {2}
+[networking.rcon]
 enabled = true
 ```
 :::
@@ -16,8 +16,8 @@ enabled = true
 Het adres en de poort waar RCON naar moet luisteren.
 
 :::code-group
-```toml [features.toml] {3}
-[rcon]
+```toml [pumpkin.toml] {3}
+[networking.rcon]
 enabled = true
 address = "0.0.0.0:25575"
 ```
@@ -27,8 +27,8 @@ address = "0.0.0.0:25575"
 Het wachtwoord dat gebruikt moet worden voor RCON-authenticatie.
 
 :::code-group
-```toml [features.toml] {3}
-[rcon]
+```toml [pumpkin.toml] {3}
+[networking.rcon]
 enabled = true
 password = "[je veilig wachtwoord hier]"
 ```
@@ -38,8 +38,8 @@ password = "[je veilig wachtwoord hier]"
 Het maximale aantal RCON-verbindingen dat tegelijkertijd is toegestaan. Stel in op 0 om een limiet uit te schakelen.
 
 :::code-group
-```toml [features.toml] {3}
-[rcon]
+```toml [pumpkin.toml] {3}
+[networking.rcon]
 enabled = true
 max_connections = 5
 ```
@@ -50,7 +50,7 @@ max_connections = 5
 Of succesvolle logins naar de console moeten worden gelogd of niet.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [rcon.logging]
 log_logged_successfully = true
 ```
@@ -60,7 +60,7 @@ log_logged_successfully = true
 Of verkeerde wachtwoordpogingen naar de console moeten worden gelogd of niet.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [rcon.logging]
 log_logged_successfully = true
 ```
@@ -70,7 +70,7 @@ log_logged_successfully = true
 Of commando's uitgevoerd vanaf RCON naar de console moeten worden gelogd of niet.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [rcon.logging]
 log_commands = true
 ```
@@ -80,7 +80,7 @@ log_commands = true
 Of het afsluiten van de RCON-client moet worden gelogd of niet.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [rcon.logging]
 log_quit = true
 ```
@@ -90,8 +90,8 @@ log_quit = true
 Standaard is RCON uitgeschakeld.
 
 :::code-group
-```toml [features.toml]
-[rcon]
+```toml [pumpkin.toml]
+[networking.rcon]
 enabled = false
 address = "0.0.0.0:25575"
 password = ""

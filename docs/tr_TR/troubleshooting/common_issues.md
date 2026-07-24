@@ -6,4 +6,4 @@
 
     **Neden:** Bu, kimlik doğrulama ile ve genellikle `prevent_proxy_connections` ayarıyla ilgilidir.
 
-    **Çözüm:** `features.toml` dosyasında `prevent_proxy_connections` değerini devre dışı bırakın
+    **Çözüm:** `pumpkin.toml` dosyasında `prevent_proxy_connections` değerini devre dışı bırakın

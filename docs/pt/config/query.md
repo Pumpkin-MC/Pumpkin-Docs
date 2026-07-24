@@ -11,8 +11,8 @@ Se deve ouvir ou não as requisições do protocolo Query.
 
 :::code-group
 
-```toml [features.toml] {2}
-[query]
+```toml [pumpkin.toml] {2}
+[networking.query]
 enabled = true
 ```
 
@@ -25,8 +25,8 @@ porta do servidor.
 
 :::code-group
 
-```toml [features.toml] {3}
-[query]
+```toml [pumpkin.toml] {3}
+[networking.query]
 enabled = true
 address = "0.0.0.0:12345"
 ```
@@ -40,8 +40,8 @@ explicitamente.
 
 :::code-group
 
-```toml [features.toml]
-[query]
+```toml [pumpkin.toml]
+[networking.query]
 enabled = true
 address = "0.0.0.0:25565"
 ```

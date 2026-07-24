@@ -10,7 +10,7 @@ Se o registro de logs está habilitado ou não.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [logging]
 enabled = true
 ```
@@ -30,7 +30,7 @@ O nível de verbosidade do log. Os valores possíveis são:
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 level = "Debug"
@@ -44,7 +44,7 @@ Se deve permitir escolher o nível de log configurando a variável de ambiente `
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 env = true
@@ -58,7 +58,7 @@ Se deve exibir as threads nas mensagens de log ou não.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 threads = false
@@ -72,7 +72,7 @@ Se deve imprimir no console com cores ou não.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 color = false
@@ -86,7 +86,7 @@ Se deve imprimir a data e hora na mensagem ou não.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [logging]
 enabled = true
 timestamp = false
@@ -100,7 +100,7 @@ Por padrão, o registro de logs está habilitado no nível `Info` e imprimirá c
 
 :::code-group
 
-```toml [features.toml]
+```toml [pumpkin.toml]
 [logging]
 enabled = true
 level = "Info"

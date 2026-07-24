@@ -6,8 +6,8 @@ Pumpkin bietet ein robustes Konfigurationssystem, mit dem Nutzer verschiedenste 
 
 Die Pumpkin‑Konfiguration ist in eine „Basic“-Konfiguration für schnelle und wichtige Änderungen und eine „Advanced“-Konfiguration aufgeteilt.
 
-- `configuration.toml`: einfach, vergleichbar mit der Vanilla‑Datei `server.properties`.
-- `features.toml`: enthält alle Pumpkin‑Features an einem Ort – eine umfangreiche Konfiguration.
+- `pumpkin.toml`: einfach, vergleichbar mit der Vanilla‑Datei `server.properties`.
+- `pumpkin.toml`: enthält alle Pumpkin‑Features an einem Ort – eine umfangreiche Konfiguration.
 
 ### Server‑Version
 

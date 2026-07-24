@@ -6,7 +6,7 @@ Contas offline, ou seja, contas geradas a partir do nome de usuário de um jogad
 
 ### Servidor Offline
 
-Por padrão, `online_mode` está ativado na configuração. Isso habilita a autenticação, desabilitando contas offline. Se você deseja permitir contas offline, pode desabilitar `online_mode` no arquivo `configuration.toml`.
+Por padrão, `online_mode` está ativado na configuração. Isso habilita a autenticação, desabilitando contas offline. Se você deseja permitir contas offline, pode desabilitar `online_mode` no arquivo `pumpkin.toml`.
 
 ### Como funciona a autenticação Yggdrasil
 
@@ -18,7 +18,7 @@ Por padrão, `online_mode` está ativado na configuração. Isso habilita a aute
 
 ### Servidor de Autenticação Personalizado
 
-Pumpkin suporta servidores de autenticação personalizados. Você pode substituir a URL de autenticação no arquivo `features.toml`.
+Pumpkin suporta servidores de autenticação personalizados. Você pode substituir a URL de autenticação no arquivo `pumpkin.toml`.
 
 #### Como funciona a autenticação no Pumpkin
 

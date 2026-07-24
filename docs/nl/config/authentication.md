@@ -12,8 +12,8 @@ Servers authentiseren met de sessieservers van Mojang om ervoor te zorgen dat de
 Of authenticatie is ingeschakeld of niet.
 
 :::code-group
-```toml [features.toml] {2}
-[authentication]
+```toml [pumpkin.toml] {2}
+[networking.java.authentication]
 enabled = false
 ```
 :::
@@ -23,8 +23,8 @@ enabled = false
 Of proxyverbindingen moeten worden geblokkeerd of niet.
 
 :::code-group
-```toml [features.toml] {3}
-[authentication]
+```toml [pumpkin.toml] {3}
+[networking.java.authentication]
 enabled = true
 prevent_proxy_connections = true
 ```
@@ -40,8 +40,8 @@ De URL om te authenticeren. Gebruikt de sessieservers van Mojang om te authentic
 | `{server_hash}` | Hash van de server    |
 
 :::code-group
-```toml [features.toml] {2}
-[authentication]
+```toml [pumpkin.toml] {2}
+[networking.java.authentication]
 auth_url = "[aangepaste auth server hier]"
 ```
 :::
@@ -57,8 +57,8 @@ De URL om te authenticeren als `prevent_proxy_connections` is ingeschakeld. Gebr
 | `{ip}`          | IP-adres van de speler    |
 
 :::code-group
-```toml [features.toml] {2}
-[authentication]
+```toml [pumpkin.toml] {2}
+[networking.java.authentication]
 prevent_proxy_connection_auth_url = "[aangepaste auth server hier]"
 ```
 :::
@@ -69,7 +69,7 @@ prevent_proxy_connection_auth_url = "[aangepaste auth server hier]"
 Sta spelers toe die door Mojang zijn gemarkeerd.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [authentication.player_profile]
 allow_banned_players = true
 ```
@@ -79,7 +79,7 @@ allow_banned_players = true
 Welke acties zijn toegestaan als `allow_banned_players` is ingeschakeld.
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.player_profile]
 allow_banned_players = true
 allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
@@ -92,7 +92,7 @@ allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
 Of spelertexturen (bijv. Skins/Capes) moeten worden gefilterd/gevalideerd.
 
 :::code-group
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [authentication.textures]
 enabled = true
 ```
@@ -102,7 +102,7 @@ enabled = true
 Toegestane URL-schema's voor texturen.
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures]
 enabled = true
 allowed_url_schemes = ["http", "https"]
@@ -113,7 +113,7 @@ allowed_url_schemes = ["http", "https"]
 Toegestane URL-domeinen voor texturen.
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures]
 enabled = true
 allowed_url_domains = [".minecraft.net", ".mojang.com"]
@@ -126,7 +126,7 @@ allowed_url_domains = [".minecraft.net", ".mojang.com"]
 Of speler skins moeten worden gebruikt of niet.
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 skin = true
 ```
@@ -136,7 +136,7 @@ skin = true
 Of speler capes moeten worden gebruikt of niet.
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 cape = true
 ```
@@ -146,7 +146,7 @@ cape = true
 Of speler elytra's moeten worden gebruikt of niet.
 
 :::code-group
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 elytra = true
 ```
@@ -155,8 +155,8 @@ elytra = true
 ## Standaardconfiguratie
 Standaard is authenticatie ingeschakeld en worden de servers van Mojang gebruikt. Hier is de standaardconfiguratie:
 :::code-group
-```toml [features.toml]
-[authentication]
+```toml [pumpkin.toml]
+[networking.java.authentication]
 enabled = true
 prevent_proxy_connections = false
 

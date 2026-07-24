@@ -6,8 +6,8 @@ Pumpkin biedt een robuust configuratiesysteem waarmee gebruikers verschillende a
 
 De configuratie van Pumpkin is opgesplitst in een basisconfiguratie voor snelle en belangrijke wijzigingen en een meer geavanceerde configuratie.
 
-- `configuration.toml`: eenvoudig en kan worden vergeleken met de vanille `server.properties`.
-- `features.toml`: ontworpen om alle functies van Pumpkin op één plek te hebben, waardoor het een grote configuratie is.
+- `pumpkin.toml`: eenvoudig en kan worden vergeleken met de vanille `server.properties`.
+- `pumpkin.toml`: ontworpen om alle functies van Pumpkin op één plek te hebben, waardoor het een grote configuratie is.
 
 ### Serverversie
 

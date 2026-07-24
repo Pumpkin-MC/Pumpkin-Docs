@@ -1,46 +1,20 @@
 # Query
 
-The Query protocol is a simple way to query the server about its status. Pumpkin fully supports the Query protocol.
+The Query protocol allows external applications (such as server lists or monitoring systems) to request status details from Pumpkin.
 
-## Configuring Query
-
-#### `enabled`: Boolean
-
-Whether to listen for Query protocol requests or not.
+## Configuration
 
 :::code-group
 
-```toml [features.toml] {2}
-[query]
-enabled = true
-```
-
-:::
-
-#### `port`: Integer (0-65535) (optional)
-
-Which port to listen to Query protocol requests on. If not specified, it uses the same port as the server.
-
-:::code-group
-
-```toml [features.toml] {3}
-[query]
-enabled = true
-address = "0.0.0.0:12345"
-```
-
-:::
-
-## Default Config
-
-By default, Query is disabled. It will run on the server port if enabled unless specified explicitly.
-
-:::code-group
-
-```toml [features.toml]
-[query]
+```toml [pumpkin.toml]
+[networking.query]
 enabled = true
 address = "0.0.0.0:25565"
 ```
 
 :::
+
+### Configuration Options
+
+- **`enabled`**: Enables or disables the Query listener.
+- **`address`**: Network address and port to bind the Query listener to.

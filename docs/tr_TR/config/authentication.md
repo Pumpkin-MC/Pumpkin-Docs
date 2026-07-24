@@ -13,8 +13,8 @@ Kimlik doğrulamanın etkin olup olmadığı.
 
 :::code-group
 
-```toml [features.toml] {2}
-[authentication]
+```toml [pumpkin.toml] {2}
+[networking.java.authentication]
 enabled = false
 ```
 
@@ -26,8 +26,8 @@ Proxy bağlantılarını engelleyip engellememe.
 
 :::code-group
 
-```toml [features.toml] {3}
-[authentication]
+```toml [pumpkin.toml] {3}
+[networking.java.authentication]
 enabled = true
 prevent_proxy_connections = true
 ```
@@ -47,8 +47,8 @@ Kimlik doğrulama için kullanılacak URL. Belirtilmezse Mojang'in oturum sunucu
 
 :::code-group
 
-```toml [features.toml] {2}
-[authentication]
+```toml [pumpkin.toml] {2}
+[networking.java.authentication]
 auth_url = "[custom auth server here]"
 ```
 
@@ -68,8 +68,8 @@ auth_url = "[custom auth server here]"
 
 :::code-group
 
-```toml [features.toml] {2}
-[authentication]
+```toml [pumpkin.toml] {2}
+[networking.java.authentication]
 prevent_proxy_connection_auth_url = "[custom auth server here]"
 ```
 
@@ -83,7 +83,7 @@ Mojang tarafından işaretlenen oyunculara izin ver.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [authentication.player_profile]
 allow_banned_players = true
 ```
@@ -96,7 +96,7 @@ allow_banned_players = true
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.player_profile]
 allow_banned_players = true
 allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
@@ -112,7 +112,7 @@ Oyuncu dokularını (örn. skin/cape) filtrelemeyi/doğrulamayı sağlar.
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [authentication.textures]
 enabled = true
 ```
@@ -125,7 +125,7 @@ Dokular için izin verilen URL şemaları.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures]
 enabled = true
 allowed_url_schemes = ["http", "https"]
@@ -139,7 +139,7 @@ Dokular için izin verilen URL alan adları.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures]
 enabled = true
 allowed_url_domains = [".minecraft.net", ".mojang.com"]
@@ -155,7 +155,7 @@ Oyuncu skinlerini kullanıp kullanmama davranışını düzenler.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 skin = true
 ```
@@ -168,7 +168,7 @@ Oyuncu capelerini kullanıp kullanmama davranışını düzenler.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 cape = true
 ```
@@ -181,7 +181,7 @@ Oyuncu elytralarını kullanıp kullanmama davranışını düzenler.
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 elytra = true
 ```
@@ -193,8 +193,8 @@ elytra = true
 Varsayılan olarak kimlik doğrulama etkindir ve Mojang'in sunucularını kullanır. Varsayılan yapılandırma:
 :::code-group
 
-```toml [features.toml]
-[authentication]
+```toml [pumpkin.toml]
+[networking.java.authentication]
 enabled = true
 prevent_proxy_connections = false
 

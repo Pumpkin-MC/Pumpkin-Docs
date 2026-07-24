@@ -13,8 +13,8 @@ Se o pacote de recursos está habilitado ou não.
 
 :::code-group
 
-```toml [features.toml] {2}
-[resource_pack]
+```toml [pumpkin.toml] {2}
+[resource_pack.java]
 enabled = true
 ```
 
@@ -29,8 +29,8 @@ A URL direta de download do pacote de recursos.
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
 resource_pack_url = "[sua URL de download aqui]"
 ```
@@ -66,8 +66,8 @@ sha1sum [arquivo]
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
 resource_pack_sha1 = "[seu hash aqui]"
 ```
@@ -80,8 +80,8 @@ A mensagem a ser exibida para o usuário quando for solicitado o download do pac
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
 prompt_message = "[sua mensagem aqui]"
 ```
@@ -94,8 +94,8 @@ Se deve forçar o cliente a baixar o pacote de recursos ou não. Se o cliente re
 
 :::code-group
 
-```toml [features.toml] {3}
-[resource_pack]
+```toml [pumpkin.toml] {3}
+[resource_pack.java]
 enabled = true
 force = false
 ```
@@ -108,8 +108,8 @@ Por padrão, nenhum pacote de recursos é enviado para os clientes.
 
 :::code-group
 
-```toml [features.toml]
-[resource_pack]
+```toml [pumpkin.toml]
+[resource_pack.java]
 enabled = false
 resource_pack_url = ""
 resource_pack_sha1 = ""

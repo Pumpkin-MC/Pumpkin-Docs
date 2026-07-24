@@ -13,8 +13,8 @@
 
 :::code-group
 
-```toml [features.toml] {2}
-[authentication]
+```toml [pumpkin.toml] {2}
+[networking.java.authentication]
 enabled = false
 ```
 
@@ -26,8 +26,8 @@ enabled = false
 
 :::code-group
 
-```toml [features.toml] {3}
-[authentication]
+```toml [pumpkin.toml] {3}
+[networking.java.authentication]
 enabled = true
 prevent_proxy_connections = true
 ```
@@ -47,8 +47,8 @@ prevent_proxy_connections = true
 
 :::code-group
 
-```toml [features.toml] {2}
-[authentication]
+```toml [pumpkin.toml] {2}
+[networking.java.authentication]
 auth_url = "[这里填写自定义身份验证服务器]"
 ```
 
@@ -68,8 +68,8 @@ auth_url = "[这里填写自定义身份验证服务器]"
 
 :::code-group
 
-```toml [features.toml] {2}
-[authentication]
+```toml [pumpkin.toml] {2}
+[networking.java.authentication]
 prevent_proxy_connection_auth_url = "[这里填写自定义身份验证服务器]"
 ```
 
@@ -83,7 +83,7 @@ prevent_proxy_connection_auth_url = "[这里填写自定义身份验证服务器
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [authentication.player_profile]
 allow_banned_players = true
 ```
@@ -96,7 +96,7 @@ allow_banned_players = true
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.player_profile]
 allow_banned_players = true
 allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
@@ -112,7 +112,7 @@ allowed_actions = ["FORCED_NAME_CHANGE", "USING_BANNED_SKIN"]
 
 :::code-group
 
-```toml [features.toml] {2}
+```toml [pumpkin.toml] {2}
 [authentication.textures]
 enabled = true
 ```
@@ -125,7 +125,7 @@ enabled = true
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures]
 enabled = true
 allowed_url_schemes = ["http", "https"]
@@ -139,7 +139,7 @@ allowed_url_schemes = ["http", "https"]
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures]
 enabled = true
 allowed_url_domains = [".minecraft.net", ".mojang.com"]
@@ -155,7 +155,7 @@ allowed_url_domains = [".minecraft.net", ".mojang.com"]
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 skin = true
 ```
@@ -168,7 +168,7 @@ skin = true
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 cape = true
 ```
@@ -181,7 +181,7 @@ cape = true
 
 :::code-group
 
-```toml [features.toml] {3}
+```toml [pumpkin.toml] {3}
 [authentication.textures.types]
 elytra = true
 ```
@@ -193,8 +193,8 @@ elytra = true
 默认情况下，身份验证已启用并使用 Mojang 的服务器。以下是默认配置：
 :::code-group
 
-```toml [features.toml]
-[authentication]
+```toml [pumpkin.toml]
+[networking.java.authentication]
 enabled = true
 prevent_proxy_connections = false
 

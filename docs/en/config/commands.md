@@ -1,58 +1,26 @@
 # Commands
 
-Pumpkin supports Vanilla commands and allows you to configure where they can be ran from.
+Pumpkin supports Minecraft commands and allows configuring console, TTY, and permission behaviors in `pumpkin.toml`.
 
-## Configuring Commands
-
-#### `use_console`: Boolean
-
-Whether commands from the console are accepted or not.
+## Configuration
 
 :::code-group
 
-```toml [features.toml] {2}
-[commands]
-use_console = false
-```
-
-:::
-
-#### `log_console`: Boolean
-
-Whether commands from players should be logged in the console or not.
-
-:::code-group
-
-```toml [features.toml] {2}
-[commands]
-log_console = false
-```
-
-:::
-
-## Operation permission level
-
-The default permission level for all players.
-
-:::code-group
-
-```toml [configuration.toml] {2}
-default_op_level = 0
-```
-
-:::
-
-## Default Config
-
-By default, Pumpkin will allow commands from console and log all commands run by players.
-
-:::code-group
-
-```toml [features.toml]
+```toml [pumpkin.toml]
 [commands]
 use_console = true
+use_tty = true
 log_console = true
+broadcast_console_to_ops = true
 default_op_level = 0
 ```
 
 :::
+
+### Configuration Options
+
+- **`use_console`**: Whether commands input via console are accepted.
+- **`use_tty`**: Whether TTY support is enabled for the interactive console.
+- **`log_console`**: Whether commands executed by players are logged to the console.
+- **`broadcast_console_to_ops`**: Broadcast console command outputs to server operators.
+- **`default_op_level`**: Default OP level assigned (0 to 4).

@@ -1,91 +1,28 @@
 # Proxy
 
-Many servers use proxies to manage connections and distribute players across servers. Pumpkin supports the following proxy protocols:
+Pumpkin supports proxy protocols for network server setups. Support for Velocity and BungeeCord is configured under `[networking.proxy]` in `pumpkin.toml`.
 
-- [Velocity](https://papermc.io/software/velocity)
-- [BungeeCord](https://www.spigotmc.org/wiki/bungeecord-installation/)
-
-> [!TIP]
-> Velocity is recommended for most server networks. Velocity is modern and more performant compared to BungeeCord.
-
-## Configuring Proxy
-
-#### `enabled`: Boolean
-
-Enables support for proxies.
+## Configuration
 
 :::code-group
 
-```toml [features.toml]{2}
-[proxy]
-enabled = true
-```
-
-:::
-
-### Velocity
-
-#### `enabled`: Boolean
-
-Whether Velocity support is enabled or not.
-
-:::code-group
-
-```toml [features.toml]{2}
-[proxy.velocity]
-enabled = true
-```
-
-:::
-
-#### `secret`: String
-
-The secret as configured in Velocity.
-
-:::code-group
-
-```toml [features.toml]{3}
-[proxy.velocity]
-enabled = true
-secret = "[proxy secret here]"
-```
-
-:::
-
-### BungeeCord
-
-#### `enabled`: Boolean
-
-Whether BungeeCord support is enabled or not.
-
-:::code-group
-
-```toml [features.toml]{2}
-[proxy.bungeecord]
-enabled = true
-```
-
-:::
-
-> [!CAUTION]
-> BungeeCord can't verify if player info is from your proxy or an imposter. Ensure that the server's firewall is correctly configured.
-
-## Default Config
-
-By default, proxy support is disabled. Here is the default config:
-
-:::code-group
-
-```toml [features.toml]
-[proxy]
+```toml [pumpkin.toml]
+[networking.proxy]
 enabled = false
 
-[proxy.velocity]
+[networking.proxy.velocity]
 enabled = false
 secret = ""
 
-[proxy.bungeecord]
+[networking.proxy.bungeecord]
 enabled = false
 ```
 
 :::
+
+### Configuration Options
+
+- **`[networking.proxy].enabled`**: Master switch to enable proxy support.
+- **`[networking.proxy.velocity].enabled`**: Enables Velocity forwarding protocol.
+- **`[networking.proxy.velocity].secret`**: Forwarding secret matching Velocity proxy configuration.
+- **`[networking.proxy.bungeecord].enabled`**: Enables BungeeCord forwarding protocol.

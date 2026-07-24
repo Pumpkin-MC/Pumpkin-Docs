@@ -11,8 +11,8 @@ Query protokolü isteklerini dinleyip dinlememesi.
 
 :::code-group
 
-```toml [features.toml] {2}
-[query]
+```toml [pumpkin.toml] {2}
+[networking.query]
 enabled = true
 ```
 
@@ -24,8 +24,8 @@ Query protokolü isteklerinin dinleneceği port. Belirtilmezse sunucu portuyla a
 
 :::code-group
 
-```toml [features.toml] {3}
-[query]
+```toml [pumpkin.toml] {3}
+[networking.query]
 enabled = true
 address = "0.0.0.0:12345"
 ```
@@ -38,8 +38,8 @@ Varsayılan olarak Query devre dışıdır. Etkinleştirilirse, açıkça belirt
 
 :::code-group
 
-```toml [features.toml]
-[query]
+```toml [pumpkin.toml]
+[networking.query]
 enabled = true
 address = "0.0.0.0:25565"
 ```

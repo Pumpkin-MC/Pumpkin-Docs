@@ -6,8 +6,8 @@ Pumpkin oferece um sistema de configuração robusto que permite aos usuários p
 
 A configuração do Pumpkin é dividida em uma configuração "básica", feita para mudanças rápidas e importantes, e uma configuração mais "avançada".
 
--   `configuration.toml`: simples e pode ser comparado ao `server.properties` do vanilla.
--   `features.toml`: projetado para reunir todos os recursos do Pumpkin em um único lugar, tornando-se uma configuração mais abrangente.
+-   `pumpkin.toml`: simples e pode ser comparado ao `server.properties` do vanilla.
+-   `pumpkin.toml`: projetado para reunir todos os recursos do Pumpkin em um único lugar, tornando-se uma configuração mais abrangente.
 
 ### Versão do Servidor
 
