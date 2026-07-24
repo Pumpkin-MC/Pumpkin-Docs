@@ -59,6 +59,36 @@ docker run --rm \
     -it ghcr.io/pumpkin-mc/pumpkin:master
 ```
 
+## Nix / NixOS
+
+Pumpkin ist als `pumpkin-mc` in [nixpkgs](https://github.com/NixOS/nixpkgs) (gepflegt von [@DerGrumpf](https://github.com/DerGrumpf)), inklusive NixOS‐Modul für den Betrieb als systemd‐Dienst verfügbar.
+
+Ohne Installation testen:
+
+```shell
+nix run nixpkgs#pumpkin-mc
+```
+
+Als Dienst über `configuration.nix`:
+
+```nix
+services.pumpkin-mc = {
+  enable = true;
+  openFirewall = true;
+};
+```
+
+Der Dienst läuft mit `DynamicUser`, `ProtectSystem = "strict"` und ohne zusätzliche Capabilities unter `/var/lib/pumpkin-mc`. Das Modul deckt den Großteil von `pumpkin.toml` über typisierte Optionen deklarativ ab. Netzwerk (Java/Bedrock/RCON/Query/Proxy), Whitelist, Weltformat, Logging, PvP. Was fehlt, lässt sich über die freeform‐Option `settings` einbinden.
+
+> [!NOTE]
+> RCON‐Passwort und Velocity‐Secret werden beim Start aus einer Datei gelesen (`rcon.passwordFile` / `proxy.velocity.secretFile`) und damit nicht im Nix‐Store gespeichert, daher ist der service kompatibel mit `sops-nix`/`agenix`.
+
+Vollständige Optionsliste: [Modul‐Quellcode](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/games/pumpkin-mc.nix), oder:
+
+```shell
+nixos-option services.pumpkin-mc
+```
+
 ## Testserver
 
 Pumpkin hat einen Testserver, der von @kralverde betrieben wird. Er läuft immer auf dem neuesten Commit des Master‑Branches von Pumpkin.
