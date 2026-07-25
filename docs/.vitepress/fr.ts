@@ -19,48 +19,48 @@ export const fr = defineConfig({
             {
                 text: "About",
                 items: [
-                    { text: "Benchmarks", link: "/about/benchmarks" },
-                    { text: "Helping & Donating", link: "/about/helping" },
+                    { text: "Benchmarks", link: "/fr/about/benchmarks" },
+                    { text: "Helping & Donating", link: "/fr/about/helping" },
                 ],
             },
             {
                 text: "Configuration",
                 items: [
-                    { text: "Introduction", link: "/config/introduction" },
-                    { text: "Basic", link: "/config/basic" },
-                    { text: "Proxy", link: "/config/proxy" },
-                    { text: "Authentication", link: "/config/authentication" },
-                    { text: "Compression", link: "/config/compression" },
-                    { text: "Resource Pack", link: "/config/resource-pack" },
-                    { text: "Commands", link: "/config/commands" },
-                    { text: "RCON", link: "/config/rcon" },
-                    { text: "PVP", link: "/config/pvp" },
-                    { text: "Logging", link: "/config/logging" },
-                    { text: "Query", link: "/config/query" },
-                    { text: "LAN Broadcast", link: "/config/lan-broadcast" },
+                    { text: "Introduction", link: "/fr/config/introduction" },
+                    { text: "Basic", link: "/fr/config/basic" },
+                    { text: "Proxy", link: "/fr/config/proxy" },
+                    { text: "Authentication", link: "/fr/config/authentication" },
+                    { text: "Compression", link: "/fr/config/compression" },
+                    { text: "Resource Pack", link: "/fr/config/resource-pack" },
+                    { text: "Commands", link: "/fr/config/commands" },
+                    { text: "RCON", link: "/fr/config/rcon" },
+                    { text: "PVP", link: "/fr/config/pvp" },
+                    { text: "Logging", link: "/fr/config/logging" },
+                    { text: "Query", link: "/fr/config/query" },
+                    { text: "LAN Broadcast", link: "/fr/config/lan-broadcast" },
                 ],
             },
             {
                 text: "Developers",
                 items: [
-                    { text: "Contributing", link: "/developer/contributing" },
-                    { text: "Introduction", link: "/developer/introduction" },
+                    { text: "Contributing", link: "/fr/developer/contributing" },
+                    { text: "Introduction", link: "/fr/developer/introduction" },
                     {
                         text: "Networking",
-                        link: "/developer/networking/networking",
+                        link: "/fr/developer/networking/networking",
                         items: [
                             {
                                 text: "Authentication",
-                                link: "/developer/networking/authentication",
+                                link: "/fr/developer/networking/authentication",
                             },
                             {
                                 text: "RCON",
-                                link: "/developer/networking/rcon",
+                                link: "/fr/developer/networking/rcon",
                             },
                         ],
                     },
-                    { text: "World", link: "/developer/world" },
-                    { text: "Mobile dev", link: "/developer/mobile" },
+                    { text: "World", link: "/fr/developer/world" },
+                    { text: "Mobile dev", link: "/fr/developer/mobile" },
                 ],
             },
             {
@@ -68,7 +68,7 @@ export const fr = defineConfig({
                 items: [
                     {
                         text: "Introduction",
-                        link: "/plugin-dev/introduction",
+                        link: "/fr/plugin-dev/introduction",
                     },
                     {
                         text: "Rust",
@@ -76,26 +76,26 @@ export const fr = defineConfig({
                         items: [
                             {
                                 text: "Creating Project",
-                                link: "/plugin-dev/rust/creating-project",
+                                link: "/fr/plugin-dev/rust/creating-project",
                             },
                             {
                                 text: "Basic Logic",
-                                link: "/plugin-dev/rust/basic-logic",
+                                link: "/fr/plugin-dev/rust/basic-logic",
                             },
                             {
                                 text: "Events",
-                                link: "/plugin-dev/rust/events",
+                                link: "/fr/plugin-dev/rust/events",
                             },
                             {
                                 text: "Commands",
                                 items: [
                                     {
                                         text: "First Command",
-                                        link: "/plugin-dev/rust/command/first-command",
+                                        link: "/fr/plugin-dev/rust/command/first-command",
                                     },
                                     {
                                         text: "Rock-Paper-Scissors",
-                                        link: "/plugin-dev/rust/command/rock-paper-scissors",
+                                        link: "/fr/plugin-dev/rust/command/rock-paper-scissors",
                                     },
                                 ],
                             },
@@ -107,15 +107,15 @@ export const fr = defineConfig({
                         items: [
                             {
                                 text: "Quick Start",
-                                link: "/plugin-dev/python/quick-start",
+                                link: "/fr/plugin-dev/python/quick-start",
                             },
                             {
                                 text: "Basic Logic",
-                                link: "/plugin-dev/python/basic-logic",
+                                link: "/fr/plugin-dev/python/basic-logic",
                             },
                             {
                                 text: "Events",
-                                link: "/plugin-dev/python/events",
+                                link: "/fr/plugin-dev/python/events",
                             },
                         ],
                     },
@@ -125,7 +125,7 @@ export const fr = defineConfig({
                         items: [
                             {
                                 text: "Quick Start",
-                                link: "/plugin-dev/csharp/quick-start",
+                                link: "/fr/plugin-dev/csharp/quick-start",
                             },
                         ],
                     },
@@ -135,7 +135,7 @@ export const fr = defineConfig({
                         items: [
                             {
                                 text: "Quick Start",
-                                link: "/plugin-dev/c/quick-start",
+                                link: "/fr/plugin-dev/c/quick-start",
                             },
                         ],
                     },
@@ -145,11 +145,11 @@ export const fr = defineConfig({
                         items: [
                             {
                                 text: "Quick Start",
-                                link: "/plugin-dev/go/quick-start",
+                                link: "/fr/plugin-dev/go/quick-start",
                             },
                             {
                                 text: "Basic Logic",
-                                link: "/plugin-dev/go/basic-logic",
+                                link: "/fr/plugin-dev/go/basic-logic",
                             },
                         ],
                     },
@@ -159,7 +159,7 @@ export const fr = defineConfig({
                         items: [
                             {
                                 text: "Quick Start",
-                                link: "/plugin-dev/kotlin/quick-start",
+                                link: "/fr/plugin-dev/kotlin/quick-start",
                             },
                         ],
                     },
@@ -170,7 +170,7 @@ export const fr = defineConfig({
                 items: [
                     {
                         text: "Common Issues",
-                        link: "/troubleshooting/common_issues.md",
+                        link: "/fr/troubleshooting/common_issues.md",
                     },
                 ],
             },
