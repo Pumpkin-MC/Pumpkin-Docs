@@ -1,46 +1,46 @@
-# Helping & Donating to Pumpkin
+# Aider & Donner à Pumpkin
 
-Thank you for your interest in supporting Pumpkin! Whether you are a developer, a server administrator, or a Minecraft enthusiast, there are many ways you can help out.
-
----
-
-## 1. Reporting Issues & Feature Suggestions
-
-If you encounter bugs, crashes, or unexpected behavior while using Pumpkin, opening a GitHub issue helps us track and resolve problems quickly.
-
-- **Check existing issues**: Search [Pumpkin GitHub Issues](https://github.com/Pumpkin-MC/Pumpkin/issues) before opening a new ticket to avoid duplicates.
-- **Provide reproduction steps**: Include clear steps, server logs, expected vs. actual behavior, and system details.
-- **Use issue templates**: Select the appropriate issue template (Bug Report or Feature Request) on GitHub.
+Merci à vous de vous interésser à supporter Pumpkin ! Peut importe si vous êtes un développeur, un administrateur de serveur, ou un passionné de Minecraft, il y a de nombreuses façon de nous aider.
 
 ---
 
-## 2. Code & Documentation Pull Requests
+## 1. Reporter des problème & Sugérer des fonctionnalités
 
-We welcome code contributions, documentation updates, and bug fixes!
+Si vous rencontrez des problème, plantages, ou comportement innatendus pendant que vous utilisez Pumpkin, ouvrir un ticket sur GitHub nous aide à suivre et résoudre les problèmes plus rapidement.
 
-For code contributions, please read our dedicated [Contributing Guide](/developer/contributing) for full instructions on setting up your environment, decompiling Minecraft logic, and submitting Pull Requests.
-
-> [!IMPORTANT] Code Guidelines
-> When contributing code to Pumpkin, please adhere to our project guidelines:
-> - **Follow Rust Formatting & Linting**: Run `cargo fmt` and `cargo clippy` before submitting your PR.
-> - **Respect Architectural Rules**: Follow existing modular structure and async practices.
-> - **Clean Commits & PRs**: Keep Pull Requests focused on a single topic with clear commit messages.
-> - **Discuss Large Changes**: Before working on major features or architectural rewrites, open a GitHub Discussion/Issue or talk with maintainers in [our Discord server](https://discord.gg/RNm224ZsDq).
+- **Vérifier les tickets existants**: Chercher dans les [ticket GitHub](https://github.com/Pumpkin-MC/Pumpkin/issues) avant d'ouvrir un nouveau ticket pour éviter les duplicatats.
+- **Fournir des étapes de reproduction**: Inclure des étapes claires, les logs du serveur, le comportement attendu vs. observé et les spécifications du système.
+- **Uiliser le modèle de ticket**: Sélectionner le bon modèel de ticket (rapport de bug ou demande de fonctionnalités) sur GitHub.
 
 ---
 
-## 3. Financial Support & Donating
+## 2. Pull Requests de code & documentation
 
-Maintaining and advancing high-performance Minecraft server software requires dedicated effort and resources. If you would like to financially back the development of Pumpkin:
+Nous apprécions les contribution dans le code, les mises à jour de la documentation et la correction de bugs.
 
-- **Sponsorship & Donations**: Check out our funding options on [GitHub Sponsors](https://github.com/sponsors/Pumpkin-MC) or links on our official site [pumpkinmc.org](https://pumpkinmc.org/).
-- **Server Infrastructure**: You can also assist by providing benchmark test environments, hardware hosting, or testing infrastructure.
+Pour contribuer dans le code, merci de lire notre [guide dédié pour contribuer](/fr/developer/contributing) pour des instruction complète par rapport à la méthode pour mettre en place votre environements, décompiler la logique de Minecraft et soummetttre des Pull Requests.
+
+> [!IMPORTANT] Directives de code
+> Quand vous contribuez au code de Pumkin, vous devez respecter les directives du projet:
+> - **Suivre la mise en forme et le marquage de Rust**: Lancez `cargo fmt` et `cargo clippy` avant de soummettre votre Pull Request.
+> - **Respect des règles architecturales**: Suivre la structur modulaire existante et les pratiques asynchrone (async).
+> - **Commits & PRs Propres**: Gardez les Pull Requests centrés sur un sujet avec des messages de commits claires.
+> - **Discuter de gros changements**: Avant de travailler sur des fonctionnalités majeurs ou des réécritures architecturales, ouvrez une [Discussion](https://github.com/Pumpkin-MC/Pumpkin/discussions) / [Ticket Github](https://github.com/Pumpkin-MC/Pumpkin/issues) ou parlez avec les mainteneurs sur [notre serveur Discord](https://discord.gg/RNm224ZsDq) 
 
 ---
 
-## 4. Community & Support
+## 3. Support financier et donnation
 
-Join our community to help answer user questions, test pre-release features, and discuss ideas:
+Maintenir et améliorer un logiciel de serveur Minecraft haute perfomance demande des effort conséquants et des ressources:
 
-- **Discord Community**: [Join the Pumpkin Discord](https://discord.gg/RNm224ZsDq)
-- **GitHub Discussions**: Share feedback and ideas on [Pumpkin GitHub Discussions](https://github.com/Pumpkin-MC/Pumpkin/discussions)
+- **Parrainage & Donations**: Consultez nos options de financement sur [GitHub Sponsors](https://github.com/sponsors/Pumpkin-MC) ou des liens sur notre site officiel [pumpkinmc.org](https://pumpkinmc.org/).
+- **Infrastructure serveur**: Vous pouvez aussi nous aider en fournissant des environement de test, du matériel d'hébergement ou en testant l'infrastructure.
+
+---
+
+## 4. Communauté & Support
+
+Rejoignez notre communauté pour aider à répondre aux question des utilisateurs, tester des pré-versions, et discuter d'idées:
+
+- **Communauté Discord**: [Rejoignez le Discord Pumpkin](https://discord.gg/RNm224ZsDq)
+- **GitHub Discussions**: Partages des avis et idés sur [Discussions GitHub Pumpkin](https://github.com/Pumpkin-MC/Pumpkin/discussions)
