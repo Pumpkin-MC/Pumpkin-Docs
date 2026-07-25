@@ -17,40 +17,40 @@ export const fr = defineConfig({
         ],
         sidebar: [
             {
-                text: "About",
+                text: "À propos",
                 items: [
                     { text: "Benchmarks", link: "/fr/about/benchmarks" },
-                    { text: "Helping & Donating", link: "/fr/about/helping" },
+                    { text: "Aide & Donations", link: "/fr/about/helping" },
                 ],
             },
             {
                 text: "Configuration",
                 items: [
                     { text: "Introduction", link: "/fr/config/introduction" },
-                    { text: "Basic", link: "/fr/config/basic" },
+                    { text: "Basique", link: "/fr/config/basic" },
                     { text: "Proxy", link: "/fr/config/proxy" },
-                    { text: "Authentication", link: "/fr/config/authentication" },
+                    { text: "Authentifaction", link: "/fr/config/authentication" },
                     { text: "Compression", link: "/fr/config/compression" },
-                    { text: "Resource Pack", link: "/fr/config/resource-pack" },
-                    { text: "Commands", link: "/fr/config/commands" },
+                    { text: "Pack de texture", link: "/fr/config/resource-pack" },
+                    { text: "Commandes", link: "/fr/config/commands" },
                     { text: "RCON", link: "/fr/config/rcon" },
                     { text: "PVP", link: "/fr/config/pvp" },
-                    { text: "Logging", link: "/fr/config/logging" },
+                    { text: "Connection", link: "/fr/config/logging" },
                     { text: "Query", link: "/fr/config/query" },
-                    { text: "LAN Broadcast", link: "/fr/config/lan-broadcast" },
+                    { text: "Accès au LAN", link: "/fr/config/lan-broadcast" },
                 ],
             },
             {
-                text: "Developers",
+                text: "Developeurs",
                 items: [
-                    { text: "Contributing", link: "/fr/developer/contributing" },
+                    { text: "Contribuer", link: "/fr/developer/contributing" },
                     { text: "Introduction", link: "/fr/developer/introduction" },
                     {
-                        text: "Networking",
+                        text: "Gestion réseau",
                         link: "/fr/developer/networking/networking",
                         items: [
                             {
-                                text: "Authentication",
+                                text: "Authentifaction",
                                 link: "/fr/developer/networking/authentication",
                             },
                             {
@@ -59,12 +59,12 @@ export const fr = defineConfig({
                             },
                         ],
                     },
-                    { text: "World", link: "/fr/developer/world" },
-                    { text: "Mobile dev", link: "/fr/developer/mobile" },
+                    { text: "Monde", link: "/fr/developer/world" },
+                    { text: "Développement mobile", link: "/fr/developer/mobile" },
                 ],
             },
             {
-                text: "Plugin Development",
+                text: "Dévellopement de plugin",
                 items: [
                     {
                         text: "Introduction",
@@ -75,26 +75,26 @@ export const fr = defineConfig({
                         collapsed: false,
                         items: [
                             {
-                                text: "Creating Project",
+                                text: "Créer un projet",
                                 link: "/fr/plugin-dev/rust/creating-project",
                             },
                             {
-                                text: "Basic Logic",
+                                text: "Logique de base",
                                 link: "/fr/plugin-dev/rust/basic-logic",
                             },
                             {
-                                text: "Events",
+                                text: "Évenements",
                                 link: "/fr/plugin-dev/rust/events",
                             },
                             {
-                                text: "Commands",
+                                text: "Commandes",
                                 items: [
                                     {
-                                        text: "First Command",
+                                        text: "Première Commande",
                                         link: "/fr/plugin-dev/rust/command/first-command",
                                     },
                                     {
-                                        text: "Rock-Paper-Scissors",
+                                        text: "Pierre-Papier-Ciseaux",
                                         link: "/fr/plugin-dev/rust/command/rock-paper-scissors",
                                     },
                                 ],
@@ -106,15 +106,15 @@ export const fr = defineConfig({
                         collapsed: false,
                         items: [
                             {
-                                text: "Quick Start",
+                                text: "Démarrage Rapie",
                                 link: "/fr/plugin-dev/python/quick-start",
                             },
                             {
-                                text: "Basic Logic",
+                                text: "Logique de base",
                                 link: "/fr/plugin-dev/python/basic-logic",
                             },
                             {
-                                text: "Events",
+                                text: "Événements",
                                 link: "/fr/plugin-dev/python/events",
                             },
                         ],
@@ -124,7 +124,7 @@ export const fr = defineConfig({
                         collapsed: false,
                         items: [
                             {
-                                text: "Quick Start",
+                                text: "Démarrage rapide",
                                 link: "/fr/plugin-dev/csharp/quick-start",
                             },
                         ],
@@ -134,7 +134,7 @@ export const fr = defineConfig({
                         collapsed: false,
                         items: [
                             {
-                                text: "Quick Start",
+                                text: "Démarrage rapide",
                                 link: "/fr/plugin-dev/c/quick-start",
                             },
                         ],
@@ -144,11 +144,11 @@ export const fr = defineConfig({
                         collapsed: false,
                         items: [
                             {
-                                text: "Quick Start",
+                                text: "Démarrage rapie",
                                 link: "/fr/plugin-dev/go/quick-start",
                             },
                             {
-                                text: "Basic Logic",
+                                text: "Logique de base",
                                 link: "/fr/plugin-dev/go/basic-logic",
                             },
                         ],
@@ -158,7 +158,7 @@ export const fr = defineConfig({
                         collapsed: false,
                         items: [
                             {
-                                text: "Quick Start",
+                                text: "Démarrage rapide",
                                 link: "/fr/plugin-dev/kotlin/quick-start",
                             },
                         ],
@@ -169,7 +169,7 @@ export const fr = defineConfig({
                 text: "Troubleshooting",
                 items: [
                     {
-                        text: "Common Issues",
+                        text: "Problèmes communs",
                         link: "/fr/troubleshooting/common_issues.md",
                     },
                 ],
