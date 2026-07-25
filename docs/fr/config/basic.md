@@ -1,8 +1,8 @@
 # Configuration
 
-Pumpkin uses a single `pumpkin.toml` file to configure all aspects of the server. Below is the complete structure of the configuration file with all available sections and default values.
+Pumpkin utilise un seul fichier `pumpkin.toml` pour configurer tous les aspects du serveur. Ci-dessous se trouve la sctrucure complète du fichier de configuration avec toutes ses sections disponibles et les valeurs par défaut.
 
-## Complete Default `pumpkin.toml`
+## `pumpkin.toml` Complet par défaut
 
 ```toml
 seed = "1785537519969227430"
@@ -188,18 +188,18 @@ save_advancements = true
 
 ### Top-Level Settings
 
-- **`seed`**: Seed string for world generation.
-- **`default_difficulty`**: Default difficulty (`"Peaceful"`, `"Easy"`, `"Normal"`, `"Hard"`).
-- **`op_permission_level`**: Default permission level assigned to operators (1-4).
-- **`allow_nether`**: Whether the Nether dimension is enabled.
-- **`allow_end`**: Whether the End dimension is enabled.
-- **`hardcore`**: Enables hardcore mode (players cannot respawn in survival).
-- **`tps`**: Target ticks per second (default: `20.0`).
-- **`default_gamemode`**: Default game mode (`"Survival"`, `"Creative"`, `"Adventure"`, `"Spectator"`).
-- **`force_gamemode`**: Force players to join in the default gamemode.
-- **`scrub_ips`**: Anonymize player IP addresses in logs.
-- **`use_favicon`**: Enable server icon (`icon.png`).
-- **`default_level_name`**: Name of the main world directory (default: `"world"`).
-- **`allow_chat_reports`**: Enable signed chat reporting.
-- **`white_list`**: Enable server whitelist.
-- **`enforce_whitelist`**: Kick non-whitelisted players when whitelist is toggled on.
+- **`seed`**: Graine pour la génération du monde.
+- **`default_difficulty`**: Difficulté par défaut (`"Peaceful"`, `"Easy"`, `"Normal"`, `"Hard"`).
+- **`op_permission_level`**: Niveau de permission par défaut assigné aux administrateur (1-4).
+- **`allow_nether`**: Controle si le Nether est activé ou non.
+- **`allow_end`**: Controle si l'End est activé ou non.
+- **`hardcore`**: Active le mod Hardcord (les joueurs ne peuvent pas réapparaitre en survie).
+- **`tps`**: Objectif de tick par seconde (par defaut: `20.0`).
+- **`default_gamemode`**: Mode de jeu par défaut (`"Survival"`, `"Creative"`, `"Adventure"`, `"Spectator"`).
+- **`force_gamemode`**: Forcer les joueurs à rejoindre dans le mode de jeu par défaut.
+- **`scrub_ips`**: Anonimise les adresses IP dans les logs.
+- **`use_favicon`**: Active l'icone du serveur (`icon.png`).
+- **`default_level_name`**: Nom du dossier de monde principal (par defaut: `"world"`).
+- **`allow_chat_reports`**: Active le signalement du chat signé.
+- **`white_list`**: Active la liste blanche.
+- **`enforce_whitelist`**: Expulse les joueurs ne faisant pas partie de al liste blanche quand activé.

@@ -1,8 +1,8 @@
 # Resource Pack
 
-Pumpkin supports serving resource packs to Java and Bedrock clients. Resource pack options are configured under `[resource_pack.java]` and `[resource_pack.bedrock]` in `pumpkin.toml`.
+Pumpkin supporte le service de pack de texture pour les clients Java et Bedrock. Les options de pack de textures sont situés sous `[resource_pack.java]` et `[resource_pack.bedrock]` dans `pumpkin.toml`.
 
-## Java Resource Pack
+## Pack de Texture Java
 
 :::code-group
 
@@ -19,13 +19,13 @@ force = false
 
 ### Options
 
-- **`enabled`**: Enable serving resource pack to Java clients.
-- **`url`**: Direct download URL for the Java resource pack zip.
-- **`sha1`**: SHA-1 checksum of the resource pack zip file.
-- **`prompt_message`**: Message shown to players when prompted to download.
-- **`force`**: Disconnect players who decline the resource pack download.
+- **`enabled`**: Active les pack de texture pour les clients Java.
+- **`url`**: URL directe de téléchargement du .zip du pack de texture Java.
+- **`sha1`**: Controle de somme SHA-1 pour le .zip du pack de texture.
+- **`prompt_message`**: Message affiché aux joueurs quand il leur est demandé de télécharger.
+- **`force`**: Rend le pack de texture obligatoire.
 
-## Bedrock Resource Pack
+## Pack de Texture Bedrock
 
 :::code-group
 
@@ -40,6 +40,6 @@ packs = []
 
 ### Options
 
-- **`enabled`**: Enable resource packs for Bedrock clients.
-- **`force`**: Force Bedrock clients to download required packs.
-- **`packs`**: Array of Bedrock resource pack definitions.
+- **`enabled`**: Active le pack de texture pour les joueurs Bedrock.
+- **`force`**: Rend le pack de texture obligatoir.
+- **`packs`**: Liste des packs de textures Bedrock.

@@ -1,6 +1,6 @@
 # Proxy
 
-Pumpkin supports proxy protocols for network server setups. Support for Velocity and BungeeCord is configured under `[networking.proxy]` in `pumpkin.toml`.
+Pumpkin supporte les protocoles Proxy pour la gestion du réseau du serveur. Le support de [Velocity](https://papermc.io/software/velocity/) et [BungeeCord](https://github.com/SpigotMC/BungeeCord) est sous `[networking.proxy]` dans `pumpkin.toml`.
 
 ## Configuration
 
@@ -22,7 +22,7 @@ enabled = false
 
 ### Configuration Options
 
-- **`[networking.proxy].enabled`**: Master switch to enable proxy support.
-- **`[networking.proxy.velocity].enabled`**: Enables Velocity forwarding protocol.
-- **`[networking.proxy.velocity].secret`**: Forwarding secret matching Velocity proxy configuration.
-- **`[networking.proxy.bungeecord].enabled`**: Enables BungeeCord forwarding protocol.
+- **`[networking.proxy].enabled`**: Interrupteur principal pour activer le support Proxy.
+- **`[networking.proxy.velocity].enabled`**: Active le protocole de transfert Velocity.
+- **`[networking.proxy.velocity].secret`**: Configuration du proxy Velocity pour la correspondance des secrets de transfert.
+- **`[networking.proxy.bungeecord].enabled`**: Active le protocole de transfert BungeeCord.

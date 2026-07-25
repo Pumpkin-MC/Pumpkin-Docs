@@ -1,24 +1,24 @@
 ### Configuration
 
-Pumpkin offers a robust configuration system that allows users to customize various aspects of the server's behavior without relying on external plugins. This provides flexibility and control over the server's operation.
+Pumpkin offre un système de configuration robuste qui permet aux utilisateurs de personnaliser diffférents aspects du comportement du serveur sans se reposer sur des plugins extrernes. Cela fournit de la felxibilité et du controle sur le comportement du serveur.
 
-### Configuration File
+### Fichier de configuration
 
-Pumpkin's configuration is stored in a single `pumpkin.toml` file.
+La configuration de Pumpkin est stockés dans un seul fichier `pumpkin.toml`.
 
-- `pumpkin.toml`: controls all server settings, features, networking, and behavior in one place.
+- `pumpkin.toml`: controle tous les paramètres serveur, fonctionalités, gestion réseau et comporements dans un seul endroit.
 
-You can create `pumpkin.toml` before running Pumpkin, or edit it after the initial run of Pumpkin.
+Vous pouvez créer `pumpkin.toml` avec de lancer Pumpkin ou le modifier après le premier lancement.
 
-### Server Version
+### Version du serveur
 
-Pumpkin aims to support the latest Minecraft Version. If you want to host a Pumpkin server for any other version, there is a project called [ViaProxy](https://github.com/ViaVersion/ViaProxy).
+Pumpkin a pour but de supporter les dernières version de Minecraft. Si vous voulez héberger un serveur Pumpkin pour n'importe quelle autre version, il y a un projet appellé [ViaProxy](https://github.com/ViaVersion/ViaProxy).
 
-- Make sure to allow proxy connections.
-- Pumpkin and ViaProxy have no connection; don't submit issues regarding their code. Furthermore, this is a 3rd party proxy and Pumpkin does not take any responsibility for the good or the bad.
+- Assurez vous d'autoriser les connection via Proxy
+- Pumpkin et ViaProxy ne sont pas liés; ne postez pas de tickets par rapport à leur code. En outre, c'est un Proxy tier et Pumpkin ne prend aucun responsabilités pour le meilleur et pour le pire.
 
-#### Key Features
+#### Fonctionnalités Clefs
 
-- Extensive Customization: Configure server settings, player behavior, world generation, and more.
-- Performance Optimization: Optimize server performance through configuration tweaks.
-- Plugin-Free Customization: Achieve desired changes without the need for additional plugins.
+- Vaste personnalisation: Configurez les parapètre du serveur, le comportement des joueurs, la génération du monde et plus.
+- Optimisation des performances: Optimisez les performances du serveur à travers des ajustements de configuration.
+- Customisation sans plugin: Faites les changements désirés sans avoir besoin de plugin additionnels.

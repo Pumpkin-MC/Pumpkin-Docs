@@ -1,6 +1,6 @@
 # LAN Broadcast
 
-Pumpkin can broadcast server announcements on the local network so LAN clients can easily discover and join the server.
+Pumpkin peut diffuser des annonces de serveur sur le réseau local afin que les clients LAN puissent facilement découvrir et rejoindre le serveur.
 
 ## Configuration
 
@@ -15,4 +15,4 @@ enabled = false
 
 ### Configuration Options
 
-- **`enabled`**: Enables or disables broadcasting to local network clients.
+- **`enabled`**: Active ou désactive les annonces pour les clients du réseau local.

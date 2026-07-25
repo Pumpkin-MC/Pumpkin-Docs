@@ -1,8 +1,8 @@
-# Authentication
+# Authentifaction
 
-Pumpkin verifies accounts with Mojang's session servers to ensure players use legitimate accounts. Authentication settings are configured under `[networking.java.authentication]` and `[networking.bedrock.authentication]` in `pumpkin.toml`.
+Pumpkin vérifie les comptes avec les serveur de session de Mojang pour assurer que les joueurs utilisents des comptes légitimes. Les paramètre d'authentification sont configuréssous `[networking.java.authentication]` et `[networking.bedrock.authentication]` dans `pumpkin.toml`.
 
-## Java Edition Authentication
+## Java Edition Authentifaction
 
 :::code-group
 
@@ -30,26 +30,26 @@ elytra = true
 
 :::
 
-### Configuration Options
+### Options de configuration
 
-- **`enabled`**: Enables online authentication for Java clients.
-- **`connect_timeout`**: Connection timeout in milliseconds when contacting auth servers.
-- **`read_timeout`**: Read timeout in milliseconds when contacting auth servers.
-- **`prevent_proxy_connections`**: Block proxy/VPN connections during authentication.
+- **`enabled`**: Active l'authentifaction en ligne pour les clients Java.
+- **`connect_timeout`**: Délai d'attente de la connection en millisecondes lors de la connection aux serveur d'authentifaction.
+- **`read_timeout`**: Délai d'attente de la lecture en millisecondes lors de la connection aux serveur d'authentifaction.
+- **`prevent_proxy_connections`**: Bloquer les connection via proxy/VPN pendant l'authentifaction.
 
 ### Player Profile Settings
 
-- **`allow_banned_players`**: Allow players flagged/banned by Mojang to connect.
-- **`allowed_actions`**: Allowed actions when banned players connect (`"FORCED_NAME_CHANGE"`, `"USING_BANNED_SKIN"`).
+- **`allow_banned_players`**: Autoriser les joueurs bannis par Mojang à se connecter.
+- **`allowed_actions`**: Actions autorisés quand un joueur bannis se connecte (`"FORCED_NAME_CHANGE"`, `"USING_BANNED_SKIN"`).
 
 ### Textures Settings
 
-- **`enabled`**: Enables player texture validation (skins, capes, elytras).
-- **`allowed_url_schemes`**: URL schemes permitted for texture downloads (`["http", "https"]`).
-- **`allowed_url_domains`**: Domains permitted for texture downloads (`[".minecraft.net", ".mojang.com"]`).
-- **`types.skin`**: Enable custom skins.
-- **`types.cape`**: Enable capes.
-- **`types.elytra`**: Enable elytra textures.
+- **`enabled`**: Activer la vérification des textures du joueur (skins, capes, elytras).
+- **`allowed_url_schemes`**: Schemas d'URL permis pour télécharger les textures (`["http", "https"]`).
+- **`allowed_url_domains`**: Domaines permis pour télécharger les textures (`[".minecraft.net", ".mojang.com"]`).
+- **`types.skin`**: Activer les skins personnalisés.
+- **`types.cape`**: Activer les capes.
+- **`types.elytra`**: Activer les textures d'élytre.
 
 ## Bedrock Edition Authentication
 

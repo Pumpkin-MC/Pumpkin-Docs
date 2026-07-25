@@ -1,6 +1,6 @@
 # Query
 
-The Query protocol allows external applications (such as server lists or monitoring systems) to request status details from Pumpkin.
+Le protocole Query permet aux applications externes (telles que les listes de serveurs ou les systèmes de surveillance) de demander des détails sur l’état à Pumpkin.
 
 ## Configuration
 
@@ -16,5 +16,5 @@ address = "0.0.0.0:25565"
 
 ### Configuration Options
 
-- **`enabled`**: Enables or disables the Query listener.
-- **`address`**: Network address and port to bind the Query listener to.
+- **`enabled`**: Active ou désactive l'écoute du protocle Query 
+- **`address`**: Adresse réseau ou port pour l'écoute réseau

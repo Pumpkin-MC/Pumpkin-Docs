@@ -1,6 +1,6 @@
 # RCON
 
-RCON allows remote administration of your Pumpkin server over a network connection. In `pumpkin.toml`, settings are placed under `[networking.rcon]`.
+RCON permet administration à disqtance de votre server Pumpkin par une connection réseau. Dans `pumpkin.toml`, les paramètres sont placés sous `[networking.rcon]`
 
 ## Configuration
 
@@ -22,16 +22,16 @@ quit = true
 
 :::
 
-### RCON Settings
+### Paramètres RCON
 
-- **`enabled`**: Master switch to enable RCON service.
-- **`address`**: IP address and port to bind RCON server to.
-- **`password`**: Password required for authenticating RCON clients.
-- **`max_connections`**: Maximum concurrent RCON client connections allowed.
+- **`enabled`**: Commutateur principal pour activer le service RCON.
+- **`address`**: Adresse IP et port auxquels lier le serveur RCON.
+- **`password`**: Mot de passe requis pour l’authentification des clients RCON.
+- **`max_connections`**: Nombre maximal de connexions concurrentes à des clients RCON autorisées.
 
-### RCON Logging Settings
+### Paramètres de connection RCON
 
-- **`logged_successfully`**: Log successful client authentication events.
-- **`wrong_password`**: Log failed authentication attempts (wrong password).
-- **`commands`**: Log commands executed through RCON.
-- **`quit`**: Log client disconnection events.
+- **`logged_successfully`** : consigner les événements d’authentification client réussis.
+- **`wrong_password`** : Consigner les tentatives d’authentification échouées (mauvais mot de passe).
+- **`commands`** : consigner les commandes exécutées via RCON.
+- **`quit`** : consigner les événements de déconnexion du client.

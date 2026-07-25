@@ -1,6 +1,6 @@
 # PVP
 
-PVP behavior and combat mechanics are configured under `[pvp]` in `pumpkin.toml`.
+Le comportement JvJ (PvP) et les mechaniques de combats sont configurés sous `[pvp]` dans `pumpkin.toml`.
 
 ## Configuration
 
@@ -19,8 +19,8 @@ swing = true
 
 ### Configuration Options
 
-- **`enabled`**: Enables player-versus-player combat.
-- **`hurt_animation`**: Shows hurt animations on attack.
-- **`protect_creative`**: Prevents players in Creative mode from receiving PVP damage.
-- **`knockback`**: Enables knockback effects upon receiving damage.
-- **`swing`**: Enables arm swing animations during attacks.
+- **`enabled`**: Active le combat Player-versus-Player.
+- **`hurt_animation`**: Affiche les animations de dégats lors des attaques.
+- **`protect_creative`**: Empèche les joueurs en créatif de recevoir des dégats de PVP.
+- **`knockback`**: Active les effect de recul quand le joueurs reçois des dégats.
+- **`swing`**: Active les animations de balancement du bras pendant les attaques.

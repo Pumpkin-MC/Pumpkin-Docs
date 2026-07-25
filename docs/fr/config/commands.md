@@ -1,6 +1,6 @@
-# Commands
+# Commandes
 
-Pumpkin supports Minecraft commands and allows configuring console, TTY, and permission behaviors in `pumpkin.toml`.
+Pumpkin supporte les commandes Minecraft et autorise la configuration de la console, TTY, et le comportement des permissions dans `pumpkin.toml`.
 
 ## Configuration
 
@@ -19,8 +19,8 @@ default_op_level = 0
 
 ### Configuration Options
 
-- **`use_console`**: Whether commands input via console are accepted.
-- **`use_tty`**: Whether TTY support is enabled for the interactive console.
-- **`log_console`**: Whether commands executed by players are logged to the console.
-- **`broadcast_console_to_ops`**: Broadcast console command outputs to server operators.
-- **`default_op_level`**: Default OP level assigned (0 to 4).
+- **`use_console`**: Controle si les commandes rentrés depuis la console sont acceptés ou non.
+- **`use_tty`**: Controle si le support de TTY est activé ou non pour la console interactive.
+- **`log_console`**: Controle si les commandes éxecutés par les joueurs sont enregistrés dans la console ou non.
+- **`broadcast_console_to_ops`**: Renvoie la console aux opérateur (OPs).
+- **`default_op_level`**: Niveau d'OP assigné par défaut (0 à 4).

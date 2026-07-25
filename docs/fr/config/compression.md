@@ -1,10 +1,10 @@
 # Compression
 
-Packet compression reduces bandwidth usage for both Java and Bedrock clients. In `pumpkin.toml`, compression is configured independently for Java and Bedrock networking, as well as world chunk compression.
+La compression des paquets réduit l'usage de la bande passant pour les clients Java et Bedrock. Dans `pumpkin.toml`, la conpression est configurée indépendament pour Java et Bedrock, de même que la compression des chunks du monde.
 
-## Network Compression
+## Compression réseau
 
-### Java Edition
+### Java Édition
 
 :::code-group
 
@@ -17,7 +17,7 @@ level = 4
 
 :::
 
-### Bedrock Edition
+### Bedrock Édition
 
 :::code-group
 
@@ -30,15 +30,15 @@ level = 4
 
 :::
 
-### Configuration Options
+### Options de configuration
 
-- **`enabled`**: Enables network packet compression.
-- **`threshold`**: Minimum packet payload size (in bytes) required before triggering compression.
-- **`level`**: Compression level (0 to 9, where higher values trade CPU time for smaller packet sizes).
+- **`enabled`**: Active la compression réseau.
+- **`threshold`**: Taille minimum de la charge utile d'un packet (en octets) avant d'utiliser la compression.
+- **`level`**: Niveau de compression (0 à 9, où les plus grandes valeurs échangent du temps CPU pour des plus petites tailles de paquets).
 
 ## World Chunk Compression
 
-Chunk compression settings control how stored world chunk data is compressed on disk.
+Les paramètrest de compression des chunks controlent comment est stocké les donnés du monde sur le disque.
 
 :::code-group
 
@@ -50,5 +50,5 @@ level = 6
 
 :::
 
-- **`algorithm`**: Compression algorithm used for chunk data (e.g. `"LZ4"`).
-- **`level`**: Compression level for chunk data.
+- **`algorithm`**: Algorithme utilisé pour la compression des donnés des chunks (ex: `"LZ4"`).
+- **`level`**: Niveau de compression (0 à 9, où les plus grandes valeurs échangent du temps CPU pour des plus petites tailles sur le disque).
