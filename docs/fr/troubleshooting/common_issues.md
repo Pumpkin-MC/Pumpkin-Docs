@@ -1,9 +1,9 @@
-# Common Issues
+# Problèmes communs
 
-1. ## Failed to verify username
+1. ## Impossible de vérifier le nom d'utilisateur
 
-    **Issue:** Some players reported having issues logging into the server, including encountering a "Failed to verify username" error.
+    **Problème:** Certains joueurs ont reporté un problème de connection au serveur, incluant la rencontre d'un erreur "Échec lors de la vérification du nom d'utilisateur".
 
-    **Cause:** This has to do with authentication, and usually with the `prevent_proxy_connections` setting.
+    **Cause:** Cela est généralement causé par authentification, et souvent à cause du paramètre `prevent_proxy_connections`.
 
-    **Fix:** Disable `prevent_proxy_connections` under `[networking.java.authentication]` in `pumpkin.toml`
+    **Fix:** Décativer `prevent_proxy_connections` sous `[networking.java.authentication]` dans `pumpkin.toml`
