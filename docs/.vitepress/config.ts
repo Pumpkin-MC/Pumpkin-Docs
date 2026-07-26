@@ -13,6 +13,8 @@ import { fr } from "./fr";
 export default defineConfig({
     title: "Pumpkin",
 
+    base: "/Pumpkin-Docs-fr/",
+
     cleanUrls: true,
     rewrites: {
         'en/:rest*': ':rest*'
@@ -40,9 +42,9 @@ export default defineConfig({
         ja_jp: {
             label: "日本語", ...jaJP
         },
-	fr: {
-	    label: "Français", ...fr
-	},
+        fr: {
+            label: "Français", ...fr
+        },
     },
 
     head: [
