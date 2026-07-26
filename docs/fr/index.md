@@ -1,7 +1,7 @@
-# Démarrage rapie
+# Démarrage rapide
 
 **Status actuel:**
-Pré-version (pre-release): Actuellement en dévellopement et pas encore près pour une publication officielle.
+Pré-version (pre-release): Actuellement en dévellopement et pas encore prêt pour une publication officielle.
 
 ## Télécharger les binaires de pré-version
 
@@ -36,7 +36,7 @@ RUSTFLAGS='-C target-cpu=native' cargo run --release
 ```
 
 > [!NOTE]
-> Pour utiliser (pour jouer sur) sur un serveur que vous hébergez vous-même sur le même système local (ex: en utilisant Prism launcher sur Linux pour se connecter  et executer / jouer Minecraft tout en utilisant Pumpkinpour héberger le serveur) vous pourrez avoir besoin d'utiliser "localhost:25565" comme l'adresse du serveur à travers 'Multijoueur' -> 'Ajouter un serveur' -> 'Adresse du server', même si cette adresse n'est pas listée dans la sortie du terminal du serveur.
+> Pour utiliser (pour jouer sur) sur un serveur que vous hébergez vous-même sur le même système local (ex: en utilisant Prism launcher sur Linux pour se connecter  et executer / jouer Minecraft tout en utilisant Pumpkin pour héberger le serveur) vous pourrez avoir besoin d'utiliser "localhost:25565" comme l'adresse du serveur à travers 'Multijoueur' -> 'Ajouter un serveur' -> 'Adresse du server', même si cette adresse n'est pas listée dans la sortie du terminal du serveur.
 ```text
 localhost:25565
 ```
@@ -56,7 +56,7 @@ docker run --rm \
 ```
 
 - `<port_exposé>`: Le port auquel vous voulez vous connecter à Pumpkin avec, par exemple `25565`.
-- `<emplacement_donnés_serveur>`: L'emlacement auquel vous voulez que votre serveur enregistre sa configuration et ses donnés, par exemple `./data`.
+- `<emplacement_donnés_serveur>`: L'emplacement auquel vous voulez que votre serveur enregistre sa configuration et ses donnés, par exemple `./data`.
 
 ### Exemple
 
@@ -75,7 +75,7 @@ Pumpkin a un serveur de test maintenu par @kralverde. Il tourne sur le dernier c
 
 - **IP:** pumpkin.kralverde.dev
 
-**Spécifiactions:**
+**Spécifications:**
 
 - OS: Debian GNU/Linux bookworm 12.7 x86_64
 - Kernel: Linux 6.1.0-21-cloud-amd64

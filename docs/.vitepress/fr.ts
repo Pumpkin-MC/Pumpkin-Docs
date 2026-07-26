@@ -64,7 +64,7 @@ export const fr = defineConfig({
                 ],
             },
             {
-                text: "Dévellopement de plugin",
+                text: "Développement de plugin",
                 items: [
                     {
                         text: "Introduction",
