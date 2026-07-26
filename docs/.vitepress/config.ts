@@ -13,7 +13,7 @@ import { fr } from "./fr";
 export default defineConfig({
     title: "Pumpkin",
 
-    base: "/Pumpkin-Docs-fr/",
+    base: "/Pumpkin-Docs/",
 
     cleanUrls: true,
     rewrites: {
