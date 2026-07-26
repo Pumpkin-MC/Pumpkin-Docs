@@ -1,7 +1,7 @@
 # Démarrage rapide
 
 **Status actuel:**
-Pré-version (pre-release): Actuellement en dévellopement et pas encore prêt pour une publication officielle.
+Pré-version (pre-release): Actuellement en développement et pas encore prêt pour une publication officielle.
 
 ## Télécharger les binaires de pré-version
 
@@ -11,14 +11,14 @@ Vous pouvez télécharger les binaires sur [la page de téléchargement pour la 
 
 Pour compiler Pumpkin depuis les sources, vous devez avoir [Rust](https://www.rust-lang.org/tools/install) installé.
 
-1. **Cloner le dépot** et navigez dans le dossier:
+1. **Cloner le dépôt** et navigez dans le dossier:
 
 ```shell
 git clone https://github.com/Pumpkin-MC/Pumpkin.git
 cd Pumpkin
 ```
 
-2. **Facultatif:** Si vous le souhaitez, vous pouvez placer un monde Vanilla dans le dossier `Pumplin/`. Nommez juste le dossier `world`
+2. **Facultatif:** Si vous le souhaitez, vous pouvez placer un monde Vanilla dans le dossier `Pumpkin/`. Nommez juste le dossier `world`
 
 3. Executer:
 
@@ -36,7 +36,7 @@ RUSTFLAGS='-C target-cpu=native' cargo run --release
 ```
 
 > [!NOTE]
-> Pour utiliser (pour jouer sur) sur un serveur que vous hébergez vous-même sur le même système local (ex: en utilisant Prism launcher sur Linux pour se connecter  et executer / jouer Minecraft tout en utilisant Pumpkin pour héberger le serveur) vous pourrez avoir besoin d'utiliser "localhost:25565" comme l'adresse du serveur à travers 'Multijoueur' -> 'Ajouter un serveur' -> 'Adresse du server', même si cette adresse n'est pas listée dans la sortie du terminal du serveur.
+> Pour utiliser (pour jouer sur) sur un serveur que vous hébergez vous-même sur le même système local (ex: en utilisant Prism launcher sur Linux pour se connecter  et exécuter / jouer Minecraft tout en utilisant Pumpkin pour héberger le serveur) vous pourrez avoir besoin d'utiliser "localhost:25565" comme l'adresse du serveur à travers 'Multijoueur' -> 'Ajouter un serveur' -> 'Adresse du serveur', même si cette adresse n'est pas listée dans la sortie du terminal du serveur.
 ```text
 localhost:25565
 ```
@@ -44,18 +44,18 @@ localhost:25565
 ## Docker
 
 > [!IMPORTANT]
-> Le support de docker est actuellement experimental.
+> Le support de docker est actuellement expérimental.
 
 Si vous ne l'avez pas déjà, [installez Docker](https://docs.docker.com/engine/install/). Après avoir installé Docker, vous pouvez lancer les commandes suivantes pour lancer le serveur:
 
 ```shell
 docker run --rm \
-    -p <port_exposé>:25565  \
+    -p <port_expose>:25565  \
     -v <emplacement_donnés_serveur>:/pumpkin \
     -it ghcr.io/pumpkin-mc/pumpkin:master
 ```
 
-- `<port_exposé>`: Le port auquel vous voulez vous connecter à Pumpkin avec, par exemple `25565`.
+- `<port_exposé>`: Le port auquel vous voulez vous connecter à Pumpkin, par exemple `25565`.
 - `<emplacement_donnés_serveur>`: L'emplacement auquel vous voulez que votre serveur enregistre sa configuration et ses donnés, par exemple `./data`.
 
 ### Exemple

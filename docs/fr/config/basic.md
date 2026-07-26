@@ -1,6 +1,6 @@
 # Configuration
 
-Pumpkin utilise un seul fichier `pumpkin.toml` pour configurer tous les aspects du serveur. Ci-dessous se trouve la sctrucure complète du fichier de configuration avec toutes ses sections disponibles et les valeurs par défaut.
+Pumpkin utilise un seul fichier `pumpkin.toml` pour configurer tous les aspects du serveur. Ci-dessous se trouve la structure complète du fichier de configuration avec toutes ses sections disponibles et les valeurs par défaut.
 
 ## `pumpkin.toml` Complet par défaut
 
@@ -190,16 +190,16 @@ save_advancements = true
 
 - **`seed`**: Graine pour la génération du monde.
 - **`default_difficulty`**: Difficulté par défaut (`"Peaceful"`, `"Easy"`, `"Normal"`, `"Hard"`).
-- **`op_permission_level`**: Niveau de permission par défaut assigné aux administrateur (1-4).
-- **`allow_nether`**: Controle si le Nether est activé ou non.
-- **`allow_end`**: Controle si l'End est activé ou non.
-- **`hardcore`**: Active le mod Hardcord (les joueurs ne peuvent pas réapparaitre en survie).
-- **`tps`**: Objectif de tick par seconde (par defaut: `20.0`).
+- **`op_permission_level`**: Niveau de permission par défaut assigné aux administrateurs (1-4).
+- **`allow_nether`**: Contrôle si le Nether est activé ou non.
+- **`allow_end`**: Contrôle si l'End est activé ou non.
+- **`hardcore`**: Active le mod Hardcore (les joueurs ne peuvent pas réapparaitre en survie).
+- **`tps`**: Objectif de tick par seconde (par défaut: `20.0`).
 - **`default_gamemode`**: Mode de jeu par défaut (`"Survival"`, `"Creative"`, `"Adventure"`, `"Spectator"`).
 - **`force_gamemode`**: Forcer les joueurs à rejoindre dans le mode de jeu par défaut.
-- **`scrub_ips`**: Anonimise les adresses IP dans les logs.
+- **`scrub_ips`**: Anonymise les adresses IP dans les logs.
 - **`use_favicon`**: Active l'icone du serveur (`icon.png`).
-- **`default_level_name`**: Nom du dossier de monde principal (par defaut: `"world"`).
+- **`default_level_name`**: Nom du dossier de monde principal (par défaut: `"world"`).
 - **`allow_chat_reports`**: Active le signalement du chat signé.
 - **`white_list`**: Active la liste blanche.
-- **`enforce_whitelist`**: Expulse les joueurs ne faisant pas partie de al liste blanche quand activé.
+- **`enforce_whitelist`**: Expulse les joueurs ne faisant pas partie de la liste blanche quand activé.

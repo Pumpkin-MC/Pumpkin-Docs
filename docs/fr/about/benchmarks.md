@@ -2,10 +2,10 @@
 
 Ici il y a une comparaison entre le logiciel de serveur Minecraft classique contre Pumpkin.
 
-> [!CAUTION]ATTENTION
-> **Cette comparaison n'est pas juste.** Pumpkin a actuellement moins de fonctionnalistés que les autres serveurs, qui pourrait entrainer l'utilisation de moins de ressources.
-> C'est aussi important de préciser que les autres serveur ont eu des annés pour s'optimiser.
-> Les dérivation du serveur Vanilla, qui n'ont pas besoin de besoin de réécrire toute la logique peuvent se concentrer exclusivement sur l'optmisation.
+> [!CAUTION] ATTENTION
+> **Cette comparaison n'est pas juste.** Pumpkin a actuellement moins de fonctionnalités que les autres serveurs, qui pourrait entrainer l'utilisation de moins de ressources.
+> C'est aussi important de préciser que les autres serveur ont eu des années pour s'optimiser.
+> Les dérivation du serveur Vanilla, qui n'ont pas besoin de besoin de réécrire toute la logique peuvent se concentrer exclusivement sur l'optimization.
 
 ![Une capture d'écrans qui montre 9 fenêtres de jeu Minecraft](https://github.com/user-attachments/assets/e08fbb00-42fe-4479-a03b-11bb6886c91a)
 
@@ -29,7 +29,7 @@ Ici il y a une comparaison entre le logiciel de serveur Minecraft classique cont
 
 #### Rust
 
-- Chain d'outils (toolchain): stable-x86_64-unknown-linux-gnu (1.81.0)
+- Chaîne d'outils (toolchain): stable-x86_64-unknown-linux-gnu (1.81.0)
 - Rust Compiler: rustc 1.81.0 (eeb90cda1 2024-09-04)
 
 #### Java
@@ -46,10 +46,10 @@ Ici il y a une comparaison entre le logiciel de serveur Minecraft classique cont
 - Mode en ligne: false
 - RCON: false
 
-<sub><sup>Le mode en ligne a été désactiver pour faciliter le test avec des comptes non-premium.</sup></sub>
+<sub><sup>Le mode en ligne a été désactivé pour faciliter le test avec des comptes non-premium.</sup></sub>
 
 > [!NOTE]
-> Tous les tests ont été éxécutés plusieurs fois pour des résultats plus précis.
+> Tous les tests ont été exécutés plusieurs fois pour des résultats plus précis.
 > Aucun joueur n'a bougé après avoir bougé. Seulement les 8 chunks initiaux ont été chargés.
 > Chaque serveur utilisait sa propre génération. Aucun monde n'était préchargé.
 
@@ -78,7 +78,7 @@ Argumements d'execution:
 | 5       | <FmtNum :n=26 />Mo    | <FmtNum :n=0 />% | <FmtNum :n=1 />%   |
 | 10      | <FmtNum :n=27.1 />Mo  | <FmtNum :n=0 />% | <FmtNum :n=1.5 />% |
 
-<sub><sup>Pumpkin met en cache les chunks déjà chargé, ce qui n'entraine pas d'usage de RAM supplémentaire à part les donnés du joueur et l'usage CPU minimal</sup></sub>
+<sub><sup>Pumpkin met en cache les chunks déjà chargés, ce qui n'entraîne pas d'usage de RAM supplémentaire à part les données du joueur et l'usage CPU minimal</sup></sub>
 
 ### Temps de compilation
 
@@ -98,7 +98,7 @@ Release: [1.21.1](https://piston-data.mojang.com/v1/objects/59353fb40c36d304f203
 
 Arguments de compilation:
 
-Arguments d'éxécution: `nogui`
+Arguments d'exécution: `nogui`
 
 **Taille du fichier:** <FmtNum :n=51.6 />Mo
 
@@ -120,7 +120,7 @@ Build: [122](https://api.papermc.io/v2/projects/paper/versions/1.21.1/builds/122
 
 Arguments de compilation:
 
-Arguments d'éxécution: `nogui`
+Arguments d'exécution: `nogui`
 
 **Taille du fichier:** <FmtNum :n=49.4 />Mo
 
