@@ -6,7 +6,7 @@ import { zhCN } from "./zh_cn";
 import { de } from "./de";
 import { trTR } from "./tr_tr";
 import { jaJP } from "./ja_jp";
-
+import { vi } from "./vi"; // <-- Thêm dòng import file vi.ts
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -38,6 +38,9 @@ export default defineConfig({
         },
         ja_jp: {
             label: "日本語", ...jaJP
+        },
+        vi: {
+            label: "Tiếng Việt", ...vi
         },
     },
 
