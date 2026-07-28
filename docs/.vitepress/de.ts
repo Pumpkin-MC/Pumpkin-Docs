@@ -158,7 +158,7 @@ export const de = defineConfig({
             { icon: "discord", link: "https://discord.gg/RNm224ZsDq" },
         ],
 
-        logo: "/assets/favicon.ico",
+        logo: "/assets/icon.svg",
         footer: {
             message: "Veröffentlicht unter der MIT-Lizenz.",
             copyright: `Copyright © 2024-${new Date().getFullYear()} Aleksandr Medvedev`,

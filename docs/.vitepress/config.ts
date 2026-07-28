@@ -42,9 +42,7 @@ export default defineConfig({
     },
 
     head: [
-        ["link", { rel: "shortcut icon", href: "/assets/favicon.ico" }],
-        ["link", { rel: "icon", type: "image/png", href: "/assets/favicon-96x96.png", sizes: "96x96" }],
-        ["link", { rel: "icon", type: "image/svg+xml", href: "/assets/favicon.svg" }],
+        ["link", { rel: "icon", type: "image/svg+xml", href: "/assets/icon.svg" }],
         ["link", { rel: "apple-touch-icon", href: "/assets/apple-touch-icon.png", sizes: "180x180" }],
         ["link", { rel: "manifest", href: "/assets/site.webmanifest" }],
 
