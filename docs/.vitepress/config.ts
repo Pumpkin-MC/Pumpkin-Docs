@@ -14,7 +14,7 @@ export default defineConfig({
     title: "Pumpkin",
 
     // Uncomment this line to work into a GitHub page
-    // base: "/Pumpkin-Docs/",
+    base: "/Pumpkin-Docs/",
 
     cleanUrls: true,
     rewrites: {
