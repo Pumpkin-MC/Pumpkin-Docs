@@ -1,38 +1,38 @@
 # Quick Start
 
-This guide will help you get started with writing Pumpkin server plugins using Kotlin.
+Ce guide va vous aider à commencer à écrire un plugin pour le serveur Pumpkin en utilisant [Koltin](https://kotlinlang.org/).
 
-:::warning
-Until the Kotlin + Wasm component toolchain matures more, there will be some oddity and inconvenience. 
+:::warning Attention
+Jusqu’à ce que la chaîne d’outils du composant Kotlin + Wasm mûrisse davantage, il y aura une certaine étrangeté et des désagréments. 
 
-Bugs are also expected.
+Des bugs sont également attendus.
 :::
 
-## Prerequisites
+## Prérequis
 
-Before you start, ensure you have the following installed:
-- JDK 17 or later
-    - To run Gradle 9.4
+Avant de commencer, vous devez vous assurer d'avoir d'installé:
+- JDK 17 ou plus
+    - Pour exécuter Gradle 9.4
 - [Rust](https://rust-lang.org/)
-    - This is required as a key component (wit-bindgen) is written and Rust must be built from a particular Kotlin-enabled fork.
-    - You only need a default Rust install for your host platform. NOT for any WebAssembly targets
+    - Ceci est requis car un composant clé (wit-bindgen) est écrit et Rust doit être construit à partir d’une fork particulière activée par Kotlin.
+    - Vous n’avez besoin que d’une installation Rust par défaut pour votre plateforme hôte. PAS pour les cibles WebAssembly
 - [wasm-tools](https://github.com/bytecodealliance/wasm-tools)
-    - To bundle the Wasm Kotlin produces into a component
-- Make (e.g. [GNU Make](https://www.gnu.org/software/make/))
-    - To run the convenience `Makefile`. You may opt to do without and perform the contained steps manually.
+    - Regrouper les produits Wasm Kotlin dans un composant
+- Make (par exemple [GNU Make](https://www.gnu.org/software/make/))
+    - Pour exécuter le Makefile, vous pouvez choisir de vous en passer et d’effectuer les étapes contenues manuellement.
 
-## Setting up the project
+## Créer votre projet
 
-Unlike most of the other APIs packages available, [pumpkin-api-kt](https://github.com/Pumpkin-MC/pumpkin-api-kt) is a TEMPLATE, not e.g. a Maven package.
+Contrairement à la majorité des paquets d'API, [pumpkin-api-kt](https://github.com/Pumpkin-MC/pumpkin-api-kt) est un MODÈLE.
 
-To start off, clone the template (and rename it as you please):
+POur commencer, clonez le modèle (et rennomez le comme vous le souhaitez):
 ```sh
 git clone --recurse-submodules https://github.com/Pumpkin-MC/pumpkin-api-kt
 mv pumpkin-api-kt my_kotlin_plugin
 cd my_kotlin_plugin
 ```
 
-Next, we'll want to update the `wit` submodule so we are using the latest version of the Pumpkin plugin API.
+Ensuite, nous voulons mettre à jour le sous-module `wit` parceque nous utilisons la dernière version de l'API Plugin de Pumpkin.
 
 ```sh
 cd wit
@@ -40,39 +40,39 @@ git pull origin master
 cd ..
 ```
 
-Finally, rename the Gradle project. Change the `rootProject.name` in `settings.gradle.kts`, AND the `PROJECT_NAME` in `Makefile`. They must both match. Whatever you name the project, is going to be the filename of the Wasm produced.
+Enfin, renommez le projet Gradle. Changez le `rootProject.name` dans `settings.gradle.kts`, ET le `PROJECT_NAME` dans `Makefile`. Ils doivent tous les deux correspondre. Quel que soit le nom du projet, ce sera le nom de fichier du Wasm produit.
 
-## Creating your first plugin
+## Créer votre premier plugin
 
-As part of the template, a basic plugin is implemented in `src/wasmWasiMain/kotlin/plugin/Plugin.kt`. 
+Dans le cadre du modèle, un plug-in de base est implémenté dans `src/wasmWasiMain/kotlin/plugin/Plugin.kt`. 
 
-Feel free to modify the metadata at the bottom. However, before changing anything else, it's recommended that you build the plugin (see next section) first so that the bindings are generated and IDE completion works for `pumpkin`.
+N’hésitez pas à modifier les métadonnées en bas. Cependant, avant de changer quoi que ce soit d’autre, il est recommandé de compiler le plugin (voir la section suivante) d’abord afin que les liaisons soient générées et que l’achèvement de l’IDE fonctionne pour `pumpkin`.
 
-## Building the plugin
+## Compiler le plugin
 
-To build your plugin into a WebAssembly component:
+Pour compiler le plugin en un composant WebAssembly:
 
 ```sh
 make
 ```
 
-The compiled `.wasm` file will be located in `build`. You can place this file in the `plugins` folder of your Pumpkin server.
+Le fichier `.wasm` compilé se trouvera dans `build`. Vous pouvez placer ce fichier dans le dossier `plugins` de votre serveur Pumpkin.
 
-Note that doing this the first time might take awhile, while it builds `wit-bindgen` from Rust source.
+Notez que faire ça une permière fois peut prendre du temps, pendant qu'il constuit `wit-bindgen` depuis les sources Rust.
 
-Running `make` will check for `wit-bindgen` updates each time. You may want to run instead `make componentify` after the initial setup to avoid this.
+Exécuret `make` va vérifier pour des mises à jour de `wit-bindgen` à chaque fois. Tu pourrais vouloir exécuter `make componentify` à la place après l'initialisation pour éviter ça.
 
-## Troubleshooting
+## Dépannage
 
-### Linker errors
-If you start getting errors like
+### Erreurs de l’éditeur de lien
+Si vous commencez à recevoir des erreurs comme
 ```
 main ThreadId(01) pumpkin::plugin: Failed to load plugin from
 "./plugins/my_plugin.wasm": Wasm plugin initialization error: plugin failed
 to load with error: component imports instance 'pumpkin:plugin/gui@0.1.0', but
 a matching implementation was not found in the linker
 ```
-or other "linker" errors when loading your plugin into Pumpkin, update the `wit` submodule.
+ou d’autres erreurs de « lien » lors du chargement de votre plug-in dans Pumpkin, mettez à jour le sous-module `wit`.
 
 ```sh
 cd wit

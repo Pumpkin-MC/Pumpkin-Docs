@@ -1,35 +1,33 @@
-# Creating a new project
+# Créer un nouveau projet
 
-Pumpkin plugins use the [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html) build system.
+Les plugins Pimpkin utilisent le système de compilation [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html).
 
-The complete code for this plugin can be found as a [template on GitHub](https://github.com/BjornTheProgrammer/Hello-Pumpkin-Wasm).
+Le code complet pour ce plugin peut être trouvé sur [l'exemple GitHub](https://github.com/BjornTheProgrammer/Hello-Pumpkin-Wasm).
 
-## Installing the toolchain
+## Installer la chaîne d'outil
 
-Before we can compile a plugin, we have to have the `wasm32-wasip2` target installed. You can install the target
-by running:
+Avant de pouvoir compiler un plugin, on a besoin de la cible `wasm32-wasip2` installée. Vous pouvez l'installé en exécutant:
 
 ```bash
 rustup target add wasm32-wasip2
 ```
 
-## Initializing a new crate
+## Initialisation d’une nouvelle crate
 
-First we need to create a new project folder. You can do this by running this command in the folder you created:
+Premièrement, nous avons besoin de créer un nouveau dossier pour le projet. Vous pouvez créer la crate ça en exécutant dans le dossier que vous venez de créer:
 
 ```bash
 cargo new <project-name> --lib
 ```
 
-After adding this, we want to create a new directory called `.cargo` and add in a `config.toml` file with the following
-contents
+Après ça, nous avons besoin de créer un nouveau dossier apellé `.cargo` et y ajouter un fichier `config.toml`
 
 ```toml [config.toml]
 [build]
 target = "wasm32-wasip2"
 ```
 
-Altogether your new folder structure should look like this:
+Au total, votre nouvelle structure de dossiers devrait ressembler à ceci:
 
 ```bash
 ├── .cargo/
@@ -40,9 +38,9 @@ Altogether your new folder structure should look like this:
 └── Cargo.lock
 ```
 
-## Configuring the crate
+## Configurer la crate
 
-Since Pumpkin plugins are loaded at runtime as dynamic libraries, we need to tell Cargo to build this crate as one.
+Puisque les plugins Pumpkin sont chargés à l’exécution en tant que bibliothèques dynamiques, nous devons dire à Cargo de construire cette crate comme une seule.
 :::code-group
 
 ```toml [Cargo.toml]
@@ -59,7 +57,7 @@ crate-type = ["cdylib"]
 
 :::
 
-Next we need to add some basic dependencies. Since Pumpkin is still in early development, the internal crates aren't published to crates.io, so we need to tell Cargo to download the dependencies directly from GitHub.
+Ensuite, nous devons ajouter quelques dépendances de base. Comme Pumpkin est encore au début de son développement, les crates internes ne sont pas publiées sur crates.io, nous devons donc dire à Cargo de télécharger les dépendances directement depuis GitHub.
 :::code-group
 
 ```toml [Cargo.toml]
@@ -73,15 +71,15 @@ crate-type = ["cdylib"]
 
 [dependencies]
 // [!code ++:3]
-# This is the api crate that makes creating plugins easier, and has wit definitions
+# Ceci est la crate d’API qui facilite la création de plugins, et a des définitions
 pumpkin-plugin-api = { version = "0.1.0", git = "https://github.com/Pumpkin-MC/Pumpkin", package = "pumpkin-plugin-api" }
 tracing = "0.1"
 ```
 
 :::
 
-For improved performance and smaller file sizes, we recommend enabling Link-Time Optimization (LTO).  
-Be aware that this will increase compilation time.
+Pour améliorer les performances et réduire la taille des fichiers, nous recommandons d’activer l’optimisation du temps de liaison (LTO).  
+Sachez que cela augmentera le temps de compilation.
 :::code-group
 
 ```toml [Cargo.toml]
@@ -90,4 +88,4 @@ lto = true
 ```
 
 :::
-<small>Enables LTO only for release builds.</small>
+<small>Activer LTO uniquement pour les compilations de publication.</small>

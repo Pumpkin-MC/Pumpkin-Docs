@@ -1,45 +1,44 @@
-# Writing a Event Handler
+# Écrire un gestionnaire d'événement
 
-Event handlers are one of the main functions of plugins. They allow a plugin to tap into the
-internal workings of the server and alter its behavior to perform some other action. For a
-simple example, we will implement a handler for the `PlayerJoinEvent` and the `PlayerLeaveEvent`.
+Les gestionnaires d'evénements sont une des fonctions principales d'un plugin. Ils permettent à un plugin de s'incruster dans le fonctionnement interne du serveur et modifier son comportement pour executer.
+Pour un exemple, nous allons implémenter un gestionnaire pour les evénements `PlayerJoinEvent` et `PlayerLeaveEvent`.
 
-## Implementing an Event
+## Implémenter un événement
 
-Individual event handlers are just structs which implement the `EventHandler<E>` trait (where `E` is a specific event data).
+Les gestionnaires d’événements individuels ne sont que des structures qui implémentent le trait `EventHandler<E>` (où `E` est une donnée d’événement spécifique).
 
-### What are blocking events?
+### Qu'est ce qui bloque les evénements ?
 
-The Pumpkin plugin event system differentiates between two types of events: blocking and non-blocking. Each have their benefits:
+Le système d'événements Pumpkin différentie deux types d'événements: bloquant et non-bloquant. Chaqu'un ayant leurs avantages:
 
-#### Blocking events
-
-```diff
-Pros:
-+ Can modify the event (like editing the join message)
-+ Can cancel the event
-+ Have a priority system
-Cons:
-- Are executed in sequence
-- Can slow down the server if not implemented well
-```
-
-#### Non-blocking events
+#### Événements bloquant
 
 ```diff
-Pros:
-+ Are executed concurrently
-+ Are executed after all blocking events finish
-+ Can still do some modifications (anything that is behind a Mutex or RwLock)
-Cons:
-- Cannot cancel the event
-- Have no priority system
-- Allow for less control over the event
+Pour:
++ Puet éditer l'événement (modifier le message de connection par exemple)
++ Peut annuler l'événement
++ Ont un système de priorité
+Contres:
+- Sont éxécutés les uns après les autres
+- Peut ralentir le serveur si mal implémenté
 ```
 
-### Writing a handler
+#### Évéments non-bloquant
 
-Since our main aim here is to change the welcome message that the player sees when they join a server, we will be choosing the blocking event type with a normal priority.
+```diff
+Pour:
++ Sont tous exécutés en même temps
++ Sont toujours executés après les evénemnt bloquants
++ Peut toujours faire certaines modification (tout ce qui est derrière un Mutex ou RwLock)
+Contres:
+- Ne peux pas annuler l'événement
+- N'a pas de système de priorité
+- Permettre moins de contrôle sur l’événement
+```
+
+### Écrire un gestionnaire
+
+Puisque notre objectif principal ici est de changer le message de bienvenue que le joueur voit lorsqu’il rejoint un serveur, nous choisirons le type d’événement bloquant avec une priorité normale.
 
 :::code-group
 
@@ -67,14 +66,14 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 
 :::
 
-**Explanation**:
+**Éxplications**:
 
-- `struct MyJoinHandler;`: The struct for our event handler
-- If the event is non-blocking, we still use the handle function, and return the event data. The event data will still be ignored.
+- `struct MyJoinHandler;` : La structure de notre gestionnaire d’événements
+- Si l’événement n’est pas bloquant, nous utilisons toujours la fonction handle et renvoyons les données de l’événement. Les données de l’événement restent ignorées.
 
-### Registering the handler
+### Enregistrer le gestionnaire
 
-Now that we have written the event handler, we need to tell the plugin to use it. We can do that by adding a single line into the `on_load` method:
+Maintenant que nous avons écrit le gestionnaire d’événements, nous devons dire au plugin de l’utiliser. Nous pouvons le faire en ajoutant une seule ligne dans la méthode `on_load` :
 :::code-group
 
 ```rust [lib.rs]
@@ -102,8 +101,4 @@ impl Plugin for HelloPlugin {
 ```
 
 :::
-Now if we build the plugin and join the server, we should see a "Hello, World!" message!
-
-## Adding a leave event
-
-As an exercise for the reader, try adding a PlayerLeaveEvent
+Maintenant si nous compilons le plugin et rejoignons le serveur, nous devrions voir un "Hello, World !"

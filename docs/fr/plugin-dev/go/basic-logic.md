@@ -1,8 +1,8 @@
-# Writing the basic logic
+# Écrire la logique de base
 
-## Plugin Entry Point
+## Point d'entré du plugin
 
-In Go, your plugin must implement the `api.Plugin` interface and register itself in the `init()` function. You also need to import `wit_exports` for WebAssembly compatibility.
+En Go, votre plugin doit implémenter l'interface `api.Plugin` et enregistrer lui-même dans la fonction `init()`. Vous aurrez aussi besoin d'importer `wit_exports` pour la compatibilité WebAssembly.
 
 :::code-group
 
@@ -41,20 +41,14 @@ func main() {}
 
 :::
 
-## Compiling the plugin
+## Compiler le plugin
 
-To compile your plugin to WebAssembly, you must use **TinyGo**. The standard Go compiler does not yet support the specific WASI targets required by Pumpkin in the same way.
+Pour compiler votre plugin vers WebAssembly, vous devez utiliser **TinyGo**. Le compilateur standard Go ne prend pas encore en charge les cibles WASI spécifiques requises par Pumpkin de la même manière.
 
-Run the following command in your project folder:
+Exécutez la commande suivante dans votre dossier de projet :
 
 ```bash
 tinygo build -o my_plugin.wasm -target=wasi main.go
 ```
 
-This will generate a `my_plugin.wasm` file that can be loaded by Pumpkin.
-
-## Testing the plugin
-
-Installing a plugin is as simple as putting the plugin binary (`.wasm`) into the `plugins/` folder of your Pumpkin server!
-
-When you start up the server and run the `/plugins` command, you should see your plugin listed.
+Cela va générer un fichier `my_plugin.wasm` qui peut être chargé par Pumpkin.

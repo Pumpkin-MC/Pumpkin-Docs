@@ -1,25 +1,25 @@
-# Quick Start
+# Démarrge Rapide
 
-This guide will help you get started with writing Pumpkin server plugins using C.
+Ce guide va vous aider à commencer à écrire un plugin pour le serveur Pumpkin en utilisant [C](https://fr.wikipedia.org/wiki/C_(langage)).
 
-## Prerequisites
+## Prérequis
 
-Before you start, ensure you have the following installed:
-- [wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases) (for compiling C to WASI)
-- `git` (to clone the API)
+Avant de commencer, vous devez vous assurer d'avoir d'installé:
+- [wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases) (pour compiler le C vers WASI)
+- `git` (pour cloner l'API)
 
-## Setting up the project
+## Mettre en place le projet
 
-First, clone the Pumpkin C API repository with submodules:
+Premièrement, clonez l'API C de Pumpkin avec ses sous-modules:
 
 ```bash
 git clone --recursive https://github.com/Pumpkin-MC/pumpkin-api-c.git
 cd pumpkin-api-c
 ```
 
-## Creating your first plugin
+## Créer votre premier plugin
 
-Create a file named `main.c` in the root of the repository and add the following content:
+Créez un fichier nommé `main.c` dans le dossier racine et ajoutez le contenu suivant
 
 ```c
 #include "pumpkin_api.h"
@@ -49,16 +49,16 @@ REGISTER_PUMPKIN_PLUGIN(((pumpkin_plugin_t){
 
 ## Building the plugin
 
-To build your plugin into a WebAssembly component, use the `clang` compiler from your `wasi-sdk` installation. 
+Pour compiler votre plugin vers un composant WebAssembly, utilisez le compileur `clang` de l'installation `wasi-sdk`
 
-Replace `/path/to/wasi-sdk` with the actual path to your WASI SDK.
+Remplacez `/chemin/vers/wasi-sdk` avec le vrai chemin de votre WASI SDK.
 
 ```bash
-/path/to/wasi-sdk/bin/clang -O3 \
+/chemin/vers/wasi-sdk/bin/clang -O3 \
     -Iinclude -Isrc/gen \
     src/gen/plugin.c src/pumpkin_api.c main.c \
     -o my_plugin.wasm \
     -mexec-model=reactor
 ```
 
-This will generate a `my_plugin.wasm` file that you can place in the `plugins` folder of your Pumpkin server.
+Cela va générer un fichier `my_plugin.wasm` que vous pouvez placer dans le dossier `plugins` de votre serveur Pumpkin.

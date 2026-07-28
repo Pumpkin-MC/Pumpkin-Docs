@@ -1,26 +1,26 @@
 # Quick Start
 
-This guide will help you get started with writing Pumpkin server plugins using C#.
+Ce guide va vous aider à commencer à écrire un plugin pour le serveur Pumpkin en utilisant [C#](https://fr.wikipedia.org/wiki/C_Sharp).
 
 ## Prerequisites
 
-Before you start, ensure you have the following installed:
-- [.NET 10.0](https://dotnet.microsoft.com/download/dotnet/10.0) or later.
-- [WebAssembly Workload](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/webassembly-overview): You may need to install the WASI workload:
+Avant de commencer, vous devez vous assurer d'avoir d'installé:
+- [.NET 10.0](https://dotnet.microsoft.com/fr-fr/download/dotnet/10.0) ou superieur.
+- WebAssembly Workload: Vous devrez peut-être installer la charge de travail WASI:
   ```bash
   dotnet workload install wasi-experimental
   ```
 
-## Setting up the project
+## Creer votre projet
 
-First, create a new class library project:
+Tout d’abord, créez un projet de bibliothèque de classe:
 
 ```bash
-dotnet new classlib -n MyPumpkinPlugin
-cd MyPumpkinPlugin
+dotnet new classlib -n MonPluginPumpkin
+cd MonPluginPumpkin
 ```
 
-Create a `NuGet.Config` file in your project root to include the experimental .NET feed:
+Créez un ficher `NuGet.Config` dans la racine de votre projet pour inclure la version experimentale de .NET:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -31,14 +31,14 @@ Create a `NuGet.Config` file in your project root to include the experimental .N
 </configuration>
 ```
 
-Add the Pumpkin API and the WebAssembly SDK:
+Ajoutez l'API Pumpkin et le SDK WebAssembly:
 
 ```bash
 dotnet add package PumpkinMC.PumpkinApi
 dotnet add package ByteCodeAlliance.Componentize.DotNet.Wasm.SDK --prerelease
 ```
 
-Edit your `.csproj` file to target `wasi-wasm` and use .NET 10.0:
+Modifiez votre fichier `.csproj` pour pointer `wasi-wasm` et utiliser .NET 10.0:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
@@ -60,16 +60,16 @@ Edit your `.csproj` file to target `wasi-wasm` and use .NET 10.0:
 
 ## Creating your first plugin
 
-Replace the content of `Class1.cs` (or create a new file `MyPlugin.cs`) with the following code:
+Remplacez le contenu de `Class1.cs` (ou créez un nouveau fichier `MonPlugin.cs`) avec le code suivant:
 
 ```csharp
 using PluginWorld;
 using PluginWorld.wit.Exports.pumpkin.plugin.v0_1_0;
 using PluginWorld.wit.Imports.pumpkin.plugin.v0_1_0;
 
-namespace MyPumpkinPlugin;
+namespace MonPluginPumpkin;
 
-public class MyPlugin : IPluginWorldExports, IMetadataExports
+public class MonPlugin : IPluginWorldExports, IMetadataExports
 {
     public static void InitPlugin() { }
 
@@ -105,12 +105,12 @@ public class MyPlugin : IPluginWorldExports, IMetadataExports
 }
 ```
 
-## Building the plugin
+## Compiler votre plugin
 
-To build your plugin into a WebAssembly component:
+Pour contruire votre plugin en un composant WebAssembly:
 
 ```bash
 dotnet build -c Release
 ```
 
-The compiled `.wasm` file will be located in `bin/Release/net10.0/wasi-wasm/publish/`. You can place this file in the `plugins` folder of your Pumpkin server.
+Le fichier `.wasm` compilé se trouvera dans `bin/Release/net10.0/wasi-wasm/publish/`. Vous pouvez placer ce fichier dans le dossier `plugins` de votre serveur Pumpkin.

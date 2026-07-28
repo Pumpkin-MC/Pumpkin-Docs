@@ -1,16 +1,16 @@
-# Creating a new project
+# Créer un nouveau projet
 
-Pumpkin plugins use the [Go](https://go.dev/) programming language and are compiled to WebAssembly.
+Les plugins Pumpkin utilisent le language de programation [Go](https://go.dev/) et sont compilés en WebAssembly.
 
 ## Prerequisites
 
-Before we can start, make sure you have the following installed:
-- [Go](https://go.dev/doc/install) (latest version recommended)
-- [TinyGo](https://tinygo.org/getting-started/install/) (required for WASM compilation)
+Avant de commencer, vous devez vous assurer d'avoir d'installé:
+- [Go](https://go.dev/doc/install) (dernière version recommandée)
+- [TinyGo](https://tinygo.org/getting-started/install/) (requis pour la compilation WASM)
 
-## Initializing a new module
+## Initialiser un nouveau module
 
-First, create a new directory for your project and initialize a Go module:
+Premièrement, créez un nouveau dossier pour votre projet et initialisez un module Go:
 
 ```bash
 mkdir hello-pumpkin
@@ -18,15 +18,15 @@ cd hello-pumpkin
 go mod init github.com/yourname/hello-pumpkin
 ```
 
-Next, add the Pumpkin Go API as a dependency:
+Ensuite, ajoutez l'API Go Pumpkin comme dépendance:
 
 ```bash
 go get github.com/Pumpkin-MC/pumpkin-api-go
 ```
 
-## Project Structure
+## Structure du projet
 
-Your project should have at least a `main.go` file. The structure should look like this:
+Votre projet doit avoir au moins un fichier `main.go` . La structure doit ressembler à ceci:
 
 ```text
 ├── go.mod

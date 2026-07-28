@@ -1,17 +1,15 @@
-# Pumpkin Plugin Development
+# Développement de Plugin Pumpkin
 
-::: warning
-The Pumpkin Plugin API is still in a very early stage of development and may change at any time.
-If you run into any issues please reach out on [our Discord server](https://discord.gg/aaNuD6rFEe).
+::: warning Attention
+L'API Pumpkin est encore dans les premières étapes de dévellopements et pourrait changer à n'importe quel moment.
+Si vous rencontrez n'importe quel problème, merci d'en parler dans [nôtre serveur Discord](https://discord.gg/aaNuD6rFEe).
 :::
 
-The Pumpkin Plugin API takes inspiration from the Spigot/Bukkit plugin API in many places,
-so if you have previous experience with these and have experience with Rust, Python, C#, Go, C, or Kotlin development,
-you should have a pretty easy time writing plugins for Pumpkin. :smile:
+L’API du plugin Pumpkin s’inspire de l’API du plugin Spigot/Bukkit dans de nombreux endroits, donc si vous avez déjà une expérience avec ceux-ci et que vous avez de l’expérience avec le développement Rust, Python, C#, Go, C ou Kotlin, vous devriez avoir un temps assez facile pour écrire des plugins pour Pumpkin.
 
-* [Rust API](https://github.com/Pumpkin-MC/Pumpkin)
-* [Python API](https://github.com/Pumpkin-MC/pumpkin-api-py)
-* [C# API](https://github.com/Pumpkin-MC/pumpkin-api-cs)
-* [Go API](https://github.com/Pumpkin-MC/pumpkin-api-go)
-* [C API](https://github.com/Pumpkin-MC/pumpkin-api-c)
-* [Kotlin API](https://github.com/Pumpkin-MC/pumpkin-api-kt)
+* [API Rust](https://github.com/Pumpkin-MC/Pumpkin)
+* [API Python](https://github.com/Pumpkin-MC/pumpkin-api-py)
+* [APIC#](https://github.com/Pumpkin-MC/pumpkin-api-cs)
+* [API Go](https://github.com/Pumpkin-MC/pumpkin-api-go)
+* [API C](https://github.com/Pumpkin-MC/pumpkin-api-c)
+* [API Kotlin](https://github.com/Pumpkin-MC/pumpkin-api-kt)

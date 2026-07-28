@@ -1,9 +1,8 @@
-# Writing the basic logic
+# Écrire la logique de base
 
-## Plugin base
+## Base du plugin
 
-Even in a basic plugin, there is a lot going on under the hood, so to greatly simplify plugin development
-we will use the `pumpkin-plugin-api` crate to create a basic empty plugin.
+Même dans un plugin basique, il se passe beaucoup de choses sous le capot, donc pour simplifier grandement le développement des plugins, nous allons utiliser la `pumpkin-plugin-api` pour créer un plugin vide de base.
 
 :::code-group
 
@@ -42,18 +41,17 @@ pumpkin_plugin_api::register_plugin!(HelloPlugin);
 
 :::
 
-This will create an empty plugin and implement all the necessary methods for it to be loaded by Pumpkin.
+Cela va créer un plugin vide et implémenter les méthodes nécessaires pour qu'il soit chagé par Pumpkin.
 
-We can now try to compile our plugin for the first time. To do so, run this command in your project folder:
+Nous pouvons maintenant essayer de compiler notre plugin pour la première fois. Pour ce faire, lancez cette commande depuis le dossier de votre projet:
 
 ```bash
 cargo build --release
 ```
 
-You do not need to build in release mode, but it greatly reduces the size of the wasm plugin and
-reduces startup times.
+Il n'est pas obligatoire de compiler en mode publication, mais ça réduit la taille du plugin `wasm` et accélère le lancement.
 
-If all went well, you should be left with a message like this:
+Si tout c'est bien passé, vous devriez voir un message comme ça:
 
 ```log
 ╰─ cargo build --release
@@ -61,47 +59,46 @@ If all went well, you should be left with a message like this:
     Finished `release` profile [optimized] target(s) in 0.05s
 ```
 
-Now you can go to the `./target/wasm32-wasip2/release` folder (or `./target/wasm32-wasip2/debug`
-if you didn't use `--release`) and locate your plugin binary. The filename will then be like the following.
+Maintenant, vous pouvez aller dans le dossier `./target/wasm32-wasip2/release` (ou `./target/wasm32-wasip2/debug` si vous n'avez pas utilisé `--release`) et trouver le binaire du plugin. Le nom du fichier devrait être le suivant.
 
 ```
 hello_pumpkin_wasm.wasm
 ```
 
 ::: info NOTE
-If you used a different project name in the `Cargo.toml` file, look for a file which contains your project name.
+Si vous avez utilisé un différent nom de projet dans le fichier `Cargo.toml`, cherchez un fichier qui contient le nom de votre projet.
 :::
 
-You can rename this file to whatever you like, however you must keep the file extension (`.wasm`) the same.
+Vous pouvez renommer ce fichier comme vous voulez, cependant vous devez garder l'exention (`.wasm`) inchangée.
 
-## Testing the plugin
+## Tester le plugin
 
-Now that we have our plugin binary, we can go ahead and test it on the Pumpkin server. Installing a plugin is as
-simple as putting the plugin binary that we just built into the `plugins/` folder of your Pumpkin server!
+Maintentant que nous avons notre binaire, nous pouvons le tester sur sur notre serveur Pumpkin.
+Installer le plugin se résume à placer le binaire que nous avons juste compilé dans le dossier `plugins/` de votre serveur Pumpkin !
 
-When you start up the server and run the `/plugins` command, you should see an output like this:
+Quand vous démarrez votre plugin et que vous utilisez la commande `/plugins`, vous devrez voir une sortie comme ça:
 
 ```text
 There is 1 plugin loaded:
 hello-pumpkin-wasm
 ```
 
-## Methods implemented on the `Context` object
+## Méthodes mises en œuvre sur l’objet `Context`
 
 ```rust
 fn get_server(&self) -> Server
 ```
 
-Returns an instance of the server.
+Retourne une instance du serveur.
 
 ```rust
 fn register_command(&self, command: Command, permission: &str)
 ```
 
-Registers a new command handler, with the permission that is for the command.
+Enregistre un nouveau gestionnaire de commande, avec l’autorisation correspondant à la commande.
 
 ```rust
 fn register_event_handler<E, H>(&self, handler: H, event_priority: EventPriority, blocking: bool) -> Result<u32>
 ```
 
-Registers a new event handler with a set priority and if it is blocking or not.
+Enregistre un nouveau gestionnaire d’événement avec une priorité définie et s’il bloque ou non.

@@ -1,19 +1,19 @@
-# Events
+# Événements
 
-Events allow your plugin to respond to actions occurring on the server, such as players joining or messages being sent.
+Les événments permettent à votre plugin de réagir à des actions qui arrivent sur le serveur, comme des joueurs qui se connectent ou des messages envoyés.
 
-## Registering an Event
+## Enregistrer un événement
 
-You can register an event handler in the `on_load` method of your plugin using `self.register_event`.
+Vous pouvez enregistrer un gestionnaire d’événements dans la méthode `on_load` de votre plug-in en utilisant `self.register_event`.
 
 ```python
 def on_load(self, ctx: context.Context) -> None:
     self.register_event(ctx, event.EventType.PLAYER_JOIN_EVENT, self.on_player_join)
 ```
 
-## Event Handlers
+## Gestionnaire d'événement
 
-An event handler is a method that receives the server instance and the event data. It should return the (possibly modified) event data.
+Un gestionnaire d’événements est une méthode qui reçoit l’instance du serveur et les données de l’événement. Il doit renvoyer les données (éventuellement modifiées) de l’événement.
 
 ```python
 def on_player_join(self, srv: server.Server, evt: event.PlayerJoinEventData) -> event.PlayerJoinEventData:
@@ -23,7 +23,7 @@ def on_player_join(self, srv: server.Server, evt: event.PlayerJoinEventData) -> 
 
 ## Event Types
 
-The `event.EventType` enum contains all available events. Some common events include:
+Le `event.EventType` contient tous les événements disponibles. Certains événements courants incluent:
 
 - `PLAYER_JOIN_EVENT`
 - `PLAYER_QUIT_EVENT`

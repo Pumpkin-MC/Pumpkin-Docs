@@ -1,39 +1,39 @@
-# Making your first Command
+# Faire votre première commande
 
-Before registering your command, you should choose a name. In this example, we define it as a constant array. Using an array allows you to easily add aliases
+Avant d'enregistrer votre commande, vous devez trouver un nom. Dans cette exemple, nous le définissons comme une liste constante. Utiliser une liste nous permet de créer facilement des alias.
 
 ```rust
 let names = ["test".to_string()]; 
-// OR with aliases 
-let names = ["test".to_string(), "testcommand".to_string()];
+// OU avec alias
+let names = ["test".to_string(), "testcommande".to_string()];
 ```
 
-You should also define a description, which will be displayed when players use the /help command
+You devriez aussi définir une description pour qu'elle soit affichée quand le joueur utilise `/help`.
 
 ```rust
-let description = "My first Command!";
+let description = "Ma première commande !";
 ```
 
-Pumpkin's Command API is heavily inspired by Mojang's [Brigadier](https://github.com/Mojang/brigadier) This system allows you to easily manage command syntax and provides automatic tab-completion for players
+L’API Pumpkin’s Command est fortement inspirée de [Brigadier] de Mojang (https://github.com/Mojang/brigadier). Ce système vous permet de gérer facilement la syntaxe des commandes et fournit une tabulation automatique pour les joueurs.
 
-#### Implementing the Command Tree
+#### Implémenter l'arbre de commandes
 
 ```rust
 use pumpkin_plugin_api::command::Command;
 
 pub fn init_command_tree() -> Command {
-    let names = ["test".to_string(), "testcommand".to_string()];
-    let description = "My first Command!";
+    let names = ["test".to_string(), "testcommande".to_string()];
+    let description = "Ma première commande!";
 
     Command::new(&names, description)
 }
 ```
 
-#### Registration and Permissions
+#### Enregistrement et permissions
 
-To make the command usable, you must register both the Permission and the Command itself within your plugin context.
+Pour rendre votre commande utilisable, vous devez enregistrer les permissions et la commande elle-même dans le contexte du plugin.
 
-First, register the Permission. In this example, we set `PermissionDefault::Allow` so that everyone can use the command by default
+Premièrement, enregistrez la permission. Dans cette exemple, on définit `PermissionDefault::Allow` pour que tout le monde puisse utiliser cette commande par défaut. 
 
 ```rust
 struct MyPlugin;
@@ -47,7 +47,7 @@ impl Plugin for MyPlugin {
             name: "plugin_docs_plugin".into(),
             version: env!("CARGO_PKG_VERSION").into(),
             authors: vec!["Bjorn".into()],
-            description: "A simple example plugin".into(),
+            description: "Un simple plugin d'exemple".into(),
         }
     }
 
@@ -67,7 +67,7 @@ impl Plugin for MyPlugin {
 }
 ```
 
-Next, register the command using the permission string created above:
+Ensuite, enregistrez la commande en utilisant la chaîne de permission crée si-dessus:
 
 ```rust
 struct MyPlugin;
@@ -78,7 +78,6 @@ impl Plugin for MyPlugin {
         tracing::info!("Hello, Pumpkin!");
 
         context.register_permission(&Permission {
-            // This has to have the same name space as provided in your PluginMetadata
             node: "plugin_docs_plugin:test".to_string(),
             description: "Important Test Permission".to_string(),
             default: PermissionDefault::Allow,
@@ -92,22 +91,22 @@ impl Plugin for MyPlugin {
 }
 ```
 
-Rebuild your plugin, move the plugins file into the plugins folder, and restart your server
+Recompliez votre plugin, déplacez vos fichier de plugin dans le dossier `plugins` et redémarrez votre serveur.
 
-**Congrats!**, The command is now registered and should be highlighted in-game and in console
+**Félicitation!**, La commande est maintenant enregistrée et devrait être surlignée en jeu et dans le console.
 
 <img src="/assets/plugin-dev/first_command_preview.png" alt="drawing" width="1000"/>
 
-Executing the command right now likely thrown an Syntax error since no Command Executor has been implemented and the Command just does nothing
+L’exécution de la commande en ce moment a probablement déclenché une erreur de syntaxe car aucun exécuteur de commande n’a été mis en œuvre et la commande ne fait tout simplement rien.
 
 ```
 $ test
 $ Invalid Syntax. Usage: /test
 ```
 
-### Adding an Executor
+### Ajouter un exécuteur
 
-Lets create a super simple Command Executor without requiring and arguments
+Permet de créer un exécuteur de commandes super simple sans nécessiter d’arguments
 
 ```rust
 struct MyCommandExecutor;
@@ -124,9 +123,9 @@ impl CommandHandler for MyCommandExecutor {
 }
 ```
 
-### Attaching the Executor
+### Attacher un exécuteur
 
-Now in order to attach the executor, all that we need to do now is provide it to the Command.
+Maintenant, afin de joindre l’exécuteur testamentaire, tout ce que nous devons faire maintenant est de le fournir au commandement.
 
 ```rust
 pub fn init_command_tree() -> Command {
@@ -137,4 +136,4 @@ pub fn init_command_tree() -> Command {
 }
 ```
 
-Now you should get no syntax error when running `/test`.
+Maintenant, vous ne devriez obtenir aucune erreur de syntaxe lors de l’exécution de `/test`.

@@ -1,38 +1,38 @@
-# Basic Logic
+# Logique de base
 
-This section covers the basic structure of a Pumpkin plugin in Python.
+Cette section couvre la structure de base d'un plugin Pumpkin en Python.
 
-## Plugin Class
+## Classe du Plugin
 
-Every Python plugin must inherit from the `Plugin` class. This class provides the base structure and methods needed for the server to interact with your plugin.
+Chaque plugin Python doit hériter de la classe `Plugin`. Cette classe fournit la structure de base et les méthodes nécessaires pour que le serveur interagisse avec votre plugin.
 
 ```python
 from pumpkin_api import Plugin, PluginMetadata, context
 
 class MyPlugin(Plugin):
     def metadata(self) -> PluginMetadata:
-        # Define plugin metadata here
+        # Définir les métadonnés du plugin ici
         pass
 
     def on_load(self, ctx: context.Context) -> None:
-        # Code to run when the plugin is loaded
+        # Code à exécuter quand le plugin est chargé
         pass
 
     def on_unload(self, ctx: context.Context) -> None:
-        # Code to run when the plugin is unloaded
+        # Code à exécuter quand le plugin est déchargé
         pass
 ```
 
 ## Plugin Metadata
 
-The `metadata` method must return a `PluginMetadata` object, which contains information about your plugin.
+La méthode `métadonnés` doit retourner une objet `PluginMetadata`, qui contient les informations à propos de votre plugin.
 
-- `name`: The name of your plugin.
-- `version`: The version of your plugin.
-- `authors`: A list of authors.
-- `description`: A short description of what your plugin does.
+- `name`: Le nom de votre plugin.
+- `version`: La version de votre plugin.
+- `authors`: Une liste d'auteurs.
+- `description`: Une courte description de ce que votre plugin fait.
 
-## Loading and Unloading
+## Charger et Décharger
 
-- `on_load`: This method is called when the server loads your plugin. You should use this to register events, commands, and perform any initialization.
-- `on_unload`: This method is called when the server unloads your plugin. Use this for cleanup if necessary.
+- `on_load`: Cette méthode est apellée quand le sereur chage votre plugin. Vous devriez utiliser ça pour enregistrer des événements, commandes et faire votre initialisation.
+- `on_unload`: Cette méthode est apellée quand le sereur chage votre plugin. Utilisez ça pour nettoyer si nécessaire.
