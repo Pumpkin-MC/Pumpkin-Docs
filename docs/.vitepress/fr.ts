@@ -93,10 +93,6 @@ export const fr = defineConfig({
                                         text: "Première Commande",
                                         link: "/fr/plugin-dev/rust/command/first-command",
                                     },
-                                    {
-                                        text: "Pierre-Papier-Ciseaux",
-                                        link: "/fr/plugin-dev/rust/command/rock-paper-scissors",
-                                    },
                                 ],
                             },
                         ],
