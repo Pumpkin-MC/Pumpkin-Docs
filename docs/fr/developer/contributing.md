@@ -1,59 +1,59 @@
-# Contributing to Pumpkin
+# Contribuer à Pumpkin
 
-We appreciate your interest in contributing to Pumpkin! This document outlines the guidelines for submitting bug reports, feature suggestions, and code changes.
+Nous apprécions votre intéret dans le développement de Pumpkin ! Ce document survole les directives pour soumettre des rapports d'erreur, des propositions de fonctionnalités ainsi que des changement dans le code.
 
-## Getting Started
+## Commencer
 
-The easiest way to get started is by asking for help in [our Discord server](https://discord.gg/wT8XjrjKkf).
+Le meilleur moyen de commencer est de demander de l'aide dans [nôtre serveur Discord](https://discord.gg/wT8XjrjKkf).
 
-## How to Contribute
+## Comment Contribuer
 
-There are several ways you can contribute to Pumpkin:
+Il y a plusieurs façons de contribuer à Pumpkin:
 
 ### Reporting Bugs
 
-  If you encounter a bug, please search for existing issues on the issue tracker first.
+Si vous rencontrez un bug, merci de chercher dans les [tickets existants](https://github.com/Pumpkin-MC/Pumpkin/issues) sur le [GitHub officiel](https://github.com/Pumpkin-MC/Pumpkin).
 
-  If you can't find a duplicate issue, open a new one.
+Si vous ne trouvez pas de duplicatats, ouvrez un nouveau ticket.
 
-  Follow the template and provide a clear description of the bug, including steps to reproduce it if possible.
-  Screenshots, logs, or code snippets can also be helpful.
+Suivez l'exemple et donnez une description claire du bug, incluant les étapes pour le reproduire, si possible.
+Des captures d'écrans, journaux ou ébauches de code serront utiles.
 
-### Suggesting Features
+### Suggérer des fonctionnalités
 
-  Do you have an idea on how Pumpkin can be improved? Share your thoughts by opening an issue on the issue tracker.
+Avez-vous une idée pour améliorer Pumpkin ? Partagez votre avis en ouvrant un ticket sur [GitHub](https://github.com/Pumpkin-MC/Pumpkin/issues).
 
-  Describe the proposed feature in detail, including its benefits and potential implementation considerations.
+Décrivez la fonctionnalité proposé en détail, incluant ses bénéfices et des moyen potentiels d'implémentation.
 
-### Contributing Code
+### Contribuer au code
 
-  To get started with contributing code to Pumpkin, fork the repository on GitHub
+Pour commencer à contribuer au code de Pumpkin, forkez le dépôt sur GitHub.
 
-1. First, create a GitHub account if you don't already have one
+1. Premièrement, créez un compte GitHub si vous n'en avez pas déjà un.
 
-2. Go to Pumpkin's official [GitHub Organization](https://github.com/Pumpkin-MC) and press fork
+2. Rendez vous sur  l'[Organisation GitHub](https://github.com/Pumpkin-MC) et appuiez sur fort
 
-> Creating a fork means you now have your own copy of the Pumpkin source code (this does not mean you own the copyright).
+> Creer un fork veut dire que vous avez maintenant votre propre copie du code source de Pumpkin (cela ne veux pas dire que vous possédez le copyright).
 
-  Now that you have a copy that you can edit, you will need a few tools.
-3. Install [git](https://git-scm.com/downloads) for your operating system
+Maintenant que vous avez une copie du code, vous aurez besoin de quelques outils.
+3. Installez [git](https://git-scm.com/downloads) pour votre OS (Windows, Linux, MacOS).
 
-- To get started with git, visit [Getting started with Git](https://docs.github.com/en/get-started/getting-started-with-git)
+- Pour commencer avec Git, visitez [Commencer avec Git](https://docs.github.com/fr/get-started/git-basics)
 
-- Optional: If you want a graphical tool to interact with GitHub, install [GitHub-Desktop](https://desktop.github.com/download/)
+- Opptionnel: Si vous voulez un outils graphique pour interagir avec GitHub, installez [GitHub-Desktop](https://desktop.github.com/download/)
 
-> GitHub Desktop may be easier if you are not used to the command line, but it is not for everyone
+> GitHub Desktop pourrait être plus simple si vous n'êtes pas habitués à la ligne de commande, mais ce n'est pas pour tout le monde.
 
-- To get started with GitHub Desktop, visit [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop)
+- Pour commencer avec Git, visitez [Commencer avec GitHub Desktop](https://docs.github.com/fr/desktop/overview/getting-started-with-github-desktop)
 
-- If you are wanting to contribute code, install Rust at [rust-lang.org](https://www.rust-lang.org/).
+- Si vous voulez contribuer au code, intallez Rust à [rust-lang.org](https://www.rust-lang.org/).
 
-- If you are wanting to contribute to documentation, install [NodeJS](https://nodejs.org/en)
+- Si vous voulez contribuer à la documentation, installez [NodeJS](https://nodejs.org/en)
 
-### Decompiling Minecraft's code
+### Décompiller le code de Minecraft
 
-When working at Pumpkin, we heavily rely on the official Minecraft client and utilize existing server logic. We often refer to Minecraft's official code.
-The easiest way to decompile Minecraft is by using Fabric Yarn:
+Lorsque nous travaillons chez Pumpkin, nous comptons beaucoup sur le client officiel de Minecraft et utilisons la logique de serveur existante. Nous nous référrons souvent sur le code Minecraft officiel.
+Le moyen le plus simple de décompiler Minecraft est en utilisant Fabric Yarn:
 
 ```shell
 git clone https://github.com/FabricMC/yarn.git
@@ -61,12 +61,12 @@ cd yarn
 ./gradlew decompileVineflower
 ```
 
-After decompiling, you can find the source code located in `build/namedSrc`.
+Après avoir décompiler, vous trouverez le code source à `build/namedSrc`.
 
-### Additional Information
+### Informantions additionels
 
-We encourage you to comment on existing issues and pull requests to share your thoughts and provide feedback.
+Nous vous encouragons à commenter sur les tickets et pull requests existantspour partager vos pensés et donner un avis.
 
-Feel free to ask questions in the issue tracker or reach out to the project maintainers if you need assistance.
+Sentez vous libre de poser des questions sur le traqueur de ticket ou contacter les mainteneurs du projet si vous avez besoin d'aide.
 
-Before submitting a large contribution, consider opening an issue or discussion, or talk with us on our Discord to discuss your approach.
+Avant de soumettre une contribution importante, pensez à ouvrir un problème ou une discussion, ou parlez avec nous sur notre Discord pour discuter de votre approche.

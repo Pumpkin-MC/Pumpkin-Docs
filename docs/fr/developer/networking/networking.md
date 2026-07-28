@@ -1,49 +1,49 @@
-### Networking
+### Gestion réseau
 
-Most of the networking code in Pumpkin can be found in the [pumpkin-protocol](https://github.com/Pumpkin-MC/Pumpkin/tree/master/pumpkin-protocol) crate.
+La majorité du code pour la gestion réseau Pumpkin se trouve dans le dossier [pumpkin-protocol](https://github.com/Pumpkin-MC/Pumpkin/tree/master/pumpkin-protocol).
 
-Serverbound: Client→Server
+Lié au serveur: Client→Serveur
 
-Clientbound: Server→Client
+Lié au client: Serveur→Client
 
 ### Structure
 
-Packets in the Pumpkin protocol are organized by functionality and state.
+Les paquets du protocole Pumpkin sont organisés par fonctionalité et état.
 
-`server`: Contains definitions for serverbound packets.
+`server`: Contient les définitions pour les paquets liés au serveur.
 
-`client`: Contains definitions for clientbound packets.
+`client`: Contient les définitions pour les paquets liés au client.
 
-### States
+### États
 
-**Handshake**: Always the first packet being sent from the client. This also determines the next state, usually to indicate if the player wants to perform a status request, join the server, or wants to be transferred.
+**Poigné de main**: Toujours le premier paquet qui est envoyé par le client. Il détermine aussi le prochain état, habituellement pour indequer si le joueur veux exécuter une requête de status, rejoindre le serveur ou veux être transféré.
 
-**Status**: Indicates the client wants to see a status response (MOTD).
+**Status**: Indique si le client veux voir une réponse de status (MOTD).
 
-**Login**: The login sequence. Indicates the client wants to join the server.
+**Login**: La séquence de connection. Indique si le client veux rejoindre le serveur.
 
-**Config**: A sequence of configuration packets is mostly sent from the server to the client (features, resource pack, server links, etc.).
+**Configuration**: Un séquence de paquets de configuration qui est princialement envoyé du serveur vers le client (fonctionalités, pack de ressource, liens serveur, etc...)
 
-**Play**: The final state, which indicates the player is now ready to join, is also used to handle all other gameplay packets.
+**Jouer**: L'état final, qui indique si le joueur est prêt à rejoindre, aussi utilisé pour gérer tous les autres paquets de jeu.
 
-### Minecraft Protocol
+### Protocole Minecraft
 
-You can find all Minecraft Java packets at <https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol>. There you also can see which [state](#states) they are in.
-You can also see all the information the packets have, which we can either read or write depending on whether they are serverbound or clientbound.
+Vous pouvez trouver tous les paquets de Minercaft Java surle [Minecraft Wiki](https://minecraft.wiki/w/Java_Edition_protocol/Packets). Vous pouvez aussi voir quels [États](#états) existent.
+Vous pouvez également voir toutes les informations que les paquets contiennent, que nous pouvons lire ou écrire selon qu’ils sont liés à un serveur ou à un client.
 
-### Adding a Packet
+### Ajouter un paquet
 
-1. Adding a packet is easy. First, derive:
+1. Ajouter un paquet est simple. D'abord, dérivez:
 
 ```rust
-// For clientbound packets:
+// Pour les paquets liés au client:
 #[derive(Serialize)]
 
-// For serverbound packets:
+// Pour les paquets liés au serveur:
 #[derive(Deserialize)]
 ```
 
-2. Next, you have to make it known that your struct represents a packet. This automatically gets the packet ID from the JSON packets file.
+2. Prochainements, vous devez faire savoir que votre strucure représente un paquet. Cela obtiens automatiquement d'ID du paquet depuis le fichier JSON des paquets.
 
 ```rust
 use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
@@ -51,27 +51,27 @@ use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
 #[packet(PLAY_DISCONNECT)]
 ```
 
-3. Now you can create the `struct`.
+3. Maintenant, vous pouvez créer la `struct` (structure).
 
 > [!IMPORTANT]
-> Please start the packet name with "C" or "S" for "Clientbound" or "Serverbound".
-> Also, if it's a packet that can be sent in multiple [states](#states), please add the state to the name. For example, there are 3 different disconnect packets.
+> Merci de commencer le nom du paquet par un "C" ou un "S" pour lié au **C**lient ou lié au **S**erveur.
+> Aussi, si le paquet peut être envoyé dans plusieurs [états](#états), merci de les ajouter au nom. Par exemple, il y a 3 différents paquets de déconnexion
 >
 > - `CLoginDisconnect`
 > - `CConfigDisconnect`
 > - `CPlayDisconnect`
 
-Create fields within your packet structure to represent the data that will be sent.
+Créez des champs dans votre structure de paquets pour représenter les données qui seront envoyées.
 
 > [!IMPORTANT]
-> Use descriptive field names and appropriate data types.
+> Utilisez des noms de champs explicites et les types de donné appropriés.
 
-Examples:
+Exemples:
 
 ```rust
 pub struct CPlayDisconnect {
     reason: TextComponent,
-    // more fields...
+    // plus de champs...
 }
 
 pub struct SPlayerPosition {
@@ -82,7 +82,7 @@ pub struct SPlayerPosition {
 }
 ```
 
-4. (Clientbound packets only) `impl` a `new` function so we can actually create them by putting in the values.
+4. (Paquets liés au client uniquement) `impl` une `new` fonction qui nous permet de les créer en insérant les valeurs.
 
 ```rust
 impl CPlayDisconnect {
@@ -92,7 +92,7 @@ impl CPlayDisconnect {
 }
 ```
 
-5. In the end, everything should come together.
+5. À la fin, tout devrait aller ensemble.
 
 ```rust
 #[derive(Serialize)]
@@ -117,7 +117,7 @@ pub struct SPlayerPosition {
 }
 ```
 
-6. You can also serialize/deserialize the packet manually, which can be useful if the packet is more complex.
+6. Vous pouvez également sérialiser/désérialiser le paquet manuellement, ce qui peut être utile si le paquet est plus complexe.
 
 ```diff
 -#[derive(Serialize)]
@@ -140,40 +140,40 @@ pub struct SPlayerPosition {
 +    }
 ```
 
-7. You can now send the clientbound packet (see [Sending Packets](#sending-packets)) or listen for the serverbound packet (see [Receiving Packets](#receiving-packets)).
+7. Vous pouvez maintenant envoyer le paquet lié au client (voir [Envoyer des paquets](#envoyer-des-paquets)) ou écouter le paquet lié au serveur (voir [Recevoir des paquets](#recevoir-des-paquets)).
 
 ### Client
 
-Pumpkin categorizes `Client`s and `Player`s separately. Everything that is not in the play state is a simple `Client`. Here are the differences:
+Pumpkin tri les `Client`s et les `Joueur`s séparéments. Tout ce qui n'est pas dans l'état de jeu est un simple `Client`. Voici les différences:
 
 #### Client
 
-- Can only be the states: Status, Login, Transfer, Config
-- Is not a living entity
-- Has small resource consumption
+- Ne peux uniquement avoir les états: Status, Connection, Transfer, Configuration
+- N'est pas une entité vivante
+- As une faible consomation de ressources
 
-#### Player
+#### Joueur
 
-- Can only be in the Play state
-- Is a living entity in a world
-- Has more data and consumes more resources
+- Ne peux uniquement être dans l'état de Jeu
+- Est une entité vivante dans le monde
+- Consome plus de donnés et de ressources
 
-#### Sending Packets
+#### Envoyer des paquets
 
-Example:
+Exemple:
 
 ```rust
-// Works only in the Status state
+// Ne fonctionne uniquement dans l'état Status
 client.send_packet(&CStatusResponse::new("{ description: "A Description"}"));
 ```
 
-#### Receiving Packets
+#### Recevoir des paquets
 
-For `Client`s:
+Pour les `Client`s:
 `src/client/mod.rs`
 
 ```diff
-// Put the packet into the right state
+// Met le paquet dans le bon état
  fn handle_mystate_packet(
   &self,
     server: &Arc<Server>,
@@ -200,11 +200,11 @@ For `Client`s:
 }
 ```
 
-For `Player`s:
+Pour le `Player`s:
 `src/entity/player.rs`
 
 ```diff
-// Players only have the Play state
+// Les joueurs n'ont que l'état de Jeu
  fn handle_play_packet(
   &self,
     server: &Arc<Server>,
@@ -231,10 +231,10 @@ For `Player`s:
 
 ### Compression
 
-Minecraft packets **can** use ZLib compression for decoding/encoding. There is usually a threshold set when compression is applied; this most often affects chunk packets.
+Les paquets Minecraft **peuvent** utiliser la compression ZLib pour le décodage/encodage. Il y a généralement un seuil défini lors de l’application de la compression ; cela affecte le plus souvent les paquets chunk.
 
-### Porting
+### Porter
 
-To port to a new minecraft version, you can compare differences in the protocol on the [minecraft.wiki Protocol reference](https://minecraft.wiki/w/Java_Edition_protocol).
+Pour porter une nouvelle version de Minecraft, vous pouvez comparer les différences dans le protocole sur le [minecraft.wiki Protocol reference](https://minecraft.wiki/w/Java_Edition_protocol).
 
-Also, change the `CURRENT_MC_PROTOCOL` in `src/lib.rs`.
+Changez aussi `CURRENT_MC_PROTOCOL` dans `src/lib.rs`.

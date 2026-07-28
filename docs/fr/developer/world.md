@@ -1,83 +1,80 @@
-# World Formats
+# Format de monde
 
-## Region File Format
+## Format de fichiers de region
 
-Minecraft Beta 1.3 to Release 1.2 used a Minecraft format known as the "Region file format".
+Minecraft Beta 1.3 à la Release 1.2 utilisait un format connu comme "Format de fichiers de region"
 
-The files stored in this format are `.mcr` files, each storing a group of 32x32 chunks called a region.
+Les fichiers enregistrés dans ce format avaient l'extension `.mcr`, chacun enregistrant un groupe de 32x32 chunks apellé Region.
 
-More details can be found on the [Minecraft Wiki](https://minecraft.wiki/w/Region_file_format).
+Plus de détails peuvent être trouvés sur le [Minecraft Wiki](https://fr.minecraft.wiki/w/Format_de_fichier_Région).
 
-## Anvil File Format
+## Format de fichier "Anvil"
 
-Replacing the Region File Format after Minecraft Release 1.2, this is the file format used to store modern Vanilla Minecraft: Java Edition worlds.
+Remplaçant le format de fichier de region après Release 1.2, ce format est encore utilisé pour stocker les mondes Vanilla Minecraft: Édition Java.
 
-The files stored in this format are `.mca` files. While using the same region logic, there were a number of changes. The notable changes include an increase
-to a 256 height limit, then to 320, as well as a higher number of block IDs.
+Les fichiers enregistrés dans ce format ont l'extension `.mca`. Il utilise la même logique de region, il y a un certain nombre de changements. Les plus notables sont le changement de la limite de hauteur à 256, puis à 320, de paire avec un plus haut nombre d'IDs de block. 
 
-More details can be found on the [Minecraft Wiki](https://minecraft.wiki/w/Anvil_file_format).
+Plus de détails peuvent être trouvés sur le [Minecraft Wiki](https://fr.minecraft.wiki/w/Format_de_fichier_Anvil).
 
-## Linear File Format
+## Format de fichier linéaire
 
-There is a more modern file format known as the Linear region file format. It saves on disk space and uses the zstd library instead of zlib. This is beneficial as zlib is extremely old and
-outdated.
+Il existe un format de fichier plus moderne connu sous le nom de format de région linéaire. Il économise de l’espace disque et utilise la bibliothèque zstd au lieu de zlib. C’est bénéfique car zlib est extrêmement vieux et dépassé.
 
-The files stored in this format are `.linear` files, and it saves about 50% of disk space in the Overworld and the Nether, and saves 95% in the End.
+Les fichiers stockés dans ce format sont des fichiers `.linear` et il économise environ 50% de l’espace disque dans l'Overworld' et le Nether, et économise 95% dans l'End.
 
-More details can be found at the GitHub page for [LinearRegionFileFormatTools](https://github.com/xymb-endcrystalme/LinearRegionFileFormatTools).
+Plus de détails peuvent être trouvés sur la page GitHub pour [Format de fichier linéaire](https://github.com/xymb-endcrystalme/LinearRegionFileFormatTools).
 
-## Slime File Format
+## Format de fichier "Slime"
 
-Developed by Hypixel to fix many of the pitfalls of the Anvil file format, Slime also replaces zlib and saves space compared to Anvil. It saves the entire world in a single save
-file, and allows that file to be loaded into multiple instances.
+Développé par Hypixel pour résoudre de nombreux problèmes du format de fichier Anvil, Slime remplace également zlib et permet d’économiser de l’espace par rapport à Anvil. Il enregistre le monde entier dans un seul fichier de sauvegarde, et permet à ce fichier d’être chargé dans plusieurs instances.
 
-The files stored in this format are `.slime` files.
+Les fichiers stockés dans ce format sont des fichiers `.slime`
 
-More details can be found on the GitHub page for [Slime World Manager](https://github.com/cijaaimee/Slime-World-Manager#:~:text=Slime%20World%20Manager%20is%20a,worlds%20faster%20and%20save%20space.), as well as on [Dev Blog #5](https://hypixel.net/threads/dev-blog-5-storing-your-skyblock-island.2190753/) for Hypixel.
+Plus de détails peuvent être trouvés sur la page GitHub pour [Slime World Manager](https://github.com/cijaaimee/Slime-World-Manager#:~:text=Slime%20World%20Manager%20is%20a,worlds%20faster%20and%20save%20space.), ainsi que sur le [Dev Blog #5](https://hypixel.net/threads/dev-blog-5-storing-your-skyblock-island.2190753/) d'Hypixel.
 
-## Schematic File Format
+## Format de fichier pour schématique
 
-Unlike the other file formats listed, the Schematic File Format is not used for storing Minecraft worlds, but instead used within 3rd party programs such as MCEdit, WorldEdit, and Schematica.
+Contrairement aux autres formats de fichiers répertoriés, le format de fichier schématique n’est pas utilisé pour stocker des mondes Minecraft, mais plutôt dans des programmes tiers tels que MCEdit, WorldEdit et Schematica.
 
-The files stored in this format are `.schematic` files, and are stored in the NBT format.
+Les fichiers stockés dans ce format sont des fichiers `.schematic`, et sont formattés dans en [NBT](https://fr.minecraft.wiki/w/Format_NBT)
 
-More details can be found on the [Minecraft Wiki](https://minecraft.wiki/w/Schematic_file_format)
+Plus de détails peuvent être trouvés sur le [Minecraft Wiki](https://fr.minecraft.wiki/w/Format_de_fichier_.schematic)
 
-### World Generation
+### Génération du monde
 
-When the server is starting up, it checks if there is a save present, also known as the "world".
+Quand le serveur démarre, il vérifie si il y a une sauvegarde présente, aussi connu comme le "monde".
 
-Pumpkin then calls for world generation:
+Pumpkin appelle ensuite la génération du monde:
 
 #### Save Present
 
-`AnvilChunkReader` is called to process the region files for the given save
+`AnvilChunkReader` est appelé pour traiter les fichier region d'un sauvegarde donnée.
 
-- As stated above, region files store 32x32 chunks
-    > Each region file is named corresponding to coordinates of where it is in the world
+- Comme indiqué ci-dessus, les fichiers de région stockent 32x32 chunks.
+> Chaque fichier région est nommé par rapport aux coordonnés de où il se trouve dans le monde
 
 > r.{}.{}.mca
 
-- The location table is read from the save file, representing the chunk coordinates
-- The timestamp table is read from the save file, representing the last time the chunk was modified
+- La table de localisation est lu depuis le fichier de sauvegarde, représentant les coordonnés du chunk.
+- Le table de timestamp est lu depuis le fichier de sauvegarde, représentant la dernière fois que le chunk a été modifié.
 
-#### No Save Present
+#### Pas de sauvegarde présente
 
-The world seed is set to "0". In the future it will be set to the value in the "basic" configuration.
+La graine mondiale est définie sur "0". À l’avenir, elle sera définie sur la valeur de la configuration "de base".
 
-`PlainsGenerator` is called, as so far `Plains` is the only biome that has been implemented.
+`PlainsGenerator` est appelé, car jusqu’à présent les `plaines` sont le seul biome qui a été implémenté.
 
-- `PerlinTerrainGenerator` is called to set chunk height
-- Stone height is set 5 below chunk height
-- Dirt height is set to 2 below chunk height
-- Grass blocks appear at the top of dirt
-- Bedrock is set at y = -64
-- Flowers and short grass are scattered about randomly
+- `PerlinTerrainGenerator` est appelé pour définir la hauteur du chunk
+- La hauteur de la pierre est défini à 5 en dessous de la hauteur du chunk
+- La hauteur de la terre est défini à 2 en dessous de la hauteur du chunk
+- Les block d'herbe appraissent sur les bloc de terre
+- Il y a de la bedrock en y = -64
+- Des fleurs et de l'herbe courte sont placés aléatoirement
 
-`SuperflatGenerator` is also available, but is not currently callable.
+`SuperflatGenerator` est aussi disponible mais n'est pas actuellement appellable.
 
-- Bedrock is set at y = -64
-- Dirt is set two blocks up
-- Grass blocks are set one more block up
+- Il y a de la bedrock en y = -64
+- Suive de 2 block de terre
+- Les blocs d’herbe sont placés un bloc de plus en haut
 
-Blocks are able to be placed and broken, but changes are not able to be saved in any world format. Anvil worlds are currently read only.
+Les blocs peuvent être placés et cassés, mais les modifications ne peuvent être enregistrées sous aucun format de monde. Les mondes Anvil sont actuellement en lecture seule.
