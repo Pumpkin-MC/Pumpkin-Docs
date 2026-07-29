@@ -46,17 +46,17 @@ Quand le serveur démarre, il vérifie si il y a une sauvegarde présente, aussi
 
 Pumpkin appelle ensuite la génération du monde:
 
-#### Save Present
+#### Sauvegarde présente
 
-`AnvilChunkReader` est appelé pour traiter les fichier region d'un sauvegarde donnée.
+`AnvilChunkReader` est appelé pour traiter les fichiers region d'uns sauvegarde donnée.
 
 - Comme indiqué ci-dessus, les fichiers de région stockent 32x32 chunks.
 > Chaque fichier région est nommé par rapport aux coordonnés de où il se trouve dans le monde
 
 > r.{}.{}.mca
 
-- La table de localisation est lu depuis le fichier de sauvegarde, représentant les coordonnés du chunk.
-- Le table de timestamp est lu depuis le fichier de sauvegarde, représentant la dernière fois que le chunk a été modifié.
+- La table de localisation est lu depuis le fichier de sauvegarde, représentant les cordonnées du chunk.
+- La table de timestamp est lu depuis le fichier de sauvegarde, représentant la dernière fois que le chunk a été modifié.
 
 #### Pas de sauvegarde présente
 
@@ -67,14 +67,14 @@ La graine mondiale est définie sur "0". À l’avenir, elle sera définie sur l
 - `PerlinTerrainGenerator` est appelé pour définir la hauteur du chunk
 - La hauteur de la pierre est défini à 5 en dessous de la hauteur du chunk
 - La hauteur de la terre est défini à 2 en dessous de la hauteur du chunk
-- Les block d'herbe appraissent sur les bloc de terre
+- Les blocs d'herbe appraissent sur les bloc de terre
 - Il y a de la bedrock en y = -64
 - Des fleurs et de l'herbe courte sont placés aléatoirement
 
 `SuperflatGenerator` est aussi disponible mais n'est pas actuellement appellable.
 
 - Il y a de la bedrock en y = -64
-- Suive de 2 block de terre
+- Suivie de 2 blocs de terre
 - Les blocs d’herbe sont placés un bloc de plus en haut
 
 Les blocs peuvent être placés et cassés, mais les modifications ne peuvent être enregistrées sous aucun format de monde. Les mondes Anvil sont actuellement en lecture seule.

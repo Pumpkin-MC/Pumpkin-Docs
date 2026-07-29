@@ -38,7 +38,7 @@ Contres:
 
 ### Écrire un gestionnaire
 
-Puisque notre objectif principal ici est de changer le message de bienvenuee que le joueur voit lorsqu’il rejoint un serveur, nous choisirons le type d’événement bloquant avec une priorité normale.
+Puisque notre objectif principal ici est de changer le message de bienvenue que le joueur voit lorsqu’il rejoint un serveur, nous choisirons le type d’événement bloquant avec une priorité normale.
 
 :::code-group
 
@@ -66,7 +66,7 @@ impl EventHandler<PlayerJoinEvent> for MyJoinHandler {
 
 :::
 
-**Éxplications**:
+**Explications**:
 
 - `struct MyJoinHandler;` : La structure de notre gestionnaire d’événements
 - Si l’événement n’est pas bloquant, nous utilisons toujours la fonction handle et renvoyons les données de l’événement. Les données de l’événement restent ignorées.

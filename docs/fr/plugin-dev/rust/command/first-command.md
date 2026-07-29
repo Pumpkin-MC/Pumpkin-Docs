@@ -8,7 +8,7 @@ let names = ["test".to_string()];
 let names = ["test".to_string(), "testcommande".to_string()];
 ```
 
-You devriez aussi définir une description pour qu'elle soit affichée quand le joueur utilise `/help`.
+Vous devriez aussi définir une description pour qu'elle soit affichée quand le joueur utilise `/help`.
 
 ```rust
 let description = "Ma première commande !";
@@ -125,7 +125,7 @@ impl CommandHandler for MyCommandExecutor {
 
 ### Attacher un exécuteur
 
-Maintenant, afin de joindre l’exécuteur testamentaire, tout ce que nous devons faire maintenant est de le fournir au commandement.
+Maintenant, afin de joindre l’exécuteur, tout ce que nous devons faire maintenant est de le fournir au commandement.
 
 ```rust
 pub fn init_command_tree() -> Command {

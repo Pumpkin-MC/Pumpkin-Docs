@@ -21,7 +21,7 @@ def on_player_join(self, srv: server.Server, evt: event.PlayerJoinEventData) -> 
     return evt
 ```
 
-## Event Types
+## Les types d'événements
 
 Le `event.EventType` contient tous les événements disponibles. Certains événements courants incluent:
 

@@ -47,7 +47,7 @@ REGISTER_PUMPKIN_PLUGIN(((pumpkin_plugin_t){
 }))
 ```
 
-## Building the plugin
+## Compiler le plugin
 
 Pour compiler votre plugin vers un composant WebAssembly, utilisez le compileur `clang` de l'installation `wasi-sdk`
 

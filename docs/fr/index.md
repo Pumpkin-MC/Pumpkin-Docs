@@ -36,7 +36,7 @@ RUSTFLAGS='-C target-cpu=native' cargo run --release
 ```
 
 > [!NOTE]
-> Pour utiliser (pour jouer sur) sur un serveur que vous hébergez vous-même sur le même système local (ex: en utilisant Prism launcher sur Linux pour se connecter  et exécuter / jouer Minecraft tout en utilisant Pumpkin pour héberger le serveur) vous pourrez avoir besoin d'utiliser "localhost:25565" comme l'adresse du serveur à travers 'Multijoueur' -> 'Ajouter un serveur' -> 'Adresse du serveur', même si cette adresse n'est pas listée dans la sortie du terminal du serveur.
+> Pour utiliser (pour jouer) sur un serveur que vous hébergez vous-même sur le même système local (ex: en utilisant Prism launcher sur Linux pour se connecter  et exécuter / jouer Minecraft tout en utilisant Pumpkin pour héberger le serveur) vous pourrez avoir besoin d'utiliser "localhost:25565" comme l'adresse du serveur à travers 'Multijoueur' -> 'Ajouter un serveur' -> 'Adresse du serveur', même si cette adresse n'est pas listée dans la sortie du terminal du serveur.
 ```text
 localhost:25565
 ```
@@ -60,7 +60,7 @@ docker run --rm \
 
 ### Exemple
 
-Pour lancer Pumpkin sur le port `25565` et enregister les donnés dans un dossier appellé `./data`, vous lanceriez la commande suivante:
+Pour lancer Pumpkin sur le port `25565` et enregister les données dans un dossier appellé `./data`, vous lanceriez la commande suivante:
 
 ```shell
 docker run --rm \

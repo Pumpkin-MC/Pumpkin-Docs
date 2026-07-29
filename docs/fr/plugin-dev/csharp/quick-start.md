@@ -1,8 +1,8 @@
-# Quick Start
+# Démarrage rapide
 
 Ce guide va vous aider à commencer à écrire un plugin pour le serveur Pumpkin en utilisant [C#](https://fr.wikipedia.org/wiki/C_Sharp).
 
-## Prerequisites
+## Prérequis
 
 Avant de commencer, vous devez vous assurer d'avoir d'installé:
 - [.NET 10.0](https://dotnet.microsoft.com/fr-fr/download/dotnet/10.0) ou superieur.
@@ -58,7 +58,7 @@ Modifiez votre fichier `.csproj` pour pointer `wasi-wasm` et utiliser .NET 10.0:
 </Project>
 ```
 
-## Creating your first plugin
+## Créer votre premier plugin
 
 Remplacez le contenu de `Class1.cs` (ou créez un nouveau fichier `MonPlugin.cs`) avec le code suivant:
 
@@ -107,7 +107,7 @@ public class MonPlugin : IPluginWorldExports, IMetadataExports
 
 ## Compiler votre plugin
 
-Pour contruire votre plugin en un composant WebAssembly:
+Pour compiler votre plugin en un composant WebAssembly:
 
 ```bash
 dotnet build -c Release

@@ -4,7 +4,7 @@ Cette section couvre la structure de base d'un plugin Pumpkin en Python.
 
 ## Classe du Plugin
 
-Chaque plugin Python doit hériter de la classe `Plugin`. Cette classe fournit la structure de base et les méthodes nécessaires pour que le serveur interagisse avec votre plugin.
+Chaque plugin Python doit hériter de la classe `Plugin`. Cette classe fournit la structure de base et les méthodes nécessaires pour que le serveur intéragisse avec votre plugin.
 
 ```python
 from pumpkin_api import Plugin, PluginMetadata, context
@@ -23,7 +23,7 @@ class MyPlugin(Plugin):
         pass
 ```
 
-## Plugin Metadata
+## Metadonnée du Plugin
 
 La méthode `métadonnés` doit retourner une objet `PluginMetadata`, qui contient les informations à propos de votre plugin.
 
@@ -34,5 +34,5 @@ La méthode `métadonnés` doit retourner une objet `PluginMetadata`, qui contie
 
 ## Charger et Décharger
 
-- `on_load`: Cette méthode est apellée quand le sereur chage votre plugin. Vous devriez utiliser ça pour enregistrer des événements, commandes et faire votre initialisation.
-- `on_unload`: Cette méthode est apellée quand le sereur chage votre plugin. Utilisez ça pour nettoyer si nécessaire.
+- `on_load`: Cette méthode est appelée quand le serveur charge votre plugin. Vous devriez utiliser ça pour enregistrer des événements, commandes et faire votre initialisation.
+- `on_unload`: Cette méthode est appelée quand le serveur décharge votre plugin. Utilisez ça pour nettoyer si nécessaire.

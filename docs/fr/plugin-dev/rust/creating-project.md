@@ -1,12 +1,12 @@
 # Créer un nouveau projet
 
-Les plugins Pimpkin utilisent le système de compilation [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html).
+Les plugins Pumpkin utilisent le système de compilation [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html).
 
 Le code complet pour ce plugin peut être trouvé sur [l'exemple GitHub](https://github.com/BjornTheProgrammer/Hello-Pumpkin-Wasm).
 
 ## Installer la chaîne d'outil
 
-Avant de pouvoir compiler un plugin, on a besoin de la cible `wasm32-wasip2` installée. Vous pouvez l'installé en exécutant:
+Avant de pouvoir compiler un plugin, on a besoin de la cible `wasm32-wasip2` installée. Vous pouvez l'installer en exécutant:
 
 ```bash
 rustup target add wasm32-wasip2

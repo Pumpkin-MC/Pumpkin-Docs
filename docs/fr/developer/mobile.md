@@ -1,10 +1,10 @@
 # Développement sur Mobile
 
-Si vous êtes un utilisateur mobile et voulez modifier le code sources, vous pouvez le faire !
+Si vous êtes un utilisateur mobile et voulez modifier le code source, vous pouvez le faire !
 (Cette page a été écrite sur Android en utilisant [Helix](https://helix-editor.com/))
 
 Premièrement, nous avons besoin d'une application de console.
-Nous recommandons [Termux](https://github.com/termux/termux-app/releases) parcequ'il est stable et open source.
+Nous recommandons [Termux](https://github.com/termux/termux-app/releases) parce qu'il est stable et open source.
 Téléchargez le fichier apk nécessaire pour l’architecture de votre appareil et installez Termux.
 
 Après ça, vous devrez executer certaines commandes. Nous utilisons Helix pour sa simplicité.
@@ -34,7 +34,7 @@ Si vous voulez contribuer, vous aurez besoin de vous connecter avec GitHub.
   gh auth login
 ```
 
-Àprès ça, vous aurez besoin de télécharger le repo Pumpkin. (Avant, vous pouvez créer un dossier projet avec `mkdir proj`; c'est utile)
+Après ça, vous aurez besoin de télécharger le dépot Pumpkin. (Avant, vous pouvez créer un dossier projet avec `mkdir proj`; c'est utile)
 
 ```bash
   git clone https://github.com/Pumpkin-MC/Pumpkin.git
@@ -42,7 +42,7 @@ Si vous voulez contribuer, vous aurez besoin de vous connecter avec GitHub.
 > [!NOTE]
 > Vous pouvez ajouter `--depth=1` à la fin de la commande pour économiser de la place, cependant vous perdrez l'historique.
 
-Si vous voulez contribuer, vous autrez besoin de dupliquer notre repo et changer `Pumpkin-MC` par votre nom d'utilisateur GitHub.
+Si vous voulez contribuer, vous aurez de dupliquer notre depot et changer `Pumpkin-MC` par votre nom d'utilisateur GitHub.
 
 ## FAQ
 
@@ -59,7 +59,7 @@ Vous pouvez utiliser `hx <dir>` pour changer de dossier au démarrage.
 
 Pressez `i` si vous êtes en mode normal
 
-### COMMENT QUITER L'ÉDITEUR ????
+### COMMENT QUITTER L'ÉDITEUR ????
 
 Pressez echap, puis écrivez `:q!` si vous ne voulez pas sauvegarder ou `:wq` si vous voulez sauvegarder.
 

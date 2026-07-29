@@ -1,4 +1,4 @@
-# Quick Start
+# Démarrage rapide
 
 Ce guide va vous aider à commencer à écrire un plugin pour le serveur Pumpkin en utilisant [Koltin](https://kotlinlang.org/).
 
@@ -25,7 +25,7 @@ Avant de commencer, vous devez vous assurer d'avoir d'installé:
 
 Contrairement à la majorité des paquets d'API, [pumpkin-api-kt](https://github.com/Pumpkin-MC/pumpkin-api-kt) est un MODÈLE.
 
-POur commencer, clonez le modèle (et rennomez le comme vous le souhaitez):
+Pour commencer, clonez le modèle (et rennomez le comme vous le souhaitez):
 ```sh
 git clone --recurse-submodules https://github.com/Pumpkin-MC/pumpkin-api-kt
 mv pumpkin-api-kt my_kotlin_plugin
@@ -60,7 +60,7 @@ Le fichier `.wasm` compilé se trouvera dans `build`. Vous pouvez placer ce fich
 
 Notez que faire ça une permière fois peut prendre du temps, pendant qu'il constuit `wit-bindgen` depuis les sources Rust.
 
-Exécuret `make` va vérifier pour des mises à jour de `wit-bindgen` à chaque fois. Tu pourrais vouloir exécuter `make componentify` à la place après l'initialisation pour éviter ça.
+Exécuter `make` va vérifier pour des mises à jour de `wit-bindgen` à chaque fois. Tu pourrais vouloir exécuter `make componentify` à la place après l'initialisation pour éviter ça.
 
 ## Dépannage
 

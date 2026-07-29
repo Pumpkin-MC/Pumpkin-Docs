@@ -2,7 +2,7 @@
 
 Les plugins Pumpkin utilisent le language de programation [Go](https://go.dev/) et sont compilés en WebAssembly.
 
-## Prerequisites
+## Prérequis
 
 Avant de commencer, vous devez vous assurer d'avoir d'installé:
 - [Go](https://go.dev/doc/install) (dernière version recommandée)

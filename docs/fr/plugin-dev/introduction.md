@@ -1,7 +1,7 @@
 # Développement de Plugin Pumpkin
 
 ::: warning Attention
-L'API Pumpkin est encore dans les premières étapes de dévellopements et pourrait changer à n'importe quel moment.
+L'API Pumpkin est encore dans les premières étapes de développements et pourrait changer à n'importe quel moment.
 Si vous rencontrez n'importe quel problème, merci d'en parler dans [notre serveur Discord](https://discord.gg/aaNuD6rFEe).
 :::
 
