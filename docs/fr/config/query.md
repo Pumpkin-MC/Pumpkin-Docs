@@ -14,7 +14,7 @@ address = "0.0.0.0:25565"
 
 :::
 
-### Configuration Options
+### Options de configuration
 
 - **`enabled`**: Active ou désactive l'écoute du protocle Query 
 - **`address`**: Adresse réseau ou port pour l'écoute réseau

@@ -17,10 +17,10 @@ default_op_level = 0
 
 :::
 
-### Configuration Options
+### Options de configuration
 
-- **`use_console`**: Controle si les commandes rentrés depuis la console sont acceptés ou non.
-- **`use_tty`**: Controle si le support de TTY est activé ou non pour la console interactive.
-- **`log_console`**: Controle si les commandes éxecutés par les joueurs sont enregistrés dans la console ou non.
+- **`use_console`**: Contrôle si les commandes rentrés depuis la console sont acceptés ou non.
+- **`use_tty`**: Contrôle si le support de TTY est activé ou non pour la console interactive.
+- **`log_console`**: Contrôle si les commandes éxecutés par les joueurs sont enregistrés dans la console ou non.
 - **`broadcast_console_to_ops`**: Renvoie la console aux opérateur (OPs).
 - **`default_op_level`**: Niveau d'OP assigné par défaut (0 à 4).

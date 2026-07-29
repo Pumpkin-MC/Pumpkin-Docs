@@ -42,7 +42,7 @@ Si vous voulez contribuer, vous aurez besoin de vous connecter avec GitHub.
 > [!NOTE]
 > Vous pouvez ajouter `--depth=1` à la fin de la commande pour économiser de la place, cependant vous perdrez l'historique.
 
-Si vous voulez contribuer, vous autrez besoin de dupliquer nôtre repo et changer `Pumpkin-MC` par votre nom d'utilisateur GitHub.
+Si vous voulez contribuer, vous autrez besoin de dupliquer notre repo et changer `Pumpkin-MC` par votre nom d'utilisateur GitHub.
 
 ## FAQ
 

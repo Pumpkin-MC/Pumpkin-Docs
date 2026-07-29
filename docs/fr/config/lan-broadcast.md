@@ -13,6 +13,6 @@ enabled = false
 
 :::
 
-### Configuration Options
+### Paramètres
 
 - **`enabled`**: Active ou désactive les annonces pour les clients du réseau local.

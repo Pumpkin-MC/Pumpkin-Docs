@@ -20,7 +20,7 @@ enabled = false
 
 :::
 
-### Configuration Options
+### Options de configuration
 
 - **`[networking.proxy].enabled`**: Interrupteur principal pour activer le support Proxy.
 - **`[networking.proxy.velocity].enabled`**: Active le protocole de transfert Velocity.

@@ -4,13 +4,13 @@ Nous apprécions votre intéret dans le développement de Pumpkin ! Ce document 
 
 ## Commencer
 
-Le meilleur moyen de commencer est de demander de l'aide dans [nôtre serveur Discord](https://discord.gg/wT8XjrjKkf).
+Le meilleur moyen de commencer est de demander de l'aide dans [notre serveur Discord](https://discord.gg/wT8XjrjKkf).
 
 ## Comment Contribuer
 
 Il y a plusieurs façons de contribuer à Pumpkin:
 
-### Reporting Bugs
+### Signaler des bugs
 
 Si vous rencontrez un bug, merci de chercher dans les [tickets existants](https://github.com/Pumpkin-MC/Pumpkin/issues) sur le [GitHub officiel](https://github.com/Pumpkin-MC/Pumpkin).
 
@@ -31,7 +31,7 @@ Pour commencer à contribuer au code de Pumpkin, forkez le dépôt sur GitHub.
 
 1. Premièrement, créez un compte GitHub si vous n'en avez pas déjà un.
 
-2. Rendez vous sur  l'[Organisation GitHub](https://github.com/Pumpkin-MC) et appuiez sur fort
+2. Rendez vous sur  l'[Organisation GitHub](https://github.com/Pumpkin-MC) et appuyez sur Fork.
 
 > Creer un fork veut dire que vous avez maintenant votre propre copie du code source de Pumpkin (cela ne veux pas dire que vous possédez le copyright).
 
@@ -40,7 +40,7 @@ Maintenant que vous avez une copie du code, vous aurez besoin de quelques outils
 
 - Pour commencer avec Git, visitez [Commencer avec Git](https://docs.github.com/fr/get-started/git-basics)
 
-- Opptionnel: Si vous voulez un outils graphique pour interagir avec GitHub, installez [GitHub-Desktop](https://desktop.github.com/download/)
+- Optionnel: Si vous voulez un outils graphique pour interagir avec GitHub, installez [GitHub-Desktop](https://desktop.github.com/download/)
 
 > GitHub Desktop pourrait être plus simple si vous n'êtes pas habitués à la ligne de commande, mais ce n'est pas pour tout le monde.
 
@@ -63,9 +63,9 @@ cd yarn
 
 Après avoir décompiler, vous trouverez le code source à `build/namedSrc`.
 
-### Informantions additionels
+### Informations additionels
 
-Nous vous encouragons à commenter sur les tickets et pull requests existantspour partager vos pensés et donner un avis.
+Nous vous encouragons à commenter sur les tickets et pull requests existantes pour partager vos pensées et donner un avis.
 
 Sentez vous libre de poser des questions sur le traqueur de ticket ou contacter les mainteneurs du projet si vous avez besoin d'aide.
 

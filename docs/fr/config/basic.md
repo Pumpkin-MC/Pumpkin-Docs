@@ -184,9 +184,9 @@ blocked_permissions = []
 save_advancements = true
 ```
 
-## Settings Breakdown
+## Détail des paramètres
 
-### Top-Level Settings
+### Paramètres de haut niveau
 
 - **`seed`**: Graine pour la génération du monde.
 - **`default_difficulty`**: Difficulté par défaut (`"Peaceful"`, `"Easy"`, `"Normal"`, `"Hard"`).

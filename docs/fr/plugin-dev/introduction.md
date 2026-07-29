@@ -2,7 +2,7 @@
 
 ::: warning Attention
 L'API Pumpkin est encore dans les premières étapes de dévellopements et pourrait changer à n'importe quel moment.
-Si vous rencontrez n'importe quel problème, merci d'en parler dans [nôtre serveur Discord](https://discord.gg/aaNuD6rFEe).
+Si vous rencontrez n'importe quel problème, merci d'en parler dans [notre serveur Discord](https://discord.gg/aaNuD6rFEe).
 :::
 
 L’API du plugin Pumpkin s’inspire de l’API du plugin Spigot/Bukkit dans de nombreux endroits, donc si vous avez déjà une expérience avec ceux-ci et que vous avez de l’expérience avec le développement Rust, Python, C#, Go, C ou Kotlin, vous devriez avoir un temps assez facile pour écrire des plugins pour Pumpkin.

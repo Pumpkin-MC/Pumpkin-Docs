@@ -2,7 +2,7 @@ import { defineConfig } from "vitepress";
 
 export const fr = defineConfig({
     lang: "fr",
-    description: "Un logiciel de server Minecraft haute permformance écrit en Rust",
+    description: "Un logiciel de serveur Minecraft haute permformance écrit en Rust",
 
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
@@ -102,7 +102,7 @@ export const fr = defineConfig({
                         collapsed: false,
                         items: [
                             {
-                                text: "Démarrage Rapie",
+                                text: "Démarrage Rapide",
                                 link: "/fr/plugin-dev/python/quick-start",
                             },
                             {
@@ -179,16 +179,16 @@ export const fr = defineConfig({
 
         logo: "/assets/favicon.ico",
         footer: {
-            message: "Released under the MIT License.",
+            message: "Publié sous la liscence MIT License.",
             copyright: `Copyright © 2024-${new Date().getFullYear()} Aleksandr Medvedev`,
         },
         editLink: {
             pattern:
                 "https://github.com/Pumpkin-MC/Pumpkin-Docs/blob/master/docs/:path",
-            text: "Edit this page on GitHub",
+            text: "Modifier cette page sur GitHub",
         },
         lastUpdated: {
-            text: "Updated at",
+            text: "Mis à jour le",
             formatOptions: {
                 dateStyle: "medium",
                 timeStyle: "medium",

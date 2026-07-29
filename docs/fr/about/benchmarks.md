@@ -5,19 +5,19 @@ Ici il y a une comparaison entre le logiciel de serveur Minecraft classique cont
 > [!CAUTION] ATTENTION
 > **Cette comparaison n'est pas juste.** Pumpkin a actuellement moins de fonctionnalités que les autres serveurs, qui pourrait entrainer l'utilisation de moins de ressources.
 > C'est aussi important de préciser que les autres serveur ont eu des années pour s'optimiser.
-> Les dérivation du serveur Vanilla, qui n'ont pas besoin de besoin de réécrire toute la logique peuvent se concentrer exclusivement sur l'optimization.
+> Les dérivation du serveur Vanilla, qui n'ont pas besoin de besoin de réécrire toute la logique peuvent se concentrer exclusivement sur l'optimisation.
 
-![Une capture d'écrans qui montre 9 fenêtres de jeu Minecraft](https://github.com/user-attachments/assets/e08fbb00-42fe-4479-a03b-11bb6886c91a)
+![Une capture d'écran qui montre 9 fenêtres de jeu Minecraft](https://github.com/user-attachments/assets/e08fbb00-42fe-4479-a03b-11bb6886c91a)
 
 ## Spécifications
 
-### Téchnique
+### Technique
 
 #### Logiciel
 
 - Distribution: Manjaro Linux
 - Architecture: x86_64 (64-bit)
-- Kernel Version: 6.11.3-arch1-1
+- Version du Kernel: 6.11.3-arch1-1
 
 #### Matériel
 
@@ -30,7 +30,7 @@ Ici il y a une comparaison entre le logiciel de serveur Minecraft classique cont
 #### Rust
 
 - Chaîne d'outils (toolchain): stable-x86_64-unknown-linux-gnu (1.81.0)
-- Rust Compiler: rustc 1.81.0 (eeb90cda1 2024-09-04)
+- Compileur Rust: rustc 1.81.0 (eeb90cda1 2024-09-04)
 
 #### Java
 
@@ -51,7 +51,7 @@ Ici il y a une comparaison entre le logiciel de serveur Minecraft classique cont
 > [!NOTE]
 > Tous les tests ont été exécutés plusieurs fois pour des résultats plus précis.
 > Aucun joueur n'a bougé après avoir bougé. Seulement les 8 chunks initiaux ont été chargés.
-> Chaque serveur utilisait sa propre génération. Aucun monde n'était préchargé.
+> Chaque serveur utilisait sa propre génération. Aucun chunks n'étaient préchargés.
 
 > [!IMPORTANT]
 > `CPU Max` est habituellement plus haut avec un joueur car les chunk initiaux sont chargés.

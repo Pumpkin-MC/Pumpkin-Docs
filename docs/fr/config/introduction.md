@@ -14,8 +14,8 @@ Vous pouvez créer `pumpkin.toml` avant de lancer Pumpkin ou le modifier après 
 
 Pumpkin a pour but de supporter les dernières versions de Minecraft. Si vous voulez héberger un serveur Pumpkin pour n'importe quelle autre version, il y a un projet appelé [ViaProxy](https://github.com/ViaVersion/ViaProxy).
 
-- Assurez-vous d'autoriser les connexions via Proxy
-- Pumpkin et ViaProxy ne sont pas liés; ne postez pas de tickets par rapport à leur code. En outre, c'est un Proxy tier et Pumpkin ne prend aucun responsabilité pour le meilleur et pour le pire.
+- Assurez-vous d'autoriser les connections via Proxy
+- Pumpkin et ViaProxy ne sont pas liés; ne postez pas de tickets par rapport à leur code. En outre, c'est un Proxy tier et Pumpkin ne prends aucune responsabilité pour le meilleur et pour le pire.
 
 #### Fonctionnalités Clefs
 

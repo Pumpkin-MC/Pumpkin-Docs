@@ -1,6 +1,6 @@
 # Introduction
 
-Bienvenu sur la documentation Pumpkin!
+Bienvenuee sur la documentation Pumpkin!
 
 Peut importe si vous êtes un développeur interne de Pumpkin ou travaillez sur un plugin, cette documentation est la ressource pour tout ce qui est lié à Pumpkin.
 

@@ -1,8 +1,8 @@
 # Authentifaction
 
-Pumpkin vérifie les comptes avec les serveur de session de Mojang pour assurer que les joueurs utilisents des comptes légitimes. Les paramètre d'authentification sont configuréssous `[networking.java.authentication]` et `[networking.bedrock.authentication]` dans `pumpkin.toml`.
+Pumpkin vérifie les comptes avec les serveur de session de Mojang pour assurer que les joueurs utilisents des comptes légitimes. Les paramètre d'authentification sont configurés sous `[networking.java.authentication]` et `[networking.bedrock.authentication]` dans `pumpkin.toml`.
 
-## Java Edition Authentifaction
+## Authentifaction édition Java
 
 :::code-group
 
@@ -33,16 +33,16 @@ elytra = true
 ### Options de configuration
 
 - **`enabled`**: Active l'authentifaction en ligne pour les clients Java.
-- **`connect_timeout`**: Délai d'attente de la connection en millisecondes lors de la connection aux serveur d'authentifaction.
-- **`read_timeout`**: Délai d'attente de la lecture en millisecondes lors de la connection aux serveur d'authentifaction.
-- **`prevent_proxy_connections`**: Bloquer les connection via proxy/VPN pendant l'authentifaction.
+- **`connect_timeout`**: Délai d'attente de la connexion en millisecondes lors de la connexion aux serveur d'authentifaction.
+- **`read_timeout`**: Délai d'attente de la lecture en millisecondes lors de la connexion aux serveurs d'authentifaction.
+- **`prevent_proxy_connections`**: Bloquer les connections via proxy/VPN pendant l'authentifaction.
 
-### Player Profile Settings
+### Paramètres des profiles joueurs
 
 - **`allow_banned_players`**: Autoriser les joueurs bannis par Mojang à se connecter.
-- **`allowed_actions`**: Actions autorisés quand un joueur bannis se connecte (`"FORCED_NAME_CHANGE"`, `"USING_BANNED_SKIN"`).
+- **`allowed_actions`**: Actions autorisés quand un joueur banni se connecte (`"FORCED_NAME_CHANGE"`, `"USING_BANNED_SKIN"`).
 
-### Textures Settings
+### Paramètres de texture
 
 - **`enabled`**: Activer la vérification des textures du joueur (skins, capes, elytras).
 - **`allowed_url_schemes`**: Schemas d'URL permis pour télécharger les textures (`["http", "https"]`).
@@ -51,7 +51,7 @@ elytra = true
 - **`types.cape`**: Activer les capes.
 - **`types.elytra`**: Activer les textures d'élytre.
 
-## Bedrock Edition Authentication
+## Authentifaction édition Bedrock
 
 :::code-group
 
