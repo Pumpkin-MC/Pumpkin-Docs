@@ -14,7 +14,7 @@ To compile Pumpkin, ensure you have [Rust](https://www.rust-lang.org/tools/insta
 1. **Clone the repository** and navigate into the directory:
 
 ```shell
-git clone https://github.com/Pumpkin-MC/Pumpkin.git
+git clone --recurse-submodules https://github.com/Pumpkin-MC/Pumpkin.git
 cd Pumpkin
 ```
 
