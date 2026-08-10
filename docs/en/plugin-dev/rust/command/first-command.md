@@ -1,42 +1,36 @@
-# Making your first Command
+# Creating Your First Command
 
-Before registering your command, you should choose a name. In this example, we define it as a constant array. Using an array allows you to easily add aliases
+Registering and handling custom commands in Pumpkin is designed to be developer-friendly, fast, and structured like Mojang's Brigadier system.
 
-```rust
-let names = ["test".to_string()]; 
-// OR with aliases 
-let names = ["test".to_string(), "testcommand".to_string()];
-```
+---
 
-You should also define a description, which will be displayed when players use the /help command
+## 1. Quick Example
 
-```rust
-let description = "My first Command!";
-```
+Here is a complete, minimal Rust plugin that registers a `/hello` command with permission checks and sends a response back to the player.
 
-Pumpkin's Command API is heavily inspired by Mojang's [Brigadier](https://github.com/Mojang/brigadier) This system allows you to easily manage command syntax and provides automatic tab-completion for players
+```rust [src/lib.rs]
+use pumpkin_plugin_api::{
+    command::{CommandHandler, CommandSender, ConsumedArgs, CommandError, Command},
+    permission::{Permission, PermissionDefault},
+    Context, Plugin, PluginMetadata, Server,
+};
 
-#### Implementing the Command Tree
+struct HelloExecutor;
 
-```rust
-use pumpkin_plugin_api::command::Command;
-
-pub fn init_command_tree() -> Command {
-    let names = ["test".to_string(), "testcommand".to_string()];
-    let description = "My first Command!";
-
-    Command::new(&names, description)
+impl CommandHandler for HelloExecutor {
+    fn handle(
+        &self,
+        sender: CommandSender,
+        _server: Server,
+        _args: ConsumedArgs,
+    ) -> Result<i32, CommandError> {
+        sender.send_message("Hello from Pumpkin!");
+        Ok(1)
+    }
 }
-```
 
-#### Registration and Permissions
+pub struct MyPlugin;
 
-To make the command usable, you must register both the Permission and the Command itself within your plugin context.
-
-First, register the Permission. In this example, we set `PermissionDefault::Allow` so that everyone can use the command by default
-
-```rust
-struct MyPlugin;
 impl Plugin for MyPlugin {
     fn new() -> Self {
         MyPlugin
@@ -44,97 +38,78 @@ impl Plugin for MyPlugin {
 
     fn metadata(&self) -> PluginMetadata {
         PluginMetadata {
-            name: "plugin_docs_plugin".into(),
+            name: "my_plugin".into(),
             version: env!("CARGO_PKG_VERSION").into(),
-            authors: vec!["Bjorn".into()],
-            description: "A simple example plugin".into(),
+            authors: vec!["Developer".into()],
+            description: "My first Pumpkin plugin".into(),
         }
     }
 
     fn on_load(&mut self, context: Context) -> pumpkin_plugin_api::Result<()> {
-        tracing::info!("Hello, Pumpkin!");
-
-        context.register_permission(&Permission { // [!code ++:7]
-            // This has to have the same name space as provided in your PluginMetadata
-            node: "plugin_docs_plugin:test".to_string(),
-            description: "Important Test Permission".to_string(),
-            default: PermissionDefault::Allow,
-            children: Vec::new(),
-        })?;
-
-        Ok(())
-    }
-}
-```
-
-Next, register the command using the permission string created above:
-
-```rust
-struct MyPlugin;
-impl Plugin for MyPlugin {
-    // ...
-
-    fn on_load(&mut self, context: Context) -> pumpkin_plugin_api::Result<()> {
-        tracing::info!("Hello, Pumpkin!");
-
+        // 1. Register permission node
         context.register_permission(&Permission {
-            // This has to have the same name space as provided in your PluginMetadata
-            node: "plugin_docs_plugin:test".to_string(),
-            description: "Important Test Permission".to_string(),
+            node: "my_plugin:hello".to_string(),
+            description: "Allows executing the /hello command".to_string(),
             default: PermissionDefault::Allow,
             children: Vec::new(),
         })?;
-        
-         context.register_command(init_command_tree(), "plugin_docs_plugin:test"); // [!code ++:1]
+
+        // 2. Build the command tree with aliases & executor
+        let names = ["hello".to_string(), "hi".to_string()];
+        let command = Command::new(&names, "Greets the player").execute(HelloExecutor);
+
+        // 3. Register the command
+        context.register_command(command, "my_plugin:hello")?;
 
         Ok(())
     }
 }
 ```
 
-Rebuild your plugin, move the plugins file into the plugins folder, and restart your server
+---
 
-**Congrats!**, The command is now registered and should be highlighted in-game and in console
+## 2. In-Game Preview
 
-<img src="/assets/plugin-dev/first_command_preview.png" alt="drawing" width="1000"/>
+Once registered, your command automatically gains client-side autocompletion, syntax validation, and color highlighting in Minecraft:
 
-Executing the command right now likely thrown an Syntax error since no Command Executor has been implemented and the Command just does nothing
+<img src="/assets/first_command_preview.png" alt="In-Game Command Autocompletion Preview" width="500"/>
 
-```
-$ test
-$ Invalid Syntax. Usage: /test
-```
+---
 
-### Adding an Executor
+## 3. How It Works
 
-Lets create a super simple Command Executor without requiring and arguments
+::: details Step-by-Step Breakdown
 
+### Step 1: Define the Permission
+Commands in Pumpkin require a permission node. Using `PermissionDefault::Allow` allows all players to execute it by default:
 ```rust
-struct MyCommandExecutor;
-
-impl CommandHandler for MyCommandExecutor {
-    fn handle(
-        &self,
-        sender: pumpkin_plugin_api::command::CommandSender,
-        server: pumpkin_plugin_api::Server,
-        args: pumpkin_plugin_api::command::ConsumedArgs,
-    ) -> pumpkin_plugin_api::Result<i32, CommandError> {
-        Ok(1)
-    }
-}
+context.register_permission(&Permission {
+    node: "my_plugin:hello".to_string(),
+    description: "Allows executing the /hello command".to_string(),
+    default: PermissionDefault::Allow,
+    children: Vec::new(),
+})?;
 ```
 
-### Attaching the Executor
-
-Now in order to attach the executor, all that we need to do now is provide it to the Command.
-
+### Step 2: Build the Command Tree
+Use `Command::new` to define primary names and aliases, then attach your `CommandHandler` struct with `.execute(...)`:
 ```rust
-pub fn init_command_tree() -> Command {
-    let names = ["test".to_string(), "testcommand".to_string()];
-    let description = "My first Command!";
-
-    Command::new(&names, description).execute(MyCommandExecutor) // [!code ++:1]
-}
+let names = ["hello".to_string(), "hi".to_string()];
+let command = Command::new(&names, "Greets the player")
+    .execute(HelloExecutor);
 ```
 
-Now you should get no syntax error when running `/test`.
+### Step 3: Register with Context
+Pass the command tree and the permission node string to `context.register_command`:
+```rust
+context.register_command(command, "my_plugin:hello")?;
+```
+
+:::
+
+---
+
+## Next Steps
+
+- Explore complex subcommands and argument parsing in the [Rock-Paper-Scissors Tutorial](./rock-paper-scissors).
+- Learn how to handle inventory and GUI interactions in plugin logic.

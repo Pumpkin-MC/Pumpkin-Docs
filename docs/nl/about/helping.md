@@ -28,7 +28,7 @@ Lees voor codebijdragen onze [Bijdragegids](/developer/contributing).
 ## 3. Financiële Ondersteuning & Doneren
 
 Het onderhouden van krachtige Minecraft-serversoftware vereist veel inzet.
-- **Sponsoring & Donaties**: Bekijk onze financieringsopties op [GitHub Sponsors](https://github.com/sponsors/Pumpkin-MC) of op [pumpkinmc.org](https://pumpkinmc.org/).
+- **Donaties**: Bekijk onze financieringsopties op onze officiële donatiepagina [pumpkinmc.org/donate](https://pumpkinmc.org/donate).
 - **Serverinfrastructuur**: U kunt ook helpen door testomgevingen beschikbaar te stellen.
 
 ---

@@ -28,7 +28,7 @@ Pumpkinの使用中にバグ、クラッシュ、または予期しない動作�
 ## 3. 財政的支援と寄付
 
 高性能なMinecraftサーバーソフトウェアの維持には多大な労力が必要です。
-- **スポンサーと寄付**: [GitHub Sponsors](https://github.com/sponsors/Pumpkin-MC)または[pumpkinmc.org](https://pumpkinmc.org/)の資金提供オプションを確認してください。
+- **寄付**: [pumpkinmc.org/donate](https://pumpkinmc.org/donate) の公式寄付ページで資金提供オプションを確認してください。
 - **サーバーインフラ**: テスト環境を提供することでも貢献できます。
 
 ---

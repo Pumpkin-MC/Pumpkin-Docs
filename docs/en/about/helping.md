@@ -33,7 +33,7 @@ For code contributions, please read our dedicated [Contributing Guide](/develope
 
 Maintaining and advancing high-performance Minecraft server software requires dedicated effort and resources. If you would like to financially back the development of Pumpkin:
 
-- **Sponsorship & Donations**: Check out our funding options on [GitHub Sponsors](https://github.com/sponsors/Pumpkin-MC) or links on our official site [pumpkinmc.org](https://pumpkinmc.org/).
+- **Donations**: Check out our funding options on our official donation page [pumpkinmc.org/donate](https://pumpkinmc.org/donate).
 - **Server Infrastructure**: You can also assist by providing benchmark test environments, hardware hosting, or testing infrastructure.
 
 ---

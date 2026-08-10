@@ -28,7 +28,7 @@
 ## 3. 财务支持与捐赠
 
 维护高性能 Minecraft 服务器软件需要大量精力。
-- **赞助与捐赠**：在 [GitHub Sponsors](https://github.com/sponsors/Pumpkin-MC) 或 [pumpkinmc.org](https://pumpkinmc.org/) 查看我们的资金选项。
+- **捐赠**：在我们的官方捐赠页面 [pumpkinmc.org/donate](https://pumpkinmc.org/donate) 查看我们的资金选项。
 - **服务器基础设施**：您也可以通过提供测试环境来提供帮助。
 
 ---

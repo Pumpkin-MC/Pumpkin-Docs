@@ -28,7 +28,7 @@ Para contribuições de código, leia nosso [Guia de Contribuição](/developer/
 ## 3. Suporte Financeiro e Doações
 
 Manter um software de servidor Minecraft de alto desempenho requer muito esforço.
-- **Patrocínio e Doações**: Confira nossas opções de financiamento no [GitHub Sponsors](https://github.com/sponsors/Pumpkin-MC) ou [pumpkinmc.org](https://pumpkinmc.org/).
+- **Doações**: Confira nossas opções de financiamento em nossa página oficial de doações [pumpkinmc.org/donate](https://pumpkinmc.org/donate).
 - **Infraestrutura de Servidor**: Você também pode ajudar fornecendo ambientes de teste.
 
 ---

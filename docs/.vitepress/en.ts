@@ -24,6 +24,13 @@ export const en = defineConfig({
                 ],
             },
             {
+                text: "Administration",
+                items: [
+                    { text: "Overview", link: "/admin/introduction" },
+                    { text: "Migrating from Bukkit", link: "/admin/migrating-from-bukkit" },
+                ],
+            },
+            {
                 text: "Configuration",
                 items: [
                     { text: "Introduction", link: "/config/introduction" },
@@ -71,6 +78,32 @@ export const en = defineConfig({
                         link: "/plugin-dev/introduction",
                     },
                     {
+                        text: "Migrating from Bukkit",
+                        collapsed: false,
+                        items: [
+                            {
+                                text: "Overview",
+                                link: "/plugin-dev/migrating-from-bukkit/",
+                            },
+                            {
+                                text: "Commands",
+                                link: "/plugin-dev/migrating-from-bukkit/commands",
+                            },
+                            {
+                                text: "Events",
+                                link: "/plugin-dev/migrating-from-bukkit/events",
+                            },
+                            {
+                                text: "Inventories & GUIs",
+                                link: "/plugin-dev/migrating-from-bukkit/inventories",
+                            },
+                            {
+                                text: "Configuration & Data",
+                                link: "/plugin-dev/migrating-from-bukkit/configuration",
+                            },
+                        ],
+                    },
+                    {
                         text: "Rust",
                         collapsed: false,
                         items: [
@@ -114,6 +147,10 @@ export const en = defineConfig({
                                 link: "/plugin-dev/python/basic-logic",
                             },
                             {
+                                text: "First Command",
+                                link: "/plugin-dev/python/first-command",
+                            },
+                            {
                                 text: "Events",
                                 link: "/plugin-dev/python/events",
                             },
@@ -127,6 +164,10 @@ export const en = defineConfig({
                                 text: "Quick Start",
                                 link: "/plugin-dev/csharp/quick-start",
                             },
+                            {
+                                text: "First Command",
+                                link: "/plugin-dev/csharp/first-command",
+                            },
                         ],
                     },
                     {
@@ -136,6 +177,10 @@ export const en = defineConfig({
                             {
                                 text: "Quick Start",
                                 link: "/plugin-dev/c/quick-start",
+                            },
+                            {
+                                text: "First Command",
+                                link: "/plugin-dev/c/first-command",
                             },
                         ],
                     },
@@ -151,6 +196,10 @@ export const en = defineConfig({
                                 text: "Basic Logic",
                                 link: "/plugin-dev/go/basic-logic",
                             },
+                            {
+                                text: "First Command",
+                                link: "/plugin-dev/go/first-command",
+                            },
                         ],
                     },
                     {
@@ -160,6 +209,10 @@ export const en = defineConfig({
                             {
                                 text: "Quick Start",
                                 link: "/plugin-dev/kotlin/quick-start",
+                            },
+                            {
+                                text: "First Command",
+                                link: "/plugin-dev/kotlin/first-command",
                             },
                         ],
                     },

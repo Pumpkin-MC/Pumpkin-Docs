@@ -28,7 +28,7 @@ Für Code-Beiträge lesen Sie bitte unseren [Beitragsleitfaden](/developer/contr
 ## 3. Finanzielle Unterstützung & Spenden
 
 Die Pflege einer hochleistungsfähigen Minecraft-Server-Software erfordert viel Mühe und Ressourcen.
-- **Sponsoring & Spenden**: Sehen Sie sich unsere Finanzierungsoptionen auf [GitHub Sponsors](https://github.com/sponsors/Pumpkin-MC) oder auf unserer offiziellen Website [pumpkinmc.org](https://pumpkinmc.org/) an.
+- **Spenden**: Sehen Sie sich unsere Finanzierungsoptionen auf unserer offiziellen Spenden-Website [pumpkinmc.org/donate](https://pumpkinmc.org/donate) an.
 - **Server-Infrastruktur**: Sie können auch durch die Bereitstellung von Testumgebungen helfen.
 
 ---

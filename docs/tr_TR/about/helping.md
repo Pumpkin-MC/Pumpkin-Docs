@@ -28,7 +28,7 @@ Kod katkıları için lütfen [Katkıda Bulunma Kılavuzumuzu](/developer/contri
 ## 3. Finansal Destek ve Bağış
 
 Yüksek performanslı Minecraft sunucu yazılımını sürdürmek büyük çaba gerektirir.
-- **Sponsorluk ve Bağışlar**: [GitHub Sponsors](https://github.com/sponsors/Pumpkin-MC) veya [pumpkinmc.org](https://pumpkinmc.org/) adresindeki finansman seçeneklerimizi inceleyin.
+- **Bağışlar**: Resmi bağış sayfamızdaki [pumpkinmc.org/donate](https://pumpkinmc.org/donate) finansman seçeneklerimizi inceleyin.
 - **Sunucu Altyapısı**: Test ortamları sağlayarak da yardımcı olabilirsiniz.
 
 ---
