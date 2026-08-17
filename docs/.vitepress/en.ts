@@ -132,6 +132,10 @@ export const en = defineConfig({
                                     },
                                 ],
                             },
+                            {
+                                text: "Licensing & Updates",
+                                link: "/plugin-dev/rust/plugin-utils",
+                            },
                         ],
                     },
                     {
