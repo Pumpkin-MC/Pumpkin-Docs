@@ -18,7 +18,7 @@ By default, `online_mode` is enabled in the configuration (`[networking.java.onl
 
 ## Custom Authentication Server
 
-Pumpkin supports custom authentication servers. You can replace the authentication URL in `features.toml`.
+Pumpkin supports custom authentication servers and fallbacks configured in `pumpkin.toml` under `[networking.java.authentication]`.
 
 ### How Pumpkin Authentication Works
 

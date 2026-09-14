@@ -1,107 +1,107 @@
 /**
- * Customize default theme styling by overriding CSS variables:
- * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
+ * Pumpkin Documentation Theme Styling
+ * High-performance, clean developer theme for Pumpkin Minecraft Server.
  */
 
-/**
- * Colors
- *
- * Each colors have exact same color scale system with 3 levels of solid
- * colors with different brightness, and 1 soft color.
- * 
- * - `XXX-1`: The most solid color used mainly for colored text. It must
- *   satisfy the contrast ratio against when used on top of `XXX-soft`.
- *
- * - `XXX-2`: The color used mainly for hover state of the button.
- *
- * - `XXX-3`: The color for solid background, such as bg color of the button.
- *   It must satisfy the contrast ratio with pure white (#ffffff) text on
- *   top of it.
- *
- * - `XXX-soft`: The color used for subtle background such as custom container
- *   or badges. It must satisfy the contrast ratio when putting `XXX-1` colors
- *   on top of it.
- *
- *   The soft color must be semi transparent alpha channel. This is crucial
- *   because it allows adding multiple "soft" colors on top of each other
- *   to create a accent, such as when having inline code block inside
- *   custom containers.
- *
- * - `default`: The color used purely for subtle indication without any
- *   special meanings attched to it such as bg color for menu hover state.
- *
- * - `brand`: Used for primary brand colors, such as link text, button with
- *   brand theme, etc.
- *
- * - `tip`: Used to indicate useful information. The default theme uses the
- *   brand color for this by default.
- *
- * - `warning`: Used to indicate warning to the users. Used in custom
- *   container, badges, etc.
- *
- * - `danger`: Used to show error, or dangerous message to the users. Used
- *   in custom container, badges, etc.
- * -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
- :root {
-  --vp-c-default-1: var(--vp-c-gray-1);
-  --vp-c-default-2: var(--vp-c-gray-2);
-  --vp-c-default-3: var(--vp-c-gray-3);
-  --vp-c-default-soft: var(--vp-c-gray-soft);
+/* ==========================================================================
+   Base Theme Variables & Brand Palette
+   ========================================================================== */
 
-  --vp-c-brand-1: #ff9800;
-  --vp-c-brand-2: #fb8c00;
-  --vp-c-brand-3: #f57c00;
-  --vp-c-brand-soft: rgba(255, 152, 0, .16);
+:root {
+  --vp-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Refined Pumpkin Brand Colors (Warm Amber & Tangerine) */
+  --vp-c-brand-1: #f97316;
+  --vp-c-brand-2: #ea580c;
+  --vp-c-brand-3: #c2410c;
+  --vp-c-brand-soft: rgba(249, 115, 22, 0.14);
 
   --vp-c-tip-1: var(--vp-c-brand-1);
   --vp-c-tip-2: var(--vp-c-brand-2);
   --vp-c-tip-3: var(--vp-c-brand-3);
   --vp-c-tip-soft: var(--vp-c-brand-soft);
 
-  --vp-c-warning-1: var(--vp-c-yellow-1);
-  --vp-c-warning-2: var(--vp-c-yellow-2);
-  --vp-c-warning-3: var(--vp-c-yellow-3);
-  --vp-c-warning-soft: var(--vp-c-yellow-soft);
+  --vp-c-warning-1: #eab308;
+  --vp-c-warning-2: #ca8a04;
+  --vp-c-warning-3: #a16207;
+  --vp-c-warning-soft: rgba(234, 179, 8, 0.14);
 
-  --vp-c-danger-1: var(--vp-c-red-1);
-  --vp-c-danger-2: var(--vp-c-red-2);
-  --vp-c-danger-3: var(--vp-c-red-3);
-  --vp-c-danger-soft: var(--vp-c-red-soft);
+  --vp-c-danger-1: #ef4444;
+  --vp-c-danger-2: #dc2626;
+  --vp-c-danger-3: #b91c1c;
+  --vp-c-danger-soft: rgba(239, 68, 68, 0.14);
 }
 
-/**
- * Component: Button
- * -------------------------------------------------------------------------- */
+/* ==========================================================================
+   Deep Obsidian Dark Mode
+   ========================================================================== */
+
+.dark {
+  --vp-c-bg: #0c0d0e;
+  --vp-c-bg-alt: #121316;
+  --vp-c-bg-elv: #181a1f;
+  --vp-c-bg-soft: rgba(255, 255, 255, 0.04);
+  --vp-c-divider: rgba(255, 255, 255, 0.08);
+  --vp-c-gutter: #0c0d0e;
+}
+
+/* ==========================================================================
+   Typography Polish
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+}
+
+.vp-doc h1 {
+  font-weight: 700;
+}
+
+.vp-doc h2 {
+  font-weight: 600;
+  border-top: 1px solid var(--vp-c-divider);
+  padding-top: 24px;
+}
+
+.vp-doc h3 {
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Component: Button
+   ========================================================================== */
 
 :root {
   --vp-button-brand-border: transparent;
-  --vp-button-brand-text: var(--vp-c-white);
-  --vp-button-brand-bg: var(--vp-c-brand-3);
+  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-bg: var(--vp-c-brand-2);
   --vp-button-brand-hover-border: transparent;
-  --vp-button-brand-hover-text: var(--vp-c-white);
-  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
+  --vp-button-brand-hover-text: #ffffff;
+  --vp-button-brand-hover-bg: var(--vp-c-brand-1);
   --vp-button-brand-active-border: transparent;
-  --vp-button-brand-active-text: var(--vp-c-white);
-  --vp-button-brand-active-bg: var(--vp-c-brand-1);
+  --vp-button-brand-active-text: #ffffff;
+  --vp-button-brand-active-bg: var(--vp-c-brand-3);
 }
 
-/**
- * Component: Home
- * -------------------------------------------------------------------------- */
+/* ==========================================================================
+   Component: Home Hero
+   ========================================================================== */
 
 :root {
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: -webkit-linear-gradient(
     120deg,
-    #ff9800 30%,
-    #fb8c00
+    #f97316 30%,
+    #fb923c
   );
 
   --vp-home-hero-image-background-image: linear-gradient(
     -45deg,
-    #ff9800 50%,
-    #fb8c00 50%
+    #f97316 50%,
+    #ea580c 50%
   );
   --vp-home-hero-image-filter: blur(44px);
 }
@@ -118,22 +118,100 @@
   }
 }
 
-/**
- * Component: Custom Block
- * -------------------------------------------------------------------------- */
+/* ==========================================================================
+   Structured Tables
+   ========================================================================== */
 
-:root {
-  --vp-custom-block-tip-border: transparent;
-  --vp-custom-block-tip-text: var(--vp-c-text-1);
-  --vp-custom-block-tip-bg: var(--vp-c-indigo-soft);
-  --vp-custom-block-tip-code-bg: var(--vp-c-indigo-soft);
+.vp-doc table {
+  width: 100%;
+  display: table;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 13.5px;
 }
 
-/**
- * Component: Algolia
- * -------------------------------------------------------------------------- */
+.vp-doc th {
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-2);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  text-align: left;
+}
+
+.vp-doc td {
+  padding: 12px 16px;
+  border-top: 1px solid var(--vp-c-divider);
+  transition: background-color 0.15s ease;
+  line-height: 1.55;
+}
+
+.vp-doc tr:first-child td {
+  border-top: none;
+}
+
+.vp-doc tr:hover td {
+  background-color: var(--vp-c-bg-soft);
+}
+
+/* ==========================================================================
+   Code Blocks & Inline Monospace
+   ========================================================================== */
+
+.vp-doc :not(pre) > code {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.85em;
+  padding: 2.5px 6px;
+  border-radius: 6px;
+  background-color: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  font-weight: 500;
+}
+
+.vp-doc div[class*='language-'] {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.vp-code-group .tabs {
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+/* ==========================================================================
+   Rounded Pill Badges
+   ========================================================================== */
+
+.VPBadge {
+  border-radius: 9999px !important;
+  font-size: 10.5px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  padding: 2px 8px !important;
+  line-height: 16px !important;
+}
+
+/* ==========================================================================
+   Component: Custom Block / Callouts
+   ========================================================================== */
+
+.vp-doc .custom-block {
+  border-radius: 10px;
+  border: 1px solid var(--vp-c-divider);
+}
+
+/* ==========================================================================
+   Component: Algolia / Local Search
+   ========================================================================== */
 
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
-

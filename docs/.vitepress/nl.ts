@@ -19,9 +19,7 @@ export const nl = defineConfig({
             {
                 text: "Over",
                 items: [
-                    { text: "Benchmarktests", link: "/nl/about/benchmarks" },
                     { text: "Helpen & Doneren", link: "/nl/about/helping" },
-                    
                 ],
             },
             {

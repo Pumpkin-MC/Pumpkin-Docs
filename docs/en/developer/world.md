@@ -1,83 +1,105 @@
-# World Formats
+# World Engine & Formats
 
-## Region File Format
+The world engine is managed primarily within the [`pumpkin-world`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/crates/pumpkin-world) crate. It handles world storage formats, chunk reading and writing, terrain generation, lighting calculations, and block ticking.
 
-Minecraft Beta 1.3 to Release 1.2 used a Minecraft format known as the "Region file format".
+---
 
-The files stored in this format are `.mcr` files, each storing a group of 32x32 chunks called a region.
+## Supported World Formats
 
-More details can be found on the [Minecraft Wiki](https://minecraft.wiki/w/Region_file_format).
+Pumpkin is designed to support multiple region and world formats, giving server administrators flexibility between vanilla compatibility and modern high-performance compression.
 
-## Anvil File Format
+### 1. Anvil File Format (`.mca`)
 
-Replacing the Region File Format after Minecraft Release 1.2, this is the file format used to store modern Vanilla Minecraft: Java Edition worlds.
+The Anvil format is the standard format used by vanilla Minecraft: Java Edition.
 
-The files stored in this format are `.mca` files. While using the same region logic, there were a number of changes. The notable changes include an increase
-to a 256 height limit, then to 320, as well as a higher number of block IDs.
+- **Structure**: Chunks are grouped into 32×32 chunk regions stored in `.mca` files (`r.{x}.{z}.mca`).
+- **Data Layers**: Each chunk contains block state palettes, biome palettes, heightmaps, tile entities, and light arrays.
+- **Compression**: Individual chunks within the region file are compressed using ZLib or LZ4.
+- **Support**: Pumpkin supports **both loading and saving** Anvil region files.
 
-More details can be found on the [Minecraft Wiki](https://minecraft.wiki/w/Anvil_file_format).
+### 2. Linear Region Format (`.linear`)
 
-## Linear File Format
+Linear is a modern alternative to Anvil that drastically reduces world save sizes and speeds up disk I/O by utilizing **Zstandard (zstd)** compression across the entire region rather than per-chunk zlib blocks.
 
-There is a more modern file format known as the Linear region file format. It saves on disk space and uses the zstd library instead of zlib. This is beneficial as zlib is extremely old and
-outdated.
+- **Savings**: Reduces disk usage by ~50% in the Overworld and Nether, and up to ~95% in the End.
+- **Performance**: High decompression speeds and reduced disk writes make it ideal for high-throughput production servers.
+- **Support**: Native read/write support is built into `pumpkin-world`.
 
-The files stored in this format are `.linear` files, and it saves about 50% of disk space in the Overworld and the Nether, and saves 95% in the End.
+### 3. Slime World Format (`.slime`)
 
-More details can be found at the GitHub page for [LinearRegionFileFormatTools](https://github.com/xymb-endcrystalme/LinearRegionFileFormatTools).
+Originally developed by Hypixel, the Slime format packages entire worlds into a single, compact, easily duplicable binary file. It is optimized for minigames and temporary instance-based worlds.
 
-## Slime File Format
+### 4. Pump Format
 
-Developed by Hypixel to fix many of the pitfalls of the Anvil file format, Slime also replaces zlib and saves space compared to Anvil. It saves the entire world in a single save
-file, and allows that file to be loaded into multiple instances.
+Pumpkin's native chunk storage format designed specifically for rapid serialization without the legacy overhead of the Anvil format.
 
-The files stored in this format are `.slime` files.
+---
 
-More details can be found on the GitHub page for [Slime World Manager](https://github.com/cijaaimee/Slime-World-Manager#:~:text=Slime%20World%20Manager%20is%20a,worlds%20faster%20and%20save%20space.), as well as on [Dev Blog #5](https://hypixel.net/threads/dev-blog-5-storing-your-skyblock-island.2190753/) for Hypixel.
+The world engine organizes chunk management and ticking into hierarchical layers:
 
-## Schematic File Format
+### Hierarchy
 
-Unlike the other file formats listed, the Schematic File Format is not used for storing Minecraft worlds, but instead used within 3rd party programs such as MCEdit, WorldEdit, and Schematica.
+1. **`World`**: Manages dimensions (`overworld`, `the_nether`, `the_end`), coordinates players within that dimension, and broadcasts updates.
+2. **`Level`**: The core data structure holding chunk tables, height bounds (-64 to 320 for vanilla 1.18+ worlds), block registries, and tick schedulers.
+3. **`Chunker`**: Manages view distances and player subscriptions. Uses `CylindricalChunkIterator` to compute which chunks to stream to players as they move.
 
-The files stored in this format are `.schematic` files, and are stored in the NBT format.
+### Asynchronous Chunk Pipeline
 
-More details can be found on the [Minecraft Wiki](https://minecraft.wiki/w/Schematic_file_format)
+To maintain steady 20 TPS tick rates:
 
-### World Generation
+- Chunks requested by players are checked in the memory cache.
+- Uncached chunks are loaded from disk or generated via **Rayon** background tasks without stalling the main game tick loop.
+- Completed chunks are dispatched through asynchronous channels to the player's connection stream.
 
-When the server is starting up, it checks if there is a save present, also known as the "world".
+---
 
-Pumpkin then calls for world generation:
+## World Generation Pipeline
 
-#### Save Present
+When a world does not yet have saved chunks, or when players explore past generated boundaries, Pumpkin generates new chunks through a 6-stage pipeline:
 
-`AnvilChunkReader` is called to process the region files for the given save
+1. **Noise Routers**: Multi-octave 3D Perlin and Simplex noise algorithms compute continentalness, erosion, and peaks/valleys.
+2. **Density Shaping**: Transforms continuous 3D noise values into terrain density and solid vs. air voxel thresholds.
+3. **Biome Climate Mapping**: Samples temperature, humidity, continentalness, and erosion to assign biome IDs.
+4. **Surface Rules**: Evaluates layered rules to place grass, dirt, sand, sandstone, or deepslate depending on exposure and altitude.
+5. **Carvers**: Carves 3D cave tunnels, ravines, and aquifers into solid rock.
+6. **Features & Decoration**: Places ore veins, vegetation, trees, structures, and surface foliage.
 
-- As stated above, region files store 32x32 chunks
-    > Each region file is named corresponding to coordinates of where it is in the world
+### 1. Noise Routers & Density Functions
 
-> r.{}.{}.mca
+Pumpkin implements Minecraft's multi-octave 3D Perlin and Simplex noise algorithms:
 
-- The location table is read from the save file, representing the chunk coordinates
-- The timestamp table is read from the save file, representing the last time the chunk was modified
+- Calculates continentalness, erosion, peaks & valleys, and 3D density.
+- Generates natural terrain shapes including overhangs, floating islands, mountains, and deep caves.
 
-#### No Save Present
+### 2. Biome Climate Parameters
 
-The world seed is set to "0". In the future it will be set to the value in the "basic" configuration.
+Biomes are resolved dynamically based on multi-dimensional climate coordinates:
 
-`PlainsGenerator` is called, as so far `Plains` is the only biome that has been implemented.
+- Temperature
+- Humidity
+- Continentalness
+- Erosion
+- Depth
+- Weirdness
 
-- `PerlinTerrainGenerator` is called to set chunk height
-- Stone height is set 5 below chunk height
-- Dirt height is set to 2 below chunk height
-- Grass blocks appear at the top of dirt
-- Bedrock is set at y = -64
-- Flowers and short grass are scattered about randomly
+The parameters match vanilla Minecraft biome palettes and generate smooth biome transitions.
 
-`SuperflatGenerator` is also available, but is not currently callable.
+### 3. Generators
 
-- Bedrock is set at y = -64
-- Dirt is set two blocks up
-- Grass blocks are set one more block up
+- **Vanilla-like Terrain Generator**: Full 3D noise generation matching modern Minecraft world limits (Y = -64 to Y = 320).
+- **Superflat Generator**: Configurable flat layers (e.g., Bedrock at Y=-64, Dirt, Grass Block top layer).
 
-Blocks are able to be placed and broken, but changes are not able to be saved in any world format. Anvil worlds are currently read only.
+---
+
+## Lighting & Ticking
+
+### 1. Lighting Engine
+
+- **Block Light**: Propagated dynamically from light-emitting blocks (torches, glowstone, lava) up to level 15.
+- **Sky Light**: Propagated vertically from the sky down through transparent and semi-transparent blocks (leaves, water).
+- Light arrays are computed and serialized into clientbound chunk packets so clients render accurate shadows.
+
+### 2. Block & Chunk Ticking
+
+- **Scheduled Ticks**: Blocks requesting delayed execution (water flow, falling sand, redstone repeaters).
+- **Random Ticks**: Random blocks selected per sub-chunk each tick to simulate plant growth, ice melting, and crop maturation.

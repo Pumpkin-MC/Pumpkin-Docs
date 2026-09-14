@@ -5,13 +5,26 @@ export const en = defineConfig({
     description: "A High-performance Minecraft server software written in Rust",
 
     themeConfig: {
+        siteTitle: "Pumpkin Docs",
         // https://vitepress.dev/reference/default-theme-config
         search: {
             provider: "local",
         },
         nav: [
             {
-                text: "Home",
+                text: "Administration",
+                link: "/admin/introduction",
+            },
+            {
+                text: "Contributors",
+                link: "/developer/introduction",
+            },
+            {
+                text: "Plugins",
+                link: "/plugin-dev/introduction",
+            },
+            {
+                text: "Website",
                 link: "https://pumpkinmc.org/",
             },
         ],
@@ -19,53 +32,128 @@ export const en = defineConfig({
             {
                 text: "About",
                 items: [
-                    { text: "Benchmarks", link: "/about/benchmarks" },
                     { text: "Helping & Donating", link: "/about/helping" },
                 ],
             },
             {
                 text: "Administration",
+                collapsed: false,
                 items: [
                     { text: "Overview", link: "/admin/introduction" },
                     { text: "Migrating from Bukkit", link: "/admin/migrating-from-bukkit" },
+                    {
+                        text: "Configuration",
+                        collapsed: true,
+                        items: [
+                            { text: "Introduction", link: "/config/introduction" },
+                            { text: "Basic", link: "/config/basic" },
+                            { text: "World", link: "/config/world" },
+                            { text: "Chat & Anti-Spam", link: "/config/chat" },
+                            { text: "Commands", link: "/config/commands" },
+                            { text: "Bedrock & NetherNet", link: "/config/bedrock" },
+                            { text: "Proxy", link: "/config/proxy" },
+                            { text: "Authentication", link: "/config/authentication" },
+                            { text: "Packet Limiter", link: "/config/packet-limiter" },
+                            { text: "Compression", link: "/config/compression" },
+                            { text: "Resource Pack", link: "/config/resource-pack" },
+                            { text: "Plugins", link: "/config/plugins" },
+                            { text: "Server Links", link: "/config/server-links" },
+                            { text: "Player Data", link: "/config/player-data" },
+                            { text: "Logging", link: "/config/logging" },
+                            { text: "Query", link: "/config/query" },
+                            { text: "RCON", link: "/config/rcon" },
+                            { text: "PVP", link: "/config/pvp" },
+                            { text: "LAN Broadcast", link: "/config/lan-broadcast" },
+                        ],
+                    },
                 ],
             },
             {
-                text: "Configuration",
+                text: "Contributors",
                 items: [
-                    { text: "Introduction", link: "/config/introduction" },
-                    { text: "Basic", link: "/config/basic" },
-                    { text: "World", link: "/config/world" },
-                    { text: "Chat & Anti-Spam", link: "/config/chat" },
-                    { text: "Commands", link: "/config/commands" },
-                    { text: "Bedrock & NetherNet", link: "/config/bedrock" },
-                    { text: "Proxy", link: "/config/proxy" },
-                    { text: "Authentication", link: "/config/authentication" },
-                    { text: "Packet Limiter", link: "/config/packet-limiter" },
-                    { text: "Compression", link: "/config/compression" },
-                    { text: "Resource Pack", link: "/config/resource-pack" },
-                    { text: "Plugins", link: "/config/plugins" },
-                    { text: "Server Links", link: "/config/server-links" },
-                    { text: "Player Data", link: "/config/player-data" },
-                    { text: "Logging", link: "/config/logging" },
-                    { text: "Query", link: "/config/query" },
-                    { text: "RCON", link: "/config/rcon" },
-                    { text: "PVP", link: "/config/pvp" },
-                    { text: "LAN Broadcast", link: "/config/lan-broadcast" },
-                ],
-            },
-            {
-                text: "Developers",
-                items: [
-                    { text: "Contributing", link: "/developer/contributing" },
                     { text: "Introduction", link: "/developer/introduction" },
+                    { text: "Contributing Guide", link: "/developer/contributing" },
+                    { text: "Architecture", link: "/developer/architecture" },
+                    { text: "Data Extractor", link: "/developer/extractor" },
+                    { text: "Code Generation", link: "/developer/codegen" },
+                    { text: "Porting Versions", link: "/developer/porting-versions" },
                     {
                         text: "Networking",
-                        link: "/developer/networking/networking",
+                        collapsed: true,
                         items: [
                             {
-                                text: "Authentication",
-                                link: "/developer/networking/authentication",
+                                text: "Introduction",
+                                link: "/developer/networking/",
+                            },
+                            {
+                                text: "Metadata & Synced Data",
+                                link: "/developer/networking/metadata",
+                            },
+                            {
+                                text: "Java Edition",
+                                collapsed: true,
+                                items: [
+                                    {
+                                        text: "Overview",
+                                        link: "/developer/networking/java/overview",
+                                    },
+                                    {
+                                        text: "Adding a Packet",
+                                        link: "/developer/networking/java/adding-packets",
+                                    },
+                                    {
+                                        text: "Authentication",
+                                        link: "/developer/networking/java/authentication",
+                                    },
+                                ],
+                            },
+                            {
+                                text: "Bedrock Edition",
+                                collapsed: true,
+                                items: [
+                                    {
+                                        text: "Overview",
+                                        link: "/developer/networking/bedrock/overview",
+                                    },
+                                    {
+                                        text: "Adding a Packet",
+                                        link: "/developer/networking/bedrock/adding-packets",
+                                    },
+                                    {
+                                        text: "Authentication",
+                                        link: "/developer/networking/bedrock/authentication",
+                                    },
+                                    {
+                                        text: "NetherNet",
+                                        link: "/developer/networking/bedrock/nethernet",
+                                    },
+                                ],
+                            },
+                            {
+                                text: "Proxy Forwarding",
+                                collapsed: true,
+                                items: [
+                                    {
+                                        text: "Overview",
+                                        link: "/developer/networking/proxy/",
+                                    },
+                                    {
+                                        text: "BungeeCord",
+                                        link: "/developer/networking/proxy/bungeecord",
+                                    },
+                                    {
+                                        text: "Velocity",
+                                        link: "/developer/networking/proxy/velocity",
+                                    },
+                                    {
+                                        text: "Vine",
+                                        link: "/developer/networking/proxy/vine",
+                                    },
+                                ],
+                            },
+                            {
+                                text: "Query (GameSpy4)",
+                                link: "/developer/networking/query",
                             },
                             {
                                 text: "RCON",
@@ -73,8 +161,52 @@ export const en = defineConfig({
                             },
                         ],
                     },
-                    { text: "World", link: "/developer/world" },
-                    { text: "Mobile dev", link: "/developer/mobile" },
+                    {
+                        text: "Blocks",
+                        collapsed: true,
+                        items: [
+                            { text: "Overview", link: "/developer/blocks/" },
+                            { text: "Adding a Block", link: "/developer/blocks/adding-blocks" },
+                        ],
+                    },
+                    {
+                        text: "Items",
+                        collapsed: true,
+                        items: [
+                            { text: "Overview", link: "/developer/items/" },
+                            { text: "Adding an Item", link: "/developer/items/adding-items" },
+                        ],
+                    },
+                    {
+                        text: "Entities",
+                        collapsed: true,
+                        items: [
+                            { text: "Overview & Hierarchy", link: "/developer/entities/" },
+                            { text: "Spawning & Tracking", link: "/developer/entities/spawning-and-tracking" },
+                            { text: "Mob AI & Goals", link: "/developer/entities/ai-and-mobs" },
+                        ],
+                    },
+                    {
+                        text: "Commands",
+                        collapsed: true,
+                        items: [
+                            { text: "Overview & Dispatcher", link: "/developer/commands/" },
+                            { text: "Adding a Command", link: "/developer/commands/adding-commands" },
+                            { text: "Arguments & Suggestions", link: "/developer/commands/arguments-and-suggestions" },
+                            { text: "Execution & Context", link: "/developer/commands/execution-and-context" },
+                        ],
+                    },
+                    {
+                        text: "Plugin Engine",
+                        collapsed: true,
+                        items: [
+                            { text: "Overview", link: "/developer/plugins/" },
+                            { text: "Adding a Plugin Loader", link: "/developer/plugins/loaders" },
+                            { text: "WASM Signing & Verification", link: "/developer/plugins/wasm-signing" },
+                        ],
+                    },
+                    { text: "World Engine", link: "/developer/world" },
+                    { text: "Mobile Development", link: "/developer/mobile" },
                 ],
             },
             {
@@ -86,7 +218,7 @@ export const en = defineConfig({
                     },
                     {
                         text: "Migrating from Bukkit",
-                        collapsed: false,
+                        collapsed: true,
                         items: [
                             {
                                 text: "Overview",
@@ -112,7 +244,7 @@ export const en = defineConfig({
                     },
                     {
                         text: "Rust",
-                        collapsed: false,
+                        collapsed: true,
                         items: [
                             {
                                 text: "Creating Project",
@@ -147,7 +279,7 @@ export const en = defineConfig({
                     },
                     {
                         text: "Python",
-                        collapsed: false,
+                        collapsed: true,
                         items: [
                             {
                                 text: "Quick Start",
@@ -169,7 +301,7 @@ export const en = defineConfig({
                     },
                     {
                         text: "C#",
-                        collapsed: false,
+                        collapsed: true,
                         items: [
                             {
                                 text: "Quick Start",
@@ -183,7 +315,7 @@ export const en = defineConfig({
                     },
                     {
                         text: "C",
-                        collapsed: false,
+                        collapsed: true,
                         items: [
                             {
                                 text: "Quick Start",
@@ -197,7 +329,7 @@ export const en = defineConfig({
                     },
                     {
                         text: "Go",
-                        collapsed: false,
+                        collapsed: true,
                         items: [
                             {
                                 text: "Quick Start",
@@ -215,7 +347,7 @@ export const en = defineConfig({
                     },
                     {
                         text: "Kotlin",
-                        collapsed: false,
+                        collapsed: true,
                         items: [
                             {
                                 text: "Quick Start",
@@ -234,7 +366,7 @@ export const en = defineConfig({
                 items: [
                     {
                         text: "Common Issues",
-                        link: "/troubleshooting/common_issues.md",
+                        link: "/troubleshooting/common_issues",
                     },
                 ],
             },

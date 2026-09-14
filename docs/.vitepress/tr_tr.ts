@@ -19,7 +19,7 @@ export const trTR = defineConfig({
             {
                 text: "Hakkında",
                 items: [
-                    { text: "Kıyaslamalar", link: "/tr_TR/about/benchmarks" },
+                    { text: "Yardım & Bağış", link: "/tr_TR/about/helping" },
                 ],
             },
             {

@@ -1,16 +1,20 @@
 import { defineConfig } from "vitepress";
-import { en } from "./en";
-import { nl } from "./nl";
-import { pt } from "./pt";
-import { zhCN } from "./zh_cn";
-import { de } from "./de";
-import { trTR } from "./tr_tr";
-import { jaJP } from "./ja_jp";
+import { en } from "./en.ts";
+import { nl } from "./nl.ts";
+import { pt } from "./pt.ts";
+import { zhCN } from "./zh_cn.ts";
+import { de } from "./de.ts";
+import { trTR } from "./tr_tr.ts";
+import { jaJP } from "./ja_jp.ts";
 
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-    title: "Pumpkin",
+    title: "Pumpkin Docs",
+
+    themeConfig: {
+        siteTitle: "Pumpkin Docs",
+    },
 
     cleanUrls: true,
     rewrites: {
@@ -51,6 +55,10 @@ export default defineConfig({
         ["link", { rel: "canonical", href: "https://pumpkinmc.org/" }],
 
         ["meta", { name: "apple-mobile-web-app-title", content: "Pumpkin" }],
+
+        ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
+        ["link", { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }],
+        ["link", { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" }],
 
         ["script", { async: '', src: "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" }],
         ['script', {}, `window.dataLayer = window.dataLayer || [];

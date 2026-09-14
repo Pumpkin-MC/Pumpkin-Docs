@@ -4,19 +4,7 @@ Moving from **Bukkit / Spigot / Paper** plugin development to Pumpkin involves s
 
 ---
 
-## High-Level Architectural Differences
-
-```mermaid
-flowchart LR
-    subgraph Bukkit / Paper
-        A[Java Source] --> B[Java Bytecode .jar]
-        B --> C[JVM / Main Server Thread]
-    end
-    subgraph Pumpkin
-        D[Rust / Python / C# / Go / C] --> E[WASM Component .wasm]
-        E --> F[WASM Sandbox / Multithreaded Engine]
-    end
-```
+The table below contrasts the legacy Bukkit/Paper paradigm with Pumpkin's modern WebAssembly architecture:
 
 | Concept | Bukkit / Spigot / Paper | Pumpkin |
 | :--- | :--- | :--- |

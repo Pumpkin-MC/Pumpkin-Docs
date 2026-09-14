@@ -19,9 +19,7 @@ export const jaJP = defineConfig({
             {
                 text: "概要",
                 items: [
-                    { text: "ベンチマーク", link: "/ja_jp/about/benchmarks" },
                     { text: "ヘルプと寄付", link: "/ja_jp/about/helping" },
-                    
                 ],
             },
             {

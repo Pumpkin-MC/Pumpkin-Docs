@@ -19,9 +19,7 @@ export const pt = defineConfig({
             {
                 text: "Sobre",
                 items: [
-                    { text: "Benchmark", link: "/pt/about/benchmarks" },
                     { text: "Ajudar e Doar", link: "/pt/about/helping" },
-                    
                 ],
             },
             {
