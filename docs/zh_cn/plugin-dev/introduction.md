@@ -14,3 +14,5 @@ Pumpkin 插件 API 在很多方面受到 Spigot/Bukkit 插件 API 的启发，�
 * [C# API](https://github.com/Pumpkin-MC/pumpkin-api-cs)
 * [Go API](https://github.com/Pumpkin-MC/pumpkin-api-go)
 * [C API](https://github.com/Pumpkin-MC/pumpkin-api-c)
+* [Kotlin API](https://github.com/Pumpkin-MC/pumpkin-api-kt)
+* [D API](https://github.com/Pumpkin-MC/pumpkin-api-d)

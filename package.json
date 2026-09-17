@@ -7,8 +7,8 @@
   },
   "devDependencies": {
     "@types/bun": "^1.4.2",
-    "vitepress": "^2.0.0-alpha.19",
-    "vue": "^3.6.0-rc.2"
+    "vitepress": "^2.0.0-alpha.20",
+    "vue": "^3.6.0-rc.8"
   },
   "dependencies": {
     "or": "^0.2.0"

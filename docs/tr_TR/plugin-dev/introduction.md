@@ -1,4 +1,4 @@
-﻿# Pumpkin Eklenti Geliştirme
+# Pumpkin Eklenti Geliştirme
 
 ::: warning
 Pumpkin Eklenti API'si hâlâ çok erken bir geliştirme aşamasındadır ve her an değişebilir.
@@ -15,3 +15,5 @@ Pumpkin Eklenti API'si birçok yerde Spigot/Bukkit eklenti API'sinden ilham alı
 * [C# API](https://github.com/Pumpkin-MC/pumpkin-api-cs)
 * [Go API](https://github.com/Pumpkin-MC/pumpkin-api-go)
 * [C API](https://github.com/Pumpkin-MC/pumpkin-api-c)
+* [Kotlin API](https://github.com/Pumpkin-MC/pumpkin-api-kt)
+* [D API](https://github.com/Pumpkin-MC/pumpkin-api-d)

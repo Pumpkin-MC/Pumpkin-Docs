@@ -359,6 +359,16 @@ export const en = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "D",
+                        collapsed: true,
+                        items: [
+                            {
+                                text: "Quick Start",
+                                link: "/plugin-dev/d/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {
