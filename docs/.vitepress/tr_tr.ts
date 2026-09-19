@@ -368,6 +368,16 @@ export const trTR = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "Zig",
+                        collapsed: true,
+                        items: [
+                            {
+                                text: "Hızlı Başlangıç",
+                                link: "/tr_TR/plugin-dev/zig/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {

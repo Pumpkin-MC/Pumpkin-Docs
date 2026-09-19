@@ -368,6 +368,16 @@ export const zhCN = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "Zig",
+                        collapsed: true,
+                        items: [
+                            {
+                                text: "快速入门",
+                                link: "/zh_cn/plugin-dev/zig/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {

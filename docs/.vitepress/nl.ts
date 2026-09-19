@@ -368,6 +368,16 @@ export const nl = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "Zig",
+                        collapsed: true,
+                        items: [
+                            {
+                                text: "Quick Start",
+                                link: "/nl/plugin-dev/zig/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {

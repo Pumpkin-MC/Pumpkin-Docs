@@ -368,6 +368,16 @@ export const jaJP = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "Zig",
+                        collapsed: true,
+                        items: [
+                            {
+                                text: "クイックスタート",
+                                link: "/ja_jp/plugin-dev/zig/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {

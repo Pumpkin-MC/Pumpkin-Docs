@@ -8,7 +8,7 @@ Herhangi bir sorunla karşılaşırsanız lütfen [Discord sunucumuzdan](https:/
 Pumpkin Eklentileri, sunucu yazılımıyla çok derin bir seviyede entegre olur ve diğer sunucu yazılımlarında mümkün
 olmayacak birçok şeye olanak tanır.
 
-Pumpkin Eklenti API'si birçok yerde Spigot/Bukkit eklenti API'sinden ilham alır; daha önce bunlarla deneyiminiz ve Rust, Python, C#, Go veya C geliştirme tecrübeniz varsa Pumpkin için eklenti yazmanız oldukça kolay olacaktır. :smile:
+Pumpkin Eklenti API'si birçok yerde Spigot/Bukkit eklenti API'sinden ilham alır; daha önce bunlarla deneyiminiz ve Rust, Python, C#, Go, C, Kotlin, D veya Zig geliştirme tecrübeniz varsa Pumpkin için eklenti yazmanız oldukça kolay olacaktır. :smile:
 
 * [Rust API](https://github.com/Pumpkin-MC/Pumpkin)
 * [Python API](https://github.com/Pumpkin-MC/pumpkin-api-py)
@@ -17,3 +17,4 @@ Pumpkin Eklenti API'si birçok yerde Spigot/Bukkit eklenti API'sinden ilham alı
 * [C API](https://github.com/Pumpkin-MC/pumpkin-api-c)
 * [Kotlin API](https://github.com/Pumpkin-MC/pumpkin-api-kt)
 * [D API](https://github.com/Pumpkin-MC/pumpkin-api-d)
+* [Zig API](https://github.com/Pumpkin-MC/pumpkin-api-zig)
