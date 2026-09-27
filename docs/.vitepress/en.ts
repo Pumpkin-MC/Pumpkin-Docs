@@ -217,6 +217,19 @@ export const en = defineConfig({
                         link: "/plugin-dev/introduction",
                     },
                     {
+                        text: "Plugin API Reference",
+                        collapsed: true,
+                        items: [
+                            { text: "Package Summary", link: "/plugin-dev/wit/" },
+                            { text: "Plugin World", link: "/plugin-dev/wit/plugin" },
+                            { text: "Context", link: "/plugin-dev/wit/context" },
+                            { text: "Events", link: "/plugin-dev/wit/event" },
+                            { text: "Commands", link: "/plugin-dev/wit/command" },
+                            { text: "Scheduler", link: "/plugin-dev/wit/scheduler" },
+                            { text: "Inventory", link: "/plugin-dev/wit/inventory" },
+                        ],
+                    },
+                    {
                         text: "Migrating from Bukkit",
                         collapsed: true,
                         items: [
