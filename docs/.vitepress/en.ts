@@ -217,6 +217,19 @@ export const en = defineConfig({
                         link: "/plugin-dev/introduction",
                     },
                     {
+                        text: "Plugin API Reference",
+                        collapsed: true,
+                        items: [
+                            { text: "Package Summary", link: "/plugin-dev/wit/" },
+                            { text: "Plugin World", link: "/plugin-dev/wit/plugin" },
+                            { text: "Context", link: "/plugin-dev/wit/context" },
+                            { text: "Events", link: "/plugin-dev/wit/event" },
+                            { text: "Commands", link: "/plugin-dev/wit/command" },
+                            { text: "Scheduler", link: "/plugin-dev/wit/scheduler" },
+                            { text: "Inventory", link: "/plugin-dev/wit/inventory" },
+                        ],
+                    },
+                    {
                         text: "Migrating from Bukkit",
                         collapsed: true,
                         items: [
@@ -352,6 +365,26 @@ export const en = defineConfig({
                             {
                                 text: "Quick Start",
                                 link: "/plugin-dev/kotlin/quick-start",
+                            },
+                            {
+                                text: "API Overview",
+                                link: "/plugin-dev/kotlin/api-overview",
+                            },
+                            {
+                                text: "Callback Reference",
+                                link: "/plugin-dev/kotlin/callbacks",
+                            },
+                            {
+                                text: "Interface Map",
+                                link: "/plugin-dev/kotlin/interfaces",
+                            },
+                            {
+                                text: "Tasks",
+                                link: "/plugin-dev/kotlin/tasks",
+                            },
+                            {
+                                text: "Events",
+                                link: "/plugin-dev/kotlin/events",
                             },
                             {
                                 text: "First Command",
