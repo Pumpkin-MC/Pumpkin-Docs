@@ -1,6 +1,6 @@
 # Kotlin API Overview
 
-The [plugin world](../wit/plugin) defines calls between a plugin and the server. Its [package summary](../wit/) lists the interfaces and their members.
+The [plugin world](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/plugin.wit) defines calls between a plugin and the server. The [WIT source directory](https://github.com/Pumpkin-MC/Pumpkin/tree/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1) contains the interface definitions.
 
 | Direction | Kotlin API | Plugin code |
 | --- | --- | --- |

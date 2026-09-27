@@ -14,10 +14,6 @@ extend-exclude = [
     "docs/.vitepress/ja_jp.ts",
 ]
 
-[default]
-# These Minecraft locale identifiers are copied from the WIT contract.
-extend-ignore-re = ['`(?:ba-ru|bs-ba|fo-fo)`']
-
 [default.extend-words]
 Iinclude = "Iinclude"
 ser = "ser"

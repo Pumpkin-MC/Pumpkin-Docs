@@ -95,7 +95,7 @@ From your plugin project:
 
 The component is written to `build/my-kotlin-plugin.wasm`. Copy it to your Pumpkin server's `plugins/` directory and start the server.
 
-See the [API overview](./api-overview) for the Kotlin layer and the [WIT reference](../wit/) for types and operations. The [events](./events), [tasks](./tasks), and [command](./first-command) guides have examples.
+See the [API overview](./api-overview) for the Kotlin layer and the [WIT definitions](https://github.com/Pumpkin-MC/Pumpkin/tree/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1) for types and operations. The [events](./events), [tasks](./tasks), and [command](./first-command) guides have examples.
 
 ## Troubleshooting
 

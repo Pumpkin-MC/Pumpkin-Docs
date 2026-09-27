@@ -44,4 +44,4 @@ With `blocking = true`, Pumpkin waits for the callback before continuing the eve
 
 `events.listen` returns an `EventSubscription`. `unregister()` returns `true` if it removed the registration and `false` if the registration was already gone. An in-progress callback may still finish. Remaining subscriptions are removed on unload.
 
-See the [event types](../wit/event) for data fields and the [callback reference](./callbacks#kotlin-callback-layer) for the WIT calls behind `events.listen`.
+See the [event types](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/event.wit) for data fields and the [callback reference](./callbacks#kotlin-callback-layer) for the WIT calls behind `events.listen`.

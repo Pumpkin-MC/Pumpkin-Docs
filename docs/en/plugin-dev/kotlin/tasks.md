@@ -53,4 +53,4 @@ val heartbeat = tasks.everyTicks(0uL, 20uL) { server ->
 heartbeat.cancel()
 ```
 
-Cancelling the handle also releases its Kotlin callback. Repeating tasks are cancelled on unload. For direct WIT calls, use the generated [`scheduler` binding](../wit/scheduler); the [callback reference](./callbacks#kotlin-callback-layer) lists the operations used by `tasks`.
+Cancelling the handle also releases its Kotlin callback. Repeating tasks are cancelled on unload. For direct WIT calls, see the [`scheduler` WIT definition](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/scheduler.wit); the [callback reference](./callbacks#kotlin-callback-layer) lists the operations used by `tasks`.

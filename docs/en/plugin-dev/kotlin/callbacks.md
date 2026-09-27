@@ -1,6 +1,6 @@
 # Kotlin Callback Reference
 
-The server calls the exports in the [`plugin` world](../wit/plugin). This page shows their Kotlin methods and registration APIs. For host imports, see the [interface map](./interfaces).
+The server calls the exports in the [`plugin` world](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/plugin.wit). This page shows their Kotlin methods and registration APIs. For host imports, see the [interface map](./interfaces).
 
 `pumpkin.pluginClass` names the no-argument `PumpkinPlugin` subclass to instantiate. The API implements `PluginRootFunctions.Exports` and `Metadata`.
 
