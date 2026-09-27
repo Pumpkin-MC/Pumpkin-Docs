@@ -9,7 +9,7 @@ Shared types: `pumpkin:plugin/event@0.1.0`
 
 [Package summary](./)
 
-Source: [event.wit](https://github.com/Pumpkin-MC/pumpkin-plugin-wit/blob/master/v0.1/event.wit)
+Source: [event.wit](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/event.wit)
 
 Event types, priorities, and event data.
 

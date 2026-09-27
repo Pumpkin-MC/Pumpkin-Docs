@@ -5,7 +5,7 @@ The [Pumpkin Gradle plugin](https://plugins.gradle.org/plugin/io.github.pumpkin-
 ## Prerequisites
 
 - JDK 17 or later
-- A Gradle project with a wrapper
+- A Gradle project with a Gradle 9.x wrapper
 
 The API artifact includes generated bindings. Plugin builds do not require `wit-bindgen` or Rust; the Gradle plugin downloads the remaining build tools.
 

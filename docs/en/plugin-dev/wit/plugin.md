@@ -9,7 +9,7 @@ outline: [2, 2]
 
 [Package summary](./)
 
-Source: [plugin.wit](https://github.com/Pumpkin-MC/pumpkin-plugin-wit/blob/master/v0.1/plugin.wit)
+Source: [plugin.wit](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/plugin.wit)
 
 Plugins call the host imports. The host calls the plugin exports.
 
