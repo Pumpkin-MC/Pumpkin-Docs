@@ -396,7 +396,7 @@ export const zhCN = defineConfig({
             { icon: "discord", link: "https://discord.gg/RNm224ZsDq" },
         ],
 
-        logo: "/assets/favicon.ico",
+        logo: "/assets/icon.svg",
         footer: {
             message: "基于 MIT 许可发布。",
             copyright: `Copyright © 2024-${new Date().getFullYear()} Aleksandr Medvedev`,
