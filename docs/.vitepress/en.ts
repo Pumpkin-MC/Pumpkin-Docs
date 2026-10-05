@@ -354,6 +354,26 @@ export const en = defineConfig({
                                 link: "/plugin-dev/kotlin/quick-start",
                             },
                             {
+                                text: "API Overview",
+                                link: "/plugin-dev/kotlin/api-overview",
+                            },
+                            {
+                                text: "Callback Reference",
+                                link: "/plugin-dev/kotlin/callbacks",
+                            },
+                            {
+                                text: "Interface Map",
+                                link: "/plugin-dev/kotlin/interfaces",
+                            },
+                            {
+                                text: "Tasks",
+                                link: "/plugin-dev/kotlin/tasks",
+                            },
+                            {
+                                text: "Events",
+                                link: "/plugin-dev/kotlin/events",
+                            },
+                            {
                                 text: "First Command",
                                 link: "/plugin-dev/kotlin/first-command",
                             },
