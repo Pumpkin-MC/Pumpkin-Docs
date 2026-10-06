@@ -9,6 +9,8 @@ The Pumpkin Plugin API takes inspiration from the Spigot/Bukkit plugin API in ma
 so if you have previous experience with these and have experience with Rust, Python, C#, Go, C, Kotlin, D, or Zig development,
 you should have a pretty easy time writing plugins for Pumpkin. :smile:
 
+The [plugin API reference](./wit/) lists the WIT interfaces, types, and operations shared by every language binding.
+
 * [Rust API](https://github.com/Pumpkin-MC/Pumpkin)
 * [Python API](https://github.com/Pumpkin-MC/pumpkin-api-py)
 * [C# API](https://github.com/Pumpkin-MC/pumpkin-api-cs)
