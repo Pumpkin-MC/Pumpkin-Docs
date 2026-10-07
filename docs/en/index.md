@@ -23,7 +23,7 @@ cd Pumpkin
 3. Run:
 
 > [!NOTE]
-> The build process may take a while, due to heavy optimizations for release builds.
+> The build process may take a while due to heavy optimizations for release builds.
 
 ```shell
 cargo run --release
@@ -36,7 +36,7 @@ RUSTFLAGS='-C target-cpu=native' cargo run --release
 ```
 
 > [!NOTE]
-> To use (to play on) a server that you are self-hosting on the same local system (e.g. using Prism launcher on Linux to login and run/play minecraft and using Pumpkin to host the server) you may need to use "localhost:25565" as the server address through the 'Multiplayer' -> 'Add Server' -> 'Server Address' pathway, though that address is not listed in the terminal's run-server output.
+> To use (to play on) a server that you are self-hosting on the same local system (e.g. using Prism launcher on Linux to log in and run/play Minecraft and using Pumpkin to host the server), you may need to use "localhost:25565" as the server address through the 'Multiplayer' -> 'Add Server' -> 'Server Address' pathway, though that address is not listed in the terminal's run-server output.
 ```text
 localhost:25565
 ```
@@ -103,7 +103,7 @@ nixos-option services.pumpkin-mc
 
 ## Test Server
 
-Pumpkin has a test server maintained by @kralverde. Its runs on the latest commit of Pumpkin's master branch.
+Pumpkin has a test server maintained by @kralverde. It runs on the latest commit of Pumpkin's master branch.
 
 - **IP:** pumpkin.kralverde.dev
 
