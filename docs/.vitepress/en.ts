@@ -377,6 +377,34 @@ export const en = defineConfig({
                                 text: "Quick Start",
                                 link: "/plugin-dev/zig/quick-start",
                             },
+                            {
+                                text: "Events",
+                                link: "/plugin-dev/zig/events",
+                            },
+                            {
+                                text: "Commands",
+                                link: "/plugin-dev/zig/commands",
+                            },
+                            {
+                                text: "Text",
+                                link: "/plugin-dev/zig/text",
+                            },
+                            {
+                                text: "Menus",
+                                link: "/plugin-dev/zig/menus",
+                            },
+                            {
+                                text: "Scheduling",
+                                link: "/plugin-dev/zig/scheduling",
+                            },
+                            {
+                                text: "Files and Configuration",
+                                link: "/plugin-dev/zig/files",
+                            },
+                            {
+                                text: "Handles and Memory",
+                                link: "/plugin-dev/zig/memory",
+                            },
                         ],
                     },
                 ],
