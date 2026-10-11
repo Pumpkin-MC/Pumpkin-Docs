@@ -1,36 +1,26 @@
 # Quick Start
 
-This guide will help you get started with writing Pumpkin server plugins using the [Zig programming language](https://ziglang.org/).
+Pumpkin plugins can be written in [Zig](https://ziglang.org/) with the [`pumpkin-api-zig`](https://github.com/Pumpkin-MC/pumpkin-api-zig) bindings. A plugin is compiled to a WebAssembly component, which the server loads from its `plugins` folder.
 
-Zig plugins for Pumpkin compile to WebAssembly (Wasm) components using the official [`pumpkin-api-zig`](https://github.com/Pumpkin-MC/pumpkin-api-zig) bindings.
-
----
+The bindings are generated from the plugin API, so everything the API offers is available from Zig. On top of that there are helpers for the things almost every plugin does: listening to [events](./events), declaring [commands](./commands), building [text](./text), showing [menus](./menus), handing out [items](./items), [scheduling](./scheduling) work, reading [config files](./files), keeping [player data](./player-data) and talking to the [network](./networking).
 
 ## Prerequisites
 
-Before building Zig plugins for Pumpkin, ensure you have the following installed:
+You need [Zig](https://ziglang.org/download/) 0.16.0 and [`wasm-tools`](https://github.com/bytecodealliance/wasm-tools) in your `PATH`. The build uses `wasm-tools` to attach the plugin API to your code and to package it as a component.
 
-- **[Zig](https://ziglang.org/download/)**: Version 0.16.0 or later.
-- **[`wasm-tools`](https://github.com/bytecodealliance/wasm-tools)**: Available in your `PATH` (used by the build script to embed WIT metadata and generate the WebAssembly component).
+## Setting up a project
 
----
-
-## 1. Setting Up the Project
-
-Create a new directory for your plugin project:
+Create a directory for the plugin and add a release of the bindings as a dependency:
 
 ```bash
 mkdir my-zig-plugin
 cd my-zig-plugin
+zig fetch --save git+https://github.com/Pumpkin-MC/pumpkin-api-zig#v0.1.0
 ```
 
-Fetch and add `pumpkin-api-zig` as a dependency:
+The [releases](https://github.com/Pumpkin-MC/pumpkin-api-zig/releases) list every version. To update, run the command again with the new one.
 
-```bash
-zig fetch --save git+https://github.com/Pumpkin-MC/pumpkin-api-zig
-```
-
-Create `build.zig` in the project root:
+Then create `build.zig`:
 
 ```zig [build.zig]
 const std = @import("std");
@@ -44,11 +34,19 @@ pub fn build(b: *std.Build) void {
 }
 ```
 
----
+`addPlugin` compiles `src/main.zig` for `wasm32-wasi`, makes the API available to it as the `pumpkin` module and turns the result into a component.
 
-## 2. Writing the Plugin
+If you are working on the bindings themselves, you can depend on a local checkout instead. The path is relative to your project:
 
-Create a `src` directory and add your plugin code in `src/main.zig`:
+```zig [build.zig.zon]
+.dependencies = .{
+    .pumpkin_api_zig = .{ .path = "../pumpkin-api-zig" },
+},
+```
+
+## Writing the plugin
+
+Put the following in `src/main.zig`:
 
 ```zig [src/main.zig]
 const std = @import("std");
@@ -82,41 +80,44 @@ comptime {
 }
 ```
 
-### Key Elements:
-- **`std_options`**: Routes standard Zig logging (`std.log`) to Pumpkin's logger using `pumpkin.logFn`.
-- **`pub const metadata`**: Defines plugin metadata (name, version, authors, description) required by Pumpkin when loading the component.
-- **`pub const events`**: Defines event handlers registered by the plugin (such as `.player_join_event`).
-- **`pub fn onLoad`**: Entry point invoked when Pumpkin initializes the plugin.
-- **`pumpkin.register(MyPlugin)`**: Generates the necessary WebAssembly component exports and entry points at compile time.
+A plugin is a struct handed to `pumpkin.register`, which generates everything the server needs to call into it. The struct's declarations describe the plugin. `metadata` is the only one that's required: it holds the name, version, authors and description the server shows, and can also list `dependencies` on other plugins and the `permissions` the plugin needs, which [Files and Configuration](./files) covers. `events` lists the events to listen to. `onLoad` runs after the plugin's events and commands have been registered, and `onUnload` runs before it is unloaded.
 
-> [!NOTE]
-> Everything the API returns (handles included) is only valid until the current callback returns. Call `keep()` on a handle to hold on to it, then release it with `deinit()` when you're done.
+Setting `std_options.logFn` to `pumpkin.logFn` sends `std.log` output to the server console, with the scope in front if you use `std.log.scoped`.
 
----
+Everything the API gives you, the event's `player` included, only lives until the callback returns. [Handles and Memory](./memory) explains how to keep things for longer.
 
-## 3. Building the Plugin
-
-Compile your plugin into a WebAssembly component:
+## Building and running
 
 ```bash
 zig build
+cp zig-out/my-zig-plugin.wasm /path/to/pumpkin/plugins/
 ```
 
-This will produce `zig-out/my-zig-plugin.wasm` in your project root.
+Start or restart the server, and the log should show the plugin's message:
 
----
+```text
+[INFO] Hello from Zig!
+```
 
-## 4. Running Your Plugin
+> [!WARNING]
+> Each release of the bindings names the revision of the plugin API it was built against. A server older than that refuses the plugin with `Plugin was built against a different iteration of the API`, and updating the server fixes it.
 
-1. Copy the compiled `.wasm` file to your server's `plugins/` directory:
-   ```bash
-   cp zig-out/my-zig-plugin.wasm /path/to/pumpkin/plugins/
-   ```
-2. Start or restart Pumpkin:
-   ```bash
-   ./pumpkin
-   ```
-3. Check the server logs to verify your plugin loaded:
-   ```text
-   [INFO] Hello from Zig!
-   ```
+## Examples
+
+The bindings repository has a small plugin for each part of the API. Building the repository with `zig build` builds them all into `zig-out/`.
+
+| Example | Shows |
+| --- | --- |
+| [`hello`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/hello.zig) | Events, a command and styled text |
+| [`heal`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/heal.zig) | Command arguments read with `cmd.typed` |
+| [`menu`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/menu.zig) | An inventory menu with buttons |
+| [`items`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/items.zig) | Building, editing and recognizing items, and giving and taking them |
+| [`tasks`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/tasks.zig) | Delayed and repeating tasks that carry a value |
+| [`config`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/config.zig) | A TOML config file that can be reloaded |
+| [`store`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/store.zig) | Data kept for every player in a file of its own |
+| [`https`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/https.zig) | Web requests with `pumpkin.http` |
+| [`tcp-server`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/tcp-server.zig) | A TCP server that bridges the chat |
+| [`udp`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/udp.zig) | Receiving and answering UDP datagrams |
+| [`dns`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/dns.zig) | Looking up the addresses of a host name |
+| [`http`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/http.zig) | A TCP connection with a timeout, sending a plain HTTP request |
+| [`nettest`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/nettest.zig) | Runs every networking path with `/nettest` and reports each one |
