@@ -49,6 +49,7 @@ Values in `data` are stored on the item under the plugin's name, so they can't c
 
 ```zig
 fn onInteract(_: pumpkin.Server, ev: *pumpkin.EventData(.player_interact_event)) void {
+    if (ev.action != .right_click_air and ev.action != .right_click_block) return;
     const held = item.held(ev.player) orelse return;
     if (!item.is(held, "id", "excalibur")) return;
     ev.player.setHealth(ev.player.getMaxHealth());
@@ -64,7 +65,8 @@ fn onInteract(_: pumpkin.Server, ev: *pumpkin.EventData(.player_interact_event))
 ```zig
 fn upgrade(sender: cmd.Sender, _: pumpkin.Server, _: cmd.Args) cmd.Result {
     const player = sender.asPlayer() orelse return cmd.fail("only players can upgrade a sword");
-    const sword = item.held(player) orelse return cmd.fail("hold the sword to upgrade it");
+    const sword = item.held(player) orelse return cmd.fail("hold Excalibur to upgrade it");
+    if (!item.is(sword, "id", "excalibur")) return cmd.fail("hold Excalibur to upgrade it");
     const level = item.enchantLevel(sword, .sharpness);
     item.edit(sword, .{ .enchants = &.{.{ .sharpness, level + 1 }} });
     item.setHeld(player, sword);

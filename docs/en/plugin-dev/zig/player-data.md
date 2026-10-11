@@ -85,7 +85,7 @@ That memory is freed when the entry is dropped. Since an entry can be dropped be
 
 ## Other keys
 
-`profiles.get(key)` returns the entry for any key, such as a town name. Keys may contain letters, digits, `-`, `_` and `.`, which keeps them inside the store's folder. `player(p)` is `get` with the player's UUID.
+`profiles.get(key)` returns the entry for any key, such as a town name. Keys may contain letters, digits, `-`, `_` and `.`, and can't be empty or start with a `.`, which keeps them inside the store's folder. `player(p)` is `get` with the player's UUID.
 
 `exists(key)` tells whether a key has an entry, `save(key)` writes one right away, `flush()` writes every changed entry, and `remove(key)` deletes an entry and its file.
 

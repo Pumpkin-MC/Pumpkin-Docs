@@ -44,7 +44,7 @@ fn teleport(srv: pumpkin.Server, id: pumpkin.uuid.Uuid) void {
 
 Store the player's UUID rather than the `Player` handle. The handle is released when the callback that scheduled the task returns, as [Handles and Memory](./memory) explains, and `getPlayerByUuid` returns `null` if the player has left in the meantime.
 
-The value can be any type, such as a struct with several fields. Slices inside it aren't copied, though, so a string the task needs later has to be copied to `pumpkin.abi.heap` first and freed by the task when it is done with it.
+The value can be any type, such as a struct with several fields. Slices inside it aren't copied, though, so a string the task needs later has to be copied to `pumpkin.abi.heap` first and freed by the task when it is done with it. Cancelling a task frees its copy of the value, but not what the value points to, so if the task can be cancelled before it runs, free the string where you cancel it as well. Tasks that are cancelled because the plugin unloads don't need this.
 
 A task with nothing to carry passes `{}` and takes only the server, as `announce` above does.
 

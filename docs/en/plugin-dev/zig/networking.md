@@ -72,13 +72,13 @@ fn onChat(_: pumpkin.Server, ev: *pumpkin.EventData(.player_chat_event)) void {
 
 `onChat` is registered for `player_chat_event`, so chat messages go out to every connected client. The server listens on `127.0.0.1` unless `host` says otherwise, so only programs on the same machine can connect. Set `.host = "0.0.0.0"` to accept connections from other machines.
 
-Sockets are checked once per tick, and callbacks only run when something has arrived, so a quiet socket costs almost nothing and never holds up the game. The callbacks are:
+Sockets are checked once per tick, and nothing runs for a socket until something happens on it, so a quiet socket costs almost nothing and never holds up the game. `on_connect` runs when the server accepts a connection, and each connection has these callbacks:
 
-- `on_line`, with one line at a time without its line ending. This is the default framing.
+- `on_line`, with one line at a time without its line ending, when one arrives. This is the default framing.
 - `on_data`, with the bytes in the chunks they arrive in, when `framing` is `.raw`.
 - `on_close`, when the connection closes from either side.
 
-`conn.send` and `conn.print` never block. Data the other side isn't ready for is sent on later ticks, and a connection with more than `max_outgoing` bytes waiting, 1 MiB by default, is closed for reading too slowly. `listener.broadcast` sends to every connection, and `close` ends a connection or the whole server. `conn.data` is a number the plugin can use to tell connections apart.
+On these connections, `conn.send` and `conn.print` never block. Data the other side isn't ready for is sent on later ticks, and a connection with more than `max_outgoing` bytes waiting, 1 MiB by default, is closed for reading too slowly. `listener.broadcast` sends to every connection, and `close` ends a connection or the whole server. `conn.data` is a number the plugin can use to tell connections apart.
 
 Sockets still open when the plugin unloads are closed automatically.
 
@@ -89,7 +89,9 @@ const conn = try net.connect("chat.example.com", 4000, .{ .callbacks = .{ .on_li
 try conn.send("hello\n");
 ```
 
-`net.connect` takes a host name or an IP address and tries its addresses in order until one accepts, within `timeout_ms`. With callbacks, the connection is checked every tick like the ones of a server. Without them, the plugin reads it itself with `conn.readLine()`, which waits up to `read_timeout_ms` for a line.
+`net.connect` takes a host name or an IP address and tries its addresses in order until one accepts. It blocks while it looks up the host and waits for the connection, for up to `timeout_ms`, which is 10 seconds unless you set it. A host that doesn't answer holds up the command or event that called `connect` for that long, so keep the timeout short where it matters.
+
+Once connected, a connection with callbacks is checked every tick like the ones of a server. Without callbacks, the plugin reads it itself with `conn.readLine()`, which waits up to `read_timeout_ms` for a line, and `conn.send` waits until the other side has taken the data.
 
 ## UDP
 
