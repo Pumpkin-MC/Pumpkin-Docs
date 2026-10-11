@@ -52,3 +52,5 @@ const name = pumpkin.TextComponent.text(player.getName());
 const joined = pumpkin.TextComponent.translate("multiplayer.player.joined", &.{name});
 joined.colorNamed(.yellow);
 ```
+
+[The `hello` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/hello.zig) builds a styled join message.

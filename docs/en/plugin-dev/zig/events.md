@@ -76,3 +76,5 @@ fn onDeath(_: pumpkin.Server, ev: *pumpkin.EventData(.player_death_event)) void 
 ```
 
 The last argument takes the same `EventOptions`.
+
+[The `hello` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/hello.zig) listens to events and changes the join message.

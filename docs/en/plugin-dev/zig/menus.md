@@ -72,10 +72,10 @@ comptime {
 
 Slots are numbered from 0 in the top left corner, going row by row, so slot 13 is the middle of a three row chest. `fill` puts an item in every slot that has no button, which is usually a glass pane as a background.
 
-An icon is an item id with an optional `count`, `name` and `lore`. The name and every lore line are lists of text spans. Unlike vanilla custom names, they aren't italic unless you set `italic`.
+An icon is an [`item.Spec`](./items), so it can be anything `item.build` makes: an item id with a `count`, a `name` and `lore` made of text spans, enchantments and so on. Unlike vanilla custom names, names and lore aren't italic unless you set `italic`.
 
 > [!NOTE]
-> The server currently gives `.generic_9x1` menus 5 slots instead of 9, so the last four slots of a one row menu don't work. Use `.generic_9x2` or bigger until that is fixed.
+> Only the first five slots of a `.generic_9x1` menu work, so use `.generic_9x2` or bigger.
 
 ## Handling clicks
 
@@ -124,3 +124,5 @@ fn saveSettings(_: pumpkin.Server, player: pumpkin.Player) void {
 ```
 
 `menu.isOpen(player)` tells whether a player has one of the plugin's menus open.
+
+[The `menu` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/menu.zig) opens a menu where each button picks a color.

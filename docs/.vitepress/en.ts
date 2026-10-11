@@ -394,12 +394,24 @@ export const en = defineConfig({
                                 link: "/plugin-dev/zig/menus",
                             },
                             {
+                                text: "Items",
+                                link: "/plugin-dev/zig/items",
+                            },
+                            {
                                 text: "Scheduling",
                                 link: "/plugin-dev/zig/scheduling",
                             },
                             {
                                 text: "Files and Configuration",
                                 link: "/plugin-dev/zig/files",
+                            },
+                            {
+                                text: "Player Data",
+                                link: "/plugin-dev/zig/player-data",
+                            },
+                            {
+                                text: "Networking",
+                                link: "/plugin-dev/zig/networking",
                             },
                             {
                                 text: "Handles and Memory",

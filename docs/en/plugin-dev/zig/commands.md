@@ -66,7 +66,7 @@ Arguments and fixed words go in `then`, and each of them can have a `then` of it
 
 This tree accepts `/heal <target>`, `/heal <target> <amount>` and `/heal all`. A bare `/heal` is rejected, since the root has no `run`.
 
-The second parameter of `.argument` is the argument's type. These are the most common ones, and `pumpkin.command.ArgumentType` has the full list:
+The second parameter of `.argument` is the argument's type. These are the most common ones:
 
 | Type | Accepts |
 | --- | --- |
@@ -75,12 +75,13 @@ The second parameter of `.argument` is the argument's type. These are the most c
 | `.{ .float = .{ min, max } }` | A decimal number. `.double` and `.long` work the same way. |
 | `.bool` | `true` or `false` |
 | `.{ .string = .single_word }` | A single word. `.quotable` also accepts a quoted string, and `.greedy` takes the rest of the line. |
-| `.message` | The rest of the line, as a chat message |
 | `.block_pos`, `.position3d` | Coordinates, including relative ones like `~ ~1 ~` |
 | `.gamemode` | A game mode |
 | `.item`, `.block_state` | An item or a block |
 
 Bounds are checked by the client as the player types and by the server when it parses the command. The `heal` handler never sees an amount below 0.5.
+
+Not every type in `pumpkin.command.ArgumentType` can be used. `cmd.isSupported` tells which ones can, and using any other one in `pub const commands` is a compile error. To read the rest of the line, use `.{ .string = .greedy }`.
 
 ## Reading arguments with `cmd.typed`
 
@@ -136,3 +137,5 @@ fn suggestKits(_: cmd.Sender, _: pumpkin.Server, request: pumpkin.command.Sugges
 ```
 
 `cmd.suggestions` offers the values that start with what the player has typed so far.
+
+[The `heal` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/heal.zig) has a command tree with arguments read through `cmd.typed`.
