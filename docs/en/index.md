@@ -41,6 +41,13 @@ RUSTFLAGS='-C target-cpu=native' cargo run --release
 localhost:25565
 ```
 
+> [!NOTE]
+> Re-running 'cargo run --release' (the shorter version or the longer `target-cpu=native` version) may initiate (re)compiling the binary (which often takes a few minutes). You can (re)use an existing compiled binary (no wait) by finding the existing release-mode binary, e.g. at '/home/NAME/Pumpkin/target/release/pumpkin'. In posix, navigate a terminal into Pumpkin/target/release/ and run:
+```shell
+./pumpkin 
+```
+
+
 ## Docker
 
 > [!IMPORTANT]
