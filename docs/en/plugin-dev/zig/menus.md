@@ -87,13 +87,17 @@ A click handler receives a `menu.Click`, which has the `player` who clicked, the
 const colors = [_]msg.Color{ .red, .green, .aqua, .yellow };
 
 fn openColors(player: pumpkin.Player) void {
+    var names: [colors.len][1]msg.Span = undefined;
     var buttons: [colors.len]menu.Button = undefined;
-    for (&buttons, colors, 0..) |*button, color, i| button.* = .{
-        .slot = @intCast(10 + 2 * i),
-        .icon = .{ .id = "minecraft:white_wool", .name = &.{.{ .text = @tagName(color), .color = color }} },
-        .on_click = pickColor,
-        .data = i,
-    };
+    for (&buttons, &names, colors, 0..) |*button, *name, color, i| {
+        name.* = .{.{ .text = @tagName(color), .color = color }};
+        button.* = .{
+            .slot = @intCast(10 + 2 * i),
+            .icon = .{ .id = "minecraft:white_wool", .name = name },
+            .on_click = pickColor,
+            .data = i,
+        };
+    }
     menu.open(player, .{ .title = &.{.{ .text = "Pick a color" }}, .buttons = &buttons });
 }
 
@@ -103,7 +107,7 @@ fn pickColor(click: menu.Click) void {
 }
 ```
 
-The buttons can live on the stack, because `menu.open` copies what it needs before it returns.
+The buttons can live on the stack, because `menu.open` copies what it needs before it returns. The names are kept in an array of their own: `&.{ ... }` written inside the loop would point to memory that the next round of the loop reuses, and every button would show the last name.
 
 The helper does not retain the specification to rebuild a menu. Players can change free-slot contents, but to change the buttons or layout, open it again with a new specification. Opening a menu replaces the one the player has open.
 
