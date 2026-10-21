@@ -421,6 +421,10 @@ export const en = defineConfig({
                                 text: "Handles and Memory",
                                 link: "/plugin-dev/zig/memory",
                             },
+                            {
+                                text: "Changelog",
+                                link: "/plugin-dev/zig/changelog",
+                            },
                         ],
                     },
                 ],
