@@ -394,6 +394,10 @@ export const en = defineConfig({
                                 link: "/plugin-dev/zig/menus",
                             },
                             {
+                                text: "Chat Prompts",
+                                link: "/plugin-dev/zig/prompts",
+                            },
+                            {
                                 text: "Items",
                                 link: "/plugin-dev/zig/items",
                             },
@@ -416,6 +420,10 @@ export const en = defineConfig({
                             {
                                 text: "Handles and Memory",
                                 link: "/plugin-dev/zig/memory",
+                            },
+                            {
+                                text: "Changelog",
+                                link: "/plugin-dev/zig/changelog",
                             },
                         ],
                     },

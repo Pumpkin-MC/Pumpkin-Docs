@@ -1,6 +1,6 @@
 # Scheduling
 
-A plugin can run code later, or repeatedly on a timer, with `pumpkin.tasks`. The server runs 20 ticks per second, and tasks run on a tick, between other game work.
+A plugin can run code later, or repeatedly on a timer, with `pumpkin.tasks`. The helpers convert seconds and minutes at 20 ticks per second. Tasks run on game ticks, so a changed tick rate or server lag changes their wall-clock timing.
 
 ## Delayed and repeating tasks
 
@@ -23,7 +23,7 @@ fn autosave(_: pumpkin.Server) void {
 
 `tasks.after(delay, handler, data)` runs the handler once, `delay` from now. `tasks.every(period, handler, data)` runs it every `period`, starting one period from now. `tasks.repeat(delay, period, handler, data)` does the same but runs the first time after `delay`, so `.fromTicks(0)` starts it on the next tick.
 
-Durations are written as `.fromTicks(n)`, `.milliseconds(n)`, `.seconds(n)` or `.minutes(n)`. Milliseconds are rounded up to whole ticks.
+Durations are written as `.fromTicks(n)`, `.milliseconds(n)`, `.seconds(n)` or `.minutes(n)`. Milliseconds are rounded up to whole ticks. A repeating period of zero is clamped to one tick.
 
 Tasks that are still scheduled when the plugin unloads are cancelled, so a plugin doesn't have to clean them up itself.
 
@@ -94,6 +94,12 @@ fn abortRestart() void {
 
 ## Tasks without a value
 
-`pumpkin.runLater(handler, delay_ticks)` and `pumpkin.runEvery(handler, delay_ticks, period_ticks)` schedule a `fn (pumpkin.Server) void` directly on the server's scheduler. They take ticks, return the server's task id for `pumpkin.scheduler.cancelTask`, and aren't cancelled when the plugin unloads. `pumpkin.tasks` is easier to use in almost every case.
+`pumpkin.runLater(handler, delay_ticks)` and `pumpkin.runEvery(handler, delay_ticks, period_ticks)` schedule a `fn (pumpkin.Server) void` directly on the server's scheduler. They take ticks and return the server's raw task ID for `pumpkin.scheduler.cancelTask`, rather than a `tasks.Task` that owns a copied value. Prefer `pumpkin.tasks` when you need that value, cancellation tracking or automatic helper cleanup.
 
-[The `tasks` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/tasks.zig) has the countdown from this page and a reminder that runs once.
+[The `tasks` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.2.0/examples/tasks.zig) has the countdown from this page and a reminder that runs once.
+
+## Timeouts used by other helpers
+
+Prompts accept the same `tasks.Duration`, such as `.timeout = .seconds(30)`. A store uses it for `.autosave = .minutes(1)`. Keep a prompt open indefinitely with `timeout = null`, and keep store entries cached with `idle = null`; those options belong to different lifetimes.
+
+Scheduling work for later does not run it in parallel. A task callback still runs to completion, just like an event or command. An HTTP request or blocking socket read inside a task can still delay other callbacks. Split long work across short tasks or use the polled callbacks described in [Networking](./networking).

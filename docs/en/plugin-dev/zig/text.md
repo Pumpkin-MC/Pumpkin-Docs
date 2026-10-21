@@ -53,4 +53,25 @@ const joined = pumpkin.TextComponent.translate("multiplayer.player.joined", &.{n
 joined.colorNamed(.yellow);
 ```
 
-[The `hello` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/hello.zig) builds a styled join message.
+[The `hello` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.2.0/examples/hello.zig) builds a styled join message.
+
+## Styles in items, menus and prompts
+
+An omitted style is `null`, meaning it is left for the parent component to decide. Setting a style to `false` explicitly turns it off. Item and menu icons built through `item.Spec` default to non-italic names and lore; set the spec's `italic` field to change that default, or override it on a particular span:
+
+```zig
+const label = item.build(.{
+    .id = "minecraft:name_tag",
+    .italic = true,
+    .name = &.{
+        .{ .text = "Vault " },
+        .{ .text = "1", .italic = false, .color = .gold },
+    },
+});
+```
+
+[Prompts](./prompts) use the same spans for questions, validation messages and choice labels. A choice supplies its own command click action; color, styles and hover text from its label remain.
+
+`Span.hover` is plain text. For a styled hover, build the component directly and call `component.hoverShowText(msg.build(spans))`. A `.click = .{ .copy = "text" }` action copies text to the player's clipboard; it does not clone the component.
+
+`TextComponent.toJson()` returns JSON text valid for the current callback, and `TextComponent.fromJson(json)` returns an `.ok` component or an `.err` message. Copy serialized text into [owned memory](./memory) before keeping it for another callback.
