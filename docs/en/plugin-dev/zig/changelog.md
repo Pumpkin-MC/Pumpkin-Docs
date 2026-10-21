@@ -4,7 +4,7 @@ Changes to the Zig bindings and helpers, grouped by `pumpkin-api-zig` version. T
 
 ## 0.2.0
 
-The 0.2.0 changes below are prepared in the repository; the release tag has not been published yet.
+WIT: [pumpkin-plugin-wit@79cc4f0](https://github.com/Pumpkin-MC/pumpkin-plugin-wit/commit/79cc4f05a7f47e5672169d3bef593855267ec5e2).
 
 ### New helpers and examples
 
@@ -28,9 +28,13 @@ The 0.2.0 changes below are prepared in the repository; the release tag has not 
 
 ## 0.1.1
 
+WIT: [pumpkin-plugin-wit@75f96e9](https://github.com/Pumpkin-MC/pumpkin-plugin-wit/commit/75f96e9475c44295f346e87531e7508f40057622).
+
 Fixed a compile-time branch quota failure when a plugin declared three or more events. [Compare 0.1.0 and 0.1.1](https://github.com/Pumpkin-MC/pumpkin-api-zig/compare/v0.1.0...v0.1.1).
 
 ## 0.1.0
+
+WIT: [pumpkin-plugin-wit@75f96e9](https://github.com/Pumpkin-MC/pumpkin-plugin-wit/commit/75f96e9475c44295f346e87531e7508f40057622).
 
 Initial release for Zig 0.16.0, building plugins as WebAssembly components:
 
@@ -42,4 +46,4 @@ Initial release for Zig 0.16.0, building plugins as WebAssembly components:
 - TOML and JSON configuration, per-player file stores, HTTP/HTTPS and TCP/UDP networking.
 - Example plugins, `/nettest` for server-side networking checks, and automated build and release workflows.
 
-See the [0.1.0 release](https://github.com/Pumpkin-MC/pumpkin-api-zig/releases/tag/v0.1.0) and [0.1.1 release](https://github.com/Pumpkin-MC/pumpkin-api-zig/releases/tag/v0.1.1) for their artifacts and plugin API revisions.
+See the [0.1.0](https://github.com/Pumpkin-MC/pumpkin-api-zig/releases/tag/v0.1.0), [0.1.1](https://github.com/Pumpkin-MC/pumpkin-api-zig/releases/tag/v0.1.1) and [0.2.0](https://github.com/Pumpkin-MC/pumpkin-api-zig/releases/tag/v0.2.0) releases for their artifacts and plugin API revisions.

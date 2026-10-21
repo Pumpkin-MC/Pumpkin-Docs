@@ -4,7 +4,7 @@ Pumpkin plugins can be written in [Zig](https://ziglang.org/) with the [`pumpkin
 
 The bindings are generated from the plugin API, so everything the API offers is available from Zig. On top of that there are helpers for the things almost every plugin does: listening to [events](./events), declaring [commands](./commands), building [text](./text), showing [menus](./menus), asking [questions in chat](./prompts), handing out [items](./items), [scheduling](./scheduling) work, reading [config files](./files), keeping [player data](./player-data) and talking to the [network](./networking).
 
-These guides cover the upcoming `pumpkin-api-zig` 0.2.0 release. Example links target its tag and become available when it is published. The [changelog](./changelog) lists the changes since 0.1.0. Your plugin's own `metadata.version` is independent of the bindings version.
+These guides cover `pumpkin-api-zig` 0.2.0. The [changelog](./changelog) lists the changes since 0.1.0. Your plugin's own `metadata.version` is independent of the bindings version.
 
 ## Prerequisites
 
@@ -19,15 +19,13 @@ mkdir my-zig-plugin
 cd my-zig-plugin
 ```
 
-Once 0.2.0 is published, add it with:
+Add the bindings as a dependency:
 
 ```bash
 zig fetch --save git+https://github.com/Pumpkin-MC/pumpkin-api-zig#v0.2.0
 ```
 
 The [releases](https://github.com/Pumpkin-MC/pumpkin-api-zig/releases) list every published version. To update, run the command again with the new one.
-
-For the unreleased 0.2.0 changes, use the local-checkout dependency shown below until the tag is available.
 
 Then create `build.zig`:
 
@@ -109,7 +107,7 @@ Start or restart the server, and the log should show the plugin's message:
 ```
 
 > [!WARNING]
-> Each release names the plugin API revision it was built against. The server and plugin need compatible revisions; otherwise the server rejects the plugin with `Plugin was built against a different iteration of the API`. Check the release notes before updating either one.
+> Each release names the plugin API revision it was built against. The server and plugin need compatible revisions; otherwise the server rejects the plugin with `Plugin was built against a different iteration of the API`. Check the [WIT commit for your release](./changelog) before updating either one.
 
 ## Examples
 
