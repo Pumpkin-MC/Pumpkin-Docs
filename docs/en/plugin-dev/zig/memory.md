@@ -56,3 +56,21 @@ For memory you only need during the callback, use `pumpkin.abi.arena()`. It is r
 An API call can run another callback of your plugin before it returns. `player.openGui`, for example, first closes the screen the player has open, and that fires `inventory_close_event` while `openGui` is still running.
 
 Memory and handles stay correct when this happens, because the inner callback only cleans up what it received itself. Your own state, however, can change during the call. Don't hold on to a pointer into one of your own maps or lists across an API call if one of your callbacks could change that map or list in the meantime.
+
+## Ownership in the helpers
+
+Keeping a handle does not keep strings returned by its methods. `player.keep()` preserves the resource, while `player.getName()` still returns callback-owned text. Copy the string separately if it is needed later. Copying a handle into another Zig variable also does not clone the underlying server object.
+
+| Value | Lifetime to account for |
+| --- | --- |
+| A UUID or integer in task or callback data | Copied by value. |
+| A slice inside task data | Only its pointer and length are copied; its contents must outlive the task. |
+| Menu icons, prompt labels and message spans | Consumed or built synchronously; stack arrays must remain valid until the opening call returns. |
+| `menu.items(player)` | Owned by the menu; available through its `on_close` callback. |
+| `config.value` strings and slices | Until another parsed value is installed or `deinit` runs, even if a defaults write fails after loading. |
+| `store.allocator(entry)` allocations | Until that entry is removed or evicted. Look up its entry again in each callback. |
+| HTTP bodies and socket callback data | Copy into owned memory before retaining them. |
+
+For a durable menu or prompt flow, store UUIDs and application data instead of callback handles. A new menu can invoke the previous menu's close handler before `menu.open` returns, so record which page the new menu represents only after opening it. The [vault example](./menus#a-vault-with-pages) uses this ordering.
+
+The plugin's heap is not automatically reset after a callback. Free your allocations when their owner is done; use `abi.arena()` for temporary work and a store's allocator for strings that belong to a stored entry. Never deinitialize a handle after passing it to an API documented as consuming it.

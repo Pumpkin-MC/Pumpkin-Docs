@@ -394,6 +394,10 @@ export const en = defineConfig({
                                 link: "/plugin-dev/zig/menus",
                             },
                             {
+                                text: "Chat Prompts",
+                                link: "/plugin-dev/zig/prompts",
+                            },
+                            {
                                 text: "Items",
                                 link: "/plugin-dev/zig/items",
                             },

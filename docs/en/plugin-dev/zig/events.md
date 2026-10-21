@@ -77,4 +77,19 @@ fn onDeath(_: pumpkin.Server, ev: *pumpkin.EventData(.player_death_event)) void 
 
 The last argument takes the same `EventOptions`.
 
-[The `hello` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/hello.zig) listens to events and changes the join message.
+[The `hello` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.2.0/examples/hello.zig) listens to events and changes the join message.
+
+## Events used by helpers
+
+Initialize helpers in `onLoad` as well as declaring your own events:
+
+```zig
+pub fn onLoad(ctx: pumpkin.Context) !void {
+    pumpkin.menu.listen(ctx);
+    try pumpkin.prompt.listen(ctx, .{});
+}
+```
+
+`menu.listen` handles inventory clicks, menu closes and players leaving. `prompt.listen` handles chat and leaving, and registers the command behind clickable choices. They do not replace the handlers in `pub const events`. Keep the prompt's chat handler blocking so captured answers can be cancelled before broadcast; a non-blocking handler cannot make answers private.
+
+Event values still have [callback lifetimes](./memory). Copy text you keep, and pass a player's UUID to a [task](./scheduling) rather than saving the event pointer or its `Player` handle.

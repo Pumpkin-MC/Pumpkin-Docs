@@ -29,10 +29,11 @@ Only `id` is required. These are the fields of `item.Spec`:
 | --- | --- |
 | `id`, `count` | The item and how many there are. `count` is 1 unless you set it. |
 | `name` | The name, made of [text spans](./text). Unlike vanilla custom names, it isn't italic unless you set `italic`. |
-| `lore` | The lines under the name, one list of spans per line, also not italic. |
+| `lore` | The lines under the name, one list of spans per line. |
+| `italic` | The default style for the name and lore, `false` unless set. An explicit style on a span takes precedence. |
 | `enchants` | Enchantments and their levels, such as `.{ .sharpness, 5 }`. |
 | `custom_enchants` | Enchantments from data packs, by id. |
-| `modifiers` | Attribute modifiers. `operation` is `.add` and `slot` is `.main_hand` unless you set them. |
+| `modifiers` | Attribute modifiers. `operation` is `.add` and `slot` is `.main_hand` unless you set them. Set `id` when several modifiers affect the same attribute. |
 | `unbreakable` | Whether the item never loses durability. |
 | `glint` | Makes the item shimmer as if it were enchanted. |
 | `rarity` | `.common`, `.uncommon`, `.rare` or `.epic`, which colors the name. |
@@ -41,7 +42,7 @@ Only `id` is required. These are the fields of `item.Spec`:
 | `custom_model_data` | A number a resource pack uses to pick a model. |
 | `data` | Values the plugin stores on the item, see below. |
 
-Menu icons are `item.Spec`s too, so a [menu](./menus) button can show anything `build` makes.
+Menu icons are `item.Spec`s too, so a [menu](./menus) button can show anything `build` makes. A modifier without an `id` uses `<plugin>:<attribute>`; modifiers with the same id replace each other.
 
 ## Recognizing your items
 
@@ -57,6 +58,8 @@ fn onInteract(_: pumpkin.Server, ev: *pumpkin.EventData(.player_interact_event))
 ```
 
 `item.held(player)` returns the item in the player's main hand. `item.is(stack, key, value)` checks for a string value, `item.get(stack, key)` returns any stored value as an `item.Value`, and `item.set(stack, key, value)` stores one.
+
+`item.setIn(stack, namespace, key, value)` and `item.getIn(stack, namespace, key)` use an explicit namespace instead of the plugin's name. Use them for data shared with another plugin.
 
 ## Changing an item
 
@@ -89,7 +92,9 @@ if (left > 0) sender.sendMessage(msg.fmt(.yellow, "{d} bread didn't fit.", .{lef
 if (!item.take(player, .{ .id = "minecraft:bread" }, 5)) return cmd.fail("you need 5 bread");
 ```
 
-`item.give` puts items in the player's inventory in the same order as vanilla's `/give`: it first tops up stacks of the same item in the main hand, the off hand and the rest of the inventory, then fills empty slots, hotbar first. Counts above the stack size are spread over several slots. It returns how many items didn't fit. Those aren't dropped on the ground, so check the result when they matter.
+`item.give` puts items in the player's inventory in the same order as vanilla's `/give`: it first tops up stacks of the same item in the main hand, the off hand and the rest of the inventory, then fills empty slots, hotbar first. Counts above the stack size are spread over several slots. It consumes the supplied stack and returns how many items did not fit. That result is a count, not an item handle; leftovers are not dropped or returned as stacks. Keep an independent copy when your plugin needs to return leftovers.
+
+`item.room(player, stack)` counts matching capacity in the inventory and offhand. In 0.2.0 it also counts an empty offhand, while `give` only tops up an occupied matching offhand. Its result can therefore overestimate what `give` will insert; it is not a guarantee that a complete trade will fit.
 
 `item.take(player, match, amount)` takes items in the same order as vanilla's `/clear`. If the player has fewer than `amount`, it takes nothing and returns `false`, so it can't leave a trade half done. `item.count(player, match)` counts the matching items, and `item.has(player, match, amount)` checks for at least `amount` of them.
 
@@ -99,4 +104,28 @@ The `match` selects items either by id, as `.{ .id = "minecraft:bread" }`, or by
 
 `build` returns a `pumpkin.item.ItemStack`, the item handle of the plugin API. Its methods, such as `getRegistryKey`, `getCount`, `getEnchantments` and `getLore`, work on stacks from anywhere, including events and inventories.
 
-[The `items` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/items.zig) puts all of this together: a sword it recognizes and upgrades, bread spread over several slots, and a trade.
+`item.copy(stack)` makes a copy, preserving custom names, lore and attribute modifiers through their typed APIs. `item.canStack(a, b)` checks whether two stacks have matching item ids and components. Neither function stores the item in a file.
+
+[The `items` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.2.0/examples/items.zig) puts all of this together: a sword it recognizes and upgrades, bread spread over several slots, and a trade.
+
+## Styling and sharing item data
+
+Set `italic` on the spec for a name and lore default, and use span styles for individual overrides. Give modifiers distinct IDs when two bonuses affect the same attribute:
+
+```zig
+const sword = item.build(.{
+    .id = "minecraft:diamond_sword",
+    .italic = true,
+    .name = &.{.{ .text = "Excalibur", .italic = false, .color = .gold }},
+    .modifiers = &.{
+        .{ .attribute = .attack_damage, .id = "my-zig-plugin:base_damage", .amount = 5 },
+        .{ .attribute = .attack_damage, .id = "my-zig-plugin:bonus_damage", .amount = 2 },
+    },
+});
+item.setIn(sword, "shared", "owner", .{ .string = player.getName() });
+const owner = item.getIn(sword, "shared", "owner");
+```
+
+`remove_modifiers` in `item.edit` removes every modifier for the requested attribute, including IDs written by other plugins. Explicit IDs prevent replacement collisions when adding modifiers; they do not narrow that removal operation.
+
+To edit one copy without changing another, call `item.copy(original)`, edit the returned stack and put that copy into the destination inventory. Copying a Zig handle value alone does not create a new stack. [Handles and Memory](./memory) covers resource ownership and consumed handles.

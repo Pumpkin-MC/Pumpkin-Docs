@@ -37,6 +37,14 @@ A request blocks until the response arrives, so send requests from commands or r
 
 HTTPS needs certificates to check the server against. Copy the system's certificate bundle into the plugin's data folder, for example from `/etc/ssl/certs/ca-certificates.crt` on Linux, and add the `fs.read.data` permission. Without it, HTTPS requests fail with `error.NoCertificates` and a message in the log.
 
+The default file is `ca-certificates.crt`. Set `http.ca_file` before the first HTTPS request to use another path relative to the data folder:
+
+```zig
+http.ca_file = "certs/roots.pem";
+```
+
+The shared client loads the bundle once. To replace it after making requests, call `http.deinit()` first, then set `ca_file`; the next HTTPS request loads the new bundle.
+
 ## A TCP server
 
 `net.listen` starts a TCP server that hands each line it receives to a callback:
@@ -50,11 +58,17 @@ var game: pumpkin.Server = undefined;
 pub fn onLoad(ctx: pumpkin.Context) !void {
     game = ctx.getServer();
     game.keep();
+    pumpkin.on(ctx, .player_chat_event, onChat, .{});
     server = try net.listen(.{
         .port = 25580,
         .on_connect = onConnect,
         .callbacks = .{ .on_line = onLine },
     });
+}
+
+pub fn onUnload(_: pumpkin.Context) !void {
+    server.close();
+    game.deinit();
 }
 
 fn onConnect(conn: *net.Connection) void {
@@ -80,6 +94,16 @@ Sockets are checked once per tick, and nothing runs for a socket until something
 
 On these connections, `conn.send` and `conn.print` never block. Data the other side isn't ready for is sent on later ticks, and a connection with more than `max_outgoing` bytes waiting, 1 MiB by default, is closed for reading too slowly. `listener.broadcast` sends to every connection, and `close` ends a connection or the whole server. `conn.data` is a number the plugin can use to tell connections apart.
 
+`read_buffer_size` sets the receive buffer capacity for every connection accepted by a listener, or for an outgoing connection in `net.connect`. The default is 4096 bytes. In line framing, the whole line including its ending has to fit. A full buffer without a newline closes a polled connection; `readLine()` returns `error.LineTooLong`. A size of zero returns `error.InvalidBufferSize` from `listen` or `connect`.
+
+```zig
+server = try net.listen(.{
+    .port = 25580,
+    .read_buffer_size = 16 * 1024,
+    .callbacks = .{ .on_line = onLine },
+});
+```
+
 Sockets still open when the plugin unloads are closed automatically.
 
 ## Connecting to a server
@@ -89,9 +113,9 @@ const conn = try net.connect("chat.example.com", 4000, .{ .callbacks = .{ .on_li
 try conn.send("hello\n");
 ```
 
-`net.connect` takes a host name or an IP address and tries its addresses in order until one accepts. It blocks while it looks up the host and waits for the connection, for up to `timeout_ms`, which is 10 seconds unless you set it. A host that doesn't answer holds up the command or event that called `connect` for that long, so keep the timeout short where it matters.
+`net.connect` takes a host name or an IP address and tries its addresses in order until one accepts. Host lookup and connection attempts block the calling callback. `timeout_ms`, 10 seconds by default, sets the connection deadline, but DNS lookup does not have a separate bounded timeout here and can take longer. An IP address avoids that lookup; keep connection deadlines short where responsiveness matters.
 
-Once connected, a connection with callbacks is checked every tick like the ones of a server. Without callbacks, the plugin reads it itself with `conn.readLine()`, which waits up to `read_timeout_ms` for a line, and `conn.send` waits until the other side has taken the data.
+Once connected, a connection with callbacks is checked every tick like the ones of a server. Without callbacks, the plugin reads it itself with `conn.readLine()`, which waits up to `read_timeout_ms` for a line, and `conn.send` blocks until all bytes have been written to the socket or an error occurs.
 
 ## UDP
 
@@ -122,4 +146,16 @@ defer stream.close(io);
 
 These calls block until they finish, so the game waits for them. `net.ready(handle)` tells whether a raw socket has a connection, data or a datagram waiting, which lets a plugin check its own sockets from a task without blocking.
 
-The examples cover each of these: [`https`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/https.zig) for web requests, [`tcp-server`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/tcp-server.zig) for a TCP server, [`udp`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/udp.zig) for UDP, [`dns`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/dns.zig) and [`http`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/http.zig) for `std.Io.net`, and [`nettest`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/nettest.zig) runs every networking path with `/nettest`.
+The examples cover each of these: [`https`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.2.0/examples/https.zig) for web requests, [`tcp-server`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.2.0/examples/tcp-server.zig) for a TCP server, [`udp`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.2.0/examples/udp.zig) for UDP, [`dns`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.2.0/examples/dns.zig) and [`http`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.2.0/examples/http.zig) for `std.Io.net`, and [`nettest`](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.2.0/examples/nettest.zig) runs every networking path with `/nettest`.
+
+## Buffer ownership and delivery
+
+Each TCP connection owns its receive buffer. The listener's `read_buffer_size` is applied to each accepted connection, so increasing it increases memory per client. With raw framing, callback chunks are arbitrary byte ranges, not complete messages; keep your own framing state if a message spans several callbacks.
+
+`readLine()` removes the newline and trailing carriage returns, and returns a copy valid until the current callback ends. Socket callback slices also need copying if retained. `close()` makes a connection unusable; its pointer can be freed on the next poll, so do not keep using it.
+
+A successful polled `send` means the data was accepted locally or queued. It does not confirm remote delivery. `close()` attempts to flush what can be sent immediately and can discard the rest of the queue. `read_timeout_ms` applies to manual `readLine()` calls, not an idle-connection timer.
+
+For bounded HTTP responses, set `max_body`; a larger response returns `error.BodyTooLong`. `http.Options` has no request-timeout option in 0.2.0. Running the request in a scheduled task delays when it starts but does not make it non-blocking.
+
+The [`nettest` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.2.0/examples/nettest.zig) contains 22 server-side checks, including large custom receive buffers and a connection closed when an unterminated line fills its buffer. Grant its requested networking permissions, run `/nettest`, and inspect the individual results.

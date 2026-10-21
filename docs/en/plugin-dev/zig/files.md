@@ -107,12 +107,29 @@ After that, `load` reads the file into `config.value`. Nested structs become tab
 The file and the struct don't have to match exactly:
 
 - Settings the file lacks get their defaults, and `load` adds them to the file. That's how settings added in a new version of the plugin reach existing configs. Optional fields can be left out without being added.
-- Settings the struct doesn't have are reported in the log and left in the file.
-- If the file can't be parsed, or a setting has the wrong type, `load` logs the error with its line and column, returns an error, and `config.value` keeps the values it had. A typo in the config doesn't reset the plugin to its defaults.
+- Settings the struct does not have are reported in the log. They remain in the file until a save or a missing-setting rewrite serializes the typed config, which omits unknown fields.
+- A syntax error is logged with its position; a wrong-type setting is logged as a conversion error. Both return an error and preserve the previous `config.value`.
+- Adding missing settings can require a write after the new value is loaded. If that write fails, `load` returns an error even though `config.value` already contains the new settings.
 
 `config.save()` writes `config.value` back to the file, and `config.deinit()` frees the loaded values. Files whose `path` ends in `.json` are read and written as JSON instead of TOML.
 
-The strings in `config.value` stay valid until the next successful `load`. For data that changes while the server runs, such as a player's coins, use [Player Data](./player-data) instead.
+The strings in `config.value` stay valid until `load` installs another parsed value or `deinit` frees them. Installing a value can happen even if writing missing defaults then fails. For data that changes while the server runs, such as a player's coins, use [Player Data](./player-data) instead.
+
+## Choosing file behavior
+
+`File(T)` has defaults for each part of loading a config:
+
+| Field | Behavior |
+| --- | --- |
+| `format` | `.toml` or `.json`; `null` chooses from the file name. |
+| `create` | `false` returns `error.FileNotFound` instead of creating a missing file. |
+| `add_missing` | `false` uses defaults for missing settings without writing them to the file. |
+| `report_unknown` | `false` suppresses warnings about settings the struct does not have. |
+| `max_size` | The largest file accepted, 16 MiB by default. |
+
+For example, `.{ .path = "settings", .format = .toml, .create = false, .add_missing = false }` reads an existing TOML file without creating it or adding defaults to it. `save()` still writes the current value when called explicitly.
+
+`pumpkin.config.toml` exposes the TOML parser and writer for other files. `parse(allocator, text, diagnostics)` returns a `std.json.Value` tree, and `stringify(allocator, value)` turns a value into TOML. `Diagnostics` reports the line, column and message for a parse error.
 
 ## Other files
 
@@ -124,8 +141,24 @@ const dir = std.Io.Dir.cwd();
 
 try dir.writeFile(io, .{ .sub_path = "notes.txt", .data = "hello" });
 const notes = try dir.readFileAlloc(io, "notes.txt", pumpkin.abi.heap, .limited(64 * 1024));
+defer pumpkin.abi.heap.free(notes);
 ```
 
 Files outside the data folder can't be reached. `notes` is allocated with `pumpkin.abi.heap`, so it stays valid after the callback returns. Use `pumpkin.abi.arena()` for data you only need during the callback. [Handles and Memory](./memory) has more on the difference.
 
-[The `config` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.1.0/examples/config.zig) greets players with a message and a title from its config, and reloads it with `/welcome reload`.
+[The `config` example](https://github.com/Pumpkin-MC/pumpkin-api-zig/blob/v0.2.0/examples/config.zig) greets players with a message and a title from its config, and reloads it with `/welcome reload`.
+
+## Configurations with arrays
+
+The TOML writer supports structs and tuples inside arrays. A configuration can keep a list of named destinations without switching to JSON:
+
+```zig
+const Config = struct {
+    destinations: []const struct { name: []const u8, x: i32, z: i32 } = &.{
+        .{ .name = "spawn", .x = 0, .z = 0 },
+        .{ .name = "market", .x = 100, .z = -20 },
+    },
+};
+```
+
+The writer serializes each destination as a TOML inline table. `load()` does not validate application rules such as a minimum page count or allowed coordinate range; check those after reading `config.value`, as the [vault example](./menus#a-vault-with-pages) does for capacity.
