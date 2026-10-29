@@ -1,4 +1,4 @@
-# Creating a new project
+# Quick Start
 
 Pumpkin plugins use the [Go](https://go.dev/) programming language and are compiled to WebAssembly.
 

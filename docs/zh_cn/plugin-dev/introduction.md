@@ -17,3 +17,4 @@ Pumpkin 插件 API 在很多方面受到 Spigot/Bukkit 插件 API 的启发，�
 * [Kotlin API](https://github.com/Pumpkin-MC/pumpkin-api-kt)
 * [D API](https://github.com/Pumpkin-MC/pumpkin-api-d)
 * [Zig API](https://github.com/Pumpkin-MC/pumpkin-api-zig)
+* [TypeScript API](https://github.com/Pumpkin-MC/pumpkin-api-ts)

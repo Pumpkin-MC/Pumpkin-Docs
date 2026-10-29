@@ -378,6 +378,16 @@ export const trTR = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "TypeScript",
+                        collapsed: true,
+                        items: [
+                            {
+                                text: "Hızlı Başlangıç",
+                                link: "/tr_TR/plugin-dev/typescript/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {

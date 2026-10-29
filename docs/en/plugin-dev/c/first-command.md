@@ -10,7 +10,7 @@ Here is a complete C plugin file (`main.c`) that registers a `/hello` command wi
 
 ```c [main.c]
 #include <stdio.h>
-#include "pumpkin.h"
+#include "pumpkin_api.h"
 
 void plugin_on_load(pumpkin_context_t ctx) {
     // 1. Register permission node

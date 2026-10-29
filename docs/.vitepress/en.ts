@@ -447,6 +447,28 @@ export const en = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "TypeScript",
+                        collapsed: true,
+                        items: [
+                            {
+                                text: "Quick Start",
+                                link: "/plugin-dev/typescript/quick-start",
+                            },
+                            {
+                                text: "Basic Logic",
+                                link: "/plugin-dev/typescript/basic-logic",
+                            },
+                            {
+                                text: "First Command",
+                                link: "/plugin-dev/typescript/first-command",
+                            },
+                            {
+                                text: "Events",
+                                link: "/plugin-dev/typescript/events",
+                            },
+                        ],
+                    },
                 ],
             },
             {

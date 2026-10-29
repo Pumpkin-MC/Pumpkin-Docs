@@ -47,7 +47,7 @@ register_plugin(MyPlugin)
 Build your plugin into a WebAssembly component using the provided build tool:
 
 ```bash
-pumpkin-api-build main -o my_plugin.wasm
+pumpkin-plugin-build main -o my_plugin.wasm
 ```
 
 This will generate a `my_plugin.wasm` file that you can place in the `plugins` folder of your Pumpkin server.

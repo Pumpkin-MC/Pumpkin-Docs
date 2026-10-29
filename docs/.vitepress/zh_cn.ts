@@ -378,6 +378,16 @@ export const zhCN = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "TypeScript",
+                        collapsed: true,
+                        items: [
+                            {
+                                text: "快速入门",
+                                link: "/zh_cn/plugin-dev/typescript/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {

@@ -378,6 +378,16 @@ export const de = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "TypeScript",
+                        collapsed: true,
+                        items: [
+                            {
+                                text: "Schnellstart",
+                                link: "/de/plugin-dev/typescript/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {

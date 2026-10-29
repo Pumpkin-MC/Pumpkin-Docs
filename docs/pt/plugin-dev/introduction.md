@@ -19,3 +19,4 @@ A API de Plugins Pumpkin se inspira na API de plugins do Spigot/Bukkit em divers
 * [Kotlin API](https://github.com/Pumpkin-MC/pumpkin-api-kt)
 * [D API](https://github.com/Pumpkin-MC/pumpkin-api-d)
 * [Zig API](https://github.com/Pumpkin-MC/pumpkin-api-zig)
+* [TypeScript API](https://github.com/Pumpkin-MC/pumpkin-api-ts)

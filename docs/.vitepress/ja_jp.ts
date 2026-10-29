@@ -378,6 +378,16 @@ export const jaJP = defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "TypeScript",
+                        collapsed: true,
+                        items: [
+                            {
+                                text: "クイックスタート",
+                                link: "/ja_jp/plugin-dev/typescript/quick-start",
+                            },
+                        ],
+                    },
                 ],
             },
             {

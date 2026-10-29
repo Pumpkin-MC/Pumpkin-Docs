@@ -74,7 +74,7 @@ crate-type = ["cdylib"]
 [dependencies]
 // [!code ++:5]
 # This is the api crate that makes creating plugins easier, and has wit definitions
-pumpkin-plugin-api = "0.1.0-dev+26.2-26.45"
+pumpkin-plugin-api = "0.2.1+26.3-26.51"
 # Optional: utilities for marketplace licensing and update checking
 pumpkin-plugin-utils = "0.1.0-dev+26.2-26.45"
 tracing = "0.1"

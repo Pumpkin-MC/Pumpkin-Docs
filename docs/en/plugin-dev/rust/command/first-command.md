@@ -12,6 +12,7 @@ Here is a complete, minimal Rust plugin that registers a `/hello` command with p
 use pumpkin_plugin_api::{
     command::{CommandHandler, CommandSender, ConsumedArgs, CommandError, Command},
     permission::{Permission, PermissionDefault},
+    text::TextComponent,
     Context, Plugin, PluginMetadata, Server,
 };
 
@@ -24,7 +25,7 @@ impl CommandHandler for HelloExecutor {
         _server: Server,
         _args: ConsumedArgs,
     ) -> Result<i32, CommandError> {
-        sender.send_message("Hello from Pumpkin!");
+        sender.send_message(TextComponent::text("Hello from Pumpkin!"));
         Ok(1)
     }
 }
@@ -45,7 +46,7 @@ impl Plugin for MyPlugin {
         }
     }
 
-    fn on_load(&mut self, context: Context) -> pumpkin_plugin_api::Result<()> {
+    fn on_load(&self, context: Context) -> pumpkin_plugin_api::Result<()> {
         // 1. Register permission node
         context.register_permission(&Permission {
             node: "my_plugin:hello".to_string(),

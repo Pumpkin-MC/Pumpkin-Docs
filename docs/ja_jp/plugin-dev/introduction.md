@@ -17,3 +17,4 @@ you should have a pretty easy time writing plugins for Pumpkin. :smile:
 * [Kotlin API](https://github.com/Pumpkin-MC/pumpkin-api-kt)
 * [D API](https://github.com/Pumpkin-MC/pumpkin-api-d)
 * [Zig API](https://github.com/Pumpkin-MC/pumpkin-api-zig)
+* [TypeScript API](https://github.com/Pumpkin-MC/pumpkin-api-ts)

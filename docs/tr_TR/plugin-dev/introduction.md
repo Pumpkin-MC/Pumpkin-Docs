@@ -18,3 +18,4 @@ Pumpkin Eklenti API'si birçok yerde Spigot/Bukkit eklenti API'sinden ilham alı
 * [Kotlin API](https://github.com/Pumpkin-MC/pumpkin-api-kt)
 * [D API](https://github.com/Pumpkin-MC/pumpkin-api-d)
 * [Zig API](https://github.com/Pumpkin-MC/pumpkin-api-zig)
+* [TypeScript API](https://github.com/Pumpkin-MC/pumpkin-api-ts)

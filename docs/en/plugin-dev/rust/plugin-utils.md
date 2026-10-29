@@ -29,7 +29,7 @@ edition = "2024"
 crate-type = ["cdylib"]
 
 [dependencies]
-pumpkin-plugin-api = "0.1.0-dev+26.2-26.45"
+pumpkin-plugin-api = "0.2.1+26.3-26.51"
 pumpkin-plugin-utils = "0.1.0-dev+26.2-26.45"
 tracing = "0.1"
 ```
@@ -62,7 +62,7 @@ impl Plugin for MyPlugin {
         }
     }
 
-    fn on_load(&mut self, context: Context) -> pumpkin_plugin_api::Result<()> {
+    fn on_load(&self, context: Context) -> pumpkin_plugin_api::Result<()> {
         // Initialize pumpkin-plugin-utils (verifies signature & caches metadata)
         let metadata = pumpkin_plugin_utils::init(&context)
             .map_err(|e| format!("Initialization failed: {e}"))?;
@@ -285,7 +285,7 @@ impl Plugin for CommercialPlugin {
         }
     }
 
-    fn on_load(&mut self, context: Context) -> pumpkin_plugin_api::Result<()> {
+    fn on_load(&self, context: Context) -> pumpkin_plugin_api::Result<()> {
         // 1. Initialize plugin-utils (verifies Ed25519 signature & caches metadata)
         let meta = pumpkin_plugin_utils::init(&context).map_err(|err| {
             error!("Signature verification failed: {err}");
@@ -336,7 +336,7 @@ impl Plugin for CommercialPlugin {
         Ok(())
     }
 
-    fn on_unload(&mut self, _context: Context) -> pumpkin_plugin_api::Result<()> {
+    fn on_unload(&self, _context: Context) -> pumpkin_plugin_api::Result<()> {
         info!("CommercialPlugin unloaded.");
         Ok(())
     }
