@@ -56,4 +56,4 @@ API_KEY = "example_secret"
 - **`allowed_permissions`**：為此插件預先批准的權限。
 - **`blocked_permissions`**：為此插件顯式阻止的權限。
 - **`loopback_only`**：覆蓋此插件的本地迴環網路限制。
-- **`environment`**：直接傳遞到插件 WASI 環境中的自訂環境變量表。
+- **`environment`**：直接傳遞到插件 WASI 環境中的自訂環境變數表。

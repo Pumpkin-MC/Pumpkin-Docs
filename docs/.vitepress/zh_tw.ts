@@ -52,7 +52,7 @@ export const zhTW = defineConfig({
                             { text: "基岩版與 NetherNet", link: "/zh_tw/config/bedrock" },
                             { text: "代理", link: "/zh_tw/config/proxy" },
                             { text: "身分驗證", link: "/zh_tw/config/authentication" },
-                            { text: "資料包限制器", link: "/zh_tw/config/packet-limiter" },
+                            { text: "封包限制器", link: "/zh_tw/config/packet-limiter" },
                             { text: "壓縮", link: "/zh_tw/config/compression" },
                             { text: "資源包", link: "/zh_tw/config/resource-pack" },
                             { text: "插件", link: "/zh_tw/config/plugins" },

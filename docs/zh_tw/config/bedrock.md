@@ -46,5 +46,5 @@ NetherNet 是 Minecraft 基岩版的現代 WebRTC/ICE 網路傳輸協定：
 - **`enabled`**：是否允許用戶端使用 NetherNet 連線（預設：`true`）。
 - **`address`**：用於 TCP 信令和 UDP ICE 多路複用的網路通訊端位址（預設：`"0.0.0.0:19132"`）。
 - **`external_ip`**：當伺服器託管在 NAT 之後時對外通告的可選公網 IP 位址。
-- **`identity_key`**：PKCS#8 P-384 身份私鑰檔案的路徑，在重啟時保留該檔案以實現用戶端的首次信任（TOFU）驗證（預設：`"nethernet-key.der"`）。
+- **`identity_key`**：PKCS#8 P-384 身分私鑰檔案的路徑，在重啟時保留該檔案以實現用戶端的首次信任（TOFU）驗證（預設：`"nethernet-key.der"`）。
 - **`stun_servers`**：用於 ICE NAT 穿透的 STUN 伺服器 URL 可選列表。

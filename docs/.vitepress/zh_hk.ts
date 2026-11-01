@@ -52,7 +52,7 @@ export const zhHK = defineConfig({
                             { text: "基岩版與 NetherNet", link: "/zh_hk/config/bedrock" },
                             { text: "代理", link: "/zh_hk/config/proxy" },
                             { text: "身份驗證", link: "/zh_hk/config/authentication" },
-                            { text: "資料包限制器", link: "/zh_hk/config/packet-limiter" },
+                            { text: "封包限制器", link: "/zh_hk/config/packet-limiter" },
                             { text: "壓縮", link: "/zh_hk/config/compression" },
                             { text: "資源包", link: "/zh_hk/config/resource-pack" },
                             { text: "插件", link: "/zh_hk/config/plugins" },

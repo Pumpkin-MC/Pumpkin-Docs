@@ -1,6 +1,6 @@
 # Java 版身分驗證
 
-身分驗證會驗證連線到 Pumpkin 的玩家身份，以防止使用者名稱欺騙和帳號冒充。
+身分驗證會驗證連線到 Pumpkin 的玩家身分，以防止使用者名稱欺騙和帳號冒充。
 
 Pumpkin 在 [`pumpkin-auth`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/crates/pumpkin-auth) crate 中處理身分驗證，並在 `crates/pumpkin/src/net/java/login/` 中的 `Login` 狀態期間協調該過程。
 

@@ -1,6 +1,6 @@
 # 引數型別與建議
 
-Pumpkin 透過 `pumpkin-command` 和主 `pumpkin` 伺服器 crate 提供了一套完整的型別安全指令引數。引數會把原始標記流反序列化為結構化的 Rust 型別、驗證範圍，併為用戶端提供 Tab 自動完成建議。
+Pumpkin 透過 `pumpkin-command` 和主 `pumpkin` 伺服器 crate 提供了一套完整的型別安全指令引數。引數會把原始標記流反序列化為結構化的 Rust 型別、驗證範圍，並為用戶端提供 Tab 自動完成建議。
 
 ---
 

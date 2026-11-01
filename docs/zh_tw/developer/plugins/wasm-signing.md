@@ -1,6 +1,6 @@
 # WASM 插件簽名與驗證
 
-Pumpkin 為 WebAssembly 插件實現了加密簽名與授權驗證系統。它可確保插件完整性、驗證作者身份，並保護已驗證或市集插件免受未經授權的篡改。
+Pumpkin 為 WebAssembly 插件實現了加密簽名與授權驗證系統。它可確保插件完整性、驗證作者身分，並保護已驗證或市集插件免受未經授權的篡改。
 
 簽名子系統基於 **W3C `wasmsign2`** 規範，使用自訂 WebAssembly 節，在 [`crates/pumpkin/src/plugin/loader/wasm/wasm_host/signature.rs`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin/src/plugin/loader/wasm/wasm_host/signature.rs) 中實現。
 
@@ -9,7 +9,7 @@ Pumpkin 為 WebAssembly 插件實現了加密簽名與授權驗證系統。它�
 ## 為什麼要為 WebAssembly 插件簽名？
 
 - **防篡改**：確保編譯後的位元組碼在編譯完成後沒有被注入惡意邏輯。
-- **作者身份**：驗證插件確實由已驗證開發者建構和釋出。
+- **作者身分**：驗證插件確實由已驗證開發者建構和釋出。
 - **市集授權**：驗證透過官方 [Pumpkin 市集](https://market.pumpkinmc.org) 分發插件的授權金鑰和授權。
 
 ---

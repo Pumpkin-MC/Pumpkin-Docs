@@ -23,7 +23,7 @@ Minecraft：基岩版實現了基於 JSON Web Token（JWT）的證書鏈身份�
 ### 1. 身份鏈（`Chain`）
 一個 JWT 令牌數組，構成不間斷的信任鏈：
 - **根令牌**：由 Mojang 官方公共根證書頒發機構進行加密簽名。
-- **中間令牌**：由 Xbox Live 服務簽發，用於驗證玩家的 Xbox Live 用戶 ID（**XUID**）和玩家代號，併為會話生成臨時 ECDSA 公鑰。
+- **中間令牌**：由 Xbox Live 服務簽發，用於驗證玩家的 Xbox Live 用戶 ID（**XUID**）和玩家代號，並為會話生成臨時 ECDSA 公鑰。
 - **宣告**：包含 `extraData`，其中有 `displayName`、`identity`（UUID）、`XUID` 和 `titleId`。
 
 ### 2. 客戶端資料（`ClientData`）

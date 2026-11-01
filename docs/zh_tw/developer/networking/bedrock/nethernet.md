@@ -21,9 +21,9 @@ Pumpkin 在 [`crates/pumpkin/src/net/bedrock/nethernet.rs`](https://github.com/P
 
 Pumpkin 的 NetherNet 子系統分為四個獨立模組：
 
-### 1. 加密身份（`nethernet-key.der`）
+### 1. 加密身分（`nethernet-key.der`）
 - Pumpkin 生成並載入 **NIST P-384 ECDSA 私鑰**（`nethernet-key.der`）。
-- 用於對會話描述（SDP offer 和 answer）進行加密簽名，向連線的用戶端驗證伺服器身份。
+- 用於對會話描述（SDP offer 和 answer）進行加密簽名，向連線的用戶端驗證伺服器身分。
 - 使用標準 PKCS#8 DER 格式編碼。
 
 ### 2. HTTP 信令路由器（`ice_router.rs`）

@@ -1,6 +1,6 @@
 # 參數類型與建議
 
-Pumpkin 透過 `pumpkin-command` 和主 `pumpkin` 伺服器 crate 提供了一套完整的類型安全指令參數。參數會把原始標記流反序列化為結構化的 Rust 類型、驗證範圍，併為客戶端提供 Tab 自動完成建議。
+Pumpkin 透過 `pumpkin-command` 和主 `pumpkin` 伺服器 crate 提供了一套完整的類型安全指令參數。參數會把原始標記流反序列化為結構化的 Rust 類型、驗證範圍，並為客戶端提供 Tab 自動完成建議。
 
 ---
 

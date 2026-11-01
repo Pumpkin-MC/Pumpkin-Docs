@@ -38,7 +38,7 @@ Pumpkin 原生支援 **Minecraft：基岩版** 用戶端（iOS、Android、Windo
 | 步驟 | 交換的封包 | 用途 |
 | :--- | :--- | :--- |
 | **1. 網路設定** | `SRequestNetworkSettings` -> `CNetworkSettings` | 協商壓縮演算法（Deflate/Snappy）和負載閾值 |
-| **2. 身分驗證** | `SLogin` -> `CPlayStatus` | 傳輸 JWT 身份鏈和用戶端硬體資料；驗證 Xbox Live 令牌 |
+| **2. 身分驗證** | `SLogin` -> `CPlayStatus` | 傳輸 JWT 身分鏈和用戶端硬體資料；驗證 Xbox Live 令牌 |
 | **3. 資源協商** | `CResourcePacksInfo` -> `SResourcePackClientResponse` | 協商伺服器資源包和下載行為 |
 | **4. 世界初始化** | `CStartGame` + `CItemRegistry` + `CCreativeContent` | 傳輸世界生成位置、維度設定、玩家實體執行階段 ID 和物品調色盤 |
 | **5. 準備生成** | `SSetLocalPlayerAsInitialized` -> `CPlayStatus` | 表示用戶端載入完成，並轉換到活躍的遊戲內遊玩狀態 |
@@ -73,7 +73,7 @@ match packet.id {
 
 ## 身分驗證與 NetherNet
 
-- **JWT 身分驗證**：基岩版透過由 Microsoft / Xbox Live 根機構簽名的證書鏈來驗證玩家身份。
+- **JWT 身分驗證**：基岩版透過由 Microsoft / Xbox Live 根機構簽名的證書鏈來驗證玩家身分。
 - **NetherNet WebRTC**：使用 WebRTC DataChannels、ICE NAT 穿透和 P-384 ECDSA 金鑰的高效能點對點傳輸。
 
 完整的實現細節請參閱 **[基岩版身分驗證與 NetherNet](/zh_tw/developer/networking/bedrock/authentication)**。
