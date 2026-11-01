@@ -1,67 +1,22 @@
 # 局域网广播
 
-Pumpkin 可以在网络中广播服务器，使本地玩家更容易连接到服务器。
+Pumpkin 可以在本地网络中广播服务器通告，让局域网客户端轻松发现并加入服务器。
 
-## 配置局域网广播
-
-#### `enabled`: 布尔值
-
-是否启用局域网广播。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[networking.lan_broadcast]
-enabled = true
-```
-
-:::
-
-#### `motd`: 字符串 (可选)
-
-广播给客户端的 MOTD；默认使用服务器的 MOTD。
-
-> [!CAUTION]警告
-> 局域网广播 MOTD 不支持多行、RGB 颜色或渐变。Pumpkin 在广播前不会验证 MOTD。如果服务器 MOTD 使用了这些组件，请考虑定义此字段，以便客户端能看到正确的 MOTD。
-
-:::code-group
-
-```toml [pumpkin.toml] {3}
-[networking.lan_broadcast]
-enabled = true
-motd = "[你的 MOTD 在这里]"
-```
-
-:::
-
-#### `port`: 整数 (0-65535) (可选)
-
-绑定的端口。如果未指定，将绑定到端口 0（系统上任何可用端口）。
-
-> [!IMPORTANT]重要
-> 协议定义了要广播到哪个端口。此选项仅用于指定要在主机上绑定的端口。此选项纯粹是为了使端口可预测。
-
-:::code-group
-
-```toml [pumpkin.toml] {3}
-[networking.lan_broadcast]
-enabled = true
-port = 46733
-```
-
-:::
-
-## 默认配置
-
-默认情况下，局域网广播是禁用的。
+## 配置
 
 :::code-group
 
 ```toml [pumpkin.toml]
 [networking.lan_broadcast]
 enabled = false
-motd = "[服务器 MOTD 在这里]"
-port = 0
+# motd = "My Custom LAN Server"
+# port = 25565
 ```
 
 :::
+
+### 配置选项
+
+- **`enabled`**：启用或禁用在本地网络中广播服务器信息（默认：`false`）。
+- **`motd`**：（可选）在局域网客户端的服务器发现列表中显示的自定义单行服务器描述（MOTD）。如果省略，则默认使用服务器的 Java 版 MOTD 并移除换行符。
+- **`port`**：（可选）在局域网广播中通告的端口。适用于端口转发，或 Docker 等容器化环境中需要使用可预测端口的场景。

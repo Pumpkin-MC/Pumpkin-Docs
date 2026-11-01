@@ -1,119 +1,8 @@
 # RCON
 
-RCON 是一种允许你从不同设备远程管理服务器的协议。Pumpkin 完全支持 RCON。
+RCON 允许你通过网络连接远程管理 Pumpkin 服务器。在 `pumpkin.toml` 中，相关设置位于 `[networking.rcon]` 下。
 
-## 配置 RCON
-
-#### `enabled`: 布尔值
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[networking.rcon]
-enabled = true
-```
-
-:::
-
-#### `address`: 字符串
-
-RCON 应监听的地址和端口。
-
-:::code-group
-
-```toml [pumpkin.toml] {3}
-[networking.rcon]
-enabled = true
-address = "0.0.0.0:25575"
-```
-
-:::
-
-#### `password`: 字符串
-
-用于 RCON 认证的密码。
-
-:::code-group
-
-```toml [pumpkin.toml] {3}
-[networking.rcon]
-enabled = true
-password = "[你的安全密码在这里]"
-```
-
-:::
-
-#### `max_connections`: 整数
-
-单次允许的最大 RCON 连接数。设置为 0 以禁用限制。
-
-:::code-group
-
-```toml [pumpkin.toml] {3}
-[networking.rcon]
-enabled = true
-max_connections = 5
-```
-
-:::
-
-### 日志记录
-
-#### `log_logged_successfully`: 布尔值
-
-成功登录是否应记录到控制台。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[rcon.logging]
-log_logged_successfully = true
-```
-
-:::
-
-#### `log_wrong_password`: 布尔值
-
-错误密码尝试是否应记录到控制台。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[rcon.logging]
-log_logged_successfully = true
-```
-
-:::
-
-#### `log_commands`: 布尔值
-
-从 RCON 运行的命令是否应记录到控制台。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[rcon.logging]
-log_commands = true
-```
-
-:::
-
-#### `log_quit`: 布尔值
-
-RCON 客户端退出是否应被记录。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[rcon.logging]
-log_quit = true
-```
-
-:::
-
-## 默认配置
-
-默认情况下，RCON 是禁用的。
+## 配置
 
 :::code-group
 
@@ -122,13 +11,27 @@ log_quit = true
 enabled = false
 address = "0.0.0.0:25575"
 password = ""
-max_connections = 0
+max_connections = 10
 
-[rcon.logging]
-log_logged_successfully = true
-log_wrong_password = true
-log_commands = true
-log_quit = true
+[networking.rcon.logging]
+logged_successfully = true
+wrong_password = true
+commands = true
+quit = true
 ```
 
 :::
+
+### RCON 设置
+
+- **`enabled`**：启用 RCON 服务的总开关。
+- **`address`**：RCON 服务器绑定的 IP 地址和端口。
+- **`password`**：RCON 客户端身份验证所需的密码。
+- **`max_connections`**：允许的最大并发 RCON 客户端连接数。
+
+### RCON 日志设置
+
+- **`logged_successfully`**：记录客户端身份验证成功事件。
+- **`wrong_password`**：记录身份验证失败尝试（密码错误）。
+- **`commands`**：记录通过 RCON 执行的命令。
+- **`quit`**：记录客户端断开连接事件。

@@ -1,66 +1,66 @@
-# Code Generation (`pumpkin-codegen`)
+# 代码生成（`pumpkin-codegen`）
 
-Minecraft is a massive game with thousands of block states, items, packet IDs, sound events, recipes, and biome parameters. These registries frequently change between Minecraft updates.
+Minecraft 是一款庞大的游戏，包含数千种方块状态、物品、数据包 ID、声音事件、配方和生物群系参数。这些注册表在 Minecraft 更新时经常发生变化。
 
-To maintain 100% fidelity without manually maintaining tens of thousands of error-prone constants, Pumpkin utilizes an automated code generation tool: [`tools/pumpkin-codegen`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/tools/pumpkin-codegen).
-
----
-
-## Purpose & Workflow
-
-`pumpkin-codegen` parses official Minecraft server data generator reports, asset files, and version specifications, and outputs zero-cost, strongly-typed Rust files directly into [`crates/pumpkin-data`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/crates/pumpkin-data).
-
-The pipeline operates in three distinct stages:
-1. **Ingestion**: Reads raw JSON assets and vanilla server reports from `assets/` and `assets/datapacks/`.
-2. **Transformation**: Normalizes states, calculates bitsets, processes ViaVersion remappings, and optimizes lookup tables.
-3. **Emission**: Emits compiled Rust constants and structs into [`crates/pumpkin-data/src/generated`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/crates/pumpkin-data/src/generated).
+为了在无需手动维护数万个易错常量的情况下保持 100% 的保真度，Pumpkin 使用了自动代码生成工具：[`tools/pumpkin-codegen`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/tools/pumpkin-codegen)。
 
 ---
 
-## Generated Datasets
+## 用途与工作流
 
-`pumpkin-codegen` generates the following components in `pumpkin-data`:
+`pumpkin-codegen` 解析官方 Minecraft 服务器数据生成器报告、资源文件和版本规范，并将零成本、强类型的 Rust 文件直接输出到 [`crates/pumpkin-data`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/crates/pumpkin-data)。
 
-| Category | Description | Generated Source |
+该管线分为三个不同的阶段：
+1. **读取**：从 `assets/` 和 `assets/datapacks/` 读取原始 JSON 资源和原版服务器报告。
+2. **转换**：规范化状态、计算位集、处理 ViaVersion 重映射并优化查找表。
+3. **输出**：将编译后的 Rust 常量和结构体输出到 [`crates/pumpkin-data/src/generated`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/crates/pumpkin-data/src/generated)。
+
+---
+
+## 生成的数据集
+
+`pumpkin-codegen` 在 `pumpkin-data` 中生成以下组件：
+
+| 类别 | 说明 | 生成的源文件 |
 | :--- | :--- | :--- |
-| **Packets** | Serverbound and clientbound packet IDs for all protocol states across supported Minecraft versions. | `packet.rs` |
-| **Blocks** | Block definitions, default states, state properties (facing, powered, waterlogged, etc.), and block collision boxes. | `block.rs` |
-| **Items** | Item definitions, stack sizes, durability, data components, food properties, and equipment slots. | `item.rs` |
-| **Registries** | Dynamic registries for biomes, dimensions, chat types, damage types, trim materials, and banner patterns. | `registry.rs` |
-| **Biomes & Noise** | Climate parameters, noise router configurations, 3D noise settings, and surface rules. | `biome.rs`, `noise_router.rs` |
-| **Entities** | Entity types, default bounding boxes, attributes, and tracked entity metadata schemas. | `entity_type.rs`, `tracked_data.rs` |
-| **Recipes & Crafting** | Shaped, shapeless, smelting, blasting, smoking, and stonecutting recipes. | `recipes.rs` |
-| **Tags** | Block tags, item tags, fluid tags, and entity type tags (e.g., `#minecraft:mineable/pickaxe`). | `tag.rs` |
-| **Enchantments & Potions** | Enchantment definitions, potion effects, and brewing stand recipes. | `enchantments.rs`, `potion.rs` |
-| **Translations** | Official localization keys for chat messages and item names. | `translations.rs` |
-| **Plugin WIT** | WebAssembly Component Model WIT files defining plugin interfaces. | `wit/` |
+| **数据包** | 所支持的 Minecraft 版本中，所有协议状态的服务端接收和客户端接收数据包 ID。 | `packet.rs` |
+| **方块** | 方块定义、默认状态、状态属性（朝向、充能、含水等）和方块碰撞箱。 | `block.rs` |
+| **物品** | 物品定义、堆叠数量、耐久度、数据组件、食物属性和装备槽位。 | `item.rs` |
+| **注册表** | 生物群系、维度、聊天类型、伤害类型、锻造模板材料和旗帜图案的动态注册表。 | `registry.rs` |
+| **生物群系与噪声** | 气候参数、噪声路由器配置、3D 噪声设置和表面规则。 | `biome.rs`、`noise_router.rs` |
+| **实体** | 实体类型、默认边界框、属性和受追踪的实体元数据模式。 | `entity_type.rs`、`tracked_data.rs` |
+| **配方与合成** | 有序、无序、熔炼、高炉、烟熏和切石配方。 | `recipes.rs` |
+| **标签** | 方块标签、物品标签、流体标签和实体类型标签（例如 `#minecraft:mineable/pickaxe`）。 | `tag.rs` |
+| **附魔与药水** | 附魔定义、药水效果和酿造台配方。 | `enchantments.rs`、`potion.rs` |
+| **翻译** | 用于聊天消息和物品名称的官方本地化键。 | `translations.rs` |
+| **插件 WIT** | 定义插件接口的 WebAssembly 组件模型 WIT 文件。 | `wit/` |
 
 ---
 
-## Running Code Generation
+## 运行代码生成
 
-To run the code generator locally:
+要在本地运行代码生成器：
 
 ```bash
-# Navigate to the workspace root
+# 进入工作区根目录
 cd Pumpkin
 
-# Run the codegen tool
+# 运行代码生成工具
 cargo run -p pumpkin-codegen
 ```
 
-### When Should You Run Codegen?
+### 何时应运行代码生成？
 
-- **Upgrading to a New Minecraft Version**: When porting Pumpkin to a new minor or major Minecraft release.
-- **Adding Protocol Mappings**: When adding support for an older or newer client protocol version.
-- **Updating WIT Definitions**: When adding new functions or types to the WebAssembly plugin API.
+- **升级到新的 Minecraft 版本**：将 Pumpkin 移植到新的 Minecraft 次要或主要版本时。
+- **添加协议映射**：添加对较旧或较新客户端协议版本的支持时。
+- **更新 WIT 定义**：向 WebAssembly 插件 API 添加新函数或类型时。
 
 ---
 
-## Data Sources
+## 数据来源
 
-`pumpkin-codegen` reads data from several primary sources:
+`pumpkin-codegen` 从以下几个主要来源读取数据：
 
-1. **Minecraft Data Generator Reports**: Generated by running `java -DbundlerMainClass=net.minecraft.data.Main -jar server.jar --reports`.
-2. **Minecraft Client Assets**: Extracted from client `.jar` files for translation keys, model shapes, and sound mappings.
-3. **Minecraft Protocol Wiki**: Cross-referenced with protocol specifications for packet IDs.
+1. **Minecraft 数据生成器报告**：通过运行 `java -DbundlerMainClass=net.minecraft.data.Main -jar server.jar --reports` 生成。
+2. **Minecraft 客户端资源**：从客户端 `.jar` 文件中提取，用于翻译键、模型形状和声音映射。
+3. **Minecraft 协议 Wiki**：与协议规范交叉核对数据包 ID。

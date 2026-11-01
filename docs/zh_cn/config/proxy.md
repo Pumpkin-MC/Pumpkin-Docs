@@ -1,78 +1,8 @@
 # 代理
 
-许多服务器使用代理来管理连接并在服务器之间分配玩家。Pumpkin 支持以下代理协议：
+Pumpkin 支持用于服务器网络部署的代理协议。Velocity 和 BungeeCord 支持在 `pumpkin.toml` 的 `[networking.proxy]` 下配置。
 
-- [Velocity](https://papermc.io/software/velocity)
-- [BungeeCord](https://www.spigotmc.org/wiki/bungeecord-installation/)
-
-> [!TIP]提示
-> 对于大多数服务器网络，建议使用 Velocity。与 BungeeCord 相比，Velocity 更现代且性能更好。
-
-## 配置代理
-
-#### `enabled`: 布尔值
-
-启用对代理的支持。
-
-:::code-group
-
-```toml [pumpkin.toml]{2}
-[networking.proxy]
-enabled = true
-```
-
-:::
-
-### Velocity
-
-#### `enabled`: 布尔值
-
-是否启用 Velocity 支持。
-
-:::code-group
-
-```toml [pumpkin.toml]{2}
-[proxy.velocity]
-enabled = true
-```
-
-:::
-
-#### `secret`: 字符串 
-
-在 Velocity 中配置的密钥。
-
-:::code-group
-
-```toml [pumpkin.toml]{3}
-[proxy.velocity]
-enabled = true
-secret = "[代理密钥]"
-```
-
-:::
-
-### BungeeCord
-
-#### `enabled`: 布尔值
-
-是否启用 BungeeCord 支持。
-
-:::code-group
-
-```toml [pumpkin.toml]{2}
-[proxy.bungeecord]
-enabled = true
-```
-
-:::
-
-> [!CAUTION]警告
-> BungeeCord 无法验证玩家信息是来自你的代理还是冒充者。确保服务器的防火墙配置正确。
-
-## 默认配置
-
-默认情况下，代理支持是禁用的。以下是默认配置：
+## 配置
 
 :::code-group
 
@@ -80,12 +10,21 @@ enabled = true
 [networking.proxy]
 enabled = false
 
-[proxy.velocity]
+[networking.proxy.velocity]
 enabled = false
 secret = ""
 
-[proxy.bungeecord]
+[networking.proxy.bungeecord]
 enabled = false
+secret = ""
 ```
 
 :::
+
+### 配置选项
+
+- **`[networking.proxy].enabled`**：启用代理支持的总开关。
+- **`[networking.proxy.velocity].enabled`**：启用 Velocity 现代转发协议。
+- **`[networking.proxy.velocity].secret`**：与 Velocity 代理配置相匹配的转发密钥。
+- **`[networking.proxy.bungeecord].enabled`**：启用 BungeeCord 玩家信息转发协议。
+- **`[networking.proxy.bungeecord].secret`**：通过 BungeeGuard（`bungeeguard-token`）验证来自 BungeeCord 代理连接的可选共享密钥。设置后，传入连接必须提供此令牌，从而防止玩家绕过代理直接连接。

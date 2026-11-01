@@ -1,39 +1,39 @@
-# Adding a Java Edition Packet
+# 添加 Java 版数据包
 
-This guide walks you through implementing, serializing, dispatching, and sending a new Java Edition packet in Pumpkin.
-
----
-
-## Naming Conventions
-
-To keep packet definitions uniform across the codebase, follow these naming conventions:
-
-- **Clientbound packets** (Server → Client) must start with **`C`** (e.g., `CBlockUpdate`, `CPlayDisconnect`).
-- **Serverbound packets** (Client → Server) must start with **`S`** (e.g., `SChatCommand`, `SPlayerPosition`).
-- If a packet exists in multiple states, prefix the state name before the packet action (e.g., `CLoginDisconnect`, `CConfigDisconnect`, and `CPlayDisconnect`).
+本指南将介绍如何在 Pumpkin 中实现、序列化、分发和发送新的 Java 版数据包。
 
 ---
 
-## Step 1: Find the Packet ID in `pumpkin-data`
+## 命名约定
 
-Packet IDs across all supported Minecraft versions are maintained in `pumpkin-data`. Import the corresponding constant:
+为保持整个代码库中数据包定义的一致性，请遵循以下命名约定：
+
+- **客户端接收数据包**（服务器 → 客户端）必须以 **`C`** 开头（例如 `CBlockUpdate`、`CPlayDisconnect`）。
+- **服务器接收数据包**（客户端 → 服务器）必须以 **`S`** 开头（例如 `SChatCommand`、`SPlayerPosition`）。
+- 如果一个数据包存在于多个状态中，请在数据包操作前添加状态名称作为前缀（例如 `CLoginDisconnect`、`CConfigDisconnect` 和 `CPlayDisconnect`）。
+
+---
+
+## 第 1 步：在 `pumpkin-data` 中查找数据包 ID
+
+所有受支持 Minecraft 版本的数据包 ID 都维护在 `pumpkin-data` 中。导入相应的常量：
 
 ```rust
-// Clientbound Play state disconnect
+// 客户端接收的游玩状态断开连接数据包
 use pumpkin_data::packet::clientbound::play::DISCONNECT;
 
-// Serverbound Play state player position
+// 服务器接收的游玩状态玩家位置数据包
 use pumpkin_data::packet::serverbound::play::MOVE_PLAYER_POS;
 ```
 
 ---
 
-## Step 2: Implementing a Clientbound Packet
+## 第 2 步：实现客户端接收数据包
 
-Clientbound packets are sent from Pumpkin to the Minecraft client. They implement the `ClientPacket` trait from `pumpkin-protocol`.
+客户端接收数据包由 Pumpkin 发送给 Minecraft 客户端。它们实现 `pumpkin-protocol` 中的 `ClientPacket` trait。
 
-### 1. Create the Struct File
-Place the file in `crates/pumpkin-protocol/src/java/client/<state>/<packet_name>.rs` (e.g., `play/disconnect.rs`):
+### 1. 创建结构体文件
+将文件放在 `crates/pumpkin-protocol/src/java/client/<state>/<packet_name>.rs`（例如 `play/disconnect.rs`）：
 
 ```rust
 use std::io::Write;
@@ -44,7 +44,7 @@ use pumpkin_protocol::ser::{NetworkWriteExt, WritingError};
 use pumpkin_util::text::TextComponent;
 use pumpkin_util::version::JavaMinecraftVersion;
 
-/// Displays a disconnect screen with a message to the player in Play state.
+/// 在游玩状态下向玩家显示包含消息的断开连接界面。
 #[java_packet(DISCONNECT)]
 pub struct CPlayDisconnect<'a> {
     pub reason: &'a TextComponent,
@@ -63,14 +63,14 @@ impl ClientPacket for CPlayDisconnect<'_> {
         mut write: impl Write,
         version: &JavaMinecraftVersion,
     ) -> Result<(), WritingError> {
-        // Use NetworkWriteExt methods to serialize fields
+        // 使用 NetworkWriteExt 方法序列化字段
         write.write_component(self.reason, version)
     }
 }
 ```
 
-### 2. Export the Module
-In `crates/pumpkin-protocol/src/java/client/<state>/mod.rs`:
+### 2. 导出模块
+在 `crates/pumpkin-protocol/src/java/client/<state>/mod.rs` 中：
 
 ```rust
 mod disconnect;
@@ -79,12 +79,12 @@ pub use disconnect::*;
 
 ---
 
-## Step 3: Implementing a Serverbound Packet
+## 第 3 步：实现服务器接收数据包
 
-Serverbound packets are received by Pumpkin from the game client. They implement the `ServerPacket` trait from `pumpkin-protocol`.
+服务器接收数据包由 Pumpkin 从游戏客户端接收。它们实现 `pumpkin-protocol` 中的 `ServerPacket` trait。
 
-### 1. Create the Struct File
-Place the file in `crates/pumpkin-protocol/src/java/server/<state>/<packet_name>.rs` (e.g., `play/player_position.rs`):
+### 1. 创建结构体文件
+将文件放在 `crates/pumpkin-protocol/src/java/server/<state>/<packet_name>.rs`（例如 `play/player_position.rs`）：
 
 ```rust
 use pumpkin_data::packet::serverbound::play::MOVE_PLAYER_POS;
@@ -104,12 +104,12 @@ impl<'a> ServerPacket<'a> for SPlayerPosition {
     fn read(bytebuf: &mut &'a [u8], version: &JavaMinecraftVersion) -> Result<Self, ReadingError> {
         let x = bytebuf.get_f64_be()?;
         let y = bytebuf.get_f64_be()?;
-        
-        // Handle version-specific fields if necessary
+
+        // 如有必要，处理特定版本的字段
         if *version <= JavaMinecraftVersion::V_1_7_6 {
             let _stance = bytebuf.get_f64_be()?;
         }
-        
+
         let z = bytebuf.get_f64_be()?;
         let collision = bytebuf.get_u8()?;
 
@@ -121,8 +121,8 @@ impl<'a> ServerPacket<'a> for SPlayerPosition {
 }
 ```
 
-### 2. Export the Module
-In `crates/pumpkin-protocol/src/java/server/<state>/mod.rs`:
+### 2. 导出模块
+在 `crates/pumpkin-protocol/src/java/server/<state>/mod.rs` 中：
 
 ```rust
 mod player_position;
@@ -131,11 +131,11 @@ pub use player_position::*;
 
 ---
 
-## Step 4: Network Codec Extension Helpers
+## 第 4 步：网络编解码扩展辅助工具
 
-`NetworkWriteExt` and `NetworkReadExt` provide helper methods for standard Minecraft types:
+`NetworkWriteExt` 和 `NetworkReadExt` 为标准 Minecraft 类型提供了辅助方法：
 
-| Data Type | Reading Method | Writing Method |
+| 数据类型 | 读取方法 | 写入方法 |
 | :--- | :--- | :--- |
 | **`VarInt`** | `bytebuf.get_var_int()?` | `write.write_var_int(val)?` |
 | **`VarLong`** | `bytebuf.get_var_long()?` | `write.write_var_long(val)?` |
@@ -147,14 +147,14 @@ pub use player_position::*;
 
 ---
 
-## Step 5: Handling Incoming Packets in `pumpkin`
+## 第 5 步：在 `pumpkin` 中处理传入数据包
 
-Incoming serverbound packets must be handled in the appropriate state handler in `crates/pumpkin/src/net/java/`.
+传入的服务器接收数据包必须在 `crates/pumpkin/src/net/java/` 中相应的状态处理函数里处理。
 
-For packets in the **Play state**, open `crates/pumpkin/src/net/java/mod.rs` and update `handle_play_packet`:
+对于**游玩状态**中的数据包，打开 `crates/pumpkin/src/net/java/mod.rs` 并更新 `handle_play_packet`：
 
 ```rust
-// In crates/pumpkin/src/net/java/mod.rs
+// 位于 crates/pumpkin/src/net/java/mod.rs
 pub fn handle_play_packet(
     &self,
     player: &Arc<Player>,
@@ -165,7 +165,7 @@ pub fn handle_play_packet(
     let mut payload = &packet.payload[..];
 
     match packet.id {
-        // Match against version-specific packet ID
+        // 匹配特定版本的数据包 ID
         id if id == SPlayerPosition::to_id(version) => {
             let packet = SPlayerPosition::read(&mut payload, &version)?;
             self.handle_player_position(player, &packet);
@@ -176,12 +176,12 @@ pub fn handle_play_packet(
 }
 ```
 
-Then implement the handler function:
+然后实现处理函数：
 
 ```rust
 impl JavaClient {
     pub fn handle_player_position(&self, player: &Arc<Player>, packet: &SPlayerPosition) {
-        // Validate coordinates, update player position, check collisions
+        // 验证坐标、更新玩家位置、检查碰撞
         player.set_position(packet.position);
     }
 }
@@ -189,15 +189,15 @@ impl JavaClient {
 
 ---
 
-## Step 6: Sending Outgoing Packets
+## 第 6 步：发送传出数据包
 
-To send a clientbound packet to a player:
+向玩家发送客户端接收数据包：
 
 ```rust
-// 1. Send directly to a player's connection
+// 1. 直接发送到玩家的连接
 player.client.send_packet(&CPlayDisconnect::new(&reason));
 
-// 2. Broadcast to all players watching a chunk
+// 2. 广播给所有正在观察该区块的玩家
 world.broadcast_packet_except(
     &[player.gameprofile.id],
     &CBlockUpdate::new(block_pos, block_id),

@@ -1,19 +1,19 @@
-# Creating Your First Command
+# 创建你的第一个命令
 
-Writing commands in C for Pumpkin is low-overhead, fast, and uses C WIT bindings.
+在 Pumpkin 中使用 C 语言编写命令具有低开销、运行速度快的特点，并且采用的是 C 语言的 WIT 绑定（bindings）。
 
 ---
 
-## 1. Quick Example
+## 1. 快速示例
 
-Here is a complete C plugin file (`main.c`) that registers a `/hello` command with permission checks and sends a response back to the player.
+下面是一个完整的 C 插件文件（`main.c`），它会注册一个带权限检查的 `/hello` 命令，并向玩家发送响应。
 
 ```c [main.c]
 #include <stdio.h>
-#include "pumpkin.h"
+#include "pumpkin_api.h"
 
 void plugin_on_load(pumpkin_context_t ctx) {
-    // 1. Register permission node
+    // 1. 注册权限节点
     pumpkin_permission_t perm = {
         .node = "my_c_plugin:hello",
         .description = "Allows executing the /hello command",
@@ -21,7 +21,7 @@ void plugin_on_load(pumpkin_context_t ctx) {
     };
     pumpkin_register_permission(ctx, &perm);
 
-    // 2. Build and register command tree
+    // 2. 构建并注册命令树
     const char* names[] = {"hello", "hi"};
     pumpkin_command_t cmd = pumpkin_command_new(names, 2, "Greets the player");
     
@@ -45,20 +45,20 @@ pumpkin_metadata_t plugin_get_metadata() {
 
 ---
 
-## 2. In-Game Preview
+## 2. 游戏内预览
 
-Once registered, your command automatically gains client-side autocompletion, syntax validation, and color highlighting in Minecraft:
+命令注册后，Minecraft 客户端会自动为其提供自动补全、语法验证和颜色高亮：
 
-<img src="/assets/first_command_preview.png" alt="In-Game Command Autocompletion Preview" width="500"/>
+<img src="/assets/first_command_preview.png" alt="游戏内命令自动补全预览" width="500"/>
 
 ---
 
-## 3. How It Works
+## 3. 工作原理
 
-::: details Step-by-Step Breakdown
+::: details 分步解析
 
-### Step 1: Define the Permission Struct
-Populate a `pumpkin_permission_t` struct and call `pumpkin_register_permission`:
+### 步骤 1：定义权限结构体
+填充一个 `pumpkin_permission_t` 结构体，并调用 `pumpkin_register_permission`：
 ```c
 pumpkin_permission_t perm = {
     .node = "my_c_plugin:hello",
@@ -68,15 +68,15 @@ pumpkin_permission_t perm = {
 pumpkin_register_permission(ctx, &perm);
 ```
 
-### Step 2: Build the Command Tree
-Create the command tree by passing name array and description:
+### 步骤 2：构建命令树
+通过传入名称数组和描述来创建命令树：
 ```c
 const char* names[] = {"hello", "hi"};
 pumpkin_command_t cmd = pumpkin_command_new(names, 2, "Greets the player");
 ```
 
-### Step 3: Register Command & Handle Execution
-Pass the command handle to `pumpkin_register_command` and handle responses inside `plugin_handle_command`:
+### 步骤 3：注册命令并处理执行
+将命令句柄传给 `pumpkin_register_command`，并在 `plugin_handle_command` 中处理响应：
 ```c
 pumpkin_register_command(ctx, cmd, "my_c_plugin:hello");
 ```
@@ -85,6 +85,6 @@ pumpkin_register_command(ctx, cmd, "my_c_plugin:hello");
 
 ---
 
-## Next Steps
+## 后续步骤
 
-- Check out the [C Quick Start Guide](./quick-start) to set up your compiler toolchain.
+- 查看 [C 快速入门指南](./quick-start)，设置编译器工具链。

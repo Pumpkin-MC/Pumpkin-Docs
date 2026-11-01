@@ -1,12 +1,12 @@
-# Creating Your First Command
+# 创建你的第一个命令
 
-Registering commands in Go with Pumpkin is built on standard Go idiom using TinyGo WASM compilation.
+在 Pumpkin 中使用 Go 注册命令遵循标准的 Go 惯例，并通过 TinyGo 编译为 WASM。
 
 ---
 
-## 1. Quick Example
+## 1. 快速示例
 
-Here is a complete Go plugin file (`main.go`) that registers a `/hello` command with permission checks and sends a response back to the player.
+下面是一个完整的 Go 插件文件（`main.go`），它会注册一个带权限检查的 `/hello` 命令，并向玩家发送响应。
 
 ```go [main.go]
 package main
@@ -33,14 +33,14 @@ func (p *MyPlugin) Metadata() api.Metadata {
 }
 
 func (p *MyPlugin) OnLoad(ctx *pumpkin_plugin_context.Context) {
-	// 1. Register permission node
+	// 1. 注册权限节点
 	ctx.RegisterPermission(pumpkin_plugin_permission.Permission{
 		Node:        "my_go_plugin:hello",
 		Description: "Allows executing the /hello command",
 		Default:     pumpkin_plugin_permission.PermissionDefaultAllow(),
 	})
 
-	// 2. Build and register command tree
+	// 2. 构建并注册命令树
 	cmd := pumpkin_plugin_command.New([]string{"hello", "hi"}, "Greets the player")
 	ctx.RegisterCommand(cmd, "my_go_plugin:hello")
 }
@@ -59,20 +59,20 @@ func main() {}
 
 ---
 
-## 2. In-Game Preview
+## 2. 游戏内预览
 
-Once registered, your command automatically gains client-side autocompletion, syntax validation, and color highlighting in Minecraft:
+命令注册后，Minecraft 客户端会自动为其提供自动补全、语法验证和颜色高亮：
 
-<img src="/assets/first_command_preview.png" alt="In-Game Command Autocompletion Preview" width="500"/>
+<img src="/assets/first_command_preview.png" alt="游戏内命令自动补全预览" width="500"/>
 
 ---
 
-## 3. How It Works
+## 3. 工作原理
 
-::: details Step-by-Step Breakdown
+::: details 分步解析
 
-### Step 1: Register Permission
-Call `ctx.RegisterPermission` inside `OnLoad`:
+### 步骤 1：注册权限
+在 `OnLoad` 中调用 `ctx.RegisterPermission`：
 ```go
 ctx.RegisterPermission(pumpkin_plugin_permission.Permission{
     Node:        "my_go_plugin:hello",
@@ -81,14 +81,14 @@ ctx.RegisterPermission(pumpkin_plugin_permission.Permission{
 })
 ```
 
-### Step 2: Build the Command Tree
-Instantiate the command tree with `pumpkin_plugin_command.New`:
+### 步骤 2：构建命令树
+使用 `pumpkin_plugin_command.New` 实例化命令树：
 ```go
 cmd := pumpkin_plugin_command.New([]string{"hello", "hi"}, "Greets the player")
 ```
 
-### Step 3: Register & Execute
-Register the command with `ctx.RegisterCommand` and handle execution in `HandleCommand`:
+### 步骤 3：注册并执行
+使用 `ctx.RegisterCommand` 注册命令，并在 `HandleCommand` 中处理执行：
 ```go
 ctx.RegisterCommand(cmd, "my_go_plugin:hello")
 ```
@@ -97,7 +97,7 @@ ctx.RegisterCommand(cmd, "my_go_plugin:hello")
 
 ---
 
-## Next Steps
+## 后续步骤
 
-- Follow the [Go Quick Start Guide](./quick-start) to set up TinyGo compilation.
-- Learn more about [Basic Logic](./basic-logic).
+- 按照 [Go 快速入门指南](./quick-start) 设置 TinyGo 编译环境。
+- 进一步了解[基本逻辑](./basic-logic)。

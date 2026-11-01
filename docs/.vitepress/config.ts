@@ -3,6 +3,7 @@ import { en } from "./en.ts";
 import { nl } from "./nl.ts";
 import { pt } from "./pt.ts";
 import { zhCN } from "./zh_cn.ts";
+import { zhTW } from "./zh_tw.ts";
 import { de } from "./de.ts";
 import { trTR } from "./tr_tr.ts";
 import { jaJP } from "./ja_jp.ts";
@@ -33,6 +34,9 @@ export default defineConfig({
         },
         zh_cn: {
             label: "简体中文", ...zhCN
+        },
+        zh_tw: {
+            label: "繁體中文(台湾)", ...zhTW
         },
         de: {
             label: "Deutsch", ...de

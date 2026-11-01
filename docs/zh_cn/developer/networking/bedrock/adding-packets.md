@@ -1,32 +1,32 @@
-# Adding a Bedrock Edition Packet
+# 添加基岩版数据包
 
-This guide explains how to implement, encode, decode, and handle a new Minecraft: Bedrock Edition packet in Pumpkin.
-
----
-
-## Naming Conventions
-
-- **Clientbound packets** (Server → Client) must start with **`C`** (e.g., `CChunkRadiusUpdated`, `CContainerOpen`).
-- **Serverbound packets** (Client → Server) must start with **`S`** (e.g., `SRequestChunkRadius`, `SPlayerAction`).
+本指南介绍如何在 Pumpkin 中实现、编码、解码和处理新的 Minecraft：基岩版数据包。
 
 ---
 
-## Step 1: Identifying the Packet ID
+## 命名约定
 
-In the Bedrock protocol, packet IDs are fixed integer constants assigned by Mojang. Verify the numeric ID from the official protocol documentation or network packet traces.
-
-For example:
-- `Disconnect` packet ID: `5`
-- `RequestChunkRadius` packet ID: `69`
+- **客户端接收数据包**（服务器 → 客户端）必须以 **`C`** 开头（例如 `CChunkRadiusUpdated`、`CContainerOpen`）。
+- **服务器接收数据包**（客户端 → 服务器）必须以 **`S`** 开头（例如 `SRequestChunkRadius`、`SPlayerAction`）。
 
 ---
 
-## Step 2: Implementing a Clientbound Packet
+## 第 1 步：确定数据包 ID
 
-Clientbound packets implement the `PacketWrite` trait from `pumpkin-protocol::serial`.
+在基岩版协议中，数据包 ID 是由 Mojang 分配的固定整数常量。请通过官方协议文档或网络数据包跟踪确认数字 ID。
 
-### 1. Create the Packet File
-Place the file in `crates/pumpkin-protocol/src/bedrock/client/<packet_name>.rs`:
+例如：
+- `Disconnect` 数据包 ID：`5`
+- `RequestChunkRadius` 数据包 ID：`69`
+
+---
+
+## 第 2 步：实现客户端接收数据包
+
+客户端接收数据包实现 `pumpkin-protocol::serial` 中的 `PacketWrite` trait。
+
+### 1. 创建数据包文件
+将文件放在 `crates/pumpkin-protocol/src/bedrock/client/<packet_name>.rs`：
 
 ```rust
 use std::io::{Error, Write};
@@ -66,8 +66,8 @@ impl PacketWrite for CDisconnect {
 }
 ```
 
-### 2. Export the Module
-In `crates/pumpkin-protocol/src/bedrock/client/mod.rs`:
+### 2. 导出模块
+在 `crates/pumpkin-protocol/src/bedrock/client/mod.rs` 中：
 
 ```rust
 pub mod disconnect;
@@ -76,12 +76,12 @@ pub use disconnect::*;
 
 ---
 
-## Step 3: Implementing a Serverbound Packet
+## 第 3 步：实现服务器接收数据包
 
-Serverbound packets implement the `PacketRead` trait. Pumpkin provides a procedural derive macro `#[derive(PacketRead)]` for automatic deserialization when fields implement `PacketRead`.
+服务器接收数据包实现 `PacketRead` trait。当字段实现 `PacketRead` 时，Pumpkin 提供过程派生宏 `#[derive(PacketRead)]` 用于自动反序列化。
 
-### 1. Create the Packet File
-Place the file in `crates/pumpkin-protocol/src/bedrock/server/<packet_name>.rs`:
+### 1. 创建数据包文件
+将文件放在 `crates/pumpkin-protocol/src/bedrock/server/<packet_name>.rs`：
 
 ```rust
 use pumpkin_macros::packet;
@@ -95,7 +95,7 @@ pub struct SRequestChunkRadius {
 }
 ```
 
-If a packet requires custom parsing logic, implement `PacketRead` manually:
+如果数据包需要自定义解析逻辑，请手动实现 `PacketRead`：
 
 ```rust
 use std::io::{Error, Read};
@@ -110,8 +110,8 @@ impl PacketRead for SMyCustomPacket {
 }
 ```
 
-### 2. Export the Module
-In `crates/pumpkin-protocol/src/bedrock/server/mod.rs`:
+### 2. 导出模块
+在 `crates/pumpkin-protocol/src/bedrock/server/mod.rs` 中：
 
 ```rust
 pub mod request_chunk_radius;
@@ -120,12 +120,12 @@ pub use request_chunk_radius::*;
 
 ---
 
-## Step 4: Dispatching Incoming Packets in `pumpkin`
+## 第 4 步：在 `pumpkin` 中分发传入数据包
 
-Incoming packets are dispatched in `crates/pumpkin/src/net/bedrock/mod.rs`:
+传入数据包在 `crates/pumpkin/src/net/bedrock/mod.rs` 中分发：
 
 ```rust
-// Inside BedrockClient::handle_game_packet
+// 位于 BedrockClient::handle_game_packet 内
 match packet.id {
     SRequestChunkRadius::PACKET_ID => {
         let packet = SRequestChunkRadius::read(reader)?;
@@ -137,9 +137,9 @@ match packet.id {
 
 ---
 
-## Step 5: Implementing the Handler Function
+## 第 5 步：实现处理函数
 
-Implement the handler logic in `crates/pumpkin/src/net/bedrock/play/<packet_name>.rs`:
+在 `crates/pumpkin/src/net/bedrock/play/<packet_name>.rs` 中实现处理逻辑：
 
 ```rust
 use super::*;
@@ -148,11 +148,11 @@ use pumpkin_protocol::bedrock::server::request_chunk_radius::SRequestChunkRadius
 impl BedrockClient {
     pub fn handle_request_chunk_radius(&self, player: &Arc<Player>, packet: &SRequestChunkRadius) {
         let requested_radius = packet.chunk_radius.0;
-        
-        // Clamp view distance within server configuration limits
+
+        // 将视距限制在服务器配置范围内
         let clamped = requested_radius.clamp(2, 16);
 
-        // Notify client that view radius was accepted
+        // 通知客户端视野半径已被接受
         self.try_enqueue_client_packet(&CChunkRadiusUpdated {
             chunk_radius: VarInt(clamped),
         });
@@ -160,7 +160,7 @@ impl BedrockClient {
 }
 ```
 
-Remember to register the new module in `crates/pumpkin/src/net/bedrock/play/mod.rs`:
+记得在 `crates/pumpkin/src/net/bedrock/play/mod.rs` 中注册新模块：
 
 ```rust
 pub mod request_chunk_radius;
@@ -168,15 +168,15 @@ pub mod request_chunk_radius;
 
 ---
 
-## Step 6: Sending Outgoing Packets
+## 第 6 步：发送传出数据包
 
-To send a Bedrock packet to a connected client:
+向已连接的客户端发送基岩版数据包：
 
 ```rust
-// Enqueues the packet into the client's outgoing batch queue
+// 将数据包加入客户端的传出批次队列
 self.try_enqueue_client_packet(&CChunkRadiusUpdated {
     chunk_radius: VarInt(view_distance),
 });
 ```
 
-Batched packets are automatically compressed, framed with `0xfe`, and transmitted over the RakNet/NetherNet socket.
+批处理数据包会自动压缩，使用 `0xfe` 分帧，并通过 RakNet/NetherNet 套接字传输。

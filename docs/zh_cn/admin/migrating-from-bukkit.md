@@ -30,7 +30,7 @@ Pumpkin 的主要插件格式为 WebAssembly（`.wasm`）：
 对于依赖现有 Bukkit/Spigot `.jar` 插件的服务器，**PatchBukkit** 项目提供了兼容层：
 - **架构**：PatchBukkit 在 Pumpkin 内部嵌入了一个 JVM 并重新实现了部分 Bukkit API，通过 JNI 和 FFI 与 Pumpkin 桥接。
 - **插件目录**：兼容的 `.jar` 插件放置在 `patchbukkit/patchbukkit-plugins/` 目录中。
-- **现状与限制**：PatchBukkit 仍在积极开发中。标准 Bukkit API 调用受支持；严重依赖 NMS（`net.minecraft.server`）内部类、CraftBukkit 反射或字节码操作的插件可能无法正常工作。
+- **现状与限制**：PatchBukkit 仍在积极开发中。虽然支持标准 Bukkit API 调用，但依赖 NMS（`net.minecraft.server`）内部类、CraftBukkit 内部实现或字节码操作的插件可能无法正常工作。
 - **Java 依赖**：使用 PatchBukkit 需要在宿主系统上安装 Java 运行时（JRE/JDK）以运行内嵌的 JVM。
 
 ---
@@ -55,7 +55,7 @@ Pumpkin 使用 TOML 配置文件替代 `server.properties` 和 YAML：
 - **格式兼容性**：Pumpkin 支持标准的 Anvil 区块格式（`.mca` 文件）。
 - **目录结构**：从现有的 Paper/Spigot 复制世界时，请确保维度目录（`world`、`world_nether`、`world_the_end`）与 Pumpkin 的目录布局相符。
 - **需要最新的世界与数据包格式**：至少在目前阶段，Pumpkin 仅支持对应目标 Minecraft 版本的最新世界格式和数据包格式。运行时不会自动转换旧版世界格式或旧版数据包。
-  - **在客户端中升级世界**：如果要迁移较旧的世界，请在导入 Pumpkin 前先进行升级。您可以直接在官方 Minecraft 客户端中更新世界：使用匹配的最新版本打开客户端，进入**单人游戏**，选择该世界，点击**编辑**并选择**优化世界**。或者，您也可以在匹配最新版本的原版/Paper 服务器中启动并保存一次该世界。
+  - **在客户端中升级世界**：如果要迁移较旧的世界，请在 Pumpkin 中加载前先进行升级。你可以直接在官方 Minecraft 客户端中更新世界：使用匹配的最新版本打开客户端，进入**单人游戏**，选择该世界，点击**编辑**并选择**优化世界**。或者，也可以在匹配最新版本的原版服务器上运行一次该世界。
   - **数据包**：确保 `world/datapacks` 中的所有自定义数据包均已更新到目标版本所要求的格式版本。
 
 ---
@@ -110,8 +110,8 @@ docker run -p 25565:25565 -v ./data:/data pumpkinmc/pumpkin:latest
 :::
 
 ### 内存机制差异
-- **无垃圾回收器**：Pumpkin 由 Rust 编写，在编译期使用确定性的内存管理（RAII）。不存在运行时的垃圾回收器，因此无需调优 GC 停顿。
-- **无需固定堆内存**：原生程序中不存在 `-Xms` 和 `-Xmx` 标志。内存根据区块和实体的加载动态向操作系统申请，卸载后立即释放。
+- **无垃圾回收器**：Pumpkin 由 Rust 编写，在编译期使用确定性的内存管理（RAII）。不存在运行时的垃圾回收器，因此无需调优 GC 停顿的开销。
+- **无需固定堆内存**：在原生程序中不存在 `-Xms` 和 `-Xmx` 标志。内存根据区块和实体的加载动态向操作系统申请，卸载后立即释放。
 - **JVM 标志不适用**：用于调优垃圾回收策略、分代大小或 JVM 内部机制的参数均不适用，且无法传递给程序。
 
 ---
@@ -120,7 +120,7 @@ docker run -p 25565:25565 -v ./data:/data pumpkinmc/pumpkin:latest
 
 1. [ ] 备份现有服务器数据和世界文件，并确保世界与数据包已升级到最新格式（例如通过客户端的“优化世界”）。
 2. [ ] 将 `server.properties` 中的设置映射至 `pumpkin.toml`。
-3. [ ] 确定所需插件并寻找 WebAssembly（`.wasm`）替代，或使用 [PatchBukkit](#bukkit-插件兼容性patchbukkit) 进行测试。
+3. [ ] 确定所需插件并寻找 WebAssembly（`.wasm`）替代，或使用 [PatchBukkit](#bukkit-插件兼容性-patchbukkit) 进行测试。
 4. [ ] 若使用代理网络，在 `pumpkin.toml` 中配置代理设置（`Velocity` / `BungeeCord`）。
 5. [ ] 更新启动脚本以直接运行 `./pumpkin`，无需传入 JVM 参数。
 6. [ ] 启动服务器并检查连接和日志。

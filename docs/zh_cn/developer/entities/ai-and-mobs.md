@@ -1,111 +1,111 @@
-# Mob AI & Goal System
+# 生物 AI 与目标系统
 
-Pumpkin implements a modular, priority-driven Artificial Intelligence (AI) goal system for computer-controlled mobs, located in [`crates/pumpkin/src/entity/ai/`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/crates/pumpkin/src/entity/ai) and [`crates/pumpkin/src/entity/mob/`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/crates/pumpkin/src/entity/mob).
+Pumpkin 为计算机控制的生物实现了模块化、优先级驱动的生物智能（AI）目标系统，位于 [`crates/pumpkin/src/entity/ai/`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/crates/pumpkin/src/entity/ai) 和 [`crates/pumpkin/src/entity/mob/`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/crates/pumpkin/src/entity/mob)。
 
 ---
 
-## The Goal System Architecture
+## 目标系统架构
 
-Mob behaviors are decomposed into independent modular tasks called **Goals**. Each mob possesses a **GoalSelector** that maintains an ordered collection of goals evaluated on every server tick.
- 
-### Goal Priority Hierarchy
- 
-Goals are assigned an integer priority (where lower numbers represent higher precedence). During each tick, higher-priority actions preempt lower-priority background tasks:
- 
-| Priority | Goal Type | Evaluation Condition | Behavior |
+生物行为被分解为称为**目标（Goal）**的独立模块化任务。每种生物都拥有一个 **GoalSelector**，其中维护着一个有序的目标集合，并在每个server tick 对这些目标进行评估。
+
+### 目标优先级层次结构
+
+每个目标都会被分配一个整数优先级（数字越小，优先级越高）。在每个 tick，高优先级操作会抢占低优先级的后台任务：
+
+| 优先级 | 目标类型 | 评估条件 | 行为 |
 | :--- | :--- | :--- | :--- |
-| **1 (Highest)** | `SwimGoal` | Entity is submerged in water | Jump repeatedly to swim to the water surface and avoid drowning. |
-| **2** | `MeleeAttackGoal` | Valid hostile target in sight/range | Navigate towards target entity and execute melee attacks. |
-| **3** | `WanderAroundGoal` | No active combat target | Pick a random nearby navigable voxel and walk to it. |
-| **4 (Lowest)** | `LookAtEntityGoal` | Player or mob within observation radius | Rotate head and body pitch/yaw towards the target entity. |
- 
-### Execution Flow
- 
-1. **Evaluation**: On every game tick, `GoalSelector::tick()` iterates through registered goals in order of priority.
-2. **Activation**: If an inactive goal satisfies `can_start()`, it is activated via `start()`.
-3. **Execution**: Active goals run their per-tick logic in `tick()`.
-4. **Preemption & Termination**: If `should_continue()` returns `false`, or a mutually exclusive goal with higher priority activates, `stop()` is called and the goal resets.
+| **1（最高）** | `SwimGoal` | 实体浸没在水中 | 反复跳跃以游到水面，避免溺水。 |
+| **2** | `MeleeAttackGoal` | 视野/范围内存在有效的敌对目标 | 向目标实体导航并执行近战攻击。 |
+| **3** | `WanderAroundGoal` | 没有活动的战斗目标 | 随机选取附近一个可导航体素并走向它。 |
+| **4（最低）** | `LookAtEntityGoal` | 观察半径内有玩家或生物 | 转动头部和身体，使其俯仰角/偏航角朝向目标实体。 |
 
-### The `Goal` Lifecycle
+### 执行流程
 
-Every AI behavior implements the `Goal` trait:
+1. **评估**：在每个 tick，`GoalSelector::tick()` 按优先级顺序遍历已注册的目标。
+2. **激活**：如果未激活的目标满足 `can_start()`，则通过 `start()` 激活它。
+3. **执行**：已激活的目标在 `tick()` 中运行每 tick 逻辑。
+4. **抢占与终止**：如果 `should_continue()` 返回 `false`，或者互斥的更高优先级目标激活，则会调用 `stop()` 并重置目标。
+
+### `Goal` 生命周期
+
+每个 AI 行为都实现 `Goal` trait：
 
 ```rust
 pub trait Goal: Send + Sync {
-    /// Evaluates preconditions to determine if this goal can activate.
+    /// 评估前置条件，确定此目标是否可以激活。
     fn can_start(&self) -> bool;
 
-    /// Called once when the goal transitions from inactive to active.
+    /// 目标从未激活转为激活时调用一次。
     fn start(&mut self) {}
 
-    /// Evaluates whether the goal should continue executing on subsequent ticks.
+    /// 评估目标是否应在后续 tick 继续执行。
     fn should_continue(&self) -> bool {
         self.can_start()
     }
 
-    /// Executes the continuous behavior on each server tick.
+    /// 在每个server tick 执行持续行为。
     fn tick(&mut self) {}
 
-    /// Called when the goal completes, fails, or is preempted by a higher priority goal.
+    /// 目标完成、失败或被更高优先级目标抢占时调用。
     fn stop(&mut self) {}
 }
 ```
 
 ---
 
-## Standard Built-in Goals
+## 标准内置目标
 
-Pumpkin provides standard vanilla AI behaviors in `crates/pumpkin/src/entity/ai/`:
+Pumpkin 在 `crates/pumpkin/src/entity/ai/` 中提供了标准的原版 AI 行为：
 
-| Goal | Description | Target Mobs |
+| 目标 | 说明 | 适用生物 |
 | :--- | :--- | :--- |
-| **`SwimGoal`** | Jumps repeatedly while submerged in water to prevent drowning. | Almost all land mobs |
-| **`MeleeAttackGoal`** | Navigates towards an attack target and executes a strike when within reach. | Zombies, Spiders, Iron Golems |
-| **`RangedAttackGoal`** | Stays at range and shoots projectiles (arrows, snowballs). | Skeletons, Pillagers, Blazes |
-| **`FleeSunGoal`** | Seeks shade or water during daytime to prevent combustion. | Zombies, Skeletons |
-| **`PanicGoal`** | Sprints in random directions when taking damage. | Cows, Pigs, Sheep, Chickens |
-| **`WanderAroundGoal`** | Selects random accessible coordinates nearby when idle. | Passive & neutral mobs |
-| **`LookAtEntityGoal`** | Rotates head to face nearby players within sensory range. | Villagers, Mobs |
+| **`SwimGoal`** | 浸没在水中时反复跳跃，防止溺水。 | 几乎所有陆地生物 |
+| **`MeleeAttackGoal`** | 向攻击目标导航，并在目标进入攻击范围后发动攻击。 | 僵尸、蜘蛛、铁傀儡 |
+| **`RangedAttackGoal`** | 保持距离并发射弹射物（箭、雪球）。 | 骷髅、掠夺者、烈焰人 |
+| **`FleeSunGoal`** | 白天寻找阴凉处或水源，防止燃烧。 | 僵尸、骷髅 |
+| **`PanicGoal`** | 受到伤害时向随机方向疾跑。 | 牛、猪、绵羊、鸡 |
+| **`WanderAroundGoal`** | 空闲时随机选择附近可到达的坐标。 | 被动型与中立型生物 |
+| **`LookAtEntityGoal`** | 转动头部，面向感知范围内的附近玩家。 | 村民、生物 |
 
 ---
 
-## Navigation & Pathfinding
+## 导航与路径寻找
 
-Mobs navigate the block world using Pumpkin's 3D grid pathfinder:
+生物使用 Pumpkin 的 3D 网格寻路器在方块世界中导航：
 
-1. **Path Calculation**: Resolves a path from the mob's origin to target coordinates using an A* algorithm optimized for Minecraft block geometries.
-2. **Obstacle Avoidance**:
-   - Avoids hazardous blocks (lava, fire, sweet berry bushes).
-   - Prevents walking off ledges higher than the mob's fall threshold.
-   - Computes jumping steps over 1-block obstacles.
-3. **Waypoint Steering**: The navigation engine updates the mob's velocity vectors per tick to smoothly guide the entity along waypoints.
+1. **路径计算**：使用针对 Minecraft 方块几何结构优化的 A* 算法，计算从生物起点到目标坐标的路径。
+2. **障碍物规避**：
+   - 避开危险方块（熔岩、火、甜浆果丛）。
+   - 防止从高于生物跌落阈值的边缘走下去。
+   - 计算越过 1 格高障碍物的跳跃步进。
+3. **路径点转向**：导航引擎每 tick 更新生物的速度向量，使实体沿路径点平滑移动。
 
 ---
 
-## Entity Attributes System
+## 实体属性系统
 
-Mob capabilities and stats are governed by the **Attributes** system in [`crates/pumpkin/src/entity/attributes.rs`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin/src/entity/attributes.rs):
+生物的能力和数值由 [`crates/pumpkin/src/entity/attributes.rs`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin/src/entity/attributes.rs) 中的**属性**系统控制：
 
 ```rust
 use pumpkin_data::entity::attribute::EntityAttribute;
 
-// Common vanilla attributes
-EntityAttribute::GENERIC_MAX_HEALTH;          // Base hit points (e.g. 20.0 for Zombies)
-EntityAttribute::GENERIC_MOVEMENT_SPEED;      // Base walking velocity (e.g. 0.23)
-EntityAttribute::GENERIC_ATTACK_DAMAGE;       // Melee attack damage (e.g. 3.0)
-EntityAttribute::GENERIC_FOLLOW_RANGE;        // Sensory detection range in blocks (e.g. 35.0)
-EntityAttribute::GENERIC_KNOCKBACK_RESISTANCE; // Resistance against knockback (0.0 to 1.0)
+// 常见的原版属性
+EntityAttribute::GENERIC_MAX_HEALTH;           // 基础生命值（例如僵尸为 20.0）
+EntityAttribute::GENERIC_MOVEMENT_SPEED;       // 基础行走速度（例如 0.23）
+EntityAttribute::GENERIC_ATTACK_DAMAGE;        // 近战攻击伤害（例如 3.0）
+EntityAttribute::GENERIC_FOLLOW_RANGE;         // 以方块为单位的感知探测范围（例如 35.0）
+EntityAttribute::GENERIC_KNOCKBACK_RESISTANCE; // 击退抗性（0.0 到 1.0）
 ```
 
-### Modifiers
-Attributes support dynamic modifiers with additive or multiplicative calculations (e.g., speed bonuses from Swiftness potions or armor attribute boosts).
+### 修饰符
+属性支持采用加法或乘法计算的动态修饰符（例如迅捷药水提供的速度加成或盔甲属性加成）。
 
 ---
 
-## Ageable & Passive Entities
+## 可成长与被动型实体
 
-Passive animals (cows, sheep, pigs) implement the `Ageable` trait:
+被动型动物（牛、绵羊、猪）实现 `Ageable` trait：
 
-- **Baby State**: Renders with smaller collision boxes and oversized heads.
-- **Growing Age**: A negative tick timer counting upward to `0`. When it reaches `0`, the entity matures into an adult.
-- **Breeding Cooldown**: Positive tick timer tracking cooldowns between successful matings.
+- **幼年状态**：使用更小的碰撞箱和比例更大的头部进行渲染。
+- **成长年龄**：一个向 `0` 递增的负数 tick 计时器。达到 `0` 时，实体成长为成年个体。
+- **繁殖冷却**：一个正数 tick 计时器，用于追踪成功繁殖后的冷却时间。
