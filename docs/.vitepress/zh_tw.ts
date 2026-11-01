@@ -357,7 +357,7 @@ export const zhTW = defineConfig({
                                 link: "/zh_tw/plugin-dev/kotlin/api-overview",
                             },
                             {
-                                text: "回撥參考",
+                                text: "回呼參考",
                                 link: "/zh_tw/plugin-dev/kotlin/callbacks",
                             },
                             {
