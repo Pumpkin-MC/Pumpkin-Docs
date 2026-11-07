@@ -13,6 +13,8 @@ format = "<{DISPLAYNAME}> {MESSAGE}"
 [chat.anti_spam]
 enabled = true
 spam_threshold = 200
+# chat_spam_threshold_seconds = 10
+# command_spam_threshold_seconds = 10
 message_cost = 20
 decay_per_tick = 1
 ops_bypass = true
@@ -33,7 +35,9 @@ ops_bypass = true
 Pumpkin implements a leaky-bucket spam counter to protect the server from spamming players and bot floods:
 
 - **`enabled`**: Whether anti-spam protection is active (default: `true`).
-- **`spam_threshold`**: The spam counter threshold in ticks at which a player will be kicked (default: `200` ticks).
+- **`spam_threshold`**: Legacy tick-based spam counter threshold at which a player will be kicked (default: `200` ticks).
+- **`chat_spam_threshold_seconds`**: (Optional) Chat spam threshold in seconds (also accepts `chat-spam-threshold-seconds`). Overrides the legacy `spam_threshold` for chat messages when set (`seconds * 20` ticks).
+- **`command_spam_threshold_seconds`**: (Optional) Command spam threshold in seconds (also accepts `command-spam-threshold-seconds`). Overrides the legacy `spam_threshold` for commands when set (`seconds * 20` ticks).
 - **`message_cost`**: The amount added to the player's spam counter for each chat message or command sent (default: `20` ticks).
 - **`decay_per_tick`**: The amount decayed from the player's spam counter on each server tick (default: `1` tick).
 - **`ops_bypass`**: Whether server operators bypass anti-spam checks (default: `true`).

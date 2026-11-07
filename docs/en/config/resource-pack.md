@@ -34,7 +34,7 @@ force = false
 enabled = false
 force = false
 packs = [
-  # { uuid = "00000000-0000-0000-0000-000000000000", version = "1.0.0", size = 1048576, download_url = "https://example.com/pack.mcpack" }
+  # { uuid = "00000000-0000-0000-0000-000000000000", version = "1.0.0", size = 1048576, download_url = "https://example.com/pack.mcpack", path = "resource_packs/pack.mcpack" }
 ]
 ```
 
@@ -53,7 +53,8 @@ Each pack in the `packs` array accepts the following properties:
 - **`uuid`**: (Required) Unique identifier (UUID) for the Bedrock pack matching its `manifest.json`.
 - **`version`**: (Required) Version string of the pack (e.g. `"1.0.0"`).
 - **`size`**: (Required) File size of the pack archive in bytes.
-- **`download_url`**: (Required) Direct download URL for the `.mcpack` or archive file.
+- **`download_url`**: (Required) Direct download URL for the `.mcpack` or archive file (can be empty `""` when streaming a local pack from the server).
+- **`path`**: (Optional) Filesystem path on the server to the local pack archive (`.mcpack` or `.zip`). When set (or when a matching file exists at `resource_packs/<uuid>_<version>.mcpack`, `resource_packs/<uuid>_<version>.zip`, `resource_packs/<uuid>.mcpack`, or `resource_packs/<uuid>.zip`), Pumpkin streams the pack directly to connecting Bedrock clients in chunks.
 - **`content_key`**: (Optional) Decryption key for encrypted marketplace/custom packs.
 - **`sub_pack_name`**: (Optional) Sub-pack name within the pack to activate.
 - **`content_id`**: (Optional) Content identifier string.
