@@ -12,6 +12,10 @@ export const en = defineConfig({
         },
         nav: [
             {
+                text: "Benchmarks",
+                link: "/about/benchmarks",
+            },
+            {
                 text: "Administration",
                 link: "/admin/introduction",
             },
@@ -32,6 +36,7 @@ export const en = defineConfig({
             {
                 text: "About",
                 items: [
+                    { text: "Benchmarks", link: "/about/benchmarks" },
                     { text: "Helping & Donating", link: "/about/helping" },
                 ],
             },
