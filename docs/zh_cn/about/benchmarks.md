@@ -6,7 +6,7 @@
 > **功能完整性说明：** 尽管 Pumpkin 已经实现了地形生成、光照、区块加载、生物生成、AI 目标和实体物理，但尚未实现所有的原版机制。与成熟的原版衍生分支相比，某些机制的缺失可能会降低其基线开销。
 
 ::: tip 概览
-- **冷启动与关闭：** Pumpkin 仅需 **`9.6 ms – 12.9 ms`** 即可完成启动并接受 TCP 连接（相比之下 Paper 和 Folia 为 **`3,840 ms – 4,905 ms`**）；在 **`41 ms – 71 ms`** 内即可完成安全关闭（相比之下 Paper 和 Folia 为 **`1.2 s – 2.8 s`**）。
+- **冷启动与关闭：** Pumpkin 仅需 **`9.6 ms – 12.9 ms`** 即可完成启动并接受 TCP 连接（相比之下 Paper 和 Folia 为 **`3,707 ms – 4,905 ms`**）；在 **`41 ms – 71 ms`** 内即可完成安全关闭（相比之下 Paper 和 Folia 为 **`1.2 s – 2.8 s`**）。
 - **内存占用：** Pumpkin 空载仅需 **`60.0 MiB` RAM**，并在并发 400 – 700 名玩家时仅占用 **`1.38 GiB – 1.74 GiB` RAM**；相比之下，Paper 和 Folia 在动态 `-Xms512M` JVM 堆内存下占用 **`2.4 GiB – 4.4 GiB` RAM**，在配置 10 GiB Aikar's Flags 时占用 **`10.8 GiB – 11.7 GiB` RAM**。
 - **CPU 与 Tick 效率：** 在单一区域内有 50 – 300 名玩家时，Pumpkin 的整个进程 CPU 使用率比 Paper 和 Folia 低 **2x – 4x**，MSPT 保持低 **2x – 5x**，在 2 个 vCPU 上稳定维持 **`250` 名玩家**，在 8 个 vCPU 上稳定维持 **`700+` 名玩家**处于 **20.0 TPS**。
 - **多区域承载能力：** 在相距 8,192 格的 8 个区域中，Pumpkin 可稳定承载 **600 名并发玩家处于 20.0 TPS（`2.05 GiB` RAM）**，相比之下 Paper 仅能承载 **100 名玩家**，同时 Pumpkin 完整保留了单一全局世界 Tick。
@@ -44,6 +44,7 @@
 #### 游戏设置
 
 - Minecraft 版本：26.3
+- 世界种子（World seed）：`42`（普通主世界地形）
 - 视距（View distance）：8
 - 模拟距离（Simulated distance）：8
 - 正版验证（Online mode）：false
@@ -56,9 +57,97 @@
 - **Pumpkin：** `0.2.1+26.3`（[commit `bc494ec66`](https://github.com/Pumpkin-MC/Pumpkin/commit/bc494ec664abcf2244bb01897365fef50a05e966)，以 `--release` 编译）
 - **Paper：** [26.3 build 244](https://papermc.io/downloads/paper)
 - **Folia：** [26.3 build 6](https://papermc.io/downloads/folia)（在 Tier 3 下 `threaded-regions.threads: 8`）
-- **测试期间激活的机制：** 普通主世界地形（已预生成热身，避免磁盘生成影响 Tick 测量）、自然生物生成与生物 AI 目标、实体碰撞箱碰撞、区块加载（`view-distance = 8`）、数据包压缩（`threshold = 256`），以及来自所有连接的 Bot 发出的持续 **20 Hz** 玩家移动（`SetPlayerPositionAndRotation` + `SwingArm`）。
+- **测试期间激活的机制：** 普通主世界地形（`seed = 42`，在测量前已在磁盘上预生成热身，避免初始区块生成影响稳态 Tick 测量）、自然生物生成与生物 AI 目标、实体碰撞箱碰撞、区块加载（`view-distance = 8`）、数据包压缩（`threshold = 256`），以及来自所有连接的 Bot 发出的持续 **20 Hz** 玩家移动（`SetPlayerPositionAndRotation` + `SwingArm`）。
 - **硬件核心隔离：** 被测试的服务器通过 `taskset -c` 绑定到 **CCD0** 的物理核心（Tier 1 绑定 `0,16`，Tier 2 绑定 `0-3,16-19`，Tier 3 绑定 `0-7,16-23`），而 8 个客户端 Bot 工作进程严格绑定到 **CCD1**（`8-15,24-31`）。
 - **JVM 堆内存配置：** Paper 与 Folia 分别在 [PaperMC 官方推荐的 Aikar's Flags](https://docs.papermc.io/paper/aikars-flags/)（`-Xms10G -Xmx10G -XX:+UseG1GC -XX:+AlwaysPreTouch`）和动态堆内存（`-Xms512M -Xmx10G` 且不启用 `-XX:+AlwaysPreTouch`）下进行了测试，以衡量非预分配内存的使用情况。
+
+### 计算方法与数据集
+
+下表中的每一项数据均由基准测试套件（<a href="/benchmarks/benchmark_suite.py" target="_blank"><code>benchmark_suite.py</code></a>，原始数据记录于 <a href="/benchmarks/results_full_tiers.json" target="_blank"><code>results_full_tiers.json</code></a> 与 <a href="/benchmarks/extra_metrics.json" target="_blank"><code>extra_metrics.json</code></a>）依据以下定义和公式自动采集：
+
+- **冷启动开机耗时（`ms`）：**
+  从 `subprocess.Popen` 启动到**同时**满足：服务器在终端输出就绪提示（Pumpkin 为 `"Server is now running"`，Paper 和 Folia 为 `"Done ("`）**并且** TCP 客户端在 `127.0.0.1:25566` 完成三次握手（`connect()`）的单调时钟流逝时间（`time.perf_counter()`）。以 **3 次连续冷启动测试的中位数**（`boot_ms = median((t_tcp_ready - t_spawn) * 1000)`）报告。
+- **关闭耗时（`ms`）：**
+  从向服务器的 `stdin` 管道写入 `stop\n` 起，直到操作系统进程退出终止（`proc.poll() is not None`）的单调时钟流逝时间（`time.perf_counter()`）。
+- **Tick 耗时（`MSPT`、`P50`、`P95`、`P99`，单位 `ms`）与 `TPS`：**
+  在每个 Bot 阶段（`50`、`100`、`150`……），当所有 Bot 完成全部登录和生成流程（`Handshake` -> `LoginStart` -> `ClientInformation` -> `FinishConfiguration` -> `SynchronizePlayerPosition` -> `AcceptTeleportation` -> `PlayerLoaded`）之后，测试套件会等待 **`8.0 秒`（`160` 个 Tick）** 以使服务器进入平稳状态，然后通过 `stdin` 发送 `tick query` 和 `tps` 命令：
+  - **Pumpkin 与 Paper：** 直接从服务器内置的 100-Tick 滚动抽样窗口（`Sample: 100`）中读取 `MSPT`（`每 Tick 平均耗时`）以及 `P50` / `P95` / `P99` 百分位数。当 `MSPT <= 50.0 ms` 时，`TPS = 20.0`；当 `MSPT > 50.0 ms` 时，`TPS = min(reported_tps, 1000.0 / MSPT)`。
+  - **Folia：** 由于 Folia 移除了全局世界 Tick 且不支持 `/tick query`，因此 `TPS`（`区域中位数 TPS`）和各区域 `MSPT` 直接从 Folia 的 `/tps` `Server Health Report` 中读取。
+- **内存占用（`RSS` 与 `PSS`，单位 `MiB`）：**
+  在每个阶段的 `8.0 秒` 稳定等待窗口后，通过 Linux 内核的 `/proc/<pid>/status`（`VmRSS:`，单位 KiB）以及 `/proc/<pid>/smaps_rollup`（`Pss:`，单位 KiB，按比例分摊共享库物理内存）进行采样（`RSS_MiB = VmRSS_KiB / 1024.0`，`PSS_MiB = Pss_KiB / 1024.0`）。
+- **进程 CPU 使用率（占分配 vCPU 的 `%`）：**
+  在所有已连接 Bot 以 20 Hz 持续活动的 **`3.0 秒` 稳态窗口**内，采样 `/proc/<pid>/stat` 的第 14 字段（`utime`，用户态时钟 Tick）和第 15 字段（`stime`，内核态时钟 Tick）（基准时钟频率 `SC_CLK_TCK = 100 Hz`），并按通过 `taskset -c` 绑定的逻辑 CPU 数量（`N_vcpu` 分别为 `{2, 8, 16}`）进行归一化计算：
+  ```text
+  CPU % = (((utime_1 + stime_1) - (utime_0 + stime_0)) / CLK_TCK) / ((t_1 - t_0) * N_vcpu) * 100
+  ```
+- **Bot 运动学与区域数据集：**
+  - **单区域（Tier 1 与 Tier 2）：** 所有 Bot 均在种子 `seed = 42` 的世界出生点生成。
+  - **多区域（Tier 3）：** Bot 预先通过 `<uuid>.dat` 的 `Pos` NBT 标签分配在以 `4 x 2` 网格排列、彼此相距 `8,192` 格（`512` 区块）的 8 个区域中：`(0.5, 120.0, 0.5)`、`(8192.5, 120.0, 0.5)`、`(16384.5, 120.0, 0.5)`、`(24576.5, 120.0, 0.5)`、`(0.5, 120.0, 8192.5)`、`(8192.5, 120.0, 8192.5)`、`(16384.5, 120.0, 8192.5)` 和 `(24576.5, 120.0, 8192.5)`。
+  - **20 Hz 移动循环：** 每隔 `50 ms`，每个编号为 `i` 的 Bot 会在其出生坐标周围半径 `0.10 格` 的圆周上推进角度 `angle += 0.06 rad`（初始角度 `angle_0 = (0.37 * i) % (2 * pi)`），并在启用 `TCP_NODELAY` 的套接字上发送 `SetPlayerPositionAndRotation`（`0x1F`）+ `SwingArm`（`0x0D`）。
+
+::: details 服务器配置文件与可复现数据集
+- **原始 JSON 数据集（多 Tier 的 MSPT、P50/P95/P99、TPS、RSS/PSS）：** <a href="/benchmarks/results_full_tiers.json" target="_blank"><code>/benchmarks/results_full_tiers.json</code></a>
+- **原始 JSON 数据集（进程 CPU %、动态 `-Xms512M` 堆 RSS、关闭耗时、二进制体积）：** <a href="/benchmarks/extra_metrics.json" target="_blank"><code>/benchmarks/extra_metrics.json</code></a>
+- **基准测试套件脚本（Python 3 `asyncio` + `multiprocessing`）：** <a href="/benchmarks/benchmark_suite.py" target="_blank"><code>/benchmarks/benchmark_suite.py</code></a>
+
+**Paper 与 Folia `server.properties`：**
+```ini
+level-seed=42
+view-distance=8
+simulation-distance=8
+online-mode=false
+max-players=2000
+spawn-protection=0
+network-compression-threshold=256
+enforce-secure-profile=false
+pause-when-empty-seconds=-1
+server-port=25566
+```
+
+**Paper 与 Folia `config/paper-global.yml` 及 `bukkit.yml`：**
+```yaml
+# bukkit.yml
+settings:
+  connection-throttle: -1
+
+# config/paper-global.yml
+packet-limiter:
+  all-packets:
+    action: DROP
+    interval: 7.0
+    max-packet-rate: 999999.0
+chunk-loading-advanced:
+  auto-config-send-distance: true
+  player-max-concurrent-chunk-generates: 0
+  player-max-concurrent-chunk-loads: 0
+```
+
+**Pumpkin `pumpkin.toml`（对应匹配字段）：**
+```toml
+seed = "42"
+default_difficulty = "Normal"
+default_gamemode = "Survival"
+tps = 20.0
+spawn_protection = 0
+
+[networking.java]
+enabled = true
+address = "0.0.0.0:25566"
+encryption = false
+online_mode = false
+max_players = 2000
+view_distance = 8
+simulation_distance = 8
+
+[networking.java.compression]
+enabled = true
+threshold = 256
+level = 6
+
+[networking.java.packet_limiter]
+enabled = false
+```
+:::
 
 ---
 
