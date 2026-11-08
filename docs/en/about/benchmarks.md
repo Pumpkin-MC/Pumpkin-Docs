@@ -6,7 +6,7 @@ Here, common Minecraft server software (**Paper** and **Folia**) is compared aga
 > **Feature completeness note:** While Pumpkin implements terrain generation, lighting, chunk loading, mob spawning, AI goals, and entity physics, it does not yet implement every vanilla mechanic. Missing mechanics can reduce baseline overhead compared to mature vanilla forks.
 
 ::: tip Overview
-- **Cold-Start & Shutdown:** Pumpkin boots and accepts TCP connections in **`9.6 ms – 12.9 ms`** (vs. **`3,840 ms – 4,905 ms`** on Paper and Folia) and shuts down cleanly in **`41 ms – 71 ms`** (vs. **`1.2 s – 2.8 s`** on Paper and Folia).
+- **Cold-Start & Shutdown:** Pumpkin boots and accepts TCP connections in **`9.6 ms – 12.9 ms`** (vs. **`3,707 ms – 4,905 ms`** on Paper and Folia) and shuts down cleanly in **`41 ms – 71 ms`** (vs. **`1.2 s – 2.8 s`** on Paper and Folia).
 - **Memory Footprint:** Pumpkin idles at **`60.0 MiB` RAM** and serves **400 – 700 concurrent players in `1.38 GiB – 1.74 GiB` RAM**, compared to **`2.4 GiB – 4.4 GiB` RAM** with a dynamic `-Xms512M` JVM heap or **`10.8 GiB – 11.7 GiB` RAM** with 10 GiB Aikar's Flags on Paper and Folia.
 - **CPU & Tick Efficiency:** At 50 – 300 players in a shared region, Pumpkin uses **2x – 4x less total process CPU** and maintains **2x – 5x lower MSPT** than Paper and Folia, sustaining **`250` players on 2 vCPUs** and **`700+` players on 8 vCPUs** at **20.0 TPS**.
 - **Multi-Region Capacity:** Across 8 regions spaced 8,192 blocks apart, Pumpkin sustains **600 concurrent players at 20.0 TPS (`2.05 GiB` RAM)** vs. **100 players on Paper** while preserving a single global world tick.
@@ -44,6 +44,7 @@ Here, common Minecraft server software (**Paper** and **Folia**) is compared aga
 #### Game
 
 - Minecraft version: 26.3
+- World seed: `42` (normal Overworld terrain)
 - View distance: 8
 - Simulated distance: 8
 - Online mode: false
@@ -56,9 +57,97 @@ Here, common Minecraft server software (**Paper** and **Folia**) is compared aga
 - **Pumpkin:** `0.2.1+26.3` ([commit `bc494ec66`](https://github.com/Pumpkin-MC/Pumpkin/commit/bc494ec664abcf2244bb01897365fef50a05e966), compiled with `--release`)
 - **Paper:** [26.3 build 244](https://papermc.io/downloads/paper)
 - **Folia:** [26.3 build 6](https://papermc.io/downloads/folia) (`threaded-regions.threads: 8` on Tier 3)
-- **Active Mechanics During Test:** Normal Overworld terrain (pre-warmed so disk generation does not skew tick measurements), natural mob spawning and mob AI goals, entity bounding-box collisions, chunk loading (`view-distance = 8`), packet compression (`threshold = 256`), and continuous **20 Hz** player movement (`SetPlayerPositionAndRotation` + `SwingArm`) from every connected bot.
+- **Active Mechanics During Test:** Normal Overworld terrain (`seed = 42`, pre-warmed on disk prior to measurement so initial chunk generation does not skew steady-state tick measurements), natural mob spawning and mob AI goals, entity bounding-box collisions, chunk loading (`view-distance = 8`), packet compression (`threshold = 256`), and continuous **20 Hz** player movement (`SetPlayerPositionAndRotation` + `SwingArm`) from every connected bot.
 - **Hardware Isolation:** The server under test is pinned to physical cores on **CCD0** via `taskset -c` (`0,16` for Tier 1, `0-3,16-19` for Tier 2, `0-7,16-23` for Tier 3), while the 8 client bot worker processes are pinned strictly to **CCD1** (`8-15,24-31`).
 - **JVM Heap Configurations:** Paper and Folia were tested both with [PaperMC's official Aikar's Flags](https://docs.papermc.io/paper/aikars-flags/) (`-Xms10G -Xmx10G -XX:+UseG1GC -XX:+AlwaysPreTouch`) and with a dynamic heap (`-Xms512M -Xmx10G` without `-XX:+AlwaysPreTouch`) to measure unpinned memory usage.
+
+### Method of Calculation & Dataset
+
+Every value in the tables below is collected automatically by the benchmark harness (<a href="/benchmarks/benchmark_suite.py" target="_blank"><code>benchmark_suite.py</code></a>, raw outputs in <a href="/benchmarks/results_full_tiers.json" target="_blank"><code>results_full_tiers.json</code></a> and <a href="/benchmarks/extra_metrics.json" target="_blank"><code>extra_metrics.json</code></a>) using the following definitions and formulas:
+
+- **Cold-Start Boot Time (`ms`):**
+  Monotonic wall-clock elapsed time (`time.perf_counter()`) from `subprocess.Popen` until **both** the server prints its readiness line (`"Server is now running"` on Pumpkin, `"Done ("` on Paper and Folia) **and** a TCP client completes a 3-way handshake (`connect()`) on `127.0.0.1:25566`. Reported as the **median of 3 consecutive cold runs** (`boot_ms = median((t_tcp_ready - t_spawn) * 1000)`).
+- **Shutdown Time (`ms`):**
+  Monotonic wall-clock elapsed time (`time.perf_counter()`) from writing `stop\n` to the server's `stdin` pipe until `proc.poll() is not None` (OS process termination).
+- **Tick Duration (`MSPT`, `P50`, `P95`, `P99` in `ms`) & `TPS`:**
+  At each bot step (`50`, `100`, `150`, ...), after all bots complete the full login and spawn sequence (`Handshake` -> `LoginStart` -> `ClientInformation` -> `FinishConfiguration` -> `SynchronizePlayerPosition` -> `AcceptTeleportation` -> `PlayerLoaded`), the harness waits **`8.0 seconds` (`160` ticks)** for steady-state stabilization before sending `tick query` and `tps` over `stdin`:
+  - **Pumpkin & Paper:** `MSPT` (`Average time per tick`) and `P50` / `P95` / `P99` percentiles are read directly from the server's built-in 100-tick rolling sample window (`Sample: 100`). When `MSPT <= 50.0 ms`, `TPS = 20.0`; when `MSPT > 50.0 ms`, `TPS = min(reported_tps, 1000.0 / MSPT)`.
+  - **Folia:** Because Folia removes the global world tick and does not support `/tick query`, `TPS` (`Median Region TPS`) and per-region `MSPT` are read from Folia's `/tps` `Server Health Report`.
+- **Memory Usage (`RSS` & `PSS` in `MiB`):**
+  Sampled from the Linux kernel's `/proc/<pid>/status` (`VmRSS:` in KiB) and `/proc/<pid>/smaps_rollup` (`Pss:` in KiB, which apportions shared library pages proportionally) after the `8.0 s` stabilization window at each step (`RSS_MiB = VmRSS_KiB / 1024.0`, `PSS_MiB = Pss_KiB / 1024.0`).
+- **Process CPU Usage (`%` of Allocated vCPUs):**
+  Sampled from `/proc/<pid>/stat` fields 14 (`utime`, user-space clock ticks) and 15 (`stime`, kernel-space clock ticks) at `SC_CLK_TCK = 100 Hz` over a **`3.0 s` steady-state window** while all connected bots are actively moving at 20 Hz, normalized by the number of logical CPUs (`N_vcpu` in `{2, 8, 16}`) pinned via `taskset -c`:
+  ```text
+  CPU % = (((utime_1 + stime_1) - (utime_0 + stime_0)) / CLK_TCK) / ((t_1 - t_0) * N_vcpu) * 100
+  ```
+- **Bot Kinematics & Region Dataset:**
+  - **Single-Region (Tier 1 & Tier 2):** All bots spawn at the world spawn in `seed = 42`.
+  - **Multi-Region (Tier 3):** Bots are pre-assigned via `<uuid>.dat` `Pos` NBT tags across 8 regions spaced `8,192` blocks (`512` chunks) apart on a `4 x 2` grid: `(0.5, 120.0, 0.5)`, `(8192.5, 120.0, 0.5)`, `(16384.5, 120.0, 0.5)`, `(24576.5, 120.0, 0.5)`, `(0.5, 120.0, 8192.5)`, `(8192.5, 120.0, 8192.5)`, `(16384.5, 120.0, 8192.5)`, and `(24576.5, 120.0, 8192.5)`.
+  - **20 Hz Movement Loop:** Every `50 ms`, each bot `i` advances its angle `angle += 0.06 rad` (starting from `angle_0 = (0.37 * i) % (2 * pi)`) along a circle of radius `0.10 blocks` around its spawn origin and transmits `SetPlayerPositionAndRotation` (`0x1F`) + `SwingArm` (`0x0D`) with `TCP_NODELAY` enabled.
+
+::: details Server Configuration Files & Reproducible Datasets
+- **Raw JSON Dataset (Multi-Tier MSPT, P50/P95/P99, TPS, RSS/PSS):** <a href="/benchmarks/results_full_tiers.json" target="_blank"><code>/benchmarks/results_full_tiers.json</code></a>
+- **Raw JSON Dataset (Process CPU %, Dynamic `-Xms512M` Heap RSS, Shutdown Time, Binary Sizes):** <a href="/benchmarks/extra_metrics.json" target="_blank"><code>/benchmarks/extra_metrics.json</code></a>
+- **Benchmark Harness Script (Python 3 `asyncio` + `multiprocessing`):** <a href="/benchmarks/benchmark_suite.py" target="_blank"><code>/benchmarks/benchmark_suite.py</code></a>
+
+**Paper & Folia `server.properties`:**
+```ini
+level-seed=42
+view-distance=8
+simulation-distance=8
+online-mode=false
+max-players=2000
+spawn-protection=0
+network-compression-threshold=256
+enforce-secure-profile=false
+pause-when-empty-seconds=-1
+server-port=25566
+```
+
+**Paper & Folia `config/paper-global.yml` & `bukkit.yml`:**
+```yaml
+# bukkit.yml
+settings:
+  connection-throttle: -1
+
+# config/paper-global.yml
+packet-limiter:
+  all-packets:
+    action: DROP
+    interval: 7.0
+    max-packet-rate: 999999.0
+chunk-loading-advanced:
+  auto-config-send-distance: true
+  player-max-concurrent-chunk-generates: 0
+  player-max-concurrent-chunk-loads: 0
+```
+
+**Pumpkin `pumpkin.toml` (matching fields):**
+```toml
+seed = "42"
+default_difficulty = "Normal"
+default_gamemode = "Survival"
+tps = 20.0
+spawn_protection = 0
+
+[networking.java]
+enabled = true
+address = "0.0.0.0:25566"
+encryption = false
+online_mode = false
+max_players = 2000
+view_distance = 8
+simulation_distance = 8
+
+[networking.java.compression]
+enabled = true
+threshold = 256
+level = 6
+
+[networking.java.packet_limiter]
+enabled = false
+```
+:::
 
 ---
 
