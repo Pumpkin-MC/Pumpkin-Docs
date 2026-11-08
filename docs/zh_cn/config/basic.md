@@ -256,6 +256,8 @@ public = false
 - **`use_favicon`**：启用服务器图标（`icon.png`）。
 - **`favicon_path`**：自定义服务器图标的可选文件路径。
 - **`default_level_name`**：主世界目录的名称（默认：`"world"`）。
-- **`allow_chat_reports`**：启用签名聊天举报。
+- **`allow_chat_reports`**：启用签名聊天举报（需要 `networking.java.online_mode = true`）。
 - **`white_list`**：启用服务器白名单。
 - **`enforce_whitelist`**：开启白名单时踢出不在白名单中的玩家。
+- **`accepts_transfers`**：此服务器是否接受来自其他服务器传入的玩家跨服转移（Transfer）（默认：`true`，也接受 `accepts-transfers`）。
+- **`spawn_protection`**：世界出生点周围保护区域的方块半径，在此半径内非管理员权限玩家无法破坏或放置方块。设置为 `0` 可禁用出生点保护（默认：`16`）。

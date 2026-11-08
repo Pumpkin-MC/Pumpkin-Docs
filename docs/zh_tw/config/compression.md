@@ -38,11 +38,14 @@ level = 4
 
 ## 世界區塊壓縮
 
-區塊壓縮設定控制儲存的世界區塊資料在磁碟上的壓縮方式。
+當 `[world.chunk]` 設定為 `type = "anvil"` 時，區塊壓縮設定控制儲存的世界區塊資料在磁碟上的壓縮方式（預設區塊格式為 `"pump"`）。
 
 :::code-group
 
 ```toml [pumpkin.toml]
+[world.chunk]
+type = "anvil"
+
 [world.chunk.compression]
 algorithm = "LZ4"
 level = 6

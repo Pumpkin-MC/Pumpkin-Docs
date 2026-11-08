@@ -11,6 +11,10 @@ export const zhCN = defineConfig({
         },
         nav: [
             {
+                text: "性能基准",
+                link: "/zh_cn/about/benchmarks",
+            },
+            {
                 text: "管理",
                 link: "/zh_cn/admin/introduction",
             },
@@ -31,6 +35,7 @@ export const zhCN = defineConfig({
             {
                 text: "关于",
                 items: [
+                    { text: "性能基准", link: "/zh_cn/about/benchmarks" },
                     { text: "帮助与捐赠", link: "/zh_cn/about/helping" },
                 ],
             },
@@ -60,9 +65,10 @@ export const zhCN = defineConfig({
                             { text: "玩家数据", link: "/zh_cn/config/player-data" },
                             { text: "日志", link: "/zh_cn/config/logging" },
                             { text: "Query", link: "/zh_cn/config/query" },
-                            { text: "RCON", link: "/zh_cn/config/rcon" },
+                            { text: "管理服务器 (MSMP)", link: "/zh_cn/config/management" },
                             { text: "PVP", link: "/zh_cn/config/pvp" },
                             { text: "局域网广播", link: "/zh_cn/config/lan-broadcast" },
+                            { text: "遥测", link: "/zh_cn/config/telemetry" },
                         ],
                     },
                 ],

@@ -29,7 +29,7 @@ enabled = false
 - **`use_console`**：是否接受来自控制台的命令。
 - **`use_tty`**：是否为交互式控制台输入启用 TTY 支持（rustyline）。
 - **`log_console`**：是否将玩家执行的命令记录到控制台。
-- **`broadcast_console_to_ops`**：是否将控制台和 RCON 命令输出广播给在线管理员（与原版 `broadcast-console-to-ops` 一致）。
+- **`broadcast_console_to_ops`**：是否将控制台命令输出广播给在线管理员（与原版 `broadcast-console-to-ops` 一致）。
 - **`default_op_level`**：分配给非管理员的 OP 权限等级（0 到 4，默认：`0`）。
 
 ## 命令覆盖设置

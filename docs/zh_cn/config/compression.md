@@ -38,11 +38,14 @@ level = 4
 
 ## 世界区块压缩
 
-区块压缩设置控制存储的世界区块数据在磁盘上的压缩方式。
+当 `[world.chunk]` 配置为 `type = "anvil"` 时，区块压缩设置控制存储的世界区块数据在磁盘上的压缩方式（默认区块格式为 `"pump"`）。
 
 :::code-group
 
 ```toml [pumpkin.toml]
+[world.chunk]
+type = "anvil"
+
 [world.chunk.compression]
 algorithm = "LZ4"
 level = 6

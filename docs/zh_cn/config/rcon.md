@@ -1,37 +1,27 @@
-# RCON
+# 管理服务器 (MSMP) / RCON
 
-RCON 允许你通过网络连接远程管理 Pumpkin 服务器。在 `pumpkin.toml` 中，相关设置位于 `[networking.rcon]` 下。
+> [!WARNING]
+> 传统的 RCON（`[networking.rcon]`）已被 `[networking.management]` 下的 [Minecraft 服务器管理协议 (MSMP)](./management) 所取代。
 
 ## 配置
 
 :::code-group
 
 ```toml [pumpkin.toml]
-[networking.rcon]
+[networking.management]
 enabled = false
-address = "0.0.0.0:25575"
-password = ""
-max_connections = 10
-
-[networking.rcon.logging]
-logged_successfully = true
-wrong_password = true
-commands = true
-quit = true
+address = "127.0.0.1:25585"
+secret = ""
+allowed_origins = []
+status_heartbeat_interval = 0
 ```
 
 :::
 
-### RCON 设置
+### 管理服务器设置
 
-- **`enabled`**：启用 RCON 服务的总开关。
-- **`address`**：RCON 服务器绑定的 IP 地址和端口。
-- **`password`**：RCON 客户端身份验证所需的密码。
-- **`max_connections`**：允许的最大并发 RCON 客户端连接数。
-
-### RCON 日志设置
-
-- **`logged_successfully`**：记录客户端身份验证成功事件。
-- **`wrong_password`**：记录身份验证失败尝试（密码错误）。
-- **`commands`**：记录通过 RCON 执行的命令。
-- **`quit`**：记录客户端断开连接事件。
+- **`enabled`**：启用 Minecraft 服务器管理协议 (MSMP) WebSocket 服务的总开关（默认：`false`）。
+- **`address`**：管理服务器监听 WebSocket 连接的 IP 地址和端口（默认：`"127.0.0.1:25585"`）。
+- **`secret`**：用于验证管理客户端身份的 40 位字母数字密钥。如果在启动时留空（`""`），系统将自动生成一个随机的 40 位密钥。
+- **`allowed_origins`**：允许通过 Web 浏览器连接的来源列表，通过 `Origin` HTTP 头进行验证（默认：`[]`）。
+- **`status_heartbeat_interval`**：自动广播服务器状态心跳的时间间隔（秒）（`0` 表示禁用心跳广播，默认：`0`）。

@@ -34,7 +34,7 @@ force = false
 enabled = false
 force = false
 packs = [
-  # { uuid = "00000000-0000-0000-0000-000000000000", version = "1.0.0", size = 1048576, download_url = "https://example.com/pack.mcpack" }
+  # { uuid = "00000000-0000-0000-0000-000000000000", version = "1.0.0", size = 1048576, download_url = "https://example.com/pack.mcpack", path = "resource_packs/pack.mcpack" }
 ]
 ```
 
@@ -53,7 +53,8 @@ packs = [
 - **`uuid`**：（必需）与基岩版资源包 `manifest.json` 匹配的唯一标识符（UUID）。
 - **`version`**：（必需）资源包的版本字符串（例如 `"1.0.0"`）。
 - **`size`**：（必需）资源包归档文件的大小，单位为字节。
-- **`download_url`**：（必需）`.mcpack` 或归档文件的直接下载 URL。
+- **`download_url`**：（必需）`.mcpack` 或归档文件的直接下载 URL（从服务器直接分块流式传输本地资源包时可留空 `""`）。
+- **`path`**：（可选）服务器上本地资源包归档文件（`.mcpack` 或 `.zip`）的文件系统路径。当设置此项时（或当 `resource_packs/<uuid>_<version>.mcpack`、`resource_packs/<uuid>_<version>.zip`、`resource_packs/<uuid>.mcpack` 或 `resource_packs/<uuid>.zip` 存在匹配文件时），Pumpkin 将直接把该资源包分块流式传输给连接的基岩版客户端。
 - **`content_key`**：（可选）加密的商城/自定义资源包的解密密钥。
 - **`sub_pack_name`**：（可选）资源包内要启用的子包名称。
 - **`content_id`**：（可选）内容标识符字符串。

@@ -11,6 +11,10 @@ export const zhTW = defineConfig({
         },
         nav: [
             {
+                text: "效能基準",
+                link: "/zh_tw/about/benchmarks",
+            },
+            {
                 text: "管理",
                 link: "/zh_tw/admin/introduction",
             },
@@ -31,6 +35,7 @@ export const zhTW = defineConfig({
             {
                 text: "關於",
                 items: [
+                    { text: "效能基準", link: "/zh_tw/about/benchmarks" },
                     { text: "幫助與捐贈", link: "/zh_tw/about/helping" },
                 ],
             },
@@ -60,9 +65,10 @@ export const zhTW = defineConfig({
                             { text: "玩家資料", link: "/zh_tw/config/player-data" },
                             { text: "日誌", link: "/zh_tw/config/logging" },
                             { text: "Query", link: "/zh_tw/config/query" },
-                            { text: "RCON", link: "/zh_tw/config/rcon" },
+                            { text: "管理伺服器 (MSMP)", link: "/zh_tw/config/management" },
                             { text: "PVP", link: "/zh_tw/config/pvp" },
                             { text: "區域網廣播", link: "/zh_tw/config/lan-broadcast" },
+                            { text: "遙測", link: "/zh_tw/config/telemetry" },
                         ],
                     },
                 ],

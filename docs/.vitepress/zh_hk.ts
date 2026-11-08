@@ -11,6 +11,10 @@ export const zhHK = defineConfig({
         },
         nav: [
             {
+                text: "效能基準",
+                link: "/zh_hk/about/benchmarks",
+            },
+            {
                 text: "管理",
                 link: "/zh_hk/admin/introduction",
             },
@@ -31,6 +35,7 @@ export const zhHK = defineConfig({
             {
                 text: "關於",
                 items: [
+                    { text: "效能基準", link: "/zh_hk/about/benchmarks" },
                     { text: "幫助與捐贈", link: "/zh_hk/about/helping" },
                 ],
             },
@@ -60,9 +65,10 @@ export const zhHK = defineConfig({
                             { text: "玩家資料", link: "/zh_hk/config/player-data" },
                             { text: "日誌", link: "/zh_hk/config/logging" },
                             { text: "Query", link: "/zh_hk/config/query" },
-                            { text: "RCON", link: "/zh_hk/config/rcon" },
+                            { text: "管理伺服器 (MSMP)", link: "/zh_hk/config/management" },
                             { text: "PVP", link: "/zh_hk/config/pvp" },
                             { text: "區域網廣播", link: "/zh_hk/config/lan-broadcast" },
+                            { text: "遙測", link: "/zh_hk/config/telemetry" },
                         ],
                     },
                 ],
