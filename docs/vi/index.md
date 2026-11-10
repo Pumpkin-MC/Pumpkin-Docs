@@ -3,6 +3,15 @@
 **Trạng thái hiện tại:**
 Tiền phát hành: Hiện đang trong quá trình phát triển và chưa sẵn sàng cho phát hành chính thức.
 
+::: tip Benchmark: Pumpkin vs. Paper vs. Folia (MC 26.3)
+- **Thời gian khởi động lạnh:** **`9.6 ms – 12.9 ms`** trên Pumpkin so với **`4,650 ms – 4,905 ms`** trên Paper & Folia (**nhanh hơn ~380x – 480x**).
+- **Dung lượng bộ nhớ:** **`60 MiB` khi rảnh** và **`1.42 GiB – 1.78 GiB` với 400 – 700 người chơi cùng lúc** trên Pumpkin so với **`10.8 GiB – 11.7 GiB`** trên Paper & Folia (cờ 10G của Aikar).
+- **Dung lượng đơn vùng (20.0 TPS):** **`250 người chơi`** trên 1 lõi / 2 vCPU (so với `150` trên Paper & Folia) và **`700+ người chơi`** (`13.17 ms` MSPT ở 300; `18.89 ms` ở 400) trên 4 lõi / 8 vCPU (so với **`300 người chơi`** trên Paper & Folia).
+- **Dung lượng đa vùng (8 Vùng @ 20.0 TPS):** **`600 người chơi`** (`42.79 ms` MSPT, `2.05 GiB` RAM) trên Pumpkin so với **`100 người chơi`** (`30.10 ms` MSPT, `11.26 GiB` RAM) trên Paper (**gấp 6 lần dung lượng của Paper** với một tick thế giới toàn cầu thống nhất).
+
+Đọc đầy đủ **[Benchmark](/about/benchmarks)** có thể tái tạo.
+:::
+
 ## Tải xuống tệp thực thi cho phiên bản Tiền phát hành
 
 Bạn có thể tải xuống tệp nhị phân được biên dịch trước tại [Trang tải xuống Tiền phát hành](https://pumpkinmc.org/download)
