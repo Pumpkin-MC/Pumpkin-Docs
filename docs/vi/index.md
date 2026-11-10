@@ -22,7 +22,7 @@ cd Pumpkin
 
 3. Chạy:
 
-> [!CHÚ Ý]
+> [!NOTE]
 > Quá trình biên dịch có thể mất 1 lúc, do tối ưu hóa hạng nặng cho quá trình dựng phiên bản.
 
 ```shell
@@ -35,7 +35,7 @@ cargo run --release
 RUSTFLAGS='-C target-cpu=native' cargo run --release
 ```
 
-> [!CHÚ Ý]
+> [!NOTE]
 > Để sử dụng (chơi ở trên) một máy chủ bạn đang tự host ở trên cùng một hệ thống cục bộ (ví dụ: sử dụng Prism Launcher trên Linux để đăng nhập và chạy/chơi Minecraft và sử dụng Pumpkin để host máy chủ), bạn cần sử dụng "localhost:25565" là địa chỉ máy chủ thông qua giao diện 'Chơi nhiều người' -> 'Tạo máy chủ' -> 'Địa chỉ máy chủ' vì địa chỉ đó không được liệt kê trong đầu ra của máy chủ trong giao diện dòng lệnh.
 ```text
 localhost:25565
@@ -44,9 +44,9 @@ localhost:25565
 ## Docker
 
 > [!IMPORTANT]
-> Docker support is currently experimental.
+> Việc hỗ trợ Docker hiện tại đang là thử nghiệm.
 
-If you haven't already, you need to [install Docker](https://docs.docker.com/engine/install/). After installing Docker, you can run the following command to start the server:
+Nếu bạn chưa có, bạn cần phải [cài đặt Docker](https://docs.docker.com/engine/install/). Sau khi cài đặt Docker, bạn có thể chạy lệnh sau để khởi động máy chủ:
 
 ```shell
 docker run --rm \
@@ -55,12 +55,12 @@ docker run --rm \
     -it ghcr.io/pumpkin-mc/pumpkin:master
 ```
 
-- `<exposed_port>`: The port you want to connect to Pumpkin with, for example `25565`.
-- `<server_data_location>`: The location where you want your server config and data to be stored, for example `./data`.
+- `<exposed_port>`: Là cổng mà bạn muốn kết nối đến Pumpkin, ví dụ `25565`
+- `<server_data_location>`: Là chỗ mà bạn muốn lưu cấu hình máy chủ và dữ liệu của bạn, ví dụ `./data`
 
-### Example
+### Ví dụ
 
-To run Pumpkin on port `25565` and store data in a directory called `./data`, you would run the following command:
+Để chạy Pumpkin trên cổng `25565` và lưu trữ ở thư mục `./data`, bạn sẽ chạy lệnh sau:
 
 ```shell
 docker run --rm \
@@ -71,17 +71,17 @@ docker run --rm \
 
 ## Nix / NixOS
 
-Pumpkin is available in [nixpkgs](https://github.com/NixOS/nixpkgs) (maintained by [@DerGrumpf](https://github.com/DerGrumpf)) as the `pumpkin-mc` package, along with a `services.pumpkin-mc` NixOS module for running it as a systemd service.
+Pumpkin hiện đang khả dụng tại [nixpkgs](https://github.com/NixOS/nixpkgs) (được duy trì bởi [@DerGrumpf](https://github.com/DerGrumpf)) dưới tên gói `pumpkin-mc`, đi kèm với module NixOS `services.pumpkin-mc` để chạy nó giống như 1 dịch vụ systemd.
 
-### Try it without installing
+### Thử mà không cần cài đặt
 
 ```shell
 nix run nixpkgs#pumpkin-mc
 ```
 
-### NixOS module
+### Module NixOS 
 
-Add the following to your `configuration.nix`:
+Thêm cái này vào tệp `configuration.nix` của bạn:
 
 ```nix
 services.pumpkin-mc = {
@@ -90,26 +90,24 @@ services.pumpkin-mc = {
 };
 ```
 
-This runs Pumpkin as a hardened systemd service (`DynamicUser`, `ProtectSystem = "strict"`, no extra capabilities) under `/var/lib/pumpkin-mc`. The module exposes typed options for most of `pumpkin.toml`. Java/Bedrock/RCON/query/proxy networking, whitelist, world storage, logging, PvP, and more, plus a `settings` freeform option for anything not yet covered.
+Cái này chạy Pumpkin như một dịch vụ systemd được bảo vệ (`DynamicUser`, `ProtectSystem = "strict"`, không có quyền bổ sung) dưới `/var/lib/pumpkin-mc`. Module cung cấp các tuỳ chọn kiểu cho hầu hết `pumpkin.toml`. Nó hỗ trợ mạng Java/Bedrock/RCON/query/proxy, danh sách trắng, lưu trữ thế giới, ghi log, PvP và nhiều thứ khác, cộng với một tuỳ chọn `settings` tự do cho bất cứ thứ gì chưa được bao phủ.
 
 > [!NOTE]
-> RCON passwords and Velocity forwarding secrets are read from files at service start (via `rcon.passwordFile` / `proxy.velocity.secretFile`) rather than stored in the Nix store, so they work with secret managers like `sops-nix` or `agenix`.
+> Mật khẩu RCON và giá trị chuyển hướng bí mật của Velocity được đọc từ file khi dịch vụ khởi động (thông qua `rcon.passwordFile` / `proxy.velocity.secretFile`) thay vì lưu trong Nix store, nên chúng có thể hoạt động với các trình quản lý bí mật như `sops-nix` hoặc `agenix`.
 
-See the [module source](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/games/pumpkin-mc.nix) for the full list of options, or run:
-
+Xem [mã nguồn module](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/games/pumpkin-mc.nix) để có đủ danh sách tùy chọn, hoặc chạy:
 ```shell
 nixos-option services.pumpkin-mc
 ```
 
-## Test Server
+## Máy chủ thử nghiệm
 
-Pumpkin has a test server maintained by @kralverde. Its runs on the latest commit of Pumpkin's master branch.
-
+Pumpkin có 1 máy chủ thử nghiệm được duy trì bởi @kralverde. Nó luôn chạy trên commit mới nhất của nhánh master của Pumpkin. 
 - **IP:** pumpkin.kralverde.dev
 
-**Specs:**
+**Cấu hình:**
 
 - OS: Debian GNU/Linux bookworm 12.7 x86_64
 - Kernel: Linux 6.1.0-21-cloud-amd64
-- CPU: Intel Core (Haswell, no TSX) (2) @ 2.40 GHz
+- CPU: Intel Core (Haswell, không TSX) (2) @ 2.40 GHz
 - RAM: 4GB DIMM
