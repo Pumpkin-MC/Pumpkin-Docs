@@ -38,11 +38,14 @@ level = 4
 
 ## World Chunk Compression
 
-Chunk compression settings control how stored world chunk data is compressed on disk.
+Chunk compression settings control how stored world chunk data is compressed on disk when `[world.chunk]` is configured with `type = "anvil"` (the default chunk format is `"pump"`).
 
 :::code-group
 
 ```toml [pumpkin.toml]
+[world.chunk]
+type = "anvil"
+
 [world.chunk.compression]
 algorithm = "LZ4"
 level = 6

@@ -3,6 +3,15 @@
 **Current Status:**
 Pre-release: Currently under development and not yet ready for official release.
 
+::: tip Benchmarks: Pumpkin vs. Paper vs. Folia (MC 26.3)
+- **Cold-Start Boot Time:** **`9.6 ms – 12.9 ms`** on Pumpkin vs. **`4,650 ms – 4,905 ms`** on Paper & Folia (**~380x – 480x faster**).
+- **Memory Footprint:** **`60 MiB` idle** and **`1.42 GiB – 1.78 GiB` at 400 – 700 concurrent players** on Pumpkin vs. **`10.8 GiB – 11.7 GiB`** on Paper & Folia (Aikar's 10G flags).
+- **Single-Region Capacity (20.0 TPS):** **`250 players`** on 1 core / 2 vCPUs (vs. `150` on Paper & Folia) and **`700+ players`** (`13.17 ms` MSPT at 300; `18.89 ms` at 400) on 4 cores / 8 vCPUs (vs. **`300 players`** on Paper & Folia).
+- **Multi-Region Capacity (8 Regions @ 20.0 TPS):** **`600 players`** (`42.79 ms` MSPT, `2.05 GiB` RAM) on Pumpkin vs. **`100 players`** (`30.10 ms` MSPT, `11.26 GiB` RAM) on Paper (**6x Paper's capacity** with a unified global world tick).
+
+Read the full reproducible **[Benchmarks](/about/benchmarks)**.
+:::
+
 ## Download Pre-Release binaries
 
 You can download pre-built binaries on the [Pre-release Download Page](https://pumpkinmc.org/download)

@@ -24,6 +24,8 @@ default_level_name = "world"
 allow_chat_reports = false
 white_list = false
 enforce_whitelist = false
+accepts_transfers = true
+spawn_protection = 16
 
 [logging]
 enabled = true
@@ -53,28 +55,22 @@ lighting = "default"
 autosave_ticks = 6000
 
 [world.chunk]
-type = "anvil"
-write_in_place = false
+type = "pump"
 
-[world.chunk.compression]
-algorithm = "LZ4"
-level = 6
+[world.entity_islands]
+unaudited_reach = 16.0
+knockback_reach = 4.0
 
 [networking.query]
 enabled = false
 address = "0.0.0.0:25565"
 
-[networking.rcon]
+[networking.management]
 enabled = false
-address = "0.0.0.0:25575"
-password = ""
-max_connections = 10
-
-[networking.rcon.logging]
-logged_successfully = true
-wrong_password = true
-commands = true
-quit = true
+address = "127.0.0.1:25585"
+secret = ""
+allowed_origins = []
+status_heartbeat_interval = 0
 
 [networking.proxy]
 enabled = false
@@ -85,6 +81,11 @@ secret = ""
 
 [networking.proxy.bungeecord]
 enabled = false
+secret = ""
+
+[networking.proxy.vine]
+enabled = false
+public_key = ""
 secret = ""
 
 [networking.lan_broadcast]
@@ -159,6 +160,7 @@ read_timeout = 5000
 [networking.bedrock.nethernet]
 enabled = true
 address = "0.0.0.0:19132"
+external_ip = ""
 identity_key = "nethernet-key.der"
 stun_servers = []
 
@@ -233,6 +235,12 @@ verify_signatures = true
 
 [advancement]
 save_advancements = true
+
+[telemetry]
+enabled = true
+endpoint = "https://market.pumpkinmc.org/api/v1/rest/telemetry/heartbeat"
+interval_secs = 300
+public = false
 ```
 
 :::

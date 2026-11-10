@@ -29,7 +29,7 @@ enabled = false
 - **`use_console`**: Whether commands from the console are accepted.
 - **`use_tty`**: Whether TTY support (rustyline) is enabled for interactive console input.
 - **`log_console`**: Whether commands executed by players are logged to the console.
-- **`broadcast_console_to_ops`**: Whether console and RCON command output is broadcast to online operators (matches vanilla `broadcast-console-to-ops`).
+- **`broadcast_console_to_ops`**: Whether console command output is broadcast to online operators (matches vanilla `broadcast-console-to-ops`).
 - **`default_op_level`**: The OP permission level assigned to non-operators (0 to 4, default: `0`).
 
 ## Command Overrides

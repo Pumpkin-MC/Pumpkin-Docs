@@ -21,6 +21,7 @@ chunk_caching = true
 [networking.bedrock.nethernet]
 enabled = true
 address = "0.0.0.0:19132"
+external_ip = ""
 identity_key = "nethernet-key.der"
 stun_servers = []
 ```
@@ -32,7 +33,7 @@ stun_servers = []
 - **`enabled`**: Whether connections from Bedrock Edition clients are accepted (default: `true`).
 - **`online_mode`**: Whether Xbox Live authentication is enforced for Bedrock players (default: `true`).
 - **`max_players`**: Maximum number of concurrent Bedrock players (`0` disables the limit, default: `1000`).
-- **`view_distance`**: Maximum chunk view distance sent to Bedrock clients (default: `16`).
+- **`view_distance`**: Maximum chunk view distance sent to Bedrock clients (`2` to `64`, default: `16`).
 - **`simulation_distance`**: Maximum tick simulation distance for Bedrock players (default: `10`).
 - **`motd`**: Message of the Day displayed in the Bedrock server list.
 - **`username_prefix`**: Optional prefix prepended to Bedrock player gamertags (e.g. `"."` or `"*"`), preventing name collisions with Java Edition accounts on cross-play servers (default: `""`).
@@ -45,6 +46,6 @@ NetherNet is Minecraft Bedrock's modern WebRTC/ICE networking transport:
 
 - **`enabled`**: Whether clients may connect using NetherNet (default: `true`).
 - **`address`**: Network socket address for TCP signaling and UDP ICE multiplexing (default: `"0.0.0.0:19132"`).
-- **`external_ip`**: Optional public IP address advertised when the server is hosted behind NAT.
+- **`external_ip`**: Optional public IP address advertised when the server is hosted behind NAT (default: `""` for automatic detection).
 - **`identity_key`**: File path to the PKCS#8 P-384 private identity key file retained across restarts for client Trust On First Use (TOFU) (default: `"nethernet-key.der"`).
 - **`stun_servers`**: Optional list of STUN server URLs for ICE NAT traversal.

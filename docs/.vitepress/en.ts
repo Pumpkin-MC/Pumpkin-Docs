@@ -12,6 +12,10 @@ export const en = defineConfig({
         },
         nav: [
             {
+                text: "Benchmarks",
+                link: "/about/benchmarks",
+            },
+            {
                 text: "Administration",
                 link: "/admin/introduction",
             },
@@ -32,6 +36,7 @@ export const en = defineConfig({
             {
                 text: "About",
                 items: [
+                    { text: "Benchmarks", link: "/about/benchmarks" },
                     { text: "Helping & Donating", link: "/about/helping" },
                 ],
             },
@@ -61,9 +66,10 @@ export const en = defineConfig({
                             { text: "Player Data", link: "/config/player-data" },
                             { text: "Logging", link: "/config/logging" },
                             { text: "Query", link: "/config/query" },
-                            { text: "RCON", link: "/config/rcon" },
+                            { text: "Management (MSMP)", link: "/config/management" },
                             { text: "PVP", link: "/config/pvp" },
                             { text: "LAN Broadcast", link: "/config/lan-broadcast" },
+                            { text: "Telemetry", link: "/config/telemetry" },
                         ],
                     },
                 ],

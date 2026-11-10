@@ -1,37 +1,27 @@
-# RCON
+# Management Server (MSMP) / RCON
 
-RCON allows remote administration of your Pumpkin server over a network connection. In `pumpkin.toml`, settings are placed under `[networking.rcon]`.
+> [!WARNING]
+> Legacy RCON (`[networking.rcon]`) has been replaced by the [Minecraft Server Management Protocol (MSMP)](./management) under `[networking.management]`.
 
 ## Configuration
 
 :::code-group
 
 ```toml [pumpkin.toml]
-[networking.rcon]
+[networking.management]
 enabled = false
-address = "0.0.0.0:25575"
-password = ""
-max_connections = 10
-
-[networking.rcon.logging]
-logged_successfully = true
-wrong_password = true
-commands = true
-quit = true
+address = "127.0.0.1:25585"
+secret = ""
+allowed_origins = []
+status_heartbeat_interval = 0
 ```
 
 :::
 
-### RCON Settings
+### Management Server Settings
 
-- **`enabled`**: Master switch to enable RCON service.
-- **`address`**: IP address and port to bind RCON server to.
-- **`password`**: Password required for authenticating RCON clients.
-- **`max_connections`**: Maximum concurrent RCON client connections allowed.
-
-### RCON Logging Settings
-
-- **`logged_successfully`**: Log successful client authentication events.
-- **`wrong_password`**: Log failed authentication attempts (wrong password).
-- **`commands`**: Log commands executed through RCON.
-- **`quit`**: Log client disconnection events.
+- **`enabled`**: Master switch to enable the Minecraft Server Management Protocol (MSMP) WebSocket service (default: `false`).
+- **`address`**: IP address and port where the management server listens for WebSocket connections (default: `"127.0.0.1:25585"`).
+- **`secret`**: 40-character alphanumeric secret required for authenticating management clients. If left empty (`""`) on startup, a random 40-character secret is automatically generated.
+- **`allowed_origins`**: List of allowed origins for web browser connections validated via the `Origin` HTTP header (default: `[]`).
+- **`status_heartbeat_interval`**: Interval in seconds between automatic server status heartbeat broadcasts (`0` disables heartbeats, default: `0`).
