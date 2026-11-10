@@ -13,19 +13,19 @@ export const vi = defineConfig({
         nav: [
             {
                 text: "Đánh giá hiệu năng",
-                link: "/about/benchmarks",
+                link: "/vi/about/benchmarks",
             },
             {
                 text: "Quản trị",
-                link: "/admin/introduction",
+                link: "/vi/admin/introduction",
             },
             {
                 text: "Người đóng góp",
-                link: "/developer/introduction",
+                link: "/vi/developer/introduction",
             },
             {
                 text: "Plugins",
-                link: "/plugin-dev/introduction",
+                link: "/vi/plugin-dev/introduction",
             },
             {
                 text: "Website",
@@ -36,40 +36,40 @@ export const vi = defineConfig({
             {
                 text: "Giới thiệu",
                 items: [
-                    { text: "Đánh giá hiệu năng", link: "/about/benchmarks" },
-                    { text: "Giúp đỡ & Ủng hộ", link: "/about/helping" },
+                    { text: "Đánh giá hiệu năng", link: "/vi/about/benchmarks" },
+                    { text: "Giúp đỡ & Ủng hộ", link: "/vi/about/helping" },
                 ],
             },
             {
                 text: "Quản trị",
                 collapsed: false,
                 items: [
-                    { text: "Tổng quan", link: "/admin/introduction" },
-                    { text: "Chuyển từ Bukkit", link: "/admin/migrating-from-bukkit" },
+                    { text: "Tổng quan", link: "/vi/admin/introduction" },
+                    { text: "Chuyển từ Bukkit", link: "/vi/admin/migrating-from-bukkit" },
                     {
                         text: "Cấu hình",
                         collapsed: true,
                         items: [
-                            { text: "Giới thiệu", link: "/config/introduction" },
-                            { text: "Cơ bản", link: "/config/basic" },
-                            { text: "Thế giới", link: "/config/world" },
-                            { text: "Chat & Chống Spam", link: "/config/chat" },
-                            { text: "Lệnh (Commands)", link: "/config/commands" },
-                            { text: "Bedrock & NetherNet", link: "/config/bedrock" },
-                            { text: "Proxy", link: "/config/proxy" },
-                            { text: "Xác thực", link: "/config/authentication" },
-                            { text: "Giới hạn gói tin (Packet Limiter)", link: "/config/packet-limiter" },
-                            { text: "Nén dữ liệu", link: "/config/compression" },
-                            { text: "Gói tài nguyên (Resource Pack)", link: "/config/resource-pack" },
-                            { text: "Plugins", link: "/config/plugins" },
-                            { text: "Liên kết máy chủ", link: "/config/server-links" },
-                            { text: "Dữ liệu người chơi", link: "/config/player-data" },
-                            { text: "Nhật ký (Logging)", link: "/config/logging" },
-                            { text: "Query", link: "/config/query" },
-                            { text: "Quản lý (MSMP)", link: "/config/management" },
-                            { text: "PVP", link: "/config/pvp" },
-                            { text: "Phát sóng mạng LAN", link: "/config/lan-broadcast" },
-                            { text: "Thu thập dữ liệu đo từ xa (Telemetry)", link: "/config/telemetry" },
+                            { text: "Giới thiệu", link: "/vi/config/introduction" },
+                            { text: "Cơ bản", link: "/vi/config/basic" },
+                            { text: "Thế giới", link: "/vi/config/world" },
+                            { text: "Chat & Chống Spam", link: "/vi/config/chat" },
+                            { text: "Lệnh (Commands)", link: "/vi/config/commands" },
+                            { text: "Bedrock & NetherNet", link: "/vi/config/bedrock" },
+                            { text: "Proxy", link: "/vi/config/proxy" },
+                            { text: "Xác thực", link: "/vi/config/authentication" },
+                            { text: "Giới hạn gói tin (Packet Limiter)", link: "/vi/config/packet-limiter" },
+                            { text: "Nén dữ liệu", link: "/vi/config/compression" },
+                            { text: "Gói tài nguyên (Resource Pack)", link: "/vi/config/resource-pack" },
+                            { text: "Plugins", link: "/vi/config/plugins" },
+                            { text: "Liên kết máy chủ", link: "/vi/config/server-links" },
+                            { text: "Dữ liệu người chơi", link: "/vi/config/player-data" },
+                            { text: "Nhật ký (Logging)", link: "/vi/config/logging" },
+                            { text: "Query", link: "/vi/config/query" },
+                            { text: "Quản lý (MSMP)", link: "/vi/config/management" },
+                            { text: "PVP", link: "/vi/config/pvp" },
+                            { text: "Phát sóng mạng LAN", link: "/vi/config/lan-broadcast" },
+                            { text: "Thu thập dữ liệu đo từ xa (Telemetry)", link: "/vi/config/telemetry" },
                         ],
                     },
                 ],
@@ -77,23 +77,23 @@ export const vi = defineConfig({
             {
                 text: "Người đóng góp",
                 items: [
-                    { text: "Giới thiệu", link: "/developer/introduction" },
-                    { text: "Hướng dẫn đóng góp", link: "/developer/contributing" },
-                    { text: "Kiến trúc", link: "/developer/architecture" },
-                    { text: "Trích xuất dữ liệu (Data Extractor)", link: "/developer/extractor" },
-                    { text: "Tạo mã nguồn (Code Generation)", link: "/developer/codegen" },
-                    { text: "Chuyển giao phiên bản (Porting Versions)", link: "/developer/porting-versions" },
+                    { text: "Giới thiệu", link: "/vi/developer/introduction" },
+                    { text: "Hướng dẫn đóng góp", link: "/vi/developer/contributing" },
+                    { text: "Kiến trúc", link: "/vi/developer/architecture" },
+                    { text: "Trích xuất dữ liệu (Data Extractor)", link: "/vi/developer/extractor" },
+                    { text: "Tạo mã nguồn (Code Generation)", link: "/vi/developer/codegen" },
+                    { text: "Chuyển giao phiên bản (Porting Versions)", link: "/vi/developer/porting-versions" },
                     {
                         text: "Mạng (Networking)",
                         collapsed: true,
                         items: [
                             {
                                 text: "Giới thiệu",
-                                link: "/developer/networking/",
+                                link: "/vi/developer/networking/",
                             },
                             {
                                 text: "Metadata & Dữ liệu đồng bộ",
-                                link: "/developer/networking/metadata",
+                                link: "/vi/developer/networking/metadata",
                             },
                             {
                                 text: "Phiên bản Java (Java Edition)",
@@ -101,15 +101,15 @@ export const vi = defineConfig({
                                 items: [
                                     {
                                         text: "Tổng quan",
-                                        link: "/developer/networking/java/overview",
+                                        link: "/vi/developer/networking/java/overview",
                                     },
                                     {
                                         text: "Thêm một gói tin (Packet)",
-                                        link: "/developer/networking/java/adding-packets",
+                                        link: "/vi/developer/networking/java/adding-packets",
                                     },
                                     {
                                         text: "Xác thực",
-                                        link: "/developer/networking/java/authentication",
+                                        link: "/vi/developer/networking/java/authentication",
                                     },
                                 ],
                             },
@@ -119,19 +119,19 @@ export const vi = defineConfig({
                                 items: [
                                     {
                                         text: "Tổng quan",
-                                        link: "/developer/networking/bedrock/overview",
+                                        link: "/vi/developer/networking/bedrock/overview",
                                     },
                                     {
                                         text: "Thêm một gói tin (Packet)",
-                                        link: "/developer/networking/bedrock/adding-packets",
+                                        link: "/vi/developer/networking/bedrock/adding-packets",
                                     },
                                     {
                                         text: "Xác thực",
-                                        link: "/developer/networking/bedrock/authentication",
+                                        link: "/vi/developer/networking/bedrock/authentication",
                                     },
                                     {
                                         text: "NetherNet",
-                                        link: "/developer/networking/bedrock/nethernet",
+                                        link: "/vi/developer/networking/bedrock/nethernet",
                                     },
                                 ],
                             },
@@ -141,29 +141,29 @@ export const vi = defineConfig({
                                 items: [
                                     {
                                         text: "Tổng quan",
-                                        link: "/developer/networking/proxy/",
+                                        link: "/vi/developer/networking/proxy/",
                                     },
                                     {
                                         text: "BungeeCord",
-                                        link: "/developer/networking/proxy/bungeecord",
+                                        link: "/vi/developer/networking/proxy/bungeecord",
                                     },
                                     {
                                         text: "Velocity",
-                                        link: "/developer/networking/proxy/velocity",
+                                        link: "/vi/developer/networking/proxy/velocity",
                                     },
                                     {
                                         text: "Vine",
-                                        link: "/developer/networking/proxy/vine",
+                                        link: "/vi/developer/networking/proxy/vine",
                                     },
                                 ],
                             },
                             {
                                 text: "Query (GameSpy4)",
-                                link: "/developer/networking/query",
+                                link: "/vi/developer/networking/query",
                             },
                             {
                                 text: "RCON",
-                                link: "/developer/networking/rcon",
+                                link: "/vi/developer/networking/rcon",
                             },
                         ],
                     },
@@ -171,48 +171,48 @@ export const vi = defineConfig({
                         text: "Khối (Blocks)",
                         collapsed: true,
                         items: [
-                            { text: "Tổng quan", link: "/developer/blocks/" },
-                            { text: "Thêm một khối", link: "/developer/blocks/adding-blocks" },
+                            { text: "Tổng quan", link: "/vi/developer/blocks/" },
+                            { text: "Thêm một khối", link: "/vi/developer/blocks/adding-blocks" },
                         ],
                     },
                     {
                         text: "Vật phẩm (Items)",
                         collapsed: true,
                         items: [
-                            { text: "Tổng quan", link: "/developer/items/" },
-                            { text: "Thêm một vật phẩm", link: "/developer/items/adding-items" },
+                            { text: "Tổng quan", link: "/vi/developer/items/" },
+                            { text: "Thêm một vật phẩm", link: "/vi/developer/items/adding-items" },
                         ],
                     },
                     {
                         text: "Thực thể (Entities)",
                         collapsed: true,
                         items: [
-                            { text: "Tổng quan & Cấu trúc phân cấp", link: "/developer/entities/" },
-                            { text: "Sinh ra & Theo dõi (Spawning & Tracking)", link: "/developer/entities/spawning-and-tracking" },
-                            { text: "AI & Mục tiêu của quái (Mob AI & Goals)", link: "/developer/entities/ai-and-mobs" },
+                            { text: "Tổng quan & Cấu trúc phân cấp", link: "/vi/developer/entities/" },
+                            { text: "Sinh ra & Theo dõi (Spawning & Tracking)", link: "/vi/developer/entities/spawning-and-tracking" },
+                            { text: "AI & Mục tiêu của quái (Mob AI & Goals)", link: "/vi/developer/entities/ai-and-mobs" },
                         ],
                     },
                     {
                         text: "Lệnh (Commands)",
                         collapsed: true,
                         items: [
-                            { text: "Tổng quan & Bộ điều phối (Dispatcher)", link: "/developer/commands/" },
-                            { text: "Thêm một lệnh", link: "/developer/commands/adding-commands" },
-                            { text: "Đối số & Gợi ý (Arguments & Suggestions)", link: "/developer/commands/arguments-and-suggestions" },
-                            { text: "Thực thi & Ngữ cảnh (Execution & Context)", link: "/developer/commands/execution-and-context" },
+                            { text: "Tổng quan & Bộ điều phối (Dispatcher)", link: "/vi/developer/commands/" },
+                            { text: "Thêm một lệnh", link: "/vi/developer/commands/adding-commands" },
+                            { text: "Đối số & Gợi ý (Arguments & Suggestions)", link: "/vi/developer/commands/arguments-and-suggestions" },
+                            { text: "Thực thi & Ngữ cảnh (Execution & Context)", link: "/vi/developer/commands/execution-and-context" },
                         ],
                     },
                     {
                         text: "Engine Plugin",
                         collapsed: true,
                         items: [
-                            { text: "Tổng quan", link: "/developer/plugins/" },
-                            { text: "Thêm một bộ nạp Plugin (Loader)", link: "/developer/plugins/loaders" },
-                            { text: "Ký & Xác thực WASM", link: "/developer/plugins/wasm-signing" },
+                            { text: "Tổng quan", link: "/vi/developer/plugins/" },
+                            { text: "Thêm một bộ nạp Plugin (Loader)", link: "/vi/developer/plugins/loaders" },
+                            { text: "Ký & Xác thực WASM", link: "/vi/developer/plugins/wasm-signing" },
                         ],
                     },
-                    { text: "Engine thế giới", link: "/developer/world" },
-                    { text: "Phát triển trên di động", link: "/developer/mobile" },
+                    { text: "Engine thế giới", link: "/vi/developer/world" },
+                    { text: "Phát triển trên di động", link: "/vi/developer/mobile" },
                 ],
             },
             {
@@ -220,7 +220,7 @@ export const vi = defineConfig({
                 items: [
                     {
                         text: "Giới thiệu",
-                        link: "/plugin-dev/introduction",
+                        link: "/vi/plugin-dev/introduction",
                     },
                     {
                         text: "Chuyển từ Bukkit",
@@ -228,23 +228,23 @@ export const vi = defineConfig({
                         items: [
                             {
                                 text: "Tổng quan",
-                                link: "/plugin-dev/migrating-from-bukkit/",
+                                link: "/vi/plugin-dev/migrating-from-bukkit/",
                             },
                             {
                                 text: "Lệnh (Commands)",
-                                link: "/plugin-dev/migrating-from-bukkit/commands",
+                                link: "/vi/plugin-dev/migrating-from-bukkit/commands",
                             },
                             {
                                 text: "Sự kiện (Events)",
-                                link: "/plugin-dev/migrating-from-bukkit/events",
+                                link: "/vi/plugin-dev/migrating-from-bukkit/events",
                             },
                             {
                                 text: "Kho đồ & Giao diện (GUIs)",
-                                link: "/plugin-dev/migrating-from-bukkit/inventories",
+                                link: "/vi/plugin-dev/migrating-from-bukkit/inventories",
                             },
                             {
                                 text: "Cấu hình & Dữ liệu",
-                                link: "/plugin-dev/migrating-from-bukkit/configuration",
+                                link: "/vi/plugin-dev/migrating-from-bukkit/configuration",
                             },
                         ],
                     },
@@ -254,32 +254,32 @@ export const vi = defineConfig({
                         items: [
                             {
                                 text: "Khởi tạo dự án",
-                                link: "/plugin-dev/rust/creating-project",
+                                link: "/vi/plugin-dev/rust/creating-project",
                             },
                             {
                                 text: "Logic cơ bản",
-                                link: "/plugin-dev/rust/basic-logic",
+                                link: "/vi/plugin-dev/rust/basic-logic",
                             },
                             {
                                 text: "Sự kiện (Events)",
-                                link: "/plugin-dev/rust/events",
+                                link: "/vi/plugin-dev/rust/events",
                             },
                             {
                                 text: "Lệnh (Commands)",
                                 items: [
                                     {
                                         text: "Lệnh đầu tiên",
-                                        link: "/plugin-dev/rust/command/first-command",
+                                        link: "/vi/plugin-dev/rust/command/first-command",
                                     },
                                     {
                                         text: "Trò chơi Kéo-Búa-Bao",
-                                        link: "/plugin-dev/rust/command/rock-paper-scissors",
+                                        link: "/vi/plugin-dev/rust/command/rock-paper-scissors",
                                     },
                                 ],
                             },
                             {
                                 text: "Giấy phép & Cập nhật",
-                                link: "/plugin-dev/rust/plugin-utils",
+                                link: "/vi/plugin-dev/rust/plugin-utils",
                             },
                         ],
                     },
@@ -289,19 +289,19 @@ export const vi = defineConfig({
                         items: [
                             {
                                 text: "Bắt đầu nhanh",
-                                link: "/plugin-dev/python/quick-start",
+                                link: "/vi/plugin-dev/python/quick-start",
                             },
                             {
                                 text: "Logic cơ bản",
-                                link: "/plugin-dev/python/basic-logic",
+                                link: "/vi/plugin-dev/python/basic-logic",
                             },
                             {
                                 text: "Lệnh đầu tiên",
-                                link: "/plugin-dev/python/first-command",
+                                link: "/vi/plugin-dev/python/first-command",
                             },
                             {
                                 text: "Sự kiện (Events)",
-                                link: "/plugin-dev/python/events",
+                                link: "/vi/plugin-dev/python/events",
                             },
                         ],
                     },
@@ -311,11 +311,11 @@ export const vi = defineConfig({
                         items: [
                             {
                                 text: "Bắt đầu nhanh",
-                                link: "/plugin-dev/csharp/quick-start",
+                                link: "/vi/plugin-dev/csharp/quick-start",
                             },
                             {
                                 text: "Lệnh đầu tiên",
-                                link: "/plugin-dev/csharp/first-command",
+                                link: "/vi/plugin-dev/csharp/first-command",
                             },
                         ],
                     },
@@ -325,11 +325,11 @@ export const vi = defineConfig({
                         items: [
                             {
                                 text: "Bắt đầu nhanh",
-                                link: "/plugin-dev/c/quick-start",
+                                link: "/vi/plugin-dev/c/quick-start",
                             },
                             {
                                 text: "Lệnh đầu tiên",
-                                link: "/plugin-dev/c/first-command",
+                                link: "/vi/plugin-dev/c/first-command",
                             },
                         ],
                     },
@@ -339,15 +339,15 @@ export const vi = defineConfig({
                         items: [
                             {
                                 text: "Bắt đầu nhanh",
-                                link: "/plugin-dev/go/quick-start",
+                                link: "/vi/plugin-dev/go/quick-start",
                             },
                             {
                                 text: "Logic cơ bản",
-                                link: "/plugin-dev/go/basic-logic",
+                                link: "/vi/plugin-dev/go/basic-logic",
                             },
                             {
                                 text: "Lệnh đầu tiên",
-                                link: "/plugin-dev/go/first-command",
+                                link: "/vi/plugin-dev/go/first-command",
                             },
                         ],
                     },
@@ -357,31 +357,31 @@ export const vi = defineConfig({
                         items: [
                             {
                                 text: "Bắt đầu nhanh",
-                                link: "/plugin-dev/kotlin/quick-start",
+                                link: "/vi/plugin-dev/kotlin/quick-start",
                             },
                             {
                                 text: "Tổng quan API",
-                                link: "/plugin-dev/kotlin/api-overview",
+                                link: "/vi/plugin-dev/kotlin/api-overview",
                             },
                             {
                                 text: "Tài liệu tham khảo Callback",
-                                link: "/plugin-dev/kotlin/callbacks",
+                                link: "/vi/plugin-dev/kotlin/callbacks",
                             },
                             {
                                 text: "Sơ đồ Interface",
-                                link: "/plugin-dev/kotlin/interfaces",
+                                link: "/vi/plugin-dev/kotlin/interfaces",
                             },
                             {
                                 text: "Tác vụ (Tasks)",
-                                link: "/plugin-dev/kotlin/tasks",
+                                link: "/vi/plugin-dev/kotlin/tasks",
                             },
                             {
                                 text: "Sự kiện (Events)",
-                                link: "/plugin-dev/kotlin/events",
+                                link: "/vi/plugin-dev/kotlin/events",
                             },
                             {
                                 text: "Lệnh đầu tiên",
-                                link: "/plugin-dev/kotlin/first-command",
+                                link: "/vi/plugin-dev/kotlin/first-command",
                             },
                         ],
                     },
@@ -391,7 +391,7 @@ export const vi = defineConfig({
                         items: [
                             {
                                 text: "Bắt đầu nhanh",
-                                link: "/plugin-dev/d/quick-start",
+                                link: "/vi/plugin-dev/d/quick-start",
                             },
                         ],
                     },
@@ -401,55 +401,55 @@ export const vi = defineConfig({
                         items: [
                             {
                                 text: "Bắt đầu nhanh",
-                                link: "/plugin-dev/zig/quick-start",
+                                link: "/vi/plugin-dev/zig/quick-start",
                             },
                             {
                                 text: "Sự kiện (Events)",
-                                link: "/plugin-dev/zig/events",
+                                link: "/vi/plugin-dev/zig/events",
                             },
                             {
                                 text: "Lệnh (Commands)",
-                                link: "/plugin-dev/zig/commands",
+                                link: "/vi/plugin-dev/zig/commands",
                             },
                             {
                                 text: "Văn bản (Text)",
-                                link: "/plugin-dev/zig/text",
+                                link: "/vi/plugin-dev/zig/text",
                             },
                             {
                                 text: "Menu giao diện",
-                                link: "/plugin-dev/zig/menus",
+                                link: "/vi/plugin-dev/zig/menus",
                             },
                             {
                                 text: "Nhắc lệnh Chat (Chat Prompts)",
-                                link: "/plugin-dev/zig/prompts",
+                                link: "/vi/plugin-dev/zig/prompts",
                             },
                             {
                                 text: "Vật phẩm (Items)",
-                                link: "/plugin-dev/zig/items",
+                                link: "/vi/plugin-dev/zig/items",
                             },
                             {
                                 text: "Lập lịch (Scheduling)",
-                                link: "/plugin-dev/zig/scheduling",
+                                link: "/vi/plugin-dev/zig/scheduling",
                             },
                             {
                                 text: "Tệp tin & Cấu hình",
-                                link: "/plugin-dev/zig/files",
+                                link: "/vi/plugin-dev/zig/files",
                             },
                             {
                                 text: "Dữ liệu người chơi",
-                                link: "/plugin-dev/zig/player-data",
+                                link: "/vi/plugin-dev/zig/player-data",
                             },
                             {
                                 text: "Mạng (Networking)",
-                                link: "/plugin-dev/zig/networking",
+                                link: "/vi/plugin-dev/zig/networking",
                             },
                             {
                                 text: "Handles & Quản lý bộ nhớ",
-                                link: "/plugin-dev/zig/memory",
+                                link: "/vi/plugin-dev/zig/memory",
                             },
                             {
                                 text: "Nhật ký thay đổi (Changelog)",
-                                link: "/plugin-dev/zig/changelog",
+                                link: "/vi/plugin-dev/zig/changelog",
                             },
                         ],
                     },
@@ -459,19 +459,19 @@ export const vi = defineConfig({
                         items: [
                             {
                                 text: "Bắt đầu nhanh",
-                                link: "/plugin-dev/typescript/quick-start",
+                                link: "/vi/plugin-dev/typescript/quick-start",
                             },
                             {
                                 text: "Logic cơ bản",
-                                link: "/plugin-dev/typescript/basic-logic",
+                                link: "/vi/plugin-dev/typescript/basic-logic",
                             },
                             {
                                 text: "Lệnh đầu tiên",
-                                link: "/plugin-dev/typescript/first-command",
+                                link: "/vi/plugin-dev/typescript/first-command",
                             },
                             {
                                 text: "Sự kiện (Events)",
-                                link: "/plugin-dev/typescript/events",
+                                link: "/vi/plugin-dev/typescript/events",
                             },
                         ],
                     },
@@ -482,7 +482,7 @@ export const vi = defineConfig({
                 items: [
                     {
                         text: "Các vấn đề thường gặp",
-                        link: "/troubleshooting/common_issues",
+                        link: "/vi/troubleshooting/common_issues",
                     },
                 ],
             },
