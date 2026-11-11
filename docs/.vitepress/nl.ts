@@ -8,6 +8,26 @@ export const nl = defineConfig({
         siteTitle: "Pumpkin Docs",
         search: {
             provider: "local",
+            options: {
+                translations: {
+                    button: { buttonText: "Zoeken", buttonAriaLabel: "Zoeken" },
+                    modal: {
+                        displayDetails: "Gedetailleerde lijst weergeven",
+                        resetButtonTitle: "Zoekopdracht wissen",
+                        backButtonTitle: "Zoeken sluiten",
+                        noResultsText: "Geen resultaten voor",
+                        footer: {
+                            selectText: "om te selecteren",
+                            selectKeyAriaLabel: "enter",
+                            navigateText: "om te navigeren",
+                            navigateUpKeyAriaLabel: "pijl omhoog",
+                            navigateDownKeyAriaLabel: "pijl omlaag",
+                            closeText: "om te sluiten",
+                            closeKeyAriaLabel: "escape"
+                        }
+                    }
+                },
+            },
         },
         nav: [
             {
