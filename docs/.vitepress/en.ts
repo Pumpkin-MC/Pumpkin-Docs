@@ -46,6 +46,7 @@ export const en = defineConfig({
                 items: [
                     { text: "Overview", link: "/admin/introduction" },
                     { text: "Migrating from Bukkit", link: "/admin/migrating-from-bukkit" },
+                    { text: "Server Hosters Guide", link: "/admin/server-hosters" },
                     {
                         text: "Configuration",
                         collapsed: true,
