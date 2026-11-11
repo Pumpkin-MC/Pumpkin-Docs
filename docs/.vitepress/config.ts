@@ -14,6 +14,12 @@ export default defineConfig({
 
     themeConfig: {
         siteTitle: "Pumpkin Docs",
+        search: {
+            provider: "local",
+            options: {
+                detailedView: true
+            }
+        }
     },
 
     cleanUrls: true,
