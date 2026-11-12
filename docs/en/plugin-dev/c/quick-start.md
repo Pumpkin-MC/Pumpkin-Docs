@@ -5,7 +5,7 @@ This guide will help you get started with writing Pumpkin server plugins using C
 ## Prerequisites
 
 Before you start, ensure you have the following installed:
-- [wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases) (version 24 or later recommended, providing `wasm32-wasip2-clang`)
+- [wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases) (version 31 or later recommended, providing `wasm32-wasip3-clang`)
 - `curl` and `tar` (or manual download tool)
 
 ## Setting up the project
@@ -54,10 +54,10 @@ REGISTER_PUMPKIN_PLUGIN(((pumpkin_plugin_t){
 
 ## Building the plugin
 
-Compile your plugin to WebAssembly using `wasm32-wasip2-clang` from `wasi-sdk`. Replace `/path/to/wasi-sdk` with your actual installation path:
+Compile your plugin to WebAssembly using `wasm32-wasip3-clang` from `wasi-sdk`. Replace `/path/to/wasi-sdk` with your actual installation path:
 
 ```bash
-/path/to/wasi-sdk/bin/wasm32-wasip2-clang -Oz \
+/path/to/wasi-sdk/bin/wasm32-wasip3-clang -Oz \
     -Ipumpkin-api/include \
     pumpkin-api/lib/libpumpkin-api.a \
     main.c \

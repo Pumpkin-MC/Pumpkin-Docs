@@ -104,10 +104,10 @@ mixin RegisterPlugin!MyPlugin;
 
 ## 3. Eklentiyi Derleme
 
-Eklentinizi `wasm32-wasip2` mimarisini hedefleyen bir WebAssembly bileşeni olarak derleyin:
+Eklentinizi `wasm32-wasip3` mimarisini hedefleyen bir WebAssembly bileşeni olarak derleyin:
 
 ```bash
-dub build -b release -a wasm32-wasip2
+dub build -b release -a wasm32-wasip3
 ```
 
 Bu komut proje kök dizininizde `my-d-plugin.wasm` dosyasını oluşturacaktır.

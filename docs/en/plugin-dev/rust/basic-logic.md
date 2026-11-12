@@ -61,7 +61,7 @@ If all went well, you should be left with a message like this:
     Finished `release` profile [optimized] target(s) in 0.05s
 ```
 
-Now you can go to the `./target/wasm32-wasip2/release` folder (or `./target/wasm32-wasip2/debug`
+Now you can go to the `./target/wasm32-wasip3/release` folder (or `./target/wasm32-wasip3/debug`
 if you didn't use `--release`) and locate your plugin binary. The filename will then be like the following.
 
 ```

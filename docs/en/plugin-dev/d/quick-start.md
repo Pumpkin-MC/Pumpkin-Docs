@@ -109,10 +109,10 @@ mixin RegisterPlugin!MyPlugin;
 
 ## 3. Building the Plugin
 
-Compile your plugin into a WebAssembly component targeting `wasm32-wasip2`:
+Compile your plugin into a WebAssembly component targeting `wasm32-wasip3`:
 
 ```bash
-dub build -b release -a wasm32-wasip2
+dub build -b release -a wasm32-wasip3
 ```
 
 This generates `my-d-plugin.wasm` in your project root.

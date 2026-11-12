@@ -104,10 +104,10 @@ mixin RegisterPlugin!MyPlugin;
 
 ## 3. 构建插件
 
-将插件编译为面向 `wasm32-wasip2` 的 WebAssembly 组件：
+将插件编译为面向 `wasm32-wasip3` 的 WebAssembly 组件：
 
 ```bash
-dub build -b release -a wasm32-wasip2
+dub build -b release -a wasm32-wasip3
 ```
 
 编译完成后，会在项目根目录生成 `my-d-plugin.wasm` 文件。
