@@ -40,6 +40,7 @@ export const trTR = defineConfig({
                 items: [
                     { text: "Genel Bakış", link: "/tr_TR/admin/introduction" },
                     { text: "Bukkit'ten Geçiş", link: "/tr_TR/admin/migrating-from-bukkit" },
+                    { text: "Sunucu Barındırıcıları Kılavuzu", link: "/tr_TR/admin/server-hosters" },
                     {
                         text: "Yapılandırma",
                         collapsed: true,

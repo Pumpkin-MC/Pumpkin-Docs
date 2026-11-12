@@ -18,6 +18,7 @@ Pumpkin sunucu yöneticileri için **Yönetici Bölümüne** hoş geldiniz. Pump
 Aşağıdaki yönetim kılavuzlarını inceleyin:
 
 - [Bukkit / Paper / Spigot Sunucusundan Geçiş](./migrating-from-bukkit) — Sunucu yönetimi, eklentiler, dünya depolaması ve performanstaki temel farklar.
+- [Sunucu Barındırıcıları İçin Kılavuz](./server-hosters) — Barındırma panelleri, konteynerler, port tahsisi ve yaşam döngüsü kancalarını Pumpkin'e uyarlama.
 - [Sunucu Yapılandırması](../config/introduction) — `pumpkin.toml` ayarlarının ayrıntılı açıklaması.
 - [Proxy Kurulumu](../config/proxy) — BungeeCord ve Velocity oyuncu yönlendirmesini yapılandırma.
 - [Komutlar ve İzinler](../config/commands) — Oyun içi yönetici (operatör) komutlarını ve izinlerini yönetme.
