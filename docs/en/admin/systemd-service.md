@@ -11,7 +11,7 @@ NixOS users do not need to write a unit by hand: the `services.pumpkin-mc` modul
 Pumpkin reads and writes `pumpkin.toml`, `world/`, `plugins/` and `latest.log` in its working directory, so give it a directory of its own and a system user that owns it:
 
 ```bash
-sudo useradd --system --home-dir /opt/pumpkin --shell /usr/sbin/nologin pumpkin
+sudo useradd --system --user-group --home-dir /opt/pumpkin --shell /usr/sbin/nologin pumpkin
 sudo mkdir -p /opt/pumpkin
 sudo chown pumpkin:pumpkin /opt/pumpkin
 ```
@@ -127,8 +127,19 @@ journalctl -u pumpkin.service -f
 The service has no attached terminal, so the server console cannot be typed into directly. Two options:
 
 - **Management protocol (recommended):** enable `[networking.management]` in `pumpkin.toml` and use the WebSocket [MSMP](../config/management) interface; it also lets you run commands from another machine.
-- **A named pipe for stdin:** if you must use stdin, add `ExecStartPre=-/usr/bin/mkfifo -m 600 /opt/pumpkin/console.fifo` and `StandardInput=file:/opt/pumpkin/console.fifo` to the `[Service]` section. Commands are then sent with `echo "say hello" > /opt/pumpkin/console.fifo`. This is more fragile than MSMP and is not needed for stopping the server, which `systemctl stop` already handles through `SIGTERM`.
+- **A named pipe for stdin:** if you must use stdin, create the FIFO outside the unit. systemd opens
+  `StandardInput=` before it runs `ExecStartPre=`, so creating the pipe from inside the unit comes too late on a
+  fresh install. Let `systemd-tmpfiles` make it instead — put this in `/etc/tmpfiles.d/pumpkin.conf`:
+
+  ```
+  p /opt/pumpkin/console.fifo 0600 pumpkin pumpkin -
+  ```
+
+  Apply it once with `sudo systemd-tmpfiles --create`, then add `StandardInput=file:/opt/pumpkin/console.fifo` to the
+  `[Service]` section. Commands are then sent with `echo "say hello" > /opt/pumpkin/console.fifo`. This is more
+  fragile than MSMP and is not needed for stopping the server, which `systemctl stop` already handles through
+  `SIGTERM`.
 
 ## Several servers on one machine
 
-Use a [template unit](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html#Description) named `pumpkin@.service` with `WorkingDirectory=/opt/pumpkin/%i` and `ExecStart=/opt/pumpkin/pumpkin` (or one binary per directory), then run `systemctl enable --now pumpkin@survival pumpkin@creative`. Each instance keeps its own `pumpkin.toml`, so give each one a different `server_address` port.
+Use a [template unit](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html#Description) named `pumpkin@.service` with `WorkingDirectory=/opt/pumpkin/%i` and `ExecStart=/opt/pumpkin/pumpkin` (or one binary per directory), then run `systemctl enable --now pumpkin@survival pumpkin@creative`. Each instance keeps its own `pumpkin.toml`, so give each one its own listening ports: `networking.java.address` (default `0.0.0.0:25565`) for Java clients, and — since Bedrock and NetherNet are on by default — either `networking.bedrock.enabled = false` or a distinct `networking.bedrock.nethernet.address` (default `0.0.0.0:19132`) for every extra instance.
