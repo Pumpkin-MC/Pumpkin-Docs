@@ -33,13 +33,13 @@ pub trait PluginLoader: Send + Sync {
     /// 判斷此載入器是否處理目標檔案。
     fn can_load(&self, path: &Path) -> bool;
 
-    /// 非同步載入、解析並初始化插件例項。
+    /// 非同步載入、解析並初始化插件實例。
     fn load<'a>(&'a self, path: &'a Path) -> PluginLoadFuture<'a>;
 
-    /// 解除安裝插件並回收相關資源。
+    /// 卸載插件並回收相關資源。
     fn unload(&self, data: Box<dyn Any + Send + Sync>) -> PluginUnloadFuture<'_>;
 
-    /// 表示執行階段是否支援無記憶體洩漏的安全解除安裝。
+    /// 表示執行階段是否支援無記憶體洩漏的安全卸載。
     fn can_unload(&self) -> bool;
 }
 ```
@@ -54,7 +54,7 @@ Pumpkin 目前提供兩個官方載入器：
    - 匹配動態程式庫檔案（Linux 為 `.so`，Windows 為 `.dll`，macOS 為 `.dylib`）。
    - 使用 [`libloading`](https://docs.rs/libloading/) 動態連結庫。
    - 定位並呼叫外部入口函式（`pumpkin_plugin_init`）。
-   - 由於作業系統級共享程式庫解除安裝存在風險，`can_unload()` 返回 `false`。
+   - 由於作業系統級共享程式庫卸載存在風險，`can_unload()` 返回 `false`。
 2. **`WasmPluginLoader`（`loader/wasm/mod.rs`）**：
    - 匹配 `.wasm` 檔案。
    - 驗證加密簽名（參見 [WASM 簽名](/zh_tw/developer/plugins/wasm-signing)）。
@@ -106,7 +106,7 @@ impl PluginLoader for MyCustomLoader {
 
 1. `Arc<dyn Plugin>`：通用插件控制代碼。
 2. `PluginMetadata`：名稱、作者、版本、描述。
-3. `Box<dyn Any + Send + Sync>`：解除安裝時保留的載入器專用上下文（例如虛擬機器狀態）。
+3. `Box<dyn Any + Send + Sync>`：卸載時保留的載入器專用上下文（例如虛擬機器狀態）。
 
 ```rust
     fn load<'a>(&'a self, path: &'a Path) -> PluginLoadFuture<'a> {
@@ -122,7 +122,7 @@ impl PluginLoader for MyCustomLoader {
                 description: Some("Custom script plugin".into()),
             };
 
-            // 2. 初始化執行環境例項
+            // 2. 初始化執行環境實例
             let plugin_instance = Arc::new(MyScriptPluginWrapper::new(script_content));
             let runtime_state: Box<dyn Any + Send + Sync> = Box::new(());
 
@@ -131,7 +131,7 @@ impl PluginLoader for MyCustomLoader {
     }
 ```
 
-### 第 4 步：實現乾淨解除安裝（`unload` 和 `can_unload`）
+### 第 4 步：實現乾淨卸載（`unload` 和 `can_unload`）
 
 如果你的執行階段可以乾淨地終止且不洩漏資源：
 

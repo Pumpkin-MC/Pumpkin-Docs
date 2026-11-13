@@ -40,7 +40,7 @@ val reminder = tasks.afterTicks(100uL) { server ->
 reminder.cancel()
 ```
 
-一次性任務開始執行或已經取消後，`cancel()` 不會產生效果。API 會移除已完成的處理器，並在插件解除安裝時取消待執行的任務。透過 `tasks` 註冊的任務不需要重寫 `handleTask`。
+一次性任務開始執行或已經取消後，`cancel()` 不會產生效果。API 會移除已完成的處理器，並在插件卸載時取消待執行的任務。透過 `tasks` 註冊的任務不需要重寫 `handleTask`。
 
 `everyTicks` 接收初始延遲和重複間隔：
 
@@ -53,4 +53,4 @@ val heartbeat = tasks.everyTicks(0uL, 20uL) { server ->
 heartbeat.cancel()
 ```
 
-取消句柄也會釋放其 Kotlin 回調。重複任務會在插件解除安裝時取消。有關直接 WIT 調用的資訊，請參閱 [`scheduler` WIT 定義](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/scheduler.wit)；[回調參考](./callbacks#kotlin-回調層)列出了 `tasks` 使用的操作。
+取消句柄也會釋放其 Kotlin 回調。重複任務會在插件卸載時取消。有關直接 WIT 調用的資訊，請參閱 [`scheduler` WIT 定義](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/scheduler.wit)；[回調參考](./callbacks#kotlin-回調層)列出了 `tasks` 使用的操作。

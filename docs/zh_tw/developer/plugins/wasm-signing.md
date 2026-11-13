@@ -77,7 +77,7 @@ Pumpkin 將簽名和驗證元資料直接嵌入兩個標準 WebAssembly 自訂�
 
 ## 驗證流程
 
-Pumpkin 啟動並載入 WebAssembly 插件時，會在插件例項化前執行驗證序列：
+Pumpkin 啟動並載入 WebAssembly 插件時，會在插件實例化前執行驗證序列：
 
 1. **提取自訂節**：`WasmPluginLoader` 掃描二進位檔案中的 `pumpkin.metadata` 和 `wasm_signature`。
 2. **獲取金鑰**：
@@ -88,5 +88,5 @@ Pumpkin 啟動並載入 WebAssembly 插件時，會在插件例項化前執行�
    - 重新構造負載 `(clean_wasm + metadata_json)`。
    - 使用 `verifying_key.verify(&payload, &signature)` 驗證簽名。
 4. **授權與完整性驗證**：
-   - 驗證成功時，Wasmtime 會安全地例項化插件。
+   - 驗證成功時，Wasmtime 會安全地實例化插件。
    - 驗證失敗或簽名無效時，載入會以錯誤中止，防止伺服器執行遭到篡改的程式碼。

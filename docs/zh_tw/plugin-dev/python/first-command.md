@@ -73,7 +73,7 @@ ctx.register_permission(permission.Permission(
 ```
 
 ### 第 2 步：建構指令樹
-建立一個帶有主名稱和別名的 `command.Command` 例項，然後透過 `.execute(...)` 附加處理器：
+建立一個帶有主名稱和別名的 `command.Command` 實例，然後透過 `.execute(...)` 附加處理器：
 ```python
 cmd = command.Command(["hello", "hi"], "Greets the player")
 cmd.execute(HelloCommand())

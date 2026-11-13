@@ -19,7 +19,7 @@ class MyPlugin(Plugin):
         pass
 
     def on_unload(self, ctx: context.Context) -> None:
-        # 插件解除安裝時要執行的程式碼
+        # 插件卸載時要執行的程式碼
         pass
 ```
 
@@ -32,7 +32,7 @@ class MyPlugin(Plugin):
 - `authors`：作者列表。
 - `description`：插件功能的簡短描述。
 
-## 載入與解除安裝
+## 載入與卸載
 
 - `on_load`：伺服器載入插件時調用此方法。你應使用此方法註冊事件和指令，並執行所有初始化操作。
-- `on_unload`：伺服器解除安裝插件時調用此方法。如有必要，可使用此方法進行清理。
+- `on_unload`：伺服器卸載插件時調用此方法。如有必要，可使用此方法進行清理。

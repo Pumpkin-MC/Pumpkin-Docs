@@ -87,7 +87,7 @@ comptime {
 }
 ```
 
-插件是傳給 `pumpkin.register` 的結構，後者會生成伺服器呼叫插件所需的一切。結構的宣告描述插件。只有 `metadata` 是必需的：它儲存伺服器顯示的名稱、版本、作者和描述，還可以列出對其他插件的 `dependencies` 以及插件需要的 `permissions`，後者在[檔案與設定](./files)中介紹。`events` 列出要監聽的事件。`onLoad` 在插件的事件和指令註冊後執行，`onUnload` 在插件解除安裝前執行。
+插件是傳給 `pumpkin.register` 的結構，後者會生成伺服器呼叫插件所需的一切。結構的宣告描述插件。只有 `metadata` 是必需的：它儲存伺服器顯示的名稱、版本、作者和描述，還可以列出對其他插件的 `dependencies` 以及插件需要的 `permissions`，後者在[檔案與設定](./files)中介紹。`events` 列出要監聽的事件。`onLoad` 在插件的事件和指令註冊後執行，`onUnload` 在插件卸載前執行。
 
 將 `std_options.logFn` 設定為 `pumpkin.logFn` 會把 `std.log` 輸出傳送到伺服器主控台；如果使用 `std.log.scoped`，輸出前還會帶上作用域。
 

@@ -49,7 +49,7 @@ export * from "@pumpkinmc/pumpkin-api-ts";
 
 ## 事件處理器
 
-事件處理器是一個回呼函式，接收 `Server` 例項和帶型別的事件資料：
+事件處理器是一個回呼函式，接收 `Server` 實例和帶型別的事件資料：
 
 ```typescript
 (server: Server, eventData: T) => T | void

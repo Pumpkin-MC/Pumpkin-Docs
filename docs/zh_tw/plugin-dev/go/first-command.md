@@ -82,7 +82,7 @@ ctx.RegisterPermission(pumpkin_plugin_permission.Permission{
 ```
 
 ### 步驟 2：建構指令樹
-使用 `pumpkin_plugin_command.New` 例項化指令樹：
+使用 `pumpkin_plugin_command.New` 實例化指令樹：
 ```go
 cmd := pumpkin_plugin_command.New([]string{"hello", "hi"}, "Greets the player")
 ```

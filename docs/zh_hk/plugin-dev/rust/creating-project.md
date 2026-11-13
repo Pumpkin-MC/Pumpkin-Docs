@@ -6,10 +6,10 @@ Pumpkin 插件使用 [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.
 
 ## 安裝工具鏈
 
-在編譯插件之前，我們必須安裝 `wasm32-wasip2` 目標。你可以透過執行以下指令來安裝該目標：
+在編譯插件之前，我們必須安裝 `wasm32-wasip3` 目標。你可以透過執行以下指令來安裝該目標：
 
 ```bash
-rustup target add wasm32-wasip2
+rustup target add wasm32-wasip3
 ```
 
 ## 初始化新的 crate
@@ -24,7 +24,7 @@ cargo new <project-name> --lib
 
 ```toml [config.toml]
 [build]
-target = "wasm32-wasip2"
+target = "wasm32-wasip3"
 ```
 
 最終，新資料夾的結構應如下所示：

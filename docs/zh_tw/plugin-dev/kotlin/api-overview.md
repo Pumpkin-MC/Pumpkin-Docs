@@ -11,7 +11,7 @@
 
 ## 回呼註冊
 
-Gradle 插件使用 `pumpkin.pluginClass` 例項化你的 `PumpkinPlugin` 子類。API 實現 WIT 匯出，包括生命週期和元資料呼叫。
+Gradle 插件使用 `pumpkin.pluginClass` 實例化你的 `PumpkinPlugin` 子類。API 實現 WIT 匯出，包括生命週期和元資料呼叫。
 
 使用 `events`、`commands`、`tasks`、`ipc`、`aiGoals` 和 `chunkGenerators` 註冊回呼。API 分配處理器 ID 並分發呼叫。`events.listen(...)` 返回帶有 `unregister()` 的 `EventSubscription`；任務方法返回帶有 `cancel()` 的 `ScheduledTask`。
 

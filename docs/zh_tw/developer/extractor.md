@@ -94,7 +94,7 @@ class Fuels : Extractor.Extractor {
 ```
 
 ### 第 3 步：註冊提取器
-開啟 `src/main/kotlin/de/snowii/extractor/Extractor.kt`，將你的類例項新增到 `extractors` 陣列中：
+開啟 `src/main/kotlin/de/snowii/extractor/Extractor.kt`，將你的類實例新增到 `extractors` 陣列中：
 
 ```kotlin
 val extractors = arrayOf(

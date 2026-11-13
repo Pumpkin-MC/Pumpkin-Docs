@@ -92,7 +92,7 @@ Pumpkin 直接使用 `pumpkin-data` 中預先烘焙的形狀來計算碰撞和�
 方塊互動事件透過 [`crates/pumpkin/src/block/registry.rs`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin/src/block/registry.rs) 中的中央 `BlockRegistry` 路由：
 
 1. **註冊**：伺服器初始化時，所有行為結構都會註冊到 `BlockManager` 中。
-2. **對映**：管理器將數字 `BlockId` 鍵對映到執行緒安全的行為例項（`Arc<dyn BlockBehaviour>`）。
+2. **對映**：管理器將數字 `BlockId` 鍵對映到執行緒安全的行為實例（`Arc<dyn BlockBehaviour>`）。
 3. **分派**：當網路層收到方塊操作封包（例如 `CUseItemOn` 或方塊挖掘封包）時，伺服器會以 $O(1)$ 時間複雜度查詢行為並呼叫相應的鉤子。
 
 ---

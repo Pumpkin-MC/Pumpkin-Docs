@@ -44,7 +44,7 @@ export * from "@pumpkinmc/pumpkin-api-ts";
 
 - **`metadata()`**：返回包含插件名稱、版本、作者、描述、依賴項和權限的 `PluginMetadata` 物件。這是純描述方法，不得呼叫主機匯入。
 - **`onLoad(ctx: Context)`**：在註冊後呼叫。使用此方法設定指令、事件和初始任務。始終呼叫 `super.onLoad(ctx)`。
-- **`onUnload(ctx: Context)`**：在伺服器停止或插件解除安裝時呼叫。使用此方法清理資源或持久化狀態。
+- **`onUnload(ctx: Context)`**：在伺服器停止或插件卸載時呼叫。使用此方法清理資源或持久化狀態。
 - **`handleIpcMessage(sender: PluginId, message: IpcMessage)`**：用於處理其他插件傳送訊息的可選方法。
 
 ## 內建輔助方法

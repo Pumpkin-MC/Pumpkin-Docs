@@ -7,7 +7,7 @@
 | [`logging`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/log.wit) | `Logging` | 伺服器日誌記錄。 |
 | [`gui`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/gui.wit) | `Gui` | GUI 資源及其物品欄。 |
 | [`scoreboard`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/scoreboard.wit) | `Scoreboard` | 記分板資源。 |
-| [`server`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/server.wit) | `Server` | 全域性伺服器和玩家查詢。 |
+| [`server`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/server.wit) | `Server` | 全域伺服器和玩家查詢。 |
 | [`text`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/text.wit) | `Text` | 文字元件。 |
 | [`command`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/command.wit) | `Command` | 指令樹、傳送者、引數、執行和建議。`commands` 管理回呼 ID。 |
 | [`context`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/context.wit) | `Context` | `Context.Context` 註冊、伺服器存取和插件資料資料夾。 |
@@ -18,7 +18,7 @@
 | [`boss-bar`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/boss-bar.wit) | `BossBar` | Boss 欄型別和資源。 |
 | [`forms`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/forms.wit) | `Forms` | 基岩版表單。 |
 | [`java-dialogs`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/java-dialogs.wit) | `JavaDialogs` | Java 版對話方塊。 |
-| [`status-effect`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/status-effect.wit) | `StatusEffect` | 狀態效果型別和例項。 |
+| [`status-effect`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/status-effect.wit) | `StatusEffect` | 狀態效果型別和實例。 |
 | [`block-entity`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/block-entity.wit) | `BlockEntity` | 方塊實體型別和資源。 |
 | [`ipc`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/ipc.wit) | `Ipc` | 向另一個插件傳送訊息；傳入訊息使用 `handleIpcMessage`。 |
 | [`attributes`](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/attributes.wit) | `Attributes` | 實體屬性和修飾符。 |

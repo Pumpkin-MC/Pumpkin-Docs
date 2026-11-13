@@ -10,7 +10,7 @@
 | :--- | :--- | :--- |
 | **執行環境** | Java 虛擬機器（需要 Java 17/21+） | 原生執行檔（Rust 編譯，無需 Java） |
 | **啟動指令** | `java [flags] -jar server.jar` | `./pumpkin` |
-| **tick 迴圈** | 可將工作解除安裝給非同步工作線程的單線程 tick 迴圈 | 跨 CPU 核心執行多線程 tick |
+| **tick 迴圈** | 可將工作分派給非同步工作線程的單線程 tick 迴圈 | 跨 CPU 核心執行多線程 tick |
 | **插件格式** | 面向 Bukkit API 的 Java 位元組碼（`.jar`） | WebAssembly（`.wasm`），或透過 PatchBukkit 支援 `.jar` |
 | **插件開發語言** | Java、Kotlin、Scala | Rust、Python、Kotlin、C#、Go、C |
 | **設定檔案** | `server.properties`、`paper.yml`、`spigot.yml` | `pumpkin.toml`（TOML 格式） |
@@ -111,7 +111,7 @@ docker run -p 25565:25565 -v ./data:/data pumpkinmc/pumpkin:latest
 
 ### 記憶體機制差異
 - **無垃圾回收器**：Pumpkin 由 Rust 編寫，在編譯階段使用確定性的記憶體管理（RAII）。不存在執行階段的垃圾回收器，因此無需調優 GC 停頓。
-- **無需固定堆記憶體**：原生程式中不存在 `-Xms` 和 `-Xmx` 標誌。記憶體根據區塊和實體的載入動態向作業系統申請，解除安裝後立即釋放。
+- **無需固定堆記憶體**：原生程式中不存在 `-Xms` 和 `-Xmx` 標誌。記憶體根據區塊和實體的載入動態向作業系統申請，卸載後立即釋放。
 - **JVM 標誌不適用**：用於調優垃圾回收策略、分代大小或 JVM 內部機制的參數均不適用，且無法傳遞給程式。
 
 ---

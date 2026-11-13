@@ -119,7 +119,7 @@ Pumpkin 使用混合並發模型：
 
 > [!WARNING]
 > **切勿讓 CPU 密集型工作阻塞 Tokio 工作線程！**
-> 不要在非同步任務中調用長時間執行的同步程式碼。應透過 `rayon::spawn` 將繁重工作解除安裝到 Rayon，並使用 `tokio::sync::mpsc` 等非同步通道返回結果。
+> 不要在非同步任務中調用長時間執行的同步程式碼。應透過 `rayon::spawn` 將繁重工作分派到 Rayon，並使用 `tokio::sync::mpsc` 等非同步通道返回結果。
 >
 > 架構範例請參閱 `pumpkin_world::level::Level::fetch_chunks`。
 

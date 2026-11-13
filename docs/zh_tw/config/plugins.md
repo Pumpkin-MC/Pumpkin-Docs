@@ -33,17 +33,17 @@ API_KEY = "example_secret"
 
 :::
 
-### 全域性插件設定
+### 全域插件設定
 
 - **`enabled`**：啟用或停用插件執行環境的總開關（預設：`true`）。
 - **`hot_reload`**：監視 `plugins/` 目錄並在執行時自動重新載入修改後的插件（預設：`false`）。
 - **`ask_permission_confirmation`**：當插件請求未經批准的功能/權限時，在伺服器主控台中提示確認（預設：`true`）。
 - **`allow_unsigned`**：是否允許載入未簽名的 WASM 插件（預設：`true`）。
-- **`allowed_permissions`**：為所有插件全域性預先批准的權限列表，繞過主控台互動式提示（預設：`[]`）。
-- **`blocked_permissions`**：對所有插件全域性拒絕的權限列表（預設：`[]`）。
+- **`allowed_permissions`**：為所有插件全域預先批准的權限列表，繞過主控台互動式提示（預設：`[]`）。
+- **`blocked_permissions`**：對所有插件全域拒絕的權限列表（預設：`[]`）。
 - **`inherit_env`**：主機環境變數預設是否繼承到插件的 WASI 沙箱中（預設：`false`）。
 - **`loopback_only`**：插件的出站網路連線是否限制為僅允許 `127.0.0.1` / 本地迴環（localhost）（預設：`false`）。
-- **`max_memory_mb`**：（可選）每個插件例項的全域性最大記憶體限制，單位為兆位元組（MB）。
+- **`max_memory_mb`**：（可選）每個插件實例的全域最大記憶體限制，單位為兆位元組（MB）。
 - **`verify_signatures`**：Pumpkin 在載入 WASM 插件前是否驗證其加密簽名（預設：`true`）。
 
 ### 單個插件覆蓋設定

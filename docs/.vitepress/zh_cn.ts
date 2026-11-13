@@ -45,6 +45,7 @@ export const zhCN = defineConfig({
                 items: [
                     { text: "概述", link: "/zh_cn/admin/introduction" },
                     { text: "从 Bukkit 迁移", link: "/zh_cn/admin/migrating-from-bukkit" },
+                    { text: "服主与托管服务商指南", link: "/zh_cn/admin/server-hosters" },
                     {
                         text: "配置",
                         collapsed: true,

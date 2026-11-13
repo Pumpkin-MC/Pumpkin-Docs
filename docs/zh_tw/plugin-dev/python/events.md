@@ -13,7 +13,7 @@ def on_load(self, ctx: context.Context) -> None:
 
 ## 事件處理器
 
-事件處理器是接收伺服器例項和事件資料的方法。它應返回（可能經過修改的）事件資料。
+事件處理器是接收伺服器實例和事件資料的方法。它應返回（可能經過修改的）事件資料。
 
 ```python
 def on_player_join(self, srv: server.Server, evt: event.PlayerJoinEventData) -> event.PlayerJoinEventData:

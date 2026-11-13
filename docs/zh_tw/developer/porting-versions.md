@@ -22,7 +22,7 @@
 
 ## 第 1 階段：首先移植 Extractor 模組（`Pumpkin-MC/Extractor`）
 
-[Extractor](https://github.com/Pumpkin-MC/Extractor) 是一個基於 Kotlin 的 Fabric 模組，它會啟動真實的 Minecraft 用戶端或伺服器例項，檢查即時遊戲註冊表，並將資料提取為 Pumpkin 所需的確切 JSON 格式。
+[Extractor](https://github.com/Pumpkin-MC/Extractor) 是一個基於 Kotlin 的 Fabric 模組，它會啟動真實的 Minecraft 用戶端或伺服器實例，檢查即時遊戲註冊表，並將資料提取為 Pumpkin 所需的確切 JSON 格式。
 
 ### 1. 克隆或更新 Extractor 倉庫
 ```bash

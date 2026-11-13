@@ -90,7 +90,7 @@ IContextImports.RegisterPermission(context, perm);
 ```
 
 ### 步驟 2：建構指令樹
-使用主名稱和描述例項化指令：
+使用主名稱和描述實例化指令：
 ```csharp
 var command = ICommandImports.Command.New(["hello", "hi"], "Greets the player");
 ```

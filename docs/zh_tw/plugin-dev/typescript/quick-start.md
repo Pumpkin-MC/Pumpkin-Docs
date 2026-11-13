@@ -102,7 +102,7 @@ export * from "@pumpkinmc/pumpkin-api-ts";
 - **`Plugin` 類**：繼承 `Plugin` 並實現 `metadata()` 方法。
 - **`metadata()`**：返回插件資訊（`name`、`version`、`authors`、`description`、`dependencies` 和 `permissions`）。
 - **`onLoad(ctx)`**：Pumpkin 載入插件時呼叫。始終呼叫 `super.onLoad(ctx)` 以註冊待處理的處理器。
-- **`registerPlugin(...)`**：向執行階段註冊你的插件例項。
+- **`registerPlugin(...)`**：向執行階段註冊你的插件實例。
 - **`export * from "@pumpkinmc/pumpkin-api-ts"`**：重新匯出所需的 WASI 元件符號，以滿足 WIT world 約定。
 
 ## 建構並執行

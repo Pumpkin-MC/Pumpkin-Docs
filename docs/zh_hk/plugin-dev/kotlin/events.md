@@ -42,6 +42,6 @@ class ExamplePlugin : PumpkinPlugin() {
 
 當 `blocking = true` 時，Pumpkin 會等待回調完成後再繼續處理事件。需要讓返回的事件影響處理過程時，請使用此設定。處理器 ID 由 API 分配。
 
-`events.listen` 返回一個 `EventSubscription`。如果 `unregister()` 移除了註冊，則返回 `true`；如果註冊已不存在，則返回 `false`。正在進行的回調仍可能執行完畢。剩餘訂閱會在插件解除安裝時移除。
+`events.listen` 返回一個 `EventSubscription`。如果 `unregister()` 移除了註冊，則返回 `true`；如果註冊已不存在，則返回 `false`。正在進行的回調仍可能執行完畢。剩餘訂閱會在插件卸載時移除。
 
 有關資料欄位，請參閱[事件類型](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/event.wit)；有關 `events.listen` 背後的 WIT 調用，請參閱[回調參考](./callbacks#kotlin-回調層)。

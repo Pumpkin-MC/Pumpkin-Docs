@@ -5,7 +5,7 @@
 ## 前提条件
 
 在开始之前，请确保已安装以下内容：
-- [wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases)（建议使用 24 或更高版本，提供 `wasm32-wasip2-clang`）
+- [wasi-sdk](https://github.com/WebAssembly/wasi-sdk/releases)（建议使用 31 或更高版本，提供 `wasm32-wasip3-clang`）
 - `curl` 和 `tar`（或手动下载工具）
 
 ## 设置项目
@@ -54,10 +54,10 @@ REGISTER_PUMPKIN_PLUGIN(((pumpkin_plugin_t){
 
 ## 构建插件
 
-使用 `wasi-sdk` 中的 `wasm32-wasip2-clang` 将插件编译为 WebAssembly。将 `/path/to/wasi-sdk` 替换为你的实际安装路径：
+使用 `wasi-sdk` 中的 `wasm32-wasip3-clang` 将插件编译为 WebAssembly。将 `/path/to/wasi-sdk` 替换为你的实际安装路径：
 
 ```bash
-/path/to/wasi-sdk/bin/wasm32-wasip2-clang -Oz \
+/path/to/wasi-sdk/bin/wasm32-wasip3-clang -Oz \
     -Ipumpkin-api/include \
     pumpkin-api/lib/libpumpkin-api.a \
     main.c \

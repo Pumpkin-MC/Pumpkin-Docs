@@ -122,4 +122,4 @@ player.start_cooldown(Item::ENDER_PEARL.registry_key.to_string(), 20);
    items.register(SnowBallItem);
    ```
 
-伺服器初始化時，`items.register` 會把 `ItemMetadata::ids()` 中宣告的 ID 對映到你的行為例項。
+伺服器初始化時，`items.register` 會把 `ItemMetadata::ids()` 中宣告的 ID 對映到你的行為實例。

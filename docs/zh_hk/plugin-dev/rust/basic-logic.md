@@ -61,8 +61,8 @@ cargo build --release
     Finished `release` profile [optimized] target(s) in 0.05s
 ```
 
-現在，你可以前往 `./target/wasm32-wasip2/release` 資料夾（如果未使用 `--release`，
-則前往 `./target/wasm32-wasip2/debug`），找到插件二進制檔案。檔名類似如下：
+現在，你可以前往 `./target/wasm32-wasip3/release` 資料夾（如果未使用 `--release`，
+則前往 `./target/wasm32-wasip3/debug`），找到插件二進制檔案。檔名類似如下：
 
 ```
 hello_pumpkin_wasm.wasm

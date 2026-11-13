@@ -2,7 +2,7 @@
 
 伺服器會呼叫 [`plugin` world](https://github.com/Pumpkin-MC/Pumpkin/blob/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1/plugin.wit) 中的匯出。本頁介紹對應的 Kotlin 方法和註冊 API。有關主機匯入，請參閱[介面對照表](./interfaces)。
 
-`pumpkin.pluginClass` 指定要例項化的無引數 `PumpkinPlugin` 子類。API 實現 `PluginRootFunctions.Exports` 和 `Metadata`。
+`pumpkin.pluginClass` 指定要實例化的無引數 `PumpkinPlugin` 子類。API 實現 `PluginRootFunctions.Exports` 和 `Metadata`。
 
 ## 生命週期和元資料
 
@@ -93,8 +93,8 @@ fun interface ChunkGenerator {
 | 功能 | Kotlin 註冊 | WIT 操作 | API 行為 |
 | --- | --- | --- | --- |
 | 事件 | `events.listen(context, type, priority, blocking) { server, event -> event }` 返回 `EventSubscription` | `context.register-event-with-handle`、`context.unregister-event`、`handle-event` | 分配 ID、分發事件、保留返回的事件，並在呼叫 `unregister()` 時移除主機註冊。 |
-| 指令 | `commands.register(context, command, permission) { sender, server, args -> Result.success(1) }`；`commands.onSuggestions(node) { sender, server, request -> ... }` | `command.execute-with-handler-id`、`command-node.suggest-with-handler-id`、`context.register-command`、`handle-command`、`handle-command-suggestion` | 分配不同的執行和建議 ID，分發兩個回呼，並在解除安裝時釋放 Kotlin 處理器。 |
-| 任務 | `tasks.afterTicks(delayTicks) { server -> ... }` 或 `tasks.everyTicks(delayTicks, periodTicks) { server -> ... }` 返回 `ScheduledTask` | `scheduler.schedule-delayed-task`、`schedule-repeating-task`、`cancel-task`、`handle-task` | 分配並回收處理器 ID、取消主機任務，並在解除安裝時清理。 |
+| 指令 | `commands.register(context, command, permission) { sender, server, args -> Result.success(1) }`；`commands.onSuggestions(node) { sender, server, request -> ... }` | `command.execute-with-handler-id`、`command-node.suggest-with-handler-id`、`context.register-command`、`handle-command`、`handle-command-suggestion` | 分配不同的執行和建議 ID，分發兩個回呼，並在卸載時釋放 Kotlin 處理器。 |
+| 任務 | `tasks.afterTicks(delayTicks) { server -> ... }` 或 `tasks.everyTicks(delayTicks, periodTicks) { server -> ... }` 返回 `ScheduledTask` | `scheduler.schedule-delayed-task`、`schedule-repeating-task`、`cancel-task`、`handle-task` | 分配並回收處理器 ID、取消主機任務，並在卸載時清理。 |
 | 傳入 IPC | `ipc.onMessage { sender, message -> Result.success(response) }` | `handle-ipc-message` | 路由唯一的傳入訊息回呼。傳出的 `Ipc.sendIpcMessage(...)` 使用其生成的綁定。 |
 | 自訂 AI 目標 | `aiGoals.register(mob, priority, goal)` 接受一個 `CustomAiGoal` 物件 | `mob.add-custom-ai-goal` 和五個 `handle-ai-goal-*` 匯出 | 為五個回呼分配同一個目標 ID，並將它們分發到同一個 Kotlin 物件。 |
 | 區塊生成 | `chunkGenerators.set(world) { phase, chunk -> ... }` | `world.set-chunk-generator` 和 `handle-generate-phase` | 分配生成器 ID，並將各階段分發給 Kotlin 回呼。 |

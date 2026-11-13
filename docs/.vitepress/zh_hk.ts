@@ -45,6 +45,7 @@ export const zhHK = defineConfig({
                 items: [
                     { text: "概述", link: "/zh_hk/admin/introduction" },
                     { text: "從 Bukkit 遷移", link: "/zh_hk/admin/migrating-from-bukkit" },
+                    { text: "服主與託管服務商指南", link: "/zh_hk/admin/server-hosters" },
                     {
                         text: "設定",
                         collapsed: true,

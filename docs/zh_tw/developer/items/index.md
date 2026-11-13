@@ -21,7 +21,7 @@
 
 ## `ItemStack` 結構
 
-`ItemStack` 表示物品欄容器中的一個物品例項。它封裝：
+`ItemStack` 表示物品欄容器中的一個物品實例。它封裝：
 
 - **`item`**：對靜態 [`Item`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin-data/src/item.rs) 定義的引用。
 - **`item_count`**：目前堆疊數量（$1 \le \text{count} \le \text{max\_stack\_size}$）。

@@ -88,7 +88,7 @@ ctx.registerPermission(permission);
 ```
 
 ### 步驟 2：建構指令樹
-使用主名稱、別名和描述例項化一個 `Command`：
+使用主名稱、別名和描述實例化一個 `Command`：
 ```typescript
 const cmd = new Command(["hello", "hi"], "Greets the player");
 ```
