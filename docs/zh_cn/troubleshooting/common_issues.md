@@ -6,7 +6,7 @@
 
     **原因:** 这与身份验证有关，通常与 `prevent_proxy_connections` 设置有关。
 
-    **解决方法:** 在 `pumpkin.toml` 中禁用 `prevent_proxy_connections`
+    **解决方法:** 在 `pumpkin.toml` 的 `[networking.java.authentication]` 下禁用 `prevent_proxy_connections`。
 
 2. ## 无法使用 0.0.0.0 连接到服务器
 
@@ -17,4 +17,4 @@
     **解决方法:**
     - 如果在**同一台电脑**上连接，请在 Minecraft 客户端中输入 `localhost` 或 `127.0.0.1`。
     - 如果在**同一局域网（LAN）中的其他设备**上连接，请使用主机的局域网 IP 地址（例如 `192.168.x.x`）。
-    - 如果通过**互联网**连接，其他玩家必须使用你的公网 IP 地址或域名（并需要在路由器上设置端口转发）。
+    - 如果通过**互联网**连接，其他玩家必须使用你的公网 IP 地址或域名（并在路由器上转发端口 `25565`）。

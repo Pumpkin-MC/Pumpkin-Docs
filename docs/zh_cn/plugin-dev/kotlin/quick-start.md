@@ -1,81 +1,104 @@
-# Quick Start
+# 快速入门
 
-This guide will help you get started with writing Pumpkin server plugins using Kotlin.
+[Pumpkin Gradle 插件](https://plugins.gradle.org/plugin/io.github.pumpkin-mc.plugin)可将 Kotlin 插件构建为 WebAssembly 组件。它使用发布在 Maven Central 上的 [Kotlin API](https://central.sonatype.com/artifact/io.github.pumpkin-mc/pumpkin-api-kt-wasm-wasi)。
 
-:::warning
-Until the Kotlin + Wasm component toolchain matures more, there will be some oddity and inconvenience. 
+## 前提条件
 
-Bugs are also expected.
-:::
+- JDK 17 或更高版本
+- 带有 Gradle 9.x wrapper 的 Gradle 项目
 
-## Prerequisites
+API 构件包含生成的绑定。构建插件不需要 `wit-bindgen` 或 Rust；Gradle 插件会下载其余构建工具。
 
-Before you start, ensure you have the following installed:
-- JDK 17 or later
-    - To run Gradle 9.4
-- [Rust](https://rust-lang.org/)
-    - This is required as a key component (wit-bindgen) is written and Rust must be built from a particular Kotlin-enabled fork.
-    - You only need a default Rust install for your host platform. NOT for any WebAssembly targets
-- [wasm-tools](https://github.com/bytecodealliance/wasm-tools)
-    - To bundle the Wasm Kotlin produces into a component
-- Make (e.g. [GNU Make](https://www.gnu.org/software/make/))
-    - To run the convenience `Makefile`. You may opt to do without and perform the contained steps manually.
+## 创建插件项目
 
-## Setting up the project
+创建一个名为 `my-kotlin-plugin` 的 Gradle Kotlin DSL 项目。在 `settings.gradle.kts` 中，配置从 Plugin Portal 解析插件、从 Maven Central 解析依赖项：
 
-Unlike most of the other APIs packages available, [pumpkin-api-kt](https://github.com/Pumpkin-MC/pumpkin-api-kt) is a TEMPLATE, not e.g. a Maven package.
+```kotlin [settings.gradle.kts]
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
 
-To start off, clone the template (and rename it as you please):
+rootProject.name = "my-kotlin-plugin"
+```
+
+在 `build.gradle.kts` 中，应用 Kotlin Multiplatform 和 Pumpkin Gradle 插件：
+
+```kotlin [build.gradle.kts]
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+
+plugins {
+    kotlin("multiplatform") version "2.4.0"
+    id("io.github.pumpkin-mc.plugin") version "0.1.0"
+}
+
+repositories {
+    mavenCentral()
+}
+
+kotlin {
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmWasi {
+        nodejs()
+        binaries.executable()
+    }
+}
+
+pumpkin {
+    apiVersion.set("0.1.0")
+    pluginClass.set("example.ExamplePlugin")
+}
+```
+
+`apiVersion` 用于选择 `io.github.pumpkin-mc:pumpkin-api-kt-wasm-wasi` 的发布版本。Gradle 插件会将其源代码添加到 Wasm 目标并生成引导代码，无需单独声明 API 依赖项。
+
+## 编写插件
+
+创建 `src/wasmWasiMain/kotlin/example/ExamplePlugin.kt`。配置的类必须继承 `PumpkinPlugin`，并具有无参数构造函数。如果更改其包名或类名，请更新 `build.gradle.kts` 中的 `pumpkin.pluginClass`。
+
+```kotlin [src/wasmWasiMain/kotlin/example/ExamplePlugin.kt]
+package example
+
+import plugin.PluginContext
+import plugin.PluginMetadata
+import plugin.PumpkinPlugin
+import pumpkin.Logging
+
+class ExamplePlugin : PumpkinPlugin() {
+    override fun metadata() = PluginMetadata(
+        name = "my-kotlin-plugin",
+        version = "0.1.0",
+        authors = listOf("Your name"),
+        description = "My first Kotlin plugin",
+        dependencies = emptyList(),
+        permissions = emptyList(),
+    )
+
+    override fun onLoad(context: PluginContext): Result<Unit> {
+        Logging.log(Logging.Level.INFO, "Hello from Kotlin!")
+        return Result.success(Unit)
+    }
+}
+```
+
+API 实现了 WIT 导出桥接层。Gradle 插件使用 `pumpkin.pluginClass` 生成引导代码，因此插件不需要 `main()` 函数或手动注册。
+
+## 构建并加载
+
+在插件项目中运行：
+
 ```sh
-git clone --recurse-submodules https://github.com/Pumpkin-MC/pumpkin-api-kt
-mv pumpkin-api-kt my_kotlin_plugin
-cd my_kotlin_plugin
+./gradlew build
 ```
 
-Next, we'll want to update the `wit` submodule so we are using the latest version of the Pumpkin plugin API.
+组件将输出到 `build/my-kotlin-plugin.wasm`。将其复制到 Pumpkin 服务器的 `plugins/` 目录，然后启动服务器。
 
-```sh
-cd wit
-git pull origin master
-cd ..
-```
+有关 Kotlin 层的信息，请参阅 [API 概览](./api-overview)；有关类型和操作的信息，请参阅 [WIT 定义](https://github.com/Pumpkin-MC/Pumpkin/tree/60b808ec89e05911c7b33aa3f58f78459105bf30/crates/pumpkin-plugin-wit/v0.1)。[事件](./events)、[任务](./tasks)和[命令](./first-command)指南中提供了示例。
 
-Finally, rename the Gradle project. Change the `rootProject.name` in `settings.gradle.kts`, AND the `PROJECT_NAME` in `Makefile`. They must both match. Whatever you name the project, is going to be the filename of the Wasm produced.
+## 故障排除
 
-## Creating your first plugin
+如果无法解析 Gradle 插件，请检查 `settings.gradle.kts` 中的 `gradlePluginPortal()`。如果无法解析 API 构件，请检查 `build.gradle.kts` 中的 `mavenCentral()`，并确认 `pumpkin.apiVersion` 与你选择的发布版本一致。
 
-As part of the template, a basic plugin is implemented in `src/wasmWasiMain/kotlin/plugin/Plugin.kt`. 
-
-Feel free to modify the metadata at the bottom. However, before changing anything else, it's recommended that you build the plugin (see next section) first so that the bindings are generated and IDE completion works for `pumpkin`.
-
-## Building the plugin
-
-To build your plugin into a WebAssembly component:
-
-```sh
-make
-```
-
-The compiled `.wasm` file will be located in `build`. You can place this file in the `plugins` folder of your Pumpkin server.
-
-Note that doing this the first time might take awhile, while it builds `wit-bindgen` from Rust source.
-
-Running `make` will check for `wit-bindgen` updates each time. You may want to run instead `make componentify` after the initial setup to avoid this.
-
-## Troubleshooting
-
-### Linker errors
-If you start getting errors like
-```
-main ThreadId(01) pumpkin::plugin: Failed to load plugin from
-"./plugins/my_plugin.wasm": Wasm plugin initialization error: plugin failed
-to load with error: component imports instance 'pumpkin:plugin/gui@0.1.0', but
-a matching implementation was not found in the linker
-```
-or other "linker" errors when loading your plugin into Pumpkin, update the `wit` submodule.
-
-```sh
-cd wit
-git pull origin master
-cd ..
-```
+`type-checking export func`、`no export ... found` 或缺少 `pumpkin:plugin/...` 导入等错误，通常意味着插件和服务器基于不同的 WIT 定义构建。请选择与服务器兼容的 API 发布版本，然后重新构建组件。

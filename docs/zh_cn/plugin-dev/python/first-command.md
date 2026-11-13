@@ -1,12 +1,12 @@
-# Creating Your First Command
+# 创建您的第一个命令
 
-Registering and handling custom commands in Pumpkin with Python is designed to be straightforward and expressive.
+在 Pumpkin 中使用 Python 注册和处理自定义命令的设计简单直观且富有表现力。
 
 ---
 
-## 1. Quick Example
+## 1. 快速示例
 
-Here is a complete, minimal Python plugin (`main.py`) that registers a `/hello` command with permission checks and sends a response back to the player.
+下面是一个完整的最小 Python 插件（`main.py`），它注册一个带有权限检查的 `/hello` 命令，并向玩家发送响应。
 
 ```python [main.py]
 from pumpkin_api import (
@@ -29,7 +29,7 @@ class MyPlugin(Plugin):
         )
 
     def on_load(self, ctx: context.Context) -> None:
-        # 1. Register permission node
+        # 1. 注册权限节点
         ctx.register_permission(permission.Permission(
             node="my_python_plugin:hello",
             description="Allows executing the /hello command",
@@ -37,11 +37,11 @@ class MyPlugin(Plugin):
             children=[]
         ))
 
-        # 2. Build the command tree with aliases & executor
+        # 2. 构建带有别名和执行器的命令树
         cmd = command.Command(["hello", "hi"], "Greets the player")
         cmd.execute(HelloCommand())
 
-        # 3. Register the command
+        # 3. 注册命令
         ctx.register_command(cmd, "my_python_plugin:hello")
 
 register_plugin(MyPlugin)
@@ -49,20 +49,20 @@ register_plugin(MyPlugin)
 
 ---
 
-## 2. In-Game Preview
+## 2. 游戏内预览
 
-Once registered, your command automatically gains client-side autocompletion, syntax validation, and color highlighting in Minecraft:
+注册后，您的命令会自动在 Minecraft 中获得客户端自动补全、语法验证和颜色高亮功能：
 
-<img src="/assets/first_command_preview.png" alt="In-Game Command Autocompletion Preview" width="500"/>
+<img src="/assets/first_command_preview.png" alt="游戏内命令自动补全预览" width="500"/>
 
 ---
 
-## 3. How It Works
+## 3. 工作原理
 
-::: details Step-by-Step Breakdown
+::: details 分步解析
 
-### Step 1: Define the Permission
-Commands in Pumpkin require a permission node. Register it with `permission.PermissionDefault.ALLOW` to allow execution by default:
+### 第 1 步：定义权限
+Pumpkin 中的命令需要权限节点。使用 `permission.PermissionDefault.ALLOW` 注册该节点，可默认允许执行命令：
 ```python
 ctx.register_permission(permission.Permission(
     node="my_python_plugin:hello",
@@ -72,15 +72,15 @@ ctx.register_permission(permission.Permission(
 ))
 ```
 
-### Step 2: Build the Command Tree
-Create a `command.Command` instance with primary names and aliases, then attach your handler with `.execute(...)`:
+### 第 2 步：构建命令树
+创建一个带有主名称和别名的 `command.Command` 实例，然后通过 `.execute(...)` 附加处理器：
 ```python
 cmd = command.Command(["hello", "hi"], "Greets the player")
 cmd.execute(HelloCommand())
 ```
 
-### Step 3: Register with Context
-Pass the command tree and permission node string to `ctx.register_command`:
+### 第 3 步：通过 Context 注册
+将命令树和权限节点字符串传递给 `ctx.register_command`：
 ```python
 ctx.register_command(cmd, "my_python_plugin:hello")
 ```
@@ -89,7 +89,7 @@ ctx.register_command(cmd, "my_python_plugin:hello")
 
 ---
 
-## Next Steps
+## 后续步骤
 
-- Check out [Events](./events) to handle player actions and server events in Python.
-- Learn more about [Basic Logic](./basic-logic).
+- 查看[事件](./events)，了解如何在 Python 中处理玩家操作和服务器事件。
+- 进一步了解[基本逻辑](./basic-logic)。

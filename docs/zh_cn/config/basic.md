@@ -1,12 +1,8 @@
-# 基础配置
+# 配置
 
-对应 `pumpkin.toml` 文件
+Pumpkin 使用单个 `pumpkin.toml` 文件配置服务器的各个方面。以下是配置文件的完整结构，包含所有可用配置节及默认值。
 
-## 服务器地址
-
-服务器绑定的地址。
-
-:::code-group
+## 完整的默认 `pumpkin.toml`
 
 ```toml
 seed = "1790155153199293024"
@@ -243,226 +239,25 @@ interval_secs = 300
 public = false
 ```
 
-:::
-
-## 种子
-
-世界生成的种子值。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-seed = ""
-```
-
-:::
-
-## 最大玩家数
-
-服务器允许的最大玩家数量。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-max_players = 100000
-```
-
-:::
-
-## 视距
-
-玩家的最大视距。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-view_distance = 10
-```
-
-:::
-
-## 模拟距离
-
-玩家的最大模拟距离。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-simulation_distance = 10
-```
-
-:::
-
-## 默认难度
-
-默认游戏难度。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-default_difficulty = "Normal"
-```
-
-:::
-
-```toml
-Peaceful # 和平
-Easy # 简单
-Normal # 普通
-Hard # 困难
-```
-
-## 操作权限等级
-
-`/op` 命令分配的权限等级。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-op_permission_level = 4
-```
-
-:::
-
-## 允许下界
-
-是否启用下界维度。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-allow_nether = true
-```
-
-:::
-
-## 允许末地
-
-是否启用末地维度。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-allow_end = true
-```
-
-:::
-
-## 极限模式
-
-服务器是否处于极限模式。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-hardcore = false
-```
-
-:::
-
-## 在线模式
-
-是否启用在线模式。需要有效的 Minecraft 账号。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-online_mode = true
-```
-
-:::
-
-## 加密
-
-是否启用数据包加密。
-
-> [!IMPORTANT]重要
-> 启用在线模式时需要此选项。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-encryption = true
-```
-
-:::
-
-## MOTD
-
-每日信息；在状态屏幕上显示的服务器描述。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-motd = "一款极速的南瓜服务器！"
-```
-
-:::
-
-## TPS
-
-服务器的目标刻率。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-tps = 20.0
-```
-
-:::
-
-## 默认游戏模式
-
-玩家的默认游戏模式。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-default_gamemode = "Survival"
-```
-
-:::
-
-```toml
-Undefined # 未定义
-Survival # 生存模式
-Creative # 创造模式
-Adventure # 冒险模式
-Spectator # 观察者模式
-```
-
-## IP 记录
-
-是否从日志中移除玩家的 IP 地址。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-scrub_ips = true
-```
-
-:::
-
-## 使用图标
-
-是否使用服务器图标。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-use_favicon = true
-```
-
-:::
-
-## 图标路径
-
-服务器图标的路径。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-favicon_path = "icon.png"
-```
-
-:::
+## 设置详解
+
+### 顶层设置
+
+- **`seed`**：用于世界生成的种子字符串。
+- **`default_difficulty`**：默认难度（`"Peaceful"`、`"Easy"`、`"Normal"`、`"Hard"`）。
+- **`op_permission_level`**：分配给管理员的默认权限等级（1–4）。
+- **`allow_nether`**：是否启用下界维度。
+- **`allow_end`**：是否启用末地维度。
+- **`hardcore`**：启用极限模式（玩家无法在生存模式中重生）。
+- **`tps`**：目标每秒 tick 数（默认：`20.0`）。
+- **`default_gamemode`**：默认游戏模式（`"Survival"`、`"Creative"`、`"Adventure"`、`"Spectator"`）。
+- **`force_gamemode`**：强制玩家以默认游戏模式加入。
+- **`scrub_ips`**：在日志中对玩家 IP 地址进行匿名化处理。
+- **`use_favicon`**：启用服务器图标（`icon.png`）。
+- **`favicon_path`**：自定义服务器图标的可选文件路径。
+- **`default_level_name`**：主世界目录的名称（默认：`"world"`）。
+- **`allow_chat_reports`**：启用签名聊天举报（需要 `networking.java.online_mode = true`）。
+- **`white_list`**：启用服务器白名单。
+- **`enforce_whitelist`**：开启白名单时踢出不在白名单中的玩家。
+- **`accepts_transfers`**：此服务器是否接受来自其他服务器传入的玩家跨服转移（Transfer）（默认：`true`，也接受 `accepts-transfers`）。
+- **`spawn_protection`**：世界出生点周围保护区域的方块半径，在此半径内非管理员权限玩家无法破坏或放置方块。设置为 `0` 可禁用出生点保护（默认：`16`）。

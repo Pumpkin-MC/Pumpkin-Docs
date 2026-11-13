@@ -1,65 +1,57 @@
 # 压缩
 
-压缩用于减小数据包的大小。这有利于减少服务器端的带宽使用，并帮助网络连接较慢的玩家。
+数据包压缩可减少 Java 版和基岩版客户端的带宽占用。在 `pumpkin.toml` 中，Java 版与基岩版的网络压缩以及世界区块压缩均可独立配置。
 
-## 配置压缩
+## 网络压缩
 
-#### `enabled`: 布尔值
-
-是否启用数据包压缩。
-
-> [!TIP]提示
-> 如果服务器位于代理后面，禁用压缩可能会更有利。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[packet_compression]
-enabled = true
-```
-
-:::
-
-#### `threshold`: 整数 (0-1024)
-
-服务器尝试压缩数据包前的最小数据包大小。
-
-> [!CAUTION]警告
-> 增加此值可能会对网络连接较慢的玩家造成不良影响。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[packet_compression]
-threshold = 256
-```
-
-:::
-
-#### `level`: 整数 (0-9)
-
-0 到 9 之间的值：0 表示禁用压缩，1 是最快的压缩（以大小为代价），9 是最大的压缩（以速度为代价）。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[packet_compression]
-level = 4
-```
-
-:::
-
-## 默认配置
-
-默认情况下，压缩是启用的。
+### Java 版
 
 :::code-group
 
 ```toml [pumpkin.toml]
-[packet_compression]
+[networking.java.compression]
 enabled = true
 threshold = 256
 level = 4
 ```
 
 :::
+
+### 基岩版
+
+:::code-group
+
+```toml [pumpkin.toml]
+[networking.bedrock.compression]
+enabled = true
+threshold = 256
+level = 4
+```
+
+:::
+
+### 配置选项
+
+- **`enabled`**：启用网络数据包压缩。
+- **`threshold`**：触发压缩所需的最小数据包负载大小（字节）。
+- **`level`**：压缩等级（0 到 9，数值越高，消耗的 CPU 时间越多，但数据包越小）。
+
+## 世界区块压缩
+
+当 `[world.chunk]` 配置为 `type = "anvil"` 时，区块压缩设置控制存储的世界区块数据在磁盘上的压缩方式（默认区块格式为 `"pump"`）。
+
+:::code-group
+
+```toml [pumpkin.toml]
+[world.chunk]
+type = "anvil"
+
+[world.chunk.compression]
+algorithm = "LZ4"
+level = 6
+```
+
+:::
+
+- **`algorithm`**：区块数据使用的压缩算法。支持 `"LZ4"`、`"ZLib"`、`"GZip"` 和 `"Custom"`（默认：`"LZ4"`）。
+- **`level`**：区块数据的压缩等级（默认：`6`）。

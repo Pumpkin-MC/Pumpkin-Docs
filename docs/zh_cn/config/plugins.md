@@ -1,6 +1,6 @@
 # 插件
 
-Pumpkin 提供了基于权能量化安全模型的 WebAssembly (WASM) 插件运行时。插件行为、签名验证及权限均在 `pumpkin.toml` 中的 `[plugins]` 下进行配置。
+Pumpkin 提供了采用基于权能的安全模型的 WebAssembly (WASM) 插件运行时。插件行为、签名验证及权限均在 `pumpkin.toml` 中的 `[plugins]` 下进行配置。
 
 ## 配置
 
@@ -18,7 +18,7 @@ inherit_env = false
 loopback_only = false
 verify_signatures = true
 
-# Optional per-plugin overrides
+# 可选的逐插件覆盖设置
 [plugins.overrides.my_plugin]
 enabled = true
 allow_unsigned = true

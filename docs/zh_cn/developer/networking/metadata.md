@@ -1,86 +1,86 @@
-# Entity Metadata & Synced Data
+# 实体元数据与同步数据
 
-Minecraft synchronizes persistent entity visual states, animation flags, poses, and properties via **Entity Metadata** (historically called *DataWatchers* in Java Edition and *Actor Data* in Bedrock Edition).
+Minecraft 通过**实体元数据**同步实体的持久视觉状态、动画标志、姿势和属性（在 Java 版中历史上称为 *DataWatchers*，在基岩版中称为 *Actor Data*）。
 
-Instead of transmitting full state packets whenever an entity crouches, catches fire, or takes damage, the server broadcasts compact metadata updates to nearby observers.
+当实体潜行、着火或受到伤害时，服务器不会每次都传输完整的状态数据包，而是向附近的观察者广播紧凑的元数据更新。
 
 ---
 
-## Edition Comparison
+## 版本对比
 
-| Feature | Minecraft: Java Edition | Minecraft: Bedrock Edition |
+| 功能 | Minecraft：Java 版 | Minecraft：基岩版 |
 | :--- | :--- | :--- |
-| **Packet Name** | `CSetEntityMetadata` (`SET_ENTITY_DATA`) | `CSetActorData` (Packet ID `39`) |
-| **Storage Structure** | `TrackedData` list terminating with `0xFF` | `SyncedActorDataList` (`HashMap<u32, MetadataValue>`) |
-| **Key Type** | Index (`u8`) mapped to typed `MetaDataType` | Enum keys (`entity_data_key::*`) |
-| **Flags** | Bitfield byte (fire, crouching, sprinting, glowing) | Bitfield int64 (`entity_data_flag::*`) |
-| **Dynamic Properties** | N/A (baked into tracked indices) | `PropertySyncData` (client/server sync) |
-| **Crate Location** | `crates/pumpkin-protocol/src/java/client/play/entity_metadata.rs` | `crates/pumpkin-protocol/src/bedrock/client/set_actor_data.rs` |
+| **数据包名称** | `CSetEntityMetadata`（`SET_ENTITY_DATA`） | `CSetActorData`（数据包 ID `39`） |
+| **存储结构** | 以 `0xFF` 结尾的 `TrackedData` 列表 | `SyncedActorDataList`（`HashMap<u32, MetadataValue>`） |
+| **键类型** | 映射到强类型 `MetaDataType` 的索引（`u8`） | 枚举键（`entity_data_key::*`） |
+| **标志** | 位域字节（着火、潜行、疾跑、发光） | 位域 int64（`entity_data_flag::*`） |
+| **动态属性** | 不适用（内置于被跟踪的索引中） | `PropertySyncData`（客户端/服务器同步） |
+| **Crate 位置** | `crates/pumpkin-protocol/src/java/client/play/entity_metadata.rs` | `crates/pumpkin-protocol/src/bedrock/client/set_actor_data.rs` |
 
 ---
 
-## 1. Java Edition: `CSetEntityMetadata`
+## 1. Java 版：`CSetEntityMetadata`
 
-In Java Edition, entity metadata consists of numbered index entries. Each entry defines an index, a `MetaDataType` ID, and the encoded value. The list terminates with a single `0xFF` byte.
+在 Java 版中，实体元数据由带编号的索引条目组成。每个条目定义一个索引、一个 `MetaDataType` ID 和编码后的值。列表以单个 `0xFF` 字节结束。
 
-### Key Index Hierarchy
+### 键索引层次结构
 
-Entity metadata follows an object-oriented inheritance model:
+实体元数据遵循面向对象的继承模型：
 
-1. **Entity (Base)**:
-   - `0`: State bitfield (flags: bit `0` = on fire, bit `1` = crouching, bit `3` = sprinting, bit `5` = invisible, bit `6` = glowing).
-   - `1`: Air supply (`VarInt`).
-   - `2`: Custom name (optional `TextComponent`).
-   - `3`: Custom name visible (`bool`).
-   - `4`: Silent (`bool`).
-   - `5`: No gravity (`bool`).
-   - `6`: Pose (`Standing`, `FallFlying`, `Sleeping`, `Swimming`, `SpinAttack`, `Crouching`, `Dying`).
-2. **LivingEntity (extends Entity)**:
-   - `8`: Hand states (using item, active hand).
-   - `9`: Health (`f32`).
-   - `10`: Potion effect ambient color.
-3. **Player (extends LivingEntity)**:
-   - Additional hearts, skin customization bitmask, main hand indicator.
+1. **Entity（基类）**：
+   - `0`：状态位域（标志：位 `0` = 着火，位 `1` = 潜行，位 `3` = 疾跑，位 `5` = 隐身，位 `6` = 发光）。
+   - `1`：空气值（`VarInt`）。
+   - `2`：自定义名称（可选 `TextComponent`）。
+   - `3`：自定义名称可见（`bool`）。
+   - `4`：静音（`bool`）。
+   - `5`：无重力（`bool`）。
+   - `6`：姿势（`Standing`、`FallFlying`、`Sleeping`、`Swimming`、`SpinAttack`、`Crouching`、`Dying`）。
+2. **LivingEntity（继承 Entity）**：
+   - `8`：手部状态（正在使用物品、活动手）。
+   - `9`：生命值（`f32`）。
+   - `10`：药水效果的环境粒子颜色。
+3. **Player（继承 LivingEntity）**：
+   - 额外的红心、皮肤自定义位掩码、主手指示器。
 
-### Sending Metadata Updates in Pumpkin
+### 在 Pumpkin 中发送元数据更新
 
-Pumpkin encodes entity metadata in `pumpkin-protocol`:
+Pumpkin 在 `pumpkin-protocol` 中编码实体元数据：
 
 ```rust
 use pumpkin_protocol::VarInt;
 use pumpkin_protocol::java::client::play::CSetEntityMetadata;
 
-// Construct metadata update for entity with ID 42
+// 为 ID 为 42 的实体构造元数据更新
 let packet = CSetEntityMetadata::new(
     VarInt(entity.entity_id),
     serialized_metadata_bytes,
 );
 
-// Broadcast to chunk observers
+// 广播给区块观察者
 world.broadcast_packet_all(&packet).await;
 ```
 
 ---
 
-## 2. Bedrock Edition: `CSetActorData`
+## 2. 基岩版：`CSetActorData`
 
-Bedrock Edition uses `CSetActorData` (`packet(39)`), storing properties in a dictionary mapping `u32` keys to strongly-typed `MetadataValue` variants.
+基岩版使用 `CSetActorData`（`packet(39)`），将属性存储在把 `u32` 键映射到强类型 `MetadataValue` 变体的字典中。
 
-### Key & Flag Constants
+### 键与标志常量
 
-Bedrock exposes flags as a 64-bit integer bitfield under `entity_data_key::FLAGS`:
+基岩版在 `entity_data_key::FLAGS` 下以 64 位整数位域的形式提供标志：
 
-- `entity_data_flag::ON_FIRE` (`0`): Entity is burning.
-- `entity_data_flag::SNEAKING` (`1`): Player is sneaking.
-- `entity_data_flag::RIDING` (`2`): Entity is mounted on a vehicle.
-- `entity_data_flag::SPRINTING` (`3`): Player is sprinting.
-- `entity_data_flag::USING_ITEM` (`4`): Player is actively charging a bow, eating food, or using a shield.
-- `entity_data_flag::INVISIBLE` (`5`): Entity is invisible.
-- `entity_data_flag::GLOWING` (`26`): Entity has the glowing effect outline.
+- `entity_data_flag::ON_FIRE`（`0`）：实体正在燃烧。
+- `entity_data_flag::SNEAKING`（`1`）：玩家正在潜行。
+- `entity_data_flag::RIDING`（`2`）：实体正在骑乘坐骑。
+- `entity_data_flag::SPRINTING`（`3`）：玩家正在疾跑。
+- `entity_data_flag::USING_ITEM`（`4`）：玩家正在拉弓、进食或使用盾牌。
+- `entity_data_flag::INVISIBLE`（`5`）：实体处于隐身状态。
+- `entity_data_flag::GLOWING`（`26`）：实体具有发光效果的轮廓。
 
-### Constructing and Updating Actor Data in Pumpkin
+### 在 Pumpkin 中构造和更新 Actor Data
 
-In `crates/pumpkin/src/entity/living.rs`:
+位于 `crates/pumpkin/src/entity/living.rs`：
 
 ```rust
 use pumpkin_protocol::bedrock::client::set_actor_data::{
@@ -90,17 +90,17 @@ use pumpkin_protocol::bedrock::client::set_actor_data::{
 
 let mut actor_data = SyncedActorDataList::new();
 
-// Set entity flags (e.g. actively using an item)
+// 设置实体标志（例如正在使用物品）
 let mut flags: i64 = 0;
 if is_using_item {
     flags |= 1i64 << entity_data_flag::USING_ITEM;
 }
 actor_data.set(entity_data_key::FLAGS, MetadataValue::Int64(flags));
 
-// Set air supply
+// 设置空气值
 actor_data.set(entity_data_key::AIR_SUPPLY, MetadataValue::Short(air as i16));
 
-// Set custom name tag
+// 设置自定义名称标签
 actor_data.set(entity_data_key::NAME, MetadataValue::String(name));
 
 let packet = CSetActorData {
@@ -115,9 +115,9 @@ client.try_enqueue_client_packet(&packet);
 
 ---
 
-## Multi-Version Compatibility
+## 多版本兼容性
 
-Because Mojang frequently shifts metadata indices between Minecraft releases, `pumpkin-protocol` leverages translation tables from `pumpkin-data`:
+由于 Mojang 经常在 Minecraft 的不同版本之间调整元数据索引，`pumpkin-protocol` 会利用 `pumpkin-data` 中的转换表：
 
-- For Java Edition, `pumpkin_data::meta_data_type::MetaDataType` remaps indices dynamically based on the client's `JavaMinecraftVersion`.
-- For Bedrock Edition, `SyncedActorDataList` validates keys against the active Bedrock protocol version to prevent client crashes.
+- 对于 Java 版，`pumpkin_data::meta_data_type::MetaDataType` 会根据客户端的 `JavaMinecraftVersion` 动态重新映射索引。
+- 对于基岩版，`SyncedActorDataList` 会根据当前基岩版协议版本验证键，以防止客户端崩溃。

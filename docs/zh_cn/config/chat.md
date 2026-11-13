@@ -13,6 +13,8 @@ format = "<{DISPLAYNAME}> {MESSAGE}"
 [chat.anti_spam]
 enabled = true
 spam_threshold = 200
+# chat_spam_threshold_seconds = 10
+# command_spam_threshold_seconds = 10
 message_cost = 20
 decay_per_tick = 1
 ops_bypass = true
@@ -33,7 +35,9 @@ ops_bypass = true
 Pumpkin 实现了漏桶算法垃圾信息计数器，以防止刷屏玩家和机器人泛洪攻击服务器：
 
 - **`enabled`**：是否启用反垃圾信息保护（默认：`true`）。
-- **`spam_threshold`**：踢出玩家的垃圾信息计数器阈值（以 Tick 为单位，默认：`200` Tick）。
+- **`spam_threshold`**：踢出玩家的传统基于 Tick 的垃圾信息计数器阈值（默认：`200` Tick）。
+- **`chat_spam_threshold_seconds`**：（可选）以秒为单位的聊天垃圾信息阈值（也接受 `chat-spam-threshold-seconds`）。设置后将覆盖聊天消息的传统 `spam_threshold`（`秒数 * 20` Tick）。
+- **`command_spam_threshold_seconds`**：（可选）以秒为单位的命令垃圾信息阈值（也接受 `command-spam-threshold-seconds`）。设置后将覆盖命令执行的传统 `spam_threshold`（`秒数 * 20` Tick）。
 - **`message_cost`**：每发送一条聊天消息或命令时，玩家垃圾信息计数器增加的数值（默认：`20` Tick）。
 - **`decay_per_tick`**：服务器每 Tick 从玩家垃圾信息计数器中衰减扣除的数值（默认：`1` Tick）。
 - **`ops_bypass`**：服务器管理员（OP）是否绕过反垃圾信息检查（默认：`true`）。

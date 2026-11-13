@@ -1,50 +1,50 @@
-# Velocity Modern Forwarding
+# Velocity 现代转发
 
-[Velocity](https://papermc.io/software/velocity) is a high-performance proxy created by PaperMC. It uses modern plugin messaging during the `Login` state to securely transmit player data with **HMAC-SHA256** message authentication codes.
+[Velocity](https://papermc.io/software/velocity) 是 PaperMC 创建的高性能代理。它在 `Login` 状态期间使用现代插件消息，通过 **HMAC-SHA256** 消息身份验证码安全地传输玩家数据。
 
-Pumpkin implements Velocity modern forwarding in [`crates/pumpkin/src/net/proxy/velocity.rs`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin/src/net/proxy/velocity.rs).
-
----
-
-## How Velocity Forwarding Operates
-
-Unlike BungeeCord, which injects unauthenticated data into the handshake string, Velocity operates during the **Login** state over a dedicated plugin channel:
-
-1. **Handshake & Login**: The player authenticates with Velocity. Velocity initiates a standard TCP connection to Pumpkin and transmits `SHandshake` and `SLoginStart`.
-2. **Channel Query**: Recognizing that Velocity modern forwarding is enabled, Pumpkin pauses the login sequence and dispatches a `CLoginPluginRequest` on channel `velocity:player_info`.
-3. **Payload Generation**: Velocity bundles the player's remote address, UUID, username, and skin textures. It calculates a 32-byte HMAC-SHA256 signature across this payload using the shared secret.
-4. **Signature Verification**: Velocity sends `SLoginPluginResponse`. Pumpkin validates the HMAC-SHA256 digest against its configured secret. If valid, Pumpkin overwrites the connection's network address and GameProfile and transitions to `Config` / `Play`.
+Pumpkin 在 [`crates/pumpkin/src/net/proxy/velocity.rs`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin/src/net/proxy/velocity.rs) 中实现了 Velocity 现代转发。
 
 ---
 
-## Wire Payload Structure
+## Velocity 转发的工作方式
 
-The payload in `SLoginPluginResponse` is structured as follows:
+与将未经验证的数据注入握手字符串的 BungeeCord 不同，Velocity 在**登录**状态期间通过专用插件通道工作：
+
+1. **握手与登录**：玩家通过 Velocity 进行身份验证。Velocity 发起与 Pumpkin 的标准 TCP 连接，并传输 `SHandshake` 和 `SLoginStart`。
+2. **通道查询**：识别到 Velocity 现代转发已启用后，Pumpkin 暂停登录序列，并在 `velocity:player_info` 通道上分发 `CLoginPluginRequest`。
+3. **生成负载**：Velocity 打包玩家的远程地址、UUID、用户名和皮肤纹理，并使用共享密钥计算此负载的 32 字节 HMAC-SHA256 签名。
+4. **签名验证**：Velocity 发送 `SLoginPluginResponse`。Pumpkin 根据配置的密钥验证 HMAC-SHA256 摘要。如果有效，Pumpkin 会覆盖连接的网络地址和 GameProfile，并转换到 `Config` / `Play`。
+
+---
+
+## 线路负载结构
+
+`SLoginPluginResponse` 中的负载结构如下：
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
-│ 32-byte HMAC-SHA256 Signature                               │
+│ 32 字节 HMAC-SHA256 签名                                    │
 ├─────────────────────────────────────────────────────────────┤
-│ Forwarding Protocol Version (VarInt: 1 - 4)                 │
+│ 转发协议版本（VarInt：1 - 4）                               │
 ├─────────────────────────────────────────────────────────────┤
-│ Client Remote IP Address (String / IPv4 / IPv6)             │
+│ 客户端远程 IP 地址（String / IPv4 / IPv6）                  │
 ├─────────────────────────────────────────────────────────────┤
-│ Player UUID (128-bit / UUID)                                │
+│ 玩家 UUID（128 位 / UUID）                                  │
 ├─────────────────────────────────────────────────────────────┤
-│ Player Username (String)                                    │
+│ 玩家用户名（String）                                        │
 ├─────────────────────────────────────────────────────────────┤
-│ Profile Properties Count (VarInt)                           │
-│  ├─ Property Name (String)                                  │
-│  ├─ Property Value (String)                                 │
-│  └─ Optional Signature (String)                             │
+│ 档案属性数量（VarInt）                                      │
+│  ├─ 属性名称（String）                                      │
+│  ├─ 属性值（String）                                        │
+│  └─ 可选签名（String）                                      │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Cryptographic Validation in Pumpkin
+## Pumpkin 中的加密验证
 
-Inside `crates/pumpkin/src/net/proxy/velocity.rs`:
+位于 `crates/pumpkin/src/net/proxy/velocity.rs`：
 
 ```rust
 use hmac::{Hmac, KeyInit, Mac};
@@ -52,32 +52,32 @@ use sha2::Sha256;
 
 type HmacSha256 = Hmac<Sha256>;
 
-// Extract signature and payload
+// 提取签名和负载
 let (signature, data_to_verify) = data.split_at(32);
 
-// Initialize HMAC with secret from pumpkin.toml
+// 使用 pumpkin.toml 中的密钥初始化 HMAC
 let mut mac = HmacSha256::new_from_slice(secret.as_bytes())
     .map_err(|_| VelocityError::FailedVerifyIntegrity)?;
 
 mac.update(data_to_verify);
 
-// Constant-time verification prevents timing attacks
+// 常数时间验证可防止计时攻击
 mac.verify_slice(signature)
     .map_err(|_| VelocityError::FailedVerifyIntegrity)?;
 ```
 
-If the signature does not match (e.g., if an attacker attempts to connect directly to the backend without knowing the secret), Pumpkin drops the connection immediately.
+如果签名不匹配（例如攻击者不知道密钥并试图直接连接后端），Pumpkin 会立即断开连接。
 
 ---
 
-## Configuration in `pumpkin.toml`
+## 在 `pumpkin.toml` 中配置
 
-1. Open `velocity.toml` on your Velocity proxy and set:
+1. 打开 Velocity 代理上的 `velocity.toml` 并设置：
    ```toml
    player-info-forwarding-mode = "modern"
    forwarding-secret-file = "forwarding.secret"
    ```
-2. Copy the generated secret string from `forwarding.secret` into `pumpkin.toml`:
+2. 将 `forwarding.secret` 中生成的密钥字符串复制到 `pumpkin.toml`：
    ```toml
    [networking.proxy]
    enabled = true

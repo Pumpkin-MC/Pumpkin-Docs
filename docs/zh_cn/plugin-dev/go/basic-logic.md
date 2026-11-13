@@ -1,8 +1,8 @@
-# Writing the basic logic
+# 编写基本逻辑
 
-## Plugin Entry Point
+## 插件入口点
 
-In Go, your plugin must implement the `api.Plugin` interface and register itself in the `init()` function. You also need to import `wit_exports` for WebAssembly compatibility.
+在 Go 中，插件必须实现 `api.Plugin` 接口，并在 `init()` 函数中注册自身。你还需要导入 `wit_exports` 以兼容 WebAssembly。
 
 :::code-group
 
@@ -13,7 +13,7 @@ import (
 	"github.com/Pumpkin-MC/pumpkin-api-go/api"
 	"github.com/Pumpkin-MC/pumpkin-api-go/pkg/pumpkin_plugin_context"
 	"github.com/Pumpkin-MC/pumpkin-api-go/pkg/pumpkin_plugin_logging"
-	_ "github.com/Pumpkin-MC/pumpkin-api-go/pkg/wit_exports" // Required for WASM exports
+	_ "github.com/Pumpkin-MC/pumpkin-api-go/pkg/wit_exports" // WASM 导出所需
 )
 
 type MyPlugin struct {
@@ -41,20 +41,20 @@ func main() {}
 
 :::
 
-## Compiling the plugin
+## 编译插件
 
-To compile your plugin to WebAssembly, you must use **TinyGo**. The standard Go compiler does not yet support the specific WASI targets required by Pumpkin in the same way.
+要将插件编译为 WebAssembly，必须使用 **TinyGo**。标准 Go 编译器尚未以相同方式支持 Pumpkin 所需的特定 WASI 目标。
 
-Run the following command in your project folder:
+在项目文件夹中运行以下命令：
 
 ```bash
 tinygo build -o my_plugin.wasm -target=wasi main.go
 ```
 
-This will generate a `my_plugin.wasm` file that can be loaded by Pumpkin.
+这会生成一个可由 Pumpkin 加载的 `my_plugin.wasm` 文件。
 
-## Testing the plugin
+## 测试插件
 
-Installing a plugin is as simple as putting the plugin binary (`.wasm`) into the `plugins/` folder of your Pumpkin server!
+安装插件非常简单，只需将插件二进制文件（`.wasm`）放入 Pumpkin 服务器的 `plugins/` 文件夹！
 
-When you start up the server and run the `/plugins` command, you should see your plugin listed.
+启动服务器并运行 `/plugins` 命令后，你应该能在列表中看到你的插件。

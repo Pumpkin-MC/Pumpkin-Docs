@@ -1,38 +1,38 @@
-# Basic Logic
+# 基本逻辑
 
-This section covers the basic structure of a Pumpkin plugin in Python.
+本节介绍 Python Pumpkin 插件的基本结构。
 
-## Plugin Class
+## 插件类
 
-Every Python plugin must inherit from the `Plugin` class. This class provides the base structure and methods needed for the server to interact with your plugin.
+每个 Python 插件都必须继承 `Plugin` 类。该类提供服务器与插件交互所需的基础结构和方法。
 
 ```python
 from pumpkin_api import Plugin, PluginMetadata, context
 
 class MyPlugin(Plugin):
     def metadata(self) -> PluginMetadata:
-        # Define plugin metadata here
+        # 在此处定义插件元数据
         pass
 
     def on_load(self, ctx: context.Context) -> None:
-        # Code to run when the plugin is loaded
+        # 插件加载时要运行的代码
         pass
 
     def on_unload(self, ctx: context.Context) -> None:
-        # Code to run when the plugin is unloaded
+        # 插件卸载时要运行的代码
         pass
 ```
 
-## Plugin Metadata
+## 插件元数据
 
-The `metadata` method must return a `PluginMetadata` object, which contains information about your plugin.
+`metadata` 方法必须返回一个 `PluginMetadata` 对象，其中包含插件的相关信息。
 
-- `name`: The name of your plugin.
-- `version`: The version of your plugin.
-- `authors`: A list of authors.
-- `description`: A short description of what your plugin does.
+- `name`：插件的名称。
+- `version`：插件的版本。
+- `authors`：作者列表。
+- `description`：插件功能的简短描述。
 
-## Loading and Unloading
+## 加载与卸载
 
-- `on_load`: This method is called when the server loads your plugin. You should use this to register events, commands, and perform any initialization.
-- `on_unload`: This method is called when the server unloads your plugin. Use this for cleanup if necessary.
+- `on_load`：服务器加载插件时调用此方法。您应使用此方法注册事件和命令，并执行所有初始化操作。
+- `on_unload`：服务器卸载插件时调用此方法。如有必要，可使用此方法进行清理。

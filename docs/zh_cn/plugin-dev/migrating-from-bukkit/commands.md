@@ -1,30 +1,30 @@
 # 从 Bukkit 迁移命令
 
-在 Bukkit 中，命令通常在 `plugin.yml` 中定义，并通过 `CommandExecutor` 类或 Brigadier 库进行处理。 
+在 Bukkit 中，命令在 `plugin.yml` 中定义，并通过 `CommandExecutor` 类或 Brigadier 库处理。
 
-而在 Pumpkin 中，命令使用**受 Brigadier 启发的命令树**构建，并通过 `context.register_command` 以编程方式进行注册。不需要使用任何 YAML 配置文件。
+在 Pumpkin 中，命令使用**受 Brigadier 启发的命令树**构建，并通过 `context.register_command` 以编程方式注册。无需使用 YAML 配置文件。
 
 ---
 
-## 核心差异
+## 主要区别
 
-| 特性 | Bukkit / Spigot | Pumpkin |
+| 功能 | Bukkit / Spigot | Pumpkin |
 | :--- | :--- | :--- |
-| **命令声明** | 在 `plugin.yml` 的 `commands:` 下声明 | 在代码中使用 `Command::new(...)` 构建 |
-| **权限控制** | 在 `plugin.yml` 中关联或通过 `player.hasPermission()` 检查 | 在 `register_command()` 时绑定显式权限节点 |
-| **Tab 补全** | 在 `TabCompleter` 中手动进行字符串匹配 | 基于命令树在客户端自动完成 Tab 补全 |
-| **子命令** | 手动判断 `if (args[0].equalsIgnoreCase("..."))` | 嵌套的 `Command` 命令树节点 |
+| **声明** | 在 `plugin.yml` 的 `commands:` 下声明 | 在代码中使用 `Command::new(...)` 构建 |
+| **权限** | 在 `plugin.yml` 中关联，或通过 `player.hasPermission()` 检查 | 在 `register_command()` 期间显式绑定权限节点 |
+| **Tab 补全** | 在 `TabCompleter` 中手动匹配字符串 | 基于命令树自动进行客户端 Tab 补全 |
+| **子命令** | 手动编写 `if (args[0].equalsIgnoreCase("..."))` | 嵌套的 `Command` 树节点 |
 
 ---
 
 ## 代码对比：简单命令
 
-对比在 Bukkit 与 Pumpkin 中注册 `/feed` 命令的实现方式：
+对比在 Bukkit 与 Pumpkin 中注册 `/feed` 命令的方式：
 
-### 1. Bukkit 实现 (Java)
+### 1. Bukkit 实现（Java）
 
 ```java [FeedCommand.java]
-// 1. Registered in plugin.yml:
+// 1. 在 plugin.yml 中注册：
 // commands:
 //   feed:
 //     description: Feeds the player
@@ -83,8 +83,8 @@ impl Plugin for MyPlugin {
         }
     }
 
-    fn on_load(&mut self, context: Context) -> pumpkin_plugin_api::Result<()> {
-        // 1. Register permission node (Replaces plugin.yml permission)
+    fn on_load(&self, context: Context) -> pumpkin_plugin_api::Result<()> {
+        // 1. 注册权限节点（替换 plugin.yml 权限）
         context.register_permission(&Permission {
             node: "feed_plugin:feed".to_string(),
             description: "Allows executing /feed".to_string(),
@@ -92,11 +92,11 @@ impl Plugin for MyPlugin {
             children: Vec::new(),
         })?;
 
-        // 2. Build command tree
+        // 2. 构建命令树
         let command = Command::new(&["feed".to_string(), "eat".to_string()], "Feeds the player")
             .execute(FeedExecutor);
 
-        // 3. Register with context
+        // 3. 通过 context 注册
         context.register_command(command, "feed_plugin:feed")?;
 
         Ok(())
@@ -131,7 +131,7 @@ class FeedPlugin(Plugin):
         cmd.execute(FeedExecutor())
         ctx.register_command(cmd, "feed_plugin:feed")
 
-        register_plugin(FeedPlugin)
+register_plugin(FeedPlugin)
 ```
 
 ```kotlin [Kotlin]

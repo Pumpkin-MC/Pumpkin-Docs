@@ -18,6 +18,7 @@
 探索以下管理指南：
 
 - [从 Bukkit / Paper / Spigot 服务器迁移](./migrating-from-bukkit) — 服务器管理、插件、世界存储和性能方面的核心差异。
+- [服主与托管服务商指南](./server-hosters) — 为 Pumpkin 适配托管面板、容器、端口分配及生命周期钩子。
 - [服务器配置](../config/introduction) — `pumpkin.toml` 设置的详细分解说明。
 - [代理设置](../config/proxy) — 配置 BungeeCord 与 Velocity 玩家转发。
 - [命令与权限](../config/commands) — 管理游戏内管理员命令与权限。
