@@ -6,11 +6,11 @@ The complete code for this plugin can be found as a [template on GitHub](https:/
 
 ## Installing the toolchain
 
-Before we can compile a plugin, we have to have the `wasm32-wasip2` target installed. You can install the target
+Before we can compile a plugin, we have to have the `wasm32-wasip3` target installed. You can install the target
 by running:
 
 ```bash
-rustup target add wasm32-wasip2
+rustup target add wasm32-wasip3
 ```
 
 ## Initializing a new crate
@@ -26,7 +26,7 @@ contents
 
 ```toml [config.toml]
 [build]
-target = "wasm32-wasip2"
+target = "wasm32-wasip3"
 ```
 
 Altogether your new folder structure should look like this:

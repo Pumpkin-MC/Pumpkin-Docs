@@ -104,10 +104,10 @@ mixin RegisterPlugin!MyPlugin;
 
 ## 3. プラグインのビルド
 
-`wasm32-wasip2` をターゲットとしてWebAssemblyコンポーネントをビルドします:
+`wasm32-wasip3` をターゲットとしてWebAssemblyコンポーネントをビルドします:
 
 ```bash
-dub build -b release -a wasm32-wasip2
+dub build -b release -a wasm32-wasip3
 ```
 
 プロジェクトルートに `my-d-plugin.wasm` が生成されます。
