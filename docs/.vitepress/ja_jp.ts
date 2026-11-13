@@ -8,6 +8,26 @@ export const jaJP = defineConfig({
         siteTitle: "Pumpkin Docs",
         search: {
             provider: "local",
+            options: {
+                translations: {
+                    button: { buttonText: "検索", buttonAriaLabel: "検索" },
+                    modal: {
+                        displayDetails: "詳細リストを表示",
+                        resetButtonTitle: "検索をリセット",
+                        backButtonTitle: "検索を閉じる",
+                        noResultsText: "一致する結果がありません",
+                        footer: {
+                            selectText: "で選択",
+                            selectKeyAriaLabel: "Enter",
+                            navigateText: "で移動",
+                            navigateUpKeyAriaLabel: "上矢印",
+                            navigateDownKeyAriaLabel: "下矢印",
+                            closeText: "で閉じる",
+                            closeKeyAriaLabel: "Esc"
+                        }
+                    }
+                },
+            },
         },
         nav: [
             {
