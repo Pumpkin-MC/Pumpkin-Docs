@@ -1,21 +1,21 @@
-# Adding a Block Behavior
+# 添加方块行为
 
-This guide walks through implementing interactive behavior for a block in Pumpkin.
-
----
-
-## When Is a Behavior Needed?
-
-- **Non-Interactive Blocks** (e.g., stone, dirt, terracotta): Do **not** require any custom Rust code. Their breaking speeds, hardness, and placement properties are automatically derived from `pumpkin-data`.
-- **Interactive or Functional Blocks** (e.g., doors, chests, levers, crops, campfires, TNT): Require an implementation of the `BlockBehaviour` trait to respond to player clicks, redstone signals, physics steps, or timer ticks.
+本指南介绍如何在 Pumpkin 中为方块实现交互行为。
 
 ---
 
-## Step 1: Create the Behavior Struct
+## 何时需要行为？
 
-Create a new file under `crates/pumpkin/src/block/blocks/<category>/<block_name>.rs` (or directly in `crates/pumpkin/src/block/blocks/`).
+- **非交互方块**（例如石头、泥土、陶瓦）：**不需要**任何自定义 Rust 代码。它们的破坏速度、硬度和放置属性会自动从 `pumpkin-data` 派生。
+- **交互或功能方块**（例如门、箱子、拉杆、作物、营火、TNT）：需要实现 `BlockBehaviour` trait，以响应玩家点击、红石信号、物理步进或计时器 tick 更新。
 
-Use the `#[pumpkin_block(...)]` macro to associate your behavior struct with one or more vanilla block identifiers:
+---
+
+## 第 1 步：创建行为结构体
+
+在 `crates/pumpkin/src/block/blocks/<category>/<block_name>.rs` 下创建新文件（也可直接放在 `crates/pumpkin/src/block/blocks/` 中）。
+
+使用 `#[pumpkin_block(...)]` 宏将行为结构体与一个或多个原版方块标识符关联：
 
 ```rust
 use std::sync::Arc;
@@ -29,7 +29,7 @@ use crate::block::{
 };
 use crate::world::World;
 
-/// Associates this behavior struct with one or multiple block IDs.
+/// 将此行为结构体与一个或多个方块 ID 关联。
 #[pumpkin_block([
     "minecraft:oak_door",
     "minecraft:iron_door",
@@ -42,12 +42,12 @@ impl BlockBehaviour for DoorBlock {
     fn normal_use(&self, args: NormalUseArgs<'_>) -> BlockActionResult {
         let state_id = args.world.get_block_state(args.location).await;
 
-        // Iron doors require redstone power and cannot be opened manually by hand
+        // 铁门需要红石信号，无法徒手打开
         if args.block.id == pumpkin_data::Block::IRON_DOOR.id {
             return BlockActionResult::Pass;
         }
 
-        // Toggle open state
+        // 切换开启状态
         let is_open = DoorLikeProperties::open(state_id);
         let new_state = DoorLikeProperties::with_open(state_id, !is_open);
         args.world.set_block_state(args.location, new_state).await;
@@ -56,78 +56,78 @@ impl BlockBehaviour for DoorBlock {
     }
 
     fn on_neighbor_update(&self, args: OnNeighborUpdateArgs<'_>) {
-        // Handle neighbor redstone signals or support block destruction
+        // 处理相邻方块的红石信号或支撑方块破坏
     }
 }
 ```
 
 ---
 
-## Step 2: `BlockBehaviour` Hook Reference
+## 第 2 步：`BlockBehaviour` 钩子参考
 
-The `BlockBehaviour` trait exposes lifecycle hooks modeled on vanilla mechanics:
+`BlockBehaviour` trait 公开了以原版机制为模型的生命周期钩子：
 
-### Player & Item Interaction Hooks
+### 玩家与物品交互钩子
 
-| Hook | Signature | Description |
+| 钩子 | 签名 | 说明 |
 | :--- | :--- | :--- |
-| `normal_use` | `(&self, args: NormalUseArgs<'_>) -> BlockActionResult` | Triggered when right-clicking the block with an empty hand. |
-| `use_with_item` | `(&self, args: UseWithItemArgs<'_>) -> BlockActionResult` | Triggered when right-clicking the block while holding an item. |
-| `get_screen_handler_factory` | `(&self, args: GetScreenHandlerFactoryArgs<'_>) -> Option<Box<dyn ScreenHandlerFactory>>` | Returns an inventory container factory to open a UI screen (e.g., Chests, Crafting Tables). |
+| `normal_use` | `(&self, args: NormalUseArgs<'_>) -> BlockActionResult` | 空手右键点击方块时触发。 |
+| `use_with_item` | `(&self, args: UseWithItemArgs<'_>) -> BlockActionResult` | 手持物品右键点击方块时触发。 |
+| `get_screen_handler_factory` | `(&self, args: GetScreenHandlerFactoryArgs<'_>) -> Option<Box<dyn ScreenHandlerFactory>>` | 返回用于打开 UI 界面的物品栏容器工厂（例如箱子、工作台）。 |
 
-### World Lifecycle & Physics Hooks
+### 世界生命周期与物理钩子
 
-| Hook | Signature | Description |
+| 钩子 | 签名 | 说明 |
 | :--- | :--- | :--- |
-| `placed` | `(&self, args: PlacedArgs<'_>)` | Triggered immediately after the block is placed in the world. |
-| `broken` | `(&self, args: BrokenArgs<'_>)` | Triggered when broken by a player or game mechanics. |
-| `on_entity_collision` | `(&self, args: OnEntityCollisionArgs<'_>)` | Triggered when an entity walks inside, steps on, or falls into the block. |
-| `on_neighbor_update` | `(&self, args: OnNeighborUpdateArgs<'_>)` | Triggered when an adjacent block state updates or is destroyed. |
-| `on_projectile_hit` | `(&self, args: OnProjectileHitArgs<'_>)` | Triggered when an arrow, snowball, or projectile strikes the block. |
+| `placed` | `(&self, args: PlacedArgs<'_>)` | 方块放置到世界中后立即触发。 |
+| `broken` | `(&self, args: BrokenArgs<'_>)` | 被玩家或游戏机制破坏时触发。 |
+| `on_entity_collision` | `(&self, args: OnEntityCollisionArgs<'_>)` | 实体走进、踩到或落入方块时触发。 |
+| `on_neighbor_update` | `(&self, args: OnNeighborUpdateArgs<'_>)` | 相邻方块状态更新或被破坏时触发。 |
+| `on_projectile_hit` | `(&self, args: OnProjectileHitArgs<'_>)` | 箭、雪球或其他弹射物击中方块时触发。 |
 
-### Redstone & Power Hooks
+### 红石与能量钩子
 
-| Hook | Signature | Description |
+| 钩子 | 签名 | 说明 |
 | :--- | :--- | :--- |
-| `emits_redstone_power` | `(&self, state_id: BlockStateId) -> bool` | Declares whether the block emits redstone power to neighbors. |
-| `get_weak_redstone_power` | `(&self, ...) -> u8` | Returns emitted weak power level (0–15). |
-| `get_strong_redstone_power` | `(&self, ...) -> u8` | Returns emitted strong direct power level (0–15). |
+| `emits_redstone_power` | `(&self, state_id: BlockStateId) -> bool` | 声明方块是否向相邻方块输出红石信号。 |
+| `get_weak_redstone_power` | `(&self, ...) -> u8` | 返回输出的弱充能等级（0–15）。 |
+| `get_strong_redstone_power` | `(&self, ...) -> u8` | 返回输出的强直接充能等级（0–15）。 |
 
-### Foliage & Bonemeal Hooks
+### 植物与骨粉钩子
 
-| Hook | Signature | Description |
+| 钩子 | 签名 | 说明 |
 | :--- | :--- | :--- |
-| `is_valid_bonemeal_target` | `(&self, args: BonemealArgs<'_>) -> bool` | Checks if bone meal can be applied (e.g., crop not fully grown). |
-| `is_bonemeal_success` | `(&self, args: BonemealArgs<'_>) -> bool` | Evaluates random chance roll for bone meal success. |
-| `perform_bonemeal` | `(&self, args: BonemealArgs<'_>)` | Advances growth stages or spawns adjacent flora. |
+| `is_valid_bonemeal_target` | `(&self, args: BonemealArgs<'_>) -> bool` | 检查是否可以使用骨粉（例如作物尚未完全成熟）。 |
+| `is_bonemeal_success` | `(&self, args: BonemealArgs<'_>) -> bool` | 计算骨粉是否成功的随机概率。 |
+| `perform_bonemeal` | `(&self, args: BonemealArgs<'_>)` | 推进生长阶段或在相邻位置生成植物。 |
 
 ---
 
-## Step 3: Modifying Block States
+## 第 3 步：修改方块状态
 
-All block properties are strongly typed in `pumpkin_data::block_properties`:
+`pumpkin_data::block_properties` 中的所有方块属性都是强类型的：
 
 ```rust
 use pumpkin_data::block_properties::{BedLikeProperties, Part};
 
-// 1. Read typed properties from the numeric BlockStateId
-let part = BedLikeProperties::part(state_id); // Part::Head or Part::Foot
+// 1. 从数字 BlockStateId 读取类型化属性
+let part = BedLikeProperties::part(state_id); // Part::Head 或 Part::Foot
 let is_occupied = BedLikeProperties::occupied(state_id);
 
-// 2. Generate a new BlockStateId with updated properties
+// 2. 生成属性已更新的新 BlockStateId
 let updated_state = BedLikeProperties::with_occupied(state_id, true);
 
-// 3. Commit the updated state to the world
+// 3. 将更新后的状态提交到世界
 world.set_block_state(pos, updated_state).await;
 ```
 
 ---
 
-## Step 4: Adding a Block Entity (Tile Entity)
+## 第 4 步：添加方块实体（Tile Entity）
 
-If your block needs to store persistent custom state (inventories, custom text, timers):
+如果你的方块需要存储持久化的自定义状态（物品栏、自定义文本、计时器）：
 
-1. Create a block entity struct in `crates/pumpkin/src/block/entities/`:
+1. 在 `crates/pumpkin/src/block/entities/` 中创建方块实体结构体：
    ```rust
    use pumpkin_util::math::position::BlockPos;
    use crate::block::entities::BlockEntity;
@@ -151,12 +151,12 @@ If your block needs to store persistent custom state (inventories, custom text, 
        }
 
        fn tick(&mut self, world: &std::sync::Arc<crate::world::World>, pos: &BlockPos) {
-           // Periodic logic per game tick
+           // 每 tick 执行一次的周期逻辑
        }
    }
    ```
 
-2. Link the block entity in your `BlockBehaviour`:
+2. 在你的 `BlockBehaviour` 中关联方块实体：
    ```rust
    impl BlockBehaviour for CustomBlock {
        fn create_block_entity(&self, pos: BlockPos) -> Option<Arc<Mutex<dyn BlockEntity>>> {
@@ -167,16 +167,16 @@ If your block needs to store persistent custom state (inventories, custom text, 
 
 ---
 
-## Step 5: Registering the Block
+## 第 5 步：注册方块
 
-1. Export your module in `crates/pumpkin/src/block/blocks/mod.rs`:
+1. 在 `crates/pumpkin/src/block/blocks/mod.rs` 中导出你的模块：
    ```rust
    pub mod doors;
    ```
 
-2. Register the behavior struct in `crates/pumpkin/src/block/registry.rs`:
+2. 在 `crates/pumpkin/src/block/registry.rs` 中注册行为结构体：
    ```rust
    manager.register(DoorBlock);
    ```
 
-At startup, `manager.register` automatically reads the block IDs declared in `#[pumpkin_block(...)]` and routes interactions to your implementation.
+启动时，`manager.register` 会自动读取 `#[pumpkin_block(...)]` 中声明的方块 ID，并将交互路由到你的实现。

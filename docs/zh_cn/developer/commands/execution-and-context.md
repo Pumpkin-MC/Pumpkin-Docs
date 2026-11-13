@@ -1,22 +1,23 @@
-# Execution & Context
+# 执行与上下文
 
-In Pumpkin, command execution separates the **physical origin** of a command from its **runtime context**. This design enables complex command routing, dimension shifts, conditional execution, and vanilla-compliant `/execute` chaining.
+在 Pumpkin 中，命令执行将命令的**物理来源**与其**运行时上下文**分离。此设计支持复杂的命令路由、维度切换、条件执行以及符合原版行为的 `/execute` 链式调用。
 
 ---
 
-## `CommandSender` vs. `CommandSource`
+## `CommandSender` 与 `CommandSource`
 
-Understanding the distinction between `CommandSender` and `CommandSource` is fundamental to developing commands in Pumpkin:
+理解 `CommandSender` 与 `CommandSource` 的区别，是开发 Pumpkin 命令的基础：
 
-| Attribute | `CommandSender` | `CommandSource` |
+| 属性 | `CommandSender` | `CommandSource` |
 | :--- | :--- | :--- |
-| **Concept** | The physical origin and network destination | The mutable runtime execution environment |
-| **Mutability** | Immutable throughout command execution | Cloned and modified across `/execute` branches |
-| **Key Fields** | Terminal socket, connection handle, RCON buffer | World, position coordinates, rotation, entity, silent flag |
-| **Creation** | Instantiated on network connection or terminal input | Constructed via `sender.into_source(&server)` |
+| **概念** | 物理来源和网络目标 | 可变的运行时执行环境 |
+| **可变性** | 在命令执行期间不可变 | 在 `/execute` 分支之间被克隆和修改 |
+| **关键字段** | 终端套接字、连接句柄、RCON 缓冲区 | 世界、位置坐标、朝向、实体、静默标志 |
+| **创建方式** | 在网络连接或终端输入时实例化 | 通过 `sender.into_source(&server)` 构造 |
 
-### 1. `CommandSender` (Physical Caller)
-Represents the entity or socket that initiated the command and receives its output:
+### 1. `CommandSender`（物理调用方）
+
+表示发起命令并接收其输出的实体或套接字：
 
 ```rust
 pub enum CommandSender {
@@ -28,11 +29,12 @@ pub enum CommandSender {
 }
 ```
 
-- **Output Target**: Determines where messages formatted with `send_message` are routed (e.g., standard out, RCON buffer, player packet, or block entity NBT).
-- **Hard Permissions**: Holds fixed base permissions (e.g., Console has level 4 bypass; Command Blocks have level 2).
+- **输出目标**：决定使用 `send_message` 格式化的消息发送到哪里（例如标准输出、RCON 缓冲区、玩家数据包或方块实体 NBT）。
+- **固定权限**：保存固定的基础权限（例如控制台具有 4 级绕过权限；命令方块具有 2 级权限）。
 
-### 2. `CommandSource` (Execution Environment)
-Represents the mutable runtime state during command evaluation:
+### 2. `CommandSource`（执行环境）
+
+表示命令求值期间的可变运行时状态：
 
 ```rust
 pub struct CommandSource {
@@ -50,39 +52,43 @@ pub struct CommandSource {
 }
 ```
 
-A sender converts into a `CommandSource` via `sender.into_source(&server)`.
+发送者通过 `sender.into_source(&server)` 转换为 `CommandSource`。
 
 ---
 
-## The `/execute` Command & Context Redirection
+## `/execute` 命令与上下文重定向
 
-The `/execute` command manipulates `CommandSource` properties before passing control to a downstream command.
+`/execute` 命令会在把控制权交给下游命令前修改 `CommandSource` 属性。
 
-### Branching Modifiers
-- **`as <targets>`**: Changes `context.source.entity` to target entities without altering position or rotation.
-- **`at <targets>`**: Updates `context.source.world`, `position`, and `rotation` to match the target entity.
-- **`positioned <pos>`**: Modifies `context.source.position` to new coordinates.
-- **`in <dimension>`**: Changes `context.source.world` to the specified dimension (Overworld, Nether, The End).
-- **`anchored (feet|eyes)`**: Adjusts coordinate offsets for line-of-sight and facing checks.
+### 分支修饰符
+- **`as <targets>`**：将 `context.source.entity` 更改为目标实体，不改变位置或朝向。
+- **`at <targets>`**：更新 `context.source.world`、`position` 和 `rotation`，使其匹配目标实体。
+- **`positioned <pos>`**：将 `context.source.position` 修改为新坐标。
+- **`in <dimension>`**：将 `context.source.world` 更改为指定维度（主世界、下界、末地）。
+- **`anchored (feet|eyes)`**：调整用于视线和朝向检查的坐标偏移。
 
-### Context Forking & Chaining
-When `/execute` matches multiple targets (e.g., `/execute as @e run ...`), `pumpkin-command` uses **forking**:
-1. The dispatcher forks the execution context once per matched target.
-2. The child command executes independently for each cloned `CommandSource`.
-3. The cumulative success count is aggregated across all executions.
+### 上下文分叉与链式调用
+
+当 `/execute` 匹配多个目标（例如 `/execute as @e run ...`）时，`pumpkin-command` 会使用**分叉**：
+
+1. 分派器为每个匹配目标分叉一次执行上下文。
+2. 子命令针对每个克隆出的 `CommandSource` 独立执行。
+3. 所有执行的累计成功计数会被聚合。
 
 ---
 
-## Result Values & Success Counts
+## 结果值与成功计数
 
-Vanilla commands communicate results back through integer exit codes and return values.
+原版命令通过整数退出码和返回值传回结果。
 
-### The Return Value Callback
-Executors return `CommandExecutorResult` (`Result<i32, CommandSyntaxError>`). The returned integer signifies:
-- **0**: Failure or zero entities affected.
-- **> 0**: Number of entities affected, blocks changed, or items cleared.
+### 返回值回调
 
-For Command Blocks, this value is persisted into the block entity's `SuccessCount`:
+执行器返回 `CommandExecutorResult`（`Result<i32, CommandSyntaxError>`）。返回的整数表示：
+
+- **0**：失败或未影响任何实体。
+- **> 0**：受影响的实体、已更改方块或已清除物品的数量。
+
+对于命令方块，此值会持久化到方块实体的 `SuccessCount` 中：
 
 ```rust
 pub fn set_success_count(&self, count: u32) {
@@ -93,26 +99,27 @@ pub fn set_success_count(&self, count: u32) {
 ```
 
 ### `/execute store`
-When chained with `/execute store (result|success) ...`, Pumpkin intercepts the return value via `ReturnValueCallback` and writes it to scoreboards, bossbars, or entity NBT tags.
+
+与 `/execute store (result|success) ...` 链式调用时，Pumpkin 会通过 `ReturnValueCallback` 拦截返回值，并将其写入记分板、Boss 栏或实体 NBT 标签。
 
 ---
 
-## Feedback & GameRules Integration
+## 反馈与游戏规则集成
 
-Sending output to the command sender is governed by server configuration and world game rules:
+向命令发送者发送输出受服务器配置和世界游戏规则控制：
 
 ```rust
 context.source.send_feedback(
     TextComponent::text("Command executed successfully!"),
-    true, // Broadcast to server operators
+    true, // 广播给服务器管理员
 );
 ```
 
-### Output Rules Matrix
+### 输出规则矩阵
 
-| Condition | Feedback Behavior |
+| 条件 | 反馈行为 |
 | :--- | :--- |
-| `silent == true` | Output is suppressed completely. |
-| `send_command_feedback == false` | Player senders do not receive success feedback (errors are still displayed). |
-| `command_block_output == false` | Command block execution output is not broadcast to online operators. |
-| `broadcast_console_to_ops == true` | Server console and RCON commands emit a copy of their feedback to all online OP level 2+ players. |
+| `silent == true` | 输出被完全抑制。 |
+| `send_command_feedback == false` | 玩家发送者不会收到成功反馈（仍会显示错误）。 |
+| `command_block_output == false` | 命令方块的执行输出不会广播给在线管理员。 |
+| `broadcast_console_to_ops == true` | 服务器控制台和 RCON 命令会向所有在线的 2 级及以上 OP 玩家发送一份反馈副本。 |

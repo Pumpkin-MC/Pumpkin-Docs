@@ -1,21 +1,21 @@
-# Licensing & Updates (`pumpkin-plugin-utils`)
+# 许可与更新（`pumpkin-plugin-utils`）
 
-`pumpkin-plugin-utils` is an official utility crate for Pumpkin Rust plugins. It provides built-in tools for **licensing checks**, **cryptographic signature verification**, and **update checks** against the [Pumpkin Marketplace](https://market.pumpkinmc.org).
+`pumpkin-plugin-utils` 是面向 Pumpkin Rust 插件的官方实用工具 crate。它提供内置工具，用于针对 [Pumpkin Marketplace](https://market.pumpkinmc.org) 进行**许可检查**、**加密签名验证**和**更新检查**。
 
-## Features
+## 功能
 
-- **Offline Ed25519 Signature Verification**: Verifies plugin integrity and embedded marketplace metadata in `< 1ms` on startup without blocking the server.
-- **Global Metadata Caching**: Call `init(&context)` once in your plugin's `on_load` lifecycle method to cache verified metadata globally.
-- **Online License Verification**: Query the marketplace `/api/v1/rest/check-license` endpoint with automatic 7-day lease caching (`license_lease.json`).
-- **Offline Grace Period**: Resilient offline lease evaluation ensures your plugin keeps working during marketplace maintenance or network outages.
-- **Zero-Argument Update Checking**: Easily check if newer plugin releases are available on the marketplace.
-- **Dynamic Public Key Resolution**: Resolves the marketplace public key dynamically via host WIT imports or HTTPS fallback without hardcoding keys.
+- **离线 Ed25519 签名验证**：启动时在 `< 1ms` 内验证插件完整性和内嵌的市场元数据，且不会阻塞服务器。
+- **全局元数据缓存**：在插件的 `on_load` 生命周期方法中调用一次 `init(&context)`，即可全局缓存经过验证的元数据。
+- **在线许可验证**：查询市场的 `/api/v1/rest/check-license` 端点，并自动缓存 7 天租约（`license_lease.json`）。
+- **离线宽限期**：可靠的离线租约评估可确保插件在市场维护或网络中断期间继续工作。
+- **零参数更新检查**：轻松检查市场上是否有更新的插件版本。
+- **动态公钥解析**：通过宿主 WIT 导入或 HTTPS 回退动态解析市场公钥，无需硬编码密钥。
 
 ---
 
-## Adding the Dependency
+## 添加依赖项
 
-Add `pumpkin-plugin-utils` alongside `pumpkin-plugin-api` in your plugin's `Cargo.toml`:
+在插件的 `Cargo.toml` 中，将 `pumpkin-plugin-utils` 与 `pumpkin-plugin-api` 一并添加：
 
 :::code-group
 
@@ -38,9 +38,9 @@ tracing = "0.1"
 
 ---
 
-## Initialization
+## 初始化
 
-Before performing license or update checks, initialize the utility crate inside your plugin's `on_load` method using the plugin's `Context`:
+在执行许可或更新检查之前，请在插件的 `on_load` 方法中使用插件的 `Context` 初始化该实用工具 crate：
 
 ```rust
 use pumpkin_plugin_api::{Context, Plugin, PluginMetadata};
@@ -62,8 +62,8 @@ impl Plugin for MyPlugin {
         }
     }
 
-    fn on_load(&mut self, context: Context) -> pumpkin_plugin_api::Result<()> {
-        // Initialize pumpkin-plugin-utils (verifies signature & caches metadata)
+    fn on_load(&self, context: Context) -> pumpkin_plugin_api::Result<()> {
+        // 初始化 pumpkin-plugin-utils（验证签名并缓存元数据）
         let metadata = pumpkin_plugin_utils::init(&context)
             .map_err(|e| format!("Initialization failed: {e}"))?;
 
@@ -77,22 +77,22 @@ impl Plugin for MyPlugin {
 }
 ```
 
-::: info What happens during `init`?
-1. Locates the plugin's `.wasm` binary in the server directory.
-2. Extracts the `pumpkin.metadata` and `wasm_signature` custom sections.
-3. Cryptographically verifies the Ed25519 signature over the WASM binary and metadata.
-4. Caches the verified `PumpkinMetadata` globally for subsequent calls.
+::: info `init` 期间会发生什么？
+1. 在服务器目录中找到插件的 `.wasm` 二进制文件。
+2. 提取 `pumpkin.metadata` 和 `wasm_signature` 自定义节。
+3. 以加密方式验证 WASM 二进制文件和元数据的 Ed25519 签名。
+4. 全局缓存经过验证的 `PumpkinMetadata`，供后续调用使用。
 :::
 
 ---
 
-## Checking for Updates
+## 检查更新
 
-`pumpkin-plugin-utils` provides both zero-argument automatic checking and custom manual checking.
+`pumpkin-plugin-utils` 既支持零参数自动检查，也支持自定义手动检查。
 
-### 1. Automatic Update Check (Recommended)
+### 1. 自动更新检查（推荐）
 
-Once initialized, call `pumpkin_plugin_utils::check_for_updates()` without arguments. It automatically uses the cached plugin name, current version, and marketplace endpoint:
+初始化后，不带参数调用 `pumpkin_plugin_utils::check_for_updates()`。它会自动使用缓存的插件名称、当前版本和市场端点：
 
 ```rust
 use tracing::{info, warn};
@@ -116,9 +116,9 @@ fn check_updates() {
 }
 ```
 
-### 2. Manual Update Check (`UpdateChecker`)
+### 2. 手动更新检查（`UpdateChecker`）
 
-If you want to manually specify the plugin name, version, or a custom marketplace URL, use `UpdateChecker`:
+如果您想手动指定插件名称、版本或自定义市场 URL，请使用 `UpdateChecker`：
 
 ```rust
 use pumpkin_plugin_utils::UpdateChecker;
@@ -135,31 +135,31 @@ if response.update_available {
 }
 ```
 
-### Update Response Structure
+### 更新响应结构
 
-The update check returns a `CheckUpdateResponse`:
+更新检查会返回一个 `CheckUpdateResponse`：
 
 ```rust
 pub struct CheckUpdateResponse {
-    /// Whether a newer stable release exists on the marketplace.
+    /// 市场上是否存在更新的稳定版本。
     pub update_available: bool,
-    /// The latest stable version string, if available.
+    /// 最新的稳定版本字符串（如果有）。
     pub latest_version: Option<String>,
 }
 ```
 
 ---
 
-## Checking and Verifying Licenses
+## 检查并验证许可
 
-`pumpkin-plugin-utils` supports online verification against the marketplace API as well as offline lease management with configurable grace periods.
+`pumpkin-plugin-utils` 支持通过市场 API 进行在线验证，也支持具有可配置宽限期的离线租约管理。
 
-### 1. Online License Check
+### 1. 在线许可检查
 
-To verify a license against the marketplace (`GET /api/v1/rest/check-license`):
+要通过市场验证许可（`GET /api/v1/rest/check-license`）：
 
 ```rust
-// Pass `None` to use the embedded license key from metadata
+// 传递 `None` 以使用元数据中内嵌的许可密钥
 let response = pumpkin_plugin_utils::check_license_online(None)
     .map_err(|e| format!("License verification failed: {e}"))?;
 
@@ -171,27 +171,27 @@ if response.valid {
 }
 ```
 
-#### Providing a Custom License Key Override
-If your plugin allows server owners to configure a license key in a `config.toml` file, pass `Some(&key)`:
+#### 提供自定义许可密钥覆盖值
+如果您的插件允许服务器所有者在 `config.toml` 文件中配置许可密钥，请传递 `Some(&key)`：
 
 ```rust
 let config_key = "LIC-CUSTOM-KEY-12345";
 let response = pumpkin_plugin_utils::check_license_online(Some(config_key))?;
 ```
 
-::: tip 7-Day Lease Caching
-Successful online checks automatically save a verified lease file (`license_lease.json`) into the plugin's data folder with a 7-day expiration.
+::: tip 7 天租约缓存
+在线检查成功后，会自动将经过验证的租约文件（`license_lease.json`）保存到插件的数据文件夹中，有效期为 7 天。
 :::
 
-### 2. Evaluating License with Grace Period
+### 2. 使用宽限期评估许可
 
-To keep paid plugins functional when the server is offline or the marketplace is unreachable, use `evaluate_license`:
+要在服务器离线或无法访问市场时让付费插件保持可用，请使用 `evaluate_license`：
 
 ```rust
 use pumpkin_plugin_utils::LicenseStatus;
 use tracing::{info, warn};
 
-// Specify grace period duration in days (e.g., 7 days)
+// 以天为单位指定宽限期时长（例如 7 天）
 let grace_period_days = 7;
 
 match pumpkin_plugin_utils::evaluate_license(grace_period_days) {
@@ -213,20 +213,20 @@ match pumpkin_plugin_utils::evaluate_license(grace_period_days) {
 }
 ```
 
-### `LicenseStatus` Enum
+### `LicenseStatus` 枚举
 
-| Variant | Description |
+| 变体 | 描述 |
 | :--- | :--- |
-| `LicenseStatus::Valid(PumpkinMetadata)` | License is valid, verified, or the plugin is free / open-source. |
-| `LicenseStatus::GracePeriod { metadata, days_remaining, reason }` | Operating offline with a previously validated lease that is within the allowable grace period. |
-| `LicenseStatus::Invalid(String)` | Signature is invalid, expired, revoked, or metadata was tampered with. |
-| `LicenseStatus::Unsigned` | Binary does not contain marketplace metadata/signature (useful during local development). |
+| `LicenseStatus::Valid(PumpkinMetadata)` | 许可有效且已经验证，或者插件为免费/开源插件。 |
+| `LicenseStatus::GracePeriod { metadata, days_remaining, reason }` | 使用先前验证过且仍在允许宽限期内的租约离线运行。 |
+| `LicenseStatus::Invalid(String)` | 签名无效、已过期、已撤销，或元数据遭到篡改。 |
+| `LicenseStatus::Unsigned` | 二进制文件不包含市场元数据/签名（在本地开发期间很有用）。 |
 
 ---
 
-## Accessing Plugin Metadata
+## 访问插件元数据
 
-You can access the verified plugin metadata anywhere in your codebase using `get_metadata` or `metadata()`:
+您可以在代码库中的任何位置使用 `get_metadata` 或 `metadata()` 访问经过验证的插件元数据：
 
 ```rust
 if let Some(meta) = pumpkin_plugin_utils::get_metadata() {
@@ -241,26 +241,26 @@ if let Some(meta) = pumpkin_plugin_utils::get_metadata() {
 }
 ```
 
-### `PumpkinMetadata` Fields
+### `PumpkinMetadata` 字段
 
-| Field | Type | Description |
+| 字段 | 类型 | 描述 |
 | :--- | :--- | :--- |
-| `plugin_name` | `String` | Canonical plugin name on the marketplace. |
-| `version` | `String` | SemVer version string of the plugin binary. |
-| `plugin_id` | `i64` | Unique plugin identifier on the marketplace. |
-| `dev_id` | `i64` | Developer account ID. |
-| `dev_name` | `String` | Developer display name. |
-| `is_paid` | `bool` | `true` if this is a premium/commercial plugin. |
-| `user_id` | `i64` | Buyer / licensee user ID (`0` for free plugins). |
-| `license_key` | `Option<String>` | Unique license key issued to the licensee. |
-| `marketplace_url` | `String` | Base marketplace URL (`https://market.pumpkinmc.org`). |
-| `issued_at` | `String` | ISO-8601 timestamp when the binary/license was issued. |
+| `plugin_name` | `String` | 插件在市场上的规范名称。 |
+| `version` | `String` | 插件二进制文件的 SemVer 版本字符串。 |
+| `plugin_id` | `i64` | 插件在市场上的唯一标识符。 |
+| `dev_id` | `i64` | 开发者账户 ID。 |
+| `dev_name` | `String` | 开发者显示名称。 |
+| `is_paid` | `bool` | 如果这是付费/商业插件，则为 `true`。 |
+| `user_id` | `i64` | 买家/被许可人的用户 ID（免费插件为 `0`）。 |
+| `license_key` | `Option<String>` | 签发给被许可人的唯一许可密钥。 |
+| `marketplace_url` | `String` | 市场基础 URL（`https://market.pumpkinmc.org`）。 |
+| `issued_at` | `String` | 二进制文件/许可签发时的 ISO-8601 时间戳。 |
 
 ---
 
-## Complete Example
+## 完整示例
 
-Here is a full plugin implementation combining initialization, online licensing checks, offline grace periods, and update checking:
+下面是一个完整的插件实现，结合了初始化、在线许可检查、离线宽限期和更新检查：
 
 :::code-group
 
@@ -285,8 +285,8 @@ impl Plugin for CommercialPlugin {
         }
     }
 
-    fn on_load(&mut self, context: Context) -> pumpkin_plugin_api::Result<()> {
-        // 1. Initialize plugin-utils (verifies Ed25519 signature & caches metadata)
+    fn on_load(&self, context: Context) -> pumpkin_plugin_api::Result<()> {
+        // 1. 初始化 plugin-utils（验证 Ed25519 签名并缓存元数据）
         let meta = pumpkin_plugin_utils::init(&context).map_err(|err| {
             error!("Signature verification failed: {err}");
             format!("Security verification error: {err}")
@@ -294,7 +294,7 @@ impl Plugin for CommercialPlugin {
 
         info!("Loaded {} v{}", meta.plugin_name, meta.version);
 
-        // 2. Validate license (offline evaluation + online check)
+        // 2. 验证许可（离线评估和在线检查）
         match pumpkin_plugin_utils::evaluate_license(7) {
             LicenseStatus::Valid(_) => {
                 info!("Local license status: Valid");
@@ -311,7 +311,7 @@ impl Plugin for CommercialPlugin {
             }
         }
 
-        // 3. Online license check if paid
+        // 3. 如果是付费插件，则进行在线许可检查
         if meta.is_paid {
             if let Ok(check) = pumpkin_plugin_utils::check_license_online(None) {
                 if !check.valid {
@@ -323,7 +323,7 @@ impl Plugin for CommercialPlugin {
             }
         }
 
-        // 4. Check for updates
+        // 4. 检查更新
         if let Ok(update) = pumpkin_plugin_utils::check_for_updates() {
             if update.update_available {
                 info!(
@@ -336,7 +336,7 @@ impl Plugin for CommercialPlugin {
         Ok(())
     }
 
-    fn on_unload(&mut self, _context: Context) -> pumpkin_plugin_api::Result<()> {
+    fn on_unload(&self, _context: Context) -> pumpkin_plugin_api::Result<()> {
         info!("CommercialPlugin unloaded.");
         Ok(())
     }

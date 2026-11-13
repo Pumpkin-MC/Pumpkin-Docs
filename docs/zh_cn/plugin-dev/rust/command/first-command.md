@@ -1,109 +1,116 @@
-# 制作您的第一个命令
+# 创建您的第一个命令
 
-在注册您的命令之前，您需要为其选择一个名称。在本示例中，我们将其定义为常量数组。使用数组可以方便地添加别名
+在 Pumpkin 中注册和处理自定义命令的设计对开发者友好、速度快，并采用类似 Mojang Brigadier 系统的结构。
 
-```rust
-const NAMES: [&str; 1] = ["test"]; 
-// OR with aliases 
-const NAMES: [&str; 2] = ["test", "testcommand"]; 
-```
+---
 
-您还需要定义命令的描述，当玩家使用 /help 命令时，此描述将会显示出来
+## 1. 快速示例
 
-```rust
-const DESCRIPTION: &str = "我的第一个命令！";
-```
+下面是一个完整的最小 Rust 插件，它注册一个带有权限检查的 `/hello` 命令，并向玩家发送响应。
 
-Pumpkin 的 Command API 很大程度上受到了 Mojang 的 [Brigadier](https://github.com/Mojang/brigadier) 的启发。这套系统能够让你轻松地管理命令语法，并为玩家提供自动的 Tab 补全功能。
+```rust [src/lib.rs]
+use pumpkin_plugin_api::{
+    command::{CommandHandler, CommandSender, ConsumedArgs, CommandError, Command},
+    permission::{Permission, PermissionDefault},
+    text::TextComponent,
+    Context, Plugin, PluginMetadata, Server,
+};
 
-#### 实现命令树
+struct HelloExecutor;
 
-```rust
-use pumpkin::command::tree::CommandTree;
-
-pub fn init_command_tree() -> CommandTree {
-    CommandTree::new(NAMES, DESCRIPTION)
-}
-```
-
-#### 注册与权限
-
-要让命令可用，您必须在您的插件上下文中同时注册权限和命令本身。
-
-首先，注册权限。在本示例中，我们将  `PermissionDefault::Allow` ，以便默认情况下所有玩家都能使用此命令。
-
-```diff
-#[plugin_method]
-async fn on_load(&mut self, context: Arc<Context>) -> Result<(), String> {
-    context.init_log();
-
-    log::info!("你好, Pumpkin!");
-
-+    context
-+        .register_permission(Permission::new(
-+            "plugin_docs_plugin:test",
-+            "重要：测试权限",
-+            PermissionDefault::Allow,
-+        ))
-+        .await
-+        .unwrap();
-
-
-    Ok(())
-}
-```
-
-接下来，使用上面创建的权限字符串来注册命令:
-
-```diff
-#[plugin_method]
-async fn on_load(&mut self, context: Arc<Context>) -> Result<(), String> {
-    context.init_log();
-
-    log::info!("你好, Pumpkin!");
-
-    context
-        .register_permission(Permission::new(
-            "plugin_docs_plugin:test",
-            "重要：测试权限",
-            PermissionDefault::Allow,
-        ))
-        .await
-        .unwrap();
-
-+    context
-+        .register_command(command::init_command_tree(), "plugin_docs_plugin:test")
-+        .await;
-
-    Ok(())
-}
-```
-
-重新构建您的插件，将生成的插件文件移动到服务器的 plugins 文件夹中，然后重启服务器。
-
-**恭喜！** 命令现已注册成功，在游戏中及控制台里都应能正常使用并高亮显示。
-
-<img src="/assets/plugin-dev/first_command_preview.png" alt="drawing" width="1000"/>
-
-目前执行命令很可能会抛出语法错误，因为尚未实现命令执行器（Command Executor），该命令现在没有任何实际功能。
-
-### 添加一个执行器
-
-让我们创建一个超级简单的命令执行器，它不需要任何参数。
-
-```rust
-struct MyCommandExecutor; 
-
-impl CommandExecutor for MyCommandExecutor {
-    fn execute<'a>(
+impl CommandHandler for HelloExecutor {
+    fn handle(
         &self,
-        sender: &'a CommandSender,
-        server: &'a Server,
-        args: &ConsumedArgs<'a>,
-    ) -> CommandResult<'a> {
-        Box::pin(async {
-            Ok((1))
-        })
+        sender: CommandSender,
+        _server: Server,
+        _args: ConsumedArgs,
+    ) -> Result<i32, CommandError> {
+        sender.send_message(TextComponent::text("Hello from Pumpkin!"));
+        Ok(1)
+    }
+}
+
+pub struct MyPlugin;
+
+impl Plugin for MyPlugin {
+    fn new() -> Self {
+        MyPlugin
+    }
+
+    fn metadata(&self) -> PluginMetadata {
+        PluginMetadata {
+            name: "my_plugin".into(),
+            version: env!("CARGO_PKG_VERSION").into(),
+            authors: vec!["Developer".into()],
+            description: "My first Pumpkin plugin".into(),
+        }
+    }
+
+    fn on_load(&self, context: Context) -> pumpkin_plugin_api::Result<()> {
+        // 1. 注册权限节点
+        context.register_permission(&Permission {
+            node: "my_plugin:hello".to_string(),
+            description: "Allows executing the /hello command".to_string(),
+            default: PermissionDefault::Allow,
+            children: Vec::new(),
+        })?;
+
+        // 2. 构建带有别名和执行器的命令树
+        let names = ["hello".to_string(), "hi".to_string()];
+        let command = Command::new(&names, "Greets the player").execute(HelloExecutor);
+
+        // 3. 注册命令
+        context.register_command(command, "my_plugin:hello")?;
+
+        Ok(())
     }
 }
 ```
+
+---
+
+## 2. 游戏内预览
+
+注册后，您的命令会自动在 Minecraft 中获得客户端自动补全、语法验证和颜色高亮功能：
+
+<img src="/assets/first_command_preview.png" alt="游戏内命令自动补全预览" width="500"/>
+
+---
+
+## 3. 工作原理
+
+::: details 分步解析
+
+### 第 1 步：定义权限
+Pumpkin 中的命令需要权限节点。使用 `PermissionDefault::Allow` 可默认允许所有玩家执行该命令：
+```rust
+context.register_permission(&Permission {
+    node: "my_plugin:hello".to_string(),
+    description: "Allows executing the /hello command".to_string(),
+    default: PermissionDefault::Allow,
+    children: Vec::new(),
+})?;
+```
+
+### 第 2 步：构建命令树
+使用 `Command::new` 定义主名称和别名，然后通过 `.execute(...)` 附加您的 `CommandHandler` 结构体：
+```rust
+let names = ["hello".to_string(), "hi".to_string()];
+let command = Command::new(&names, "Greets the player")
+    .execute(HelloExecutor);
+```
+
+### 第 3 步：通过 Context 注册
+将命令树和权限节点字符串传递给 `context.register_command`：
+```rust
+context.register_command(command, "my_plugin:hello")?;
+```
+
+:::
+
+---
+
+## 后续步骤
+
+- 在[石头剪刀布教程](./rock-paper-scissors)中探索复杂的子命令和参数解析。
+- 学习如何在插件逻辑中处理物品栏和 GUI 交互。

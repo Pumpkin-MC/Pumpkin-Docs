@@ -1,39 +1,39 @@
 # 从 Bukkit 迁移事件
 
-在 Bukkit 中，事件处理通过创建实现 `Listener` 接口的类，并用 `@EventHandler` 注解方法来完成。
+在 Bukkit 中，事件通过创建实现 `Listener` 的类并使用 `@EventHandler` 注解方法来处理。
 
-而在 Pumpkin 中，事件处理器是结构体或对象，并通过 `context.register_event_handler(...)` 进行显式注册。此外，Pumpkin 还区分了**阻塞（Blocking）**与**非阻塞（Non-blocking）**事件，以最大化服务器的并发性能。
+在 Pumpkin 中，事件处理器是通过 `context.register_event_handler(...)` 显式注册的结构体或对象。Pumpkin 还区分**阻塞**和**非阻塞**事件，以最大限度提高服务器并发性。
 
 ---
 
-## 核心差异
+## 主要区别
 
-| 特性 | Bukkit / Spigot | Pumpkin |
+| 功能 | Bukkit / Spigot | Pumpkin |
 | :--- | :--- | :--- |
 | **监听器声明** | 方法上的 `@EventHandler` 注解 | 实现 `EventHandler<E>` trait / 接口 |
-| **事件注册** | `pm.registerEvents(listener, plugin)` | `context.register_event_handler(handler, priority, is_blocking)` |
-| **执行模型** | 主线程执行（`EventPriority`） | 可选**阻塞**（顺序执行/可取消）与**非阻塞**（并发执行） |
-| **事件取消** | `event.setCancelled(true)` | 在阻塞事件上调用 `event.cancel()` |
+| **注册** | `pm.registerEvents(listener, plugin)` | `context.register_event_handler(handler, priority, is_blocking)` |
+| **执行模型** | 主线程执行（`EventPriority`） | 可选择**阻塞**（顺序执行/可取消）或**非阻塞**（并发执行） |
+| **取消** | `event.setCancelled(true)` | 对阻塞事件调用 `event.cancel()` |
 
 ---
 
 ## Pumpkin 中的阻塞与非阻塞事件
 
-与 Bukkit 中所有事件处理器都在主服务器线程上按顺序执行不同，Pumpkin 允许您指定事件处理器是否为**阻塞**类型：
+Bukkit 的所有事件处理器都在服务器主线程上顺序执行，而 Pumpkin 允许您指定事件处理器是否为**阻塞**处理器：
 
 ```rust
-// Registration signature in Rust:
+// Rust 中的注册签名：
 context.register_event_handler(handler, priority, is_blocking)?;
 ```
 
-- **阻塞（`is_blocking = true`）**：按优先级顺序依次执行。可以修改事件数据（例如修改进服消息）或取消事件。
-- **非阻塞（`is_blocking = false`）**：在工作线程间并发执行。非常适合日志记录、指标收集或无需取消事件的外部通知。
+- **阻塞（`is_blocking = true`）**：按优先级顺序依次执行。可以修改事件数据（例如编辑加入消息）或取消事件。
+- **非阻塞（`is_blocking = false`）**：在工作线程上并发执行。非常适合日志记录、指标收集或无需取消事件的外部通知。
 
 ---
 
 ## 代码对比：玩家加入事件
 
-### 1. Bukkit 实现 (Java)
+### 1. Bukkit 实现（Java）
 
 ```java [JoinListener.java]
 public class JoinListener implements Listener {
@@ -44,7 +44,7 @@ public class JoinListener implements Listener {
     }
 }
 
-// In JavaPlugin:
+// 在 JavaPlugin 中：
 // getServer().getPluginManager().registerEvents(new JoinListener(), this);
 ```
 
@@ -86,8 +86,8 @@ impl Plugin for MyPlugin {
         }
     }
 
-    fn on_load(&mut self, context: Context) -> pumpkin_plugin_api::Result<()> {
-        // Register blocking event handler with Normal priority
+    fn on_load(&self, context: Context) -> pumpkin_plugin_api::Result<()> {
+        // 注册具有普通优先级的阻塞事件处理器
         context.register_event_handler(JoinHandler, EventPriority::Normal, true)?;
         Ok(())
     }

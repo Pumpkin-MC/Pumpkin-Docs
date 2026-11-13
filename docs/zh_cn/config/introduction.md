@@ -1,23 +1,24 @@
-### 配置系统
+# 配置
 
-Pumpkin 提供了强大的配置系统，允许用户无需依赖外部插件即可自定义服务器的各个方面。这为服务器的运行提供了灵活性和控制力。
+Pumpkin 提供强大的配置系统，无需依赖外部插件，用户即可自定义服务器行为的各个方面，从而灵活地控制服务器的运行。
 
-### 基础 / 高级配置
+## 配置文件
 
-Pumpkin 的配置分为"基础"配置（用于快速更改和重要设置）和更加"高级"的配置：
+Pumpkin 的配置存储在单个 `pumpkin.toml` 文件中。
 
-- `pumpkin.toml`：简单配置，可以与原版 Minecraft 的 `server.properties` 相比较。
-- `pumpkin.toml`：设计为在一个地方包含 Pumpkin 的所有功能，是一个更全面的配置文件。
+- `pumpkin.toml`：集中控制所有服务器设置、功能、网络和行为。
 
-### 服务器版本
+你可以在运行 Pumpkin 前创建 `pumpkin.toml`，也可以在首次运行 Pumpkin 后编辑它。
 
-Pumpkin 旨在支持最新的 Minecraft 版本。如果您想为任何其他版本托管 Pumpkin 服务器，可以使用名为 [ViaProxy](https://github.com/ViaVersion/ViaProxy) 的项目。
+## 服务器版本
 
-- 确保允许代理连接。
-- Pumpkin 和 ViaProxy 没有关联；请勿提交关于其代码的问题。此外，这是第三方代理，Pumpkin 不对其好坏负责。
+Pumpkin 旨在支持最新的 Minecraft 版本。如果你想为其他版本托管 Pumpkin 服务器，可以使用名为 [ViaProxy](https://github.com/ViaVersion/ViaProxy) 的项目。
 
-#### 主要特点
+- 请确保允许代理连接。
+- Pumpkin 与 ViaProxy 没有关联；请勿就 ViaProxy 的代码向 Pumpkin 提交问题。此外，ViaProxy 是第三方代理，无论其带来何种影响，Pumpkin 均不承担责任。
 
-- 全面的自定义：配置服务器设置、玩家行为、世界生成等。
-- 性能优化：通过配置调整优化服务器性能。
-- 无插件自定义：无需额外插件即可实现所需的更改。 
+### 主要特性
+
+- 丰富的自定义选项：配置服务器设置、玩家行为、世界生成等。
+- 性能优化：通过调整配置优化服务器性能。
+- 无插件自定义：无需额外插件即可实现所需更改。

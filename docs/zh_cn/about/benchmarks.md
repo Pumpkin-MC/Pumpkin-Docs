@@ -1,0 +1,314 @@
+# 性能基准
+
+本文在 **Minecraft Java 版 26.3（协议版本 777）** 上，将常见的 Minecraft 服务器软件（**Paper** 与 **Folia**）与 **Pumpkin** 进行性能基准对比。
+
+> [!CAUTION]
+> **功能完整性说明：** 尽管 Pumpkin 已经实现了地形生成、光照、区块加载、生物生成、AI 目标和实体物理，但尚未实现所有的原版机制。与成熟的原版衍生分支相比，某些机制的缺失可能会降低其基线开销。
+
+::: tip 概览
+- **冷启动与关闭：** Pumpkin 仅需 **`9.6 ms – 12.9 ms`** 即可完成启动并接受 TCP 连接（相比之下 Paper 和 Folia 为 **`3,707 ms – 4,905 ms`**）；在 **`41 ms – 71 ms`** 内即可完成安全关闭（相比之下 Paper 和 Folia 为 **`1.2 s – 2.8 s`**）。
+- **内存占用：** Pumpkin 空载仅需 **`60.0 MiB` RAM**，并在并发 400 – 700 名玩家时仅占用 **`1.38 GiB – 1.74 GiB` RAM**；相比之下，Paper 和 Folia 在动态 `-Xms512M` JVM 堆内存下占用 **`2.4 GiB – 4.4 GiB` RAM**，在配置 10 GiB Aikar's Flags 时占用 **`10.8 GiB – 11.7 GiB` RAM**。
+- **CPU 与 Tick 效率：** 在单一区域内有 50 – 300 名玩家时，Pumpkin 的整个进程 CPU 使用率比 Paper 和 Folia 低 **2x – 4x**，MSPT 保持低 **2x – 5x**，在 2 个 vCPU 上稳定维持 **`250` 名玩家**，在 8 个 vCPU 上稳定维持 **`700+` 名玩家**处于 **20.0 TPS**。
+- **多区域承载能力：** 在相距 8,192 格的 8 个区域中，Pumpkin 可稳定承载 **600 名并发玩家处于 20.0 TPS（`2.05 GiB` RAM）**，相比之下 Paper 仅能承载 **100 名玩家**，同时 Pumpkin 完整保留了单一全局世界 Tick。
+:::
+
+## 测试规格
+
+### 技术指标
+
+#### 软件环境
+
+- 发行版：Manjaro Linux
+- 架构：x86_64（64 位）
+- 内核版本：7.2.15-1-MANJARO
+
+#### 硬件配置
+
+- 主板：MAG B650 TOMAHAWK WIFI
+- CPU：AMD Ryzen 9 9950X 16-Core
+- 内存：Corsair 2x16GB DDR5 6000Mhz
+- 存储：Samsung 990 PRO 1TB PCIe 4.0 M.2 SSD
+- 散热：be quiet Dark Rock Elite
+
+#### Rust
+
+- 工具链：stable-x86_64-unknown-linux-gnu (1.99.1)
+- Rust 编译器：rustc 1.99.1 (58cf8f9c3 2026-10-13)
+
+#### Java
+
+- JDK 版本：OpenJDK 27.0.1.0.3 64-Bit 2026-10-24
+- JRE 版本：OpenJDK Runtime Environment (build 27.0.1.0.3)
+- 发行商：Arch Linux
+
+#### 游戏设置
+
+- Minecraft 版本：26.3
+- 世界种子（World seed）：`42`（普通主世界地形）
+- 视距（View distance）：8
+- 模拟距离（Simulated distance）：8
+- 正版验证（Online mode）：false
+- RCON：false
+
+<sub><sup>关闭正版验证以便于使用非正版测试账号进行批量测试。</sup></sub>
+
+### 测试构建版本与运行负载
+
+- **Pumpkin：** `0.2.1+26.3`（[commit `bc494ec66`](https://github.com/Pumpkin-MC/Pumpkin/commit/bc494ec664abcf2244bb01897365fef50a05e966)，以 `--release` 编译）
+- **Paper：** [26.3 build 244](https://papermc.io/downloads/paper)
+- **Folia：** [26.3 build 6](https://papermc.io/downloads/folia)（在 Tier 3 下 `threaded-regions.threads: 8`）
+- **测试期间激活的机制：** 普通主世界地形（`seed = 42`，在测量前已在磁盘上预生成热身，避免初始区块生成影响稳态 Tick 测量）、自然生物生成与生物 AI 目标、实体碰撞箱碰撞、区块加载（`view-distance = 8`）、数据包压缩（`threshold = 256`），以及来自所有连接的 Bot 发出的持续 **20 Hz** 玩家移动（`SetPlayerPositionAndRotation` + `SwingArm`）。
+- **硬件核心隔离：** 被测试的服务器通过 `taskset -c` 绑定到 **CCD0** 的物理核心（Tier 1 绑定 `0,16`，Tier 2 绑定 `0-3,16-19`，Tier 3 绑定 `0-7,16-23`），而 8 个客户端 Bot 工作进程严格绑定到 **CCD1**（`8-15,24-31`）。
+- **JVM 堆内存配置：** Paper 与 Folia 分别在 [PaperMC 官方推荐的 Aikar's Flags](https://docs.papermc.io/paper/aikars-flags/)（`-Xms10G -Xmx10G -XX:+UseG1GC -XX:+AlwaysPreTouch`）和动态堆内存（`-Xms512M -Xmx10G` 且不启用 `-XX:+AlwaysPreTouch`）下进行了测试，以衡量非预分配内存的使用情况。
+
+### 计算方法与数据集
+
+下表中的每一项数据均由基准测试套件（<a href="/benchmarks/benchmark_suite.py" target="_blank"><code>benchmark_suite.py</code></a>，原始数据记录于 <a href="/benchmarks/results_full_tiers.json" target="_blank"><code>results_full_tiers.json</code></a> 与 <a href="/benchmarks/extra_metrics.json" target="_blank"><code>extra_metrics.json</code></a>）依据以下定义和公式自动采集：
+
+- **冷启动开机耗时（`ms`）：**
+  从 `subprocess.Popen` 启动到**同时**满足：服务器在终端输出就绪提示（Pumpkin 为 `"Server is now running"`，Paper 和 Folia 为 `"Done ("`）**并且** TCP 客户端在 `127.0.0.1:25566` 完成三次握手（`connect()`）的单调时钟流逝时间（`time.perf_counter()`）。以 **3 次连续冷启动测试的中位数**（`boot_ms = median((t_tcp_ready - t_spawn) * 1000)`）报告。
+- **关闭耗时（`ms`）：**
+  从向服务器的 `stdin` 管道写入 `stop\n` 起，直到操作系统进程退出终止（`proc.poll() is not None`）的单调时钟流逝时间（`time.perf_counter()`）。
+- **Tick 耗时（`MSPT`、`P50`、`P95`、`P99`，单位 `ms`）与 `TPS`：**
+  在每个 Bot 阶段（`50`、`100`、`150`……），当所有 Bot 完成全部登录和生成流程（`Handshake` -> `LoginStart` -> `ClientInformation` -> `FinishConfiguration` -> `SynchronizePlayerPosition` -> `AcceptTeleportation` -> `PlayerLoaded`）之后，测试套件会等待 **`8.0 秒`（`160` 个 Tick）** 以使服务器进入平稳状态，然后通过 `stdin` 发送 `tick query` 和 `tps` 命令：
+  - **Pumpkin 与 Paper：** 直接从服务器内置的 100-Tick 滚动抽样窗口（`Sample: 100`）中读取 `MSPT`（`每 Tick 平均耗时`）以及 `P50` / `P95` / `P99` 百分位数。当 `MSPT <= 50.0 ms` 时，`TPS = 20.0`；当 `MSPT > 50.0 ms` 时，`TPS = min(reported_tps, 1000.0 / MSPT)`。
+  - **Folia：** 由于 Folia 移除了全局世界 Tick 且不支持 `/tick query`，因此 `TPS`（`区域中位数 TPS`）和各区域 `MSPT` 直接从 Folia 的 `/tps` `Server Health Report` 中读取。
+- **内存占用（`RSS` 与 `PSS`，单位 `MiB`）：**
+  在每个阶段的 `8.0 秒` 稳定等待窗口后，通过 Linux 内核的 `/proc/<pid>/status`（`VmRSS:`，单位 KiB）以及 `/proc/<pid>/smaps_rollup`（`Pss:`，单位 KiB，按比例分摊共享库物理内存）进行采样（`RSS_MiB = VmRSS_KiB / 1024.0`，`PSS_MiB = Pss_KiB / 1024.0`）。
+- **进程 CPU 使用率（占分配 vCPU 的 `%`）：**
+  在所有已连接 Bot 以 20 Hz 持续活动的 **`3.0 秒` 稳态窗口**内，采样 `/proc/<pid>/stat` 的第 14 字段（`utime`，用户态时钟 Tick）和第 15 字段（`stime`，内核态时钟 Tick）（基准时钟频率 `SC_CLK_TCK = 100 Hz`），并按通过 `taskset -c` 绑定的逻辑 CPU 数量（`N_vcpu` 分别为 `{2, 8, 16}`）进行归一化计算：
+  ```text
+  CPU % = (((utime_1 + stime_1) - (utime_0 + stime_0)) / CLK_TCK) / ((t_1 - t_0) * N_vcpu) * 100
+  ```
+- **Bot 运动学与区域数据集：**
+  - **单区域（Tier 1 与 Tier 2）：** 所有 Bot 均在种子 `seed = 42` 的世界出生点生成。
+  - **多区域（Tier 3）：** Bot 预先通过 `<uuid>.dat` 的 `Pos` NBT 标签分配在以 `4 x 2` 网格排列、彼此相距 `8,192` 格（`512` 区块）的 8 个区域中：`(0.5, 120.0, 0.5)`、`(8192.5, 120.0, 0.5)`、`(16384.5, 120.0, 0.5)`、`(24576.5, 120.0, 0.5)`、`(0.5, 120.0, 8192.5)`、`(8192.5, 120.0, 8192.5)`、`(16384.5, 120.0, 8192.5)` 和 `(24576.5, 120.0, 8192.5)`。
+  - **20 Hz 移动循环：** 每隔 `50 ms`，每个编号为 `i` 的 Bot 会在其出生坐标周围半径 `0.10 格` 的圆周上推进角度 `angle += 0.06 rad`（初始角度 `angle_0 = (0.37 * i) % (2 * pi)`），并在启用 `TCP_NODELAY` 的套接字上发送 `SetPlayerPositionAndRotation`（`0x1F`）+ `SwingArm`（`0x0D`）。
+
+::: details 服务器配置文件与可复现数据集
+- **原始 JSON 数据集（多 Tier 的 MSPT、P50/P95/P99、TPS、RSS/PSS）：** <a href="/benchmarks/results_full_tiers.json" target="_blank"><code>/benchmarks/results_full_tiers.json</code></a>
+- **原始 JSON 数据集（进程 CPU %、动态 `-Xms512M` 堆 RSS、关闭耗时、二进制体积）：** <a href="/benchmarks/extra_metrics.json" target="_blank"><code>/benchmarks/extra_metrics.json</code></a>
+- **基准测试套件脚本（Python 3 `asyncio` + `multiprocessing`）：** <a href="/benchmarks/benchmark_suite.py" target="_blank"><code>/benchmarks/benchmark_suite.py</code></a>
+
+**Paper 与 Folia `server.properties`：**
+```ini
+level-seed=42
+view-distance=8
+simulation-distance=8
+online-mode=false
+max-players=2000
+spawn-protection=0
+network-compression-threshold=256
+enforce-secure-profile=false
+pause-when-empty-seconds=-1
+server-port=25566
+```
+
+**Paper 与 Folia `config/paper-global.yml` 及 `bukkit.yml`：**
+```yaml
+# bukkit.yml
+settings:
+  connection-throttle: -1
+
+# config/paper-global.yml
+packet-limiter:
+  all-packets:
+    action: DROP
+    interval: 7.0
+    max-packet-rate: 999999.0
+chunk-loading-advanced:
+  auto-config-send-distance: true
+  player-max-concurrent-chunk-generates: 0
+  player-max-concurrent-chunk-loads: 0
+```
+
+**Pumpkin `pumpkin.toml`（对应匹配字段）：**
+```toml
+seed = "42"
+default_difficulty = "Normal"
+default_gamemode = "Survival"
+tps = 20.0
+spawn_protection = 0
+
+[networking.java]
+enabled = true
+address = "0.0.0.0:25566"
+encryption = false
+online_mode = false
+max_players = 2000
+view_distance = 8
+simulation_distance = 8
+
+[networking.java.compression]
+enabled = true
+threshold = 256
+level = 6
+
+[networking.java.packet_limiter]
+enabled = false
+```
+:::
+
+---
+
+## 启动、关闭与基线资源占用
+
+| 指标 | Pumpkin 26.3 | Paper 26.3 | Folia 26.3 |
+| :--- | :--- | :--- | :--- |
+| **二进制文件 / 打包体积** | `103.3 MiB`（独立二进制） | `52.7 MiB`（jar + JVM 运行时） | `53.0 MiB`（jar + JVM 运行时） |
+| **冷启动耗时（2 vCPU）** | **`12.9 ms`** | `4,650 ms` | `4,905 ms` |
+| **冷启动耗时（8 vCPU）** | **`9.6 ms`** | `3,787 ms` | `3,707 ms` |
+| **关闭耗时（输入 `stop` 至退出）** | **`41 ms – 71 ms`** | `1,169 ms – 1,962 ms` | `1,232 ms – 2,836 ms` |
+| **空载 CPU 使用率** | **`0.0%`** | `0.3% – 2.0%` | `0.1% – 0.3%` |
+| **空载内存（`-Xms512M` 动态堆）** | **`60.0 MiB`** | `1,589 – 2,457 MiB` | `1,614 – 1,859 MiB` |
+| **空载内存（Aikar's `10G` 预分配）** | **`60.0 MiB`** | `10,825 MiB` | `10,826 MiB` |
+
+---
+
+## Tier 1：单核测试（1 物理核心 / 2 vCPU，单一区域）
+
+代表玩家聚集在同一区域的 2-vCPU 实例或容器分片。服务器必须将 MSPT 控制在 `50.0 ms` 以内才能保持 `20.0 TPS`。
+
+### Tick 性能（`MSPT` 与 `TPS`）
+
+| 玩家数 | Pumpkin 26.3 | Paper 26.3 (Aikar 10G) | Folia 26.3 (Aikar 10G) |
+| :--- | :--- | :--- | :--- |
+| **50** | **`2.31 ms`** (`20.0 TPS`) | `10.18 ms` (`20.0 TPS`) | `10.45 ms` (`20.0 TPS`) |
+| **100** | **`3.95 ms`** (`20.0 TPS`) | `19.61 ms` (`20.0 TPS`) | `18.30 ms` (`20.0 TPS`) |
+| **150** | **`7.62 ms`** (`20.0 TPS`) | `31.80 ms` (`20.0 TPS`) | `33.32 ms` (`20.0 TPS`) |
+| **200** | **`12.71 ms`** (`20.0 TPS`) | `60.60 ms` (`16.5 TPS`) | `55.56 ms` (`18.0 TPS`) |
+| **250** | **`8.96 ms`** (`20.0 TPS`) | *已饱和 (< 15 TPS)* | *已饱和 (< 16 TPS)* |
+| **20 TPS 下最大承载** | **`250 名玩家`** | `150 名玩家` | `150 名玩家` |
+
+### CPU 使用率（占 2 个分配 vCPU 的 `%`）
+
+通过 `/proc/<pid>/stat`（`utime + stime`）测量整个服务器进程（Tick 线程、网络线程与 JVM GC）：
+
+| 玩家数 | Pumpkin 26.3 | Paper 26.3 | Folia 26.3 |
+| :--- | :--- | :--- | :--- |
+| **空载 (0)** | **`0.0%`** | `2.0%` | `0.3%` |
+| **50** | **`18.0%`** | `56.8%` | `32.8%` |
+| **100** | **`12.3%`** | `43.1%` | `46.5%` |
+| **150** | **`20.8%`** | `74.1%` | `78.2%` |
+| **200** | **`35.8%`** | `87.2%` (`16.5 TPS`) | `91.4%` (`18.0 TPS`) |
+
+### 内存占用（`RAM RSS`）
+
+| 玩家数 | Pumpkin 26.3 | Paper 26.3 (`-Xms512M`) | Paper 26.3 (Aikar `10G`) | Folia 26.3 (`-Xms512M`) | Folia 26.3 (Aikar `10G`) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **空载 (0)** | **`60 MiB`** | `1,589 MiB` | `10,829 MiB` | `1,614 MiB` | `10,860 MiB` |
+| **50** | **`527 MiB`** | `3,516 MiB` (`15.9 TPS`) | `10,937 MiB` | `3,917 MiB` (`14.7 TPS`) | `11,005 MiB` |
+| **100** | **`882 MiB`** | *已饱和* | `11,012 MiB` | *已饱和* | `11,048 MiB` |
+| **150** | **`1,057 MiB`** | *已饱和* | `11,095 MiB` | *已饱和* | `11,110 MiB` |
+| **200** | **`1,118 MiB`** | *已饱和* | `11,180 MiB` | *已饱和* | `11,165 MiB` |
+| **250** | **`1,156 MiB`** | *已饱和* | *已饱和* | *已饱和* | *已饱和* |
+
+<sub><sup>在没有 `-Xms10G -XX:+AlwaysPreTouch` 的 2 个 vCPU 环境下，G1GC 堆扩展和操作系统缺页中断导致 Paper 和 Folia 在 50 名玩家时 TPS 就跌破 16，同时依然消耗 `3.5 – 3.9 GiB` RSS。</sup></sub>
+
+---
+
+## Tier 2：四核测试（4 物理核心 / 8 vCPU，单一区域）
+
+代表承载生存出生点、大厅、Boss 战或 PvP 竞技场（玩家在同一区域内互动）的 4 核 / 8 线程服务器。
+
+### Tick 性能（`MSPT` 与 `TPS`）
+
+| 玩家数 | Pumpkin 26.3 (`MSPT`) | Pumpkin 26.3 (`P99`) | Paper 26.3 (`MSPT`) | Folia 26.3 (`MSPT`) |
+| :--- | :--- | :--- | :--- | :--- |
+| **空载 (0)** | **`0.04 ms`** (`20.0 TPS`) | **`0.1 ms`** | `0.20 ms` (`20.0 TPS`) | `0.00 ms` (`20.0 TPS`) |
+| **50** | **`1.86 ms`** (`20.0 TPS`) | **`3.5 ms`** | `10.70 ms` (`20.0 TPS`) | `4.13 ms` (`20.0 TPS`) |
+| **100** | **`3.02 ms`** (`20.0 TPS`) | **`4.5 ms`** | `12.00 ms` (`20.0 TPS`) | `6.74 ms` (`20.0 TPS`) |
+| **150** | **`4.82 ms`** (`20.0 TPS`) | **`6.4 ms`** | `17.70 ms` (`20.0 TPS`) | `9.34 ms` (`20.0 TPS`) |
+| **200** | **`7.00 ms`** (`20.0 TPS`) | **`9.7 ms`** | `24.60 ms` (`20.0 TPS`) | `16.29 ms` (`20.0 TPS`) |
+| **250** | **`9.91 ms`** (`20.0 TPS`) | **`13.6 ms`** | `33.20 ms` (`20.0 TPS`) | `24.51 ms` (`20.0 TPS`) |
+| **300** | **`13.17 ms`** (`20.0 TPS`) | **`19.7 ms`** | `41.80 ms` (`20.0 TPS`) | `30.93 ms` (`20.0 TPS`) |
+| **400** | **`18.89 ms`** (`20.0 TPS`) | **`49.3 ms`** | *看门狗崩溃（卡死 60 秒）* | `44.48 ms` (`19.2 TPS`) |
+| **500 – 700** | **`9.57 – 23.28 ms`** (`20.0 TPS`) | **`71.9 – 91.8 ms`** | *已崩溃* | *已饱和 (< 20 TPS)* |
+| **20 TPS 下最大承载** | **`700+ 名玩家`** | | `300 名玩家` | `300 名玩家` |
+
+### CPU 使用率（占 8 个分配 vCPU 的 `%`）
+
+| 玩家数 | Pumpkin 26.3 | Paper 26.3 | Folia 26.3 |
+| :--- | :--- | :--- | :--- |
+| **空载 (0)** | **`0.0%`** | `0.3%` | `0.1%` |
+| **50** | **`1.9%`** | `7.8%` | `6.0%` |
+| **100** | **`4.1%`** | `9.2%` | `7.4%` |
+| **150** | **`6.8%`** | `16.0%` | `12.0%` |
+| **200** | **`10.9%`** | `26.9%` | `19.9%` |
+| **250** | **`15.8%`** | `38.9%` | `30.6%` |
+| **300** | **`24.2%`** | `25.5%` *(主线程饱和)* | `44.8%` |
+| **400** | **`32.6%`** (`20.0 TPS`) | *已崩溃* | `57.4%` (`19.2 TPS`) |
+| **500 – 700** | **`37.3% – 45.1%`** (`20.0 TPS`) | *已崩溃* | *已饱和* |
+
+### 内存占用（`RAM RSS`）
+
+| 玩家数 | Pumpkin 26.3 | Paper 26.3 (`-Xms512M`) | Paper 26.3 (Aikar `10G`) | Folia 26.3 (`-Xms512M`) | Folia 26.3 (Aikar `10G`) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **空载 (0)** | **`60 MiB`** | `2,457 MiB` | `10,825 MiB` | `1,859 MiB` | `10,826 MiB` |
+| **50** | **`584 MiB`** | `4,052 MiB` | `10,936 MiB` | `4,058 MiB` | `10,980 MiB` |
+| **100** | **`771 MiB`** | `4,124 MiB` | `10,982 MiB` | `4,115 MiB` | `11,004 MiB` |
+| **150** | **`895 MiB`** | `4,166 MiB` | `11,034 MiB` | `4,317 MiB` | `11,041 MiB` |
+| **200** | **`1,053 MiB`** | `4,218 MiB` | `11,084 MiB` | `4,372 MiB` | `11,077 MiB` |
+| **250** | **`1,087 MiB`** | `4,194 MiB` | `11,131 MiB` | `4,337 MiB` | `11,117 MiB` |
+| **300** | **`1,146 MiB`** | `4,026 MiB` | `11,203 MiB` | `4,186 MiB` | `11,162 MiB` |
+| **400** | **`1,416 MiB`** | *已崩溃* | *已崩溃* | `4,268 MiB` (`19.2 TPS`) | `11,276 MiB` (`19.2 TPS`) |
+| **500 – 700** | **`1,575 – 1,782 MiB`** | *已崩溃* | *已崩溃* | *已饱和* | *已饱和* |
+
+::: info 为什么 Pumpkin 在共享区域中同时超越 Paper 和 Folia
+当玩家聚集在单一区域时，Folia 无法将他们划分到独立的区域线程（`Regions: 1`），必须在单线程上 Tick 所有玩家。而 Pumpkin 借助 Rayon 工作线程，并行化了玩家移动广播、数据包编码、实体追踪器更新、区块 Tick 以及不相交的**实体孤岛（Entity Islands）**，同时比动态堆 Paper/Folia（`-Xms512M`）少消耗 **3.5x – 7x 的 RAM**，比 Aikar 10G 配置少消耗 **6x – 9x 的 RAM**。
+:::
+
+---
+
+## Tier 3：多区域分散测试（8 物理核心 / 16 vCPU，8 个相距 8,192 格的区域）
+
+在此工作负载下，玩家平均分布在 **8 个相距 `8,192` 格（`512` 区块）的独立区域**中（总计约 `2,312` 个活动加载区块）。
+
+### Tick 性能（`MSPT` 与 `TPS`）
+
+| 玩家数（分布在 8 个区域） | Pumpkin 26.3（统一世界 Tick） | Paper 26.3（统一世界 Tick） | Folia 26.3（8 个独立区域时钟） |
+| :--- | :--- | :--- | :--- |
+| **100** | **`9.56 ms`** (`20.0 TPS`) | `30.10 ms` (`20.0 TPS`) | `6.31 ms/区域` (`19.9 TPS`) |
+| **200** | **`11.78 ms`** (`20.0 TPS`) | `51.40 ms` (`19.5 TPS`) | `4.19 ms/区域` (`20.0 TPS`) |
+| **300** | **`16.54 ms`** (`20.0 TPS`) | *已饱和 (< 20 TPS)* | `4.76 ms/区域` (`20.0 TPS`) |
+| **400** | **`23.97 ms`** (`20.0 TPS`) | *已饱和 (< 20 TPS)* | `5.38 ms/区域` (`20.0 TPS`) |
+| **500** | **`34.86 ms`** (`20.0 TPS`) | *已饱和 (< 20 TPS)* | `6.12 ms/区域` (`20.0 TPS`) |
+| **600** | **`42.79 ms`** (`20.0 TPS`) | *已饱和 (< 20 TPS)* | `7.18 ms/区域` (`20.0 TPS`) |
+| **750 – 1,200** | *在 750 名玩家时饱和 (`52.6 ms`)* | *已饱和 (< 20 TPS)* | `8.40 – 12.16 ms/区域` (`20.0 TPS`) |
+| **20 TPS 下最大承载** | **`600 名玩家`**（统一 Tick） | `100 名玩家`（统一 Tick） | `1,200+ 名玩家`（分立时钟） |
+
+### CPU 使用率（占 16 个分配 vCPU 的 `%`）
+
+| 玩家数（分布在 8 个区域） | Pumpkin 26.3 | Paper 26.3 | Folia 26.3 |
+| :--- | :--- | :--- | :--- |
+| **空载 (0)** | **`0.0%`** | `0.1%` | `0.1%` |
+| **100** | **`4.2%`** | `7.2%` | `4.8%` |
+| **200** | **`6.1%`** | `9.6%` (`19.5 TPS`，受单线程瓶颈限制) | `3.7%` |
+| **300** | **`11.0%`** | *已饱和* | `5.4%` |
+| **400** | **`23.0%`** | *已饱和* | `6.8%` |
+| **500** | **`39.8%`** | *已饱和* | `8.6%` |
+| **600** | **`46.0%`** | *已饱和* | `11.8%` |
+| **750 – 1,200** | *已饱和* | *已饱和* | `14.8% – 32.2%` |
+
+### 内存占用（`RAM RSS`）
+
+| 玩家数（分布在 8 个区域） | Pumpkin 26.3 | Paper 26.3 (`-Xms512M`) | Paper 26.3 (Aikar `10G`) | Folia 26.3 (`-Xms512M`) | Folia 26.3 (Aikar `10G`) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **100** | **`1,186 MiB`** | `4,442 MiB` | `11,265 MiB` | `4,421 MiB` | `11,276 MiB` |
+| **200** | **`1,445 MiB`** | `4,682 MiB` | `11,341 MiB` | `4,609 MiB` | `11,333 MiB` |
+| **300** | **`1,750 MiB`** | *已饱和* | *已饱和* | `4,829 MiB` | `11,365 MiB` |
+| **400** | **`1,900 MiB`** | *已饱和* | *已饱和* | `4,874 MiB` | `11,398 MiB` |
+| **500** | **`2,011 MiB`** | *已饱和* | *已饱和* | `5,129 MiB` | `11,480 MiB` |
+| **600** | **`2,097 MiB`** | *已饱和* | *已饱和* | `5,041 MiB` | `11,554 MiB` |
+| **750 – 1,200** | *已饱和* | *已饱和* | *已饱和* | `4,993 – 5,185 MiB` | `11,741 MiB` |
+
+### 统一世界 Tick 与分立区域时钟对比
+
+- **Pumpkin vs. Paper（统一世界 Tick，6 倍承载能力）：**
+  Pumpkin 和 Paper 都保留了原版 Minecraft 的**统一全局世界 Tick**，这意味着红石、命令、全局游戏规则和插件在整个维度内都能观察到单一、一致的 Tick 顺序。当 8 个遥远的区域同时处于活动状态（约 `2,312` 个区块）时，Paper 的单主线程在 **100 名玩家（`30.10 ms` MSPT）** 时便达到饱和，并在 200 名玩家时降至 20 TPS 以下。而 Pumpkin 借助 Rayon 在每个世界 Tick 内并行化区块 Tick、流体/随机 Tick、方块实体、实体追踪器更新以及不相交的**实体孤岛（Entity Islands）**，在仅使用 **`2.05 GiB` RAM** 的情况下便能承载 **600 名玩家稳定运行在 20.0 TPS（`42.79 ms` MSPT）**。
+- **为什么 Folia 在分散世界中的扩展表现不同：**
+  Folia 通过**移除全局世界 Tick**，将维度拆分为 8 个不同步的区域线程（`Regions: 8`，报告各区域的 MSPT 而非世界总 CPU 时间），从而实现了 `1,200+` 名分散玩家的承载。这种设计非常适合玩家相隔数千格的分散生存服务器，但带来了两个代价：
+  - **插件与原版兼容性：** 插件、命令和跨区域机制无法在单个 Tick 内跨区域安全读取或修改世界状态。
+  - **共享区域瓶颈：** 一旦玩家聚集在同一区域（如上述 Tier 1 和 Tier 2 场景），Folia 会退化回单一区域线程（`Regions: 1`），此时 Pumpkin 的承载能力是其 **2.3 倍以上（`700+` 对比 `300`）**，且内存占用比其少 **3.5x – 8x**。
+
+<sub><sup>基准测试于 2026 年 11 月 7 日完成</sup></sub>

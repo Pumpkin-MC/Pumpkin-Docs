@@ -1,39 +1,46 @@
-# 帮助与捐赠 Pumpkin
+# 帮助 Pumpkin 并为其捐赠
 
-感谢您对支持 Pumpkin 的兴趣！无论您是开发人员、服务器管理员还是 Minecraft 爱好者，都有很多方法可以提供帮助。
-
----
-
-## 1. 报告问题和功能建议
-
-如果您在使用 Pumpkin 时遇到错误、崩溃或意外行为，打开 GitHub issue 有助于我们快速跟踪和解决问题。
-- **检查现有 issue**：在打开新工单之前搜索 [Pumpkin GitHub Issues](https://github.com/Pumpkin-MC/Pumpkin/issues)。
-- **提供重现步骤**：包括清晰的步骤、服务器日志和系统详细信息。
-- **使用 issue 模板**：在 GitHub 上选择适当的 issue 模板。
+感谢你有兴趣支持 Pumpkin！无论你是开发者、服务器管理员还是 Minecraft 爱好者，都可以通过多种方式提供帮助。
 
 ---
 
-## 2. 代码和文档的 Pull Requests
+## 1. 报告问题与提出功能建议
 
-我们欢迎代码贡献、文档更新和错误修复！
-有关代码贡献，请阅读我们的 [贡献指南](/developer/contributing)。
-> [!IMPORTANT] 代码指南
-> - **遵循 Rust 格式和 Linting**：在提交 PR 之前运行 `cargo fmt` 和 `cargo clippy`。
-> - **尊重架构规则**：遵循现有的模块化结构。
-> - **干净的提交和 PR**：让 Pull Request 专注于单个主题。
-> - **讨论重大更改**：在 [Discord](https://discord.gg/RNm224ZsDq) 上讨论。
+如果你在使用 Pumpkin 时遇到缺陷、崩溃或异常行为，创建 GitHub Issue 有助于我们快速跟踪并解决问题。
+
+- **检查现有 Issue**：创建新工单前，请先搜索 [Pumpkin GitHub Issues](https://github.com/Pumpkin-MC/Pumpkin/issues)，避免重复。
+- **提供复现步骤**：附上清晰的步骤、服务器日志、预期行为与实际行为，以及系统详细信息。
+- **使用 Issue 模板**：在 GitHub 上选择合适的 Issue 模板（缺陷报告或功能请求）。
 
 ---
 
-## 3. 财务支持与捐赠
+## 2. 代码与文档 Pull Request
 
-维护高性能 Minecraft 服务器软件需要大量精力。
-- **捐赠**：在我们的官方捐赠页面 [pumpkinmc.org/donate](https://pumpkinmc.org/donate) 查看我们的资金选项。
-- **服务器基础设施**：您也可以通过提供测试环境来提供帮助。
+我们欢迎代码贡献、文档更新和缺陷修复！
+
+有关代码贡献，请阅读专门的[贡献指南](/zh_cn/developer/contributing)，了解如何设置环境、反编译 Minecraft 逻辑以及提交 Pull Request 的完整说明。
+
+> [!IMPORTANT] 代码规范
+> 为 Pumpkin 贡献代码时，请遵守我们的项目规范：
+> - **遵循 Rust 格式化与静态检查规范**：提交 PR 前运行 `cargo fmt` 和 `cargo clippy`。
+> - **遵守架构规则**：遵循现有的模块化结构和异步编程实践。
+> - **保持提交与 PR 整洁**：让 Pull Request 专注于单一主题，并使用清晰的提交信息。
+> - **讨论重大更改**：在着手开发重大功能或重写架构之前，请创建 GitHub Discussion/Issue，或在[我们的 Discord 服务器](https://discord.gg/RNm224ZsDq)中与维护者讨论。
+
+---
+
+## 3. 资金支持与捐赠
+
+维护和改进高性能 Minecraft 服务器软件需要持续投入精力和资源。如果你希望为 Pumpkin 的开发提供资金支持：
+
+- **捐赠**：请访问我们的官方捐赠页面 [pumpkinmc.org/donate](https://pumpkinmc.org/donate)，查看资助方式。
+- **服务器基础设施**：你也可以通过提供基准测试环境、硬件托管或测试基础设施来提供帮助。
 
 ---
 
 ## 4. 社区与支持
 
+加入我们的社区，帮助解答用户问题、测试预发布功能并讨论想法：
+
 - **Discord 社区**：[加入 Pumpkin Discord](https://discord.gg/RNm224ZsDq)
-- **GitHub 讨论**：在 [Pumpkin GitHub Discussions](https://github.com/Pumpkin-MC/Pumpkin/discussions) 分享反馈。
+- **GitHub 讨论**：在 [Pumpkin GitHub Discussions](https://github.com/Pumpkin-MC/Pumpkin/discussions) 上分享反馈和想法

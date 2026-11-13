@@ -1,94 +1,52 @@
-# Creating Your First Command
+# 创建你的第一个命令
 
-Registering custom commands in Pumpkin using Kotlin is concise, idiomatic, and strongly typed.
+为[快速入门](./quick-start)中的插件添加 `/hello`。`commands.register` 会将命令绑定到其 Kotlin 执行回调。
 
----
+```kotlin [src/wasmWasiMain/kotlin/example/ExamplePlugin.kt]
+package example
 
-## 1. Quick Example
+import plugin.PluginContext
+import plugin.PluginMetadata
+import plugin.PumpkinPlugin
+import pumpkin.Command
+import pumpkin.Permission
+import pumpkin.Text
 
-Here is a complete Kotlin plugin (`Plugin.kt`) that registers a `/hello` command with permission checks and sends a response back to the player.
+class ExamplePlugin : PumpkinPlugin() {
+    override fun metadata() = PluginMetadata(
+        name = "my-kotlin-plugin",
+        version = "0.1.0",
+        authors = listOf("Your name"),
+        description = "A Kotlin plugin with a command",
+        dependencies = emptyList(),
+        permissions = emptyList(),
+    )
 
-```kotlin [src/wasmWasiMain/kotlin/plugin/Plugin.kt]
-package plugin
-
-import pumpkin.plugin.context.Context
-import pumpkin.plugin.command.Command
-import pumpkin.plugin.permission.Permission
-import pumpkin.plugin.permission.PermissionDefault
-
-class MyPlugin {
-    fun onLoad(ctx: Context) {
-        // 1. Register permission node
-        ctx.registerPermission(
-            Permission(
-                node = "my_kotlin_plugin:hello",
-                description = "Allows executing the /hello command",
-                default = PermissionDefault.ALLOW,
-                children = emptyList()
+    override fun onLoad(context: PluginContext): Result<Unit> = runCatching {
+        context.registerPermission(
+            Permission.Permission(
+                node = "example:hello",
+                description = "Allows using /hello",
+                default = Permission.PermissionDefault.Allow,
+                children = emptyList(),
             )
-        )
+        ).getOrThrow()
 
-        // 2. Build and register command tree
-        val cmd = Command(
-            names = listOf("hello", "hi"),
-            description = "Greets the player"
+        val command = Command.Command(
+            names = listOf("hello"),
+            description = "Greets the sender",
         )
-        ctx.registerCommand(cmd, "my_kotlin_plugin:hello")
-    }
-
-    fun handleCommand(sender: pumpkin.plugin.command.CommandSender): Int {
-        sender.sendMessage("Hello from Kotlin Plugin!")
-        return 1
+        commands.register(context, command, "example:hello") { sender, _, _ ->
+            sender.sendMessage(Text.TextComponent.text("Hello from Kotlin!"))
+            Result.success(1)
+        }
+        Unit
     }
 }
 ```
 
----
+`onLoad` 注册权限和命令。`commands.register` 管理处理器 ID，并将执行请求发送给 lambda；插件无需重写 `handleCommand`。
 
-## 2. In-Game Preview
+回调返回 `Result<Int>`；`Result.success(1)` 表示成功。按照快速入门中的说明构建并加载插件。
 
-Once registered, your command automatically gains client-side autocompletion, syntax validation, and color highlighting in Minecraft:
-
-<img src="/assets/first_command_preview.png" alt="In-Game Command Autocompletion Preview" width="500"/>
-
----
-
-## 3. How It Works
-
-::: details Step-by-Step Breakdown
-
-### Step 1: Define the Permission Node
-Construct a `Permission` object and pass it to `ctx.registerPermission`:
-```kotlin
-ctx.registerPermission(
-    Permission(
-        node = "my_kotlin_plugin:hello",
-        description = "Allows executing the /hello command",
-        default = PermissionDefault.ALLOW,
-        children = emptyList()
-    )
-)
-```
-
-### Step 2: Build the Command Tree
-Instantiate `Command` with primary names and aliases:
-```kotlin
-val cmd = Command(
-    names = listOf("hello", "hi"),
-    description = "Greets the player"
-)
-```
-
-### Step 3: Register with Context
-Register the command with `ctx.registerCommand` and handle calls inside `handleCommand`:
-```kotlin
-ctx.registerCommand(cmd, "my_kotlin_plugin:hello")
-```
-
-:::
-
----
-
-## Next Steps
-
-- Follow the [Kotlin Quick Start Guide](./quick-start) to configure your `Makefile` and Kotlin/Wasm build tools.
+有关命令建议和底层 WIT 导出的信息，请参阅[回调参考](./callbacks#kotlin-回调层)。

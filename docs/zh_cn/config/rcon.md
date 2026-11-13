@@ -1,134 +1,27 @@
-# RCON
+# 管理服务器 (MSMP) / RCON
 
-RCON 是一种允许你从不同设备远程管理服务器的协议。Pumpkin 完全支持 RCON。
+> [!WARNING]
+> 传统的 RCON（`[networking.rcon]`）已被 `[networking.management]` 下的 [Minecraft 服务器管理协议 (MSMP)](./management) 所取代。
 
-## 配置 RCON
-
-#### `enabled`: 布尔值
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[networking.rcon]
-enabled = true
-```
-
-:::
-
-#### `address`: 字符串
-
-RCON 应监听的地址和端口。
-
-:::code-group
-
-```toml [pumpkin.toml] {3}
-[networking.rcon]
-enabled = true
-address = "0.0.0.0:25575"
-```
-
-:::
-
-#### `password`: 字符串
-
-用于 RCON 认证的密码。
-
-:::code-group
-
-```toml [pumpkin.toml] {3}
-[networking.rcon]
-enabled = true
-password = "[你的安全密码在这里]"
-```
-
-:::
-
-#### `max_connections`: 整数
-
-单次允许的最大 RCON 连接数。设置为 0 以禁用限制。
-
-:::code-group
-
-```toml [pumpkin.toml] {3}
-[networking.rcon]
-enabled = true
-max_connections = 5
-```
-
-:::
-
-### 日志记录
-
-#### `log_logged_successfully`: 布尔值
-
-成功登录是否应记录到控制台。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[rcon.logging]
-log_logged_successfully = true
-```
-
-:::
-
-#### `log_wrong_password`: 布尔值
-
-错误密码尝试是否应记录到控制台。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[rcon.logging]
-log_logged_successfully = true
-```
-
-:::
-
-#### `log_commands`: 布尔值
-
-从 RCON 运行的命令是否应记录到控制台。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[rcon.logging]
-log_commands = true
-```
-
-:::
-
-#### `log_quit`: 布尔值
-
-RCON 客户端退出是否应被记录。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[rcon.logging]
-log_quit = true
-```
-
-:::
-
-## 默认配置
-
-默认情况下，RCON 是禁用的。
+## 配置
 
 :::code-group
 
 ```toml [pumpkin.toml]
-[networking.rcon]
+[networking.management]
 enabled = false
-address = "0.0.0.0:25575"
-password = ""
-max_connections = 0
-
-[rcon.logging]
-log_logged_successfully = true
-log_wrong_password = true
-log_commands = true
-log_quit = true
+address = "127.0.0.1:25585"
+secret = ""
+allowed_origins = []
+status_heartbeat_interval = 0
 ```
 
 :::
+
+### 管理服务器设置
+
+- **`enabled`**：启用 Minecraft 服务器管理协议 (MSMP) WebSocket 服务的总开关（默认：`false`）。
+- **`address`**：管理服务器监听 WebSocket 连接的 IP 地址和端口（默认：`"127.0.0.1:25585"`）。
+- **`secret`**：用于验证管理客户端身份的 40 位字母数字密钥。如果在启动时留空（`""`），系统将自动生成一个随机的 40 位密钥。
+- **`allowed_origins`**：允许通过 Web 浏览器连接的来源列表，通过 `Origin` HTTP 头进行验证（默认：`[]`）。
+- **`status_heartbeat_interval`**：自动广播服务器状态心跳的时间间隔（秒）（`0` 表示禁用心跳广播，默认：`0`）。

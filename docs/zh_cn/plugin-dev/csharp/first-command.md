@@ -1,12 +1,12 @@
-# Creating Your First Command
+# 创建你的第一个命令
 
-Registering custom commands in Pumpkin using C# provides a strongly-typed, clean structure.
+使用 C# 在 Pumpkin 中注册自定义命令，可以获得强类型且清晰的代码结构。
 
 ---
 
-## 1. Quick Example
+## 1. 快速示例
 
-Here is a complete C# plugin file (`MyPlugin.cs`) that registers a `/hello` command with permission checks and sends a response back to the player.
+下面是一个完整的 C# 插件文件（`MyPlugin.cs`），它会注册一个带权限检查的 `/hello` 命令，并向玩家发送响应。
 
 ```csharp [MyPlugin.cs]
 using PluginWorld;
@@ -21,7 +21,7 @@ public class MyPlugin : IPluginWorldExports, IMetadataExports
 
     public static void OnLoad(IContextImports.Context context)
     {
-        // 1. Register permission node
+        // 1. 注册权限节点
         var perm = new IPermissionImports.Permission(
             "my_csharp_plugin:hello",
             "Allows executing the /hello command",
@@ -30,7 +30,7 @@ public class MyPlugin : IPluginWorldExports, IMetadataExports
         );
         IContextImports.RegisterPermission(context, perm);
 
-        // 2. Build and register command tree
+        // 2. 构建并注册命令树
         var command = ICommandImports.Command.New(["hello", "hi"], "Greets the player");
         IContextImports.RegisterCommand(context, command, "my_csharp_plugin:hello");
     }
@@ -65,20 +65,20 @@ public class MyPlugin : IPluginWorldExports, IMetadataExports
 
 ---
 
-## 2. In-Game Preview
+## 2. 游戏内预览
 
-Once registered, your command automatically gains client-side autocompletion, syntax validation, and color highlighting in Minecraft:
+命令注册后，Minecraft 客户端会自动为其提供自动补全、语法验证和颜色高亮：
 
-<img src="/assets/first_command_preview.png" alt="In-Game Command Autocompletion Preview" width="500"/>
+<img src="/assets/first_command_preview.png" alt="游戏内命令自动补全预览" width="500"/>
 
 ---
 
-## 3. How It Works
+## 3. 工作原理
 
-::: details Step-by-Step Breakdown
+::: details 分步解析
 
-### Step 1: Define the Permission Node
-Construct an `IPermissionImports.Permission` record and register it via `IContextImports.RegisterPermission`:
+### 步骤 1：定义权限节点
+构造一个 `IPermissionImports.Permission` 记录，并通过 `IContextImports.RegisterPermission` 注册：
 ```csharp
 var perm = new IPermissionImports.Permission(
     "my_csharp_plugin:hello",
@@ -89,14 +89,14 @@ var perm = new IPermissionImports.Permission(
 IContextImports.RegisterPermission(context, perm);
 ```
 
-### Step 2: Build the Command Tree
-Instantiate your command with primary names and description:
+### 步骤 2：构建命令树
+使用主名称和描述实例化命令：
 ```csharp
 var command = ICommandImports.Command.New(["hello", "hi"], "Greets the player");
 ```
 
-### Step 3: Register and Handle
-Register the command with `IContextImports.RegisterCommand` and process incoming executions inside `HandleCommand`:
+### 步骤 3：注册并处理
+使用 `IContextImports.RegisterCommand` 注册命令，并在 `HandleCommand` 中处理传入的执行请求：
 ```csharp
 IContextImports.RegisterCommand(context, command, "my_csharp_plugin:hello");
 ```
@@ -105,6 +105,6 @@ IContextImports.RegisterCommand(context, command, "my_csharp_plugin:hello");
 
 ---
 
-## Next Steps
+## 后续步骤
 
-- Follow the [C# Quick Start Guide](./quick-start) to configure `.csproj` and build WebAssembly outputs.
+- 按照 [C# 快速入门指南](./quick-start) 配置 `.csproj` 并构建 WebAssembly 输出。

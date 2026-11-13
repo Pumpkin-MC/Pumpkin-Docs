@@ -1,240 +1,210 @@
-### 网络
+# 网络与协议
 
-Pumpkin 中的大部分网络代码可以在 [pumpkin-protocol](https://github.com/Pumpkin-MC/Pumpkin/tree/master/pumpkin-protocol) 包中找到。
+Pumpkin 包含一个高性能网络栈，同时支持 **Minecraft：Java 版** 和 **Minecraft：基岩版**。
 
-服务器绑定（Serverbound）：客户端 → 服务器
+大多数协议定义、编解码器和序列化逻辑位于 [`pumpkin-protocol`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/crates/pumpkin-protocol) crate 中，而连接处理与游戏数据包分发位于 [`pumpkin`](https://github.com/Pumpkin-MC/Pumpkin/tree/master/crates/pumpkin/src/net) crate 中。
 
-客户端绑定（Clientbound）：服务器 → 客户端
+> [!NOTE]
+> 专用子分类中提供了详细指南：
+> - **[网络简介](/zh_cn/developer/networking/)**
+> - **Java 版**：**[架构](/zh_cn/developer/networking/java/overview)**、**[添加 Java 数据包](/zh_cn/developer/networking/java/adding-packets)** 和 **[身份验证](/zh_cn/developer/networking/java/authentication)**
+> - **基岩版**：**[架构](/zh_cn/developer/networking/bedrock/overview)** 和 **[添加基岩版数据包](/zh_cn/developer/networking/bedrock/adding-packets)**
 
-### 结构
+---
 
-Pumpkin 协议中的数据包按功能和状态组织。
+## 方向与协议术语
 
-`server`：包含服务器绑定数据包的定义。
+- **服务器接收（Serverbound，客户端 → 服务器）**：由游戏客户端发送、Pumpkin 接收的数据包。以 `S` 为前缀（例如 `SChatMessage`、`SPlayerPosition`）。
+- **客户端接收（Clientbound，服务器 → 客户端）**：由 Pumpkin 发送给游戏客户端的数据包。以 `C` 为前缀（例如 `CPlayDisconnect`、`CBlockUpdate`）。
 
-`client`：包含客户端绑定数据包的定义。
+---
 
-### 状态
+## 协议状态
 
-**握手（Handshake）**：始终是由客户端发送的第一个数据包。这也决定了下一个状态，通常用于指示玩家是想执行状态请求、加入服务器，还是想被转移。
+Minecraft Java 协议作为一个具有五种不同状态的有限状态机运行：
 
-**状态（Status）**：表示客户端想要查看状态响应（MOTD）。
+1. **握手（Handshake）**：客户端连接时发送的初始数据包。它指定协议版本、服务器地址和目标下一状态（`Status`、`Login` 或 `Transfer`）。
+2. **状态（Status）**：用于多人游戏服务器列表的轻量级查询状态（MOTD、在线玩家数、延迟 ping）。
+3. **登录（Login）**：验证玩家身份（通过 Mojang Yggdrasil 或离线模式），设置加密（AES-128/CFB8），并在启用时激活数据包压缩。
+4. **配置（Config）**：在现代 Minecraft 版本中引入，用于在游玩前配置客户端设置、协商功能、资源包和服务器链接。
+5. **游玩（Play）**：处理实体、世界区块、物品栏交互、聊天和移动的主要游戏状态。
 
-**登录（Login）**：登录序列。表示客户端想要加入服务器。
+---
 
-**配置（Config）**：配置数据包序列主要从服务器发送到客户端（功能、资源包、服务器链接等）。
+## 在 `pumpkin-protocol` 中定义数据包
 
-**游玩（Play）**：最终状态，表示玩家现在准备好加入，也用于处理所有其他游戏玩法数据包。
+`pumpkin-protocol` 中的数据包按版本（`java`、`bedrock`）、方向（`client`、`server`）和状态（`handshake`、`status`、`login`、`config`、`play`）组织。
 
-### Minecraft 协议
+### 1. 客户端接收数据包（`ClientPacket`）
 
-您可以在 <https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Protocol> 找到所有 Minecraft Java 数据包。在那里，您还可以看到它们处于哪个[状态](#状态)。
-您还可以看到数据包的所有信息，根据它们是服务器绑定还是客户端绑定，我们可以读取或写入这些信息。
+创建客户端接收数据包的步骤：
 
-### 添加数据包
-
-1. 添加数据包很简单。首先，派生：
-
-```rust
-// 对于客户端绑定数据包：
-#[derive(Serialize)]
-
-// 对于服务器绑定数据包：
-#[derive(Deserialize)]
-```
-
-2. 接下来，您必须让系统知道您的结构表示一个数据包。这会自动从 JSON 数据包文件中获取数据包 ID。
+1. 从 `pumpkin-data` 获取数据包 ID 常量。
+2. 使用 `#[java_packet(PACKET_CONSTANT)]` 标注结构体。
+3. 实现 `ClientPacket`，使用 `NetworkWriteExt` 将数据包字段写入字节流。
 
 ```rust
-use pumpkin_data::packet::clientbound::PLAY_DISCONNECT;
+use std::io::Write;
+use pumpkin_data::packet::clientbound::play::DISCONNECT;
+use pumpkin_macros::java_packet;
+use pumpkin_protocol::ClientPacket;
+use pumpkin_protocol::ser::{NetworkWriteExt, WritingError};
+use pumpkin_util::text::TextComponent;
+use pumpkin_util::version::JavaMinecraftVersion;
 
-#[packet(PLAY_DISCONNECT)]
-```
-
-3. 现在您可以创建 `struct`。
-
-> [!IMPORTANT]重要
-> 请以 "C" 或 "S" 开始数据包名称，分别代表"客户端绑定"或"服务器绑定"。
-> 此外，如果这是一个可以在多个[状态](#状态)下发送的数据包，请将状态添加到名称中。例如，有 3 个不同的断开连接数据包。
->
-> - `CLoginDisconnect`
-> - `CConfigDisconnect`
-> - `CPlayDisconnect`
-
-在您的数据包结构中创建字段，以表示将要发送的数据。
-
-> [!IMPORTANT]重要
-> 使用描述性字段名称和适当的数据类型。
-
-例子：
-
-```rust
-pub struct CPlayDisconnect {
-    reason: TextComponent,
-    // 更多字段...
+/// 在游玩状态下断开玩家连接。
+#[java_packet(DISCONNECT)]
+pub struct CPlayDisconnect<'a> {
+    pub reason: &'a TextComponent,
 }
 
-pub struct SPlayerPosition {
-    pub x: f64,
-    pub feet_y: f64,
-    pub z: f64,
-    pub ground: bool,
-}
-```
-
-4. （仅限客户端绑定数据包）`impl` 一个 `new` 函数，这样我们就可以通过输入值来实际创建它们。
-
-```rust
-impl CPlayDisconnect {
-    pub fn new(reason: TextComponent) -> Self {
-        Self { reason }
-    }
-}
-```
-
-5. 最后，所有内容应该组合在一起。
-
-```rust
-#[derive(Serialize)]
-#[packet(PLAY_DISCONNECT)]
-pub struct CPlayDisconnect {
-    reason: TextComponent,
-}
-
-impl CPlayDisconnect {
-    pub fn new(reason: TextComponent) -> Self {
+impl<'a> CPlayDisconnect<'a> {
+    pub const fn new(reason: &'a TextComponent) -> Self {
         Self { reason }
     }
 }
 
-#[derive(Deserialize)]
-#[packet(PLAY_MOVE_PLAYER_POS)]
-pub struct SPlayerPosition {
-    pub x: f64,
-    pub feet_y: f64,
-    pub z: f64,
-    pub ground: bool,
+impl ClientPacket for CPlayDisconnect<'_> {
+    fn write_packet_data(
+        &self,
+        mut write: impl Write,
+        version: &JavaMinecraftVersion,
+    ) -> Result<(), WritingError> {
+        // 写入针对目标客户端版本格式化的文本组件
+        write.write_component(self.reason, version)
+    }
 }
 ```
 
-6. 您还可以手动序列化/反序列化数据包，这在数据包更复杂时很有用。
+### 2. 服务器接收数据包（`ServerPacket`）
 
-```diff
--#[derive(Serialize)]
+创建服务器接收数据包的步骤：
 
-+ impl ClientPacket for CPlayDisconnect {
-+    fn write(&self, bytebuf: &mut BytesMut) {
-+       bytebuf.put_slice(&self.reason.encode());
-+    }
-
--#[derive(Deserialize)]
-
-+ impl ServerPacket for SPlayerPosition {
-+    fn read(bytebuf: &mut Bytes) -> Result<Self, ReadingError> {
-+       Ok(Self {
-+           x: bytebuf.try_get_f64()?,
-+           feet_y: bytebuf.try_get_f64()?,
-+           z: bytebuf.try_get_f64()?,
-+           ground: bytebuf.try_get_bool()?,
-+       })
-+    }
-```
-
-7. 现在您可以发送客户端绑定数据包（参见[发送数据包](#发送数据包)）或监听服务器绑定数据包（参见[接收数据包](#接收数据包)）。
-
-### 客户端
-
-Pumpkin 将 `Client`（客户端）和 `Player`（玩家）分开分类。不在游戏状态的所有内容都是简单的 `Client`。以下是它们的区别：
-
-#### 客户端
-
-- 只能处于状态：Status、Login、Transfer、Config
-- 不是活动实体
-- 资源消耗小
-
-#### 玩家
-
-- 只能处于 Play 状态
-- 是世界中的一个活动实体
-- 有更多数据并消耗更多资源
-
-#### 发送数据包
-
-例子：
+1. 从 `pumpkin-data` 获取数据包 ID 常量。
+2. 使用 `#[java_packet(PACKET_CONSTANT)]` 标注结构体。
+3. 实现 `ServerPacket<'a>`，使用 `NetworkReadExt` 从传入的字节切片中读取字段。
 
 ```rust
-// 仅在 Status 状态下工作
-client.send_packet(&CStatusResponse::new("{ description: "A Description"}"));
-```
+use pumpkin_data::packet::serverbound::play::MOVE_PLAYER_POS;
+use pumpkin_macros::java_packet;
+use pumpkin_protocol::ServerPacket;
+use pumpkin_protocol::ser::{NetworkReadExt, ReadingError};
+use pumpkin_util::math::vector3::Vector3;
+use pumpkin_util::version::JavaMinecraftVersion;
 
-#### 接收数据包
-
-关于 `Client` 的部分：
-`src/client/mod.rs`
-
-```diff
-// 将数据包放入正确的状态
- fn handle_mystate_packet(
-  &self,
-    server: &Arc<Server>,
-    packet: &mut RawPacket,
-) -> Result<(), ReadingError> {
-    let bytebuf = &mut packet.bytebuf;
-    match packet.id.0 {
-        SStatusRequest::PACKET_ID => {
-                self.handle_status_request(server, SStatusRequest::read(bytebuf)?)
-                    .await;
-            }
-+            MyPacket::PACKET_ID => {
-+                self.handle_my_packet(MyPacket::read(bytebuf)?)
-+                    .await;
-            }
-            _ => {
-            log::error!(
-                "Failed to handle packet id {} while in ... state",
-                packet.id.0
-            );
-            }
-    };
-    Ok(())
+#[java_packet(MOVE_PLAYER_POS)]
+pub struct SPlayerPosition {
+    pub position: Vector3<f64>,
+    pub collision: u8,
 }
-```
 
-关于 `Player` 的部分
-`src/entity/player.rs`
-
-```diff
-// 玩家只有“游玩”状态
- fn handle_play_packet(
-  &self,
-    server: &Arc<Server>,
-    packet: &mut RawPacket,
-) -> Result<(), ReadingError> {
-    let bytebuf = &mut packet.bytebuf;
-    match packet.id.0 {
-        SChatMessage::PACKET_ID => {
-            self.handle_chat_message(SChatMessage::read(bytebuf)?).await;
+impl<'a> ServerPacket<'a> for SPlayerPosition {
+    fn read(bytebuf: &mut &'a [u8], version: &JavaMinecraftVersion) -> Result<Self, ReadingError> {
+        let x = bytebuf.get_f64_be()?;
+        let y = bytebuf.get_f64_be()?;
+        if *version <= JavaMinecraftVersion::V_1_7_6 {
+            let _stance = bytebuf.get_f64_be()?;
         }
-       MyPacket::PACKET_ID => {
-+           self.handle_mypacket(server, MyPacket::read(bytebuf)?).await;
+        let z = bytebuf.get_f64_be()?;
+        let collision = bytebuf.get_u8()?;
+
+        Ok(Self {
+            position: Vector3::new(x, y, z),
+            collision,
+        })
+    }
+}
+```
+
+### 实用的序列化辅助工具（`NetworkWriteExt` 和 `NetworkReadExt`）
+
+Pumpkin 为字节流提供了扩展 trait，用于处理标准 Minecraft 原始类型：
+
+- `write_var_int(i32)` / `get_var_int()`：可变长度的 32 位整数。
+- `write_var_long(i64)` / `get_var_long()`：可变长度的 64 位整数。
+- `write_string(&str)` / `get_string()`：以 VarInt 长度为前缀的 UTF-8 字符串。
+- `write_uuid(&Uuid)` / `get_uuid()`：128 位玩家或实体 UUID。
+- `write_component(&TextComponent)`：序列化格式化的聊天/UI 文本。
+- `write_nbt(&NBTTag)` / `get_nbt()`：序列化/反序列化二进制 NBT 标签。
+
+---
+
+## `pumpkin` 中的数据包流与处理
+
+传入数据包会经过以下几个阶段，然后才会修改游戏状态：
+
+1. **帧解码**：Tokio TCP 流解码 VarInt 长度前缀，并在启用加密时解密帧。
+2. **事件拦截**：向已注册的插件发出 `PacketReceivedEvent`。如果事件被取消，数据包会立即被丢弃。
+3. **版本感知分发**：根据客户端协商的协议版本映射线路数据包 ID。
+4. **状态处理**：将解析后的数据包结构体路由到对应的处理函数（例如 `handle_play_packet`）。
+5. **状态变更**：修改玩家会话、世界区块或实体状态。
+
+### 1. `Client` 与 `Player`
+
+Pumpkin 严格区分游玩前的连接和活跃玩家：
+
+- **`Client`**：表示处于 `Handshake`、`Status`、`Login` 或 `Config` 状态的连接。它是轻量级的，不关联世界，也没有物理实体。在 `crates/pumpkin/src/net/java/mod.rs` 中处理。
+- **`Player`**：表示 `Play` 状态下活跃 `World` 中的生物实体。保存物品栏、生命值、速度和区块订阅队列。在 `crates/pumpkin/src/entity/player/` 中处理。
+
+### 2. 数据包分发（`handle_play_packet`）
+
+在 `crates/pumpkin/src/net/java/mod.rs` 中，通过匹配特定版本的数据包 ID 来分发数据包：
+
+```rust
+pub fn handle_play_packet(
+    &self,
+    player: &Arc<Player>,
+    server: &Arc<Server>,
+    packet: &RawPacket,
+) -> Result<(), Box<dyn PumpkinError>> {
+    let version = self.version.load();
+
+    // 触发插件事件，允许插件观察或取消数据包
+    let mut event = PacketReceivedEvent::new(player.clone(), packet.id, packet.payload.clone());
+    server.plugin_manager.fire_blocking(server, &mut event);
+    if event.cancelled {
+        return Ok(());
+    }
+
+    let mut payload = &event.payload[..];
+    match event.packet_id {
+        id if id == SConfirmTeleport::to_id(version) => {
+            self.handle_confirm_teleport(player, &SConfirmTeleport::read(&mut payload, &version)?);
+        }
+        id if id == SChatCommand::to_id(version) => {
+            let packet = SChatCommand::read(&mut payload, &version)?;
+            self.handle_chat_command(player, server, &packet);
+        }
+        id if id == SPlayerPosition::to_id(version) => {
+            let packet = SPlayerPosition::read(&mut payload, &version)?;
+            self.handle_player_position(player, &packet);
         }
         _ => {
-            log::error!(
-                "Failed to handle packet id {} while in ... state",
-                packet.id.0
-            );
+            trace!("Unhandled play packet id: {:#04x}", event.packet_id);
         }
-    };
+    }
     Ok(())
 }
 ```
 
-### 压缩
+### 3. 发送数据包
 
-Minecraft 数据包 **可以** 使用 ZLib 压缩进行解码/编码。通常会设置一个压缩阈值，当数据包超过该阈值时才会应用压缩；这影响最多的是区块数据包。
+向客户端发送数据包：
 
-### 移植
+```rust
+// 直接发送给单个玩家
+player.client.send_packet(&CPlayDisconnect::new(&reason));
 
-要移植到新的 Minecraft 版本，可以在 [minecraft.wiki 协议参考页面](https://minecraft.wiki/w/Java_Edition_protocol) 上对比协议差异。
+// 广播给世界中附近的玩家
+world.broadcast_packet_except(
+    &[player.gameprofile.id],
+    &CBlockUpdate::new(block_pos, block_id),
+).await;
+```
 
-同时还要修改 `src/lib.rs` 中的 `CURRENT_MC_PROTOCOL`。
+---
+
+## 压缩与加密
+
+- **压缩**：客户端通过登录状态后，如果 `pumpkin.toml` 中启用了 `compression_threshold`，超过阈值大小的数据包将使用 ZLib/fast 压缩。
+- **加密**：在在线模式下，登录状态中交换共享密钥后，会立即激活 128 位 AES/CFB8 加密。

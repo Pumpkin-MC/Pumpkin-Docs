@@ -1,34 +1,35 @@
-# Adding a Command
+# 添加命令
 
-This guide explains how to implement and register a new command in the Pumpkin server codebase.
+本指南说明如何在 Pumpkin 服务器代码库中实现并注册新命令。
 
-Commands in Pumpkin are implemented in the `crates/pumpkin/src/command/commands/` directory and registered into the central [`CommandDispatcher`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin-command/src/node/dispatcher.rs) during server initialization.
-
----
-
-## Anatomy of a Pumpkin Command
-
-A typical command file contains:
-1. **Metadata Constants**: Command description, permission node identifier, and argument names.
-2. **Permission Registration**: Declaring default OP requirements in the server's [`PermissionRegistry`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin-util/src/permission.rs).
-3. **Command Executors**: Structs implementing the [`CommandExecutor`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin-command/src/node/mod.rs) trait for each terminal node or subcommand.
-4. **Registration Function**: Constructing the argument tree using fluent builders (`command`, `literal`, `argument`).
+Pumpkin 中的命令在 `crates/pumpkin/src/command/commands/` 目录中实现，并在服务器初始化期间注册到中央 [`CommandDispatcher`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin-command/src/node/dispatcher.rs)。
 
 ---
 
-## Step-by-Step Implementation: Creating `/heal`
+## Pumpkin 命令的组成
 
-Let's implement a complete `/heal` command that can heal either the executing player or a set of target players:
+一个典型的命令文件包含：
+
+1. **元数据常量**：命令描述、权限节点标识符和参数名称。
+2. **权限注册**：在服务器的 [`PermissionRegistry`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin-util/src/permission.rs) 中声明默认 OP 要求。
+3. **命令执行器**：为每个终端节点或子命令实现 [`CommandExecutor`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin-command/src/node/mod.rs) trait 的结构体。
+4. **注册函数**：使用流式构建器（`command`、`literal`、`argument`）构造参数树。
+
+---
+
+## 分步实现：创建 `/heal`
+
+下面实现一个完整的 `/heal` 命令，它可以治疗执行者自身或一组目标玩家：
 
 ```
-/heal                 -> Heals the executing sender
-/heal <targets>       -> Heals target player(s)
-/heal <targets> <amount> -> Heals target player(s) by a specified amount
+/heal                 -> 治疗执行命令的发送者
+/heal <targets>       -> 治疗目标玩家
+/heal <targets> <amount> -> 按指定数值治疗目标玩家
 ```
 
-### 1. Create the File
+### 1. 创建文件
 
-Create `crates/pumpkin/src/command/commands/heal.rs`:
+创建 `crates/pumpkin/src/command/commands/heal.rs`：
 
 ```rust
 use std::sync::Arc;
@@ -58,12 +59,12 @@ const ERROR_NOT_PLAYER: CommandErrorType<0> = CommandErrorType::new(
 );
 ```
 
-### 2. Implement the Executors
+### 2. 实现执行器
 
-Command execution logic is encapsulated in structs implementing [`CommandExecutor`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin-command/src/node/mod.rs):
+命令执行逻辑封装在实现 [`CommandExecutor`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin-command/src/node/mod.rs) 的结构体中：
 
 ```rust
-/// Heals the executing player to full health.
+/// 将执行命令的玩家治疗到满生命值。
 struct SelfHealExecutor;
 
 impl CommandExecutor for SelfHealExecutor {
@@ -74,20 +75,20 @@ impl CommandExecutor for SelfHealExecutor {
             .as_player()
             .ok_or_else(|| ERROR_NOT_PLAYER.create_without_context())?;
 
-        // Restore player health
+        // 恢复玩家生命值
         player.living_entity.set_health(20.0);
 
         context.source.send_feedback(
             TextComponent::text("Fully restored your health!"),
-            true, // Broadcast to operators if configured
+            true, // 如果已配置，则广播给管理员
         );
 
-        // Return number of affected entities
+        // 返回受影响的实体数量
         Ok(1)
     }
 }
 
-/// Heals specified target players.
+/// 治疗指定的目标玩家。
 struct TargetsHealExecutor {
     has_amount: bool,
 }
@@ -121,20 +122,20 @@ impl CommandExecutor for TargetsHealExecutor {
 }
 ```
 
-### 3. Build the Command Tree
+### 3. 构建命令树
 
-Use the fluent builder functions `command`, `literal`, and `argument` to assemble the syntax tree and register the permission:
+使用流式构建函数 `command`、`literal` 和 `argument` 组装语法树并注册权限：
 
 ```rust
 pub fn register(dispatcher: &mut CommandDispatcher, registry: &PermissionRegistry) {
-    // 1. Register permission node with default requirement (OP level 2)
+    // 1. 注册权限节点及其默认要求（OP 2 级）
     registry.register_permission_or_panic(Permission::new(
         PERMISSION,
         DESCRIPTION,
         PermissionDefault::Op(PermissionLvl::Two),
     ));
 
-    // 2. Assemble command tree
+    // 2. 组装命令树
     dispatcher.register(
         command("heal", DESCRIPTION)
             .requires(PERMISSION)
@@ -153,10 +154,11 @@ pub fn register(dispatcher: &mut CommandDispatcher, registry: &PermissionRegistr
 
 ---
 
-## Command Structure Patterns
+## 命令结构模式
 
-### Adding Subcommand Literals
-Use `literal("subcommand_name")` to create keyword branches:
+### 添加子命令字面量
+
+使用 `literal("subcommand_name")` 创建关键字分支：
 
 ```rust
 use crate::command::argument_builder::{argument, command, literal};
@@ -170,8 +172,9 @@ dispatcher.register(
 );
 ```
 
-### Cross-Platform Translation Feedback
-Pumpkin servers serve both Java and Bedrock Edition players simultaneously. Whenever possible, use vanilla translation keys with `TextComponent::translate_cross` so messages render localized on the client:
+### 跨平台翻译反馈
+
+Pumpkin 服务器同时服务 Java 版和基岩版玩家。只要可行，就应通过 `TextComponent::translate_cross` 使用原版翻译键，让消息在客户端本地化显示：
 
 ```rust
 use pumpkin_data::translation;
@@ -186,8 +189,9 @@ let msg = TextComponent::translate_cross(
 context.source.send_feedback(msg, true);
 ```
 
-### Error Handling in Executors
-Executors must return `CommandExecutorResult`, which resolves to `Result<i32, CommandSyntaxError>`. If validation fails, return an error cleanly without panicking:
+### 执行器中的错误处理
+
+执行器必须返回 `CommandExecutorResult`，即 `Result<i32, CommandSyntaxError>`。验证失败时应干净地返回错误，不要 panic：
 
 ```rust
 use crate::command::errors::error_types::CommandErrorType;
@@ -204,17 +208,19 @@ if amount <= 0.0 {
 
 ---
 
-## Registering in `default_dispatcher`
+## 在 `default_dispatcher` 中注册
 
-Once your command is implemented, register it in `crates/pumpkin/src/command/commands/mod.rs`:
+实现命令后，在 `crates/pumpkin/src/command/commands/mod.rs` 中注册它：
 
-1. **Declare the Module**:
+1. **声明模块**：
+
    ```rust
-   // In crates/pumpkin/src/command/commands/mod.rs
+   // 在 crates/pumpkin/src/command/commands/mod.rs 中
    mod heal;
    ```
 
-2. **Invoke `register` in `default_dispatcher`**:
+2. **在 `default_dispatcher` 中调用 `register`**：
+
    ```rust
    pub fn default_dispatcher(
        permission_manager: &PermissionManager,
@@ -223,7 +229,7 @@ Once your command is implemented, register it in `crates/pumpkin/src/command/com
        let registry = &permission_manager.registry;
        let mut dispatcher = CommandDispatcher::new();
 
-       // ... existing registrations ...
+       // ... 现有注册 ...
        heal::register(&mut dispatcher, registry);
 
        dispatcher
@@ -232,12 +238,12 @@ Once your command is implemented, register it in `crates/pumpkin/src/command/com
 
 ---
 
-## Best Practices Checklist
+## 最佳实践清单
 
-- [ ] **No Panics or Unwraps**: Use `?` or return descriptive `CommandSyntaxError`s when arguments are invalid.
-- [ ] **Permission Nodes**: Prefix permission strings with appropriate namespaces (`minecraft:command.<name>` for vanilla commands, `pumpkin:command.<name>` for server-specific commands).
-- [ ] **Return Success Counts**: The returned `i32` represents the command's exit code or number of affected objects for redstone command blocks and `/execute store result`.
-- [ ] **Respect GameRules**: When notifying players other than the sender, check if `send_command_feedback` is enabled:
+- [ ] **不 panic、不 unwrap**：参数无效时使用 `?` 或返回描述性的 `CommandSyntaxError`。
+- [ ] **权限节点**：为权限字符串添加合适的命名空间前缀（原版命令使用 `minecraft:command.<name>`，服务器专用命令使用 `pumpkin:command.<name>`）。
+- [ ] **返回成功计数**：返回的 `i32` 表示命令退出码或受影响对象数量，可供红石命令方块和 `/execute store result` 使用。
+- [ ] **遵守游戏规则**：通知发送者以外的玩家时，检查是否启用 `send_command_feedback`：
   ```rust
   let server = context.source.server();
   if server.level_info.load().game_rules.send_command_feedback {

@@ -11,6 +11,10 @@ export const zhCN = defineConfig({
         },
         nav: [
             {
+                text: "性能基准",
+                link: "/zh_cn/about/benchmarks",
+            },
+            {
                 text: "管理",
                 link: "/zh_cn/admin/introduction",
             },
@@ -31,6 +35,7 @@ export const zhCN = defineConfig({
             {
                 text: "关于",
                 items: [
+                    { text: "性能基准", link: "/zh_cn/about/benchmarks" },
                     { text: "帮助与捐赠", link: "/zh_cn/about/helping" },
                 ],
             },
@@ -40,6 +45,7 @@ export const zhCN = defineConfig({
                 items: [
                     { text: "概述", link: "/zh_cn/admin/introduction" },
                     { text: "从 Bukkit 迁移", link: "/zh_cn/admin/migrating-from-bukkit" },
+                    { text: "服主与托管服务商指南", link: "/zh_cn/admin/server-hosters" },
                     {
                         text: "配置",
                         collapsed: true,
@@ -60,9 +66,10 @@ export const zhCN = defineConfig({
                             { text: "玩家数据", link: "/zh_cn/config/player-data" },
                             { text: "日志", link: "/zh_cn/config/logging" },
                             { text: "Query", link: "/zh_cn/config/query" },
-                            { text: "RCON", link: "/zh_cn/config/rcon" },
+                            { text: "管理服务器 (MSMP)", link: "/zh_cn/config/management" },
                             { text: "PVP", link: "/zh_cn/config/pvp" },
                             { text: "局域网广播", link: "/zh_cn/config/lan-broadcast" },
+                            { text: "遥测", link: "/zh_cn/config/telemetry" },
                         ],
                     },
                 ],
@@ -353,6 +360,26 @@ export const zhCN = defineConfig({
                                 link: "/zh_cn/plugin-dev/kotlin/quick-start",
                             },
                             {
+                                text: "API 概览",
+                                link: "/zh_cn/plugin-dev/kotlin/api-overview",
+                            },
+                            {
+                                text: "回调参考",
+                                link: "/zh_cn/plugin-dev/kotlin/callbacks",
+                            },
+                            {
+                                text: "接口对照表",
+                                link: "/zh_cn/plugin-dev/kotlin/interfaces",
+                            },
+                            {
+                                text: "任务",
+                                link: "/zh_cn/plugin-dev/kotlin/tasks",
+                            },
+                            {
+                                text: "事件",
+                                link: "/zh_cn/plugin-dev/kotlin/events",
+                            },
+                            {
                                 text: "首个命令",
                                 link: "/zh_cn/plugin-dev/kotlin/first-command",
                             },
@@ -376,6 +403,54 @@ export const zhCN = defineConfig({
                                 text: "快速入门",
                                 link: "/zh_cn/plugin-dev/zig/quick-start",
                             },
+                            {
+                                text: "事件",
+                                link: "/zh_cn/plugin-dev/zig/events",
+                            },
+                            {
+                                text: "命令",
+                                link: "/zh_cn/plugin-dev/zig/commands",
+                            },
+                            {
+                                text: "文本",
+                                link: "/zh_cn/plugin-dev/zig/text",
+                            },
+                            {
+                                text: "菜单",
+                                link: "/zh_cn/plugin-dev/zig/menus",
+                            },
+                            {
+                                text: "聊天提示",
+                                link: "/zh_cn/plugin-dev/zig/prompts",
+                            },
+                            {
+                                text: "物品",
+                                link: "/zh_cn/plugin-dev/zig/items",
+                            },
+                            {
+                                text: "调度",
+                                link: "/zh_cn/plugin-dev/zig/scheduling",
+                            },
+                            {
+                                text: "文件与配置",
+                                link: "/zh_cn/plugin-dev/zig/files",
+                            },
+                            {
+                                text: "玩家数据",
+                                link: "/zh_cn/plugin-dev/zig/player-data",
+                            },
+                            {
+                                text: "网络",
+                                link: "/zh_cn/plugin-dev/zig/networking",
+                            },
+                            {
+                                text: "句柄与内存",
+                                link: "/zh_cn/plugin-dev/zig/memory",
+                            },
+                            {
+                                text: "更新日志",
+                                link: "/zh_cn/plugin-dev/zig/changelog",
+                            },
                         ],
                     },
                     {
@@ -385,6 +460,18 @@ export const zhCN = defineConfig({
                             {
                                 text: "快速入门",
                                 link: "/zh_cn/plugin-dev/typescript/quick-start",
+                            },
+                            {
+                                text: "基本逻辑",
+                                link: "/zh_cn/plugin-dev/typescript/basic-logic",
+                            },
+                            {
+                                text: "首个命令",
+                                link: "/zh_cn/plugin-dev/typescript/first-command",
+                            },
+                            {
+                                text: "事件",
+                                link: "/zh_cn/plugin-dev/typescript/events",
                             },
                         ],
                     },

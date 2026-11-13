@@ -1,14 +1,14 @@
-# Adding a Plugin Loader
+# 添加插件加载器
 
-Pumpkin's plugin architecture is runtime-agnostic. The server does not assume all plugins run in WebAssembly or native shared libraries; instead, all execution runtimes implement the unified [`PluginLoader`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin/src/plugin/loader/mod.rs) trait.
+Pumpkin 的插件架构与运行时无关。服务器不会假定所有插件都运行在 WebAssembly 或原生共享库中；相反，所有执行运行时都会实现统一的 [`PluginLoader`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin/src/plugin/loader/mod.rs) trait。
 
-This guide explains how `PluginLoader` operates and demonstrates how to implement a custom loader for new script runtimes or virtual machines (such as Lua, JavaScript/Boa, or GraalVM).
+本指南说明 `PluginLoader` 的工作方式，并演示如何为新的脚本运行时或虚拟机（例如 Lua、JavaScript/Boa 或 GraalVM）实现自定义加载器。
 
 ---
 
-## The `PluginLoader` Trait
+## `PluginLoader` Trait
 
-All plugin loaders implement the `PluginLoader` trait located in `crates/pumpkin/src/plugin/loader/mod.rs`:
+所有插件加载器都会实现位于 `crates/pumpkin/src/plugin/loader/mod.rs` 的 `PluginLoader` trait：
 
 ```rust
 use std::{any::Any, path::Path, pin::Pin, sync::Arc};
@@ -30,46 +30,47 @@ pub type PluginUnloadFuture<'a> =
     Pin<Box<dyn Future<Output = Result<(), LoaderError>> + Send + 'a>>;
 
 pub trait PluginLoader: Send + Sync {
-    /// Determines whether this loader handles the target file.
+    /// 判断此加载器是否处理目标文件。
     fn can_load(&self, path: &Path) -> bool;
 
-    /// Loads, parses, and initializes a plugin instance asynchronously.
+    /// 异步加载、解析并初始化插件实例。
     fn load<'a>(&'a self, path: &'a Path) -> PluginLoadFuture<'a>;
 
-    /// Unloads the plugin and reclaims associated resources.
+    /// 卸载插件并回收相关资源。
     fn unload(&self, data: Box<dyn Any + Send + Sync>) -> PluginUnloadFuture<'_>;
 
-    /// Indicates whether the runtime supports safe unloading without memory leaks.
+    /// 表示运行时是否支持无内存泄漏的安全卸载。
     fn can_unload(&self) -> bool;
 }
 ```
 
 ---
 
-## Existing Loaders in Pumpkin
+## Pumpkin 中的现有加载器
 
-Pumpkin currently provides two official loaders:
+Pumpkin 目前提供两个官方加载器：
 
-1. **`NativePluginLoader` (`loader/native.rs`)**:
-   - Matches dynamic library files (`.so` on Linux, `.dll` on Windows, `.dylib` on macOS).
-   - Dynamically links the library using [`libloading`](https://docs.rs/libloading/).
-   - Locates and invokes the extern entrypoint function (`pumpkin_plugin_init`).
-   - `can_unload()` returns `false` due to OS-level shared library unloading hazards.
-2. **`WasmPluginLoader` (`loader/wasm/mod.rs`)**:
-   - Matches `.wasm` files.
-   - Verifies cryptographic signatures (see [WASM Signing](/developer/plugins/wasm-signing)).
-   - JIT-compiles WebAssembly components using [Wasmtime](https://wasmtime.dev/).
-   - Links host WIT exports (`pumpkin-host-bindings`).
-   - `can_unload()` returns `true` because Wasmtime safely drops guest memory.
+1. **`NativePluginLoader`（`loader/native.rs`）**：
+   - 匹配动态库文件（Linux 为 `.so`，Windows 为 `.dll`，macOS 为 `.dylib`）。
+   - 使用 [`libloading`](https://docs.rs/libloading/) 动态链接库。
+   - 定位并调用外部入口函数（`pumpkin_plugin_init`）。
+   - 由于操作系统级共享库卸载存在风险，`can_unload()` 返回 `false`。
+2. **`WasmPluginLoader`（`loader/wasm/mod.rs`）**：
+   - 匹配 `.wasm` 文件。
+   - 验证加密签名（参见 [WASM 签名](/zh_cn/developer/plugins/wasm-signing)）。
+   - 使用 [Wasmtime](https://wasmtime.dev/) JIT 编译 WebAssembly 组件。
+   - 链接宿主 WIT 导出（`pumpkin-host-bindings`）。
+   - 因为 Wasmtime 能安全释放来宾内存，`can_unload()` 返回 `true`。
 
 ---
 
-## Step-by-Step: Adding a Custom Plugin Loader
+## 分步：添加自定义插件加载器
 
-Here is how to create a custom loader (e.g., for a scripting runtime):
+下面说明如何创建自定义加载器（例如用于脚本运行时）：
 
-### Step 1: Define the Loader Struct
-Create a new file in `crates/pumpkin/src/plugin/loader/my_loader.rs`:
+### 第 1 步：定义加载器结构体
+
+在 `crates/pumpkin/src/plugin/loader/my_loader.rs` 中创建新文件：
 
 ```rust
 use std::{any::Any, path::Path, sync::Arc};
@@ -86,8 +87,9 @@ impl MyCustomLoader {
 }
 ```
 
-### Step 2: Implement File Recognition (`can_load`)
-Check the file extension or inspect header bytes:
+### 第 2 步：实现文件识别（`can_load`）
+
+检查文件扩展名或文件头字节：
 
 ```rust
 impl PluginLoader for MyCustomLoader {
@@ -98,11 +100,13 @@ impl PluginLoader for MyCustomLoader {
     }
 ```
 
-### Step 3: Implement Asynchronous Loading (`load`)
-The `load` method reads the script, initializes the VM, registers server host callbacks, and returns a tuple containing:
-1. `Arc<dyn Plugin>`: The generic plugin handle.
-2. `PluginMetadata`: Name, author, version, description.
-3. `Box<dyn Any + Send + Sync>`: Loader-specific context (e.g., VM state) retained for unloading.
+### 第 3 步：实现异步加载（`load`）
+
+`load` 方法读取脚本、初始化虚拟机、注册服务器宿主回调，并返回包含以下内容的元组：
+
+1. `Arc<dyn Plugin>`：通用插件句柄。
+2. `PluginMetadata`：名称、作者、版本、描述。
+3. `Box<dyn Any + Send + Sync>`：卸载时保留的加载器专用上下文（例如虚拟机状态）。
 
 ```rust
     fn load<'a>(&'a self, path: &'a Path) -> PluginLoadFuture<'a> {
@@ -110,7 +114,7 @@ The `load` method reads the script, initializes the VM, registers server host ca
             let script_content = tokio::fs::read_to_string(path).await
                 .map_err(|e| LoaderError::InitializationFailed(e.to_string()))?;
 
-            // 1. Parse plugin metadata from header or accompanying manifest
+            // 1. 从头部或随附清单解析插件元数据
             let metadata = PluginMetadata {
                 name: "ExampleScript".into(),
                 version: "1.0.0".into(),
@@ -118,7 +122,7 @@ The `load` method reads the script, initializes the VM, registers server host ca
                 description: Some("Custom script plugin".into()),
             };
 
-            // 2. Initialize runtime instance
+            // 2. 初始化运行时实例
             let plugin_instance = Arc::new(MyScriptPluginWrapper::new(script_content));
             let runtime_state: Box<dyn Any + Send + Sync> = Box::new(());
 
@@ -127,8 +131,9 @@ The `load` method reads the script, initializes the VM, registers server host ca
     }
 ```
 
-### Step 4: Implement Clean Unloading (`unload` & `can_unload`)
-If your runtime can cleanly terminate without leaking resources:
+### 第 4 步：实现干净卸载（`unload` 和 `can_unload`）
+
+如果你的运行时可以干净地终止且不泄漏资源：
 
 ```rust
     fn can_unload(&self) -> bool {
@@ -137,7 +142,7 @@ If your runtime can cleanly terminate without leaking resources:
 
     fn unload(&self, data: Box<dyn Any + Send + Sync>) -> PluginUnloadFuture<'_> {
         Box::pin(async move {
-            // Drop runtime state and disconnect event listeners
+            // 释放运行时状态并断开事件监听器
             drop(data);
             Ok(())
         })
@@ -145,17 +150,17 @@ If your runtime can cleanly terminate without leaking resources:
 }
 ```
 
-### Step 5: Register the Loader in `PluginManager`
+### 第 5 步：在 `PluginManager` 中注册加载器
 
-Open `crates/pumpkin/src/plugin/mod.rs` and register your loader in `PluginManager::new()`:
+打开 `crates/pumpkin/src/plugin/mod.rs`，并在 `PluginManager::new()` 中注册加载器：
 
 ```rust
-// In crates/pumpkin/src/plugin/mod.rs
+// 在 crates/pumpkin/src/plugin/mod.rs 中
 let mut loaders: Vec<Box<dyn PluginLoader>> = Vec::new();
 
 loaders.push(Box::new(NativePluginLoader::new()));
 loaders.push(Box::new(WasmPluginLoader::new()));
-loaders.push(Box::new(MyCustomLoader::new())); // Add custom loader
+loaders.push(Box::new(MyCustomLoader::new())); // 添加自定义加载器
 ```
 
-During server startup, Pumpkin iterates through all registered loaders in sequence when scanning the `plugins/` folder, dispatching each file to the first loader whose `can_load` returns `true`.
+服务器启动期间扫描 `plugins/` 文件夹时，Pumpkin 会按顺序遍历所有已注册加载器，并把每个文件分派给第一个 `can_load` 返回 `true` 的加载器。

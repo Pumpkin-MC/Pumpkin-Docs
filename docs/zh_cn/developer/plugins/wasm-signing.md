@@ -1,27 +1,29 @@
-# WASM Plugin Signing & Verification
+# WASM 插件签名与验证
 
-Pumpkin implements a cryptographic signing and license verification system for WebAssembly plugins. This ensures plugin integrity, authenticates author identity, and protects verified or marketplace plugins against unauthorized tampering.
+Pumpkin 为 WebAssembly 插件实现了加密签名与许可证验证系统。它可确保插件完整性、验证作者身份，并保护已验证或市场插件免受未经授权的篡改。
 
-The signing subsystem is implemented in [`crates/pumpkin/src/plugin/loader/wasm/wasm_host/signature.rs`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin/src/plugin/loader/wasm/wasm_host/signature.rs) based on the **W3C `wasmsign2`** specification using custom WebAssembly sections.
-
----
-
-## Why Sign WebAssembly Plugins?
-
-- **Tamper Protection**: Ensures that compiled bytecode has not been injected with malicious logic after compilation.
-- **Author Identity**: Authenticates that a plugin was built and released by a verified developer.
-- **Marketplace Licensing**: Validates license keys and entitlements for plugins distributed through the official [Pumpkin Marketplace](https://market.pumpkinmc.org).
+签名子系统基于 **W3C `wasmsign2`** 规范，使用自定义 WebAssembly 节，在 [`crates/pumpkin/src/plugin/loader/wasm/wasm_host/signature.rs`](https://github.com/Pumpkin-MC/Pumpkin/blob/master/crates/pumpkin/src/plugin/loader/wasm/wasm_host/signature.rs) 中实现。
 
 ---
 
-## Custom Sections in the WASM Binary
+## 为什么要为 WebAssembly 插件签名？
 
-Pumpkin embeds signing and verification metadata directly into two standard WebAssembly custom sections:
-- **`pumpkin.metadata`**: Stores developer, publication, and license claims in JSON format.
-- **`wasm_signature`**: Stores the cryptographic signature envelope compliant with the W3C `wasmsign2` standard.
+- **防篡改**：确保编译后的字节码在编译完成后没有被注入恶意逻辑。
+- **作者身份**：验证插件确实由已验证开发者构建和发布。
+- **市场许可证**：验证通过官方 [Pumpkin 市场](https://market.pumpkinmc.org) 分发插件的许可证密钥和授权。
 
-### 1. `pumpkin.metadata` Section
-Contains a JSON string holding publication and license claims:
+---
+
+## WASM 二进制文件中的自定义节
+
+Pumpkin 将签名和验证元数据直接嵌入两个标准 WebAssembly 自定义节：
+
+- **`pumpkin.metadata`**：以 JSON 格式存储开发者、发布和许可证声明。
+- **`wasm_signature`**：存储符合 W3C `wasmsign2` 标准的加密签名信封。
+
+### 1. `pumpkin.metadata` 节
+
+包含保存发布与许可证声明的 JSON 字符串：
 
 ```json
 {
@@ -38,8 +40,9 @@ Contains a JSON string holding publication and license claims:
 }
 ```
 
-### 2. `wasm_signature` Section
-Follows the W3C `wasmsign2` envelope structure:
+### 2. `wasm_signature` 节
+
+遵循 W3C `wasmsign2` 信封结构：
 
 ```json
 {
@@ -52,35 +55,38 @@ Follows the W3C `wasmsign2` envelope structure:
 
 ---
 
-## The Signing Pipeline
+## 签名流程
 
-The signing process guarantees integrity by hashing and signing the clean WebAssembly bytecode combined with the metadata claims:
+签名流程通过对干净的 WebAssembly 字节码和元数据声明的组合进行哈希和签名来保证完整性：
 
-### Signing Algorithm Steps
-1. **Sanitization (`strip_pumpkin_sections`)**: Uses [`wasmparser`](https://docs.rs/wasmparser/) to strip any preexisting `pumpkin.metadata` or `wasm_signature` custom sections to avoid recursion.
-2. **Payload Construction**:
+### 签名算法步骤
+
+1. **清理（`strip_pumpkin_sections`）**：使用 [`wasmparser`](https://docs.rs/wasmparser/) 移除任何已存在的 `pumpkin.metadata` 或 `wasm_signature` 自定义节，避免递归。
+2. **构造负载**：
+
    ```rust
    let mut sign_payload = Vec::new();
    sign_payload.extend_from_slice(&clean_wasm);
    sign_payload.extend_from_slice(&metadata_json);
    ```
-3. **Ed25519 Signature**: The payload is signed using [`ed25519-dalek`](https://docs.rs/ed25519-dalek/) with the developer's 32-byte secret key.
-4. **Encoding**: Uses [`wasm-encoder`](https://docs.rs/wasm-encoder/) to append the `pumpkin.metadata` and `wasm_signature` custom sections to the clean binary.
+
+3. **Ed25519 签名**：使用开发者的 32 字节密钥，通过 [`ed25519-dalek`](https://docs.rs/ed25519-dalek/) 对负载签名。
+4. **编码**：使用 [`wasm-encoder`](https://docs.rs/wasm-encoder/) 将 `pumpkin.metadata` 和 `wasm_signature` 自定义节附加到干净的二进制文件中。
 
 ---
 
-## The Verification Pipeline
+## 验证流程
 
-When Pumpkin boots and loads a WebAssembly plugin, the verification sequence executes before the plugin is instantiated:
+Pumpkin 启动并加载 WebAssembly 插件时，会在插件实例化前执行验证序列：
 
-1. **Custom Section Extraction**: The `WasmPluginLoader` scans the binary for `pumpkin.metadata` and `wasm_signature`.
-2. **Key Retrieval**:
-   - If the plugin is marked as marketplace-verified, Pumpkin verifies the public key against the Marketplace Public Key Endpoint (`https://market.pumpkinmc.org/api/v1/rest/public-key`).
-   - If signed by an independent developer, the key is matched against trusted developer keys configured in `pumpkin.toml`.
-3. **Bytecode Verification**:
-   - Pumpkin strips the custom sections from the loaded binary to recover the original `clean_wasm`.
-   - Reconstructs the payload `(clean_wasm + metadata_json)`.
-   - Verifies the signature using `verifying_key.verify(&payload, &signature)`.
-4. **License & Integrity Validation**:
-   - If verification succeeds, Wasmtime instantiates the plugin safely.
-   - If verification fails or the signature is invalid, loading is aborted with an error, protecting the server from running compromised code.
+1. **提取自定义节**：`WasmPluginLoader` 扫描二进制文件中的 `pumpkin.metadata` 和 `wasm_signature`。
+2. **获取密钥**：
+   - 如果插件标记为市场已验证，Pumpkin 会通过市场公钥端点（`https://market.pumpkinmc.org/api/v1/rest/public-key`）验证公钥。
+   - 如果由独立开发者签名，则将密钥与 `pumpkin.toml` 中配置的可信开发者密钥匹配。
+3. **字节码验证**：
+   - Pumpkin 从已加载二进制文件中移除自定义节，恢复原始 `clean_wasm`。
+   - 重新构造负载 `(clean_wasm + metadata_json)`。
+   - 使用 `verifying_key.verify(&payload, &signature)` 验证签名。
+4. **许可证与完整性验证**：
+   - 验证成功时，Wasmtime 会安全地实例化插件。
+   - 验证失败或签名无效时，加载会以错误中止，防止服务器运行遭到篡改的代码。

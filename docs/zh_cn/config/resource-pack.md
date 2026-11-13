@@ -1,120 +1,63 @@
 # 资源包
 
-服务器可以向客户端发送资源包，以改变客户端上游戏的外观。Pumpkin 允许你完全配置资源包。
+Pumpkin 支持向 Java 版和基岩版客户端提供资源包。资源包选项在 `pumpkin.toml` 的 `[resource_pack.java]` 和 `[resource_pack.bedrock]` 下配置。
 
-> [!TIP]提示
-> 使用 [PackSquash](https://packsquash.aylas.org/) 压缩你的资源包！这可以帮助客户端更快地下载资源包。
-
-## 配置资源包
-
-#### `enabled`: 布尔值
-
-是否启用资源包。
-
-:::code-group
-
-```toml [pumpkin.toml] {2}
-[resource_pack.java]
-enabled = true
-```
-
-:::
-
-#### `resource_pack_url`: 字符串
-
-资源包的直接下载 URL。
-
-> [!TIP]提示
-> 你可以在 [MCPacks](https://mc-packs.net/) 免费托管资源包。
-
-:::code-group
-
-```toml [pumpkin.toml] {3}
-[resource_pack.java]
-enabled = true
-resource_pack_url = "[你的下载 URL 在这里]"
-```
-
-:::
-
-#### `resource_pack_sha1`: 字符串
-
-资源包的 SHA1 哈希值。
-
-> [!IMPORTANT]重要
-> 虽然不需要指定，但你应该指定此字段，因为否则客户端每次加入服务器时都会重新下载资源包，即使资源包没有变化。
-
-> [!WARNING]警告
-> 如果资源包被修改，请确保更新此字段。
-
-::: details 如何获取资源包的 SHA1 哈希值？
-::: code-group
-
-```powershell [Windows (PowerShell)]
-Get-FileHash [文件] SHA1
-```
-
-```shell [Mac OS]
-shasum -a 1 [文件]
-```
-
-```shell [Linux]
-sha1sum [文件]
-```
-
-:::
-
-:::code-group
-
-```toml [pumpkin.toml] {3}
-[resource_pack.java]
-enabled = true
-resource_pack_sha1 = "[你的哈希值在这里]"
-```
-
-:::
-
-#### `prompt_message`: 字符串
-
-当提示用户下载资源包时显示的消息。
-
-:::code-group
-
-```toml [pumpkin.toml] {3}
-[resource_pack.java]
-enabled = true
-prompt_message = "[你的消息在这里]"
-```
-
-:::
-
-#### `force`: 布尔值
-
-是否强制客户端下载资源包。如果客户端拒绝下载，他们将被踢出服务器。
-
-:::code-group
-
-```toml [pumpkin.toml] {3}
-[resource_pack.java]
-enabled = true
-force = false
-```
-
-:::
-
-## 默认配置
-
-默认情况下，不向客户端发送资源包。
+## Java 版资源包
 
 :::code-group
 
 ```toml [pumpkin.toml]
 [resource_pack.java]
 enabled = false
-resource_pack_url = ""
-resource_pack_sha1 = ""
+url = ""
+sha1 = ""
 prompt_message = ""
 force = false
 ```
 
 :::
+
+### 选项
+
+- **`enabled`**：启用向 Java 版客户端提供资源包的功能。
+- **`url`**：Java 版资源包 ZIP 文件的直接下载 URL。
+- **`sha1`**：资源包 ZIP 文件的 SHA-1 校验和。
+- **`prompt_message`**：提示玩家下载资源包时显示的消息。
+- **`force`**：断开拒绝下载资源包的玩家的连接。
+
+## 基岩版资源包
+
+:::code-group
+
+```toml [pumpkin.toml]
+[resource_pack.bedrock]
+enabled = false
+force = false
+packs = [
+  # { uuid = "00000000-0000-0000-0000-000000000000", version = "1.0.0", size = 1048576, download_url = "https://example.com/pack.mcpack", path = "resource_packs/pack.mcpack" }
+]
+```
+
+:::
+
+### 选项
+
+- **`enabled`**：为基岩版客户端启用资源包。
+- **`force`**：强制基岩版客户端在加入前下载所需资源包。
+- **`packs`**：基岩版资源包定义数组。
+
+### 基岩版资源包字段
+
+`packs` 数组中的每个资源包接受以下属性：
+
+- **`uuid`**：（必需）与基岩版资源包 `manifest.json` 匹配的唯一标识符（UUID）。
+- **`version`**：（必需）资源包的版本字符串（例如 `"1.0.0"`）。
+- **`size`**：（必需）资源包归档文件的大小，单位为字节。
+- **`download_url`**：（必需）`.mcpack` 或归档文件的直接下载 URL（从服务器直接分块流式传输本地资源包时可留空 `""`）。
+- **`path`**：（可选）服务器上本地资源包归档文件（`.mcpack` 或 `.zip`）的文件系统路径。当设置此项时（或当 `resource_packs/<uuid>_<version>.mcpack`、`resource_packs/<uuid>_<version>.zip`、`resource_packs/<uuid>.mcpack` 或 `resource_packs/<uuid>.zip` 存在匹配文件时），Pumpkin 将直接把该资源包分块流式传输给连接的基岩版客户端。
+- **`content_key`**：（可选）加密的商城/自定义资源包的解密密钥。
+- **`sub_pack_name`**：（可选）资源包内要启用的子包名称。
+- **`content_id`**：（可选）内容标识符字符串。
+- **`has_scripts`**：（可选）资源包是否包含客户端脚本（`true`/`false`，默认：`false`）。
+- **`addon_pack`**：（可选）是否将资源包标记为附加包（默认：`false`）。
+- **`rtx_enabled`**：（可选）是否为资源包启用光线追踪/RTX 功能（默认：`false`）。
