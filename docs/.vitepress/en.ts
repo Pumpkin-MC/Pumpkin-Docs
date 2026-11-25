@@ -47,6 +47,7 @@ export const en = defineConfig({
                     { text: "Overview", link: "/admin/introduction" },
                     { text: "Migrating from Bukkit", link: "/admin/migrating-from-bukkit" },
                     { text: "Server Hosters Guide", link: "/admin/server-hosters" },
+                    { text: "systemd Service", link: "/admin/systemd-service" },
                     {
                         text: "Configuration",
                         collapsed: true,

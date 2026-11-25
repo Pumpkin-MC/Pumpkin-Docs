@@ -19,6 +19,7 @@ Explore the following administration guides:
 
 - [Migrating from Bukkit / Paper / Spigot Server](./migrating-from-bukkit) — Key differences in server administration, plugins, world storage, and performance.
 - [Guide for Server Hosters](./server-hosters) — Adapting hosting panels, containers, port allocations, and lifecycle hooks for Pumpkin.
+- [Running Pumpkin as a systemd Service](./systemd-service) — A hardened unit file for Linux servers: auto-start, clean `SIGTERM` shutdown, restarts, memory cap and `journalctl` logging.
 - [Server Configuration](../config/introduction) — Detailed breakdown of `pumpkin.toml` settings.
 - [Proxy Setup](../config/proxy) — Configuring BungeeCord & Velocity player forwarding.
 - [Commands & Permissions](../config/commands) — Managing in-game operator commands and permissions.
