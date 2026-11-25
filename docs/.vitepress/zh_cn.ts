@@ -8,6 +8,26 @@ export const zhCN = defineConfig({
         siteTitle: "Pumpkin Docs",
         search: {
             provider: "local",
+            options: {
+                translations: {
+                    button: { buttonText: "搜索", buttonAriaLabel: "搜索" },
+                    modal: {
+                        displayDetails: "显示详细列表",
+                        resetButtonTitle: "清除搜索",
+                        backButtonTitle: "关闭搜索",
+                        noResultsText: "没有找到相关结果",
+                        footer: {
+                            selectText: "选择",
+                            selectKeyAriaLabel: "回车",
+                            navigateText: "切换",
+                            navigateUpKeyAriaLabel: "上方向键",
+                            navigateDownKeyAriaLabel: "下方向键",
+                            closeText: "关闭",
+                            closeKeyAriaLabel: "Esc"
+                        }
+                    }
+                },
+            },
         },
         nav: [
             {

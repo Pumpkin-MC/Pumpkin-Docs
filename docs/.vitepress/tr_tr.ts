@@ -8,6 +8,26 @@ export const trTR = defineConfig({
         siteTitle: "Pumpkin Docs",
         search: {
             provider: "local",
+            options: {
+                translations: {
+                    button: { buttonText: "Ara", buttonAriaLabel: "Ara" },
+                    modal: {
+                        displayDetails: "Ayrıntılı listeyi göster",
+                        resetButtonTitle: "Aramayı sıfırla",
+                        backButtonTitle: "Aramayı kapat",
+                        noResultsText: "Sonuç bulunamadı:",
+                        footer: {
+                            selectText: "seçmek için",
+                            selectKeyAriaLabel: "enter",
+                            navigateText: "gezinmek için",
+                            navigateUpKeyAriaLabel: "yukarı ok",
+                            navigateDownKeyAriaLabel: "aşağı ok",
+                            closeText: "kapatmak için",
+                            closeKeyAriaLabel: "escape"
+                        }
+                    }
+                },
+            },
         },
         nav: [
             {

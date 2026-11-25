@@ -8,6 +8,26 @@ export const pt = defineConfig({
         siteTitle: "Pumpkin Docs",
         search: {
             provider: "local",
+            options: {
+                translations: {
+                    button: { buttonText: "Pesquisar", buttonAriaLabel: "Pesquisar" },
+                    modal: {
+                        displayDetails: "Mostrar lista detalhada",
+                        resetButtonTitle: "Limpar pesquisa",
+                        backButtonTitle: "Fechar pesquisa",
+                        noResultsText: "Nenhum resultado para",
+                        footer: {
+                            selectText: "para selecionar",
+                            selectKeyAriaLabel: "enter",
+                            navigateText: "para navegar",
+                            navigateUpKeyAriaLabel: "seta para cima",
+                            navigateDownKeyAriaLabel: "seta para baixo",
+                            closeText: "para fechar",
+                            closeKeyAriaLabel: "esc"
+                        }
+                    }
+                },
+            },
         },
         nav: [
             {
